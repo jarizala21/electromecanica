@@ -140,6 +140,11 @@ svg .t{fill:var(--acc-soft)}
 .chip{font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--acc)}
 .card-title{font-family:var(--f-display);font-weight:600;font-size:23px;line-height:1.1}
 .card-desc{color:var(--muted);font-size:15px;line-height:1.45}
+.grupos{display:grid;gap:26px}
+.grupo{display:grid;gap:10px}
+.grupo h3{font-family:var(--f-display);font-weight:700;font-size:22px;margin:0;display:flex;align-items:baseline;gap:10px;
+  padding-bottom:6px;border-bottom:2px solid var(--acc-soft);color:var(--ink)}
+.grupo h3 span{font-family:var(--f-body);font-weight:600;font-size:13px;color:var(--acc);font-variant-numeric:tabular-nums}
 .chev{width:22px;height:22px;color:var(--muted);transition:color .15s ease,transform .15s ease}
 .card:hover .chev{color:var(--acc);transform:translateX(2px)}
 

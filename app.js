@@ -17,6 +17,15 @@
     presostato: '<path d="M4 32h10M14 32l18-9M34 32h10"/><circle class="t" cx="14" cy="32" r="2.2"/><circle class="t" cx="34" cy="32" r="2.2"/><path class="d" d="M23 27.5V14"/><rect x="16" y="4" width="14" height="10" rx="1.5"/><path d="M21 12V6.5h3a2.2 2.2 0 0 1 0 4.4h-3"/>',
     regulador: '<rect x="14" y="10" width="20" height="28" rx="1.5"/><path d="M24 3v7M24 38v7M21 33V15M18 18.5l3-4 3 4M34 24l2.5-4 2.5 8 2.5-8 2 4"/><path class="d" d="M24 42H8V20h6"/>',
     cremallera: '<path d="M22.2 7.2L22.4 4.1L25.6 4.1L25.8 7.2L27.9 8.1L30.2 6.1L32.4 8.3L30.4 10.6L31.3 12.7L34.4 12.9L34.4 16.1L31.3 16.3L30.4 18.4L32.4 20.7L30.2 22.9L27.9 20.9L25.8 21.8L25.6 24.9L22.4 24.9L22.2 21.8L20.1 20.9L17.8 22.9L15.6 20.7L17.6 18.4L16.7 16.3L13.6 16.1L13.6 12.9L16.7 12.7L17.6 10.6L15.6 8.3L17.8 6.1L20.1 8.1Z"/><circle class="f" cx="24" cy="14.5" r="2"/><path d="M4 33h3l2-4h3l2 4h3l2-4h3l2 4h3l2-4h3l2 4h3l2-4h3l2 4M4 33v8h40v-8"/>',
+    guia: '<path d="M4 41h40M8 41v-8h32v8"/><rect x="14" y="17" width="20" height="16" rx="1.5"/><path d="M11 10h26M15 6l-4 4 4 4M33 6l4 4-4 4"/>',
+    acoplamiento: '<path d="M3 24h11M34 24h11"/><rect x="14" y="13" width="9" height="22" rx="1.5"/><rect x="25" y="13" width="9" height="22" rx="1.5"/><path class="d" d="M24 15v18"/>',
+    cardan: '<path d="M3 30h13"/><path d="M31 20l13-10"/><path d="M16 21v18M16 21h4M16 39h4"/><path d="M25 15l9 11M25 15l-3 3M34 26l-3 3"/><circle class="f" cx="23" cy="27" r="3"/>',
+    embrague: '<path d="M3 24h11M34 24h11"/><rect x="14" y="9" width="7" height="30" rx="1.5"/><rect x="27" y="9" width="7" height="30" rx="1.5"/><path class="d" d="M24 12v24"/>',
+    biela: '<circle cx="15" cy="33" r="9"/><circle class="f" cx="15" cy="33" r="2"/><path d="M21 28l9-15"/><rect x="24" y="4" width="14" height="10" rx="1.5"/><circle class="t" cx="21" cy="28" r="2.6"/>',
+    leva: '<path d="M24 15c5 0 7 7 10 11 3 5 2 15-10 15s-13-10-10-15c3-4 5-11 10-11z"/><circle class="f" cx="24" cy="31" r="2.2"/><path d="M24 3v12"/><path d="M19 3h10"/>',
+    polea: '<circle cx="13" cy="29" r="8"/><circle cx="34" cy="22" r="11"/><circle class="f" cx="13" cy="29" r="2"/><circle class="f" cx="34" cy="22" r="2.2"/><path d="M12 21l21-10M14 37l21-4"/>',
+    cadena: '<rect x="3" y="17" width="20" height="14" rx="7"/><rect x="16" y="17" width="16" height="14" rx="7"/><rect x="25" y="17" width="20" height="14" rx="7"/><circle class="f" cx="10" cy="24" r="2"/><circle class="f" cx="24" cy="24" r="2"/><circle class="f" cx="38" cy="24" r="2"/>',
+    sinfin: '<rect x="6" y="5" width="36" height="12" rx="2"/><path d="M12 5l-4 12M19 5l-4 12M26 5l-4 12M33 5l-4 12M40 5l-4 12"/><circle cx="24" cy="32" r="11"/><circle class="f" cx="24" cy="32" r="2"/>',
     simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>'
   };
   var TONOS = ["cobre", "azul", "verde", "violeta", "gris"];
@@ -116,14 +125,28 @@
         '<span class="count">' + plural(sec.simulaciones.length) + '</span></span>' +
         '<h2 class="tile-name">' + esc(sec.nombre) + '</h2>' +
         (sec.descripcion ? '<p class="tile-desc">' + esc(sec.descripcion) + '</p>' : '') +
-        '<ul class="tile-list">' + sec.simulaciones.map(function(s){ return '<li>' + esc(s.titulo) + '</li>'; }).join("") + '</ul>' +
+        '<ul class="tile-list">' + resumen(sec).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join("") + '</ul>' +
         '<span class="tile-go">Ver simulaciones ' + FLECHA + '</span></a>';
     }).join("");
-    $("meta").textContent = plural(TODAS.length) + " en " + SECCIONES.length + (SECCIONES.length === 1 ? " sección" : " secciones");
+    var unicas = {}; TODAS.forEach(function(e){ unicas[e.sim.ruta] = 1; });
+    $("meta").textContent = plural(Object.keys(unicas).length) + " en " + SECCIONES.length + (SECCIONES.length === 1 ? " sección" : " secciones");
   }
 
-  function tarjeta(e, conSeccion){
-    var chip = conSeccion ? e.sec.nombre + (e.sim.tema ? " · " + e.sim.tema : "") : (e.sim.tema || "");
+  // Temas en orden de aparición
+  function temas(sec){
+    var out = [];
+    sec.simulaciones.forEach(function(x){ if (x.tema && out.indexOf(x.tema) < 0) out.push(x.tema); });
+    return out;
+  }
+  function agrupada(sec){ return sec.simulaciones.length > 6 && temas(sec).length > 1; }
+  function resumen(sec){
+    if (agrupada(sec)) return temas(sec);
+    var t = sec.simulaciones.map(function(s){ return s.titulo; });
+    return t.length > 6 ? t.slice(0, 5).concat(["y " + (t.length - 5) + " más"]) : t;
+  }
+
+  function tarjeta(e, conSeccion, sinTema){
+    var chip = conSeccion ? e.sec.nombre + (e.sim.tema ? " · " + e.sim.tema : "") : (sinTema ? "" : (e.sim.tema || ""));
     return '<a class="card ' + tono(e.sec) + '" href="#' + esc(e.sim.id) + '">' +
       '<span class="glyph">' + glifo(e.sim.icono) + '</span>' +
       '<span class="card-body">' +
@@ -170,7 +193,17 @@
     $("sec-desc").textContent = sec.descripcion || "";
     $("sec-desc").hidden = !sec.descripcion;
     $("sec-count").textContent = plural(sec.simulaciones.length);
-    $("sec-cards").innerHTML = sec.simulaciones.map(function(sim, i){ return tarjeta({ sec: sec, sim: sim, i: i }, false); }).join("");
+    if (agrupada(sec)) {
+      $("sec-cards").className = "grupos";
+      $("sec-cards").innerHTML = temas(sec).map(function(t){
+        var items = [];
+        sec.simulaciones.forEach(function(sim, i){ if (sim.tema === t) items.push(tarjeta({ sec: sec, sim: sim, i: i }, false, true)); });
+        return '<section class="grupo"><h3>' + esc(t) + ' <span>' + items.length + '</span></h3><div class="cards">' + items.join("") + '</div></section>';
+      }).join("");
+    } else {
+      $("sec-cards").className = "cards";
+      $("sec-cards").innerHTML = sec.simulaciones.map(function(sim, i){ return tarjeta({ sec: sec, sim: sim, i: i }, false); }).join("");
+    }
     mostrarVista("vista-seccion");
     if (mover) { window.scrollTo(0, 0); try { $("sec-nombre").focus({ preventScroll: true }); } catch (e) {} }
   }

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía de cola de milano</title>
+<meta name="description" content="Perfil trapecial con regleta cónica para ajustar el juego.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+:root{
+  --bg:#e6e9eb; --panel:#f9fafb; --line:#d0d6db; --ink:#162029; --muted:#55626c;
+  --acc:#2b6e37; --acc-soft:#dcecdd;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
+    --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
+  --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding-block:26px 44px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
+h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:clamp(30px,5vw,40px);line-height:1.05;margin:0}
+h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:22px;margin:0 0 8px}
+.lead{margin:8px 0 0;color:var(--muted);max-width:62ch}
+figure{margin:0;background:#f0f2f4;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+figure.norma{background:#ffffff}
+figure img{display:block;width:100%;height:auto;max-width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+ul{margin:0;padding-left:20px;display:grid;gap:8px}
+.formula{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:24px;color:var(--acc);
+  background:var(--acc-soft);border-radius:10px;padding:6px 14px;display:inline-block;margin:2px 0 10px}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>Guía de cola de milano</h1>
+    <p class="lead">El perfil de la guía es un trapecio más ancho arriba que abajo. El carro lo abraza y no puede levantarse. Una regleta cónica con tornillos permite ajustar el juego.</p>
+  </header>
+
+  <figure>
+    <img src="guia-cola-de-milano.gif" width="800" height="480" alt="Animación: un carro se desliza sobre una guía de cola de milano; a la derecha, la sección con la regleta y sus tornillos.">
+  </figure>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Qué observar</h2>
+      <ul>
+        <li>El carro solo se puede sacar deslizándolo por un extremo.</li>
+        <li>La regleta va entre un flanco de la guía y el carro.</li>
+        <li>Apretando los tornillos se elimina la holgura.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h2>Ventajas e inconvenientes</h2>
+      <ul>
+        <li>Compacta y muy rígida.</li>
+        <li>El juego se ajusta fácilmente con la regleta.</li>
+        <li>Más rozamiento que las guías con rodadura.</li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Dónde lo encontramos</h2>
+    <ul>
+      <li>Carro transversal y charriot del torno.</li>
+      <li>Mesas de fresadoras convencionales.</li>
+      <li>Utillajes y mesas de coordenadas.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

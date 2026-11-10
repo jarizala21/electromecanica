@@ -23,9 +23,12 @@
      id           enlace directo (#id). Si no se pone, se usa el nombre
                   del archivo
      titulo, tema, descripcion
+     tema         apartado dentro de la sección (las que comparten tema
+                  se muestran juntas bajo ese título)
      icono        magnetotermico · diferencial · conmutada · cruzamiento ·
-                  presostato · regulador · cremallera · lampara ·
-                  manometro · engranaje · simulacion
+                  presostato · regulador · cremallera · engranaje · sinfin ·
+                  guia · acoplamiento · cardan · embrague · biela · leva ·
+                  polea · cadena · lampara · manometro · simulacion
    ===================================================================== */
 self.CATALOGO = {
   secciones: [
@@ -98,18 +101,77 @@ self.CATALOGO = {
     {
       carpeta: "mecanica",
       nombre: "Mecánica",
-      descripcion: "Mecanismos que transmiten y transforman el movimiento.",
+      descripcion: "Guías, acoplamientos, embragues, transformadores de movimiento, engranajes y transmisiones.",
       tono: "verde",
       icono: "engranaje",
+      // El campo "tema" agrupa las simulaciones en apartados dentro de la sección.
       simulaciones: [
-        {
-          archivo: "pinon-cremallera.html",
-          id: "pinon-cremallera",
+        { archivo: "guia-redonda.html", id: "guia-redonda", tema: "Guías de deslizamiento", icono: "guia",
+          titulo: "Guía redonda",
+          descripcion: "Un casquillo desliza sobre un eje cilíndrico rectificado." },
+        { archivo: "guia-plana.html", id: "guia-plana", tema: "Guías de deslizamiento", icono: "guia",
+          titulo: "Guía plana",
+          descripcion: "El carro apoya en superficies planas; las regletas evitan que se levante." },
+        { archivo: "guia-prismatica.html", id: "guia-prismatica", tema: "Guías de deslizamiento", icono: "guia",
+          titulo: "Guía prismática",
+          descripcion: "Guía en V: el carro se centra al apoyar en los dos flancos." },
+        { archivo: "guia-cola-de-milano.html", id: "guia-cola-de-milano", tema: "Guías de deslizamiento", icono: "guia",
+          titulo: "Guía de cola de milano",
+          descripcion: "Perfil trapecial con regleta cónica para ajustar el juego." },
+        { archivo: "acoplamiento-oldham.html", id: "acoplamiento-oldham", tema: "Acoplamientos flexibles", icono: "acoplamiento",
+          titulo: "Acoplamiento Oldham",
+          descripcion: "Une ejes paralelos desplazados con un disco de lengüetas cruzadas." },
+        { archivo: "acoplamiento-jaw.html", id: "acoplamiento-jaw", tema: "Acoplamientos flexibles", icono: "acoplamiento",
+          titulo: "Acoplamiento de garras (Jaw)",
+          descripcion: "Dos cubos con garras y una araña elástica entre ellas." },
+        { archivo: "acoplamiento-fuelle.html", id: "acoplamiento-fuelle", tema: "Acoplamientos flexibles", icono: "acoplamiento",
+          titulo: "Acoplamiento de fuelle",
+          descripcion: "Flexible a flexión y rígido a torsión: sin holgura." },
+        { archivo: "cardan.html", id: "cardan", tema: "Acoplamientos flexibles", icono: "cardan",
+          titulo: "Junta cardán",
+          descripcion: "Transmite el giro entre ejes que forman un ángulo." },
+        { archivo: "embrague-dientes.html", id: "embrague-dientes", tema: "Embragues", icono: "embrague",
+          titulo: "Embrague de dientes",
+          descripcion: "Dientes frontales que encajan para unir dos ejes." },
+        { archivo: "embrague-disco.html", id: "embrague-disco", tema: "Embragues", icono: "embrague",
+          titulo: "Embrague de disco",
+          descripcion: "El disco transmite el giro por rozamiento entre volante y plato." },
+        { archivo: "biela-manivela.html", id: "biela-manivela", tema: "Transformadores de movimiento", icono: "biela",
+          titulo: "Biela-manivela (cigüeñal)",
+          descripcion: "Convierte el giro en vaivén del pistón, y al revés." },
+        { archivo: "pinon-cremallera.html", id: "pinon-cremallera", tema: "Transformadores de movimiento", icono: "cremallera",
           titulo: "Piñón y cremallera",
-          tema: "Transformación del movimiento",
-          descripcion: "El giro del piñón se convierte en desplazamiento rectilíneo de la cremallera, y al revés.",
-          icono: "cremallera"
-        }
+          descripcion: "El giro del piñón se convierte en desplazamiento rectilíneo de la cremallera." },
+        { archivo: "levas.html", id: "levas", tema: "Transformadores de movimiento", icono: "leva",
+          titulo: "Levas: tipos",
+          descripcion: "Cuatro levas con su seguidor y la gráfica de su movimiento." },
+        { archivo: "engranajes-rectos.html", id: "engranajes-rectos", tema: "Engranajes", icono: "engranaje",
+          titulo: "Dientes rectos",
+          descripcion: "Ejes paralelos; giran en sentidos contrarios. Con representación normalizada." },
+        { archivo: "engranajes-helicoidales.html", id: "engranajes-helicoidales", tema: "Engranajes", icono: "engranaje",
+          titulo: "Dientes helicoidales",
+          descripcion: "Dientes inclinados: más silenciosos. Con representación normalizada." },
+        { archivo: "engranajes-conicos.html", id: "engranajes-conicos", tema: "Engranajes", icono: "engranaje",
+          titulo: "Cónicos",
+          descripcion: "Ejes que se cortan, normalmente a 90°. Con representación normalizada." },
+        { archivo: "tornillo-sin-fin.html", id: "tornillo-sin-fin", tema: "Engranajes", icono: "sinfin",
+          titulo: "Tornillo sin fin y corona",
+          descripcion: "Gran reducción entre ejes que se cruzan. Con representación normalizada." },
+        { archivo: "dentado-interior.html", id: "dentado-interior", tema: "Engranajes", icono: "engranaje",
+          titulo: "Dentado interior",
+          descripcion: "El piñón engrana dentro de la corona. Con representación normalizada." },
+        { archivo: "pinon-cremallera.html", id: "engranaje-pinon-cremallera", tema: "Engranajes", icono: "cremallera",
+          titulo: "Piñón y cremallera",
+          descripcion: "Animación y representación normalizada." },
+        { archivo: "formas-poleas.html", id: "formas-poleas", tema: "Poleas, correas y cadenas", icono: "polea",
+          titulo: "Poleas: formas",
+          descripcion: "La forma de la garganta según la correa." },
+        { archivo: "tipos-correas.html", id: "tipos-correas", tema: "Poleas, correas y cadenas", icono: "polea",
+          titulo: "Correas: tipos",
+          descripcion: "Plana, trapezoidal, poli-V, dentada y redonda." },
+        { archivo: "tipos-cadenas.html", id: "tipos-cadenas", tema: "Poleas, correas y cadenas", icono: "cadena",
+          titulo: "Cadenas: tipos",
+          descripcion: "Partes de la cadena de rodillos y tipos de cadena." }
       ]
     }
   ]

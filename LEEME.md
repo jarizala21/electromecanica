@@ -17,7 +17,7 @@ Cada sección y cada simulación tiene su enlace directo: añade `#electrica`, `
 
 Las apps ya instaladas se actualizan solas la próxima vez que se abren con internet.
 
-Para darle un título, una descripción o un icono más cuidados, o cambiar el orden, edita `catalogo.js` (las instrucciones están dentro).
+Para darle un título, una descripción o un icono más cuidados, cambiar el orden o agruparla en un apartado (campo `tema`), edita `catalogo.js` (las instrucciones están dentro).
 
 ## Añadir una sección
 
@@ -33,3 +33,5 @@ Crea una carpeta nueva dentro de `simulaciones/` con al menos un `.html` (en **U
 | `sw.js` | Funcionamiento sin internet |
 | `manifest.webmanifest`, `iconos/` | Nombre e icono al instalarla (los PNG se generan solos a partir de los SVG) |
 | `herramientas/preparar.mjs`, `.github/workflows/publicar.yml` | Publicación automática en GitHub Pages |
+| `herramientas/gif/` | Scripts que dibujan los GIF de Mecánica (`python3 herramientas/gif/todos.py`) |
+| `herramientas/paginas.py` | Genera las páginas de Mecánica a partir de sus textos |

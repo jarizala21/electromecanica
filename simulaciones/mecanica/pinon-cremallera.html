@@ -11,18 +11,18 @@
 <style>
 :root{
   --bg:#e6e9eb; --panel:#f9fafb; --line:#d0d6db; --ink:#162029; --muted:#55626c;
-  --acc:#2b6e37; --acc-soft:#dcecdd; --rojo:#c83e2c;
+  --acc:#2b6e37; --acc-soft:#dcecdd;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
-    --acc:#77c387; --acc-soft:#1b3322; --rojo:#ef6a5d; color-scheme:dark;
+    --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
-  --acc:#77c387; --acc-soft:#1b3322; --rojo:#ef6a5d; color-scheme:dark;
+  --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.55}
@@ -32,16 +32,15 @@ h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font
 h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:22px;margin:0 0 8px}
 .lead{margin:8px 0 0;color:var(--muted);max-width:62ch}
 figure{margin:0;background:#f0f2f4;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+figure.norma{background:#ffffff}
 figure img{display:block;width:100%;height:auto;max-width:100%}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
 ul{margin:0;padding-left:20px;display:grid;gap:8px}
-.rojo{color:var(--rojo);font-weight:600}
-.formula{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:26px;color:var(--acc);
+.formula{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:24px;color:var(--acc);
   background:var(--acc-soft);border-radius:10px;padding:6px 14px;display:inline-block;margin:2px 0 10px}
 .card p{margin:0 0 8px}
 .card p:last-child{margin-bottom:0}
-.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -52,8 +51,11 @@ ul{margin:0;padding-left:20px;display:grid;gap:8px}
   </header>
 
   <figure>
-    <img src="pinon-cremallera.gif" width="800" height="480"
-         alt="Animación: el piñón gira media vuelta en sentido antihorario y la cremallera avanza a la derecha; después gira en sentido horario y la cremallera vuelve a la izquierda.">
+    <img src="pinon-cremallera.gif" width="800" height="480" alt="Animación: el piñón gira media vuelta en sentido antihorario y la cremallera avanza a la derecha; después gira en sentido horario y la cremallera vuelve a la izquierda.">
+  </figure>
+
+  <figure class="norma">
+    <img src="pinon-cremallera-normalizada.png" width="800" height="330" alt="Representación normalizada del piñón sobre la cremallera, con la leyenda de tipos de línea.">
   </figure>
 
   <div class="grid">
@@ -61,15 +63,23 @@ ul{margin:0;padding-left:20px;display:grid;gap:8px}
       <h2>Qué observar</h2>
       <ul>
         <li>Si el piñón cambia de sentido de giro, la cremallera cambia de sentido de avance.</li>
-        <li>La <span class="rojo">marca roja</span> del piñón y la de la cremallera se encuentran en el punto de contacto: el piñón rueda sobre la cremallera sin deslizar.</li>
+        <li>La marca roja del piñón y la de la cremallera se encuentran en el punto de contacto: el piñón rueda sobre la cremallera sin deslizar.</li>
         <li>Cuanto más grande es el piñón, más avanza la cremallera en cada vuelta.</li>
       </ul>
     </section>
     <section class="card">
       <h2>Cuánto avanza</h2>
       <div class="formula">avance por vuelta = π · d</div>
-      <p>d es el diámetro primitivo del piñón. Con un piñón de <span class="num">12 dientes</span> y módulo <span class="num">2 mm</span>, <span class="num">d = 24 mm</span>, así que cada vuelta mueve la cremallera <span class="num">π · 24 ≈ 75,4 mm</span>.</p>
-      <p>Media vuelta, como en la animación, son <span class="num">37,7 mm</span>.</p>
+      <p>d es el diámetro primitivo del piñón. Con un piñón de 12 dientes y módulo 2 mm, d = 24 mm, así que cada vuelta mueve la cremallera π · 24 ≈ 75,4 mm.</p>
+      <p>Media vuelta, como en la animación, son 37,7 mm.</p>
+    </section>
+    <section class="card">
+      <h2>Cómo se representa</h2>
+      <ul>
+        <li>Piñón: circunferencia de cabeza gruesa y primitiva de trazo y punto.</li>
+        <li>Cremallera: línea de cabeza gruesa y línea primitiva tangente a la circunferencia primitiva del piñón.</li>
+        <li>En la zona de engrane, los dientes de una de las piezas se dibujan ocultos.</li>
+      </ul>
     </section>
   </div>
 
