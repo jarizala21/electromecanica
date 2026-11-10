@@ -27,7 +27,9 @@ La imagen redonda de la lista sale de `simulaciones/<área>/miniaturas/<archivo>
 
 ## Fichas bilingües
 
-Las fichas didácticas (guardamotor, contactor, hojas de proceso, acotación, perfiles, tornillos, tuercas, roscachapas y remaches) usan `simulaciones/comun/ficha.css` y `ficha.js`: pestañas, partes que se resaltan al tocarlas y textos en euskera y castellano (`class="es"` / `class="eu"`). Se ven en el idioma elegido en la portada y tienen un botón EU · ES arriba.
+Las fichas didácticas (guardamotor, contactor, hojas de proceso, acotación, perfiles, tornillos, tuercas, roscachapas y remaches) usan `simulaciones/comun/ficha.css` y `ficha.js`: pestañas, partes que se resaltan al tocarlas y textos en euskera y castellano (`class="es"` / `class="eu"`). Se ven en el idioma elegido en la portada y tienen un botón EU · ES arriba. Una ficha puede llevar dentro un simulador ya hecho (`<iframe class="sim-embebida">`); ese simulador se marca en `catalogo.js` con `oculta: true` para que no salga repetido en la lista.
+
+La app y las fichas siguen el modo claro u oscuro del móvil o del ordenador. Los dibujos van siempre sobre fondo claro.
 
 ## Añadir un área
 

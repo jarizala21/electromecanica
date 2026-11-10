@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compresor</title>
+<meta name="description" content="Qué es, partes, funcionamiento interactivo (pistón, válvulas, depósito y presostato), características y símbolos del compresor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Compresor" data-eu="Konpresorea"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">compresor</span> es la máquina que <b>coge aire de la atmósfera y lo comprime</b>: lo mete en menos espacio y así sube su presión. Es el «corazón» de una instalación neumática.</p>
+      <p class="eu"><span class="clave">Konpresorea</span> <b>atmosferatik airea hartu eta konprimitzen duen</b> makina da: leku txikiagoan sartzen du eta horrela haren presioa igotzen da. Instalazio neumatiko baten «bihotza» da.</p>
+      <p class="es">Lo mueve un motor (normalmente eléctrico) y guarda el aire en un <b>depósito</b>. Un <b>presostato</b> lo para cuando el depósito está lleno y lo arranca cuando baja la presión.</p>
+      <p class="eu">Motor batek mugitzen du (normalean elektrikoa) eta airea <b>depósito</b> batean gordetzen du. <b>Presostato</b> batek gelditzen du depósitoa beteta dagoenean eta abiarazten du presioa jaisten denean.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">De pistón</h3><h3 class="eu">Pistoiduna</h3><p class="es">Como un motor de coche al revés. El más común en talleres pequeños. Puede ser de una o dos etapas.</p><p class="eu">Autoaren motor bat alderantziz bezala. Tailer txikietan ohikoena. Etapa batekoa edo bikoa izan daiteke.</p></div>
+      <div class="card"><h3 class="es">De tornillo</h3><h3 class="eu">Torlojuduna</h3><p class="es">Dos tornillos que giran y empujan el aire. Silencioso y continuo: industria.</p><p class="eu">Biratzen duten eta airea bultzatzen duten bi torloju. Isila eta jarraitua: industria.</p></div>
+      <div class="card"><h3 class="es">De paletas</h3><h3 class="eu">Paletaduna</h3><p class="es">Un rotor con paletas que reduce el espacio del aire al girar.</p><p class="eu">Paletak dituen errotore bat, biratzean airearen lekua txikiagotzen duena.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 320 260" role="img" aria-label="Partes del compresor de pistón">
+          <g class="resaltable" data-parte="deposito"><rect x="20" y="170" width="280" height="70" rx="35" fill="#e3e8ef" stroke="#242d5f" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="purga"><path d="M160 240v12" stroke="#242d5f" stroke-width="3"/><rect x="154" y="250" width="12" height="6" fill="#d4a017"/></g>
+          <g class="resaltable" data-parte="motor"><rect x="210" y="100" width="70" height="50" rx="8" fill="#5c6575" stroke="#242d5f" stroke-width="2"/><text class="txt" x="245" y="130" text-anchor="middle" fill="#fff" style="fill:#fff">M</text></g>
+          <g class="resaltable" data-parte="cilindro"><path d="M70 30h70v110H70z" fill="#f2f4f7" stroke="#242d5f" stroke-width="2"/><path d="M60 40h10M60 52h10M60 64h10M140 40h10M140 52h10M140 64h10" stroke="#242d5f" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="piston"><rect x="73" y="80" width="64" height="22" fill="#9aa3b2" stroke="#242d5f" stroke-width="1.5"/></g>
+          <g class="resaltable" data-parte="biela"><path d="M105 102l18 40" stroke="#5c6575" stroke-width="6" stroke-linecap="round"/></g>
+          <g class="resaltable" data-parte="ciguenal"><circle cx="105" cy="150" r="16" fill="#c9cfd8" stroke="#242d5f" stroke-width="2"/><circle cx="123" cy="142" r="4" fill="#242d5f"/><path d="M121 150h89" stroke="#242d5f" stroke-width="4" stroke-dasharray="6 3"/></g>
+          <g class="resaltable" data-parte="valvulas"><path d="M80 30v-10h16v10M114 30v-10h16v10" fill="none" stroke="#c62f2f" stroke-width="3"/></g>
+          <g class="resaltable" data-parte="filtro"><rect x="30" y="8" width="44" height="16" rx="6" fill="#d6dde7" stroke="#242d5f" stroke-width="1.5"/><path d="M74 16h14v4" stroke="#242d5f" stroke-width="2" fill="none"/></g>
+          <g class="resaltable" data-parte="salida"><path d="M122 20V12h60v158" stroke="#242d5f" stroke-width="3" fill="none"/></g>
+          <g class="resaltable" data-parte="presostato"><rect x="186" y="60" width="26" height="20" rx="3" fill="#2b6cb0"/><path d="M182 70h4" stroke="#242d5f" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="manometro"><circle cx="290" cy="190" r="14" fill="#fff" stroke="#242d5f" stroke-width="2"/><path d="M290 190l6-8" stroke="#c62f2f" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="seguridad"><path d="M40 170v-14h10v14" fill="#d4a017" stroke="#242d5f"/><path d="M45 156v-10" stroke="#242d5f" stroke-width="2"/></g>
+        </svg>
+        <figcaption data-es="Compresor de pistón con depósito" data-eu="Pistoi-konpresorea depositoarekin"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="motor"><span class="n">1</span><span><b class="es">Motor eléctrico</b><b class="eu">Motor elektrikoa</b><small class="es">Mueve el cigüeñal (directo o con correa).</small><small class="eu">Birabarki-ardatza mugitzen du (zuzenean edo uhalarekin).</small></span></button></li>
+        <li><button data-parte="ciguenal"><span class="n">2</span><span><b class="es">Cigüeñal</b><b class="eu">Birabarki-ardatza</b></span></button></li>
+        <li><button data-parte="biela"><span class="n">3</span><span><b class="es">Biela</b><b class="eu">Biela</b><small class="es">Convierte el giro en subida y bajada del pistón.</small><small class="eu">Biraketa pistoiaren igoera eta jaitsiera bihurtzen du.</small></span></button></li>
+        <li><button data-parte="piston"><span class="n">4</span><span><b class="es">Pistón</b><b class="eu">Pistoia</b><small class="es">Aspira el aire al bajar y lo comprime al subir.</small><small class="eu">Jaistean airea xurgatzen du eta igotzean konprimitzen du.</small></span></button></li>
+        <li><button data-parte="cilindro"><span class="n">5</span><span><b class="es">Cilindro con aletas</b><b class="eu">Zilindroa hegaltxoekin</b><small class="es">Las aletas lo refrigeran: al comprimir, el aire se calienta.</small><small class="eu">Hegaltxoek hozten dute: konprimitzean airea berotu egiten da.</small></span></button></li>
+        <li><button data-parte="valvulas"><span class="n">6</span><span><b class="es">Válvulas de admisión y escape</b><b class="eu">Onarpen- eta ihes-balbulak</b><small class="es">Dejan entrar el aire y lo dejan salir hacia el depósito.</small><small class="eu">Airea sartzen uzten dute eta depositorantz ateratzen uzten dute.</small></span></button></li>
+        <li><button data-parte="filtro"><span class="n">7</span><span><b class="es">Filtro de aspiración</b><b class="eu">Xurgatze-iragazkia</b></span></button></li>
+        <li><button data-parte="salida"><span class="n">8</span><span><b class="es">Tubo de impulsión</b><b class="eu">Bultzatze-hodia</b></span></button></li>
+        <li><button data-parte="deposito"><span class="n">9</span><span><b class="es">Depósito (calderín)</b><b class="eu">Depositoa (galdaratxoa)</b><small class="es">Guarda el aire y estabiliza la presión.</small><small class="eu">Airea gordetzen du eta presioa egonkortzen du.</small></span></button></li>
+        <li><button data-parte="presostato"><span class="n">10</span><span><b class="es">Presostato</b><b class="eu">Presostatoa</b><small class="es">Para el motor al llegar a la presión máxima y lo arranca en la mínima.</small><small class="eu">Motorra gelditzen du presio maximora iristean eta abiarazten du minimoan.</small></span></button></li>
+        <li><button data-parte="seguridad"><span class="n">11</span><span><b class="es">Válvula de seguridad</b><b class="eu">Segurtasun-balbula</b><small class="es">Suelta aire si la presión sube demasiado.</small><small class="eu">Airea askatzen du presioa gehiegi igotzen bada.</small></span></button></li>
+        <li><button data-parte="manometro"><span class="n">12</span><span><b class="es">Manómetro</b><b class="eu">Manometroa</b></span></button></li>
+        <li><button data-parte="purga"><span class="n">13</span><span><b class="es">Purga</b><b class="eu">Purga</b><small class="es">Por abajo se saca el agua que se condensa en el depósito.</small><small class="eu">Behetik depositoan kondentsatzen den ura ateratzen da.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es"><b>Aspiración:</b> el pistón baja, se abre la válvula de admisión y entra aire. <b>Compresión:</b> el pistón sube, el aire se comprime y sale por la válvula de escape al depósito. El presostato arranca a <b>6 bar</b> y para a <b>8 bar</b>. Abre el consumo y mira cómo trabaja.</p>
+      <p class="eu"><b>Xurgatzea:</b> pistoia jaisten da, onarpen-balbula irekitzen da eta airea sartzen da. <b>Konpresioa:</b> pistoia igotzen da, airea konprimitzen da eta ihes-balbulatik depositora ateratzen da. Presostatoak <b>6 bar</b>-etan abiarazten du eta <b>8 bar</b>-etan gelditzen. Ireki kontsumoa eta begiratu nola lan egiten duen.</p>
+    </div>
+    <figure class="fig"><svg id="svg-f" viewBox="0 0 340 230" role="img" aria-label="Simulación del compresor"></svg></figure>
+    <div class="lectura-g"><div><small data-es="Depósito" data-eu="Depositoa"></small><b id="l-p"></b></div><div><small data-es="Motor" data-eu="Motorra"></small><b id="l-m"></b></div><div><small data-es="Fase" data-eu="Fasea"></small><b id="l-f"></b></div></div>
+    <div class="mandos">
+      <button class="boton verde" id="on" aria-pressed="true" data-es="Interruptor general" data-eu="Etengailu nagusia"></button>
+      <div class="deslizador"><label><span data-es="Consumo de aire" data-eu="Aire-kontsumoa"></span><output id="c-t"></output></label><input id="c" type="range" min="0" max="100" value="30"></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Caudal</h3><h3 class="eu">Emaria</h3><p class="es">Aire que da, en l/min. Ojo: el <b>aspirado</b> es mayor que el <b>efectivo</b> (el que de verdad llega).</p><p class="eu">Ematen duen airea, l/min-tan. Kontuz: <b>xurgatutakoa</b> <b>eraginkorra</b> (benetan iristen dena) baino handiagoa da.</p></div>
+      <div class="card"><h3 class="es">Presión máxima</h3><h3 class="eu">Presio maximoa</h3><p class="es">Por ejemplo 8 o 10 bar.</p><p class="eu">Adibidez 8 edo 10 bar.</p></div>
+      <div class="card"><h3 class="es">Potencia del motor</h3><h3 class="eu">Motorraren potentzia</h3><p class="es">En kW o CV (1 CV ≈ 0,736 kW). Monofásico o trifásico.</p><p class="eu">kW-tan edo ZP-tan (1 ZP ≈ 0,736 kW). Monofasikoa edo trifasikoa.</p></div>
+      <div class="card"><h3 class="es">Capacidad del depósito</h3><h3 class="eu">Depositoaren edukiera</h3><p class="es">En litros: 24, 50, 100, 270 l… Más depósito, menos arranques.</p><p class="eu">Litrotan: 24, 50, 100, 270 l… Deposito handiagoa, abiarazte gutxiago.</p></div>
+      <div class="card"><h3 class="es">Ciclo de trabajo</h3><h3 class="eu">Lan-zikloa</h3><p class="es">Cuánto tiempo puede estar en marcha seguido sin calentarse (por ejemplo 50 %).</p><p class="eu">Zenbat denbora egon daitekeen martxan jarraian berotu gabe (adibidez % 50).</p></div>
+      <div class="card"><h3 class="es">Mantenimiento</h3><h3 class="eu">Mantentzea</h3><p class="es">Purgar el agua, limpiar el filtro de aspiración, revisar aceite y correas.</p><p class="eu">Ura purgatu, xurgatze-iragazkia garbitu, olioa eta uhalak berrikusi.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="48" r="24"/><path class="s-l" d="M60 24l10 16H50z"/><path class="s-l" d="M60 24V6M84 48h14M84 44v8"/></svg><b data-es="Compresor" data-eu="Konpresorea"></b><small data-es="triángulo hacia fuera: da aire" data-eu="triangelua kanpora: airea ematen du"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="24"/><text class="s-t" x="60" y="51" text-anchor="middle">M</text></svg><b data-es="Motor eléctrico" data-eu="Motor elektrikoa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><rect class="s-l" x="20" y="28" width="80" height="34" rx="17"/><path class="s-l" d="M60 28V8"/></svg><b data-es="Depósito" data-eu="Depositoa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="45" cy="45" r="16"/><path class="s-l" d="M45 29l7 11H38z"/><circle class="s-l" cx="85" cy="45" r="14"/><text class="s-t" x="85" y="50" text-anchor="middle" style="font-size:13px">M</text><path class="s-l" d="M61 43h10M61 47h10M45 29V10"/></svg><b data-es="Grupo compresor" data-eu="Konpresio-taldea"></b><small data-es="compresor movido por un motor" data-eu="motor batek eragindako konpresorea"></small></div>
+    </div>
+    <p class="nota es">Compara los símbolos con la tabla de vuestro libro: algunos fabricantes los dibujan con pequeñas diferencias.</p>
+    <p class="nota eu">Alderatu sinboloak zuen liburuko taularekin: fabrikatzaile batzuek desberdintasun txikiekin marrazten dituzte.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var P = 5.5, motor = true, general = true, ang = 0, ult = performance.now();
+  function n(v){ return (Math.round(v * 10) / 10).toString().replace(".", ","); }
+  function paso(t){
+    var dt = Math.min((t - ult) / 1000, .1); ult = t;
+    if (general) { if (P <= 6) motor = true; if (P >= 8) motor = false; } else motor = false;
+    var c = +$("c").value / 100;
+    if (motor) { ang += dt * 9; P += dt * 0.55; }
+    P -= dt * c * 0.5 * (P / 8);
+    if (P < 0) P = 0;
+    var y = Math.sin(ang), sube = Math.cos(ang) > 0;
+    var px = 120, cy = 140 + 0, py = 70 + 26 * (1 - y) / 2;
+    var s = '<rect x="10" y="170" width="320" height="50" rx="25" fill="#e3e8ef" stroke="#242d5f" stroke-width="2"/>';
+    s += '<rect x="12" y="' + (218 - 46 * Math.min(P, 10) / 10) + '" width="316" height="' + (46 * Math.min(P, 10) / 10) + '" fill="#bcd4f6" opacity=".8" rx="20"/>';
+    s += '<path d="M80 20h80v110H80z" fill="#f2f4f7" stroke="#242d5f" stroke-width="2"/>';
+    s += '<rect x="80" y="20" width="80" height="' + (py - 20) + '" fill="' + (motor && sube ? "#ffd6a5" : "#dfeaf8") + '"/>';
+    s += '<rect x="83" y="' + py + '" width="74" height="20" fill="#9aa3b2" stroke="#242d5f"/>';
+    var cxk = 120 + 16 * Math.cos(ang), cyk = 150 + 16 * Math.sin(ang);
+    s += '<path d="M120 ' + (py + 10) + 'L' + cxk + ' ' + cyk + '" stroke="#5c6575" stroke-width="6" stroke-linecap="round"/><circle cx="120" cy="150" r="18" fill="none" stroke="#242d5f" stroke-width="2"/><circle cx="' + cxk + '" cy="' + cyk + '" r="4" fill="#242d5f"/>';
+    var adm = motor && !sube, esc = motor && sube && py < 80;
+    s += '<path d="M90 20V' + (adm ? 2 : 8) + 'M106 20V' + (adm ? 2 : 8) + '" stroke="' + (adm ? "#1f8a4c" : "#c62f2f") + '" stroke-width="3"/>';
+    s += '<path d="M134 20V' + (esc ? 2 : 8) + 'M150 20V' + (esc ? 2 : 8) + '" stroke="' + (esc ? "#1f8a4c" : "#c62f2f") + '" stroke-width="3"/>';
+    s += '<path d="M142 6V0" stroke="#242d5f"/><path d="M142 8h80v162" stroke="' + (esc ? "#f39200" : "#242d5f") + '" stroke-width="3" fill="none"/>';
+    s += '<text class="txt" x="40" y="12">' + T("admisión", "onarpena") + '</text><text class="txt" x="230" y="20">' + T("escape → depósito", "ihesa → depositoa") + '</text>';
+    s += '<rect x="250" y="100" width="70" height="44" rx="8" fill="' + (motor ? "#1f8a4c" : "#5c6575") + '"/><text class="txt" x="285" y="127" text-anchor="middle" style="fill:#fff">M</text>';
+    s += '<path d="M138 150h112" stroke="#242d5f" stroke-width="3" stroke-dasharray="6 3"/>';
+    var a = (-225 + 270 * Math.min(P, 10) / 10) * Math.PI / 180;
+    s += '<circle cx="300" cy="60" r="24" fill="#fff" stroke="#242d5f" stroke-width="2"/><path d="M300 60l' + 18 * Math.cos(a) + ' ' + 18 * Math.sin(a) + '" stroke="#c62f2f" stroke-width="3"/><path d="M300 84v86" stroke="#242d5f" stroke-width="2"/>';
+    s += '<path d="M330 200h-2" stroke="#242d5f"/><path d="M40 220v8" stroke="#242d5f" stroke-width="3"/>';
+    if (c > 0) for (var i = 0; i < 4; i++) s += '<circle cx="' + (330 - ((t / 6 * c + i * 9) % 30)) + '" cy="196" r="2" fill="#3a7bd5"/>';
+    $("svg-f").innerHTML = s;
+    $("l-p").textContent = n(P) + " bar";
+    $("l-m").textContent = motor ? T("En marcha", "Martxan") : T("Parado", "Geldirik");
+    $("l-f").textContent = !motor ? "–" : sube ? T("Compresión", "Konpresioa") : T("Aspiración", "Xurgatzea");
+    requestAnimationFrame(paso);
+  }
+  $("on").addEventListener("click", function(){ general = !general; this.setAttribute("aria-pressed", general ? "true" : "false"); this.className = "boton " + (general ? "verde" : "claro"); });
+  function ct(){ $("c-t").textContent = $("c").value + " %"; }
+  $("c").addEventListener("input", ct); alCambiarIdioma(ct);
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

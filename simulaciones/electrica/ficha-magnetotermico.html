@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnetotérmico</title>
+<meta name="description" content="Qué es, partes, funcionamiento (con simulador), características (In, curvas B C D, poder de corte) y símbolos del interruptor magnetotérmico.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos eléctricos" data-eu="Elementu elektrikoak"></p>
+      <h1 data-es="Magnetotérmico" data-eu="Magnetotermikoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">interruptor magnetotérmico</span> (PIA) protege <b>los cables y los aparatos</b> de un circuito. Corta la corriente sola cuando hay una <b>sobrecarga</b> (demasiados aparatos a la vez) o un <b>cortocircuito</b> (fase y neutro se tocan).</p>
+      <p class="eu"><span class="clave">Etengailu magnetotermikoak</span> (PIA) zirkuitu bateko <b>kableak eta aparatuak</b> babesten ditu. Korrontea berez mozten du <b>gainkarga</b> (aparatu gehiegi aldi berean) edo <b>zirkuitulabur</b> (fasea eta neutroa ukitzen dira) bat dagoenean.</p>
+      <p class="es">También sirve para <b>abrir y cerrar el circuito a mano</b>. Cada circuito de la vivienda (alumbrado, enchufes, cocina…) lleva el suyo en el cuadro.</p>
+      <p class="eu"><b>Zirkuitua eskuz ireki eta ixteko</b> ere balio du. Etxebizitzako zirkuitu bakoitzak (argiztapena, entxufeak, sukaldea…) berea du koadroan.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Parte térmica</h3><h3 class="eu">Zati termikoa</h3><p class="es">Bimetal → sobrecargas → actúa con retraso.</p><p class="eu">Bimetala → gainkargak → atzerapenarekin jarduten du.</p></div>
+      <div class="card"><h3 class="es">Parte magnética</h3><h3 class="eu">Zati magnetikoa</h3><p class="es">Bobina → cortocircuitos → actúa al instante.</p><p class="eu">Bobina → zirkuitulaburrak → berehala jarduten du.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 220 300" role="img" aria-label="Partes del magnetotérmico">
+          <rect x="30" y="20" width="160" height="260" rx="10" fill="#f1f3f6" stroke="#8d95a3" stroke-width="2"/>
+          <g class="resaltable" data-parte="bornes"><rect x="88" y="26" width="44" height="22" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="88" y="252" width="44" height="22" rx="4" fill="#c9ced6" stroke="#6b7280"/></g>
+          <g class="resaltable" data-parte="palanca"><rect x="150" y="70" width="34" height="18" rx="4" fill="#2d3340"/><text class="txt" x="190" y="66">I</text></g>
+          <g class="resaltable" data-parte="contactos"><path d="M110 48v24M110 72l18 22" stroke="#b07d2a" stroke-width="5"/><circle cx="110" cy="72" r="4" fill="#d4a017"/></g>
+          <g class="resaltable" data-parte="camara"><path d="M50 90h36v40H50z" fill="#9aa3b2"/><path d="M54 96h28M54 104h28M54 112h28M54 120h28" stroke="#fff" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="bobina"><path d="M128 110c14 0 14 8 0 8c14 0 14 8 0 8c14 0 14 8 0 8c14 0 14 8 0 8" stroke="#c46a1b" stroke-width="3" fill="none"/></g>
+          <g class="resaltable" data-parte="bimetal"><path d="M118 170v60" stroke="#c62f2f" stroke-width="5"/><path d="M126 170v60" stroke="#9aa3b2" stroke-width="3"/></g>
+          <g class="resaltable" data-parte="mecanismo"><path d="M150 100v80h-20M150 140h20" stroke="#5c6575" stroke-width="3" fill="none" stroke-dasharray="5 3"/><circle cx="150" cy="100" r="5" fill="#5c6575"/></g>
+          <path d="M128 142v20h-6v8M122 230v22" stroke="#242d5f" stroke-width="2" fill="none"/>
+        </svg>
+        <figcaption data-es="Por dentro (simplificado)" data-eu="Barrutik (sinplifikatua)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="bornes"><span class="n">1</span><span><b class="es">Bornes de entrada y salida</b><b class="eu">Sarrerako eta irteerako borneak</b></span></button></li>
+        <li><button data-parte="palanca"><span class="n">2</span><span><b class="es">Palanca de maniobra</b><b class="eu">Maniobra-palanka</b><small class="es">Arriba = conectado (I). Si salta, baja sola.</small><small class="eu">Gora = konektatuta (I). Jauzten bada, berez jaisten da.</small></span></button></li>
+        <li><button data-parte="contactos"><span class="n">3</span><span><b class="es">Contactos fijo y móvil</b><b class="eu">Kontaktu finkoa eta mugikorra</b></span></button></li>
+        <li><button data-parte="bobina"><span class="n">4</span><span><b class="es">Bobina (relé magnético)</b><b class="eu">Bobina (errele magnetikoa)</b><small class="es">Con un cortocircuito crea un campo fuerte que mueve un núcleo y dispara.</small><small class="eu">Zirkuitulabur batekin eremu indartsua sortzen du, nukleo bat mugitzen du eta jauzi egiten du.</small></span></button></li>
+        <li><button data-parte="bimetal"><span class="n">5</span><span><b class="es">Bimetal (relé térmico)</b><b class="eu">Bimetala (errele termikoa)</b><small class="es">Dos metales que se dilatan distinto: con calor se curva y dispara.</small><small class="eu">Desberdin dilatatzen diren bi metal: beroarekin okertu eta jauzi egiten du.</small></span></button></li>
+        <li><button data-parte="mecanismo"><span class="n">6</span><span><b class="es">Mecanismo de disparo</b><b class="eu">Jauzi-mekanismoa</b><small class="es">Recibe el empujón del bimetal o de la bobina y abre los contactos.</small><small class="eu">Bimetalaren edo bobinaren bultzada jaso eta kontaktuak irekitzen ditu.</small></span></button></li>
+        <li><button data-parte="camara"><span class="n">7</span><span><b class="es">Cámara apagachispas</b><b class="eu">Txinparta-itzalgailuaren ganbera</b><small class="es">Placas que rompen y enfrían el arco eléctrico al abrir.</small><small class="eu">Irekitzean arku elektrikoa hautsi eta hozten duten plakak.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es"><b>Sobrecarga</b>: pasa algo más de corriente de la nominal; el bimetal se calienta, se curva y, tras un tiempo, dispara. <b>Cortocircuito</b>: la corriente sube muchísimo; la bobina atrae su núcleo y dispara en milisegundos.</p>
+      <p class="eu"><b>Gainkarga</b>: korronte nominala baino zertxobait gehiago igarotzen da; bimetala berotu, okertu eta, denbora baten ondoren, jauzi egiten du. <b>Zirkuitulaburra</b>: korrontea izugarri igotzen da; bobinak bere nukleoa erakartzen du eta milisegundotan jauzi egiten du.</p>
+    </div>
+    <p class="nota es">Pruébalo en el simulador (en castellano):</p><p class="nota eu">Probatu simulagailuan (gaztelaniaz):</p>
+    <iframe class="sim-embebida" src="magnetotermico.html" title="Simulador del magnetotérmico" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Intensidad nominal (In)</h3><h3 class="eu">Korronte nominala (In)</h3><p class="es">La corriente que deja pasar sin disparar: 6, 10, 16, 20, 25, 32, 40 A… Se elige según la sección del cable.</p><p class="eu">Jauzi gabe uzten duen korrontea: 6, 10, 16, 20, 25, 32, 40 A… Kablearen sekzioaren arabera aukeratzen da.</p></div>
+      <div class="card"><h3 class="es">Curva de disparo</h3><h3 class="eu">Jauzi-kurba</h3><p class="es">A cuántas veces In salta el magnético: <b>B</b> 3-5·In (cables largos), <b>C</b> 5-10·In (viviendas, lo normal), <b>D</b> 10-20·In (motores, transformadores).</p><p class="eu">In-ren zenbat aldiz jauzten den magnetikoa: <b>B</b> 3-5·In (kable luzeak), <b>C</b> 5-10·In (etxebizitzak, arrunta), <b>D</b> 10-20·In (motorrak, transformadoreak).</p></div>
+      <div class="card"><h3 class="es">Poder de corte</h3><h3 class="eu">Etete-ahalmena</h3><p class="es">El cortocircuito máximo que puede cortar: 4,5 kA, 6 kA, 10 kA…</p><p class="eu">Eten dezakeen zirkuitulabur handiena: 4,5 kA, 6 kA, 10 kA…</p></div>
+      <div class="card"><h3 class="es">Número de polos</h3><h3 class="eu">Polo kopurua</h3><p class="es">1P+N y 2P (monofásico), 3P y 4P (trifásico).</p><p class="eu">1P+N eta 2P (monofasikoa), 3P eta 4P (trifasikoa).</p></div>
+      <div class="card"><h3 class="es">Marcado</h3><h3 class="eu">Markaketa</h3><p class="es">En el frontal: <b>C16</b> = curva C, 16 A. Y la tensión y el poder de corte.</p><p class="eu">Aurrealdean: <b>C16</b> = C kurba, 16 A. Eta tentsioa eta etete-ahalmena.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 6v30M60 74L46 38M60 74v40"/><path class="s-l" d="M54 30l12 12M66 30l-12 12"/></svg><b data-es="Interruptor automático (unifilar)" data-eu="Etengailu automatikoa (hari bakarrekoa)"></b><small data-es="la «×» = interruptor automático" data-eu="«×» = etengailu automatikoa"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 4v20M60 54L48 26M60 54v8"/><path class="s-l" d="M55 20l10 10M65 20l-10 10"/><rect class="s-l" x="50" y="62" width="20" height="22"/><path class="s-l" d="M60 62v6h-5v10h5v6"/><path class="s-l" d="M60 84v6"/><rect class="s-l" x="50" y="90" width="20" height="20"/><text class="s-t" x="60" y="105" text-anchor="middle" style="font-size:9px">I&gt;</text><path class="s-d" d="M20 40H52M20 73H50M20 100H50M20 40v60"/></svg><b data-es="Con relé térmico y magnético" data-eu="Errele termiko eta magnetikoarekin"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M44 6v30M44 74L30 38M44 74v40M76 6v30M76 74L62 38M76 74v40"/><path class="s-l" d="M38 30l12 12M50 30l-12 12M70 30l12 12M82 30l-12 12"/><path class="s-d" d="M37 56h36"/></svg><b data-es="Bipolar (2P)" data-eu="Bipolarra (2P)"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+</body>
+</html>

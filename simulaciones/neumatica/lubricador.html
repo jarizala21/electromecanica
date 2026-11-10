@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lubricador</title>
+<meta name="description" content="Qué es, partes, funcionamiento por efecto Venturi (interactivo), características y símbolo del lubricador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Lubricador" data-eu="Lubrikadorea"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">lubricador</span> mete en el aire comprimido <b>gotitas de aceite muy finas</b> (niebla) para que cilindros y válvulas se deslicen mejor, se desgasten menos y no se oxiden.</p>
+      <p class="eu"><span class="clave">Lubrikadoreak</span> aire konprimituari <b>olio-tanta oso finak</b> (lainoa) gehitzen dizkio, zilindroak eta balbulak hobeto irristatu daitezen, gutxiago higatu daitezen eta herdoildu ez daitezen.</p>
+      <p class="es">Va el <b>último</b> en la unidad de mantenimiento: filtro → regulador → lubricador.</p>
+      <p class="eu">Mantentze-unitatean <b>azkena</b> doa: iragazkia → erreguladorea → lubrikadorea.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Ojo" data-eu="Kontuz"></h2>
+      <p class="es">Muchos elementos modernos vienen engrasados de fábrica y <b>no necesitan lubricador</b>. Pero si una instalación se ha lubricado alguna vez, <b>hay que seguir lubricando siempre</b>: el aceite arrastra la grasa original.</p>
+      <p class="eu">Elementu moderno askok fabrikatik koipeztatuta datoz eta <b>ez dute lubrikadorerik behar</b>. Baina instalazio bat behin lubrifikatu bada, <b>beti lubrifikatzen jarraitu behar da</b>: olioak jatorrizko koipea eramaten du.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 300 300" role="img" aria-label="Partes del lubricador">
+          <g class="resaltable" data-parte="cuerpo"><path d="M20 40h260v60H20z" fill="#dfe4ea" stroke="#242d5f" stroke-width="2"/><path d="M20 58h100l20 10h20l20-10h100v24H180l-20-8h-20l-20 8H20z" fill="#fff" stroke="#242d5f" stroke-width="1.5"/></g>
+          <g class="resaltable" data-parte="venturi"><path d="M120 58l20 10h20l20-10M120 82l20-8h20l20 8" stroke="#c62f2f" stroke-width="3" fill="none"/></g>
+          <g class="resaltable" data-parte="visor"><path d="M130 40c0-26 40-26 40 0" fill="#e8f4ff" stroke="#242d5f" stroke-width="2"/><circle cx="150" cy="30" r="3.5" fill="#d4a017"/></g>
+          <g class="resaltable" data-parte="tornillo"><rect x="190" y="10" width="14" height="30" fill="#9aa3b2" stroke="#242d5f"/><rect x="184" y="4" width="26" height="9" rx="3" fill="#2d3340"/></g>
+          <g class="resaltable" data-parte="vaso"><path d="M80 100h140v150a20 20 0 0 1-20 20H100a20 20 0 0 1-20-20z" fill="#f2f6fb" stroke="#242d5f" stroke-width="2"/><path d="M82 180h136v70a18 18 0 0 1-18 18H100a18 18 0 0 1-18-18z" fill="#f2c94c" opacity=".75"/></g>
+          <g class="resaltable" data-parte="tubo"><path d="M150 74V250" stroke="#5c6575" stroke-width="4"/><path d="M150 40v-6" stroke="#5c6575" stroke-width="3"/></g>
+          <g class="resaltable" data-parte="llenado"><rect x="232" y="30" width="22" height="10" rx="3" fill="#2d3340"/></g>
+        </svg>
+        <figcaption data-es="Corte simplificado" data-eu="Ebaketa sinplifikatua"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="cuerpo"><span class="n">1</span><span><b class="es">Cuerpo con entrada y salida</b><b class="eu">Gorputza, sarrera eta irteerarekin</b></span></button></li>
+        <li><button data-parte="venturi"><span class="n">2</span><span><b class="es">Estrechamiento (Venturi)</b><b class="eu">Estugunea (Venturi)</b><small class="es">El aire pasa más rápido y su presión baja.</small><small class="eu">Airea azkarrago igarotzen da eta haren presioa jaisten da.</small></span></button></li>
+        <li><button data-parte="vaso"><span class="n">3</span><span><b class="es">Vaso con aceite</b><b class="eu">Olio-ontzia</b><small class="es">Transparente, para ver el nivel. Se rellena sin pasar del máximo.</small><small class="eu">Gardena, maila ikusteko. Maximoa gainditu gabe betetzen da.</small></span></button></li>
+        <li><button data-parte="tubo"><span class="n">4</span><span><b class="es">Tubo de aspiración</b><b class="eu">Xurgatze-hodia</b><small class="es">Sube el aceite desde el fondo del vaso.</small><small class="eu">Olioa ontziaren hondotik igotzen du.</small></span></button></li>
+        <li><button data-parte="visor"><span class="n">5</span><span><b class="es">Cúpula de goteo (visor)</b><b class="eu">Tanta-kupula (ikusgailua)</b><small class="es">Se ven caer las gotas: así se regula.</small><small class="eu">Tantak erortzen ikusten dira: horrela erregulatzen da.</small></span></button></li>
+        <li><button data-parte="tornillo"><span class="n">6</span><span><b class="es">Tornillo de regulación</b><b class="eu">Erregulazio-torlojua</b><small class="es">Abre o cierra el paso de aceite: más o menos gotas.</small><small class="eu">Olio-igarobidea ireki edo ixten du: tanta gehiago edo gutxiago.</small></span></button></li>
+        <li><button data-parte="llenado"><span class="n">7</span><span><b class="es">Tapón de llenado</b><b class="eu">Betetzeko tapoia</b></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es">Cuando pasa aire, en el estrechamiento va más rápido y <b>baja la presión</b>. La presión del vaso empuja el aceite por el tubo hasta la cúpula, cae gota a gota en la corriente de aire y <b>se pulveriza</b>. Sin consumo de aire, no hay goteo.</p>
+      <p class="eu">Airea igarotzean, estugunean azkarrago doa eta <b>presioa jaisten da</b>. Ontziko presioak olioa hoditik kupularaino bultzatzen du, tantaka erortzen da aire-korrontera eta <b>polbortu</b> egiten da. Aire-kontsumorik gabe, ez dago tantarik.</p>
+    </div>
+    <figure class="fig"><svg id="svg-f" viewBox="0 0 340 200" role="img" aria-label="Funcionamiento"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Consumo de aire" data-eu="Aire-kontsumoa"></span><output id="q-t"></output></label><input id="q" type="range" min="0" max="100" value="50"></div>
+      <div class="deslizador"><label><span data-es="Tornillo de regulación" data-eu="Erregulazio-torlojua"></span><output id="r-t"></output></label><input id="r" type="range" min="0" max="100" value="50"></div>
+    </div>
+    <div class="estado" id="estado"></div>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Tipo de aceite</h3><h3 class="eu">Olio mota</h3><p class="es">Aceite especial para neumática, poco viscoso (ISO VG 32). Nunca aceite de motor.</p><p class="eu">Neumatikarako olio berezia, likatasun txikikoa (ISO VG 32). Inoiz ez motor-olioa.</p></div>
+      <div class="card"><h3 class="es">Regulación del goteo</h3><h3 class="eu">Tanten erregulazioa</h3><p class="es">Se ajusta en gotas por minuto: poco aceite, lo justo (por ejemplo 1 gota por cada 300-600 l de aire).</p><p class="eu">Minutuko tantetan doitzen da: olio gutxi, behar adina (adibidez tanta 1 300-600 l aire bakoitzeko).</p></div>
+      <div class="card"><h3 class="es">Caudal mínimo</h3><h3 class="eu">Gutxieneko emaria</h3><p class="es">Por debajo de un caudal no gotea: el Venturi no tiene fuerza.</p><p class="eu">Emari jakin baten azpitik ez du tantarik ematen: Venturik ez du indarrik.</p></div>
+      <div class="card"><h3 class="es">Capacidad del vaso</h3><h3 class="eu">Ontziaren edukiera</h3><p class="es">En cm³. Se rellena sin presión (cerrando y purgando antes).</p><p class="eu">cm³-tan. Presiorik gabe betetzen da (aurretik itxi eta purgatuta).</p></div>
+      <div class="card"><h3 class="es">Presión máxima</h3><h3 class="eu">Presio maximoa</h3><p class="es">Normalmente 10 bar. El vaso lleva protector metálico.</p><p class="eu">Normalean 10 bar. Ontziak babes metalikoa du.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-l" d="M60 75V50"/><circle class="s-f" cx="60" cy="44" r="4"/></svg><b data-es="Lubricador" data-eu="Lubrikadorea"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-d" d="M60 18v54"/></svg><b data-es="Filtro" data-eu="Iragazkia"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-d" d="M60 18v40"/><path class="s-l" d="M50 65h20l-10 10z"/><path class="s-l" d="M60 75v12"/></svg><b data-es="Filtro con purga" data-eu="Iragazkia purgarekin"></b></div>
+    </div>
+    <p class="nota es">Compara los símbolos con la tabla de vuestro libro: algunos fabricantes los dibujan con pequeñas diferencias.</p>
+    <p class="nota eu">Alderatu sinboloak zuen liburuko taularekin: fabrikatzaile batzuek desberdintasun txikiekin marrazten dituzte.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var gotas = [], acum = 0, niebla = [], ult = performance.now();
+  function ritmo(){ var q = +$("q").value, r = +$("r").value; return q < 12 || r === 0 ? 0 : (q / 100) * (r / 100) * 160; }
+  function paso(t){
+    var dt = Math.min((t - ult) / 1000, .1); ult = t;
+    var gpm = ritmo(), q = +$("q").value;
+    acum += dt * gpm / 60;
+    if (acum >= 1) { acum = 0; gotas.push({ y: 34 }); }
+    gotas.forEach(function(g){ g.y += dt * 90; });
+    gotas = gotas.filter(function(g){ if (g.y >= 62) { for (var i = 0; i < 6; i++) niebla.push({ x: 170, y: 72, vx: 40 + q * 2 + Math.random() * 60, vy: (Math.random() - .5) * 30, v: 1 }); return false; } return true; });
+    niebla.forEach(function(p){ p.x += p.vx * dt; p.y += p.vy * dt; p.v -= dt * .6; });
+    niebla = niebla.filter(function(p){ return p.v > 0 && p.x < 330; });
+    var s = '<path d="M10 50h120l20 12h40l20-12h120v40H210l-20-10h-40l-20 10H10z" fill="#fff" stroke="#242d5f" stroke-width="2"/>';
+    var n = Math.round(q / 12);
+    for (var i = 0; i < n; i++) { var x = (t / 8 * (0.4 + q / 100) + i * 37) % 320 + 10, y = 62 + (i * 13 % 16); s += '<circle cx="' + x + '" cy="' + y + '" r="2" fill="#3a7bd5"/>'; }
+    s += '<path d="M140 50c0-30 60-30 60 0" fill="#e8f4ff" stroke="#242d5f" stroke-width="2"/>';
+    gotas.forEach(function(g){ s += '<ellipse cx="170" cy="' + g.y + '" rx="3" ry="4" fill="#d4a017"/>'; });
+    niebla.forEach(function(p){ s += '<circle cx="' + p.x + '" cy="' + p.y + '" r="1.6" fill="#d4a017" opacity="' + p.v + '"/>'; });
+    s += '<path d="M120 90h100v80a14 14 0 0 1-14 14h-72a14 14 0 0 1-14-14z" fill="#f2f6fb" stroke="#242d5f" stroke-width="2"/><path d="M122 130h96v40a12 12 0 0 1-12 12h-72a12 12 0 0 1-12-12z" fill="#f2c94c" opacity=".8"/>';
+    s += '<path d="M220 30v26" stroke="#5c6575" stroke-width="3"/><path d="M170 180V30" stroke="#5c6575" stroke-width="3" opacity=".7"/>';
+    s += '<text class="txt" x="14" y="44">' + T("entrada", "sarrera") + '</text><text class="txt" x="270" y="44">' + T("salida", "irteera") + '</text>';
+    s += '<text class="txt" x="232" y="160">' + T("aceite", "olioa") + '</text><text class="txt" x="206" y="22">' + Math.round(gpm) + ' ' + T("gotas/min", "tanta/min") + '</text>';
+    $("svg-f").innerHTML = s;
+    requestAnimationFrame(paso);
+  }
+  function textos(){
+    $("q-t").textContent = $("q").value + " %"; $("r-t").textContent = $("r").value + " %";
+    var q = +$("q").value, r = +$("r").value, e = $("estado");
+    e.className = "estado";
+    if (q < 12) e.textContent = T("Casi no pasa aire: el Venturi no hace fuerza y no cae aceite.", "Ia ez da airerik igarotzen: Venturik ez du indarrik egiten eta ez da oliorik erortzen.");
+    else if (r === 0) e.textContent = T("El tornillo está cerrado: no pasa aceite.", "Torlojua itxita dago: ez da oliorik igarotzen.");
+    else if (q * r > 6000) { e.className = "estado mal"; e.textContent = T("Demasiado aceite: mancha las piezas y el escape. Cierra un poco el tornillo.", "Olio gehiegi: piezak eta ihesa zikintzen ditu. Itxi pixka bat torlojua."); }
+    else { e.className = "estado ok"; e.textContent = T("Bien: el aceite cae gota a gota y se convierte en niebla.", "Ondo: olioa tantaka erortzen da eta laino bihurtzen da."); }
+  }
+  $("q").addEventListener("input", textos); $("r").addEventListener("input", textos);
+  alCambiarIdioma(textos);
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diferencial</title>
+<meta name="description" content="Qué es, partes, funcionamiento (con simulador), características (sensibilidad 30 mA, tipos) y símbolos del interruptor diferencial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos eléctricos" data-eu="Elementu elektrikoak"></p>
+      <h1 data-es="Diferencial" data-eu="Diferentziala"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">interruptor diferencial</span> protege <b>a las personas</b>. Detecta si parte de la corriente <b>se escapa a tierra</b> (por ejemplo, a través de una persona que toca un aparato estropeado) y corta en milésimas de segundo.</p>
+      <p class="eu"><span class="clave">Etengailu diferentzialak</span> <b>pertsonak</b> babesten ditu. Korrontearen zati bat <b>lurrera ihes egiten</b> duen hautematen du (adibidez, aparatu hondatu bat ukitzen duen pertsona baten bidez) eta segundo-milaren batzuetan mozten du.</p>
+      <p class="es">No protege contra sobrecargas ni cortocircuitos: para eso está el magnetotérmico. Por eso en el cuadro van los dos.</p>
+      <p class="eu">Ez du gainkargen ezta zirkuitulaburren aurka babesten: horretarako magnetotermikoa dago. Horregatik, koadroan biak doaz.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Pulsa el botón de prueba (T) una vez al mes" data-eu="Sakatu proba-botoia (T) hilean behin"></h2>
+      <p class="es">Si no salta al pulsarlo, el diferencial no protege y hay que cambiarlo.</p>
+      <p class="eu">Sakatzean jauzten ez bada, diferentzialak ez du babesten eta aldatu egin behar da.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 240 300" role="img" aria-label="Partes del diferencial">
+          <rect x="30" y="20" width="180" height="260" rx="10" fill="#f1f3f6" stroke="#8d95a3" stroke-width="2"/>
+          <g class="resaltable" data-parte="bornes"><rect x="70" y="26" width="34" height="20" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="136" y="26" width="34" height="20" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="70" y="254" width="34" height="20" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="136" y="254" width="34" height="20" rx="4" fill="#c9ced6" stroke="#6b7280"/>
+            <text class="txt" x="87" y="62" text-anchor="middle">L</text><text class="txt" x="153" y="62" text-anchor="middle">N</text></g>
+          <g class="resaltable" data-parte="contactos"><path d="M87 46v24l-12 22M153 46v24l-12 22" stroke="#b07d2a" stroke-width="4" fill="none"/></g>
+          <g class="resaltable" data-parte="toroide"><ellipse cx="120" cy="160" rx="62" ry="16" fill="none" stroke="#5c6575" stroke-width="10"/></g>
+          <path d="M87 92v162M153 92v162" stroke="#242d5f" stroke-width="2.5"/>
+          <g class="resaltable" data-parte="detector"><path d="M182 160h14v-6c8 0 8 6 0 6c8 0 8 6 0 6c8 0 8 6 0 6" stroke="#c46a1b" stroke-width="2.4" fill="none"/></g>
+          <g class="resaltable" data-parte="rele"><rect x="168" y="100" width="34" height="34" rx="4" fill="#dfe3e9" stroke="#242d5f" stroke-width="2"/><text class="txt" x="185" y="122" text-anchor="middle">IΔ</text></g>
+          <g class="resaltable" data-parte="test"><circle cx="52" cy="120" r="12" fill="#e9b200" stroke="#242d5f"/><text class="txt" x="52" y="124" text-anchor="middle">T</text><rect x="44" y="190" width="18" height="8" fill="#fff" stroke="#242d5f"/><path d="M52 132v58M53 198v20h34" stroke="#242d5f" stroke-width="1.5" fill="none"/></g>
+          <g class="resaltable" data-parte="palanca"><rect x="104" y="64" width="32" height="18" rx="4" fill="#2d3340"/></g>
+        </svg>
+        <figcaption data-es="Por dentro (simplificado)" data-eu="Barrutik (sinplifikatua)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="bornes"><span class="n">1</span><span><b class="es">Bornes de fase (L) y neutro (N)</b><b class="eu">Fasearen (L) eta neutroaren (N) borneak</b></span></button></li>
+        <li><button data-parte="toroide"><span class="n">2</span><span><b class="es">Toroide (transformador)</b><b class="eu">Toroidea (transformadorea)</b><small class="es">Anillo de hierro por el que pasan la fase y el neutro.</small><small class="eu">Fasea eta neutroa igarotzen diren burdinazko eraztuna.</small></span></button></li>
+        <li><button data-parte="detector"><span class="n">3</span><span><b class="es">Bobina detectora</b><b class="eu">Bobina detektatzailea</b><small class="es">Solo da corriente si la de ida y la de vuelta no son iguales.</small><small class="eu">Joaneko eta itzulerako korronteak berdinak ez badira bakarrik ematen du korrontea.</small></span></button></li>
+        <li><button data-parte="rele"><span class="n">4</span><span><b class="es">Relé de disparo</b><b class="eu">Jauzi-errelea</b><small class="es">Con esa pequeña corriente libera el mecanismo y abre.</small><small class="eu">Korronte txiki horrekin mekanismoa askatu eta irekitzen du.</small></span></button></li>
+        <li><button data-parte="contactos"><span class="n">5</span><span><b class="es">Contactos (fase y neutro)</b><b class="eu">Kontaktuak (fasea eta neutroa)</b><small class="es">Corta las dos líneas a la vez.</small><small class="eu">Bi lerroak aldi berean mozten ditu.</small></span></button></li>
+        <li><button data-parte="test"><span class="n">6</span><span><b class="es">Botón de prueba (T) y resistencia</b><b class="eu">Proba-botoia (T) eta erresistentzia</b><small class="es">Crea una fuga pequeña a propósito para comprobar que salta.</small><small class="eu">Nahita ihes txiki bat sortzen du, jauzten dela egiaztatzeko.</small></span></button></li>
+        <li><button data-parte="palanca"><span class="n">7</span><span><b class="es">Palanca</b><b class="eu">Palanka</b></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es">En condiciones normales, la corriente que va por la fase <b>es igual</b> a la que vuelve por el neutro: sus campos magnéticos en el toroide se anulan. Si hay una <b>fuga a tierra</b>, vuelve menos por el neutro; la diferencia crea un campo, la bobina detectora da corriente al relé y <b>el diferencial dispara</b>.</p>
+      <p class="eu">Egoera normalean, fasetik doan korrontea neutrotik itzultzen denaren <b>berdina</b> da: toroidean dituzten eremu magnetikoak elkar ezeztatzen dira. <b>Lurrerako ihes</b> bat badago, gutxiago itzultzen da neutrotik; aldeak eremu bat sortzen du, bobina detektatzaileak errelea elikatzen du eta <b>diferentziala jauzi egiten da</b>.</p>
+      <div class="formula">I fase − I neutro = I fuga</div>
+    </div>
+    <p class="nota es">Pruébalo en el simulador (en castellano):</p><p class="nota eu">Probatu simulagailuan (gaztelaniaz):</p>
+    <iframe class="sim-embebida" src="diferencial.html" title="Simulador del diferencial" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Sensibilidad (IΔn)</h3><h3 class="eu">Sentikortasuna (IΔn)</h3><p class="es">La fuga a la que salta: <b>30 mA</b> para proteger personas (viviendas), 300 mA para instalaciones.</p><p class="eu">Jauzten den ihesa: <b>30 mA</b> pertsonak babesteko (etxebizitzak), 300 mA instalazioetarako.</p></div>
+      <div class="card"><h3 class="es">Intensidad nominal (In)</h3><h3 class="eu">Korronte nominala (In)</h3><p class="es">La corriente que puede pasar por él: 25, 40, 63 A… Debe ser igual o mayor que la del magnetotérmico de cabecera.</p><p class="eu">Bertatik igaro daitekeen korrontea: 25, 40, 63 A… Buruko magnetotermikoarena bezainbestekoa edo handiagoa izan behar du.</p></div>
+      <div class="card"><h3 class="es">Tipo</h3><h3 class="eu">Mota</h3><p class="es"><b>AC</b>: fugas en alterna (lo normal). <b>A</b>: también fugas con continua pulsante (electrónica, lavadoras). <b>Superinmunizado</b>: no salta en falso con muchos ordenadores.</p><p class="eu"><b>AC</b>: korronte alternoko ihesak (arrunta). <b>A</b>: korronte zuzen pultsatzaileko ihesak ere (elektronika, garbigailuak). <b>Superimmunizatua</b>: ez da faltsuki jauzten ordenagailu askorekin.</p></div>
+      <div class="card"><h3 class="es">Polos</h3><h3 class="eu">Poloak</h3><p class="es">2P (monofásico) o 4P (trifásico).</p><p class="eu">2P (monofasikoa) edo 4P (trifasikoa).</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M44 6v26M44 64L32 34M44 64v50M76 6v26M76 64L64 34M76 64v50"/><ellipse class="s-l" cx="60" cy="84" rx="26" ry="7"/><rect class="s-l" x="92" y="40" width="22" height="22"/><text class="s-t" x="103" y="56" text-anchor="middle" style="font-size:10px">IΔ</text><path class="s-d" d="M38 48h54M103 62v22H86"/></svg><b data-es="Interruptor diferencial (2P)" data-eu="Etengailu diferentziala (2P)"></b><small data-es="toroide + relé IΔ" data-eu="toroidea + IΔ errelea"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 6v30M60 74L46 38M60 74v40"/><text class="s-t" x="70" y="62">IΔ</text></svg><b data-es="Unifilar" data-eu="Hari bakarrekoa"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+</body>
+</html>

@@ -13,11 +13,11 @@
 .sec{fill:#c3cad4;stroke:var(--marino);stroke-width:2}
 .fina{stroke:var(--naranja-osc);stroke-width:1.2;fill:none}
 .cifra{font-size:12px;fill:var(--naranja-osc);font-weight:700}
-.designa{font-size:26px;font-weight:700;color:var(--marino);letter-spacing:.01em}
+.designa{font-size:26px;font-weight:700;color:var(--marino-txt);letter-spacing:.01em}
 .datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
 .dato{background:var(--naranja-soft);border-radius:14px;padding:8px 10px}
 .dato small{display:block;font-size:11px;color:var(--muted);font-weight:600}
-.dato b{color:var(--marino);font-size:16px;font-variant-numeric:tabular-nums}
+.dato b{color:var(--marino-txt);font-size:16px;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -54,7 +54,7 @@
         <figcaption data-es="Sección del perfil con sus medidas" data-eu="Profilaren sekzioa bere neurriekin"></figcaption></figure>
       <div class="card" style="display:grid;gap:10px">
         <div class="mandos"><span class="designa" id="designa"></span><select id="tam" aria-label="Medida"></select></div>
-        <p id="p-nombre" style="margin:0;font-weight:600;color:var(--marino)"></p>
+        <p id="p-nombre" style="margin:0;font-weight:600;color:var(--marino-txt)"></p>
         <p id="p-uso" style="margin:0"></p>
         <div class="datos" id="datos"></div>
       </div>

@@ -285,14 +285,23 @@ PLANTILLA = """<!doctype html>
   --bg:#f5f3ef; --panel:#ffffff; --ink:#1b2147; --marino:#242d5f; --muted:#5d6382;
   --naranja:#f39200; --naranja-soft:#fff0dc; --naranja-osc:#b45f00;
   --sombra:0 10px 24px -16px rgba(36,45,95,.4),0 1px 3px rgba(36,45,95,.06);
+  --titulo:#242d5f;
   color-scheme:light;
+}}
+@media (prefers-color-scheme: dark){{
+  :root{{
+    --bg:#11142a; --panel:#1c2142; --ink:#e8eaf6; --muted:#a6abca; --titulo:#eef0ff;
+    --naranja-soft:#3b2b14; --naranja-osc:#ffb44d;
+    --sombra:0 10px 24px -16px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }}
 }}
 *{{box-sizing:border-box}}
 body{{margin:0;background:var(--bg);color:var(--ink);font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15.5px;line-height:1.6}}
 .wrap{{max-width:900px;margin:0 auto;padding-block:22px 44px;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}}
-h1{{font-weight:700;font-size:clamp(25px,5vw,34px);line-height:1.12;letter-spacing:-.01em;margin:0;color:var(--marino)}}
-h2{{font-weight:600;font-size:17px;margin:0 0 10px;color:var(--marino);display:flex;align-items:center;gap:10px}}
+h1{{font-weight:700;font-size:clamp(25px,5vw,34px);line-height:1.12;letter-spacing:-.01em;margin:0;color:var(--titulo)}}
+h2{{font-weight:600;font-size:17px;margin:0 0 10px;color:var(--titulo);display:flex;align-items:center;gap:10px}}
 h2::before{{content:"";width:10px;height:10px;border-radius:50%;background:var(--naranja);flex:none}}
 .lead{{margin:8px 0 0;color:var(--muted);max-width:62ch}}
 figure{{margin:0;background:#f0f2f4;border-radius:22px;overflow:hidden;box-shadow:var(--sombra)}}
@@ -302,7 +311,7 @@ figure img{{display:block;width:100%;height:auto;max-width:100%}}
 .card{{background:var(--panel);border-radius:22px;padding:18px 20px;box-shadow:var(--sombra)}}
 ul{{margin:0;padding-left:20px;display:grid;gap:8px}}
 li::marker{{color:var(--naranja)}}
-.formula{{font-weight:600;font-size:20px;color:var(--marino);
+.formula{{font-weight:600;font-size:20px;color:var(--titulo);
   background:var(--naranja-soft);border-radius:12px;padding:6px 14px;display:inline-block;margin:2px 0 10px}}
 .card p{{margin:0 0 8px}}
 .card p:last-child{{margin-bottom:0}}

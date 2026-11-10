@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnitudes neumáticas</title>
+<meta name="description" content="Presión, caudal y otras magnitudes (temperatura, humedad, fuerza): qué son, en qué se miden y sus símbolos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.particula{fill:#3a7bd5}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Neumática" data-eu="Neumatika"></p>
+      <h1 data-es="Magnitudes neumáticas" data-eu="Magnitude neumatikoak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ================= PRESIÓN ================= -->
+  <section class="panel" data-tab="presioa" data-es="Presión" data-eu="Presioa">
+    <div class="card">
+      <h2 data-es="¿Qué es?" data-eu="Zer da?"></h2>
+      <p class="es">La <span class="clave">presión</span> es la <b>fuerza que hace el aire sobre cada unidad de superficie</b>. Cuanto más aire metemos en un depósito, más «empuja» contra las paredes: más presión.</p>
+      <p class="eu"><span class="clave">Presioa</span> <b>aireak azalera-unitate bakoitzaren gainean egiten duen indarra</b> da. Zenbat eta aire gehiago sartu depósito batean, orduan eta gehiago «bultzatzen» du hormen kontra: presio handiagoa.</p>
+      <div class="formula">p = F / A</div>
+      <p class="es">Hay dos formas de darla: <b>presión relativa</b> (la que marca el manómetro, sobre la atmósfera) y <b>presión absoluta</b> (desde el vacío). Absoluta = relativa + 1 bar aproximadamente.</p>
+      <p class="eu">Bi modutan ematen da: <b>presio erlatiboa</b> (manometroak markatzen duena, atmosferaren gainetik) eta <b>presio absolutua</b> (hutsetik hasita). Absolutua = erlatiboa + 1 bar gutxi gorabehera.</p>
+    </div>
+    <div class="card">
+      <h2 data-es="¿En qué se mide?" data-eu="Zertan neurtzen da?"></h2>
+      <p class="es">En el taller se usa el <b>bar</b>. En el Sistema Internacional es el <b>pascal (Pa)</b>; en máquinas americanas, el <b>psi</b>. Se mide con el <b>manómetro</b>. Una red de aire normal trabaja a <b>6 bar</b>.</p>
+      <p class="eu">Tailerrean <b>bar</b> erabiltzen da. Nazioarteko Sisteman <b>pascala (Pa)</b> da; makina amerikarretan, <b>psi</b>. <b>Manometroarekin</b> neurtzen da. Aire-sare arrunt batek <b>6 bar</b>-etan lan egiten du.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig"><svg id="mano" viewBox="0 0 240 200" role="img" aria-label="Manómetro"></svg></figure>
+      <div style="display:grid;gap:10px;align-content:start">
+        <div class="deslizador"><label><span data-es="Presión del manómetro" data-eu="Manometroaren presioa"></span><output id="p-t"></output></label><input id="p" type="range" min="0" max="10" step="0.1" value="6"></div>
+        <div class="lectura-g">
+          <div><small>bar</small><b id="u-bar"></b></div><div><small>kPa</small><b id="u-kpa"></b></div>
+          <div><small>MPa</small><b id="u-mpa"></b></div><div><small>psi</small><b id="u-psi"></b></div>
+          <div><small data-es="absoluta (bar)" data-eu="absolutua (bar)"></small><b id="u-abs"></b></div>
+        </div>
+        <p class="nota es">1 bar = 100 000 Pa = 100 kPa = 0,1 MPa ≈ 14,5 psi</p>
+        <p class="nota eu">1 bar = 100 000 Pa = 100 kPa = 0,1 MPa ≈ 14,5 psi</p>
+      </div>
+    </div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 100 80"><circle class="s-l" cx="50" cy="34" r="20"/><path class="s-l" d="M50 54v22M38 46l24-24"/><path class="s-f" d="M62 22l-9 2 7 7z"/></svg><b data-es="Manómetro" data-eu="Manometroa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 100 80"><circle class="s-l" cx="50" cy="40" r="22"/><path class="s-l" d="M50 26l12 22H38z"/><path class="s-l" d="M50 62v16"/></svg><b data-es="Fuente de presión" data-eu="Presio-iturria"></b><small data-es="triángulo blanco = aire" data-eu="triangelu zuria = airea"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 100 80"><path class="s-l" d="M20 40h60M50 40v-22"/><circle class="s-l" cx="50" cy="40" r="2.5"/><path class="s-l" d="M34 18h32"/><path class="s-l" d="M46 10l4 8 4-8"/></svg><b data-es="Escape a la atmósfera" data-eu="Atmosferarako ihesa"></b></div>
+    </div>
+  </section>
+
+  <!-- ================= CAUDAL ================= -->
+  <section class="panel" data-tab="emaria" data-es="Caudal" data-eu="Emaria" hidden>
+    <div class="card">
+      <h2 data-es="¿Qué es?" data-eu="Zer da?"></h2>
+      <p class="es">El <span class="clave">caudal</span> es la <b>cantidad de aire que pasa por un tubo en un tiempo</b>. Si la presión es la «fuerza» del aire, el caudal es «cuánto aire» llega. Un cilindro grande o rápido necesita mucho caudal.</p>
+      <p class="eu"><span class="clave">Emaria</span> <b>denbora jakin batean hodi batetik igarotzen den aire-kantitatea</b> da. Presioa airearen «indarra» bada, emaria «zenbat aire» iristen den da. Zilindro handi edo azkar batek emari handia behar du.</p>
+      <div class="formula">Q = V / t</div>
+    </div>
+    <div class="card">
+      <h2 data-es="¿En qué se mide?" data-eu="Zertan neurtzen da?"></h2>
+      <p class="es">En <b>litros por minuto (l/min)</b> o <b>metros cúbicos por hora (m³/h)</b>. Se suele dar en <b>litros normales (Nl/min)</b>: el aire medido a presión atmosférica, para poder comparar. Se mide con el <b>caudalímetro</b>.</p>
+      <p class="eu"><b>Litro minutuko (l/min)</b> edo <b>metro kubiko orduko (m³/h)</b>. Normalean <b>litro normaletan (Nl/min)</b> ematen da: presio atmosferikoan neurtutako airea, alderatu ahal izateko. <b>Emari-neurgailuarekin</b> neurtzen da.</p>
+    </div>
+    <figure class="fig"><svg id="tubo" viewBox="0 0 340 90" role="img" aria-label="Caudal en un tubo"></svg></figure>
+    <div class="deslizador"><label><span data-es="Caudal" data-eu="Emaria"></span><output id="q-t"></output></label><input id="q" type="range" min="0" max="1000" step="10" value="300"></div>
+    <div class="lectura-g"><div><small>l/min</small><b id="q-l"></b></div><div><small>m³/h</small><b id="q-m"></b></div><div><small>l/s</small><b id="q-s"></b></div></div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 100 80"><path class="s-l" d="M8 40h84"/><path class="s-l" d="M40 30l12 10-12 10" /></svg><b data-es="Sentido del caudal" data-eu="Emariaren noranzkoa"></b><small data-es="en una línea de trabajo" data-eu="lan-lerro batean"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 100 80"><path class="s-l" d="M8 40h84"/><path class="s-l" d="M40 26c8 6 8 22 0 28M60 26c-8 6-8 22 0 28"/><path class="s-l" d="M36 60l28-40"/><path class="s-f" d="M64 20l-8 3 6 5z"/></svg><b data-es="Regulador de caudal" data-eu="Emari-erregulagailua"></b><small data-es="estrangulación regulable" data-eu="itotze erregulagarria"></small></div>
+    </div>
+  </section>
+
+  <!-- ================= OTRAS ================= -->
+  <section class="panel" data-tab="besteak" data-es="Otras magnitudes" data-eu="Beste magnitudeak" hidden>
+    <div class="rejilla">
+      <div class="card"><h2 data-es="Fuerza" data-eu="Indarra"></h2>
+        <p class="es"><b>Qué es:</b> lo que empuja el vástago de un cilindro. Depende de la presión y de la superficie del émbolo.</p>
+        <p class="eu"><b>Zer da:</b> zilindro baten zurtoinak bultzatzen duena. Presioaren eta enboloaren azaleraren araberakoa da.</p>
+        <p class="es"><b>Se mide en:</b> newtons (N). 10 N ≈ 1 kg.</p><p class="eu"><b>Neurtzen da:</b> newtonetan (N). 10 N ≈ 1 kg.</p></div>
+      <div class="card"><h2 data-es="Temperatura" data-eu="Tenperatura"></h2>
+        <p class="es"><b>Qué es:</b> lo caliente que está el aire. Al comprimirlo se calienta mucho; luego se enfría y suelta agua.</p>
+        <p class="eu"><b>Zer da:</b> airea zein bero dagoen. Konprimitzean asko berotzen da; gero hoztu eta ura askatzen du.</p>
+        <p class="es"><b>Se mide en:</b> grados Celsius (°C) con el termómetro.</p><p class="eu"><b>Neurtzen da:</b> Celsius gradutan (°C), termometroarekin.</p></div>
+      <div class="card"><h2 data-es="Humedad y punto de rocío" data-eu="Hezetasuna eta ihintz-puntua"></h2>
+        <p class="es"><b>Qué es:</b> el agua que lleva el aire. El <b>punto de rocío</b> es la temperatura a la que esa agua se condensa.</p>
+        <p class="eu"><b>Zer da:</b> aireak daraman ura. <b>Ihintz-puntua</b> ur hori kondentsatzen den tenperatura da.</p>
+        <p class="es"><b>Se mide en:</b> % de humedad relativa y °C de punto de rocío (higrómetro).</p><p class="eu"><b>Neurtzen da:</b> hezetasun erlatiboaren %-tan eta ihintz-puntuko °C-tan (higrometroa).</p></div>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h2 data-es="Calcula la fuerza de un cilindro" data-eu="Kalkulatu zilindro baten indarra"></h2>
+      <div class="mandos">
+        <select id="cil" aria-label="Ø"><option>16</option><option>25</option><option>32</option><option selected>50</option><option>63</option><option>80</option><option>100</option></select>
+        <div class="deslizador"><label><span data-es="Presión" data-eu="Presioa"></span><output id="fp-t"></output></label><input id="fp" type="range" min="1" max="10" step="0.5" value="6"></div>
+      </div>
+      <figure class="fig"><svg id="svg-cil" viewBox="0 0 340 110" role="img" aria-label="Cilindro"></svg></figure>
+      <div class="formula" id="f-r"></div>
+    </div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 100 80"><circle class="s-l" cx="50" cy="36" r="20"/><path class="s-l" d="M50 56v22M50 22v22"/><circle class="s-f" cx="50" cy="46" r="4"/></svg><b data-es="Termómetro" data-eu="Termometroa"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function n(v, d){ return (Math.round(v * Math.pow(10, d || 1)) / Math.pow(10, d || 1)).toLocaleString("es-ES"); }
+  function mano(){
+    var p = +$("p").value, a = (-225 + 270 * p / 10) * Math.PI / 180, s = "";
+    s += '<circle cx="120" cy="96" r="78" fill="#fff" stroke="#242d5f" stroke-width="6"/>';
+    for (var i = 0; i <= 50; i++) { var b = (-225 + 270 * i / 50) * Math.PI / 180, r1 = i % 5 ? 64 : 58;
+      s += '<path d="M' + (120 + 70 * Math.cos(b)) + ' ' + (96 + 70 * Math.sin(b)) + 'L' + (120 + r1 * Math.cos(b)) + ' ' + (96 + r1 * Math.sin(b)) + '" stroke="#242d5f" stroke-width="' + (i % 5 ? 1 : 2.4) + '"/>';
+      if (i % 5 === 0) s += '<text class="txt" text-anchor="middle" x="' + (120 + 48 * Math.cos(b)) + '" y="' + (100 + 48 * Math.sin(b)) + '">' + i / 5 + '</text>'; }
+    s += '<text class="txt" x="120" y="140" text-anchor="middle">bar</text>';
+    s += '<path d="M120 96L' + (120 + 62 * Math.cos(a)) + ' ' + (96 + 62 * Math.sin(a)) + '" stroke="#c62f2f" stroke-width="4" stroke-linecap="round"/><circle cx="120" cy="96" r="7" fill="#242d5f"/>';
+    s += '<rect x="112" y="174" width="16" height="24" fill="#d4a017" stroke="#242d5f"/>';
+    $("mano").innerHTML = s;
+    $("p-t").textContent = n(p) + " bar";
+    $("u-bar").textContent = n(p); $("u-kpa").textContent = n(p * 100, 0); $("u-mpa").textContent = n(p / 10, 2);
+    $("u-psi").textContent = n(p * 14.5038, 0); $("u-abs").textContent = n(p + 1.013, 1);
+  }
+  var fase = 0, ult = performance.now();
+  function tubo(t){
+    var q = +$("q").value, dt = (t - ult) / 1000; ult = t; fase = (fase + dt * q / 25) % 30;
+    var s = '<rect x="10" y="30" width="320" height="30" rx="6" fill="#e9eef5" stroke="#242d5f" stroke-width="2"/>';
+    var dens = Math.max(2, Math.round(q / 60));
+    for (var i = 0; i < 12; i++) for (var k = 0; k < Math.min(dens, 6); k++) {
+      var x = 14 + ((i * 30 + fase + k * 7) % 312), y = 36 + ((i * 7 + k * 5) % 18);
+      if (q > 0) s += '<circle class="particula" cx="' + x + '" cy="' + y + '" r="2.6"/>';
+    }
+    s += '<text class="txt" x="170" y="82" text-anchor="middle">' + n(q, 0) + ' l/min</text>';
+    $("tubo").innerHTML = s;
+    requestAnimationFrame(tubo);
+  }
+  function caudal(){ var q = +$("q").value; $("q-t").textContent = n(q, 0) + " l/min"; $("q-l").textContent = n(q, 0); $("q-m").textContent = n(q * 60 / 1000, 1); $("q-s").textContent = n(q / 60, 1); }
+  function fuerza(){
+    var d = +$("cil").value, p = +$("fp").value, A = Math.PI * d * d / 4, F = p * 0.1 * A;
+    $("fp-t").textContent = n(p) + " bar";
+    $("f-r").textContent = "F = p · A = " + n(p * 0.1, 2) + " N/mm² × " + n(A, 0) + " mm² ≈ " + n(F, 0) + " N (≈ " + n(F / 9.81, 0) + " kg)";
+    var h = 20 + d * 0.5, cy = 55, s = '<rect x="40" y="' + (cy - h / 2) + '" width="170" height="' + h + '" fill="#e9eef5" stroke="#242d5f" stroke-width="2.4"/>';
+    s += '<rect x="150" y="' + (cy - h / 2 + 3) + '" width="14" height="' + (h - 6) + '" fill="#9aa3b2" stroke="#242d5f"/><rect x="164" y="' + (cy - 5) + '" width="140" height="10" fill="#c9cfd8" stroke="#242d5f"/>';
+    s += '<rect x="43" y="' + (cy - h / 2 + 3) + '" width="107" height="' + (h - 6) + '" fill="#bcd4f6"/>';
+    for (var i = 0; i < 4; i++) s += '<path d="M60 ' + (cy - h / 3 + i * h / 5) + 'h70" stroke="#3a7bd5" stroke-width="2" marker-end="url(#fl2)"/>';
+    s += '<defs><marker id="fl2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1L10 5L0 9z" fill="#3a7bd5"/></marker></defs>';
+    s += '<path d="M304 ' + cy + 'h30" stroke="#c62f2f" stroke-width="4"/><path d="M334 ' + cy + 'l-10-7v14z" fill="#c62f2f"/><text class="txt" x="230" y="' + (cy - 12) + '">F</text><text class="txt" x="96" y="' + (cy + h / 2 + 14) + '" text-anchor="middle">p</text><text class="txt" x="12" y="' + (cy + 4) + '">Ø' + d + '</text>';
+    $("svg-cil").innerHTML = s;
+  }
+  $("p").addEventListener("input", mano); $("q").addEventListener("input", caudal);
+  $("cil").addEventListener("change", fuerza); $("fp").addEventListener("input", fuerza);
+  alCambiarIdioma(function(){ mano(); caudal(); fuerza(); });
+  requestAnimationFrame(tubo);
+})();
+</script>
+</body>
+</html>

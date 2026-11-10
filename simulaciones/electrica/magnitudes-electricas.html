@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnitudes eléctricas</title>
+<meta name="description" content="Tensión, intensidad y potencia: qué son, en qué se miden, con qué aparato, sus símbolos y un circuito para probar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.med{font-size:13px;font-weight:700;fill:#242d5f}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Electricidad" data-eu="Elektrizitatea"></p>
+      <h1 data-es="Magnitudes eléctricas" data-eu="Magnitude elektrikoak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="tentsioa" data-es="Tensión" data-eu="Tentsioa">
+    <div class="card">
+      <h2 data-es="¿Qué es?" data-eu="Zer da?"></h2>
+      <p class="es">La <span class="clave">tensión</span> o <b>diferencia de potencial</b> es el «empuje» que hace moverse a los electrones por el circuito. Es como la <b>presión</b> en neumática: sin presión no se mueve el aire; sin tensión no hay corriente.</p>
+      <p class="eu"><span class="clave">Tentsioa</span> edo <b>potentzial-diferentzia</b> elektroiak zirkuituan mugiarazten dituen «bultzada» da. Neumatikako <b>presioa</b> bezala: presiorik gabe airea ez da mugitzen; tentsiorik gabe ez dago korronterik.</p>
+      <p class="es">Siempre se da <b>entre dos puntos</b>: entre los bornes de una pila, entre fase y neutro de un enchufe…</p>
+      <p class="eu">Beti <b>bi punturen artean</b> ematen da: pila baten borneen artean, entxufe baten fasearen eta neutroaren artean…</p>
+    </div>
+    <div class="card">
+      <h2 data-es="¿En qué se mide?" data-eu="Zertan neurtzen da?"></h2>
+      <p class="es">En <b>voltios (V)</b>. Se mide con el <b>voltímetro</b>, conectado <b>en paralelo</b> (las puntas a los dos puntos). Ejemplos: pila 1,5 V · batería de coche 12 V · enchufe 230 V · industria 400 V.</p>
+      <p class="eu"><b>Voltetan (V)</b>. <b>Voltmetroarekin</b> neurtzen da, <b>paraleloan</b> konektatuta (puntak bi puntuetara). Adibideak: pila 1,5 V · autoaren bateria 12 V · entxufea 230 V · industria 400 V.</p>
+      <div class="formula">U (V)</div>
+    </div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="22"/><text class="s-t" x="60" y="51" text-anchor="middle">V</text><path class="s-l" d="M10 45h28M82 45h28"/></svg><b data-es="Voltímetro" data-eu="Voltmetroa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h42M68 45h42M52 22v46"/><path d="M68 32v26" stroke="#242d5f" stroke-width="6"/><text class="s-t" x="44" y="22">+</text></svg><b data-es="Pila o batería" data-eu="Pila edo bateria"></b><small data-es="raya larga = +" data-eu="marra luzea = +"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><text class="s-t" x="60" y="54" text-anchor="middle" style="font-size:30px">U</text></svg><b data-es="Letra de la tensión" data-eu="Tentsioaren letra"></b><small data-es="también V" data-eu="baita V ere"></small></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="intentsitatea" data-es="Intensidad" data-eu="Intentsitatea" hidden>
+    <div class="card">
+      <h2 data-es="¿Qué es?" data-eu="Zer da?"></h2>
+      <p class="es">La <span class="clave">intensidad</span> es la <b>cantidad de corriente</b> (de electrones) que pasa por un cable cada segundo. Es como el <b>caudal</b> en neumática.</p>
+      <p class="eu"><span class="clave">Intentsitatea</span> kable batetik segundo bakoitzean igarotzen den <b>korronte-kantitatea</b> (elektroiena) da. Neumatikako <b>emaria</b> bezala.</p>
+      <p class="es">Depende de la tensión y de lo que le cuesta pasar (la <b>resistencia</b>): <b>ley de Ohm</b>.</p>
+      <p class="eu">Tentsioaren eta igarotzea zenbat kostatzen zaion (<b>erresistentzia</b>) araberakoa da: <b>Ohmen legea</b>.</p>
+      <div class="formula">I = U / R</div>
+    </div>
+    <div class="card">
+      <h2 data-es="¿En qué se mide?" data-eu="Zertan neurtzen da?"></h2>
+      <p class="es">En <b>amperios (A)</b>. Se mide con el <b>amperímetro</b>, conectado <b>en serie</b> (hay que abrir el circuito y que la corriente pase por él), o con una <b>pinza amperimétrica</b> sin cortar el cable. 1 A = 1000 mA.</p>
+      <p class="eu"><b>Anperetan (A)</b>. <b>Anperemetroarekin</b> neurtzen da, <b>seriean</b> konektatuta (zirkuitua ireki behar da eta korronteak bertatik igaro behar du), edo <b>pintza anperemetrikoarekin</b>, kablea moztu gabe. 1 A = 1000 mA.</p>
+    </div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="22"/><text class="s-t" x="60" y="51" text-anchor="middle">A</text><path class="s-l" d="M10 45h28M82 45h28"/></svg><b data-es="Amperímetro" data-eu="Anperemetroa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><rect class="s-l" x="34" y="34" width="52" height="22"/><path class="s-l" d="M10 45h24M86 45h24"/></svg><b data-es="Resistencia" data-eu="Erresistentzia"></b><small>R (Ω)</small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h100"/><path class="s-f" d="M66 45l-12-7v14z"/></svg><b data-es="Sentido de la corriente" data-eu="Korrontearen noranzkoa"></b></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="potentzia" data-es="Potencia" data-eu="Potentzia" hidden>
+    <div class="card">
+      <h2 data-es="¿Qué es?" data-eu="Zer da?"></h2>
+      <p class="es">La <span class="clave">potencia</span> es la <b>energía que consume o da un aparato cada segundo</b>: cuánto trabajo hace. Una bombilla de 100 W da más luz que una de 40 W; un motor de 4 kW hace más fuerza que uno de 1 kW.</p>
+      <p class="eu"><span class="clave">Potentzia</span> <b>aparatu batek segundo bakoitzean kontsumitzen edo ematen duen energia</b> da: zenbat lan egiten duen. 100 W-ko bonbilla batek 40 W-koak baino argi gehiago ematen du; 4 kW-ko motor batek 1 kW-koak baino indar gehiago egiten du.</p>
+      <div class="formula">P = U · I</div>
+    </div>
+    <div class="card">
+      <h2 data-es="¿En qué se mide?" data-eu="Zertan neurtzen da?"></h2>
+      <p class="es">En <b>vatios (W)</b> y <b>kilovatios (kW)</b>: 1 kW = 1000 W. Se mide con el <b>vatímetro</b>, o se calcula midiendo tensión e intensidad. En motores aún se usa el caballo (1 CV ≈ 736 W).</p>
+      <p class="eu"><b>Watt-etan (W)</b> eta <b>kilowatt-etan (kW)</b>: 1 kW = 1000 W. <b>Wattmetroarekin</b> neurtzen da, edo tentsioa eta intentsitatea neurtuta kalkulatzen da. Motorretan oraindik zaldi-potentzia erabiltzen da (1 ZP ≈ 736 W).</p>
+    </div>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="22"/><text class="s-t" x="60" y="51" text-anchor="middle">W</text><path class="s-l" d="M10 45h28M82 45h28"/></svg><b data-es="Vatímetro" data-eu="Wattmetroa"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="20"/><path class="s-l" d="M46 31l28 28M74 31L46 59M10 45h30M80 45h30"/></svg><b data-es="Lámpara" data-eu="Lanpara"></b></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Cambia la tensión de la fuente y la bombilla, y mira lo que marcan el <b>voltímetro</b> (en paralelo), el <b>amperímetro</b> (en serie) y la potencia.</p>
+      <p class="eu">Aldatu iturriaren tentsioa eta bonbilla, eta begiratu zer markatzen duten <b>voltmetroak</b> (paraleloan), <b>anperemetroak</b> (seriean) eta potentziak.</p>
+    </div>
+    <figure class="fig"><svg id="circ" viewBox="0 0 340 220" role="img" aria-label="Circuito"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Tensión de la fuente" data-eu="Iturriaren tentsioa"></span><output id="u-t"></output></label><input id="u" type="range" min="0" max="24" step="0.5" value="12"></div>
+      <div class="chips" id="lamp"><button data-r="48" aria-pressed="true">R = 48 Ω</button><button data-r="24">R = 24 Ω</button><button data-r="12">R = 12 Ω</button></div>
+    </div>
+    <div class="lectura-g"><div><small>U</small><b id="l-u"></b></div><div><small>I = U / R</small><b id="l-i"></b></div><div><small>P = U · I</small><b id="l-p"></b></div></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var R = 48;
+  function n(v, d){ return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toLocaleString("es-ES"); }
+  function pintar(){
+    var U = +$("u").value, I = U / R, P = U * I, luz = Math.min(P / 12, 1);
+    var on = I > 0.001, c = on ? "#f39200" : "#9aa3b2";
+    var s = '';
+    s += '<path d="M60 40H160M200 40H290V180H60V130M60 90V40" stroke="' + c + '" stroke-width="4" fill="none" stroke-linejoin="round"/>';
+    s += '<path d="M40 90h40" stroke="#242d5f" stroke-width="3"/><path d="M50 130h20" stroke="#242d5f" stroke-width="7"/><path d="M60 90v14M60 116v14" stroke="#242d5f" stroke-width="3"/><text class="txt" x="22" y="96">+</text><text class="txt" x="86" y="114">' + n(U, 1) + ' V</text>';
+    s += '<circle cx="180" cy="40" r="20" fill="#fff" stroke="#242d5f" stroke-width="2.5"/><text class="med" x="180" y="45" text-anchor="middle">A</text><text class="txt" x="180" y="14" text-anchor="middle">' + n(I, 2) + ' A</text>';
+    s += '<circle cx="290" cy="110" r="22" fill="rgba(255,210,87,' + luz + ')" stroke="#242d5f" stroke-width="2.5"/><path d="M275 95l30 30M305 95l-30 30" stroke="#242d5f" stroke-width="2"/>';
+    if (luz > 0.05) for (var i = 0; i < 8; i++) { var a = i * Math.PI / 4; s += '<path d="M' + (290 + 28 * Math.cos(a)) + ' ' + (110 + 28 * Math.sin(a)) + 'L' + (290 + (28 + 10 * luz) * Math.cos(a)) + ' ' + (110 + (28 + 10 * luz) * Math.sin(a)) + '" stroke="#f39200" stroke-width="2.5"/>'; }
+    s += '<path d="M290 72V60H230V85M230 135V160H290V148" stroke="#5c6575" stroke-width="2" fill="none" stroke-dasharray="4 3"/>';
+    s += '<circle cx="230" cy="110" r="20" fill="#fff" stroke="#242d5f" stroke-width="2.5"/><text class="med" x="230" y="115" text-anchor="middle">V</text><text class="txt" x="196" y="114" text-anchor="end">' + n(U, 1) + ' V</text>';
+    s += '<text class="txt" x="290" y="210" text-anchor="middle">' + n(P, 1) + ' W</text>';
+    if (on) for (var k = 0; k < 6; k++) { var f = ((performance.now() / 1000 * I * 2 + k / 6) % 1); var p = camino(f); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="#2b6cb0"/>'; }
+    $("circ").innerHTML = s;
+    $("u-t").textContent = n(U, 1) + " V"; $("l-u").textContent = n(U, 1) + " V"; $("l-i").textContent = n(I, 2) + " A"; $("l-p").textContent = n(P, 1) + " W";
+  }
+  function camino(f){
+    var pts = [[60, 90], [60, 40], [290, 40], [290, 180], [60, 180], [60, 130]], L = [], tot = 0;
+    for (var i = 0; i < pts.length - 1; i++) { var d = Math.abs(pts[i + 1][0] - pts[i][0]) + Math.abs(pts[i + 1][1] - pts[i][1]); L.push(d); tot += d; }
+    var x = f * tot;
+    for (var j = 0; j < L.length; j++) { if (x <= L[j]) { var r = x / L[j]; return [pts[j][0] + (pts[j + 1][0] - pts[j][0]) * r, pts[j][1] + (pts[j + 1][1] - pts[j][1]) * r]; } x -= L[j]; }
+    return pts[0];
+  }
+  function bucle(){ pintar(); requestAnimationFrame(bucle); }
+  $("lamp").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; R = +b.getAttribute("data-r"); [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

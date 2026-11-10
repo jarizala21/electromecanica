@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tubos neumáticos</title>
+<meta name="description" content="Qué son, partes, cómo afecta el diámetro a la velocidad del aire (interactivo), características y símbolos de líneas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Tubos neumáticos" data-eu="Tutu neumatikoak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">Los <span class="clave">tubos neumáticos</span> llevan el aire comprimido desde la unidad de mantenimiento hasta las válvulas y los cilindros. Son <b>flexibles</b>, de plástico, y se conectan con <b>racores</b>.</p>
+      <p class="eu"><span class="clave">Tutu neumatikoek</span> aire konprimitua mantentze-unitatetik balbuletara eta zilindroetara eramaten dute. <b>Malguak</b> dira, plastikozkoak, eta <b>rakorrekin</b> konektatzen dira.</p>
+      <p class="es">La red general de la nave suele ser de tubo rígido (aluminio, acero, cobre); dentro de la máquina, tubo flexible.</p>
+      <p class="eu">Pabilioiko sare orokorra hodi zurrunekoa izan ohi da (aluminioa, altzairua, kobrea); makinaren barruan, tutu malgua.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 320 200" role="img" aria-label="Partes del tubo">
+          <g class="resaltable" data-parte="pared"><path d="M30 70h200v60H30z" fill="#3a7bd5"/><path d="M30 80h200v40H30z" fill="#dbe8fa"/></g>
+          <g class="resaltable" data-parte="interior"><path d="M30 80h200M30 120h200" stroke="#242d5f" stroke-width="1"/><text class="txt" x="130" y="104" text-anchor="middle" data-es="paso del aire" data-eu="airearen igarobidea"></text></g>
+          <g class="resaltable" data-parte="marcado"><text x="40" y="66" font-size="9" fill="#242d5f" font-weight="600">PU 8×6 · 10 bar · 20 °C</text></g>
+          <g class="resaltable" data-parte="seccion">
+            <circle cx="270" cy="100" r="34" fill="#3a7bd5"/><circle cx="270" cy="100" r="25" fill="#dbe8fa"/>
+            <path d="M236 150h68M236 144v12M304 144v12" stroke="#b45f00" stroke-width="1.5"/><text x="270" y="168" text-anchor="middle" font-size="11" fill="#b45f00" font-weight="700">Ø ext 8</text>
+            <path d="M245 100h50" stroke="#b45f00" stroke-width="1.2"/><text x="270" y="96" text-anchor="middle" font-size="10" fill="#b45f00" font-weight="700">Ø int 6</text>
+          </g>
+          <g class="resaltable" data-parte="corte"><path d="M230 60v80" stroke="#c62f2f" stroke-width="2" stroke-dasharray="4 3"/><text class="txt" x="196" y="154" data-es="corte a 90°" data-eu="90°-ko ebakia"></text></g>
+        </svg>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="pared"><span class="n">1</span><span><b class="es">Pared del tubo</b><b class="eu">Tutuaren horma</b><small class="es">De plástico: poliuretano (PU, muy flexible), poliamida (PA, más rígida y resistente), polietileno (PE).</small><small class="eu">Plastikozkoa: poliuretanoa (PU, oso malgua), poliamida (PA, zurrunagoa eta erresistenteagoa), polietilenoa (PE).</small></span></button></li>
+        <li><button data-parte="seccion"><span class="n">2</span><span><b class="es">Diámetro exterior e interior</b><b class="eu">Kanpo- eta barne-diametroa</b><small class="es">Se nombra por el exterior: tubo de 8 = 8 mm fuera (6 mm dentro).</small><small class="eu">Kanpokoaren arabera izendatzen da: 8ko tutua = 8 mm kanpoan (6 mm barruan).</small></span></button></li>
+        <li><button data-parte="interior"><span class="n">3</span><span><b class="es">Paso interior</b><b class="eu">Barne-igarobidea</b><small class="es">Liso, para que el aire pierda poca presión.</small><small class="eu">Leuna, aireak presio gutxi gal dezan.</small></span></button></li>
+        <li><button data-parte="marcado"><span class="n">4</span><span><b class="es">Marcado</b><b class="eu">Markaketa</b><small class="es">Material, medida y presión máxima impresos en el tubo.</small><small class="eu">Materiala, neurria eta presio maximoa tutuan inprimatuta.</small></span></button></li>
+        <li><button data-parte="corte"><span class="n">5</span><span><b class="es">Extremo cortado a 90°</b><b class="eu">90°-tan ebakitako muturra</b><small class="es">Con cortatubos, recto y limpio, para que el racor cierre bien.</small><small class="eu">Tutu-ebakigailuarekin, zuzen eta garbi, rakorrak ondo itx dezan.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es">Por un tubo más fino el aire tiene que ir <b>más rápido</b> para pasar el mismo caudal, y entonces <b>pierde más presión</b> (rozamiento). Elige el tubo y el caudal.</p>
+      <p class="eu">Tutu meheago batetik, aireak <b>azkarrago</b> joan behar du emari bera igarotzeko, eta orduan <b>presio gehiago galtzen du</b> (marruskadura). Aukeratu tutua eta emaria.</p>
+    </div>
+    <div class="chips" id="tubos"></div>
+    <figure class="fig"><svg id="svg-f" viewBox="0 0 340 120" role="img" aria-label="Velocidad del aire"></svg></figure>
+    <div class="deslizador"><label><span data-es="Caudal" data-eu="Emaria"></span><output id="q-t"></output></label><input id="q" type="range" min="20" max="1500" step="10" value="300"></div>
+    <div class="lectura-g"><div><small data-es="Sección interior" data-eu="Barne-sekzioa"></small><b id="l-a"></b></div><div><small data-es="Velocidad del aire" data-eu="Airearen abiadura"></small><b id="l-v"></b></div></div>
+    <div class="estado" id="estado"></div>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Diámetros</h3><h3 class="eu">Diametroak</h3><p class="es">Los más usados: 4, 6, 8, 10 y 12 mm de diámetro exterior.</p><p class="eu">Erabilienak: 4, 6, 8, 10 eta 12 mm-ko kanpo-diametroa.</p></div>
+      <div class="card"><h3 class="es">Presión de trabajo</h3><h3 class="eu">Lan-presioa</h3><p class="es">Por ejemplo 10 bar a 20 °C. Con calor aguanta menos.</p><p class="eu">Adibidez 10 bar 20 °C-tan. Beroarekin gutxiago eusten du.</p></div>
+      <div class="card"><h3 class="es">Radio de curvatura</h3><h3 class="eu">Kurbadura-erradioa</h3><p class="es">Lo mínimo que se puede doblar sin que se estrangule.</p><p class="eu">Itotu gabe tolestu daitekeen gutxienekoa.</p></div>
+      <div class="card"><h3 class="es">Colores</h3><h3 class="eu">Koloreak</h3><p class="es">Azul, negro, transparente… Usar colores distintos ayuda a no equivocarse al conectar.</p><p class="eu">Urdina, beltza, gardena… Kolore desberdinak erabiltzeak konektatzean ez nahasten laguntzen du.</p></div>
+      <div class="card"><h3 class="es">Montaje</h3><h3 class="eu">Muntaketa</h3><p class="es">Sin dobleces, sin roces con aristas, sujeto con bridas y sin tensión.</p><p class="eu">Tolesturarik gabe, ertzekin igurtzi gabe, bridekin lotuta eta tentsiorik gabe.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h100"/></svg><b data-es="Línea de trabajo" data-eu="Lan-lerroa"></b><small data-es="lleva el aire de potencia" data-eu="potentzia-airea darama"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-d" d="M10 45h100"/></svg><b data-es="Línea de pilotaje" data-eu="Pilotaje-lerroa"></b><small data-es="aire de mando" data-eu="agintzeko airea"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 60c20 0 20-30 50-30s30 30 50 30"/></svg><b data-es="Conducto flexible" data-eu="Hodi malgua"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h100M60 10v70"/><circle class="s-f" cx="60" cy="45" r="5"/></svg><b data-es="Unión de líneas" data-eu="Lerroen lotura"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h100M60 10v70"/></svg><b data-es="Cruce sin unión" data-eu="Loturarik gabeko gurutzea"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var T_ = [[4, 2.5], [6, 4], [8, 6], [10, 7.5], [12, 9]], k = 2, fase = 0, ult = performance.now();
+  function n(v, d){ return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toString().replace(".", ","); }
+  function chips(){ $("tubos").innerHTML = T_.map(function(t, i){ return '<button data-i="' + i + '" aria-pressed="' + (i === k) + '">' + t[0] + '×' + n(t[1], 1) + '</button>'; }).join(""); }
+  function vel(){ var di = T_[k][1], A = Math.PI * di * di / 4, q = +$("q").value; return [A, (q / 60000 / 7) / (A / 1e6)]; }  // caudal normal a 6 bar (7 bar absolutos)
+  function datos(){
+    var r = vel(), v = r[1], e = $("estado");
+    $("q-t").textContent = $("q").value + " Nl/min (6 bar)"; $("l-a").textContent = n(r[0], 1) + " mm²"; $("l-v").textContent = n(v, 0) + " m/s";
+    if (v > 60) { e.className = "estado mal"; e.textContent = T("Demasiado rápido: el tubo es pequeño para tanto caudal. Pierde mucha presión y el cilindro irá lento.", "Azkarregi: tutua txikia da hainbeste emarirako. Presio asko galtzen du eta zilindroa motel ibiliko da."); }
+    else if (v > 30) { e.className = "estado"; e.textContent = T("Velocidad alta: vale para tramos cortos.", "Abiadura handia: tarte laburretarako balio du."); }
+    else { e.className = "estado ok"; e.textContent = T("Bien: el aire pasa sin perder mucha presión.", "Ondo: airea presio handirik galdu gabe igarotzen da."); }
+  }
+  function dibujar(t){
+    var dt = Math.min((t - ult) / 1000, .1); ult = t;
+    var di = T_[k][1], de = T_[k][0], v = vel()[1];
+    fase = (fase + dt * v * 3) % 40;
+    var h = di * 8, H = de * 8, cy = 60, s = '<rect x="10" y="' + (cy - H / 2) + '" width="320" height="' + H + '" rx="4" fill="#3a7bd5"/><rect x="10" y="' + (cy - h / 2) + '" width="320" height="' + h + '" fill="#dbe8fa"/>';
+    for (var i = 0; i < 9; i++) for (var j = 0; j < 3; j++) { var x = 14 + (i * 40 + fase + j * 13) % 316, y = cy - h / 2 + 5 + ((i * 11 + j * 17) % Math.max(h - 10, 1)); s += '<path d="M' + x + ' ' + y + 'h' + Math.min(4 + v / 6, 22) + '" stroke="#242d5f" stroke-width="2" stroke-linecap="round"/>'; }
+    $("svg-f").innerHTML = s;
+    requestAnimationFrame(dibujar);
+  }
+  $("tubos").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; k = +b.getAttribute("data-i"); chips(); datos(); });
+  $("q").addEventListener("input", datos);
+  alCambiarIdioma(function(){ chips(); datos(); });
+  requestAnimationFrame(dibujar);
+})();
+</script>
+</body>
+</html>

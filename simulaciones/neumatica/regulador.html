@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Regulador de presión</title>
+<meta name="description" content="Qué es, partes, funcionamiento (con simulador), características y símbolos del regulador de presión.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Regulador de presión" data-eu="Presio erreguladorea"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">regulador de presión</span> baja la presión de la red a la que necesita la máquina y <b>la mantiene constante</b>, aunque cambie la presión de entrada o el consumo.</p>
+      <p class="eu"><span class="clave">Presio erreguladoreak</span> sareko presioa makinak behar duenera jaisten du eta <b>konstante mantentzen du</b>, sarrerako presioa edo kontsumoa aldatu arren.</p>
+      <p class="es">Por ejemplo: la red está a 8 bar y el cilindro trabaja a 5 bar. La presión de salida <b>siempre es menor</b> que la de entrada.</p>
+      <p class="eu">Adibidez: sarea 8 bar-etan dago eta zilindroak 5 bar-etan lan egiten du. Irteerako presioa <b>beti da sarrerakoa baino txikiagoa</b>.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Unidad de mantenimiento (FRL)" data-eu="Mantentze-unitatea (FRL)"></h2>
+      <p class="es">Suele ir junto al <b>filtro</b> y el <b>lubricador</b>: Filtro → Regulador → Lubricador, a la entrada de cada máquina.</p>
+      <p class="eu">Normalean <b>iragazkiarekin</b> eta <b>lubrikadorearekin</b> batera doa: Iragazkia → Erreguladorea → Lubrikadorea, makina bakoitzaren sarreran.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 300 300" role="img" aria-label="Partes del regulador">
+          <g class="resaltable" data-parte="cuerpo"><path d="M30 180h240v80H30z" fill="#dfe4ea" stroke="#242d5f" stroke-width="2"/><path d="M30 200h100v20H30zM170 200h100v20H170z" fill="#fff" stroke="#242d5f" stroke-width="1.5"/>
+            <text class="txt" x="40" y="194" data-es="entrada P1" data-eu="sarrera P1"></text><text class="txt" x="200" y="194" data-es="salida P2" data-eu="irteera P2"></text></g>
+          <g class="resaltable" data-parte="asiento"><path d="M130 200v40h-10M170 200v20" stroke="#242d5f" stroke-width="3" fill="none"/><path d="M130 240h40v-20" stroke="#242d5f" stroke-width="3" fill="none"/></g>
+          <g class="resaltable" data-parte="obturador"><path d="M136 232h28v14h-28z" fill="#c46a1b" stroke="#242d5f"/><path d="M150 246v12" stroke="#242d5f" stroke-width="3"/><path d="M142 258l8 8 8-8" stroke="#2b6cb0" stroke-width="2" fill="none"/></g>
+          <g class="resaltable" data-parte="vastago"><path d="M150 140v92" stroke="#5c6575" stroke-width="5"/></g>
+          <g class="resaltable" data-parte="diafragma"><path d="M60 140q90 -14 180 0" stroke="#2b6cb0" stroke-width="5" fill="none"/><rect x="132" y="128" width="36" height="10" rx="3" fill="#5c6575"/></g>
+          <g class="resaltable" data-parte="muelle"><path d="M150 128l-14-6 28-8-28-8 28-8-28-8 28-8-28-8 14-6" stroke="#2b6cb0" stroke-width="2.6" fill="none"/></g>
+          <g class="resaltable" data-parte="tapa"><path d="M60 140V60h180v80" fill="none" stroke="#242d5f" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="tornillo"><rect x="140" y="20" width="20" height="50" fill="#9aa3b2" stroke="#242d5f"/><rect x="110" y="6" width="80" height="18" rx="6" fill="#2d3340"/></g>
+          <g class="resaltable" data-parte="escape"><circle cx="230" cy="100" r="5" fill="#fff" stroke="#242d5f" stroke-width="2"/><path d="M236 100h26" stroke="#242d5f" stroke-dasharray="3 3"/></g>
+          <g class="resaltable" data-parte="manometro"><circle cx="262" cy="150" r="20" fill="#fff" stroke="#242d5f" stroke-width="2"/><path d="M262 150l9-10" stroke="#c62f2f" stroke-width="2.4"/><path d="M262 170v30" stroke="#242d5f" stroke-width="3"/></g>
+        </svg>
+        <figcaption data-es="Corte simplificado" data-eu="Ebaketa sinplifikatua"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="cuerpo"><span class="n">1</span><span><b class="es">Cuerpo con entrada (P1) y salida (P2)</b><b class="eu">Gorputza, sarrera (P1) eta irteera (P2)</b></span></button></li>
+        <li><button data-parte="tornillo"><span class="n">2</span><span><b class="es">Pomo y tornillo de ajuste</b><b class="eu">Pomoa eta doikuntza-torlojua</b><small class="es">Al girarlo comprime más o menos el muelle.</small><small class="eu">Biratzean malgukia gehiago edo gutxiago estutzen du.</small></span></button></li>
+        <li><button data-parte="muelle"><span class="n">3</span><span><b class="es">Muelle de regulación</b><b class="eu">Erregulazio-malgukia</b><small class="es">Empuja la membrana hacia abajo: fija la presión de salida.</small><small class="eu">Mintza beherantz bultzatzen du: irteerako presioa finkatzen du.</small></span></button></li>
+        <li><button data-parte="diafragma"><span class="n">4</span><span><b class="es">Membrana (diafragma)</b><b class="eu">Mintza (diafragma)</b><small class="es">Por debajo la empuja la presión de salida, por arriba el muelle.</small><small class="eu">Behetik irteerako presioak bultzatzen du, goitik malgukiak.</small></span></button></li>
+        <li><button data-parte="vastago"><span class="n">5</span><span><b class="es">Vástago</b><b class="eu">Zurtoina</b><small class="es">Une la membrana con el obturador.</small><small class="eu">Mintza obturadorearekin lotzen du.</small></span></button></li>
+        <li><button data-parte="obturador"><span class="n">6</span><span><b class="es">Obturador (válvula)</b><b class="eu">Obturadorea (balbula)</b><small class="es">Abre o cierra el paso; un muelle pequeño lo empuja a cerrar.</small><small class="eu">Igarobidea ireki edo ixten du; malguki txiki batek ixtera bultzatzen du.</small></span></button></li>
+        <li><button data-parte="asiento"><span class="n">7</span><span><b class="es">Asiento</b><b class="eu">Eserlekua</b><small class="es">Donde apoya el obturador cuando cierra.</small><small class="eu">Obturadorea ixten denean bermatzen den lekua.</small></span></button></li>
+        <li><button data-parte="escape"><span class="n">8</span><span><b class="es">Orificio de escape</b><b class="eu">Ihes-zuloa</b><small class="es">Si la salida sube demasiado, suelta aire (regulador con alivio).</small><small class="eu">Irteera gehiegi igotzen bada, airea askatzen du (arintze-erreguladorea).</small></span></button></li>
+        <li><button data-parte="manometro"><span class="n">9</span><span><b class="es">Manómetro</b><b class="eu">Manometroa</b><small class="es">Indica la presión de salida.</small><small class="eu">Irteerako presioa adierazten du.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <ol class="es"><li>Al apretar el pomo, el muelle empuja la membrana y <b>abre el obturador</b>: el aire pasa a la salida.</li><li>La presión de salida empuja la membrana hacia arriba.</li><li>Cuando esa fuerza iguala a la del muelle, el obturador <b>se cierra</b>: la salida queda a la presión elegida.</li><li>Si se consume aire, baja la presión, el muelle vuelve a abrir… y así siempre.</li></ol>
+      <ol class="eu"><li>Pomoa estutzean, malgukiak mintza bultzatzen du eta <b>obturadorea irekitzen</b> du: airea irteerara igarotzen da.</li><li>Irteerako presioak mintza gorantz bultzatzen du.</li><li>Indar hori malgukiarenaren berdina denean, obturadorea <b>ixten</b> da: irteera aukeratutako presioan geratzen da.</li><li>Airea kontsumitzen bada, presioa jaisten da, malgukiak berriro irekitzen du… eta horrela beti.</li></ol>
+    </div>
+    <p class="nota es">Pruébalo en el simulador (en castellano):</p><p class="nota eu">Probatu simulagailuan (gaztelaniaz):</p>
+    <iframe class="sim-embebida" src="regulador_presion.html" title="Simulador del regulador" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Presión de entrada máxima</h3><h3 class="eu">Sarrerako presio maximoa</h3><p class="es">La que aguanta, por ejemplo 16 bar.</p><p class="eu">Eusten duena, adibidez 16 bar.</p></div>
+      <div class="card"><h3 class="es">Rango de regulación</h3><h3 class="eu">Erregulazio-tartea</h3><p class="es">Entre qué presiones se puede ajustar la salida, por ejemplo 0,5 – 10 bar.</p><p class="eu">Irteera zein presioren artean doi daitekeen, adibidez 0,5 – 10 bar.</p></div>
+      <div class="card"><h3 class="es">Caudal nominal</h3><h3 class="eu">Emari nominala</h3><p class="es">Cuánto aire deja pasar sin que caiga mucho la presión (l/min).</p><p class="eu">Presioa asko jaitsi gabe zenbat aire uzten duen igarotzen (l/min).</p></div>
+      <div class="card"><h3 class="es">Rosca de conexión</h3><h3 class="eu">Konexio-haria</h3><p class="es">Tamaño de los orificios: G1/8, G1/4, G1/2…</p><p class="eu">Zuloen tamaina: G1/8, G1/4, G1/2…</p></div>
+      <div class="card"><h3 class="es">Con o sin escape</h3><h3 class="eu">Ihesarekin edo gabe</h3><p class="es">Con escape (alivio) puede bajar la presión de salida al aflojar el pomo.</p><p class="eu">Ihesarekin (arintzea) irteerako presioa jaitsi dezake pomoa askatzean.</p></div>
+      <div class="card"><h3 class="es">Bloqueo del pomo</h3><h3 class="eu">Pomoaren blokeoa</h3><p class="es">Se tira o se empuja del pomo para que nadie cambie el ajuste.</p><p class="eu">Pomotik tira edo bultzatu egiten da, inork doikuntza alda ez dezan.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><rect class="s-l" x="35" y="20" width="50" height="50"/><path class="s-l" d="M10 45h25M85 45h25M38 45h40"/><path class="s-f" d="M83 45l-9-5v10z"/><path class="s-l" d="M60 70l-8 3 16 4-16 4 8 3"/><path class="s-l" d="M46 88l28-16"/><path class="s-f" d="M76 71l-8 0 4 6z"/><path class="s-d" d="M97 45V8H60V20"/></svg><b data-es="Regulador de presión" data-eu="Presio erreguladorea"></b><small data-es="muelle ajustable (abajo) y pilotaje desde la salida (trazos)" data-eu="malguki doigarria (behean) eta irteeratik pilotajea (marra etenak)"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="38" r="20"/><path class="s-l" d="M60 58v26M48 50l24-24"/><path class="s-f" d="M72 26l-9 2 7 7z"/></svg><b data-es="Manómetro" data-eu="Manometroa"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+</body>
+</html>

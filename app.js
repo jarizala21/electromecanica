@@ -107,7 +107,7 @@
         descripcion: s.descripcion || "", imagen: s.imagen || "", icono: s.icono || "simulacion",
         simulaciones: (s.simulaciones || []).map(function(x){
           return { id: x.id, archivo: x.archivo, titulo: x.titulo || bonito(sinExt(x.archivo)), tema: x.tema || "",
-                   descripcion: x.descripcion || "", icono: x.icono || "simulacion", miniatura: x.miniatura || "", eu: x.eu || {} };
+                   descripcion: x.descripcion || "", icono: x.icono || "simulacion", miniatura: x.miniatura || "", eu: x.eu || {}, oculta: !!x.oculta };
         })
       };
     });
@@ -148,6 +148,9 @@
         var m = x.miniatura ? s.carpeta + "/" + x.miniatura : s.carpeta + "/miniaturas/" + sinExt(x.archivo) + ".webp";
         x.foto = (!RECURSOS || RECURSOS[m]) ? "simulaciones/" + m.split("/").map(encodeURIComponent).join("/") : "";
       });
+      // Las «ocultas» no salen en las listas, pero se pueden abrir por su enlace (#id), p. ej. desde una ficha.
+      s.ocultas = s.simulaciones.filter(function(x){ return x.oculta; });
+      s.simulaciones = s.simulaciones.filter(function(x){ return !x.oculta; });
     });
     return secs;
   }
@@ -156,7 +159,10 @@
   var SECCIONES = [], TODAS = [], RECURSOS = null;
   function aplicar(secs){
     SECCIONES = secs; TODAS = [];
-    SECCIONES.forEach(function(sec){ sec.simulaciones.forEach(function(sim, i){ TODAS.push({ sec: sec, sim: sim, i: i }); }); });
+    SECCIONES.forEach(function(sec){
+      sec.simulaciones.forEach(function(sim, i){ TODAS.push({ sec: sec, sim: sim, i: i }); });
+      (sec.ocultas || []).forEach(function(sim){ TODAS.push({ sec: sec, sim: sim, i: -1 }); });
+    });
     pintarAreas();
   }
   function porId(id){ for (var k = 0; k < TODAS.length; k++) if (TODAS[k].sim.id === id) return TODAS[k]; return null; }
@@ -209,12 +215,13 @@
     res.hidden = !abierto;
     if (!abierto) return;
     if (!q) {
-      var unicas = {}; TODAS.forEach(function(e){ unicas[e.sim.ruta] = 1; });
+      var unicas = {}; TODAS.forEach(function(e){ if (e.i >= 0) unicas[e.sim.ruta] = 1; });
       res.innerHTML = '<p class="res-head">' + esc(L().escribe(Object.keys(unicas).length)) + '</p>';
       return;
     }
     var palabras = q.split(/\s+/);
     var hits = TODAS.filter(function(e){
+      if (e.i < 0) return false;
       var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre, e.sim.eu.titulo, e.sim.eu.descripcion,
                         e.sec.eu.nombre, e.sec.temasEu[e.sim.tema]].join(" "));
       return palabras.every(function(p){ return pajar.indexOf(p) >= 0; });
@@ -240,7 +247,8 @@
   function mostrarVista(id){
     ["vista-portada", "vista-areas", "vista-seccion"].forEach(function(v){ $(v).hidden = v !== id; });
     var m = document.querySelector('meta[name="theme-color"]');
-    if (m) m.setAttribute("content", COLOR_BARRA[id]);
+    var oscuro = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+    if (m) m.setAttribute("content", id === "vista-portada" ? COLOR_BARRA[id] : (oscuro ? "#11142a" : COLOR_BARRA[id]));
   }
   function verPortada(){ mostrarVista("vista-portada"); window.scrollTo(0, 0); }
   function verAreas(mover){
@@ -294,11 +302,11 @@
     $("v-back").href = "#" + sec.id;
     $("v-back").setAttribute("aria-label", L().volverA + nombre(sec));
     $("v-sec").textContent = nombre(sec) + " · ";
-    $("v-pos").textContent = L().pos(i + 1, sec.simulaciones.length);
+    $("v-pos").textContent = i < 0 ? "" : L().pos(i + 1, sec.simulaciones.length);
     $("v-name").textContent = titulo(sim);
     frame.title = titulo(sim);
-    navegacion($("v-prev"), sec.simulaciones[i - 1], L().ant);
-    navegacion($("v-next"), sec.simulaciones[i + 1], L().sig);
+    navegacion($("v-prev"), i < 0 ? null : sec.simulaciones[i - 1], L().ant);
+    navegacion($("v-next"), i < 0 ? null : sec.simulaciones[i + 1], L().sig);
     app.hidden = true; visor.hidden = false; root.classList.add("con-visor");
     if (abierta !== sim.id) { abierta = sim.id; entrada = e; cargar(e); }
   }

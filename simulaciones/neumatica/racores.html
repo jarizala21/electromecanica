@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Racores</title>
+<meta name="description" content="Qué son, partes del racor instantáneo, cómo se mete y se saca el tubo (interactivo), tipos y símbolos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:10.5px;fill:#242d5f;font-weight:600}
+.ico svg{width:100%;height:84px;display:block;background:#fff;border-radius:14px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Racores" data-eu="Rakorrak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">Los <span class="clave">racores</span> son las piezas que <b>unen los tubos</b> entre sí y con los aparatos (válvulas, cilindros, unidad de mantenimiento) <b>sin que se escape el aire</b>.</p>
+      <p class="eu"><span class="clave">Rakorrak</span> tutuak elkarren artean eta aparatuekin (balbulak, zilindroak, mantentze-unitatea) <b>airea ihes egin gabe lotzen dituzten</b> piezak dira.</p>
+      <p class="es">Los más usados son los <b>instantáneos</b> (push-in): el tubo se mete empujando y se saca apretando un anillo. Por el otro lado llevan <b>rosca</b> para el aparato.</p>
+      <p class="eu">Erabilienak <b>berehalakoak</b> dira (push-in): tutua bultzatuz sartzen da eta eraztun bat sakatuz ateratzen da. Beste aldean <b>haria</b> dute aparaturako.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 320 180" role="img" aria-label="Partes del racor">
+          <g class="resaltable" data-parte="rosca"><path d="M20 70h70v40H20z" fill="#d4b06a" stroke="#242d5f" stroke-width="1.5"/><path d="M28 70l-4 40M38 70l-4 40M48 70l-4 40M58 70l-4 40M68 70l-4 40M78 70l-4 40" stroke="#8a6d3b" stroke-width="1.4"/></g>
+          <g class="resaltable" data-parte="junta-rosca"><rect x="90" y="62" width="8" height="56" fill="#2b6cb0"/></g>
+          <g class="resaltable" data-parte="cuerpo"><path d="M98 50h140v80H98z" fill="#d6dde7" stroke="#242d5f" stroke-width="2"/><path d="M98 80h50v20H98z" fill="#fff" stroke="#242d5f"/></g>
+          <g class="resaltable" data-parte="junta"><circle cx="170" cy="74" r="5" fill="#1b1f2b"/><circle cx="170" cy="106" r="5" fill="#1b1f2b"/></g>
+          <g class="resaltable" data-parte="pinza"><path d="M196 62l12 12M196 118l12-12" stroke="#5c6575" stroke-width="4"/><path d="M190 60h20M190 120h20" stroke="#5c6575" stroke-width="3"/></g>
+          <g class="resaltable" data-parte="anillo"><path d="M238 56h20v68h-20z" fill="#f39200" stroke="#242d5f" stroke-width="1.5"/><path d="M222 74h20M222 106h20" stroke="#f39200" stroke-width="5"/></g>
+          <g class="resaltable" data-parte="tubo"><path d="M150 76h170v28H150z" fill="#3a7bd5" opacity=".85"/></g>
+        </svg>
+        <figcaption data-es="Racor instantáneo recto (corte)" data-eu="Rakor zuzen berehalakoa (ebaketa)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="rosca"><span class="n">1</span><span><b class="es">Rosca</b><b class="eu">Haria</b><small class="es">Se enrosca en el aparato: M5, G1/8, G1/4, R1/4 (cónica)…</small><small class="eu">Aparatuan harizkatzen da: M5, G1/8, G1/4, R1/4 (konikoa)…</small></span></button></li>
+        <li><button data-parte="junta-rosca"><span class="n">2</span><span><b class="es">Junta de la rosca</b><b class="eu">Hariaren juntura</b><small class="es">Junta o sellante para que no fugue por la rosca.</small><small class="eu">Juntura edo zigilatzailea, haritik ihesik egon ez dadin.</small></span></button></li>
+        <li><button data-parte="cuerpo"><span class="n">3</span><span><b class="es">Cuerpo</b><b class="eu">Gorputza</b><small class="es">De latón niquelado o de plástico técnico.</small><small class="eu">Letoi nikelatuzkoa edo plastiko teknikozkoa.</small></span></button></li>
+        <li><button data-parte="junta"><span class="n">4</span><span><b class="es">Junta tórica</b><b class="eu">O-juntura</b><small class="es">Aprieta el tubo por fuera: estanqueidad.</small><small class="eu">Tutua kanpotik estutzen du: estankotasuna.</small></span></button></li>
+        <li><button data-parte="pinza"><span class="n">5</span><span><b class="es">Pinza (garras)</b><b class="eu">Pintza (atzaparrak)</b><small class="es">Dientes de acero inclinados: dejan entrar el tubo pero no salir.</small><small class="eu">Altzairuzko hortz inklinatuak: tutua sartzen uzten dute baina ez ateratzen.</small></span></button></li>
+        <li><button data-parte="anillo"><span class="n">6</span><span><b class="es">Anillo de liberación</b><b class="eu">Askatze-eraztuna</b><small class="es">Al empujarlo abre las garras para sacar el tubo.</small><small class="eu">Bultzatzean atzaparrak irekitzen ditu tutua ateratzeko.</small></span></button></li>
+        <li><button data-parte="tubo"><span class="n">7</span><span><b class="es">Tubo</b><b class="eu">Tutua</b></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <figure class="fig"><svg id="svg-f" viewBox="0 0 340 160" role="img" aria-label="Montaje del tubo"></svg></figure>
+    <div class="estado" id="estado"></div>
+    <div class="mandos">
+      <button class="boton" id="b-meter" data-es="Meter el tubo" data-eu="Tutua sartu"></button>
+      <button class="boton claro" id="b-tirar" data-es="Tirar del tubo" data-eu="Tututik tira"></button>
+      <button class="boton naranja" id="b-soltar" data-es="Apretar anillo y tirar" data-eu="Eraztuna sakatu eta tira"></button>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M20 30h40v24H20z" fill="#d4b06a" stroke="#242d5f"/><path d="M60 24h50v36H60z" fill="#d6dde7" stroke="#242d5f"/><path d="M110 30h40v24h-40z" fill="#3a7bd5"/></svg><h3 class="es">Recto</h3><h3 class="eu">Zuzena</h3><p class="es">Rosca a un lado y tubo al otro.</p><p class="eu">Haria alde batean eta tutua bestean.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M30 46h40v24H30z" fill="#d4b06a" stroke="#242d5f"/><path d="M70 40h40v36H70z" fill="#d6dde7" stroke="#242d5f"/><path d="M76 40V10h28v30" fill="#d6dde7" stroke="#242d5f"/><path d="M80 10V0h20v10" fill="#3a7bd5"/></svg><h3 class="es">Codo 90°</h3><h3 class="eu">Ukondoa 90°</h3><p class="es">Para cambiar de dirección en poco sitio. Algunos giran.</p><p class="eu">Leku gutxian norabidez aldatzeko. Batzuk biratu egiten dira.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M20 30h120v24H20z" fill="#d6dde7" stroke="#242d5f"/><path d="M68 54h24v26H68z" fill="#d6dde7" stroke="#242d5f"/><path d="M0 34h20v16H0zM140 34h20v16h-20zM72 80h16" fill="#3a7bd5" stroke="#3a7bd5" stroke-width="4"/></svg><h3 class="es">En T y en Y</h3><h3 class="eu">T eta Y formakoak</h3><p class="es">Para repartir el aire a dos sitios.</p><p class="eu">Airea bi lekutara banatzeko.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M20 26h50v32H20z" fill="#3a7bd5"/><path d="M70 22h30v40H70z" fill="#d6dde7" stroke="#242d5f"/><path d="M100 32h50v20h-50z" fill="#3a7bd5"/></svg><h3 class="es">Reducción</h3><h3 class="eu">Murrizketa</h3><p class="es">Une tubos de distinto diámetro (8 → 6).</p><p class="eu">Diametro desberdineko tutuak lotzen ditu (8 → 6).</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M20 30h50v24H20z" fill="#d6dde7" stroke="#242d5f"/><path d="M76 28h50v28H76z" fill="#c9cfd8" stroke="#242d5f"/><path d="M70 36h12v12H70z" fill="#5c6575"/></svg><h3 class="es">Enchufe rápido</h3><h3 class="eu">Lotune azkarra</h3><p class="es">Para conectar y desconectar herramientas. Al soltarlo, una válvula cierra el aire.</p><p class="eu">Erremintak konektatu eta deskonektatzeko. Askatzean, balbula batek airea ixten du.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><path d="M20 30h40v24H20z" fill="#d4b06a" stroke="#242d5f"/><path d="M60 22h40v40H60z" fill="#d6dde7" stroke="#242d5f"/><circle cx="80" cy="14" r="8" fill="#2d3340"/><path d="M100 30h40v24h-40z" fill="#3a7bd5"/></svg><h3 class="es">Con regulador de caudal</h3><h3 class="eu">Emari-erregulagailuarekin</h3><p class="es">Se pone en el cilindro para regular su velocidad.</p><p class="eu">Zilindroan jartzen da haren abiadura erregulatzeko.</p></div>
+    </div>
+    <div class="card">
+      <p class="es">Al elegir un racor hay que saber: el <b>diámetro del tubo</b> (4, 6, 8…), la <b>rosca</b> del aparato (M5, G1/8, G1/4…) y la <b>forma</b> (recto, codo, T…).</p>
+      <p class="eu">Rakor bat aukeratzean jakin behar da: <b>tutuaren diametroa</b> (4, 6, 8…), aparatuaren <b>haria</b> (M5, G1/8, G1/4…) eta <b>forma</b> (zuzena, ukondoa, T…).</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h100M60 10v70"/><circle class="s-f" cx="60" cy="45" r="5"/></svg><b data-es="Unión (T)" data-eu="Lotura (T)"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h36M74 45h36M46 33l12 12-12 12M74 33L62 45l12 12"/></svg><b data-es="Enchufe rápido acoplado" data-eu="Lotune azkarra akoplatuta"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h30M80 45h30M40 33l12 12-12 12M80 33L68 45l12 12"/></svg><b data-es="Enchufe rápido desacoplado" data-eu="Lotune azkarra desakoplatuta"></b></div>
+    </div>
+    <p class="nota es">Compara los símbolos con la tabla de vuestro libro: algunos fabricantes los dibujan con pequeñas diferencias.</p>
+    <p class="nota eu">Alderatu sinboloak zuen liburuko taularekin: fabrikatzaile batzuek desberdintasun txikiekin marrazten dituzte.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var x = 330, objetivo = 330, anillo = false, metido = false, msg = "inicio";
+  function dibujar(){
+    x += (objetivo - x) * 0.18;
+    var s = '<path d="M10 50h70v60H10z" fill="#d4b06a" stroke="#242d5f" stroke-width="1.5"/>';
+    s += '<path d="M80 30h170v100H80z" fill="#d6dde7" stroke="#242d5f" stroke-width="2"/><path d="M80 66h60v28H80z" fill="#fff" stroke="#242d5f"/>';
+    s += '<circle cx="160" cy="62" r="5" fill="#1b1f2b"/><circle cx="160" cy="98" r="5" fill="#1b1f2b"/>';
+    var abre = anillo ? 7 : 0;
+    s += '<path d="M190 44l' + (14 - abre) + ' ' + (14 - abre) + 'M190 116l' + (14 - abre) + ' -' + (14 - abre) + '" stroke="#5c6575" stroke-width="4"/>';
+    var ax = 250 - (anillo ? 10 : 0);
+    s += '<path d="M' + ax + ' 36h22v88h-22z" fill="#f39200" stroke="#242d5f" stroke-width="1.5"/>';
+    s += '<path d="M' + x + ' 64h' + (340 - x) + 'v32H' + x + 'z" fill="#3a7bd5" opacity=".9"/>';
+    if (msg === "agarre") s += '<circle cx="204" cy="62" r="9" fill="none" stroke="#c62f2f" stroke-width="2"/><circle cx="204" cy="98" r="9" fill="none" stroke="#c62f2f" stroke-width="2"/>';
+    $("svg-f").innerHTML = s;
+    if (Math.abs(objetivo - x) > 0.5) requestAnimationFrame(dibujar);
+  }
+  function texto(){
+    var M = {
+      inicio: ["Corta el tubo recto y mételo empujando hasta el fondo.", "Ebaki tutua zuzen eta sartu bultzatuz hondoraino."],
+      metido: ["El tubo pasa las garras y la junta tórica: ya está sujeto y estanco.", "Tutuak atzaparrak eta O-juntura gainditzen ditu: lotuta eta estanko dago."],
+      agarre: ["Las garras se clavan en el tubo: cuanto más tiras, más agarran. No sale.", "Atzaparrak tutuan iltzatzen dira: zenbat eta gehiago tira, orduan eta gehiago heltzen diote. Ez da ateratzen."],
+      fuera: ["Al empujar el anillo se abren las garras y el tubo sale. ¡Sin aire en la instalación!", "Eraztuna bultzatzean atzaparrak irekitzen dira eta tutua ateratzen da. Instalazioan airerik gabe!"],
+      vacio: ["Primero mete el tubo.", "Lehenik sartu tutua."]
+    };
+    var e = $("estado"); e.className = "estado" + (msg === "metido" ? " ok" : msg === "agarre" ? " mal" : "");
+    e.textContent = T(M[msg][0], M[msg][1]);
+  }
+  $("b-meter").addEventListener("click", function(){ anillo = false; metido = true; objetivo = 130; msg = "metido"; texto(); requestAnimationFrame(dibujar); });
+  $("b-tirar").addEventListener("click", function(){ anillo = false; if (!metido) { msg = "vacio"; texto(); return; } objetivo = 136; msg = "agarre"; texto(); requestAnimationFrame(dibujar); });
+  $("b-soltar").addEventListener("click", function(){ if (!metido) { msg = "vacio"; texto(); return; } anillo = true; metido = false; objetivo = 330; msg = "fuera"; texto(); requestAnimationFrame(dibujar); });
+  alCambiarIdioma(function(){ texto(); dibujar(); });
+})();
+</script>
+</body>
+</html>

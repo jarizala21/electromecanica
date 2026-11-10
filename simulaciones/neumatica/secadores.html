@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Secadores de aire</title>
+<meta name="description" content="Por qué hay que secar el aire, partes y funcionamiento interactivo de los secadores frigorífico, de adsorción y de membrana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#242d5f;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos neumáticos" data-eu="Elementu neumatikoak"></p>
+      <h1 data-es="Secadores de aire" data-eu="Lehorgailuak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El aire de la atmósfera lleva <b>vapor de agua</b>. Al comprimirlo y enfriarse, ese vapor se convierte en <b>agua líquida</b> dentro de los tubos: oxida, arrastra la grasa y estropea válvulas y cilindros.</p>
+      <p class="eu">Atmosferako aireak <b>ur-lurruna</b> darama. Konprimitu eta hoztean, lurrun hori <b>ur likido</b> bihurtzen da hodien barruan: herdoiltzen du, koipea eramaten du eta balbulak eta zilindroak hondatzen ditu.</p>
+      <p class="es">El <span class="clave">secador</span> quita esa humedad del aire comprimido. Se pone <b>después del compresor y del depósito</b>, antes de la red.</p>
+      <p class="eu"><span class="clave">Lehorgailuak</span> hezetasun hori kentzen dio aire konprimituari. <b>Konpresorearen eta depositoaren ondoren</b> jartzen da, sarearen aurretik.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Punto de rocío" data-eu="Ihintz-puntua"></h2>
+      <p class="es">Es la temperatura a la que el agua del aire empieza a condensarse. <b>Cuanto más bajo, más seco</b> está el aire.</p>
+      <p class="eu">Aireko ura kondentsatzen hasten den tenperatura da. <b>Zenbat eta baxuagoa, orduan eta lehorrago</b> dago airea.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="zatiak" data-es="Partes" data-eu="Zatiak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-z" viewBox="0 0 320 210" role="img" aria-label="Partes del secador frigorífico">
+          <g class="resaltable" data-parte="aire-aire"><rect x="20" y="40" width="90" height="70" rx="8" fill="#e4ecf7" stroke="#242d5f" stroke-width="2"/><path d="M30 60h70M30 75h70M30 90h70" stroke="#2b6cb0" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="refrigerante"><rect x="130" y="40" width="90" height="70" rx="8" fill="#dff3f7" stroke="#242d5f" stroke-width="2"/><path d="M140 55c10 10 60-10 70 0M140 75c10 10 60-10 70 0M140 95c10 10 60-10 70 0" stroke="#1b9aaa" stroke-width="2" fill="none"/></g>
+          <g class="resaltable" data-parte="separador"><path d="M240 40h50v80l-25 20-25-20z" fill="#eef1f5" stroke="#242d5f" stroke-width="2"/><circle cx="262" cy="100" r="3" fill="#3a7bd5"/><circle cx="270" cy="112" r="3" fill="#3a7bd5"/></g>
+          <g class="resaltable" data-parte="purga"><path d="M265 140v16" stroke="#242d5f" stroke-width="3"/><rect x="255" y="156" width="20" height="14" rx="3" fill="#d4a017" stroke="#242d5f"/></g>
+          <g class="resaltable" data-parte="frigo"><rect x="130" y="140" width="90" height="50" rx="8" fill="#5c6575" stroke="#242d5f" stroke-width="2"/><path d="M175 140v-30" stroke="#1b9aaa" stroke-width="3"/></g>
+          <path d="M0 60h20M110 75h20M220 75h20M240 70h-4M110 50h-6" stroke="#242d5f" stroke-width="2"/>
+          <text class="txt" x="4" y="54" data-es="entrada" data-eu="sarrera"></text>
+        </svg>
+        <figcaption data-es="Secador frigorífico (esquema)" data-eu="Lehorgailu hozkailua (eskema)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-z">
+        <li><button data-parte="aire-aire"><span class="n">1</span><span><b class="es">Intercambiador aire-aire</b><b class="eu">Aire-aire trukagailua</b><small class="es">El aire caliente que entra se enfría un poco con el aire frío que sale (ahorra energía).</small><small class="eu">Sartzen den aire beroa pixka bat hozten da irteten den aire hotzarekin (energia aurrezten du).</small></span></button></li>
+        <li><button data-parte="refrigerante"><span class="n">2</span><span><b class="es">Intercambiador aire-refrigerante (evaporador)</b><b class="eu">Aire-hozgarri trukagailua (lurrungailua)</b><small class="es">Enfría el aire hasta unos 3 °C: el vapor se condensa.</small><small class="eu">Airea 3 °C ingurura hozten du: lurruna kondentsatzen da.</small></span></button></li>
+        <li><button data-parte="frigo"><span class="n">3</span><span><b class="es">Equipo frigorífico</b><b class="eu">Hozte-ekipoa</b><small class="es">Compresor de gas refrigerante, como el de una nevera.</small><small class="eu">Gas hozgarriaren konpresorea, hozkailu batekoa bezala.</small></span></button></li>
+        <li><button data-parte="separador"><span class="n">4</span><span><b class="es">Separador de condensados</b><b class="eu">Kondentsatu-bereizgailua</b><small class="es">Recoge las gotas de agua.</small><small class="eu">Ur-tantak biltzen ditu.</small></span></button></li>
+        <li><button data-parte="purga"><span class="n">5</span><span><b class="es">Purgador automático</b><b class="eu">Purgagailu automatikoa</b><small class="es">Echa el agua fuera sola, cada cierto tiempo.</small><small class="eu">Ura berez kanpora botatzen du, denbora tarte batez behin.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="chips" id="tipos">
+      <button data-t="frigo" aria-pressed="true" data-es="Frigorífico" data-eu="Hozkailua"></button>
+      <button data-t="ads" data-es="Adsorción" data-eu="Adsortzioa"></button>
+      <button data-t="memb" data-es="Membrana" data-eu="Mintza"></button>
+    </div>
+    <figure class="fig"><svg id="svg-f" viewBox="0 0 340 200" role="img" aria-label="Funcionamiento del secador"></svg></figure>
+    <div class="lectura-g"><div><small data-es="Punto de rocío" data-eu="Ihintz-puntua"></small><b id="l-pr"></b></div><div><small data-es="Uso típico" data-eu="Ohiko erabilera"></small><b id="l-uso" style="font-size:13px"></b></div></div>
+    <div class="card" id="explica"></div>
+  </section>
+
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Punto de rocío</h3><h3 class="eu">Ihintz-puntua</h3><p class="es">Frigorífico ≈ +3 °C · adsorción ≈ −40 °C · membrana: según el modelo.</p><p class="eu">Hozkailua ≈ +3 °C · adsortzioa ≈ −40 °C · mintza: modeloaren arabera.</p></div>
+      <div class="card"><h3 class="es">Caudal</h3><h3 class="eu">Emaria</h3><p class="es">El aire que puede secar (m³/min o l/min). Tiene que ser mayor que el del compresor.</p><p class="eu">Lehor dezakeen airea (m³/min edo l/min). Konpresorearena baino handiagoa izan behar du.</p></div>
+      <div class="card"><h3 class="es">Consumo</h3><h3 class="eu">Kontsumoa</h3><p class="es">El frigorífico gasta electricidad; el de adsorción y el de membrana gastan parte del aire.</p><p class="eu">Hozkailuak elektrizitatea gastatzen du; adsortziokoak eta mintzakoak airearen zati bat.</p></div>
+      <div class="card"><h3 class="es">Mantenimiento</h3><h3 class="eu">Mantentzea</h3><p class="es">Comprobar el purgador, limpiar el condensador y cambiar el desecante cuando toque.</p><p class="eu">Purgagailua egiaztatu, kondentsadorea garbitu eta desekatzailea aldatu behar denean.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-l" d="M36 45h48"/><path class="s-f" d="M54 28l6 10 6-10zM54 62l6-10 6 10z"/></svg><b data-es="Secador" data-eu="Lehorgailua"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-d" d="M60 18v40"/><path class="s-l" d="M50 65h20l-10 10z"/><path class="s-l" d="M60 75v12"/></svg><b data-es="Separador con purga" data-eu="Bereizgailua purgarekin"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M8 45h22M90 45h22M30 45L60 15 90 45 60 75z"/><path class="s-l" d="M36 45h48"/><path class="s-l" d="M52 22l8-8 8 8M52 68l8 8 8-8"/></svg><b data-es="Refrigerador" data-eu="Hozgailua"></b></div>
+    </div>
+    <p class="nota es">Compara los símbolos con la tabla de vuestro libro: algunos fabricantes los dibujan con pequeñas diferencias.</p>
+    <p class="nota eu">Alderatu sinboloak zuen liburuko taularekin: fabrikatzaile batzuek desberdintasun txikiekin marrazten dituzte.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var tipo = "frigo", t0 = performance.now();
+  var D = {
+    frigo: { pr: "+3 °C", uso: ["Talleres e industria en general", "Tailerrak eta industria orokorrean"],
+      txt: ["El aire caliente y húmedo se <b>enfría a unos 3 °C</b>. El vapor se convierte en gotas, que se separan y se purgan. Luego el aire se calienta un poco al salir para que no «sude» la tubería.",
+            "Aire bero eta hezea <b>3 °C ingurura hozten</b> da. Lurruna tanta bihurtzen da, eta tantak bereizi eta purgatu egiten dira. Gero, airea pixka bat berotzen da irtetean, hodiak «izerdirik» bota ez dezan."] },
+    ads: { pr: "−40 °C", uso: ["Aire muy seco: pintura, electrónica, exterior con heladas", "Aire oso lehorra: pintura, elektronika, izotzak dauden kanpoaldea"],
+      txt: ["Dos torres con <b>desecante</b> (bolitas que atrapan el agua). Mientras una seca el aire, la otra se <b>regenera</b> con un poco de aire seco que sale al exterior. Cambian cada pocos minutos.",
+            "<b>Desekatzailea</b> duten bi dorre (ura harrapatzen duten bolatxoak). Batek airea lehortzen duen bitartean, bestea <b>birsortu</b> egiten da kanpora ateratzen den aire lehor apur batekin. Minutu gutxitan behin aldatzen dira."] },
+    memb: { pr: T("según modelo", "modeloaren arabera"), uso: ["Puntos de consumo concretos, sin electricidad", "Kontsumo-puntu jakinak, elektrizitaterik gabe"],
+      txt: ["Un haz de <b>fibras huecas</b>: el vapor de agua atraviesa la pared de las fibras y sale fuera, el aire seco sigue por dentro. No tiene piezas móviles ni electricidad.",
+            "<b>Zuntz hutsez</b> osatutako sorta bat: ur-lurrunak zuntzen horma zeharkatzen du eta kanpora ateratzen da; aire lehorrak barrutik jarraitzen du. Ez du pieza mugikorrik ezta elektrizitaterik ere."] }
+  };
+  function anim(t){
+    var s = "", k = (t - t0) / 1000;
+    if (tipo === "frigo") {
+      s += '<rect x="20" y="60" width="300" height="50" rx="10" fill="#f6f8fb" stroke="#242d5f" stroke-width="2"/>';
+      s += '<rect x="120" y="60" width="100" height="50" fill="#dff3f7"/><text class="txt" x="170" y="56" text-anchor="middle">3 °C</text>';
+      for (var i = 0; i < 14; i++) { var x = 24 + ((i * 23 + k * 60) % 292), y = 70 + (i * 7 % 30); var seco = x > 220; s += '<circle cx="' + x + '" cy="' + y + '" r="' + (seco ? 2 : 3) + '" fill="' + (seco ? "#9aa3b2" : "#3a7bd5") + '"/>'; }
+      for (var j = 0; j < 4; j++) { var yy = 110 + ((k * 40 + j * 12) % 40); s += '<circle cx="' + (200 + j * 6) + '" cy="' + yy + '" r="3" fill="#3a7bd5"/>'; }
+      s += '<path d="M190 150h40l-20 20z" fill="#d4a017" stroke="#242d5f"/><text class="txt" x="240" y="168">' + T("agua → purga", "ura → purga") + '</text>';
+      s += '<text class="txt" x="24" y="128">' + T("aire caliente y húmedo", "aire bero eta hezea") + '</text><text class="txt" x="236" y="128">' + T("aire seco", "aire lehorra") + '</text>';
+    } else if (tipo === "ads") {
+      var a = Math.floor(k / 4) % 2;
+      [60, 200].forEach(function(x, i){
+        var activa = i === a;
+        s += '<rect x="' + x + '" y="30" width="80" height="140" rx="16" fill="' + (activa ? "#e4ecf7" : "#fff3e0") + '" stroke="#242d5f" stroke-width="2"/>';
+        for (var r = 0; r < 24; r++) s += '<circle cx="' + (x + 12 + (r % 5) * 14) + '" cy="' + (50 + Math.floor(r / 5) * 22) + '" r="5" fill="' + (activa ? "#c9a227" : "#e8d9a8") + '"/>';
+        s += '<text class="txt" x="' + (x + 40) + '" y="188" text-anchor="middle">' + (activa ? T("seca", "lehortzen") : T("se regenera", "birsortzen")) + '</text>';
+        if (activa) for (var p = 0; p < 6; p++) { var yy = 170 - ((k * 50 + p * 22) % 140); s += '<circle cx="' + (x + 40 + Math.sin(p) * 20) + '" cy="' + yy + '" r="2.6" fill="' + (yy < 90 ? "#9aa3b2" : "#3a7bd5") + '"/>'; }
+      });
+    } else {
+      s += '<rect x="30" y="40" width="280" height="110" rx="20" fill="#f6f8fb" stroke="#242d5f" stroke-width="2"/>';
+      for (var f = 0; f < 4; f++) s += '<rect x="40" y="' + (55 + f * 24) + '" width="260" height="12" rx="6" fill="#e4ecf7" stroke="#2b6cb0"/>';
+      for (var q = 0; q < 18; q++) { var x = 44 + ((q * 31 + k * 70) % 252), fila = q % 4, cy = 61 + fila * 24; var sale = (x + q * 13) % 60 < 14; s += '<circle cx="' + x + '" cy="' + (sale ? cy - 10 - ((k * 30 + q) % 8) : cy) + '" r="2.6" fill="' + (sale ? "#3a7bd5" : "#9aa3b2") + '"/>'; }
+      s += '<text class="txt" x="40" y="170">' + T("el vapor atraviesa las fibras y sale fuera", "lurrunak zuntzak zeharkatu eta kanpora ateratzen da") + '</text>';
+    }
+    $("svg-f").innerHTML = s;
+    requestAnimationFrame(anim);
+  }
+  function textos(){
+    var d = D[tipo];
+    $("l-pr").textContent = tipo === "memb" ? T("según modelo", "modeloaren arabera") : d.pr;
+    $("l-uso").textContent = T(d.uso[0], d.uso[1]);
+    $("explica").innerHTML = "<p style='margin:0'>" + T(d.txt[0], d.txt[1]) + "</p>";
+  }
+  $("tipos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    tipo = b.getAttribute("data-t");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    textos();
+  });
+  alCambiarIdioma(textos);
+  requestAnimationFrame(anim);
+})();
+</script>
+</body>
+</html>

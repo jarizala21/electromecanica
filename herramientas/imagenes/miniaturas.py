@@ -25,6 +25,17 @@ CAP = {  # simulaciones HTML: centro x, centro y, lado (fracciones del ancho de 
     'mecanica/tornillos': (0.35, 0.5, 0.5, 'atalak'),
     'mecanica/tuercas': (0.5, 0.45, 0.46, 'zer-da'),
     'mecanica/roscachapas': (0.3, 0.5, 0.36, 'ezaugarriak'),
+    'neumatica/magnitudes-neumaticas': (0.5, 0.5, 0.85, 'presioa'),
+    'neumatica/compresor': (0.42, 0.42, 0.75, 'zatiak'),
+    'neumatica/secadores': (0.5, 0.42, 0.7, 'zatiak'),
+    'neumatica/regulador': (0.5, 0.45, 0.85, 'zatiak'),
+    'neumatica/lubricador': (0.5, 0.42, 0.85, 'zatiak'),
+    'neumatica/tubos': (0.84, 0.5, 0.36, 'zatiak'),
+    'neumatica/racores': (0.55, 0.5, 0.6, 'zatiak'),
+    'electrica/magnitudes-electricas': (0.55, 0.5, 0.62, 'proba'),
+    'electrica/cc-ca': (0.4, 0.5, 0.6, 'grafikoa'),
+    'electrica/ficha-magnetotermico': (0.5, 0.42, 0.95, 'zatiak'),
+    'electrica/ficha-diferencial': (0.5, 0.5, 0.95, 'zatiak'),
     'mecanica/remaches': (0.5, 0.5, 0.9, 'motak'),
 }
 GIF = {  # fotograma (fracción del total), centro x, centro y, lado (fracción del ancho)

@@ -34,6 +34,8 @@
                   presostato · regulador · cremallera · engranaje · sinfin ·
                   guia · acoplamiento · cardan · embrague · biela · leva ·
                   polea · cadena · lampara · manometro · simulacion
+     oculta       true = no sale en la lista (se abre solo por su enlace #id,
+                  por ejemplo desde una ficha que la lleva dentro)
      miniatura    (opcional) imagen redonda de la lista. Si no se pone, se usa
                   miniaturas/<nombre-del-archivo>.webp dentro de la carpeta,
                   y si no existe, el icono.
@@ -50,9 +52,26 @@ self.CATALOGO = {
       temas_eu: {
         "Instalaciones": "Instalazioak",
         "Protecciones": "Babesak",
-        "Mando y protección de motores": "Motorren agintea eta babesa"
+        "Mando y protección de motores": "Motorren agintea eta babesa",
+        "Magnitudes y corriente": "Magnitudeak eta korrontea"
       },
       simulaciones: [
+        { archivo: "magnitudes-electricas.html", id: "magnitudes-electricas", tema: "Magnitudes y corriente", icono: "simulacion",
+          titulo: "Magnitudes eléctricas",
+          descripcion: "Tensión, intensidad y potencia, con un circuito para medir.",
+          eu: { titulo: "Magnitude elektrikoak", descripcion: "Tentsioa, intentsitatea eta potentzia, neurtzeko zirkuitu batekin." } },
+        { archivo: "cc-ca.html", id: "cc-ca", tema: "Magnitudes y corriente", icono: "simulacion",
+          titulo: "Corriente continua vs alterna",
+          descripcion: "Diferencias, gráfica interactiva y valor eficaz.",
+          eu: { titulo: "Korronte zuzena vs alternoa", descripcion: "Desberdintasunak, grafiko interaktiboa eta balio eraginkorra." } },
+        { archivo: "ficha-magnetotermico.html", id: "magnetotermico", tema: "Protecciones", icono: "magnetotermico",
+          titulo: "Magnetotérmico",
+          descripcion: "Partes, curvas B, C y D, símbolos y simulador por dentro.",
+          eu: { titulo: "Magnetotermikoa", descripcion: "Zatiak, B, C eta D kurbak, sinboloak eta barruko simulagailua." } },
+        { archivo: "ficha-diferencial.html", id: "diferencial", tema: "Protecciones", icono: "diferencial",
+          titulo: "Diferencial",
+          descripcion: "Protege a las personas: toroide, 30 mA, tipos y simulador.",
+          eu: { titulo: "Diferentziala", descripcion: "Pertsonak babesten ditu: toroidea, 30 mA, motak eta simulagailua." } },
         { archivo: "guardamotor.html", id: "guardamotor", tema: "Mando y protección de motores", icono: "magnetotermico",
           titulo: "Guardamotor",
           descripcion: "Protege el motor contra sobrecargas y cortocircuitos. Simulador de disparo y símbolo.",
@@ -81,7 +100,8 @@ self.CATALOGO = {
         },
         {
           archivo: "magnetotermico.html",
-          id: "magnetotermico",
+          id: "magnetotermico-sim",
+          oculta: true,
           titulo: "Magnetotérmico por dentro",
           tema: "Protecciones",
           descripcion: "Bimetal y bobina en acción: sobrecarga, cortocircuito y curvas de disparo B, C y D.",
@@ -90,7 +110,8 @@ self.CATALOGO = {
         },
         {
           archivo: "diferencial.html",
-          id: "diferencial",
+          id: "diferencial-sim",
+          oculta: true,
           titulo: "Diferencial por dentro",
           tema: "Protecciones",
           descripcion: "Toroide, relé y botón de test. Cómo detecta una fuga a tierra y por qué 30 mA.",
@@ -108,12 +129,43 @@ self.CATALOGO = {
       eu: { nombre: "Pneumatika", descripcion: "Aire konprimituaren erregulazio- eta agintze-elementuak." },
       temas_eu: {
         "Preparación del aire": "Airearen prestaketa",
-        "Mando por presión": "Presio bidezko agintea"
+        "Mando por presión": "Presio bidezko agintea",
+        "Magnitudes": "Magnitudeak",
+        "Elementos neumáticos": "Elementu neumatikoak"
       },
       simulaciones: [
+        { archivo: "magnitudes-neumaticas.html", id: "magnitudes-neumaticas", tema: "Magnitudes", icono: "manometro",
+          titulo: "Magnitudes neumáticas",
+          descripcion: "Presión, caudal, fuerza, temperatura y humedad.",
+          eu: { titulo: "Magnitude neumatikoak", descripcion: "Presioa, emaria, indarra, tenperatura eta hezetasuna." } },
+        { archivo: "compresor.html", id: "compresor", tema: "Elementos neumáticos", icono: "simulacion",
+          titulo: "Compresor",
+          descripcion: "Partes y simulador con depósito y presostato.",
+          eu: { titulo: "Konpresorea", descripcion: "Zatiak eta simulagailua depositoarekin eta presostatoarekin." } },
+        { archivo: "secadores.html", id: "secadores", tema: "Elementos neumáticos", icono: "simulacion",
+          titulo: "Secadores de aire",
+          descripcion: "Frigorífico, de adsorción y de membrana.",
+          eu: { titulo: "Lehorgailuak", descripcion: "Hozkailua, adsortziozkoa eta mintzazkoa." } },
+        { archivo: "regulador.html", id: "regulador", tema: "Elementos neumáticos", icono: "regulador",
+          titulo: "Regulador de presión",
+          descripcion: "Partes, características, símbolo y simulador.",
+          eu: { titulo: "Presio erreguladorea", descripcion: "Zatiak, ezaugarriak, sinboloa eta simulagailua." } },
+        { archivo: "lubricador.html", id: "lubricador", tema: "Elementos neumáticos", icono: "simulacion",
+          titulo: "Lubricador",
+          descripcion: "Efecto Venturi: regula el goteo de aceite.",
+          eu: { titulo: "Lubrikadorea", descripcion: "Venturi efektua: erregulatu olio-tantak." } },
+        { archivo: "tubos.html", id: "tubos", tema: "Elementos neumáticos", icono: "simulacion",
+          titulo: "Tubos neumáticos",
+          descripcion: "Diámetros, materiales y velocidad del aire.",
+          eu: { titulo: "Tutu neumatikoak", descripcion: "Diametroak, materialak eta airearen abiadura." } },
+        { archivo: "racores.html", id: "racores", tema: "Elementos neumáticos", icono: "simulacion",
+          titulo: "Racores",
+          descripcion: "Racor instantáneo: meter y sacar el tubo. Tipos.",
+          eu: { titulo: "Rakorrak", descripcion: "Berehalako rakorra: tutua sartu eta atera. Motak." } },
         {
           archivo: "regulador_presion.html",
-          id: "regulador",
+          id: "regulador-sim",
+          oculta: true,
           titulo: "Regulador de presión",
           tema: "Preparación del aire",
           descripcion: "El tornillo comprime el muelle y fija la presión de salida; el diafragma la mantiene aunque cambie el consumo.",

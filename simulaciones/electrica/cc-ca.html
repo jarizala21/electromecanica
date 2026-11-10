@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corriente continua vs corriente alterna</title>
+<meta name="description" content="Diferencias entre corriente continua y alterna, gráfica interactiva (amplitud, frecuencia, valor eficaz) y símbolos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.txt{font-size:10.5px;fill:#5d6382;font-weight:600}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Electricidad" data-eu="Elektrizitatea"></p>
+      <h1 data-es="Corriente continua vs corriente alterna" data-eu="Korronte zuzena vs korronte alternoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="rejilla">
+      <div class="card"><h2 data-es="Corriente continua (CC · DC)" data-eu="Korronte zuzena (KZ · DC)"></h2>
+        <p class="es">Los electrones van <b>siempre en el mismo sentido</b> y la tensión no cambia. Tiene polo <b>+</b> y polo <b>−</b>.</p>
+        <p class="eu">Elektroiak <b>beti noranzko berean</b> doaz eta tentsioa ez da aldatzen. <b>+</b> poloa eta <b>−</b> poloa ditu.</p>
+        <p class="es"><b>De dónde sale:</b> pilas, baterías, placas solares, fuentes de alimentación.</p><p class="eu"><b>Nondik dator:</b> pilak, bateriak, eguzki-plakak, elikadura-iturriak.</p>
+        <p class="es"><b>Dónde se usa:</b> electrónica, móviles, coches, automatismos a 24 V.</p><p class="eu"><b>Non erabiltzen da:</b> elektronika, mugikorrak, autoak, 24 V-ko automatismoak.</p></div>
+      <div class="card"><h2 data-es="Corriente alterna (CA · AC)" data-eu="Korronte alternoa (KA · AC)"></h2>
+        <p class="es">Los electrones <b>van y vienen</b>: la tensión cambia de sentido muchas veces por segundo siguiendo una onda (senoidal). En Europa, <b>50 veces por segundo (50 Hz)</b>.</p>
+        <p class="eu">Elektroiak <b>joan eta etorri</b> dabiltza: tentsioak noranzkoa aldatzen du segundoko askotan, uhin bati jarraituz (sinusoidala). Europan, <b>segundoko 50 aldiz (50 Hz)</b>.</p>
+        <p class="es"><b>De dónde sale:</b> centrales eléctricas (alternadores) y la red.</p><p class="eu"><b>Nondik dator:</b> zentral elektrikoak (alternadoreak) eta sarea.</p>
+        <p class="es"><b>Dónde se usa:</b> enchufes de casa (230 V), motores y máquinas de taller (400 V).</p><p class="eu"><b>Non erabiltzen da:</b> etxeko entxufeak (230 V), tailerreko motorrak eta makinak (400 V).</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="¿Por qué la red es alterna?" data-eu="Zergatik da sarea alternoa?"></h2>
+      <p class="es">Porque con un <b>transformador</b> se sube y se baja la tensión muy fácilmente, y así se lleva la energía lejos perdiendo poco. Los transformadores solo funcionan con alterna.</p>
+      <p class="eu"><b>Transformadore</b> batekin tentsioa oso erraz igo eta jaisten delako, eta horrela energia urrutira eramaten da gutxi galduz. Transformadoreek korronte alternoarekin bakarrik funtzionatzen dute.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="grafikoa" data-es="Gráfica" data-eu="Grafikoa" hidden>
+    <div class="chips" id="modo"><button data-m="cc" data-es="Continua" data-eu="Zuzena"></button><button data-m="ca" aria-pressed="true" data-es="Alterna" data-eu="Alternoa"></button></div>
+    <figure class="fig"><svg id="osc" viewBox="0 0 340 200" role="img" aria-label="Gráfica de la tensión"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Tensión" data-eu="Tentsioa"></span><output id="u-t"></output></label><input id="u" type="range" min="12" max="400" step="1" value="230"></div>
+      <div class="deslizador" id="caja-f"><label><span data-es="Frecuencia" data-eu="Maiztasuna"></span><output id="f-t"></output></label><input id="f" type="range" min="10" max="100" step="5" value="50"></div>
+    </div>
+    <div class="lectura-g" id="lect"></div>
+    <div class="card" id="exp"></div>
+  </section>
+
+  <section class="panel" data-tab="sinboloak" data-es="Símbolos" data-eu="Sinboloak" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M30 38h60"/><path class="s-l" d="M30 54h14M53 54h14M76 54h14"/></svg><b data-es="Corriente continua" data-eu="Korronte zuzena"></b><small>DC · CC · KZ</small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M24 45c12-24 24-24 36 0s24 24 36 0"/></svg><b data-es="Corriente alterna" data-eu="Korronte alternoa"></b><small>AC · CA · KA</small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><path class="s-l" d="M10 45h42M68 45h42M52 22v46"/><path d="M68 32v26" stroke="#242d5f" stroke-width="6"/></svg><b data-es="Pila / batería" data-eu="Pila / bateria"></b></div>
+      <div class="simbolo"><svg viewBox="0 0 120 90"><circle class="s-l" cx="60" cy="45" r="24"/><path class="s-l" d="M46 45c5-10 9-10 14 0s9 10 14 0M10 45h26M84 45h26"/></svg><b data-es="Generador de alterna" data-eu="Korronte alternoko sorgailua"></b></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var modo = "ca", t0 = performance.now();
+  function n(v, d){ return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toLocaleString("es-ES"); }
+  function dibujar(t){
+    var U = +$("u").value, f = +$("f").value, ca = modo === "ca", Vmax = ca ? U * Math.SQRT2 : U, y0 = 100, k = 80 / Math.max(Vmax * 1.05, 20);
+    var s = '<rect x="30" y="10" width="300" height="180" fill="#fbfcfe" stroke="#d0d6db"/>';
+    for (var gx = 30; gx <= 330; gx += 30) s += '<path d="M' + gx + ' 10v180" stroke="#eceff3"/>';
+    for (var gy = 10; gy <= 190; gy += 30) s += '<path d="M30 ' + gy + 'h300" stroke="#eceff3"/>';
+    s += '<path d="M30 100h300" stroke="#8d95a3" stroke-width="1.4"/><text class="txt" x="4" y="104">0 V</text><text class="txt" x="300" y="198">t</text>';
+    var desp = ((t - t0) / 1000) * 0.3, d = "";
+    for (var x = 0; x <= 300; x += 2) {
+      var tt = x / 300 * 0.06 + desp * 0.02, v = ca ? Vmax * Math.sin(2 * Math.PI * f * tt) : Vmax;
+      d += (x ? "L" : "M") + (30 + x) + " " + (y0 - v * k);
+    }
+    s += '<path d="' + d + '" stroke="#f39200" stroke-width="3" fill="none"/>';
+    if (ca) {
+      s += '<path d="M30 ' + (y0 - Vmax * k) + 'h300" stroke="#c62f2f" stroke-dasharray="4 4"/><text class="txt" x="34" y="' + (y0 - Vmax * k - 4) + '" style="fill:#c62f2f">Vmax</text>';
+      s += '<path d="M30 ' + (y0 - U * k) + 'h300" stroke="#1f8a4c" stroke-dasharray="4 4"/><text class="txt" x="34" y="' + (y0 - U * k + 12) + '" style="fill:#1f8a4c">Vef</text>';
+      var per = 300 / (0.06 * f);
+      if (per < 280) s += '<path d="M60 182h' + per + '" stroke="#242d5f" stroke-width="1.5"/><path d="M60 177v10M' + (60 + per) + ' 177v10" stroke="#242d5f"/><text class="txt" x="' + (60 + per / 2) + '" y="178" text-anchor="middle" style="fill:#242d5f">T</text>';
+    }
+    s += '<text class="txt" x="326" y="22" text-anchor="end">' + T("6 ms por cuadro", "6 ms lauki bakoitzeko") + '</text>';
+    $("osc").innerHTML = s;
+    requestAnimationFrame(dibujar);
+  }
+  function textos(){
+    var U = +$("u").value, f = +$("f").value, ca = modo === "ca";
+    $("u-t").textContent = U + " V"; $("f-t").textContent = f + " Hz";
+    $("caja-f").hidden = !ca;
+    [].forEach.call($("modo").children, function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-m") === modo ? "true" : "false"); });
+    $("lect").innerHTML = ca
+      ? '<div><small>' + T("Valor eficaz", "Balio eraginkorra") + '</small><b>' + U + ' V</b></div><div><small>' + T("Valor máximo", "Balio maximoa") + '</small><b>' + n(U * Math.SQRT2, 0) + ' V</b></div><div><small>' + T("Periodo", "Periodoa") + '</small><b>' + n(1000 / f, 1) + ' ms</b></div><div><small>' + T("Frecuencia", "Maiztasuna") + '</small><b>' + f + ' Hz</b></div>'
+      : '<div><small>' + T("Tensión", "Tentsioa") + '</small><b>' + U + ' V</b></div><div><small>' + T("Sentido", "Noranzkoa") + '</small><b>' + T("siempre igual", "beti berdina") + '</b></div>';
+    $("exp").innerHTML = ca
+      ? "<p style='margin:0'>" + T("En alterna la tensión sube y baja. El voltímetro marca el <b>valor eficaz</b> (230 V en casa), pero los picos llegan a <b>Vmax = Vef × √2 ≈ 325 V</b>. La <b>frecuencia</b> es cuántas ondas hay por segundo; el <b>periodo</b> lo que dura una.", "Korronte alternoan tentsioa igo eta jaitsi egiten da. Voltmetroak <b>balio eraginkorra</b> markatzen du (230 V etxean), baina gailurrak <b>Vmax = Vef × √2 ≈ 325 V</b>-ra iristen dira. <b>Maiztasuna</b> segundoko zenbat uhin dauden da; <b>periodoa</b> uhin batek irauten duena.") + "</p>"
+      : "<p style='margin:0'>" + T("En continua la gráfica es una <b>línea recta</b>: la tensión no cambia con el tiempo.", "Korronte zuzenean grafikoa <b>lerro zuzena</b> da: tentsioa ez da denborarekin aldatzen.") + "</p>";
+  }
+  $("modo").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; modo = b.getAttribute("data-m"); if (modo === "cc" && +$("u").value > 48) $("u").value = 24; if (modo === "ca") $("u").value = 230; textos(); });
+  $("u").addEventListener("input", textos); $("f").addEventListener("input", textos);
+  alCambiarIdioma(textos);
+  requestAnimationFrame(dibujar);
+})();
+</script>
+</body>
+</html>
