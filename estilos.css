@@ -58,7 +58,6 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 .eus-nombre{margin:0 0 1px;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--naranja-osc)}
 .titular h1{margin:0;font-size:clamp(27px,7.6vw,36px);font-weight:700;line-height:1.08;letter-spacing:-.015em;color:var(--marino)}
 .bienvenida p{margin:0;font-size:clamp(13.5px,3.7vw,15.5px);line-height:1.5}
-.bienvenida p[lang="es"]{color:var(--muted)}
 .idioma{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;line-height:1;padding:4px 6px 3px;border-radius:6px;
   margin-right:8px;vertical-align:2px;background:var(--marino);color:#fff}
 p[lang="es"] .idioma{background:var(--naranja-soft);color:var(--naranja-osc)}
@@ -71,12 +70,11 @@ p[lang="es"] .idioma{background:var(--naranja-soft);color:var(--naranja-osc)}
 .entrar-ico svg{width:22px;height:22px}
 .entrar:hover .entrar-ico{transform:translateX(2px)}
 
-.creditos{margin-top:auto;display:grid;gap:9px;color:var(--muted);font-size:11.5px;line-height:1.45}
+.creditos{margin-top:auto;display:grid;gap:6px;color:var(--muted);font-size:10.5px;line-height:1.4}
 .creditos p{margin:0}
-.licencia{display:flex;gap:10px;align-items:flex-start}
-.licencia a{flex:none;display:block;border-radius:4px}
-.licencia img{display:block;width:86px;height:auto;margin-top:2px}
-.licencia p{font-size:10.5px;line-height:1.4}
+.licencia{font-size:9.5px}
+.licencia a{float:left;margin:1px 8px 0 0;border-radius:3px}
+.licencia img{display:block;width:66px;height:auto}
 
 /* =================== PANTALLAS (áreas y lista) =================== */
 .pantalla{display:flex;flex-direction:column;width:100%;max-width:1200px;margin:0 auto}
@@ -115,7 +113,7 @@ p[lang="es"] .idioma{background:var(--naranja-soft);color:var(--naranja-osc)}
   background:linear-gradient(135deg,var(--marino-2) 0%,var(--marino) 55%,var(--marino-3) 100%);box-shadow:var(--sombra);
   container-type:size;transition:transform .18s ease,box-shadow .18s ease}
 .area:hover{transform:translateY(-2px);box-shadow:0 22px 40px -20px rgba(36,45,95,.6)}
-.area-texto{position:relative;z-index:2;width:57%;display:flex;flex-direction:column;gap:3px;padding:14px 4px 14px 20px}
+.area-texto{position:relative;z-index:2;width:61%;display:flex;flex-direction:column;gap:3px;padding:14px 4px 14px 20px}
 .area-eus{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--oro-claro)}
 .area h3{margin:0;font-size:24px;font-size:clamp(19px,14.5cqh,28px);font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .area-desc{margin:2px 0 0;font-size:13px;font-size:clamp(12px,8.4cqh,15px);line-height:1.38;color:rgba(255,255,255,.84);
@@ -127,7 +125,7 @@ p[lang="es"] .idioma{background:var(--naranja-soft);color:var(--naranja-osc)}
 .flecha svg{width:17px;height:17px}
 .area:hover .flecha{transform:translateX(3px)}
 
-@container (max-height:165px){
+@container (max-height:150px){
   .area-desc{-webkit-line-clamp:2}
   .area-pie{margin-top:5px}
 }
@@ -135,7 +133,7 @@ p[lang="es"] .idioma{background:var(--naranja-soft);color:var(--naranja-osc)}
   .area-desc{display:none}
 }
 /* Foto del área sobre un disco naranja */
-.area-foto{position:absolute;z-index:1;top:0;bottom:0;right:0;width:44%;display:grid;place-items:center}
+.area-foto{position:absolute;z-index:1;top:0;bottom:0;right:0;width:41%;display:grid;place-items:center}
 .disco{position:absolute;border-radius:50%;width:130px;height:130px;width:min(40cqw,80cqh);height:min(40cqw,80cqh);
   background:radial-gradient(circle at 34% 30%,var(--oro-claro) 0%,var(--naranja-2) 30%,var(--naranja) 74%);
   box-shadow:0 0 0 10px rgba(243,146,0,.16),0 0 0 22px rgba(243,146,0,.07)}

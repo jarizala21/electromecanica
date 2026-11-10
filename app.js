@@ -122,7 +122,6 @@
       return '<a class="area" href="#' + esc(sec.id) + '">' +
         '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +
         '<span class="area-texto">' +
-          (sec.euskera ? '<span class="area-eus" lang="eu">' + esc(sec.euskera) + '</span>' : '') +
           '<h3>' + esc(sec.nombre) + '</h3>' +
           (sec.descripcion ? '<span class="area-desc">' + esc(sec.descripcion) + '</span>' : '') +
           '<span class="area-pie"><span class="pastilla">' + plural(sec.simulaciones.length) + '</span>' +
@@ -199,8 +198,6 @@
   }
   function verSeccion(sec, mover){
     $("sec-barra").textContent = sec.nombre;
-    $("sec-eus").textContent = sec.euskera || "";
-    $("sec-eus").hidden = !sec.euskera;
     $("sec-nombre").textContent = sec.nombre;
     $("sec-desc").textContent = sec.descripcion || "";
     $("sec-desc").hidden = !sec.descripcion;
