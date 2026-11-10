@@ -14,7 +14,8 @@
      carpeta      nombre de la carpeta dentro de simulaciones/ (sin tildes
                   ni espacios). También es su enlace directo: #carpeta
      nombre       lo que se ve en la app
-     euskera      nombre en euskera (sale pequeño encima del nombre)
+     eu           nombre y frase en euskera: { nombre: "…", descripcion: "…" }
+     temas_eu     traducción de los apartados: { "Engranajes": "Engranajeak", … }
      descripcion  una frase corta
      imagen       foto del botón del área, con fondo transparente
                   (por ejemplo imagenes/area-electrica.webp)
@@ -25,6 +26,8 @@
      id           enlace directo (#id). Si no se pone, se usa el nombre
                   del archivo
      titulo, tema, descripcion
+     eu           título y descripción en euskera: { titulo: "…", descripcion: "…" }
+                  (lo que no esté traducido sale en castellano)
      tema         apartado dentro de la sección (las que comparten tema
                   se muestran juntas bajo ese título)
      icono        magnetotermico · diferencial · conmutada · cruzamiento ·
@@ -40,10 +43,14 @@ self.CATALOGO = {
     {
       carpeta: "electrica",
       nombre: "Electricidad",
-      euskera: "Elektrizitatea",
       descripcion: "Elementos de seguridad, control y actuadores eléctricos.",
       imagen: "imagenes/area-electrica.webp",
       icono: "lampara",
+      eu: { nombre: "Elektrizitatea", descripcion: "Segurtasun- eta kontrol-elementuak eta eragingailuak." },
+      temas_eu: {
+        "Instalaciones": "Instalazioak",
+        "Protecciones": "Babesak"
+      },
       simulaciones: [
         {
           archivo: "conmutada-2-bombillas.html",
@@ -51,7 +58,8 @@ self.CATALOGO = {
           titulo: "Conmutada con 2 bombillas",
           tema: "Instalaciones",
           descripcion: "Dos conmutadores encienden las mismas bombillas desde dos puntos, como en un pasillo.",
-          icono: "conmutada"
+          icono: "conmutada",
+          eu: { titulo: "Konmutatua 2 bonbillarekin", descripcion: "Bi konmutadorek bonbilla berberak pizten dituzte bi lekutatik, korridore batean bezala." }
         },
         {
           archivo: "cruzamiento-2-bombillas.html",
@@ -59,7 +67,8 @@ self.CATALOGO = {
           titulo: "Conmutada con cruzamiento",
           tema: "Instalaciones",
           descripcion: "Un cruzamiento entre los dos conmutadores permite mandar las bombillas desde tres puntos.",
-          icono: "cruzamiento"
+          icono: "cruzamiento",
+          eu: { titulo: "Konmutatua gurutzagailuarekin", descripcion: "Bi konmutadoreen arteko gurutzagailu bati esker, bonbillak hiru lekutatik agin daitezke." }
         },
         {
           archivo: "magnetotermico.html",
@@ -67,7 +76,8 @@ self.CATALOGO = {
           titulo: "Magnetotérmico por dentro",
           tema: "Protecciones",
           descripcion: "Bimetal y bobina en acción: sobrecarga, cortocircuito y curvas de disparo B, C y D.",
-          icono: "magnetotermico"
+          icono: "magnetotermico",
+          eu: { titulo: "Magnetotermikoa barrutik", descripcion: "Bimetala eta bobina lanean: gainkarga, zirkuitulaburra eta B, C eta D etete-kurbak." }
         },
         {
           archivo: "diferencial.html",
@@ -75,17 +85,22 @@ self.CATALOGO = {
           titulo: "Diferencial por dentro",
           tema: "Protecciones",
           descripcion: "Toroide, relé y botón de test. Cómo detecta una fuga a tierra y por qué 30 mA.",
-          icono: "diferencial"
+          icono: "diferencial",
+          eu: { titulo: "Diferentziala barrutik", descripcion: "Toroidea, errelea eta proba-botoia. Lurrerako ihes bat nola hautematen duen eta zergatik 30 mA." }
         }
       ]
     },
     {
       carpeta: "neumatica",
       nombre: "Neumática",
-      euskera: "Pneumatika",
       descripcion: "Elementos de regulación y mando del aire comprimido.",
       imagen: "imagenes/area-neumatica.webp",
       icono: "manometro",
+      eu: { nombre: "Pneumatika", descripcion: "Aire konprimituaren erregulazio- eta agintze-elementuak." },
+      temas_eu: {
+        "Preparación del aire": "Airearen prestaketa",
+        "Mando por presión": "Presio bidezko agintea"
+      },
       simulaciones: [
         {
           archivo: "regulador_presion.html",
@@ -93,7 +108,8 @@ self.CATALOGO = {
           titulo: "Regulador de presión",
           tema: "Preparación del aire",
           descripcion: "El tornillo comprime el muelle y fija la presión de salida; el diafragma la mantiene aunque cambie el consumo.",
-          icono: "regulador"
+          icono: "regulador",
+          eu: { titulo: "Presio-erregulagailua", descripcion: "Torlojuak malgukia estutzen du eta irteerako presioa finkatzen du; diafragmak mantendu egiten du, kontsumoa aldatu arren." }
         },
         {
           archivo: "presostato_interactivo.html",
@@ -101,85 +117,116 @@ self.CATALOGO = {
           titulo: "Presostato",
           tema: "Mando por presión",
           descripcion: "Al llegar a la presión de corte, la membrana conmuta el contacto NA/NC y se enciende la bombilla.",
-          icono: "presostato"
+          icono: "presostato",
+          eu: { titulo: "Presostatoa", descripcion: "Ebaketa-presiora iristean, mintzak NA/NC kontaktua kommutatzen du eta bonbilla pizten da." }
         }
       ]
     },
     {
       carpeta: "mecanica",
       nombre: "Mecánica",
-      euskera: "Mekanika",
       descripcion: "Elementos de guiado, unión y transmisión del movimiento.",
       imagen: "imagenes/area-mecanica.webp",
       icono: "engranaje",
+      eu: { nombre: "Mekanika", descripcion: "Gidatze-, lotura- eta transmisio-elementuak." },
+      temas_eu: {
+        "Guías de deslizamiento": "Irristatze-gidak",
+        "Acoplamientos flexibles": "Akoplamendu malguak",
+        "Embragues": "Enbrageak",
+        "Transformadores de movimiento": "Mugimendu-eraldatzaileak",
+        "Engranajes": "Engranajeak",
+        "Poleas, correas y cadenas": "Poleak, uhalak eta kateak"
+      },
       // El campo "tema" agrupa las simulaciones en apartados dentro de la sección.
       simulaciones: [
         { archivo: "guia-redonda.html", id: "guia-redonda", tema: "Guías de deslizamiento", icono: "guia",
           titulo: "Guía redonda",
-          descripcion: "Un casquillo desliza sobre un eje cilíndrico rectificado." },
+          descripcion: "Un casquillo desliza sobre un eje cilíndrico rectificado.",
+          eu: { titulo: "Gida biribila", descripcion: "Kasketa bat ardatz zilindriko artezu baten gainean irristatzen da." } },
         { archivo: "guia-plana.html", id: "guia-plana", tema: "Guías de deslizamiento", icono: "guia",
           titulo: "Guía plana",
-          descripcion: "El carro apoya en superficies planas; las regletas evitan que se levante." },
+          descripcion: "El carro apoya en superficies planas; las regletas evitan que se levante.",
+          eu: { titulo: "Gida laua", descripcion: "Gurdia gainazal lauen gainean bermatzen da; erregletek altxatzea eragozten dute." } },
         { archivo: "guia-prismatica.html", id: "guia-prismatica", tema: "Guías de deslizamiento", icono: "guia",
           titulo: "Guía prismática",
-          descripcion: "Guía en V: el carro se centra al apoyar en los dos flancos." },
+          descripcion: "Guía en V: el carro se centra al apoyar en los dos flancos.",
+          eu: { titulo: "Gida prismatikoa", descripcion: "V formako gida: gurdia zentratu egiten da bi hegaletan bermatzean." } },
         { archivo: "guia-cola-de-milano.html", id: "guia-cola-de-milano", tema: "Guías de deslizamiento", icono: "guia",
           titulo: "Guía de cola de milano",
-          descripcion: "Perfil trapecial con regleta cónica para ajustar el juego." },
+          descripcion: "Perfil trapecial con regleta cónica para ajustar el juego.",
+          eu: { titulo: "Enara-buztan gida", descripcion: "Profil trapezoidala, jokoa doitzeko erregleta konikoarekin." } },
         { archivo: "acoplamiento-oldham.html", id: "acoplamiento-oldham", tema: "Acoplamientos flexibles", icono: "acoplamiento",
           titulo: "Acoplamiento Oldham",
-          descripcion: "Une ejes paralelos desplazados con un disco de lengüetas cruzadas." },
+          descripcion: "Une ejes paralelos desplazados con un disco de lengüetas cruzadas.",
+          eu: { titulo: "Oldham akoplamendua", descripcion: "Lerrokatuta ez dauden ardatz paraleloak lotzen ditu, mihi gurutzatuko disko baten bidez." } },
         { archivo: "acoplamiento-jaw.html", id: "acoplamiento-jaw", tema: "Acoplamientos flexibles", icono: "acoplamiento",
           titulo: "Acoplamiento de garras (Jaw)",
-          descripcion: "Dos cubos con garras y una araña elástica entre ellas." },
+          descripcion: "Dos cubos con garras y una araña elástica entre ellas.",
+          eu: { titulo: "Atzapar-akoplamendua (Jaw)", descripcion: "Atzaparrak dituzten bi naba eta haien artean armiarma elastiko bat." } },
         { archivo: "acoplamiento-fuelle.html", id: "acoplamiento-fuelle", tema: "Acoplamientos flexibles", icono: "acoplamiento",
           titulo: "Acoplamiento de fuelle",
-          descripcion: "Flexible a flexión y rígido a torsión: sin holgura." },
+          descripcion: "Flexible a flexión y rígido a torsión: sin holgura.",
+          eu: { titulo: "Hauspo-akoplamendua", descripcion: "Malgua flexioan eta zurruna bihurduran: jokorik gabe." } },
         { archivo: "cardan.html", id: "cardan", tema: "Acoplamientos flexibles", icono: "cardan",
           titulo: "Junta cardán",
-          descripcion: "Transmite el giro entre ejes que forman un ángulo." },
+          descripcion: "Transmite el giro entre ejes que forman un ángulo.",
+          eu: { titulo: "Kardan-juntura", descripcion: "Angelu bat osatzen duten ardatzen artean transmititzen du biraketa." } },
         { archivo: "embrague-dientes.html", id: "embrague-dientes", tema: "Embragues", icono: "embrague",
           titulo: "Embrague de dientes",
-          descripcion: "Dientes frontales que encajan para unir dos ejes." },
+          descripcion: "Dientes frontales que encajan para unir dos ejes.",
+          eu: { titulo: "Hortz-enbragea", descripcion: "Aurrealdeko hortzak elkarri txertatzen zaizkio bi ardatz lotzeko." } },
         { archivo: "embrague-disco.html", id: "embrague-disco", tema: "Embragues", icono: "embrague",
           titulo: "Embrague de disco",
-          descripcion: "El disco transmite el giro por rozamiento entre volante y plato." },
+          descripcion: "El disco transmite el giro por rozamiento entre volante y plato.",
+          eu: { titulo: "Disko-enbragea", descripcion: "Diskoak marruskaduraz transmititzen du biraketa bolantearen eta platerraren artean." } },
         { archivo: "biela-manivela.html", id: "biela-manivela", tema: "Transformadores de movimiento", icono: "biela",
           titulo: "Biela-manivela (cigüeñal)",
-          descripcion: "Convierte el giro en vaivén del pistón, y al revés." },
+          descripcion: "Convierte el giro en vaivén del pistón, y al revés.",
+          eu: { titulo: "Biela-birabarkia (birabarki-ardatza)", descripcion: "Biraketa pistoiaren joan-etorri bihurtzen du, eta alderantziz." } },
         { archivo: "pinon-cremallera.html", id: "pinon-cremallera", tema: "Transformadores de movimiento", icono: "cremallera",
           titulo: "Piñón y cremallera",
-          descripcion: "El giro del piñón se convierte en desplazamiento rectilíneo de la cremallera." },
+          descripcion: "El giro del piñón se convierte en desplazamiento rectilíneo de la cremallera.",
+          eu: { titulo: "Pinoia eta kremailera", descripcion: "Pinoiaren biraketa kremaileraren desplazamendu zuzen bihurtzen da." } },
         { archivo: "levas.html", id: "levas", tema: "Transformadores de movimiento", icono: "leva",
           titulo: "Levas: tipos",
-          descripcion: "Cuatro levas con su seguidor y la gráfica de su movimiento." },
+          descripcion: "Cuatro levas con su seguidor y la gráfica de su movimiento.",
+          eu: { titulo: "Espekak: motak", descripcion: "Lau espeka, bakoitza bere jarraitzailearekin eta mugimenduaren grafikoarekin." } },
         { archivo: "engranajes-rectos.html", id: "engranajes-rectos", tema: "Engranajes", icono: "engranaje",
           titulo: "Dientes rectos",
-          descripcion: "Ejes paralelos; giran en sentidos contrarios. Con representación normalizada." },
+          descripcion: "Ejes paralelos; giran en sentidos contrarios. Con representación normalizada.",
+          eu: { titulo: "Hortz zuzenak", descripcion: "Ardatz paraleloak; aurkako noranzkoan biratzen dute. Irudikapen normalizatuarekin." } },
         { archivo: "engranajes-helicoidales.html", id: "engranajes-helicoidales", tema: "Engranajes", icono: "engranaje",
           titulo: "Dientes helicoidales",
-          descripcion: "Dientes inclinados: más silenciosos. Con representación normalizada." },
+          descripcion: "Dientes inclinados: más silenciosos. Con representación normalizada.",
+          eu: { titulo: "Hortz helikoidalak", descripcion: "Hortz inklinatuak: isilagoak. Irudikapen normalizatuarekin." } },
         { archivo: "engranajes-conicos.html", id: "engranajes-conicos", tema: "Engranajes", icono: "engranaje",
           titulo: "Cónicos",
-          descripcion: "Ejes que se cortan, normalmente a 90°. Con representación normalizada." },
+          descripcion: "Ejes que se cortan, normalmente a 90°. Con representación normalizada.",
+          eu: { titulo: "Konikoak", descripcion: "Elkar ebakitzen duten ardatzak, normalean 90°-an. Irudikapen normalizatuarekin." } },
         { archivo: "tornillo-sin-fin.html", id: "tornillo-sin-fin", tema: "Engranajes", icono: "sinfin",
           titulo: "Tornillo sin fin y corona",
-          descripcion: "Gran reducción entre ejes que se cruzan. Con representación normalizada." },
+          descripcion: "Gran reducción entre ejes que se cruzan. Con representación normalizada.",
+          eu: { titulo: "Torloju amaigabea eta koroa", descripcion: "Murrizketa handia gurutzatzen diren ardatzen artean. Irudikapen normalizatuarekin." } },
         { archivo: "dentado-interior.html", id: "dentado-interior", tema: "Engranajes", icono: "engranaje",
           titulo: "Dentado interior",
-          descripcion: "El piñón engrana dentro de la corona. Con representación normalizada." },
+          descripcion: "El piñón engrana dentro de la corona. Con representación normalizada.",
+          eu: { titulo: "Barne-hortzeria", descripcion: "Pinoia koroaren barruan engranatzen da. Irudikapen normalizatuarekin." } },
         { archivo: "pinon-cremallera.html", id: "engranaje-pinon-cremallera", tema: "Engranajes", icono: "cremallera",
           titulo: "Piñón y cremallera",
-          descripcion: "Animación y representación normalizada." },
+          descripcion: "Animación y representación normalizada.",
+          eu: { titulo: "Pinoia eta kremailera", descripcion: "Animazioa eta irudikapen normalizatua." } },
         { archivo: "formas-poleas.html", id: "formas-poleas", tema: "Poleas, correas y cadenas", icono: "polea",
           titulo: "Poleas: formas",
-          descripcion: "La forma de la garganta según la correa." },
+          descripcion: "La forma de la garganta según la correa.",
+          eu: { titulo: "Poleak: formak", descripcion: "Zirrikituaren forma uhalaren araberakoa da." } },
         { archivo: "tipos-correas.html", id: "tipos-correas", tema: "Poleas, correas y cadenas", icono: "polea",
           titulo: "Correas: tipos",
-          descripcion: "Plana, trapezoidal, poli-V, dentada y redonda." },
+          descripcion: "Plana, trapezoidal, poli-V, dentada y redonda.",
+          eu: { titulo: "Uhalak: motak", descripcion: "Laua, trapezoidala, poli-V, horzduna eta biribila." } },
         { archivo: "tipos-cadenas.html", id: "tipos-cadenas", tema: "Poleas, correas y cadenas", icono: "cadena",
           titulo: "Cadenas: tipos",
-          descripcion: "Partes de la cadena de rodillos y tipos de cadena." }
+          descripcion: "Partes de la cadena de rodillos y tipos de cadena.",
+          eu: { titulo: "Kateak: motak", descripcion: "Arrabol-katearen atalak eta kate motak." } }
       ]
     }
   ]

@@ -38,7 +38,54 @@
   function slug(s){ return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "x"; }
   function sinExt(f){ return String(f || "").replace(/\.html?$/i, ""); }
   function bonito(s){ s = String(s || "").replace(/[-_]+/g, " ").trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
-  function plural(n){ return n + (n === 1 ? " simulación" : " simulaciones"); }
+  /* ---------- idioma de los menús (las simulaciones siguen en su idioma) ---------- */
+  var TEXTOS = {
+    es: { app: "Electromecánica", elige: "Elige un área", areas: "Áreas", buscar: "Buscar simulación", instalar: "Instalar la app",
+          portada: "Volver a la portada", volverAreas: "Volver a las áreas", volverA: "Volver a ", cerrar: "Cerrar aviso",
+          anterior: "Simulación anterior", siguiente: "Simulación siguiente", reiniciar: "Reiniciar", completa: "Pantalla completa",
+          cargando: "Cargando…", ant: "Anterior", sig: "Siguiente",
+          sim: function(n){ return n + (n === 1 ? " simulación" : " simulaciones"); },
+          res: function(n){ return n + (n === 1 ? " resultado" : " resultados"); },
+          escribe: function(n){ return "Escribe para buscar entre " + n + " simulaciones."; },
+          nada: function(t){ return "Ninguna simulación coincide con «" + t + "»."; },
+          pos: function(i, n){ return i + " de " + n; } },
+    eu: { app: "Elektromekanika", elige: "Aukeratu arlo bat", areas: "Arloak", buscar: "Bilatu simulazioa", instalar: "Instalatu aplikazioa",
+          portada: "Itzuli azalera", volverAreas: "Itzuli arloetara", volverA: "Itzuli: ", cerrar: "Itxi oharra",
+          anterior: "Aurreko simulazioa", siguiente: "Hurrengo simulazioa", reiniciar: "Berrabiarazi", completa: "Pantaila osoa",
+          cargando: "Kargatzen…", ant: "Aurrekoa", sig: "Hurrengoa",
+          sim: function(n){ return n === 1 ? "simulazio 1" : n + " simulazio"; },
+          res: function(n){ return n === 1 ? "emaitza 1" : n + " emaitza"; },
+          escribe: function(n){ return "Idatzi bilatzeko (" + n + " simulazio daude)."; },
+          nada: function(t){ return "Ez dago «" + t + "» bilaketarekin bat datorren simulaziorik."; },
+          pos: function(i, n){ return i + " / " + n; } }
+  };
+  var CLAVE_IDIOMA = "electromecanica:idioma";
+  var IDIOMA = "es";
+  try { IDIOMA = localStorage.getItem(CLAVE_IDIOMA) === "eu" ? "eu" : "es"; } catch (e) {}
+  function L(){ return TEXTOS[IDIOMA]; }
+  function plural(n){ return L().sim(n); }
+  // Textos del catálogo en el idioma elegido (si falta la traducción, en castellano)
+  function nombre(sec){ return (IDIOMA === "eu" && sec.eu.nombre) || sec.nombre; }
+  function frase(sec){ return (IDIOMA === "eu" && sec.eu.descripcion) || sec.descripcion; }
+  function titulo(sim){ return (IDIOMA === "eu" && sim.eu.titulo) || sim.titulo; }
+  function desc(sim){ return (IDIOMA === "eu" && sim.eu.descripcion) || sim.descripcion; }
+  function tema(sec, t){ return (IDIOMA === "eu" && sec.temasEu[t]) || t; }
+  function traducirPagina(){
+    document.documentElement.lang = IDIOMA;
+    document.title = L().app;
+    [].forEach.call(document.querySelectorAll("[data-t]"), function(el){ el.textContent = L()[el.getAttribute("data-t")]; });
+    [].forEach.call(document.querySelectorAll("[data-t-aria]"), function(el){
+      var t = L()[el.getAttribute("data-t-aria")];
+      el.setAttribute("aria-label", t);
+      if (el.hasAttribute("title")) el.title = t;
+    });
+    [].forEach.call(document.querySelectorAll("[data-t-ph]"), function(el){ el.placeholder = L()[el.getAttribute("data-t-ph")]; });
+  }
+  function ponerIdioma(id){
+    IDIOMA = id === "eu" ? "eu" : "es";
+    try { localStorage.setItem(CLAVE_IDIOMA, IDIOMA); } catch (e) {}
+    traducirPagina(); pintarAreas();
+  }
   function glifo(n){
     return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       (GLIFOS[n] || GLIFOS.simulacion) + '</svg>';
@@ -56,11 +103,11 @@
     var secs = ((cat && cat.secciones) || []).map(function(s){
       var carpeta = s.carpeta || s.id;
       return {
-        id: s.id || carpeta, carpeta: carpeta, nombre: s.nombre || bonito(carpeta), euskera: s.euskera || "",
+        id: s.id || carpeta, carpeta: carpeta, nombre: s.nombre || bonito(carpeta), eu: s.eu || {}, temasEu: s.temas_eu || {},
         descripcion: s.descripcion || "", imagen: s.imagen || "", icono: s.icono || "simulacion",
         simulaciones: (s.simulaciones || []).map(function(x){
           return { id: x.id, archivo: x.archivo, titulo: x.titulo || bonito(sinExt(x.archivo)), tema: x.tema || "",
-                   descripcion: x.descripcion || "", icono: x.icono || "simulacion", miniatura: x.miniatura || "" };
+                   descripcion: x.descripcion || "", icono: x.icono || "simulacion", miniatura: x.miniatura || "", eu: x.eu || {} };
         })
       };
     });
@@ -78,13 +125,13 @@
         var s = null;
         secs.forEach(function(z){ if (z.carpeta === c.carpeta) s = z; });
         if (!s) {
-          s = { id: c.carpeta, carpeta: c.carpeta, nombre: bonito(c.carpeta), euskera: "", descripcion: "", imagen: "", icono: "simulacion", simulaciones: [] };
+          s = { id: c.carpeta, carpeta: c.carpeta, nombre: bonito(c.carpeta), eu: {}, temasEu: {}, descripcion: "", imagen: "", icono: "simulacion", simulaciones: [] };
           secs.push(s);
         }
         (c.archivos || []).forEach(function(f){
           if (s.simulaciones.some(function(x){ return x.archivo === f.archivo; })) return;
           s.simulaciones.push({ id: null, archivo: f.archivo, titulo: f.titulo || bonito(sinExt(f.archivo)), tema: "",
-                                descripcion: f.descripcion || "", icono: "simulacion", miniatura: "" });
+                                descripcion: f.descripcion || "", icono: "simulacion", miniatura: "", eu: {} });
         });
       });
       secs = secs.filter(function(s){ return s.simulaciones.length > 0; });
@@ -122,8 +169,8 @@
       return '<a class="area" href="#' + esc(sec.id) + '">' +
         '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +
         '<span class="area-texto">' +
-          '<h3>' + esc(sec.nombre) + '</h3>' +
-          (sec.descripcion ? '<span class="area-desc">' + esc(sec.descripcion) + '</span>' : '') +
+          '<h3>' + esc(nombre(sec)) + '</h3>' +
+          (frase(sec) ? '<span class="area-desc">' + esc(frase(sec)) + '</span>' : '') +
           '<span class="area-pie"><span class="pastilla">' + plural(sec.simulaciones.length) + '</span>' +
           '<span class="flecha">' + FLECHA + '</span></span>' +
         '</span></a>';
@@ -139,14 +186,15 @@
   function agrupada(sec){ return sec.simulaciones.length > 6 && temas(sec).length > 1; }
 
   function tarjeta(e, conSeccion, sinTema){
-    var chip = conSeccion ? e.sec.nombre + (e.sim.tema ? " · " + e.sim.tema : "") : (sinTema ? "" : (e.sim.tema || ""));
+    var tm = e.sim.tema ? tema(e.sec, e.sim.tema) : "";
+    var chip = conSeccion ? nombre(e.sec) + (tm ? " · " + tm : "") : (sinTema ? "" : tm);
     var mini = '<span class="mini">' + glifo(e.sim.icono) +
       (e.sim.foto ? '<img src="' + esc(e.sim.foto) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">' : '') + '</span>';
     return '<a class="card" href="#' + esc(e.sim.id) + '">' + mini +
       '<span class="card-body">' +
         (chip ? '<span class="chip">' + esc(chip) + '</span>' : '') +
-        '<span class="card-title">' + esc(e.sim.titulo) + '</span>' +
-        (e.sim.descripcion ? '<span class="card-desc">' + esc(e.sim.descripcion) + '</span>' : '') +
+        '<span class="card-title">' + esc(titulo(e.sim)) + '</span>' +
+        (desc(e.sim) ? '<span class="card-desc">' + esc(desc(e.sim)) + '</span>' : '') +
       '</span><span class="ir">' + CHEV + '</span></a>';
   }
 
@@ -160,18 +208,19 @@
     if (!abierto) return;
     if (!q) {
       var unicas = {}; TODAS.forEach(function(e){ unicas[e.sim.ruta] = 1; });
-      res.innerHTML = '<p class="res-head">Escribe para buscar entre ' + plural(Object.keys(unicas).length) + '.</p>';
+      res.innerHTML = '<p class="res-head">' + esc(L().escribe(Object.keys(unicas).length)) + '</p>';
       return;
     }
     var palabras = q.split(/\s+/);
     var hits = TODAS.filter(function(e){
-      var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre, e.sec.euskera].join(" "));
+      var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre, e.sim.eu.titulo, e.sim.eu.descripcion,
+                        e.sec.eu.nombre, e.sec.temasEu[e.sim.tema]].join(" "));
       return palabras.every(function(p){ return pajar.indexOf(p) >= 0; });
     });
     res.innerHTML = hits.length
-      ? '<p class="res-head">' + hits.length + (hits.length === 1 ? ' resultado' : ' resultados') + '</p><div class="cards">' +
+      ? '<p class="res-head">' + esc(L().res(hits.length)) + '</p><div class="cards">' +
         hits.map(function(h){ return tarjeta(h, true); }).join("") + '</div>'
-      : '<p class="empty">Ninguna simulación coincide con «' + esc(texto) + '».</p>';
+      : '<p class="empty">' + esc(L().nada(texto)) + '</p>';
   }
   buscar.addEventListener("input", pintarBusqueda);
   function mostrarBuscador(si){
@@ -197,10 +246,10 @@
     if (mover) window.scrollTo(0, 0);
   }
   function verSeccion(sec, mover){
-    $("sec-barra").textContent = sec.nombre;
-    $("sec-nombre").textContent = sec.nombre;
-    $("sec-desc").textContent = sec.descripcion || "";
-    $("sec-desc").hidden = !sec.descripcion;
+    $("sec-barra").textContent = nombre(sec);
+    $("sec-nombre").textContent = nombre(sec);
+    $("sec-desc").textContent = frase(sec) || "";
+    $("sec-desc").hidden = !frase(sec);
     $("sec-count").textContent = plural(sec.simulaciones.length);
     $("sec-foto").innerHTML = foto(sec);
     if (agrupada(sec)) {
@@ -208,7 +257,7 @@
       $("sec-cards").innerHTML = temas(sec).map(function(t){
         var items = [];
         sec.simulaciones.forEach(function(sim, i){ if (sim.tema === t) items.push(tarjeta({ sec: sec, sim: sim, i: i }, false, true)); });
-        return '<section class="grupo"><h3>' + esc(t) + ' <span class="num">' + items.length + '</span></h3><div class="cards">' + items.join("") + '</div></section>';
+        return '<section class="grupo"><h3>' + esc(tema(sec, t)) + ' <span class="num">' + items.length + '</span></h3><div class="cards">' + items.join("") + '</div></section>';
       }).join("");
     } else {
       $("sec-cards").className = "lista";
@@ -236,18 +285,18 @@
   function navegacion(btn, sim, etiqueta){
     btn.disabled = !sim;
     btn.setAttribute("data-ir", sim ? sim.id : "");
-    btn.title = sim ? etiqueta + ": " + sim.titulo : "";
+    btn.title = sim ? etiqueta + ": " + titulo(sim) : "";
   }
   function abrirVisor(e){
     var sec = e.sec, sim = e.sim, i = e.i;
     $("v-back").href = "#" + sec.id;
-    $("v-back").setAttribute("aria-label", "Volver a " + sec.nombre);
-    $("v-sec").textContent = sec.nombre + " · ";
-    $("v-pos").textContent = (i + 1) + " de " + sec.simulaciones.length;
-    $("v-name").textContent = sim.titulo;
-    frame.title = sim.titulo;
-    navegacion($("v-prev"), sec.simulaciones[i - 1], "Anterior");
-    navegacion($("v-next"), sec.simulaciones[i + 1], "Siguiente");
+    $("v-back").setAttribute("aria-label", L().volverA + nombre(sec));
+    $("v-sec").textContent = nombre(sec) + " · ";
+    $("v-pos").textContent = L().pos(i + 1, sec.simulaciones.length);
+    $("v-name").textContent = titulo(sim);
+    frame.title = titulo(sim);
+    navegacion($("v-prev"), sec.simulaciones[i - 1], L().ant);
+    navegacion($("v-next"), sec.simulaciones[i + 1], L().sig);
     app.hidden = true; visor.hidden = false; root.classList.add("con-visor");
     if (abierta !== sim.id) { abierta = sim.id; entrada = e; cargar(e); }
   }
@@ -298,6 +347,10 @@
   }
   window.addEventListener("hashchange", function(){ enrutar(true); });
 
+  [].forEach.call(document.querySelectorAll("[data-idioma]"), function(a){
+    a.addEventListener("click", function(){ ponerIdioma(a.getAttribute("data-idioma")); });
+  });
+  traducirPagina();
   aplicar(construir(CATALOGO, null));
   enrutar(false);
 
