@@ -49,9 +49,18 @@ self.CATALOGO = {
       eu: { nombre: "Elektrizitatea", descripcion: "Segurtasun- eta kontrol-elementuak eta eragingailuak." },
       temas_eu: {
         "Instalaciones": "Instalazioak",
-        "Protecciones": "Babesak"
+        "Protecciones": "Babesak",
+        "Mando y protección de motores": "Motorren agintea eta babesa"
       },
       simulaciones: [
+        { archivo: "guardamotor.html", id: "guardamotor", tema: "Mando y protección de motores", icono: "magnetotermico",
+          titulo: "Guardamotor",
+          descripcion: "Protege el motor contra sobrecargas y cortocircuitos. Simulador de disparo y símbolo.",
+          eu: { titulo: "Disyuntorea (guardamotorra)", descripcion: "Motorra gainkargen eta zirkuitulaburren aurka babesten du. Jauzi-simulagailua eta sinboloa." } },
+        { archivo: "contactor.html", id: "contactor", tema: "Mando y protección de motores", icono: "simulacion",
+          titulo: "Contactor",
+          descripcion: "Partes, tipos, símbolo y marcha-paro con autorretención.",
+          eu: { titulo: "Kontaktorea", descripcion: "Atalak, motak, sinboloa eta martxa-geldialdia autoatxikimenduarekin." } },
         {
           archivo: "conmutada-2-bombillas.html",
           id: "conmutada",
@@ -130,6 +139,7 @@ self.CATALOGO = {
       icono: "engranaje",
       eu: { nombre: "Mekanika", descripcion: "Gidatze-, lotura- eta transmisio-elementuak." },
       temas_eu: {
+        "Elementos de unión": "Lotura-elementuak",
         "Guías de deslizamiento": "Irristatze-gidak",
         "Acoplamientos flexibles": "Akoplamendu malguak",
         "Embragues": "Enbrageak",
@@ -139,6 +149,22 @@ self.CATALOGO = {
       },
       // El campo "tema" agrupa las simulaciones en apartados dentro de la sección.
       simulaciones: [
+        { archivo: "tornillos.html", id: "tornillos", tema: "Elementos de unión", icono: "simulacion",
+          titulo: "Tornillos",
+          descripcion: "Partes, tipos de cabeza y designación: M10 × 40 – 8.8.",
+          eu: { titulo: "Torlojuak", descripcion: "Atalak, buru motak eta izendapena: M10 × 40 – 8.8." } },
+        { archivo: "tuercas.html", id: "tuercas", tema: "Elementos de unión", icono: "simulacion",
+          titulo: "Tuercas",
+          descripcion: "Tipos, cómo evitar que se aflojen y avance por vuelta.",
+          eu: { titulo: "Azkoinak", descripcion: "Motak, askatu ez daitezen zer egin eta biraka aurrerapena." } },
+        { archivo: "roscachapas.html", id: "roscachapas", tema: "Elementos de unión", icono: "simulacion",
+          titulo: "Tornillos roscachapa",
+          descripcion: "Hacen su propia rosca en chapa fina. Montaje paso a paso.",
+          eu: { titulo: "Txapa-torlojuak (roskatxapak)", descripcion: "Txapa mehean beren haria egiten dute. Muntaketa urratsez urrats." } },
+        { archivo: "remaches.html", id: "remaches", tema: "Elementos de unión", icono: "simulacion",
+          titulo: "Remaches",
+          descripcion: "Macizos y pop: cómo se colocan y cómo se eligen.",
+          eu: { titulo: "Errematxeak", descripcion: "Trinkoak eta pop: nola jartzen diren eta nola aukeratzen diren." } },
         { archivo: "guia-redonda.html", id: "guia-redonda", tema: "Guías de deslizamiento", icono: "guia",
           titulo: "Guía redonda",
           descripcion: "Un casquillo desliza sobre un eje cilíndrico rectificado.",
@@ -227,6 +253,29 @@ self.CATALOGO = {
           titulo: "Cadenas: tipos",
           descripcion: "Partes de la cadena de rodillos y tipos de cadena.",
           eu: { titulo: "Kateak: motak", descripcion: "Arrabol-katearen atalak eta kate motak." } }
+      ]
+    },
+    {
+      carpeta: "dibujo",
+      nombre: "Dibujo técnico",
+      descripcion: "Hojas de proceso, acotación y perfiles normalizados.",
+      imagen: "imagenes/area-dibujo.webp",
+      icono: "simulacion",
+      eu: { nombre: "Marrazketa teknikoa", descripcion: "Prozesu-orriak, akotazioa eta profil normalizatuak." },
+      temas_eu: { "Fabricación": "Fabrikazioa", "Dibujo técnico": "Marrazketa teknikoa" },
+      simulaciones: [
+        { archivo: "hojas-proceso.html", id: "hojas-proceso", tema: "Fabricación", icono: "simulacion",
+          titulo: "Hojas de proceso",
+          descripcion: "Qué son, sus partes y un ejercicio para ordenar las operaciones.",
+          eu: { titulo: "Prozesu-orriak", descripcion: "Zer diren, haien atalak eta eragiketak ordenatzeko ariketa bat." } },
+        { archivo: "acotacion.html", id: "acotacion", tema: "Dibujo técnico", icono: "simulacion",
+          titulo: "Acotación",
+          descripcion: "Elementos de una cota, normas, tipos y símbolos.",
+          eu: { titulo: "Akotazioa", descripcion: "Kota baten elementuak, arauak, motak eta ikurrak." } },
+        { archivo: "perfiles.html", id: "perfiles", tema: "Dibujo técnico", icono: "simulacion",
+          titulo: "Perfiles metálicos normalizados",
+          descripcion: "IPE, HEB, UPN, L, tubos… medidas, designación y peso.",
+          eu: { titulo: "Metalezko profil normalizatuak", descripcion: "IPE, HEB, UPN, L, hodiak… neurriak, izendapena eta pisua." } }
       ]
     }
   ]

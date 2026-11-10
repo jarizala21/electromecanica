@@ -165,6 +165,8 @@
   function pintarAreas(){
     var nav = $("areas");
     nav.style.setProperty("--n", Math.max(SECCIONES.length, 1));
+    nav.style.setProperty("--filas", Math.ceil(SECCIONES.length / 2));
+    nav.classList.toggle("rejilla", SECCIONES.length >= 4);
     nav.innerHTML = SECCIONES.map(function(sec){
       return '<a class="area" href="#' + esc(sec.id) + '">' +
         '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +

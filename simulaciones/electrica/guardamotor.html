@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guardamotor (disyuntor motor)</title>
+<meta name="description" content="Qué es, características, funcionamiento interactivo (sobrecarga, cortocircuito, fallo de fase) y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.pieza{fill:#e9ecef;stroke:#8d95a3;stroke-width:1.5}
+.borne{fill:#c9ced6;stroke:#6b7280;stroke-width:1.2}
+.cable{stroke:#9aa3b2;stroke-width:4;fill:none;stroke-linecap:round}
+.cable.con{stroke:var(--naranja)}
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+#motor-aspas{transform-origin:180px 262px}
+.gira #motor-aspas{animation:giro 0.5s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+.chispa{fill:var(--oro-claro);stroke:var(--rojo);stroke-width:1.5;opacity:0}
+.chispa.on{animation:chispa .5s ease-out}
+@keyframes chispa{0%{opacity:1;transform:scale(.6)}100%{opacity:0;transform:scale(1.6)}}
+.lecturas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.lectura{background:var(--blanco);border-radius:16px;padding:8px 10px;box-shadow:var(--sombra);text-align:center}
+.lectura small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.lectura b{font-size:clamp(13px,4vw,18px);color:var(--marino);font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Mando y protección de motores" data-eu="Motorren agintea eta babesa"></p>
+      <h1 data-es="Guardamotor (disyuntor motor)" data-eu="Disyuntorea (guardamotorra)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">guardamotor</span> es un interruptor automático pensado para <b>proteger un motor</b>. En un solo aparato hace tres cosas: <b>conecta y desconecta</b> el motor a mano, lo protege contra <b>sobrecargas</b> (relé térmico) y contra <b>cortocircuitos</b> (relé magnético).</p>
+      <p class="eu"><span class="clave">Disyuntorea</span> (guardamotorra) <b>motor bat babesteko</b> etengailu automatikoa da. Gailu bakar batek hiru gauza egiten ditu: motorra eskuz <b>konektatu eta deskonektatu</b>, <b>gainkargen</b> aurka babestu (erreleko termikoa) eta <b>zirkuitulaburren</b> aurka babestu (erreleko magnetikoa).</p>
+      <p class="es">Se monta en el cuadro, en carril DIN, normalmente <b>antes del contactor</b> que pone en marcha el motor.</p>
+      <p class="eu">Koadroan muntatzen da, DIN errailean, normalean motorra martxan jartzen duen <b>kontaktorearen aurretik</b>.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-aparato" viewBox="0 0 300 300" role="img" aria-label="Guardamotor">
+          <rect class="pieza" x="80" y="20" width="140" height="260" rx="12"/>
+          <g class="resaltable" data-parte="bornes-arriba">
+            <rect x="88" y="28" width="124" height="40" rx="6" fill="#d7dce3"/>
+            <circle class="borne" cx="110" cy="48" r="9"/><circle class="borne" cx="150" cy="48" r="9"/><circle class="borne" cx="190" cy="48" r="9"/>
+            <path d="M104 48h12M110 42v12M144 48h12M150 42v12M184 48h12M190 42v12" stroke="#6b7280" stroke-width="2"/>
+            <text class="txt-s" x="110" y="20" text-anchor="middle">1/L1</text><text class="txt-s" x="150" y="20" text-anchor="middle">3/L2</text><text class="txt-s" x="190" y="20" text-anchor="middle">5/L3</text>
+          </g>
+          <g class="resaltable" data-parte="mando">
+            <circle cx="150" cy="135" r="34" fill="#2d3340"/>
+            <rect x="143" y="104" width="14" height="44" rx="6" fill="#111" transform="rotate(30 150 135)"/>
+            <text class="txt" x="108" y="104" font-size="13">O</text><text class="txt" x="186" y="104" font-size="13">I</text>
+          </g>
+          <g class="resaltable" data-parte="regulacion">
+            <circle cx="150" cy="205" r="18" fill="#fff" stroke="#8d95a3" stroke-width="1.5"/>
+            <path d="M150 205l9-9" stroke="var(--naranja-osc)" stroke-width="3" stroke-linecap="round"/>
+            <text class="txt-s" x="126" y="232">6</text><text class="txt-s" x="146" y="186" font-size="9">8</text><text class="txt-s" x="168" y="232">10 A</text>
+          </g>
+          <g class="resaltable" data-parte="bornes-abajo">
+            <rect x="88" y="232" width="124" height="40" rx="6" fill="#d7dce3"/>
+            <circle class="borne" cx="110" cy="252" r="9"/><circle class="borne" cx="150" cy="252" r="9"/><circle class="borne" cx="190" cy="252" r="9"/>
+            <path d="M104 252h12M110 246v12M144 252h12M150 246v12M184 252h12M190 246v12" stroke="#6b7280" stroke-width="2"/>
+            <text class="txt-s" x="110" y="293" text-anchor="middle">2/T1</text><text class="txt-s" x="150" y="293" text-anchor="middle">4/T2</text><text class="txt-s" x="190" y="293" text-anchor="middle">6/T3</text>
+          </g>
+          <g class="resaltable" data-parte="auxiliar">
+            <rect x="222" y="90" width="38" height="120" rx="8" fill="#dfe3e9" stroke="#8d95a3" stroke-width="1.5"/>
+            <text class="txt-s" x="241" y="140" text-anchor="middle">13</text><text class="txt-s" x="241" y="170" text-anchor="middle">14</text>
+          </g>
+          <text class="txt" x="40" y="150" text-anchor="middle">Q1</text>
+        </svg>
+        <figcaption data-es="Toca una parte para verla" data-eu="Ukitu atal bat ikusteko"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-aparato">
+        <li><button data-parte="bornes-arriba"><span class="n">1</span><span><b class="es">Bornes de entrada 1-3-5</b><b class="eu">Sarrerako borneak 1-3-5</b><small class="es">Llegan las tres fases de la red (L1, L2, L3).</small><small class="eu">Sareko hiru faseak iristen dira (L1, L2, L3).</small></span></button></li>
+        <li><button data-parte="mando"><span class="n">2</span><span><b class="es">Mando giratorio (I/O)</b><b class="eu">Biraketa-eragingailua (I/O)</b><small class="es">Conecta (I) y desconecta (O) a mano. Si salta, se rearma volviendo a I.</small><small class="eu">Eskuz konektatu (I) eta deskonektatu (O). Jauzten bada, berriro I-ra eramanda berrarmatzen da.</small></span></button></li>
+        <li><button data-parte="regulacion"><span class="n">3</span><span><b class="es">Regulación de la corriente (Ir)</b><b class="eu">Korrontearen erregulazioa (Ir)</b><small class="es">Se ajusta a la intensidad nominal de la placa del motor.</small><small class="eu">Motorraren plakako korronte nominalera doitzen da.</small></span></button></li>
+        <li><button data-parte="bornes-abajo"><span class="n">4</span><span><b class="es">Bornes de salida 2-4-6</b><b class="eu">Irteerako borneak 2-4-6</b><small class="es">Salen hacia el contactor y el motor (T1, T2, T3).</small><small class="eu">Kontaktorera eta motorrera doaz (T1, T2, T3).</small></span></button></li>
+        <li><button data-parte="auxiliar"><span class="n">5</span><span><b class="es">Contacto auxiliar (opcional)</b><b class="eu">Kontaktu laguntzailea (aukerakoa)</b><small class="es">Avisa al cuadro de si el guardamotor está conectado o ha saltado.</small><small class="eu">Disyuntorea konektatuta dagoen edo jauzi den adierazten dio koadroari.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. EZAUGARRIAK ============ -->
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Intensidad regulable (Ir)</h3><h3 class="eu">Korronte erregulagarria (Ir)</h3>
+        <p class="es">Cada modelo tiene un margen, por ejemplo <b>6 – 10 A</b>. Se pone igual a la intensidad nominal (In) del motor.</p>
+        <p class="eu">Modelo bakoitzak tarte bat du, adibidez <b>6 – 10 A</b>. Motorraren korronte nominalaren (In) berdina jartzen da.</p></div>
+      <div class="card"><h3 class="es">Protección térmica</h3><h3 class="eu">Babes termikoa</h3>
+        <p class="es">Contra <b>sobrecargas</b>: corrientes algo mayores de Ir durante un tiempo. Actúa con retardo (segundos o minutos).</p>
+        <p class="eu"><b>Gainkargen</b> aurka: Ir baino zertxobait handiagoak diren korronteak denbora batez. Atzerapenarekin jarduten du (segundoak edo minutuak).</p></div>
+      <div class="card"><h3 class="es">Protección magnética</h3><h3 class="eu">Babes magnetikoa</h3>
+        <p class="es">Contra <b>cortocircuitos</b>: corrientes muy grandes (unas <b>13 × Ir</b>). Actúa al instante (milisegundos).</p>
+        <p class="eu"><b>Zirkuitulaburren</b> aurka: korronte oso handiak (<b>13 × Ir</b> inguru). Berehala jarduten du (milisegundoak).</p></div>
+      <div class="card"><h3 class="es">Fallo de fase</h3><h3 class="eu">Fase-hutsegitea</h3>
+        <p class="es">Si se pierde una fase, el motor se calienta mucho. El guardamotor lo detecta y dispara antes.</p>
+        <p class="eu">Fase bat galtzen bada, motorra asko berotzen da. Disyuntoreak hauteman eta lehenago jauzten da.</p></div>
+      <div class="card"><h3 class="es">Poder de corte</h3><h3 class="eu">Etete-ahalmena</h3>
+        <p class="es">La corriente de cortocircuito máxima que puede cortar sin romperse, en kA (por ejemplo 50 kA a 400 V).</p>
+        <p class="eu">Hautsi gabe eten dezakeen zirkuitulabur-korronte handiena, kA-tan (adibidez 50 kA 400 V-an).</p></div>
+      <div class="card"><h3 class="es">Tensión y polos</h3><h3 class="eu">Tentsioa eta poloak</h3>
+        <p class="es">Tripolar, para motores trifásicos de 230/400 V. Bornes 1-3-5 de entrada y 2-4-6 de salida.</p>
+        <p class="eu">Tripolarra, 230/400 V-ko motor trifasikoetarako. Sarrerako borneak 1-3-5 eta irteerakoak 2-4-6.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Térmico → <b>sobrecarga</b> (lento). Magnético → <b>cortocircuito</b> (instantáneo). Ir = In del motor.</p>
+      <p class="eu">Termikoa → <b>gainkarga</b> (motela). Magnetikoa → <b>zirkuitulaburra</b> (berehalakoa). Ir = motorraren In.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. FUNTZIONAMENDUA ============ -->
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es">Pon en marcha el motor y prueba qué pasa con una <b>sobrecarga</b>, un <b>cortocircuito</b> o un <b>fallo de fase</b>. El motor tiene una <b>In de 8 A</b>: ¿qué pasa si ajustas Ir por debajo?</p>
+      <p class="eu">Jarri motorra martxan eta probatu zer gertatzen den <b>gainkarga</b>, <b>zirkuitulabur</b> edo <b>fase-hutsegite</b> batekin. Motorraren <b>In 8 A</b> da: zer gertatzen da Ir txikiagoa jartzen baduzu?</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-sim" viewBox="0 0 360 310" role="img" aria-label="Simulación">
+        <text class="txt-s" x="90" y="14" text-anchor="middle">L1</text><text class="txt-s" x="150" y="14" text-anchor="middle">L2</text><text class="txt-s" x="210" y="14" text-anchor="middle">L3</text>
+        <rect x="55" y="34" width="190" height="172" rx="14" fill="#f1f3f6" stroke="#8d95a3" stroke-width="1.5"/>
+        <text class="txt" x="66" y="52">Q1</text>
+        <g id="fases"></g>
+        <path id="union" d="M70 86H230" stroke="var(--marino)" stroke-width="2" stroke-dasharray="5 4"/>
+        <g id="aguja"><text id="estado-q" class="txt" x="300" y="70" text-anchor="middle" font-size="22">O</text></g>
+        <text class="txt-s" x="300" y="90" text-anchor="middle" data-es="mando" data-eu="eragingailua"></text>
+        <path d="M245 86h40" stroke="var(--marino)" stroke-width="2" stroke-dasharray="5 4"/>
+        <g id="motor">
+          <circle cx="180" cy="262" r="34" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+          <g id="motor-aspas"><path d="M180 236v52M154 262h52" stroke="#c4cad4" stroke-width="5" stroke-linecap="round"/></g>
+          <text class="txt" x="180" y="259" text-anchor="middle" font-size="15">M</text>
+          <text class="txt" x="180" y="276" text-anchor="middle" font-size="11">3~</text>
+        </g>
+        <circle id="chispa" class="chispa" cx="150" cy="230" r="14"/>
+      </svg>
+    </figure>
+    <div class="lecturas">
+      <div class="lectura"><small>I L1</small><b id="i1">0 A</b></div>
+      <div class="lectura"><small>I L2</small><b id="i2">0 A</b></div>
+      <div class="lectura"><small>I L3</small><b id="i3">0 A</b></div>
+      <div class="lectura"><small data-es="Disparo magnético" data-eu="Jauzi magnetikoa"></small><b id="imag">–</b></div>
+    </div>
+    <div class="card" style="display:grid;gap:8px">
+      <div class="deslizador"><label><span data-es="Calentamiento del bimetal (térmico)" data-eu="Bimetalaren berotzea (termikoa)"></span><output id="calor-t">0 %</output></label><div class="barra"><i id="calor"></i></div></div>
+      <div class="estado" id="estado"></div>
+    </div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Regulación Ir" data-eu="Ir erregulazioa"></span><output id="ir-t">8,0 A</output></label><input id="ir" type="range" min="6" max="10" step="0.1" value="8"></div>
+      <div class="deslizador"><label><span data-es="Carga del motor" data-eu="Motorraren karga"></span><output id="carga-t">100 %</output></label><input id="carga" type="range" min="40" max="200" step="5" value="100"></div>
+    </div>
+    <div class="mandos">
+      <button class="boton verde" id="b-marcha" data-es="Conectar (I)" data-eu="Konektatu (I)"></button>
+      <button class="boton claro" id="b-paro" data-es="Desconectar (O)" data-eu="Deskonektatu (O)"></button>
+      <button class="boton rojo" id="b-cc" data-es="Cortocircuito" data-eu="Zirkuitulaburra"></button>
+      <button class="boton claro" id="b-fase" aria-pressed="false" data-es="Fallo de fase L3" data-eu="L3 fase-hutsegitea"></button>
+    </div>
+    <p class="nota es">El tiempo está acelerado: en la realidad una sobrecarga pequeña tarda minutos en hacer saltar el térmico.</p>
+    <p class="nota eu">Denbora azkartuta dago: errealitatean gainkarga txiki batek minutuak behar ditu termikoa jauzteko.</p>
+  </section>
+
+  <!-- ============ 4. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-simbolo" viewBox="0 0 300 300" role="img" aria-label="Símbolo">
+          <g fill="none" stroke="var(--marino)" stroke-width="2.4" stroke-linecap="round">
+            <g class="resaltable" data-parte="bornes">
+              <text class="txt" x="100" y="22" text-anchor="middle" stroke="none">1</text><text class="txt" x="160" y="22" text-anchor="middle" stroke="none">3</text><text class="txt" x="220" y="22" text-anchor="middle" stroke="none">5</text>
+              <text class="txt" x="100" y="292" text-anchor="middle" stroke="none">2</text><text class="txt" x="160" y="292" text-anchor="middle" stroke="none">4</text><text class="txt" x="220" y="292" text-anchor="middle" stroke="none">6</text>
+            </g>
+            <g class="resaltable" data-parte="contactos">
+              <path d="M100 30v40M160 30v40M220 30v40"/>
+              <path d="M100 110L86 74M160 110L146 74M220 110L206 74"/>
+              <path d="M95 64l10 12M105 64l-10 12M155 64l10 12M165 64l-10 12M215 64l10 12M225 64l-10 12"/>
+              <path d="M100 110v20M160 110v20M220 110v20"/>
+            </g>
+            <g class="resaltable" data-parte="termico">
+              <rect x="88" y="130" width="24" height="40"/><rect x="148" y="130" width="24" height="40"/><rect x="208" y="130" width="24" height="40"/>
+              <path d="M100 130v12h-6v16h6v12M160 130v12h-6v16h6v12M220 130v12h-6v16h6v12"/>
+            </g>
+            <g class="resaltable" data-parte="magnetico">
+              <path d="M100 170v20M160 170v20M220 170v20"/>
+              <rect x="88" y="190" width="24" height="40"/><rect x="148" y="190" width="24" height="40"/><rect x="208" y="190" width="24" height="40"/>
+              <text class="txt" x="100" y="215" text-anchor="middle" stroke="none" font-size="10">I&gt;</text><text class="txt" x="160" y="215" text-anchor="middle" stroke="none" font-size="10">I&gt;</text><text class="txt" x="220" y="215" text-anchor="middle" stroke="none" font-size="10">I&gt;</text>
+              <path d="M100 230v48M160 230v48M220 230v48"/>
+            </g>
+            <g class="resaltable" data-parte="union">
+              <path d="M40 92H212" stroke-dasharray="6 5"/>
+              <path d="M40 150H88M112 150h36M172 150h36M40 210H88M112 210h36M172 210h36M40 92v118" stroke-dasharray="6 5"/>
+            </g>
+            <g class="resaltable" data-parte="mando">
+              <path d="M40 92H22M22 80v24"/>
+            </g>
+          </g>
+          <text class="txt" x="262" y="160" font-size="16">Q1</text>
+        </svg>
+        <figcaption data-es="Símbolo del guardamotor (IEC 60617)" data-eu="Disyuntorearen sinboloa (IEC 60617)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-simbolo">
+        <li><button data-parte="contactos"><span class="n">1</span><span><b class="es">Contactos principales</b><b class="eu">Kontaktu nagusiak</b><small class="es">Tres contactos que abren las tres fases. La «×» indica función de interruptor automático.</small><small class="eu">Hiru faseak irekitzen dituzten hiru kontaktu. «×» ikurrak etengailu automatikoaren funtzioa adierazten du.</small></span></button></li>
+        <li><button data-parte="termico"><span class="n">2</span><span><b class="es">Relé térmico</b><b class="eu">Errele termikoa</b><small class="es">El rectángulo con la línea quebrada: protege contra sobrecargas.</small><small class="eu">Lerro hautsia duen laukizuzena: gainkargen aurka babesten du.</small></span></button></li>
+        <li><button data-parte="magnetico"><span class="n">3</span><span><b class="es">Relé magnético (I&gt;)</b><b class="eu">Errele magnetikoa (I&gt;)</b><small class="es">Protege contra cortocircuitos.</small><small class="eu">Zirkuitulaburren aurka babesten du.</small></span></button></li>
+        <li><button data-parte="union"><span class="n">4</span><span><b class="es">Unión mecánica (trazos)</b><b class="eu">Lotura mekanikoa (marra etenak)</b><small class="es">Si cualquier relé actúa, abre los tres contactos a la vez.</small><small class="eu">Edozein errelek jarduten badu, hiru kontaktuak batera irekitzen ditu.</small></span></button></li>
+        <li><button data-parte="mando"><span class="n">5</span><span><b class="es">Mando manual</b><b class="eu">Eskuzko eragingailua</b><small class="es">Para conectar, desconectar y rearmar.</small><small class="eu">Konektatzeko, deskonektatzeko eta berrarmatzeko.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">6</span><span><b class="es">Numeración 1-2, 3-4, 5-6 y letra Q</b><b class="eu">Zenbakiak 1-2, 3-4, 5-6 eta Q letra</b><small class="es">Impares arriba (entrada), pares abajo (salida). En los esquemas se nombra Q1, Q2…</small><small class="eu">Bakoitiak goian (sarrera), bikoitiak behean (irteera). Eskemetan Q1, Q2… izena ematen zaio.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var X = [90, 150, 210], IN = 8;
+  var on = false, calor = 0, disparo = null, fase = false, cc = 0;
+  var $ = function(id){ return document.getElementById(id); };
+  var ir = $("ir"), carga = $("carga");
+  function f1(n){ return n.toFixed(1).replace(".", idioma() === "eu" ? "," : ","); }
+
+  function dibujar(I){
+    var g = "";
+    X.forEach(function(x, k){
+      var hay = on && I[k] > 0.05;
+      var cls = "cable" + (hay ? " con" : "");
+      // entrada
+      g += '<path class="' + cls + '" d="M' + x + ' 20V64"/>';
+      // contacto
+      if (on) g += '<path class="' + cls + '" d="M' + x + ' 64V100"/>';
+      else g += '<path class="cable" d="M' + x + ' 100L' + (x - 16) + ' 68"/>';
+      g += '<circle cx="' + x + '" cy="64" r="3.5" fill="var(--marino)"/><circle cx="' + x + '" cy="100" r="3.5" fill="var(--marino)"/>';
+      // bimetal (se curva y enrojece con el calor)
+      var c = Math.min(calor, 1.2), r = Math.round(150 + 105 * Math.min(c, 1)), gr = Math.round(160 - 120 * Math.min(c, 1));
+      var curva = 10 * Math.min(c, 1.2);
+      g += '<path class="' + cls + '" d="M' + x + ' 100V112"/>';
+      g += '<path d="M' + (x - 4) + ' 112 Q' + (x - 4 + curva) + ' 132 ' + (x - 4 + curva * 0.6) + ' 150" stroke="rgb(' + r + ',' + gr + ',90)" stroke-width="5" fill="none" stroke-linecap="round"/>';
+      g += '<path d="M' + (x + 4) + ' 112 Q' + (x + 4 + curva) + ' 132 ' + (x + 4 + curva * 0.6) + ' 150" stroke="#9aa3b2" stroke-width="3" fill="none" stroke-linecap="round"/>';
+      g += '<path class="' + cls + '" d="M' + x + ' 150V158"/>';
+      // bobina magnética
+      var mag = cc > 0 ? "var(--rojo)" : "var(--marino)";
+      g += '<path d="M' + x + ' 158c10 0 10 8 0 8c10 0 10 8 0 8c10 0 10 8 0 8c10 0 10 8 0 8" stroke="' + mag + '" stroke-width="2.4" fill="none"/>';
+      // salida al motor
+      var xm = [164, 180, 196][k];
+      g += '<path class="' + cls + '" d="M' + x + ' 190V214 Q' + x + ' 222 ' + xm + ' 228"/>';
+    });
+    g += '<text class="txt-s" x="232" y="134">' + T("térmico", "termikoa") + '</text>';
+    g += '<text class="txt-s" x="232" y="180">' + T("magnético", "magnetikoa") + '</text>';
+    $("fases").innerHTML = g;
+    $("estado-q").textContent = on ? "I" : "O";
+    $("estado-q").setAttribute("fill", on ? "var(--verde)" : "var(--rojo)");
+    $("svg-sim").classList.toggle("gira", on && I.some(function(v){ return v > 0.05; }));
+  }
+
+  function corrientes(){
+    if (!on) return [0, 0, 0];
+    if (cc > 0) return [IN * 18, IN * 18, IN * 18];
+    var i = IN * carga.value / 100;
+    if (fase) return [i * 1.3, i * 1.3, 0];
+    return [i, i, i];
+  }
+
+  function mensaje(){
+    var e = $("estado"), irv = +ir.value;
+    e.className = "estado";
+    if (disparo === "termico") { e.className = "estado mal"; e.textContent = T("Ha saltado el TÉRMICO por sobrecarga. Espera a que se enfríe el bimetal y rearma (I).", "TERMIKOA jauzi da gainkargagatik. Itxaron bimetala hoztu arte eta berrarmatu (I)."); return; }
+    if (disparo === "fase") { e.className = "estado mal"; e.textContent = T("Ha saltado por FALLO DE FASE: el motor funcionaba con dos fases y se calentaba.", "FASE-HUTSEGITEAGATIK jauzi da: motorrak bi faserekin funtzionatzen zuen eta berotzen ari zen."); return; }
+    if (disparo === "magnetico") { e.className = "estado mal"; e.textContent = T("Ha saltado el MAGNÉTICO al instante: cortocircuito.", "MAGNETIKOA berehala jauzi da: zirkuitulaburra."); return; }
+    if (!on) { e.textContent = T("Desconectado. Pulsa «Conectar (I)».", "Deskonektatuta. Sakatu «Konektatu (I)»."); return; }
+    var I = IN * carga.value / 100 * (fase ? 1.3 : 1);
+    if (I > irv * 1.15 || fase) { e.className = "estado mal"; e.textContent = T("¡Cuidado! Pasa más corriente que Ir: el bimetal se está calentando.", "Kontuz! Ir baino korronte gehiago dabil: bimetala berotzen ari da."); return; }
+    e.className = "estado ok";
+    e.textContent = irv < IN - 0.05 ? T("Funciona, pero Ir está por debajo de la In del motor (8 A): saltará en cuanto suba un poco la carga.", "Badabil, baina Ir motorraren In-aren azpitik dago (8 A): karga pixka bat igotzean jauziko da.")
+      : T("Motor en marcha. Corriente normal.", "Motorra martxan. Korronte normala.");
+  }
+
+  var ult = performance.now();
+  function paso(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    var I = corrientes(), irv = +ir.value, imax = Math.max.apply(null, I);
+    if (cc > 0) cc -= dt;
+    if (on && imax > 13 * irv) { on = false; disparo = "magnetico"; var ch = $("chispa"); ch.classList.remove("on"); void ch.getBBox(); ch.classList.add("on"); }
+    var ss = on ? Math.pow(imax / irv, 2) / 1.32 * (fase ? 1.6 : 1) : 0;
+    calor += (ss - calor) * dt / 6;
+    if (calor < 0) calor = 0;
+    if (on && calor >= 1) { on = false; disparo = fase ? "fase" : "termico"; }
+    I = corrientes();
+    ["i1", "i2", "i3"].forEach(function(id, k){ $(id).textContent = (I[k] > 60 ? Math.round(I[k]) : f1(I[k])) + " A"; });
+    $("imag").textContent = "≈ " + Math.round(13 * irv) + " A";
+    $("calor").style.width = Math.min(100, calor * 100) + "%";
+    $("calor-t").textContent = Math.round(Math.min(100, calor * 100)) + " %";
+    dibujar(I); mensaje();
+    requestAnimationFrame(paso);
+  }
+
+  $("b-marcha").addEventListener("click", function(){
+    if (disparo === "termico" || disparo === "fase") { if (calor > 0.7) { $("estado").className = "estado mal"; $("estado").textContent = T("Todavía está caliente: espera un poco.", "Oraindik bero dago: itxaron pixka bat."); return; } }
+    on = true; disparo = null;
+  });
+  $("b-paro").addEventListener("click", function(){ on = false; disparo = null; });
+  $("b-cc").addEventListener("click", function(){ if (on) cc = 0.4; });
+  $("b-fase").addEventListener("click", function(){ fase = !fase; this.setAttribute("aria-pressed", fase ? "true" : "false"); });
+  function textos(){ $("ir-t").textContent = f1(+ir.value) + " A"; $("carga-t").textContent = carga.value + " %"; }
+  ir.addEventListener("input", textos); carga.addEventListener("input", textos);
+  alCambiarIdioma(textos);
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

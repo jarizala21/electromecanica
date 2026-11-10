@@ -25,6 +25,10 @@ Para darle un título, una descripción o un icono más cuidados, cambiar el ord
 
 La imagen redonda de la lista sale de `simulaciones/<área>/miniaturas/<archivo>.webp`. Si no existe, se ve el icono. Para crearlas: `python3 herramientas/imagenes/miniaturas.py`.
 
+## Fichas bilingües
+
+Las fichas didácticas (guardamotor, contactor, hojas de proceso, acotación, perfiles, tornillos, tuercas, roscachapas y remaches) usan `simulaciones/comun/ficha.css` y `ficha.js`: pestañas, partes que se resaltan al tocarlas y textos en euskera y castellano (`class="es"` / `class="eu"`). Se ven en el idioma elegido en la portada y tienen un botón EU · ES arriba.
+
 ## Añadir un área
 
 Crea una carpeta nueva dentro de `simulaciones/` con al menos un `.html` (en **Upload files** puedes arrastrar la carpeta entera). Usa un nombre corto, en minúsculas, sin tildes ni espacios: `automatizacion`, `hidraulica`… Aparece sola como área nueva; para ponerle nombre con tildes, nombre en euskera, frase y foto, añádela en `catalogo.js`.
@@ -35,7 +39,7 @@ La foto del botón de un área es una imagen con fondo transparente en `imagenes
 
 | Archivo | Para qué sirve |
 |---|---|
-| `simulaciones/` | Las simulaciones, una carpeta por área (con sus miniaturas) |
+| `simulaciones/` | Las simulaciones, una carpeta por área (con sus miniaturas); `comun/` tiene el estilo de las fichas |
 | `catalogo.js` | Nombres (también en euskera), frases, fotos, iconos y orden |
 | `index.html`, `estilos.css`, `app.js` | La app |
 | `imagenes/` | Logo de La Salle, fotos de las áreas y distintivo de la licencia |

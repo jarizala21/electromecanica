@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hojas de proceso</title>
+<meta name="description" content="Qué es una hoja de proceso, sus partes y un ejemplo para ordenar las operaciones de una pieza.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.hoja td,.hoja th{font-size:12.5px}
+.hoja th button{all:unset;cursor:pointer;display:block;width:100%;font-weight:600;color:var(--marino)}
+.hoja th[aria-current="true"]{background:var(--naranja);}
+.hoja .cabecera td{background:#f8f6f2}
+.hoja .cabecera b{color:var(--marino)}
+#ops button{transition:transform .15s}
+#ops button.mal{animation:sacude .35s}
+@keyframes sacude{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#ops button:disabled{opacity:.35}
+.txt{font-size:10px;fill:var(--marino);font-weight:600}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Fabricación" data-eu="Fabrikazioa"></p>
+      <h1 data-es="Hojas de proceso" data-eu="Prozesu-orriak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">hoja de proceso</span> es el documento que dice <b>cómo se fabrica una pieza paso a paso</b>: qué operaciones se hacen, <b>en qué orden</b>, con qué máquina, con qué herramientas y cómo se comprueba.</p>
+      <p class="eu"><span class="clave">Prozesu-orria</span> pieza bat <b>urratsez urrats nola fabrikatzen den</b> esaten duen dokumentua da: zer eragiketa egiten diren, <b>zer ordenatan</b>, zer makinarekin, zer erremintarekin eta nola egiaztatzen den.</p>
+      <p class="es">Se hace <b>antes de empezar</b>, mirando el plano. Así cualquiera del taller puede fabricar la pieza igual y sin olvidar nada.</p>
+      <p class="eu"><b>Hasi aurretik</b> egiten da, planoari begira. Horrela, tailerreko edonork pieza berdin eta ezer ahaztu gabe fabrika dezake.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Plano</h3><h3 class="eu">Planoa</h3><p class="es">Dice <b>cómo es</b> la pieza: forma y medidas.</p><p class="eu">Pieza <b>nolakoa den</b> esaten du: forma eta neurriak.</p></div>
+      <div class="card"><h3 class="es">Hoja de proceso</h3><h3 class="eu">Prozesu-orria</h3><p class="es">Dice <b>cómo se hace</b>: operaciones y orden.</p><p class="eu"><b>Nola egiten den</b> esaten du: eragiketak eta ordena.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Para ordenar las operaciones" data-eu="Eragiketak ordenatzeko"></h2>
+      <ol class="es"><li>Primero se prepara el material (cortar a medida).</li><li>Después se hacen las superficies de referencia (planear, escuadrar).</li><li>Luego se traza y se mecanizan agujeros, ranuras, roscas…</li><li>Al final se quitan rebabas y se verifica.</li></ol>
+      <ol class="eu"><li>Lehenik materiala prestatzen da (neurrira ebaki).</li><li>Gero erreferentzia-gainazalak egiten dira (planeatu, eskuadratu).</li><li>Ondoren trazatu eta zuloak, artekak, hariak… mekanizatzen dira.</li><li>Azkenik bizarrak kentzen dira eta egiaztatzen da.</li></ol>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="atalak" data-es="Partes" data-eu="Atalak" hidden>
+    <div class="card">
+      <p class="es">Toca cada columna de la hoja para ver qué se escribe en ella.</p>
+      <p class="eu">Ukitu orriko zutabe bakoitza bertan zer idazten den ikusteko.</p>
+    </div>
+    <div class="tabla">
+      <table class="hoja" id="hoja-partes">
+        <tr class="cabecera"><td colspan="6"><button class="boton claro" data-col="cab" style="padding:4px 10px;font-size:12px" data-es="Cabecera" data-eu="Goiburua"></button>
+          <b class="es">Pieza:</b><b class="eu">Pieza:</b> <span class="es">placa soporte</span><span class="eu">euskarri-plaka</span> · <b class="es">Plano:</b><b class="eu">Planoa:</b> P-01 · <b>Material:</b> S235 · <b class="es">Cantidad:</b><b class="eu">Kopurua:</b> 10</td></tr>
+        <tr><th data-col="num"><button>N.º</button></th><th data-col="op"><button data-es="Operación" data-eu="Eragiketa"></button></th><th data-col="croquis"><button data-es="Croquis" data-eu="Krokisa"></button></th><th data-col="maq"><button data-es="Máquina" data-eu="Makina"></button></th><th data-col="herr"><button data-es="Herramienta" data-eu="Erreminta"></button></th><th data-col="ver"><button data-es="Control" data-eu="Kontrola"></button></th></tr>
+        <tr><td>10</td><td data-es="Cortar a 102 × 62" data-eu="102 × 62 neurrira ebaki"></td><td>▭</td><td data-es="Sierra de cinta" data-eu="Zinta-zerra"></td><td data-es="Hoja bimetálica" data-eu="Xafla bimetalikoa"></td><td data-es="Flexómetro" data-eu="Flexometroa"></td></tr>
+        <tr><td>20</td><td data-es="Planear y escuadrar a 100 × 60" data-eu="100 × 60 neurrira planeatu eta eskuadratu"></td><td>▭</td><td data-es="Fresadora" data-eu="Fresagailua"></td><td data-es="Fresa de planear Ø50" data-eu="Ø50 planeatze-fresa"></td><td data-es="Calibre" data-eu="Kalibrea"></td></tr>
+        <tr><td>…</td><td>…</td><td></td><td></td><td></td><td></td></tr>
+      </table>
+    </div>
+    <div class="estado" id="exp-col"></div>
+    <div class="card">
+      <h2 data-es="También puede llevar" data-eu="Hauek ere eraman ditzake"></h2>
+      <p class="es">Datos de corte: velocidad de giro <b>n</b> (rpm), avance <b>f</b> (mm/rev o mm/min), profundidad de pasada <b>a</b> (mm), y el <b>tiempo</b> de cada operación.</p>
+      <p class="eu">Ebaketa-datuak: biraketa-abiadura <b>n</b> (bira/min), aurrerapena <b>f</b> (mm/bira edo mm/min), pasaldiaren sakonera <b>a</b> (mm), eta eragiketa bakoitzaren <b>denbora</b>.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="adibidea" data-es="Ejercicio" data-eu="Ariketa" hidden>
+    <div class="card">
+      <p class="es">Hay que fabricar esta placa de acero con <b>dos agujeros Ø8</b> y <b>un agujero roscado M10</b>. Toca las operaciones <b>en el orden correcto</b>.</p>
+      <p class="eu">Altzairuzko plaka hau fabrikatu behar da, <b>Ø8-ko bi zulo</b> eta <b>M10 zulo hariztatu bat</b> dituena. Ukitu eragiketak <b>ordena egokian</b>.</p>
+    </div>
+    <figure class="fig">
+      <svg id="pieza" viewBox="0 0 320 170" role="img" aria-label="Placa"></svg>
+    </figure>
+    <div class="chips" id="ops"></div>
+    <div class="estado" id="ej-estado"></div>
+    <div class="tabla"><table class="hoja"><thead><tr><th>N.º</th><th data-es="Operación" data-eu="Eragiketa"></th><th data-es="Máquina" data-eu="Makina"></th><th data-es="Herramienta / útil" data-eu="Erreminta / tresna"></th></tr></thead><tbody id="ej-hoja"></tbody></table></div>
+    <div class="mandos"><button class="boton claro" id="reinicio" data-es="Empezar de nuevo" data-eu="Berriro hasi"></button></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var COLS = {
+    cab: ["Cabecera: nombre de la pieza, número de plano, material, cantidad, quién la hace y la fecha.", "Goiburua: piezaren izena, plano-zenbakia, materiala, kopurua, nork egiten duen eta data."],
+    num: ["Número de operación, de 10 en 10 (10, 20, 30…) para poder meter otra en medio si hace falta.", "Eragiketa-zenbakia, 10etik 10era (10, 20, 30…), behar izanez gero beste bat tartean sartu ahal izateko."],
+    op: ["Qué se hace, con las medidas a conseguir: «Taladrar Ø8», «Roscar M10»…", "Zer egiten den, lortu beharreko neurriekin: «Zulatu Ø8», «Roskatu M10»…"],
+    croquis: ["Un dibujo sencillo de cómo queda la pieza tras esa operación (y cómo se sujeta).", "Eragiketa horren ondoren pieza nola geratzen den erakusten duen marrazki sinplea (eta nola eusten zaion)."],
+    maq: ["La máquina: sierra, fresadora, torno, taladro de columna, banco de ajuste…", "Makina: zerra, fresagailua, tornua, zutabe-zulagailua, doikuntza-mahaia…"],
+    herr: ["Herramienta de corte (broca, fresa, macho…) y útiles de sujeción (mordaza, gato…).", "Ebaketa-erreminta (burgina, fresa, harizulatzailea…) eta eusteko tresnak (mordaza, katua…)."],
+    ver: ["Instrumento para comprobar la medida: calibre, micrómetro, escuadra, galga de roscas…", "Neurria egiaztatzeko tresna: kalibrea, mikrometroa, eskuaira, hari-galga…"]
+  };
+  var col = null;
+  $("hoja-partes").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var th = b.closest("[data-col]"); col = th ? th.getAttribute("data-col") : b.getAttribute("data-col");
+    [].forEach.call(this.querySelectorAll("th"), function(t){ t.setAttribute("aria-current", t.getAttribute("data-col") === col ? "true" : "false"); });
+    explicar();
+  });
+  function explicar(){ var e = $("exp-col"); e.textContent = col ? T(COLS[col][0], COLS[col][1]) : T("Toca una columna.", "Ukitu zutabe bat."); }
+
+  var OPS = [
+    { es: "Cortar a medida", eu: "Neurrira ebaki", maq: ["Sierra de cinta", "Zinta-zerra"], herr: ["Hoja de sierra · flexómetro", "Zerra-xafla · flexometroa"] },
+    { es: "Planear y escuadrar", eu: "Planeatu eta eskuadratu", maq: ["Fresadora", "Fresagailua"], herr: ["Fresa de planear · calibre", "Planeatze-fresa · kalibrea"] },
+    { es: "Trazar y granetear", eu: "Trazatu eta puntzonatu", maq: ["Mármol de trazar", "Trazatzeko marmola"], herr: ["Gramil · granete · martillo", "Gramila · puntzoia · mailua"] },
+    { es: "Taladrar Ø8 y Ø8,5", eu: "Zulatu Ø8 eta Ø8,5", maq: ["Taladro de columna", "Zutabe-zulagailua"], herr: ["Brocas Ø8 y Ø8,5 · mordaza", "Ø8 eta Ø8,5 burginak · mordaza"] },
+    { es: "Roscar M10", eu: "M10 roskatu", maq: ["Banco de ajuste", "Doikuntza-mahaia"], herr: ["Machos M10 · bandeador", "M10 harizulatzaileak · giratzailea"] },
+    { es: "Avellanar y quitar rebabas", eu: "Abokardatu eta bizarrak kendu", maq: ["Taladro / banco", "Zulagailua / mahaia"], herr: ["Avellanador · lima", "Abokardagailua · lima"] },
+    { es: "Verificar", eu: "Egiaztatu", maq: ["Mesa de control", "Kontrol-mahaia"], herr: ["Calibre · galga de roscas", "Kalibrea · hari-galga"] }
+  ];
+  var hechas = 0, orden = [];
+  function barajar(){ orden = OPS.map(function(_, i){ return i; }); for (var i = orden.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = orden[i]; orden[i] = orden[j]; orden[j] = t; } }
+  function pieza(){
+    var s = '<rect x="10" y="10" width="300" height="150" rx="6" fill="#f6f7f9"/>';
+    var g = hechas >= 2 ? 0 : 6, w = 240 + g * 2, h = 120 + g * 2, x = 40 - g, y = 25 - g;
+    if (hechas >= 1) {
+      s += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + (hechas >= 2 ? "#cfd5dd" : "#b9bec6") + '" stroke="var(--marino)" stroke-width="2"/>';
+    } else {
+      s += '<rect x="22" y="15" width="290" height="140" fill="#b9bec6" stroke="#8d95a3" stroke-width="2" stroke-dasharray="8 4"/>';
+      s += '<text class="txt" x="160" y="90" text-anchor="middle">' + T("barra de acero", "altzairuzko barra") + '</text>';
+    }
+    var H = [[80, 60], [240, 60], [160, 115]];
+    if (hechas >= 3) H.forEach(function(p){ s += '<path d="M' + (p[0] - 10) + ' ' + p[1] + 'h20M' + p[0] + ' ' + (p[1] - 10) + 'v20" stroke="var(--rojo)" stroke-width="1.2"/>'; });
+    if (hechas >= 4) H.forEach(function(p, i){ s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + (i < 2 ? 12 : 13) + '" fill="#fff" stroke="var(--marino)" stroke-width="2"/>'; });
+    if (hechas >= 5) s += '<circle cx="160" cy="115" r="16" fill="none" stroke="var(--marino)" stroke-width="1.2" stroke-dasharray="20 5"/>';
+    if (hechas >= 6) H.forEach(function(p){ s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="15.5" fill="none" stroke="var(--naranja)" stroke-width="2"/>'; });
+    if (hechas >= 7) s += '<text x="290" y="45" font-size="26" fill="var(--verde)">✓</text>';
+    if (hechas >= 4) { s += '<text class="txt" x="80" y="88" text-anchor="middle">Ø8</text><text class="txt" x="240" y="88" text-anchor="middle">Ø8</text>'; }
+    if (hechas >= 5) s += '<text class="txt" x="190" y="140">M10</text>';
+    $("pieza").innerHTML = s;
+  }
+  function pintar(){
+    $("ops").innerHTML = orden.map(function(i){
+      return '<button data-i="' + i + '"' + (i < hechas ? " disabled" : "") + '>' + T(OPS[i].es, OPS[i].eu) + '</button>';
+    }).join("");
+    $("ej-hoja").innerHTML = OPS.slice(0, hechas).map(function(o, i){
+      return '<tr><td>' + ((i + 1) * 10) + '</td><td>' + T(o.es, o.eu) + '</td><td>' + T(o.maq[0], o.maq[1]) + '</td><td>' + T(o.herr[0], o.herr[1]) + '</td></tr>';
+    }).join("");
+    var e = $("ej-estado");
+    if (hechas === OPS.length) { e.className = "estado ok"; e.textContent = T("¡Hoja de proceso completa! Fíjate: primero preparar, luego mecanizar y al final verificar.", "Prozesu-orria osatuta! Begiratu: lehenik prestatu, gero mekanizatu eta azkenik egiaztatu."); }
+    else if (!e.dataset.fallo) { e.className = "estado"; e.textContent = T("Operación " + ((hechas + 1) * 10) + ": ¿cuál va ahora?", ((hechas + 1) * 10) + ". eragiketa: zein dator orain?"); }
+    pieza();
+  }
+  $("ops").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b || b.disabled) return;
+    var i = +b.getAttribute("data-i"), e = $("ej-estado");
+    if (i === hechas) { hechas++; delete e.dataset.fallo; pintar(); return; }
+    b.classList.remove("mal"); void b.offsetWidth; b.classList.add("mal");
+    e.dataset.fallo = 1; e.className = "estado mal";
+    var pista = [
+      T("Primero hay que tener el trozo de material.", "Lehenik material-zatia izan behar da."),
+      T("Antes de trazar, la pieza debe tener sus caras planas y a escuadra.", "Trazatu aurretik, piezak aurpegi lau eta eskuadrakoak izan behar ditu."),
+      T("Antes de taladrar hay que marcar dónde van los agujeros.", "Zulatu aurretik, zuloak non doazen markatu behar da."),
+      T("Para roscar M10 primero hay que hacer el agujero de Ø8,5.", "M10 roskatzeko, lehenik Ø8,5eko zuloa egin behar da."),
+      T("La rosca se hace sobre el agujero ya taladrado.", "Haria zulatutako zuloaren gainean egiten da."),
+      T("Las rebabas se quitan cuando ya está todo mecanizado.", "Bizarrak dena mekanizatuta dagoenean kentzen dira."),
+      T("Se verifica al final.", "Amaieran egiaztatzen da.")
+    ][hechas];
+    e.textContent = T("Todavía no. ", "Oraindik ez. ") + pista;
+  });
+  $("reinicio").addEventListener("click", function(){ hechas = 0; delete $("ej-estado").dataset.fallo; barajar(); pintar(); });
+  barajar();
+  alCambiarIdioma(function(){ explicar(); pintar(); });
+})();
+</script>
+</body>
+</html>

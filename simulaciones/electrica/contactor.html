@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contactor</title>
+<meta name="description" content="Qué es, partes, características, funcionamiento interactivo con autorretención, tipos y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.hilo{stroke:#9aa3b2;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+.movil{transition:transform .18s ease}
+#rotor{transform-origin:258px 52px}
+.gira #rotor{animation:giro .45s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+.pulsador{user-select:none;-webkit-user-select:none;touch-action:none}
+.quiz{display:grid;gap:8px}
+.quiz .fila{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.quiz .num{font-weight:700;font-size:18px;color:var(--marino);min-width:62px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Mando y protección de motores" data-eu="Motorren agintea eta babesa"></p>
+      <h1 data-es="Contactor" data-eu="Kontaktorea"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">contactor</span> es un <b>interruptor que se maneja a distancia con una bobina</b>. Cuando la bobina recibe corriente, se convierte en un electroimán, atrae la parte móvil y <b>cierra los contactos</b>. Cuando se le quita la corriente, un muelle los vuelve a <b>abrir</b>.</p>
+      <p class="eu"><span class="clave">Kontaktorea</span> <b>bobina baten bidez urrutitik maneiatzen den etengailua</b> da. Bobinak korrontea jasotzen duenean, elektroiman bihurtzen da, zati mugikorra erakartzen du eta <b>kontaktuak ixten</b> ditu. Korrontea kentzen zaionean, malguki batek berriro <b>irekitzen</b> ditu.</p>
+      <p class="es">Así, con una corriente pequeña (la del pulsador y la bobina) <b>mandamos una corriente grande</b> (la del motor). Se usa para arrancar y parar motores, encender alumbrado, resistencias, etc.</p>
+      <p class="eu">Horrela, korronte txiki batekin (pultsadorearena eta bobinarena) <b>korronte handi bat agintzen dugu</b> (motorrarena). Motorrak abiarazteko eta gelditzeko, argiztapena, erresistentziak eta abar pizteko erabiltzen da.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Circuito de mando</h3><h3 class="eu">Agintzeko zirkuitua</h3>
+        <p class="es">Pulsadores y bobina. Corriente pequeña, a 24 V o 230 V.</p><p class="eu">Pultsadoreak eta bobina. Korronte txikia, 24 V edo 230 V-an.</p></div>
+      <div class="card"><h3 class="es">Circuito de potencia</h3><h3 class="eu">Potentzia-zirkuitua</h3>
+        <p class="es">Contactos principales y motor. Corriente grande, a 400 V.</p><p class="eu">Kontaktu nagusiak eta motorra. Korronte handia, 400 V-an.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Diferencia con el guardamotor" data-eu="Disyuntorearekiko aldea"></h2>
+      <p class="es">El contactor <b>maniobra</b> (pone en marcha y para), pero <b>no protege</b>. Por eso va siempre con un guardamotor o con un relé térmico.</p>
+      <p class="eu">Kontaktoreak <b>maniobra</b> egiten du (martxan jarri eta gelditu), baina <b>ez du babesten</b>. Horregatik, beti disyuntore batekin edo errele termiko batekin jartzen da.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. DESKRIBAPENA ============ -->
+  <section class="panel" data-tab="deskribapena" data-es="Descripción" data-eu="Deskribapena" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-partes" viewBox="0 0 300 290" role="img" aria-label="Partes del contactor">
+          <g class="resaltable" data-parte="carcasa"><rect x="40" y="10" width="220" height="270" rx="14" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/></g>
+          <g class="resaltable" data-parte="bornes">
+            <rect x="52" y="52" width="26" height="18" rx="3" fill="#c9ced6" stroke="#6b7280"/><rect x="222" y="52" width="26" height="18" rx="3" fill="#c9ced6" stroke="#6b7280"/>
+            <rect x="52" y="226" width="26" height="16" rx="3" fill="#c9ced6" stroke="#6b7280"/><rect x="222" y="226" width="26" height="16" rx="3" fill="#c9ced6" stroke="#6b7280"/>
+            <text class="txt-s" x="65" y="48" text-anchor="middle">1</text><text class="txt-s" x="235" y="48" text-anchor="middle">2</text>
+            <text class="txt-s" x="65" y="254" text-anchor="middle">A1</text><text class="txt-s" x="235" y="254" text-anchor="middle">A2</text>
+          </g>
+          <g class="resaltable" data-parte="principales">
+            <path d="M78 61H112M188 61h34" stroke="#8a6d3b" stroke-width="6"/>
+            <circle cx="112" cy="68" r="5" fill="#d4a017"/><circle cx="188" cy="68" r="5" fill="#d4a017"/>
+            <rect x="100" y="48" width="100" height="10" rx="3" fill="#b07d2a"/>
+            <circle cx="112" cy="58" r="4" fill="#d4a017"/><circle cx="188" cy="58" r="4" fill="#d4a017"/>
+          </g>
+          <g class="resaltable" data-parte="auxiliares">
+            <path d="M78 104h34M188 104h34" stroke="#8a6d3b" stroke-width="4"/>
+            <rect x="106" y="90" width="88" height="7" rx="3" fill="#b07d2a"/>
+            <path d="M78 122h34M188 122h34" stroke="#8a6d3b" stroke-width="4"/>
+            <rect x="106" y="126" width="88" height="7" rx="3" fill="#b07d2a"/>
+            <text class="txt-s" x="60" y="108" text-anchor="middle">13</text><text class="txt-s" x="240" y="108" text-anchor="middle">14</text>
+            <text class="txt-s" x="60" y="126" text-anchor="middle">21</text><text class="txt-s" x="240" y="126" text-anchor="middle">22</text>
+          </g>
+          <g class="resaltable" data-parte="portacontactos"><rect x="144" y="40" width="12" height="125" rx="3" fill="#7d8697"/></g>
+          <g class="resaltable" data-parte="armadura"><path d="M90 160h120v30h-20v-14h-30v14h-20v-14h-30v14H90z" fill="#5c6575"/></g>
+          <g class="resaltable" data-parte="muelle"><path d="M100 196l10 4-10 4 10 4-10 4 10 4" stroke="#2b6cb0" stroke-width="2.5" fill="none"/><path d="M200 196l-10 4 10 4-10 4 10 4-10 4" stroke="#2b6cb0" stroke-width="2.5" fill="none"/></g>
+          <g class="resaltable" data-parte="nucleo"><path d="M90 268h120v-46h-20v24h-30v-24h-20v24h-30v-24H90z" fill="#5c6575"/></g>
+          <g class="resaltable" data-parte="bobina"><rect x="122" y="214" width="16" height="44" rx="3" fill="#c46a1b"/><rect x="162" y="214" width="16" height="44" rx="3" fill="#c46a1b"/></g>
+          <g class="resaltable" data-parte="espira"><rect x="91" y="221" width="18" height="5" rx="2" fill="#d4a017"/><rect x="191" y="221" width="18" height="5" rx="2" fill="#d4a017"/></g>
+        </svg>
+        <figcaption data-es="Corte simplificado de un contactor (en reposo)" data-eu="Kontaktore baten ebaketa sinplifikatua (atsedenean)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-partes">
+        <li><button data-parte="bobina"><span class="n">1</span><span><b class="es">Bobina (A1-A2)</b><b class="eu">Bobina (A1-A2)</b><small class="es">Hilo de cobre enrollado. Con corriente crea el campo magnético.</small><small class="eu">Kobrezko hari harilkatua. Korrontearekin eremu magnetikoa sortzen du.</small></span></button></li>
+        <li><button data-parte="nucleo"><span class="n">2</span><span><b class="es">Núcleo fijo</b><b class="eu">Nukleo finkoa</b><small class="es">Chapas de hierro en forma de E. Concentra el campo magnético.</small><small class="eu">E itxurako burdinazko xaflak. Eremu magnetikoa kontzentratzen du.</small></span></button></li>
+        <li><button data-parte="armadura"><span class="n">3</span><span><b class="es">Armadura (núcleo móvil)</b><b class="eu">Armadura (nukleo mugikorra)</b><small class="es">La atrae el núcleo y arrastra los contactos.</small><small class="eu">Nukleoak erakartzen du eta kontaktuak eramaten ditu.</small></span></button></li>
+        <li><button data-parte="muelle"><span class="n">4</span><span><b class="es">Muelle de retorno</b><b class="eu">Itzulera-malgukia</b><small class="es">Separa la armadura cuando la bobina se queda sin corriente.</small><small class="eu">Bobinak korronterik gabe geratzen denean armadura bereizten du.</small></span></button></li>
+        <li><button data-parte="espira"><span class="n">5</span><span><b class="es">Espira de sombra</b><b class="eu">Itzal-espira</b><small class="es">Anillo de cobre en bobinas de alterna: evita que la armadura vibre y zumbe.</small><small class="eu">Korronte alternoko bobinetan kobrezko eraztuna: armadura dardarka eta burrunbaka ez ibiltzeko.</small></span></button></li>
+        <li><button data-parte="portacontactos"><span class="n">6</span><span><b class="es">Portacontactos</b><b class="eu">Kontaktu-eramailea</b><small class="es">Pieza aislante que une la armadura con los contactos móviles.</small><small class="eu">Armadura kontaktu mugikorrekin lotzen duen pieza isolatzailea.</small></span></button></li>
+        <li><button data-parte="principales"><span class="n">7</span><span><b class="es">Contactos principales</b><b class="eu">Kontaktu nagusiak</b><small class="es">Normalmente tres (1-2, 3-4, 5-6). Abiertos en reposo. Llevan la corriente del motor.</small><small class="eu">Normalean hiru (1-2, 3-4, 5-6). Irekita atsedenean. Motorraren korrontea daramate.</small></span></button></li>
+        <li><button data-parte="auxiliares"><span class="n">8</span><span><b class="es">Contactos auxiliares</b><b class="eu">Kontaktu laguntzaileak</b><small class="es">Pequeños, para el circuito de mando: abiertos (NA, 13-14) o cerrados (NC, 21-22).</small><small class="eu">Txikiak, agintzeko zirkuiturako: irekiak (NA, 13-14) edo itxiak (NC, 21-22).</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">9</span><span><b class="es">Bornes</b><b class="eu">Borneak</b><small class="es">Tornillos donde se conectan los cables.</small><small class="eu">Kableak konektatzen diren torlojuak.</small></span></button></li>
+        <li><button data-parte="carcasa"><span class="n">10</span><span><b class="es">Carcasa</b><b class="eu">Karkasa</b><small class="es">Caja aislante que se fija al carril DIN.</small><small class="eu">DIN errailean finkatzen den kaxa isolatzailea.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. EZAUGARRIAK ============ -->
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Tensión de la bobina</h3><h3 class="eu">Bobinaren tentsioa</h3>
+        <p class="es">La que necesita para cerrar: 24 V, 48 V, 230 V… en alterna (AC) o continua (DC). Viene escrita en la bobina.</p>
+        <p class="eu">Ixteko behar duena: 24 V, 48 V, 230 V… korronte alternoan (AC) edo zuzenean (DC). Bobinan idatzita dago.</p></div>
+      <div class="card"><h3 class="es">Intensidad de empleo (Ie)</h3><h3 class="eu">Erabilera-korrontea (Ie)</h3>
+        <p class="es">Corriente que pueden llevar los contactos principales, por ejemplo <b>9 A, 12 A, 18 A</b>…</p>
+        <p class="eu">Kontaktu nagusiek eraman dezaketen korrontea, adibidez <b>9 A, 12 A, 18 A</b>…</p></div>
+      <div class="card"><h3 class="es">Potencia del motor</h3><h3 class="eu">Motorraren potentzia</h3>
+        <p class="es">Potencia máxima del motor que puede mandar, en kW a 400 V (por ejemplo 4 kW).</p>
+        <p class="eu">Agin dezakeen motorraren potentzia handiena, kW-tan 400 V-an (adibidez 4 kW).</p></div>
+      <div class="card"><h3 class="es">Categoría de empleo</h3><h3 class="eu">Erabilera-kategoria</h3>
+        <p class="es">El tipo de carga: <b>AC-1</b> resistencias, <b>AC-3</b> motores (la más usada).</p>
+        <p class="eu">Karga mota: <b>AC-1</b> erresistentziak, <b>AC-3</b> motorrak (erabiliena).</p></div>
+      <div class="card"><h3 class="es">Número de polos y contactos auxiliares</h3><h3 class="eu">Polo kopurua eta kontaktu laguntzaileak</h3>
+        <p class="es">Tripolar o tetrapolar. Suelen traer 1 NA o 1 NC y se pueden añadir bloques de auxiliares.</p>
+        <p class="eu">Tripolarra edo tetrapolarra. Normalean NA 1 edo NC 1 dakarte, eta laguntzaile-blokeak gehi daitezke.</p></div>
+      <div class="card"><h3 class="es">Vida útil</h3><h3 class="eu">Bizitza erabilgarria</h3>
+        <p class="es">Millones de maniobras mecánicas; menos si corta mucha corriente.</p>
+        <p class="eu">Milioika maniobra mekaniko; gutxiago korronte asko eteten badu.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. FUNTZIONAMENDUA ============ -->
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <p class="es">Mantén pulsado <b>S2 (marcha)</b> y suelta. Con <b>autorretención</b>, el contacto 13-14 sigue dando corriente a la bobina y el motor no se para hasta que pulses <b>S1 (paro)</b>. Quítala y mira la diferencia.</p>
+      <p class="eu">Eutsi sakatuta <b>S2 (martxa)</b> eta askatu. <b>Autoatxikimenduarekin</b>, 13-14 kontaktuak bobinari korrontea ematen jarraitzen dio eta motorra ez da gelditzen <b>S1 (geldialdia)</b> sakatu arte. Kendu eta begiratu aldea.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-mando" viewBox="0 0 300 270" role="img" aria-label="Circuito de mando">
+          <g id="mando-hilos"></g>
+          <text class="txt" x="14" y="24">L</text><text class="txt" x="14" y="258">N</text>
+        </svg>
+        <figcaption data-es="Circuito de mando" data-eu="Agintzeko zirkuitua"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg id="svg-meca" viewBox="0 0 300 270" role="img" aria-label="Contactor y motor">
+          <rect x="30" y="8" width="200" height="254" rx="14" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/>
+          <path d="M42 58H92M168 58h50" stroke="#8a6d3b" stroke-width="6"/>
+          <path d="M42 112h50M168 112h50M42 140h50M168 140h50" stroke="#8a6d3b" stroke-width="4"/>
+          <text class="txt-s" x="36" y="50" data-es="principales" data-eu="nagusiak"></text>
+          <text class="txt-s" x="36" y="106">13-14 NA</text><text class="txt-s" x="36" y="154">21-22 NC</text>
+          <g id="movil" class="movil">
+            <rect x="124" y="30" width="12" height="150" rx="3" fill="#7d8697"/>
+            <rect x="86" y="38" width="88" height="10" rx="3" fill="#b07d2a"/>
+            <rect x="86" y="96" width="88" height="7" rx="3" fill="#b07d2a"/>
+            <rect x="86" y="142" width="88" height="7" rx="3" fill="#b07d2a"/>
+            <path d="M70 176h120v26h-20v-12h-30v12h-20v-12h-30v12H70z" fill="#5c6575"/>
+          </g>
+          <path d="M80 214l10 4-10 4 10 4-10 4M180 214l-10 4 10 4-10 4 10 4" stroke="#2b6cb0" stroke-width="2.5" fill="none"/>
+          <path d="M70 256h120v-40h-20v20h-30v-20h-20v20h-30v-20H70z" fill="#5c6575"/>
+          <rect id="bob1" x="102" y="212" width="16" height="40" rx="3" fill="#c46a1b"/><rect id="bob2" x="142" y="212" width="16" height="40" rx="3" fill="#c46a1b"/>
+          <path id="flujo" d="M95 250V200h70v50" stroke="var(--naranja)" stroke-width="2" stroke-dasharray="4 4" fill="none" opacity="0"/>
+          <g id="motor">
+            <path id="m-hilo" class="hilo" d="M218 58h40v-20"/>
+            <circle cx="258" cy="52" r="0"/>
+            <circle cx="258" cy="30" r="24" fill="#fff" stroke="var(--marino)" stroke-width="2"/>
+            <g id="rotor" style="transform-origin:258px 30px"><path d="M258 12v36M240 30h36" stroke="#c4cad4" stroke-width="4" stroke-linecap="round"/></g>
+            <text class="txt" x="258" y="34" text-anchor="middle" font-size="12">M</text>
+          </g>
+          <circle id="lampara" cx="258" cy="140" r="14" fill="#f3d0cc" stroke="var(--rojo)" stroke-width="2"/>
+          <path d="M218 140h26" class="hilo" id="l-hilo"/>
+          <text class="txt-s" x="258" y="170" text-anchor="middle">H1</text>
+        </svg>
+        <figcaption data-es="Contactor KM1 por dentro" data-eu="KM1 kontaktorea barrutik"></figcaption>
+      </figure>
+    </div>
+    <div class="estado" id="estado"></div>
+    <div class="mandos">
+      <button class="boton verde pulsador" id="s2" data-es="S2 marcha (mantén)" data-eu="S2 martxa (eutsi)"></button>
+      <button class="boton rojo pulsador" id="s1" data-es="S1 paro (mantén)" data-eu="S1 geldialdia (eutsi)"></button>
+      <button class="boton claro" id="auto" aria-pressed="true" data-es="Autorretención" data-eu="Autoatxikimendua"></button>
+    </div>
+  </section>
+
+  <!-- ============ 5. MOTAK ============ -->
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Contactor de potencia</h3><h3 class="eu">Potentzia-kontaktorea</h3>
+        <p class="es">Con contactos principales para mandar motores y otras cargas grandes.</p>
+        <p class="eu">Kontaktu nagusiak ditu, motorrak eta beste karga handi batzuk agintzeko.</p></div>
+      <div class="card"><h3 class="es">Contactor auxiliar (relé)</h3><h3 class="eu">Kontaktore laguntzailea (errelea)</h3>
+        <p class="es">Solo contactos pequeños NA/NC para hacer automatismos en el circuito de mando.</p>
+        <p class="eu">NA/NC kontaktu txikiak bakarrik, agintzeko zirkuituan automatismoak egiteko.</p></div>
+      <div class="card"><h3 class="es">Según la bobina: AC o DC</h3><h3 class="eu">Bobinaren arabera: AC edo DC</h3>
+        <p class="es">Bobina para corriente alterna (con espira de sombra) o para continua (más silenciosa).</p>
+        <p class="eu">Korronte alternorako bobina (itzal-espirarekin) edo zuzenerako (isilagoa).</p></div>
+      <div class="card"><h3 class="es">Según la carga: categorías</h3><h3 class="eu">Kargaren arabera: kategoriak</h3>
+        <p class="es"><b>AC-1</b> cargas resistivas · <b>AC-3</b> motores de jaula (arranque y paro normal) · <b>AC-4</b> motores con arranques y paradas muy frecuentes.</p>
+        <p class="eu"><b>AC-1</b> karga erresistiboak · <b>AC-3</b> kaiola-motorrak (abiarazte eta geldialdi arrunta) · <b>AC-4</b> oso maiz abiarazi eta gelditzen diren motorrak.</p></div>
+      <div class="card"><h3 class="es">Inversor</h3><h3 class="eu">Inbertsorea</h3>
+        <p class="es">Dos contactores con enclavamiento mecánico para cambiar el sentido de giro del motor.</p>
+        <p class="eu">Bi kontaktore blokeo mekanikoarekin, motorraren biraketa-noranzkoa aldatzeko.</p></div>
+      <div class="card"><h3 class="es">Accesorios</h3><h3 class="eu">Osagarriak</h3>
+        <p class="es">Bloques de contactos auxiliares, temporizadores, relé térmico acoplado, enclavamientos.</p>
+        <p class="eu">Kontaktu laguntzaileen blokeak, tenporizadoreak, errele termiko akoplatua, blokeoak.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 6. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-simbolo" viewBox="0 0 330 250" role="img" aria-label="Símbolo">
+          <g fill="none" stroke="var(--marino)" stroke-width="2.4" stroke-linecap="round">
+            <g class="resaltable" data-parte="bobina">
+              <rect x="20" y="78" width="44" height="44"/>
+              <path d="M42 43v35M42 122v35"/>
+              <text class="txt" x="50" y="52" stroke="none">A1</text><text class="txt" x="50" y="155" stroke="none">A2</text>
+            </g>
+            <g class="resaltable" data-parte="principales">
+              <path d="M110 30v50M160 30v50M210 30v50M110 80l-14 38M160 80l-14 38M210 80l-14 38M110 118v100M160 118v100M210 118v100"/>
+              <path d="M104 86a6 6 0 0 1 12 0M154 86a6 6 0 0 1 12 0M204 86a6 6 0 0 1 12 0" transform="translate(0 -6)"/>
+              <text class="txt" x="118" y="38" stroke="none">1</text><text class="txt" x="168" y="38" stroke="none">3</text><text class="txt" x="218" y="38" stroke="none">5</text>
+              <text class="txt" x="118" y="214" stroke="none">2</text><text class="txt" x="168" y="214" stroke="none">4</text><text class="txt" x="218" y="214" stroke="none">6</text>
+            </g>
+            <g class="resaltable" data-parte="na">
+              <path d="M262 30v50M262 80l-14 38M262 118v40"/>
+              <text class="txt" x="266" y="38" stroke="none" font-size="10">13</text><text class="txt" x="266" y="156" stroke="none" font-size="10">14</text>
+            </g>
+            <g class="resaltable" data-parte="nc">
+              <path d="M300 30v50M300 80h-12M300 118L286 74M300 118v40"/>
+              <text class="txt" x="280" y="38" stroke="none" font-size="10" text-anchor="end">21</text><text class="txt" x="280" y="156" stroke="none" font-size="10" text-anchor="end">22</text>
+            </g>
+            <g class="resaltable" data-parte="union"><path d="M64 100H294" stroke-dasharray="6 5" stroke-width="1.6"/></g>
+          </g>
+          <text class="txt" x="10" y="230" font-size="15">KM1</text>
+        </svg>
+        <figcaption data-es="Símbolo del contactor KM1" data-eu="KM1 kontaktorearen sinboloa"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-simbolo">
+        <li><button data-parte="bobina"><span class="n">1</span><span><b class="es">Bobina A1-A2</b><b class="eu">A1-A2 bobina</b><small class="es">Un rectángulo. Se dibuja en el esquema de mando.</small><small class="eu">Laukizuzen bat. Agintzeko eskeman marrazten da.</small></span></button></li>
+        <li><button data-parte="principales"><span class="n">2</span><span><b class="es">Contactos principales 1-2, 3-4, 5-6</b><b class="eu">Kontaktu nagusiak 1-2, 3-4, 5-6</b><small class="es">El semicírculo indica función de contactor. Van en el esquema de potencia.</small><small class="eu">Erdizirkuluak kontaktore-funtzioa adierazten du. Potentzia-eskeman joaten dira.</small></span></button></li>
+        <li><button data-parte="na"><span class="n">3</span><span><b class="es">Auxiliar NA 13-14</b><b class="eu">NA laguntzailea 13-14</b><small class="es">Normalmente abierto: se cierra cuando la bobina tiene corriente.</small><small class="eu">Normalean irekia: bobinak korrontea duenean ixten da.</small></span></button></li>
+        <li><button data-parte="nc"><span class="n">4</span><span><b class="es">Auxiliar NC 21-22</b><b class="eu">NC laguntzailea 21-22</b><small class="es">Normalmente cerrado: se abre cuando la bobina tiene corriente.</small><small class="eu">Normalean itxia: bobinak korrontea duenean irekitzen da.</small></span></button></li>
+        <li><button data-parte="union"><span class="n">5</span><span><b class="es">Unión mecánica</b><b class="eu">Lotura mekanikoa</b><small class="es">Todos los contactos cambian a la vez. En los esquemas se separan, pero todos llevan el nombre KM1.</small><small class="eu">Kontaktu guztiak batera aldatzen dira. Eskemetan bereizita marrazten dira, baina guztiek KM1 izena dute.</small></span></button></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 data-es="Cómo se numeran los auxiliares" data-eu="Nola zenbakitzen diren laguntzaileak"></h2>
+      <p class="es">La <b>segunda cifra</b> dice qué tipo es: <b>1-2 = NC</b>, <b>3-4 = NA</b>. La <b>primera</b> es el número de orden (1.º, 2.º, 3.º…).</p>
+      <p class="eu"><b>Bigarren zifrak</b> mota adierazten du: <b>1-2 = NC</b>, <b>3-4 = NA</b>. <b>Lehenengoa</b> ordena-zenbakia da (1., 2., 3.…).</p>
+      <div class="quiz" id="quiz"></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var s1 = false, s2 = false, auto = true, km = false;
+
+  function pulsador(b, fn){
+    var on = function(e){ e.preventDefault(); fn(true); b.setAttribute("aria-pressed", "true"); };
+    var off = function(){ fn(false); b.setAttribute("aria-pressed", "false"); };
+    b.addEventListener("pointerdown", on);
+    ["pointerup", "pointerleave", "pointercancel"].forEach(function(ev){ b.addEventListener(ev, off); });
+    b.addEventListener("keydown", function(e){ if (e.key === " " || e.key === "Enter") on(e); });
+    b.addEventListener("keyup", off);
+  }
+  pulsador($("s2"), function(v){ s2 = v; calcular(); });
+  pulsador($("s1"), function(v){ s1 = v; calcular(); });
+  $("auto").addEventListener("click", function(){ auto = !auto; this.setAttribute("aria-pressed", auto ? "true" : "false"); calcular(); });
+
+  function calcular(){
+    // rama: L - S1(NC) - [S2 (NA) || KM1 13-14] - bobina - N
+    var trasS1 = !s1;
+    var ret = auto && km;
+    km = trasS1 && (s2 || ret);
+    dibujar();
+  }
+
+  function H(d, con){ return '<path class="hilo' + (con ? " con" : "") + '" d="' + d + '"/>'; }
+  function dibujar(){
+    var trasS1 = !s1, rama2 = trasS1 && s2, rama3 = trasS1 && auto && km;
+    var g = "";
+    g += H("M30 20H260", true) + H("M30 250H260", true);
+    // S1 (NC)
+    g += H("M80 20V50", true);
+    g += s1 ? H("M80 50L94 78", false) + '<path d="M86 64h-14" stroke="var(--marino)" stroke-width="2"/>' : H("M80 50V80", true);
+    g += '<circle cx="80" cy="50" r="3" fill="var(--marino)"/><circle cx="80" cy="80" r="3" fill="var(--marino)"/><path d="M80 80l12 0" stroke="var(--marino)" stroke-width="2"/>';
+    g += '<text class="txt" x="46" y="70">S1</text>';
+    g += H("M80 80V100", trasS1) + H("M80 100H150", trasS1);
+    // S2 (NA)
+    g += H("M80 100V120", trasS1);
+    g += s2 ? H("M80 120V150", trasS1) : H("M80 150L66 122", false);
+    g += '<circle cx="80" cy="120" r="3" fill="var(--marino)"/><circle cx="80" cy="150" r="3" fill="var(--marino)"/>';
+    g += '<text class="txt" x="46" y="140">S2</text>';
+    // KM1 13-14
+    g += H("M150 100V120", trasS1);
+    var c13 = auto && km;
+    g += c13 ? H("M150 120V150", trasS1) : H("M150 150L136 122", false);
+    g += '<circle cx="150" cy="120" r="3" fill="var(--marino)"/><circle cx="150" cy="150" r="3" fill="var(--marino)"/>';
+    g += '<text class="txt-s" x="158" y="128">KM1</text><text class="txt-s" x="158" y="140">13-14</text>';
+    if (!auto) g += '<path d="M140 132l20 6" stroke="var(--rojo)" stroke-width="3"/>';
+    var bob = km;
+    g += H("M80 150V160", rama2 || rama3) + H("M150 150V160H80", rama3) + H("M80 160V180", bob);
+    g += '<rect x="62" y="180" width="36" height="34" fill="' + (bob ? "var(--naranja-soft)" : "#fff") + '" stroke="var(--marino)" stroke-width="2.4"/>';
+    g += '<text class="txt" x="104" y="196">KM1</text><text class="txt-s" x="104" y="208">A1-A2</text>';
+    g += H("M80 214V250", bob);
+    // lámpara por 21-22
+    g += H("M230 20V110", true);
+    g += km ? H("M230 140L216 112", false) : H("M230 110V140", true);
+    g += '<circle cx="230" cy="110" r="3" fill="var(--marino)"/><circle cx="230" cy="140" r="3" fill="var(--marino)"/>';
+    g += '<text class="txt-s" x="238" y="128">21-22</text>';
+    g += H("M230 140V180", !km);
+    g += '<circle cx="230" cy="194" r="13" fill="' + (!km ? "#ff8a80" : "#fff") + '" stroke="var(--marino)" stroke-width="2.2"/><path d="M221 185l18 18M239 185l-18 18" stroke="var(--marino)" stroke-width="2"/>';
+    g += '<text class="txt-s" x="248" y="198">H1</text>';
+    g += H("M230 207V250", !km);
+    $("mando-hilos").innerHTML = g;
+
+    $("movil").style.transform = km ? "translateY(12px)" : "none";
+    ["bob1", "bob2"].forEach(function(id){ $(id).setAttribute("fill", km ? "#ff9d2e" : "#c46a1b"); });
+    $("flujo").setAttribute("opacity", km ? 1 : 0);
+    $("m-hilo").setAttribute("class", "hilo" + (km ? " con" : ""));
+    $("l-hilo").setAttribute("class", "hilo" + (!km ? " con" : ""));
+    $("lampara").setAttribute("fill", !km ? "#ff8a80" : "#f3f3f3");
+    $("svg-meca").classList.toggle("gira", km);
+    var e = $("estado");
+    if (km) { e.className = "estado ok"; e.textContent = s2 ? T("Bobina con corriente: contactos principales cerrados, motor en marcha. H1 se apaga (21-22 abierto).", "Bobina korrontearekin: kontaktu nagusiak itxita, motorra martxan. H1 itzaltzen da (21-22 irekita).")
+                                              : T("Autorretención: 13-14 está cerrado y sigue alimentando la bobina aunque sueltes S2.", "Autoatxikimendua: 13-14 itxita dago eta bobina elikatzen jarraitzen du S2 askatu arren."); }
+    else { e.className = "estado"; e.textContent = s1 ? T("S1 abre el circuito: la bobina pierde corriente y el muelle abre los contactos.", "S1-ek zirkuitua irekitzen du: bobinak korrontea galtzen du eta malgukiak kontaktuak irekitzen ditu.")
+           : (auto ? T("En reposo: motor parado, H1 encendida (21-22 cerrado). Pulsa S2.", "Atsedenean: motorra geldirik, H1 piztuta (21-22 itxita). Sakatu S2.")
+                   : T("Sin autorretención el motor solo gira mientras mantienes S2 pulsado (mando por impulsos).", "Autoatxikimendurik gabe, motorrak S2 sakatuta duzun bitartean bakarrik biratzen du (bultzadakako agintea).")); }
+  }
+
+  // test de numeración
+  var NUMS = ["13-14", "21-22", "31-32", "43-44", "53-54", "61-62"];
+  function quiz(){
+    $("quiz").innerHTML = NUMS.map(function(n, i){
+      return '<div class="fila"><span class="num">' + n + '</span><span class="chips"><button data-i="' + i + '" data-r="NA">NA</button><button data-i="' + i + '" data-r="NC">NC</button></span><span class="res" id="r' + i + '"></span></div>';
+    }).join("");
+  }
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest("#quiz button"); if (!b) return;
+    var n = NUMS[+b.getAttribute("data-i")], bien = (n.charAt(1) === "3" ? "NA" : "NC") === b.getAttribute("data-r");
+    [].forEach.call(b.parentNode.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    var r = $("r" + b.getAttribute("data-i"));
+    r.className = bien ? "ok" : "mal";
+    r.textContent = bien ? T("¡Bien!", "Ondo!") : T("No: mira la segunda cifra", "Ez: begiratu bigarren zifra");
+  });
+  alCambiarIdioma(function(){ dibujar(); quiz(); });
+})();
+</script>
+</body>
+</html>

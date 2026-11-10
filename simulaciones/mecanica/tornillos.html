@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tornillos</title>
+<meta name="description" content="Partes del tornillo, tipos de cabeza, designación (M10 × 40 – 8.8), calidad y llave.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.ac{fill:#c9cfd8;stroke:var(--marino);stroke-width:1.8}
+.hilo{stroke:var(--marino);stroke-width:1.1}
+.fina{stroke:var(--naranja-osc);stroke-width:1.2;fill:none}
+.cifra{font-size:11.5px;fill:var(--naranja-osc);font-weight:700}
+.ico svg{width:100%;height:92px;display:block;background:var(--naranja-soft);border-radius:14px;margin-bottom:8px}
+.designa{font-size:clamp(20px,6vw,28px);font-weight:700;color:var(--marino)}
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.campos label{display:grid;gap:4px;font-size:12.5px;font-weight:600;color:var(--marino)}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de unión" data-eu="Lotura-elementuak"></p>
+      <h1 data-es="Tornillos" data-eu="Torlojuak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <marker id="fl" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 1.5L10 5L0 8.5z" fill="var(--naranja-osc)"/></marker>
+  </defs></svg>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">tornillo</span> es una pieza cilíndrica con <b>rosca exterior</b> y normalmente una <b>cabeza</b>. Sirve para <b>unir piezas de forma desmontable</b>: se puede soltar y volver a montar sin romper nada.</p>
+      <p class="eu"><span class="clave">Torlojua</span> <b>kanpo-haria</b> eta normalean <b>burua</b> dituen pieza zilindrikoa da. <b>Piezak era desmuntagarrian lotzeko</b> balio du: ezer hautsi gabe askatu eta berriro munta daiteke.</p>
+      <p class="es">Puede roscar en una pieza con agujero roscado, o atravesar las piezas y apretarse con una <b>tuerca</b> (entonces se llama perno).</p>
+      <p class="eu">Zulo hariztatua duen pieza batean roska daiteke, edo piezak zeharkatu eta <b>azkoin</b> batekin estutu (orduan perno deitzen zaio).</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Unión desmontable</h3><h3 class="eu">Lotura desmuntagarria</h3><p class="es">Tornillos, tuercas, pasadores, chavetas.</p><p class="eu">Torlojuak, azkoinak, pasadoreak, kabilak.</p></div>
+      <div class="card"><h3 class="es">Unión fija</h3><h3 class="eu">Lotura finkoa</h3><p class="es">Remaches, soldadura, pegado: para soltar hay que romper.</p><p class="eu">Errematxeak, soldadura, itsasketa: askatzeko hautsi egin behar da.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="atalak" data-es="Partes" data-eu="Atalak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-t" viewBox="0 0 340 170" role="img" aria-label="Partes del tornillo">
+          <g class="resaltable" data-parte="cabeza"><path class="ac" d="M30 50h36v70H30z"/><path class="hilo" d="M30 72h36M30 98h36"/></g>
+          <g class="resaltable" data-parte="vastago"><path class="ac" d="M66 66h100v38H66z"/></g>
+          <g class="resaltable" data-parte="rosca"><path class="ac" d="M166 66h130l8 8v22l-8 8H166z"/>
+            <path class="hilo" d="M174 66l-6 38M186 66l-6 38M198 66l-6 38M210 66l-6 38M222 66l-6 38M234 66l-6 38M246 66l-6 38M258 66l-6 38M270 66l-6 38M282 66l-6 38M294 66l-6 38"/></g>
+          <g class="resaltable" data-parte="d"><path class="fina" d="M318 66v38" marker-start="url(#fl)" marker-end="url(#fl)"/><path class="fina" d="M300 66h24M300 104h24" stroke-width=".7"/><text class="cifra" x="326" y="90">d</text></g>
+          <g class="resaltable" data-parte="L"><path class="fina" d="M66 140H304" marker-start="url(#fl)" marker-end="url(#fl)"/><path class="fina" d="M66 104v42M304 104v42" stroke-width=".7"/><text class="cifra" x="185" y="135" text-anchor="middle">L</text></g>
+          <g class="resaltable" data-parte="b"><path class="fina" d="M166 30H304" marker-start="url(#fl)" marker-end="url(#fl)"/><path class="fina" d="M166 66V24M304 66V24" stroke-width=".7"/><text class="cifra" x="235" y="24" text-anchor="middle">b</text></g>
+          <g class="resaltable" data-parte="P"><path class="fina" d="M222 56h12" stroke-width="1.6"/><text class="cifra" x="228" y="52" text-anchor="middle">P</text></g>
+          <g class="resaltable" data-parte="k"><path class="fina" d="M30 40h36" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="cifra" x="48" y="34" text-anchor="middle">k</text></g>
+        </svg>
+        <figcaption data-es="Tornillo de cabeza hexagonal" data-eu="Buru hexagonaleko torlojua"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-t">
+        <li><button data-parte="cabeza"><span class="n">1</span><span><b class="es">Cabeza (k = altura)</b><b class="eu">Burua (k = altuera)</b><small class="es">Donde se aplica la llave. Hace tope contra la pieza.</small><small class="eu">Giltza bertan jartzen da. Piezaren kontra tope egiten du.</small></span></button></li>
+        <li><button data-parte="vastago"><span class="n">2</span><span><b class="es">Vástago (caña lisa)</b><b class="eu">Kirtena (zati leuna)</b><small class="es">Parte sin rosca. En algunos tornillos no existe (roscados hasta la cabeza).</small><small class="eu">Haririk gabeko zatia. Torloju batzuetan ez dago (burura arte hariztatuak).</small></span></button></li>
+        <li><button data-parte="rosca"><span class="n">3</span><span><b class="es">Rosca (b = longitud roscada)</b><b class="eu">Haria (b = luzera hariztatua)</b><small class="es">El filete en hélice que entra en la tuerca o en el agujero roscado.</small><small class="eu">Azkoinean edo zulo hariztatuan sartzen den helize-formako harilkatua.</small></span></button></li>
+        <li><button data-parte="d"><span class="n">4</span><span><b class="es">Diámetro nominal d</b><b class="eu">d diametro nominala</b><small class="es">El diámetro exterior de la rosca. En métrica: M10 → d = 10 mm.</small><small class="eu">Hariaren kanpo-diametroa. Metrikoan: M10 → d = 10 mm.</small></span></button></li>
+        <li><button data-parte="L"><span class="n">5</span><span><b class="es">Longitud L</b><b class="eu">L luzera</b><small class="es">Se mide sin la cabeza (salvo en los avellanados, que se mide entera).</small><small class="eu">Bururik gabe neurtzen da (abokardatuetan izan ezik, osorik neurtzen baita).</small></span></button></li>
+        <li><button data-parte="P"><span class="n">6</span><span><b class="es">Paso P</b><b class="eu">P pausoa</b><small class="es">Distancia entre dos filetes. Es lo que avanza el tornillo en una vuelta.</small><small class="eu">Bi hariren arteko distantzia. Torlojuak bira batean aurreratzen duena da.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="rejilla">
+      <div class="card ico"><svg viewBox="0 0 160 80"><path class="ac" d="M20 22h22v36H20z"/><path class="hilo" d="M20 33h22M20 47h22"/><path class="ac" d="M42 32h96v16H42z"/></svg>
+        <h3 class="es">Hexagonal (ISO 4017)</h3><h3 class="eu">Hexagonala (ISO 4017)</h3><p class="es">El más común. Llave fija o de vaso.</p><p class="eu">Ohikoena. Giltza finkoa edo hodi-giltza.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 80"><rect class="ac" x="20" y="24" width="24" height="32" rx="3"/><path d="M28 34h8v12h-8z" fill="var(--marino)"/><path class="ac" d="M44 32h94v16H44z"/></svg>
+        <h3 class="es">Allen (ISO 4762)</h3><h3 class="eu">Allen (ISO 4762)</h3><p class="es">Cabeza cilíndrica con hexágono interior. Llave Allen. Muy usado en máquinas.</p><p class="eu">Buru zilindrikoa, barne-hexagonoarekin. Allen giltza. Makinetan asko erabiltzen da.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 80"><path class="ac" d="M24 18v44l20-14V32z"/><path class="ac" d="M44 32h94v16H44z"/></svg>
+        <h3 class="es">Avellanado (ISO 10642)</h3><h3 class="eu">Abokardatua (ISO 10642)</h3><p class="es">Cabeza cónica que queda enrasada con la pieza. Allen o Torx.</p><p class="eu">Buru konikoa, piezarekin berdinduta geratzen dena. Allen edo Torx.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 80"><path class="ac" d="M42 24c-20 0-24 8-24 16s4 16 24 16z"/><path d="M26 40h12M32 34v12" stroke="var(--marino)" stroke-width="2"/><path class="ac" d="M42 32h96v16H42z"/></svg>
+        <h3 class="es">Alomado o cilíndrico (cruz, ranura)</h3><h3 class="eu">Kupuladuna edo zilindrikoa (gurutzea, arteka)</h3><p class="es">Pequeños, con destornillador. Cuadros eléctricos, carcasas.</p><p class="eu">Txikiak, bihurkinarekin. Koadro elektrikoak, karkasak.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 80"><path class="ac" d="M40 30h80v20H40z"/><path class="hilo" d="M48 30l-4 20M58 30l-4 20M68 30l-4 20M78 30l-4 20M88 30l-4 20M98 30l-4 20M108 30l-4 20M118 30l-4 20"/><path d="M40 36h6v8h-6z" fill="var(--marino)"/></svg>
+        <h3 class="es">Prisionero</h3><h3 class="eu">Presoa (prisionero)</h3><p class="es">Sin cabeza. Fija una pieza sobre un eje apretando con la punta.</p><p class="eu">Bururik gabe. Pieza bat ardatz baten gainean finkatzen du puntarekin estutuz.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 80"><path class="ac" d="M20 32h120v16H20z"/><path class="hilo" d="M28 32l-4 16M38 32l-4 16M48 32l-4 16M58 32l-4 16M112 32l-4 16M122 32l-4 16M132 32l-4 16M142 32l-4 16"/></svg>
+        <h3 class="es">Espárrago</h3><h3 class="eu">Zainzuria (esparragoa)</h3><p class="es">Rosca en los dos extremos: un lado fijo en la pieza y en el otro una tuerca.</p><p class="eu">Haria bi muturretan: alde bat piezan finko eta bestean azkoin bat.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="izendapena" data-es="Designación" data-eu="Izendapena" hidden>
+    <div class="card" style="display:grid;gap:12px">
+      <p class="es">Elige y mira cómo se escribe el tornillo. El <b>paso normal</b> no se escribe; el fino sí.</p>
+      <p class="eu">Aukeratu eta begiratu torlojua nola idazten den. <b>Pauso normala</b> ez da idazten; fina bai.</p>
+      <div class="campos">
+        <label><span data-es="Cabeza" data-eu="Burua"></span><select id="c-cab"></select></label>
+        <label><span data-es="Métrica" data-eu="Metrikoa"></span><select id="c-d"></select></label>
+        <label><span data-es="Paso" data-eu="Pausoa"></span><select id="c-p"></select></label>
+        <label><span data-es="Longitud" data-eu="Luzera"></span><select id="c-l"></select></label>
+        <label><span data-es="Calidad" data-eu="Kalitatea"></span><select id="c-q"></select></label>
+      </div>
+      <div class="designa" id="designa"></div>
+      <figure class="fig" style="box-shadow:none;padding:0"><svg id="svg-d" viewBox="0 0 340 110" role="img" aria-label="Tornillo"></svg></figure>
+      <div class="rejilla" id="expl"></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var D = { 3: [0.5, null, 5.5, 2.5], 4: [0.7, null, 7, 3], 5: [0.8, null, 8, 4], 6: [1, null, 10, 5], 8: [1.25, 1, 13, 6], 10: [1.5, 1.25, 16, 8], 12: [1.75, 1.5, 18, 10], 16: [2, 1.5, 24, 14], 20: [2.5, 1.5, 30, 17] };
+  var CAB = [["hex", "ISO 4017", "Hexagonal", "Hexagonala"], ["allen", "ISO 4762", "Allen", "Allen"], ["av", "ISO 10642", "Avellanado Allen", "Allen abokardatua"]];
+  var LS = [10, 12, 16, 20, 25, 30, 35, 40, 50, 60, 70, 80, 100];
+  var Q = ["4.6", "5.6", "8.8", "10.9", "12.9"];
+  var est = { cab: 0, d: 10, p: "n", l: 40, q: "8.8" };
+  function n(v){ return String(v).replace(".", ","); }
+  function opciones(){
+    $("c-cab").innerHTML = CAB.map(function(c, i){ return '<option value="' + i + '"' + (i === est.cab ? " selected" : "") + '>' + T(c[2], c[3]) + '</option>'; }).join("");
+    $("c-d").innerHTML = Object.keys(D).map(function(d){ return '<option value="' + d + '"' + (+d === est.d ? " selected" : "") + '>M' + d + '</option>'; }).join("");
+    var f = D[est.d][1];
+    if (!f && est.p === "f") est.p = "n";
+    $("c-p").innerHTML = '<option value="n">' + T("Normal", "Normala") + ' (' + n(D[est.d][0]) + ')</option>' + (f ? '<option value="f"' + (est.p === "f" ? " selected" : "") + '>' + T("Fino", "Fina") + ' (' + n(f) + ')</option>' : "");
+    $("c-l").innerHTML = LS.map(function(l){ return '<option' + (l === est.l ? " selected" : "") + '>' + l + '</option>'; }).join("");
+    $("c-q").innerHTML = Q.map(function(q){ return '<option' + (q === est.q ? " selected" : "") + '>' + q + '</option>'; }).join("");
+  }
+  function pintar(){
+    var c = CAB[est.cab], d = D[est.d], p = est.p === "f" ? d[1] : d[0];
+    $("designa").textContent = c[1] + " M" + est.d + (est.p === "f" ? "×" + n(p) : "") + " × " + est.l + " – " + est.q;
+    var q = est.q.split("."), rm = +q[0] * 100, re = rm * +q[1] / 10;
+    var llave = c[0] === "hex" ? T("Llave fija o de vaso de ", "Giltza finkoa edo hodi-giltza: ") + n(d[2]) + " mm" : T("Llave Allen de ", "Allen giltza: ") + d[3] + " mm";
+    var ex = [
+      [T("Rosca", "Haria"), "M" + est.d + ": " + T("métrica, d = ", "metrikoa, d = ") + est.d + " mm"],
+      [T("Paso", "Pausoa"), n(p) + " mm " + (est.p === "f" ? T("(fino: se escribe)", "(fina: idatzi egiten da)") : T("(normal: no se escribe)", "(normala: ez da idazten)"))],
+      [T("Longitud", "Luzera"), est.l + " mm" + (c[0] === "av" ? T(" (con la cabeza)", " (buruarekin)") : T(" (sin la cabeza)", " (bururik gabe)"))],
+      [T("Calidad ", "Kalitatea ") + est.q, T("Resistencia a rotura ", "Haustura-erresistentzia ") + rm + " MPa · " + T("límite elástico ", "muga elastikoa ") + re + " MPa"],
+      [T("Herramienta", "Erreminta"), llave],
+      [T("Agujero para roscar", "Roskatzeko zuloa"), "Ø " + n(Math.round((est.d - p) * 10) / 10) + " mm (d − P)"]
+    ];
+    $("expl").innerHTML = ex.map(function(x){ return '<div class="card"><h3>' + x[0] + '</h3><p style="margin:0">' + x[1] + '</p></div>'; }).join("");
+    // dibujo a escala aproximada
+    var k = Math.min(6, 250 / (est.l + est.d * 1.6)), dd = Math.max(est.d * k, 8), L = est.l * k, cy = 55, x0 = 40, s = "";
+    if (c[0] === "hex") s += '<path class="ac" d="M' + x0 + ' ' + (cy - dd * 0.9) + 'h' + (dd * 0.65) + 'v' + (dd * 1.8) + 'h' + (-dd * 0.65) + 'z"/>', x0 += dd * 0.65;
+    else if (c[0] === "allen") s += '<rect class="ac" x="' + x0 + '" y="' + (cy - dd * 0.75) + '" width="' + dd + '" height="' + dd * 1.5 + '" rx="2"/>', x0 += dd;
+    else { s += '<path class="ac" d="M' + (x0 + dd * 0.6) + ' ' + (cy - dd) + 'v' + 2 * dd + 'L' + (x0 + dd * 1.2) + ' ' + (cy + dd / 2) + 'v' + (-dd) + 'z"/>'; x0 += dd * 1.2; L -= dd * 0.6; }
+    s += '<rect class="ac" x="' + x0 + '" y="' + (cy - dd / 2) + '" width="' + L + '" height="' + dd + '"/>';
+    var pk = Math.max(p * k, 3);
+    for (var x = x0 + Math.max(L - Math.min(L, (2 * est.d + 6) * k), 0); x < x0 + L - 2; x += pk) s += '<path class="hilo" d="M' + x + ' ' + (cy - dd / 2) + 'l-' + (pk * 0.6) + ' ' + dd + '"/>';
+    s += '<text class="cifra" x="' + (x0 + L / 2) + '" y="' + (cy + dd / 2 + 18) + '" text-anchor="middle">L = ' + est.l + '</text>';
+    $("svg-d").innerHTML = s;
+  }
+  [["c-cab", "cab", true], ["c-d", "d", true], ["c-p", "p", false], ["c-l", "l", true], ["c-q", "q", false]].forEach(function(x){
+    $(x[0]).addEventListener("change", function(){ est[x[1]] = x[2] ? +this.value : this.value; opciones(); pintar(); });
+  });
+  alCambiarIdioma(function(){ opciones(); pintar(); });
+})();
+</script>
+</body>
+</html>

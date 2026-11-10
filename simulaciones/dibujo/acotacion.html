@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Acotación</title>
+<meta name="description" content="Elementos de una cota, normas básicas, acotación en serie, en paralelo y por coordenadas, y símbolos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.pz{fill:#eef1f5;stroke:var(--marino);stroke-width:2.6}
+.fina{stroke:var(--marino);stroke-width:1;fill:none}
+.cifra{font-size:12px;fill:var(--marino);font-weight:600}
+.eje{stroke:var(--rojo);stroke-width:.9;stroke-dasharray:10 3 2 3;fill:none}
+.simbolo{font-size:30px;font-weight:700;color:var(--marino);text-align:center;background:var(--naranja-soft);border-radius:14px;padding:6px 0;margin-bottom:8px}
+.bm{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bm figure{margin:0;background:var(--blanco);border-radius:16px;padding:8px;box-shadow:var(--sombra)}
+.bm figcaption{font-size:12.5px;text-align:center;font-weight:600}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Dibujo técnico" data-eu="Marrazketa teknikoa"></p>
+      <h1 data-es="Acotación" data-eu="Akotazioa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <marker id="fl" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 1.5L10 5L0 8.5z" fill="var(--marino)"/></marker>
+  </defs></svg>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es"><span class="clave">Acotar</span> es poner en el plano <b>las medidas</b> de la pieza para poder fabricarla. Cada medida es una <b>cota</b>.</p>
+      <p class="eu"><span class="clave">Akotatzea</span> piezaren <b>neurriak</b> planoan jartzea da, fabrikatu ahal izateko. Neurri bakoitza <b>kota</b> bat da.</p>
+      <p class="es">El plano tiene que tener <b>todas las medidas necesarias y ninguna repetida</b>. Las medidas se escriben en <b>milímetros</b> y no se pone «mm».</p>
+      <p class="eu">Planoak <b>beharrezko neurri guztiak izan behar ditu, bat ere errepikatu gabe</b>. Neurriak <b>milimetrotan</b> idazten dira eta ez da «mm» jartzen.</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 320 170" role="img" aria-label="Pieza acotada">
+        <path class="pz" d="M60 40h140v40h60v60H60z"/>
+        <circle class="pz" cx="110" cy="90" r="14"/>
+        <path class="eje" d="M88 90h44M110 68v44"/>
+        <path class="fina" d="M60 140v22M260 140v22M60 40H40M60 140H40M200 40v-22M60 40v-22"/>
+        <path class="fina" d="M60 156H260M46 40V140M60 24H200" marker-start="url(#fl)" marker-end="url(#fl)"/>
+        <text class="cifra" x="160" y="151" text-anchor="middle">200</text>
+        <text class="cifra" x="40" y="90" text-anchor="middle" transform="rotate(-90 40 90)">100</text>
+        <text class="cifra" x="130" y="19" text-anchor="middle">140</text>
+        <path class="fina" d="M120 80l40-30h24" marker-start="url(#fl)"/>
+        <text class="cifra" x="164" y="46">Ø28</text>
+      </svg>
+      <figcaption data-es="Una pieza con sus cotas" data-eu="Pieza bat bere kotekin"></figcaption>
+    </figure>
+  </section>
+
+  <section class="panel" data-tab="elementuak" data-es="Elementos" data-eu="Elementuak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-el" viewBox="0 0 320 190" role="img" aria-label="Elementos de una cota">
+          <g class="resaltable" data-parte="pieza"><path class="pz" d="M60 70h180v74l-6 6H60z"/></g>
+          <g class="resaltable" data-parte="auxiliar"><path class="fina" d="M60 70V24M240 70V24" stroke-width="1.6"/></g>
+          <g class="resaltable" data-parte="cota"><path class="fina" d="M60 32H240" stroke-width="1.6"/></g>
+          <g class="resaltable" data-parte="flechas"><path class="fina" d="M60 32h22M240 32h-22" marker-start="url(#fl)" stroke-width="1.6"/></g>
+          <g class="resaltable" data-parte="cifra"><text class="cifra" x="150" y="26" text-anchor="middle" font-size="15">180</text></g>
+          <g class="resaltable" data-parte="referencia"><path class="fina" d="M237 147l26 22h44" marker-start="url(#fl)" stroke-width="1.6"/><text class="cifra" x="268" y="164">2×45°</text></g>
+        </svg>
+        <figcaption data-es="Toca cada elemento" data-eu="Ukitu elementu bakoitza"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-el">
+        <li><button data-parte="auxiliar"><span class="n">1</span><span><b class="es">Líneas auxiliares</b><b class="eu">Lerro laguntzaileak</b><small class="es">Finas. Salen de la pieza, perpendiculares a la medida, y pasan unos 2 mm de la línea de cota.</small><small class="eu">Meheak. Piezatik ateratzen dira, neurriarekiko perpendikularrak, eta kota-lerroa 2 mm inguru gainditzen dute.</small></span></button></li>
+        <li><button data-parte="cota"><span class="n">2</span><span><b class="es">Línea de cota</b><b class="eu">Kota-lerroa</b><small class="es">Fina y paralela a la medida. A unos 8-10 mm de la pieza.</small><small class="eu">Mehea eta neurriarekiko paraleloa. Piezatik 8-10 mm ingurura.</small></span></button></li>
+        <li><button data-parte="flechas"><span class="n">3</span><span><b class="es">Flechas (terminales)</b><b class="eu">Geziak (amaierak)</b><small class="es">En los extremos de la línea de cota, tocando las auxiliares.</small><small class="eu">Kota-lerroaren muturretan, lerro laguntzaileak ukituz.</small></span></button></li>
+        <li><button data-parte="cifra"><span class="n">4</span><span><b class="es">Cifra de cota</b><b class="eu">Kota-zifra</b><small class="es">El valor en mm, encima de la línea y centrado. Se lee desde abajo o desde la derecha.</small><small class="eu">Balioa mm-tan, lerroaren gainean eta erdian. Behetik edo eskuinetik irakurtzen da.</small></span></button></li>
+        <li><button data-parte="referencia"><span class="n">5</span><span><b class="es">Línea de referencia</b><b class="eu">Erreferentzia-lerroa</b><small class="es">Señala un detalle (chaflán, agujero, nota) con una flecha y un texto.</small><small class="eu">Xehetasun bat seinalatzen du (txaflana, zuloa, oharra) gezi eta testu batekin.</small></span></button></li>
+        <li><button data-parte="pieza"><span class="n">6</span><span><b class="es">Contorno de la pieza</b><b class="eu">Piezaren ingerada</b><small class="es">Línea gruesa. Las de cota son siempre finas.</small><small class="eu">Lerro lodia. Kota-lerroak beti meheak dira.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="arauak" data-es="Normas" data-eu="Arauak" hidden>
+    <div class="card">
+      <ol class="es">
+        <li>Cada medida se pone <b>una sola vez</b>.</li>
+        <li>Las cotas van preferiblemente <b>fuera de la pieza</b> y en la vista donde mejor se ve la forma.</li>
+        <li><b>No se acota sobre aristas ocultas</b> (líneas de trazos).</li>
+        <li>Las líneas de cota <b>no se cruzan</b>: las cotas pequeñas más cerca de la pieza, las grandes más lejos.</li>
+        <li>Las líneas de cota paralelas se separan siempre lo mismo (unos 8 mm).</li>
+        <li>Un eje o una arista <b>no se usan como línea de cota</b>.</li>
+        <li>En una cadena de cotas no se ponen todas: falta una o se pone la total.</li>
+      </ol>
+      <ol class="eu">
+        <li>Neurri bakoitza <b>behin bakarrik</b> jartzen da.</li>
+        <li>Kotak ahal dela <b>piezatik kanpo</b> jartzen dira, forma hobekien ikusten den bistan.</li>
+        <li><b>Ez da ertz ezkutuen gainean akotatzen</b> (marra etenak).</li>
+        <li>Kota-lerroak <b>ez dira gurutzatzen</b>: kota txikiak piezatik gertuago, handiak urrunago.</li>
+        <li>Kota-lerro paraleloak beti tarte berean bereizten dira (8 mm inguru).</li>
+        <li>Ardatz bat edo ertz bat <b>ez dira kota-lerro gisa erabiltzen</b>.</li>
+        <li>Kota-kate batean ez dira denak jartzen: bat falta da edo osoa jartzen da.</li>
+      </ol>
+    </div>
+    <div class="bm">
+      <figure>
+        <svg viewBox="0 0 150 120"><path class="pz" d="M30 50h90v50H30z"/><path class="fina" d="M30 50V14M75 50V28M120 50V14"/>
+          <path class="fina" d="M30 34H75M30 20H120" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="cifra" x="52" y="31" text-anchor="middle">40</text><text class="cifra" x="75" y="17" text-anchor="middle">90</text></svg>
+        <figcaption class="ok" data-es="Bien: la pequeña dentro" data-eu="Ondo: txikia barruan"></figcaption>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 150 120"><path class="pz" d="M30 50h90v50H30z"/><path class="fina" d="M30 50V14M75 50V14M120 50V28"/>
+          <path class="fina" d="M30 34H120M30 20H75" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="cifra" x="98" y="31" text-anchor="middle">90</text><text class="cifra" x="52" y="17" text-anchor="middle">40</text>
+          <circle cx="75" cy="34" r="7" fill="none" stroke="var(--rojo)" stroke-width="2"/></svg>
+        <figcaption class="mal" data-es="Mal: las líneas se cruzan" data-eu="Gaizki: lerroak gurutzatzen dira"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="chips" id="tipos">
+      <button data-t="serie" aria-pressed="true" data-es="En serie" data-eu="Seriean"></button>
+      <button data-t="paralelo" data-es="En paralelo" data-eu="Paraleloan"></button>
+      <button data-t="coord" data-es="Por coordenadas" data-eu="Koordenatuetan"></button>
+    </div>
+    <figure class="fig"><svg id="svg-tipos" viewBox="0 0 320 190" role="img" aria-label="Tipos de acotación"></svg></figure>
+    <div class="card" id="tipo-txt"></div>
+  </section>
+
+  <section class="panel" data-tab="ikurrak" data-es="Símbolos" data-eu="Ikurrak" hidden>
+    <div class="rejilla">
+      <div class="card"><div class="simbolo">Ø20</div><p class="es"><b>Diámetro</b> de un agujero o un eje.</p><p class="eu">Zulo edo ardatz baten <b>diametroa</b>.</p></div>
+      <div class="card"><div class="simbolo">R10</div><p class="es"><b>Radio</b> de un arco o redondeo.</p><p class="eu">Arku edo biribiltze baten <b>erradioa</b>.</p></div>
+      <div class="card"><div class="simbolo">□30</div><p class="es">Sección <b>cuadrada</b> de 30 × 30.</p><p class="eu">30 × 30-eko sekzio <b>karratua</b>.</p></div>
+      <div class="card"><div class="simbolo">SØ40</div><p class="es">Diámetro de una <b>esfera</b>.</p><p class="eu"><b>Esfera</b> baten diametroa.</p></div>
+      <div class="card"><div class="simbolo">M10</div><p class="es"><b>Rosca métrica</b> de 10 mm de diámetro.</p><p class="eu">10 mm-ko diametroko <b>hari metrikoa</b>.</p></div>
+      <div class="card"><div class="simbolo">2×45°</div><p class="es"><b>Chaflán</b>: 2 mm a 45°.</p><p class="eu"><b>Txaflana</b>: 2 mm 45°-tan.</p></div>
+      <div class="card"><div class="simbolo">4×Ø8</div><p class="es"><b>Cuatro agujeros iguales</b> de Ø8.</p><p class="eu">Ø8-ko <b>lau zulo berdin</b>.</p></div>
+      <div class="card"><div class="simbolo">t=3</div><p class="es"><b>Espesor</b> de una chapa (3 mm).</p><p class="eu">Txapa baten <b>lodiera</b> (3 mm).</p></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var tipo = "serie";
+  var HX = [100, 160, 240], X0 = 40, Y0 = 70, L = 260;
+  function cota(x1, x2, y, txt){
+    return '<path class="fina" d="M' + x1 + ' ' + y + 'H' + x2 + '" marker-start="url(#fl)" marker-end="url(#fl)"/>' +
+           '<text class="cifra" x="' + ((x1 + x2) / 2) + '" y="' + (y - 4) + '" text-anchor="middle">' + txt + '</text>';
+  }
+  function dibujar(){
+    var s = '<path class="pz" d="M' + X0 + ' ' + Y0 + 'h' + L + 'v80H' + X0 + 'z"/>';
+    HX.forEach(function(x){ s += '<circle class="pz" cx="' + x + '" cy="110" r="10"/><path class="eje" d="M' + x + ' 90v40"/>'; });
+    if (tipo === "serie") {
+      var xs = [X0].concat(HX);
+      xs.forEach(function(x){ s += '<path class="fina" d="M' + x + ' ' + (x === X0 ? Y0 : 92) + 'V36"/>'; });
+      for (var i = 0; i < 3; i++) s += cota(xs[i], xs[i + 1], 44, (xs[i + 1] - xs[i]) / 2);
+    } else if (tipo === "paralelo") {
+      s += '<path class="fina" d="M' + X0 + ' ' + Y0 + 'V10"/>';
+      HX.forEach(function(x, i){ s += '<path class="fina" d="M' + x + ' 92V' + (54 - 16 * i - 8) + '"/>' + cota(X0, x, 54 - 16 * i, (x - X0) / 2); });
+    } else {
+      s += '<path class="fina" d="M' + X0 + ' ' + Y0 + 'V40"/><circle cx="' + X0 + '" cy="48" r="3.5" fill="none" stroke="var(--marino)"/><text class="cifra" x="' + X0 + '" y="34" text-anchor="middle">0</text>';
+      s += '<path class="fina" d="M' + (X0 + 3.5) + ' 48H' + HX[2] + '" marker-end="url(#fl)"/>';
+      HX.forEach(function(x){ s += '<path class="fina" d="M' + x + ' 92V40"/><text class="cifra" x="' + (x - 4) + '" y="44" text-anchor="end" transform="rotate(-90 ' + (x - 4) + ' 44)">' + ((x - X0) / 2) + '</text>'; });
+    }
+    $("svg-tipos").innerHTML = s;
+    var T_ = {
+      serie: [ "<b>En serie (cadena):</b> cada cota empieza donde acaba la anterior. Es fácil de leer, pero los errores se van <b>sumando</b>: el último agujero puede quedar desplazado.",
+               "<b>Seriean (katean):</b> kota bakoitza aurrekoa amaitzen den lekuan hasten da. Erraz irakurtzen da, baina akatsak <b>batu</b> egiten dira: azken zuloa lekuz kanpo gera daiteke." ],
+      paralelo: [ "<b>En paralelo:</b> todas las cotas salen de <b>la misma referencia</b> (una cara). Los errores no se suman. Ocupa más sitio.",
+                  "<b>Paraleloan:</b> kota guztiak <b>erreferentzia beretik</b> ateratzen dira (aurpegi batetik). Akatsak ez dira batzen. Leku gehiago hartzen du." ],
+      coord: [ "<b>Por coordenadas (progresiva):</b> como en paralelo, pero en una sola línea con un origen «0». Muy usada en piezas con muchos agujeros y en CNC.",
+               "<b>Koordenatuetan (progresiboa):</b> paraleloan bezala, baina lerro bakarrean «0» jatorri batekin. Zulo asko dituzten piezetan eta CNCn asko erabiltzen da." ]
+    };
+    $("tipo-txt").innerHTML = "<p>" + T(T_[tipo][0], T_[tipo][1]) + "</p>";
+  }
+  $("tipos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    tipo = b.getAttribute("data-t");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    dibujar();
+  });
+  alCambiarIdioma(dibujar);
+})();
+</script>
+</body>
+</html>

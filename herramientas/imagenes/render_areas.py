@@ -301,7 +301,26 @@ def regulador():
     # (sin cristal: el reflejo tapaba la escala)
     estudio((0, 0, 0.95), 9.5, 17, -22, focal=85, luz=0.9)
 
-if QUE == "engranaje":
+def perfiles():
+    acero = mat("acero", (0.5, 0.52, 0.56), 1.0, 0.42)
+    oscuro = mat("acero2", (0.34, 0.35, 0.38), 1.0, 0.38)
+    # IPE 200 (cotas en dm: h=2, b=1, tw=0.056, tf=0.085) escalado ×1.6
+    k = 1.6
+    h, b, tw, tf = 2 * k, 1 * k, 0.056 * k * 1.4, 0.085 * k * 1.3
+    ipe = [(-b/2, -h/2), (b/2, -h/2), (b/2, -h/2 + tf), (tw/2, -h/2 + tf), (tw/2, h/2 - tf), (b/2, h/2 - tf), (b/2, h/2), (-b/2, h/2), (-b/2, h/2 - tf), (-tw/2, h/2 - tf), (-tw/2, -h/2 + tf), (-b/2, -h/2 + tf)]
+    from mathutils import Matrix
+    def colocar(o, x, y, z):
+        o.matrix_world = Matrix(((0, 0, 1, x), (1, 0, 0, y), (0, 1, 0, z), (0, 0, 0, 1)))
+    colocar(perfil("ipe", [ipe], 6.5, acero, 0.01), 0, 0, 0)
+    a, e = 1.1, 0.11
+    colocar(perfil("L", [[(0, 0), (a, 0), (a, e), (e, e), (e, a), (0, a)]], 4.5, oscuro, 0.008), 1.6, -b / 2 - 1.3, -h / 2)
+    t = 0.42
+    colocar(perfil("tubo", [[(-t, -t), (t, -t), (t, t), (-t, t)], [(-t + .07, -t + .07), (t - .07, -t + .07), (t - .07, t - .07), (-t + .07, t - .07)]], 4.2, oscuro, 0.02), 2.2, b / 2 + 1.2, -h / 2 + t)
+    estudio((0.6, -0.3, -0.3), 23, 24, -64, focal=85)
+
+if QUE == "perfiles":
+    perfiles()
+elif QUE == "engranaje":
     engranajes()
 else:
     regulador()

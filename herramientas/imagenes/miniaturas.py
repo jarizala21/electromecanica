@@ -16,6 +16,16 @@ CAP = {  # simulaciones HTML: centro x, centro y, lado (fracciones del ancho de 
     'electrica/magnetotermico': (0.40, 0.42, 0.70),
     'neumatica/presostato_interactivo': (0.42, 0.40, 0.46),
     'neumatica/regulador_presion': (0.52, 0.40, 0.42),
+    # fichas: (centro x, centro y, lado, pestaña que se captura)
+    'electrica/guardamotor': (0.5, 0.5, 0.62, 'zer-da'),
+    'electrica/contactor': (0.5, 0.42, 0.75, 'deskribapena'),
+    'dibujo/hojas-proceso': (0.32, 0.36, 0.42, 'atalak'),
+    'dibujo/acotacion': (0.42, 0.5, 0.56, 'zer-da'),
+    'dibujo/perfiles': (0.53, 0.5, 0.95, 'motak'),
+    'mecanica/tornillos': (0.35, 0.5, 0.5, 'atalak'),
+    'mecanica/tuercas': (0.5, 0.45, 0.46, 'zer-da'),
+    'mecanica/roscachapas': (0.3, 0.5, 0.36, 'ezaugarriak'),
+    'mecanica/remaches': (0.5, 0.5, 0.9, 'motak'),
 }
 GIF = {  # fotograma (fracción del total), centro x, centro y, lado (fracción del ancho)
     'acoplamiento-fuelle': (0.3, 0.36, 0.52, 0.32), 'acoplamiento-jaw': (0.3, 0.75, 0.6, 0.36),
@@ -37,13 +47,13 @@ def recorte(im, cx, cy, s):
     x0 = min(max(cx * w - lado / 2, 0), w - lado); y0 = min(max(cy * h - lado / 2, 0), h - lado)
     return im.crop((int(x0), int(y0), int(x0 + lado), int(y0 + lado))).resize((192, 192), Image.LANCZOS)
 
-def captura(pagina, ruta):
-    pagina.goto("file://" + ruta)
+def captura(pagina, ruta, pestana=None):
+    pagina.goto("file://" + ruta + ("#" + pestana if pestana else ""))
     pagina.wait_for_timeout(1800)
     el = pagina.evaluate_handle("""() => {
       let best = null, area = 0;
       for (const el of document.querySelectorAll('svg, canvas, img')) {
-        if (el.closest('button')) continue;
+        if (el.closest('button') || el.closest('[hidden]')) continue;
         const r = el.getBoundingClientRect(), a = r.width * r.height;
         if (a > area) { area = a; best = el; }
       }
@@ -75,8 +85,8 @@ def main():
                 pw = sync_playwright().start()
                 navegador = pw.chromium.launch()
                 pagina = navegador.new_page(viewport={"width": 900, "height": 900})
-            cx, cy, s = CAP.get(carpeta + "/" + nombre, (0.5, 0.5, 0.6))
-            im = recorte(captura(pagina, os.path.join(SIM, carpeta, nombre + ".html")), cx, cy, s)
+            c = CAP.get(carpeta + "/" + nombre, (0.5, 0.5, 0.6))
+            im = recorte(captura(pagina, os.path.join(SIM, carpeta, nombre + ".html"), c[3] if len(c) > 3 else None), c[0], c[1], c[2])
         os.makedirs(os.path.join(SIM, carpeta, "miniaturas"), exist_ok=True)
         im.save(os.path.join(SIM, carpeta, "miniaturas", nombre + ".webp"), quality=82, method=6)
         print("miniatura", carpeta + "/" + nombre)

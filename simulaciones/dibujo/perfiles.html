@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perfiles metálicos normalizados</title>
+<meta name="description" content="IPE, HEB, UPN, angulares, T, tubos, pletinas y redondos: forma, medidas, designación y peso por metro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.sec{fill:#c3cad4;stroke:var(--marino);stroke-width:2}
+.fina{stroke:var(--naranja-osc);stroke-width:1.2;fill:none}
+.cifra{font-size:12px;fill:var(--naranja-osc);font-weight:700}
+.designa{font-size:26px;font-weight:700;color:var(--marino);letter-spacing:.01em}
+.datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.dato{background:var(--naranja-soft);border-radius:14px;padding:8px 10px}
+.dato small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.dato b{color:var(--marino);font-size:16px;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Dibujo técnico" data-eu="Marrazketa teknikoa"></p>
+      <h1 data-es="Perfiles metálicos normalizados" data-eu="Metalezko profil normalizatuak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <marker id="fl" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 1.5L10 5L0 8.5z" fill="var(--naranja-osc)"/></marker>
+  </defs></svg>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué son?" data-eu="Zer dira?">
+    <div class="card">
+      <p class="es">Los <span class="clave">perfiles normalizados</span> son barras largas de acero laminado con una <b>sección (forma del corte) fija</b> y unas <b>medidas definidas por norma</b> (EN). Se compran por metros o en barras de 6 o 12 m.</p>
+      <p class="eu"><span class="clave">Profil normalizatuak</span> altzairu ijeztuzko barra luzeak dira, <b>sekzio (ebakiaren forma) finkoa</b> eta <b>arauak zehaztutako neurriak</b> (EN) dituztenak. Metroka edo 6 edo 12 m-ko barretan erosten dira.</p>
+      <p class="es">Al ser normalizados, con <b>el nombre y un número</b> (por ejemplo <b>IPE 200</b>) ya se saben todas sus medidas y su peso: vienen en tablas y prontuarios.</p>
+      <p class="eu">Normalizatuak direnez, <b>izenarekin eta zenbaki batekin</b> (adibidez <b>IPE 200</b>) haren neurri guztiak eta pisua jakiten dira: tauletan eta prontuarioetan datoz.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">¿Para qué?</h3><h3 class="eu">Zertarako?</h3><p class="es">Estructuras, bastidores de máquinas, soportes, barandillas, puentes grúa…</p><p class="eu">Egiturak, makinen bastidoreak, euskarriak, barandak, zubi-garabiak…</p></div>
+      <div class="card"><h3 class="es">Material</h3><h3 class="eu">Materiala</h3><p class="es">Normalmente acero estructural <b>S235</b> o <b>S275</b> (el número es su límite elástico en MPa).</p><p class="eu">Normalean <b>S235</b> edo <b>S275</b> egitura-altzairua (zenbakia haren muga elastikoa da MPa-tan).</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="chips" id="tipos"></div>
+    <div class="dos">
+      <figure class="fig"><svg id="svg-p" viewBox="0 0 300 260" role="img" aria-label="Sección"></svg>
+        <figcaption data-es="Sección del perfil con sus medidas" data-eu="Profilaren sekzioa bere neurriekin"></figcaption></figure>
+      <div class="card" style="display:grid;gap:10px">
+        <div class="mandos"><span class="designa" id="designa"></span><select id="tam" aria-label="Medida"></select></div>
+        <p id="p-nombre" style="margin:0;font-weight:600;color:var(--marino)"></p>
+        <p id="p-uso" style="margin:0"></p>
+        <div class="datos" id="datos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="izendapena" data-es="Designación y peso" data-eu="Izendapena eta pisua" hidden>
+    <div class="card">
+      <h2 data-es="Cómo se nombran" data-eu="Nola izendatzen diren"></h2>
+      <div class="tabla"><table>
+        <tr><th data-es="Perfil" data-eu="Profila"></th><th data-es="Se escribe" data-eu="Honela idazten da"></th><th data-es="Qué indica el número" data-eu="Zenbakiak zer adierazten duen"></th></tr>
+        <tr><td>IPE, HEB, UPN</td><td>IPE 200</td><td data-es="Altura h en mm" data-eu="h altuera mm-tan"></td></tr>
+        <tr><td data-es="Angular (L)" data-eu="Angeluarra (L)"></td><td>L 50×50×5</td><td data-es="Alas × espesor" data-eu="Hegalak × lodiera"></td></tr>
+        <tr><td data-es="Tubo cuadrado" data-eu="Hodi karratua"></td><td>□ 40×40×2</td><td data-es="Lados × espesor" data-eu="Aldeak × lodiera"></td></tr>
+        <tr><td data-es="Tubo redondo" data-eu="Hodi biribila"></td><td>Ø 48,3×3</td><td data-es="Diámetro exterior × espesor" data-eu="Kanpo-diametroa × lodiera"></td></tr>
+        <tr><td data-es="Pletina" data-eu="Pletina"></td><td>PLT 50×8</td><td data-es="Ancho × espesor" data-eu="Zabalera × lodiera"></td></tr>
+        <tr><td data-es="Redondo" data-eu="Biribila"></td><td>Ø 20</td><td data-es="Diámetro" data-eu="Diametroa"></td></tr>
+      </table></div>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h2 data-es="Calcula el peso" data-eu="Kalkulatu pisua"></h2>
+      <div class="mandos"><select id="calc-p" aria-label="Perfil"></select>
+        <div class="deslizador"><label><span data-es="Longitud" data-eu="Luzera"></span><output id="lon-t">6 m</output></label><input id="lon" type="range" min="0.5" max="12" step="0.5" value="6"></div></div>
+      <div class="formula" id="calc-r"></div>
+      <p class="nota es">Peso = masa por metro (de la tabla) × longitud. El acero pesa 7850 kg/m³.</p>
+      <p class="nota eu">Pisua = metroko masa (taulatik) × luzera. Altzairuak 7850 kg/m³ pisatzen du.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // [medida, h, b, tw, tf, kg/m]
+  var P = {
+    IPE: { n: ["Viga IPE (doble T de alas estrechas)", "IPE habea (hegal estuko T bikoitza)"], u: ["Vigas que trabajan a flexión: forjados, pórticos, carriles de polipasto.", "Flexioan lan egiten duten habeak: forjatuak, ataurreak, poliplastoen errailak."],
+      t: [[100,100,55,4.1,5.7,8.1],[120,120,64,4.4,6.3,10.4],[140,140,73,4.7,6.9,12.9],[160,160,82,5,7.4,15.8],[180,180,91,5.3,8,18.8],[200,200,100,5.6,8.5,22.4],[220,220,110,5.9,9.2,26.2],[240,240,120,6.2,9.8,30.7],[270,270,135,6.6,10.2,36.1],[300,300,150,7.1,10.7,42.2]] },
+    HEB: { n: ["Perfil HEB (doble T de alas anchas)", "HEB profila (hegal zabaleko T bikoitza)"], u: ["Pilares y vigas muy cargadas: aguanta bien en las dos direcciones.", "Zutabeak eta oso kargatutako habeak: bi norabideetan ondo eusten du."],
+      t: [[100,100,100,6,10,20.4],[120,120,120,6.5,11,26.7],[140,140,140,7,12,33.7],[160,160,160,8,13,42.6],[180,180,180,8.5,14,51.2],[200,200,200,9,15,61.3]] },
+    UPN: { n: ["Perfil UPN (U normal)", "UPN profila (U normala)"], u: ["Bastidores, marcos, escaleras; se pueden unir dos para formar un cajón.", "Bastidoreak, markoak, eskailerak; bi lot daitezke kaxa bat osatzeko."],
+      t: [[80,80,45,6,8,8.64],[100,100,50,6,8.5,10.6],[120,120,55,7,9,13.4],[140,140,60,7,10,16],[160,160,65,7.5,10.5,18.8],[180,180,70,8,11,22],[200,200,75,8.5,11.5,25.3]] },
+    L: { n: ["Angular de alas iguales (L)", "Hegal berdineko angeluarra (L)"], u: ["Estructuras ligeras, refuerzos, marcos, soportes.", "Egitura arinak, indargarriak, markoak, euskarriak."],
+      t: [["40×40×4",40,40,4,4,2.42],["50×50×5",50,50,5,5,3.77],["60×60×6",60,60,6,6,5.42],["80×80×8",80,80,8,8,9.63]] },
+    T: { n: ["Perfil T", "T profila"], u: ["Refuerzos, guías, carpintería metálica.", "Indargarriak, gidak, arotzeria metalikoa."],
+      t: [["40×40×5",40,40,5,5,2.96],["50×50×6",50,50,6,6,4.44],["60×60×7",60,60,7,7,6.23]] },
+    TC: { n: ["Tubo cuadrado", "Hodi karratua"], u: ["Estructuras ligeras, bastidores, mesas, barandillas.", "Egitura arinak, bastidoreak, mahaiak, barandak."],
+      t: [["40×40×2",40,40,2,2,0],["50×50×3",50,50,3,3,0],["60×60×3",60,60,3,3,0]] },
+    TR: { n: ["Tubo redondo", "Hodi biribila"], u: ["Barandillas, conducciones, columnas, ejes huecos.", "Barandak, hodiak, zutabeak, ardatz hutsak."],
+      t: [["42,4×2,6",42.4,42.4,2.6,0,0],["48,3×3",48.3,48.3,3,0,0],["60,3×3",60.3,60.3,3,0,0]] },
+    PLT: { n: ["Pletina (llanta)", "Pletina (llanta)"], u: ["Refuerzos, cartelas, piezas cortadas, guías.", "Indargarriak, kartelak, ebakitako piezak, gidak."],
+      t: [["40×5",5,40,0,0,0],["50×8",8,50,0,0,0],["60×10",10,60,0,0,0]] },
+    R: { n: ["Redondo macizo", "Biribil trinkoa"], u: ["Ejes, bulones, pasadores, tirantes.", "Ardatzak, bulojak, pasadoreak, tirakiak."],
+      t: [["Ø10",10,10,0,0,0],["Ø16",16,16,0,0,0],["Ø20",20,20,0,0,0]] }
+  };
+  var NOM = { IPE: "IPE", HEB: "HEB", UPN: "UPN", L: "L", T: "T", TC: "□", TR: "Ø", PLT: "PLT", R: "Ø" };
+  function kg(tipo, f){
+    if (f[5]) return f[5];
+    var h = f[1], b = f[2], e = f[3], A;
+    if (tipo === "TC") A = 2 * h * e + 2 * (b - 2 * e) * e;
+    else if (tipo === "TR") A = Math.PI * (h * h - Math.pow(h - 2 * e, 2)) / 4;
+    else if (tipo === "PLT") A = h * b;
+    else A = Math.PI * h * h / 4;
+    return A * 7850 / 1e6;
+  }
+  var tipo = "IPE", idx = 5;
+  function n2(v){ return (Math.round(v * 100) / 100).toString().replace(".", ","); }
+  function cotaH(x1, x2, y, t){ return '<path class="fina" d="M' + x1 + ' ' + y + 'H' + x2 + '" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="cifra" x="' + (x1 + x2) / 2 + '" y="' + (y - 5) + '" text-anchor="middle">' + t + '</text>'; }
+  function cotaV(y1, y2, x, t){ return '<path class="fina" d="M' + x + ' ' + y1 + 'V' + y2 + '" marker-start="url(#fl)" marker-end="url(#fl)"/><text class="cifra" x="' + (x - 6) + '" y="' + (y1 + y2) / 2 + '" text-anchor="middle" transform="rotate(-90 ' + (x - 6) + ' ' + (y1 + y2) / 2 + ')">' + t + '</text>'; }
+  function seccion(){
+    var f = P[tipo].t[idx], h = f[1], b = f[2], tw = f[3], tf = f[4];
+    var k = Math.min(170 / Math.max(h, 1), 170 / Math.max(b, 1));
+    if (tipo === "PLT") k = Math.min(200 / b, 120 / h);
+    var H = h * k, B = b * k, W = Math.max(tw * k, 3), F = Math.max(tf * k, 3), cx = 160, cy = 130, x0 = cx - B / 2, y0 = cy - H / 2, s = "";
+    if (tipo === "IPE" || tipo === "HEB") {
+      s += '<path class="sec" d="M' + x0 + ' ' + y0 + 'h' + B + 'v' + F + 'h' + (-(B - W) / 2) + 'v' + (H - 2 * F) + 'h' + ((B - W) / 2) + 'v' + F + 'h' + (-B) + 'v' + (-F) + 'h' + ((B - W) / 2) + 'v' + (-(H - 2 * F)) + 'h' + (-(B - W) / 2) + 'z"/>';
+      s += cotaV(y0, y0 + H, x0 - 22, "h=" + h) + cotaH(x0, x0 + B, y0 - 14, "b=" + b);
+      s += '<text class="cifra" x="' + (cx + W / 2 + 6) + '" y="' + cy + '">tw=' + n2(tw) + '</text><text class="cifra" x="' + (x0 + B + 6) + '" y="' + (y0 + F) + '">tf=' + n2(tf) + '</text>';
+    } else if (tipo === "UPN") {
+      s += '<path class="sec" d="M' + x0 + ' ' + y0 + 'h' + B + 'l0 ' + F * 0.8 + 'L' + (x0 + W) + ' ' + (y0 + F * 1.2) + 'V' + (y0 + H - F * 1.2) + 'L' + (x0 + B) + ' ' + (y0 + H - F * 0.8) + 'v' + F * 0.8 + 'h' + (-B) + 'z"/>';
+      s += cotaV(y0, y0 + H, x0 - 22, "h=" + h) + cotaH(x0, x0 + B, y0 - 14, "b=" + b) + '<text class="cifra" x="' + (x0 + W + 6) + '" y="' + cy + '">tw=' + n2(tw) + '</text>';
+    } else if (tipo === "L") {
+      s += '<path class="sec" d="M' + x0 + ' ' + y0 + 'h' + W + 'v' + (H - W) + 'h' + (B - W) + 'v' + W + 'h' + (-B) + 'z"/>';
+      s += cotaV(y0, y0 + H, x0 - 22, h) + cotaH(x0, x0 + B, y0 + H + 22, b) + '<text class="cifra" x="' + (x0 + W + 6) + '" y="' + (y0 + 20) + '">e=' + tw + '</text>';
+    } else if (tipo === "T") {
+      s += '<path class="sec" d="M' + x0 + ' ' + y0 + 'h' + B + 'v' + F + 'h' + (-(B - W) / 2) + 'v' + (H - F) + 'h' + (-W) + 'v' + (-(H - F)) + 'h' + (-(B - W) / 2) + 'z"/>';
+      s += cotaV(y0, y0 + H, x0 - 22, h) + cotaH(x0, x0 + B, y0 - 14, b) + '<text class="cifra" x="' + (cx + W / 2 + 6) + '" y="' + (cy + 20) + '">e=' + tw + '</text>';
+    } else if (tipo === "TC") {
+      s += '<rect class="sec" x="' + x0 + '" y="' + y0 + '" width="' + B + '" height="' + H + '" rx="' + W * 1.5 + '"/><rect x="' + (x0 + W) + '" y="' + (y0 + W) + '" width="' + (B - 2 * W) + '" height="' + (H - 2 * W) + '" rx="' + W * 0.6 + '" fill="#fff" stroke="var(--marino)" stroke-width="2"/>';
+      s += cotaV(y0, y0 + H, x0 - 22, h) + cotaH(x0, x0 + B, y0 - 14, b) + '<text class="cifra" x="' + (x0 + B + 6) + '" y="' + cy + '">e=' + n2(tw) + '</text>';
+    } else if (tipo === "TR" || tipo === "R") {
+      s += '<circle class="sec" cx="' + cx + '" cy="' + cy + '" r="' + B / 2 + '"/>';
+      if (tipo === "TR") s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (B / 2 - W) + '" fill="#fff" stroke="var(--marino)" stroke-width="2"/><text class="cifra" x="' + (cx + B / 2 + 6) + '" y="' + cy + '">e=' + n2(tw) + '</text>';
+      s += cotaH(x0, x0 + B, y0 - 14, "Ø" + n2(b));
+    } else {
+      s += '<rect class="sec" x="' + x0 + '" y="' + y0 + '" width="' + B + '" height="' + H + '"/>' + cotaH(x0, x0 + B, y0 - 14, b) + cotaV(y0, y0 + H, x0 - 22, h);
+    }
+    $("svg-p").innerHTML = s;
+  }
+  function designacion(f){ return tipo === "IPE" || tipo === "HEB" || tipo === "UPN" ? NOM[tipo] + " " + f[0] : NOM[tipo] + " " + f[0]; }
+  function ficha(){
+    var f = P[tipo].t[idx];
+    $("designa").textContent = designacion(f);
+    $("p-nombre").textContent = T(P[tipo].n[0], P[tipo].n[1]);
+    $("p-uso").textContent = T(P[tipo].u[0], P[tipo].u[1]);
+    var d = [[T("Masa", "Masa"), n2(kg(tipo, f)) + " kg/m"]];
+    if (tipo === "IPE" || tipo === "HEB" || tipo === "UPN") d = d.concat([["h", f[1] + " mm"], ["b", f[2] + " mm"], [T("tw alma", "tw arima"), n2(f[3]) + " mm"], [T("tf ala", "tf hegala"), n2(f[4]) + " mm"]]);
+    $("datos").innerHTML = d.map(function(x){ return '<div class="dato"><small>' + x[0] + '</small><b>' + x[1] + '</b></div>'; }).join("");
+    seccion();
+  }
+  function chips(){
+    var N = { IPE: "IPE", HEB: "HEB", UPN: "UPN", L: "L", T: "T", TC: T("Tubo □", "Hodia □"), TR: T("Tubo Ø", "Hodia Ø"), PLT: T("Pletina", "Pletina"), R: T("Redondo", "Biribila") };
+    $("tipos").innerHTML = Object.keys(P).map(function(k){ return '<button data-k="' + k + '" aria-pressed="' + (k === tipo) + '">' + N[k] + '</button>'; }).join("");
+    $("tam").innerHTML = P[tipo].t.map(function(f, i){ return '<option value="' + i + '"' + (i === idx ? " selected" : "") + '>' + designacion(f) + '</option>'; }).join("");
+  }
+  $("tipos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    tipo = b.getAttribute("data-k"); idx = Math.min(tipo === "IPE" ? 5 : 1, P[tipo].t.length - 1);
+    chips(); ficha();
+  });
+  $("tam").addEventListener("change", function(){ idx = +this.value; ficha(); });
+
+  // calculadora
+  var lista = [];
+  Object.keys(P).forEach(function(k){ P[k].t.forEach(function(f){ var o = tipo; tipo = k; lista.push([designacion(f), kg(k, f)]); tipo = o; }); });
+  $("calc-p").innerHTML = lista.map(function(x, i){ return '<option value="' + i + '"' + (x[0] === "IPE 200" ? " selected" : "") + '>' + x[0] + '</option>'; }).join("");
+  function calc(){
+    var x = lista[+$("calc-p").value], L = +$("lon").value;
+    $("lon-t").textContent = n2(L) + " m";
+    $("calc-r").textContent = n2(x[1]) + " kg/m × " + n2(L) + " m = " + n2(x[1] * L) + " kg";
+  }
+  $("calc-p").addEventListener("change", calc); $("lon").addEventListener("input", calc);
+  alCambiarIdioma(function(){ chips(); ficha(); calc(); });
+})();
+</script>
+</body>
+</html>
