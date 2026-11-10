@@ -12,9 +12,11 @@ var ESPERA_RED = 5000;
 var BASE = [
   "./", "index.html", "estilos.css", "app.js", "catalogo.js", "manifest.webmanifest",
   "iconos/favicon.svg", "iconos/favicon-32.png", "iconos/apple-touch-icon.png",
-  "iconos/icono-192.png", "iconos/icono-512.png", "iconos/icono-maskable-512.png"
+  "iconos/icono-192.png", "iconos/icono-512.png", "iconos/icono-maskable-512.png",
+  "imagenes/la-salle-berrozpe.webp", "imagenes/cc-by-nc-sa.svg",
+  "imagenes/area-electrica.webp", "imagenes/area-neumatica.webp", "imagenes/area-mecanica.webp"
 ];
-var FUENTES = "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap";
+var FUENTES = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap";
 
 try { importScripts("catalogo.js"); } catch (e) {}
 
@@ -33,6 +35,7 @@ self.addEventListener("install", function(ev){
     var lista = BASE.slice();
     try {
       (self.CATALOGO.secciones || []).forEach(function(s){
+        if (s.imagen) lista.push(s.imagen);
         (s.simulaciones || []).forEach(function(x){ lista.push(ruta(s.carpeta || s.id, x.archivo)); });
       });
     } catch (e) {}

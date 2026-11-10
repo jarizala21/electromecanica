@@ -4,9 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Electromecánica</title>
-<meta name="description" content="Simulaciones interactivas de electricidad y neumática para clase.">
-<meta name="theme-color" content="#e6e9eb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#11161a" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Simulaciones y animaciones para entender la teoría del ciclo de Mantenimiento Electromecánico (La Salle Berrozpe).">
+<meta name="theme-color" content="#fff8ef">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="iconos/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="iconos/favicon-32.png" sizes="32x32" type="image/png">
@@ -17,88 +16,139 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
-<div id="app" class="page">
-  <header class="mast">
-    <a class="brand" href="#">
-      <span class="mark" id="mark"></span>
-      <span>
-        <h1 class="wordmark">Electromecánica</h1>
-        <span class="tagline">Simulaciones interactivas para clase</span>
-      </span>
-    </a>
-    <button type="button" class="instalar" id="instalar" hidden>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
-      Instalar app
-    </button>
-  </header>
+<div id="app">
 
-  <div class="aviso" id="aviso-ios" role="note" hidden>
-    <p><strong>Para instalarla en el iPhone o iPad:</strong> en Safari, pulsa
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11v9h12v-9"/></svg>
-      <em>Compartir</em> y elige <em>Añadir a pantalla de inicio</em>.</p>
-    <button type="button" class="cerrar" id="cerrar-ios" aria-label="Cerrar aviso">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-  </div>
+  <!-- ===================== Portada / Ongi etorri ===================== -->
+  <section id="vista-portada" class="portada" hidden>
+    <div class="portada-top">
+      <span class="burbuja b1" aria-hidden="true"></span>
+      <span class="burbuja b2" aria-hidden="true"></span>
+      <div class="logo-card"><img class="logo" src="imagenes/la-salle-berrozpe.webp" width="354" height="520" alt="La Salle Berrozpe Andoain"></div>
+      <div class="trio" aria-hidden="true">
+        <img class="t1" src="imagenes/area-mecanica.webp" alt="">
+        <img class="t2" src="imagenes/area-electrica.webp" alt="">
+        <img class="t3" src="imagenes/area-neumatica.webp" alt="">
+      </div>
+    </div>
+    <div class="portada-in">
+      <div class="bienvenida">
+        <div class="titular">
+          <p class="eus-nombre" lang="eu">Elektromekanika</p>
+          <h1>Electromecánica</h1>
+        </div>
+        <p lang="eu"><span class="idioma">EU</span>Hemen zikloko teoria ulertzen lagunduko dizuten simulazioak eta animazioak aurkituko dituzu.</p>
+        <p lang="es"><span class="idioma">ES</span>Aquí encontrarás simulaciones y animaciones que te ayudarán a entender la teoría del ciclo.</p>
+      </div>
 
-  <section id="vista-inicio" class="vista">
-    <div class="tools">
+      <a class="entrar" href="#areas">
+        <span><span lang="eu">Sartu</span> · Entrar</span>
+        <span class="entrar-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <footer class="creditos">
+        <p><span lang="eu">LSBko Mantentze Elektromekanikoko sailak egindako aplikazioa.</span><br>
+           Aplicación realizada por el departamento de Mantenimiento Electromecánico de LSB.</p>
+        <div class="licencia">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener license">
+            <img src="imagenes/cc-by-nc-sa.svg" width="106" height="26" alt="Licencia Creative Commons BY-NC-SA 4.0">
+          </a>
+          <p><span lang="eu">Lan honek Creative Commons Aitortu-EzKomertziala-PartekatuBerdin 4.0 Nazioarteko Baimena dauka (CC BY-NC-SA 4.0).</span>
+             Esta obra está bajo una licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional.</p>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ===================== Menú de áreas ===================== -->
+  <section id="vista-areas" class="pantalla" hidden>
+    <header class="barra">
+      <a class="redondo" href="#inicio" aria-label="Volver a la portada">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </a>
+      <span class="barra-titulo">Electromecánica</span>
+      <button type="button" class="redondo" id="abrir-buscar" aria-label="Buscar simulación" aria-expanded="false" aria-controls="buscador">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button type="button" class="redondo naranja" id="instalar" title="Instalar la app" aria-label="Instalar la app" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+      </button>
+    </header>
+
+    <div class="aviso" id="aviso-ios" role="note" hidden>
+      <p><strong>Para instalarla en el iPhone o iPad:</strong> en Safari, pulsa
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11v9h12v-9"/></svg>
+        <em>Compartir</em> y elige <em>Añadir a pantalla de inicio</em>.</p>
+      <button type="button" class="cerrar" id="cerrar-ios" aria-label="Cerrar aviso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="buscador" id="buscador" hidden>
       <label class="search" for="buscar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
         <input id="buscar" type="search" placeholder="Buscar simulación" autocomplete="off" spellcheck="false" aria-label="Buscar simulación">
       </label>
-      <a class="continuar" id="continuar" href="#" hidden>
-        <span class="k">Última abierta</span><strong id="continuar-t"></strong>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
     </div>
-    <div class="tiles" id="secciones"></div>
-    <div class="vista" id="resultados" hidden></div>
-    <p class="meta" id="meta"></p>
+
+    <div class="areas-head" id="areas-head">
+      <h2>Elige un área</h2>
+      <p lang="eu">Aukeratu arlo bat</p>
+    </div>
+    <nav class="areas" id="areas" aria-label="Áreas"></nav>
+    <div class="resultados" id="resultados" hidden></div>
   </section>
 
-  <section id="vista-seccion" class="vista" hidden>
-    <a class="crumb" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Inicio
-    </a>
-    <header class="sec-head">
-      <span class="glyph glyph-lg" id="sec-glyph"></span>
-      <div class="sec-text"><h2 id="sec-nombre" tabindex="-1"></h2><p id="sec-desc"></p></div>
-      <span class="count" id="sec-count"></span>
+  <!-- ===================== Lista de un área ===================== -->
+  <section id="vista-seccion" class="pantalla" hidden>
+    <header class="barra">
+      <a class="redondo" href="#areas" aria-label="Volver a las áreas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </a>
+      <span class="barra-titulo" id="sec-barra"></span>
     </header>
-    <div class="cards" id="sec-cards"></div>
+    <header class="sec-hero" id="sec-hero">
+      <div class="sec-text">
+        <p class="eus-nombre" id="sec-eus" lang="eu"></p>
+        <h2 id="sec-nombre" tabindex="-1"></h2>
+        <p class="sec-desc" id="sec-desc"></p>
+        <span class="pastilla" id="sec-count"></span>
+      </div>
+      <div class="sec-foto" id="sec-foto" aria-hidden="true"></div>
+    </header>
+    <div class="lista" id="sec-cards"></div>
   </section>
 </div>
 
+<!-- ===================== Visor ===================== -->
 <div id="visor" class="visor" hidden>
   <header class="vbar">
-    <a class="vbtn back" id="v-back" href="#">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span class="back-label" id="v-back-label"></span>
+    <a class="redondo" id="v-back" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
     </a>
     <div class="vtitle"><span class="vpos"><span class="vpos-sec" id="v-sec"></span><span id="v-pos"></span></span><span class="vname" id="v-name"></span></div>
     <div class="vactions">
-      <button type="button" class="vbtn icon" id="v-prev" aria-label="Simulación anterior">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+      <button type="button" class="redondo" id="v-prev" aria-label="Simulación anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
       </button>
-      <button type="button" class="vbtn icon" id="v-next" aria-label="Simulación siguiente">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      <button type="button" class="redondo" id="v-next" aria-label="Simulación siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
-      <button type="button" class="vbtn icon" id="v-reload" aria-label="Reiniciar la simulación" title="Reiniciar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>
+      <button type="button" class="redondo" id="v-reload" aria-label="Reiniciar la simulación" title="Reiniciar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>
       </button>
-      <button type="button" class="vbtn icon" id="v-full" aria-label="Pantalla completa" title="Pantalla completa" aria-pressed="false" hidden>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      <button type="button" class="redondo" id="v-full" aria-label="Pantalla completa" title="Pantalla completa" aria-pressed="false" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
       </button>
     </div>
   </header>
   <div class="stage" id="stage">
     <iframe id="frame" title="Simulación" allow="fullscreen"></iframe>
-    <div class="loading" id="loading"><span class="spinner"></span>Cargando simulación…</div>
+    <div class="loading" id="loading"><span class="spinner"></span>Cargando…</div>
   </div>
 </div>
 

@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SALIDA = path.join(RAIZ, "_site");
-const PUBLICAR = ["index.html", "estilos.css", "app.js", "catalogo.js", "sw.js", "manifest.webmanifest", "iconos", "simulaciones"];
+const PUBLICAR = ["index.html", "estilos.css", "app.js", "catalogo.js", "sw.js", "manifest.webmanifest", "iconos", "imagenes", "simulaciones"];
 // [dibujo SVG, PNG que se genera, ancho en píxeles]
 const ICONOS = [
   ["favicon.svg", "icono-512.png", 512],

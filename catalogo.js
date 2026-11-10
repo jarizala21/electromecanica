@@ -6,17 +6,19 @@
    el título que tenga el propio archivo (su etiqueta <title>).
 
    Este catálogo sirve para dejarlas más bonitas:
-     · nombre, descripción, color e icono de cada sección
+     · nombre, nombre en euskera, frase, foto e icono de cada área
      · título, tema, descripción e icono de cada simulación
      · el orden (también el de los botones Anterior / Siguiente)
 
-   Campos de una sección
+   Campos de un área (sección)
      carpeta      nombre de la carpeta dentro de simulaciones/ (sin tildes
                   ni espacios). También es su enlace directo: #carpeta
      nombre       lo que se ve en la app
-     descripcion  una frase
-     tono         cobre · azul · verde · violeta · gris
-     icono        lampara · manometro · engranaje · simulacion
+     euskera      nombre en euskera (sale pequeño encima del nombre)
+     descripcion  una frase corta
+     imagen       foto del botón del área, con fondo transparente
+                  (por ejemplo imagenes/area-electrica.webp)
+     icono        se usa si no hay foto: lampara · manometro · engranaje · simulacion
 
    Campos de una simulación
      archivo      nombre del .html dentro de la carpeta de la sección
@@ -29,14 +31,18 @@
                   presostato · regulador · cremallera · engranaje · sinfin ·
                   guia · acoplamiento · cardan · embrague · biela · leva ·
                   polea · cadena · lampara · manometro · simulacion
+     miniatura    (opcional) imagen redonda de la lista. Si no se pone, se usa
+                  miniaturas/<nombre-del-archivo>.webp dentro de la carpeta,
+                  y si no existe, el icono.
    ===================================================================== */
 self.CATALOGO = {
   secciones: [
     {
       carpeta: "electrica",
-      nombre: "Eléctrica",
-      descripcion: "Instalaciones de vivienda y protecciones del cuadro eléctrico.",
-      tono: "cobre",
+      nombre: "Electricidad",
+      euskera: "Elektrizitatea",
+      descripcion: "Elementos de seguridad, control y actuadores eléctricos.",
+      imagen: "imagenes/area-electrica.webp",
       icono: "lampara",
       simulaciones: [
         {
@@ -76,8 +82,9 @@ self.CATALOGO = {
     {
       carpeta: "neumatica",
       nombre: "Neumática",
-      descripcion: "Preparación del aire comprimido y mando por presión.",
-      tono: "azul",
+      euskera: "Pneumatika",
+      descripcion: "Elementos de regulación y mando del aire comprimido.",
+      imagen: "imagenes/area-neumatica.webp",
       icono: "manometro",
       simulaciones: [
         {
@@ -101,8 +108,9 @@ self.CATALOGO = {
     {
       carpeta: "mecanica",
       nombre: "Mecánica",
-      descripcion: "Guías, acoplamientos, embragues, transformadores de movimiento, engranajes y transmisiones.",
-      tono: "verde",
+      euskera: "Mekanika",
+      descripcion: "Elementos de guiado, unión y transmisión del movimiento.",
+      imagen: "imagenes/area-mecanica.webp",
       icono: "engranaje",
       // El campo "tema" agrupa las simulaciones en apartados dentro de la sección.
       simulaciones: [

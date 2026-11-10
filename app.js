@@ -1,7 +1,9 @@
 /* Electromecánica · lógica de la app
    Lee el catálogo (catalogo.js) y el índice de archivos que se genera al publicar
-   (simulaciones/indice.json), pinta la portada y las secciones y abre cada
-   simulación en el visor. Rutas: #carpeta-de-seccion o #id-de-simulacion. */
+   (simulaciones/indice.json), pinta la portada, el menú de áreas y la lista de cada
+   área, y abre cada simulación en el visor.
+   Rutas: (vacía) o #inicio = portada · #areas = menú de áreas ·
+          #carpeta-del-area = lista · #id-de-simulacion = visor. */
 (function(){
   "use strict";
 
@@ -28,8 +30,6 @@
     sinfin: '<rect x="6" y="5" width="36" height="12" rx="2"/><path d="M12 5l-4 12M19 5l-4 12M26 5l-4 12M33 5l-4 12M40 5l-4 12"/><circle cx="24" cy="32" r="11"/><circle class="f" cx="24" cy="32" r="2"/>',
     simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>'
   };
-  var TONOS = ["cobre", "azul", "verde", "violeta", "gris"];
-  var TONOS_LIBRES = ["verde", "violeta", "gris"];
 
   var $ = function(id){ return document.getElementById(id); };
   var root = document.documentElement;
@@ -39,26 +39,28 @@
   function sinExt(f){ return String(f || "").replace(/\.html?$/i, ""); }
   function bonito(s){ s = String(s || "").replace(/[-_]+/g, " ").trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
   function plural(n){ return n + (n === 1 ? " simulación" : " simulaciones"); }
-  function tono(sec){ return "tono-" + (TONOS.indexOf(sec.tono) >= 0 ? sec.tono : "gris"); }
   function glifo(n){
     return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
       (GLIFOS[n] || GLIFOS.simulacion) + '</svg>';
   }
-  var FLECHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+  var FLECHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var CHEV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+  function foto(sec){
+    return sec.imagen
+      ? '<span class="disco"></span><img src="' + esc(sec.imagen) + '" alt="" decoding="async">'
+      : '<span class="disco"></span><span class="glifo-grande">' + glifo(sec.icono) + '</span>';
+  }
 
   /* ---------- catálogo + archivos realmente publicados ---------- */
   function construir(cat, indice){
-    var tonosUsados = {};
     var secs = ((cat && cat.secciones) || []).map(function(s){
       var carpeta = s.carpeta || s.id;
-      if (s.tono) tonosUsados[s.tono] = 1;
       return {
-        id: s.id || carpeta, carpeta: carpeta, nombre: s.nombre || bonito(carpeta),
-        descripcion: s.descripcion || "", tono: s.tono, icono: s.icono || "simulacion",
+        id: s.id || carpeta, carpeta: carpeta, nombre: s.nombre || bonito(carpeta), euskera: s.euskera || "",
+        descripcion: s.descripcion || "", imagen: s.imagen || "", icono: s.icono || "simulacion",
         simulaciones: (s.simulaciones || []).map(function(x){
           return { id: x.id, archivo: x.archivo, titulo: x.titulo || bonito(sinExt(x.archivo)), tema: x.tema || "",
-                   descripcion: x.descripcion || "", icono: x.icono || "simulacion" };
+                   descripcion: x.descripcion || "", icono: x.icono || "simulacion", miniatura: x.miniatura || "" };
         })
       };
     });
@@ -76,60 +78,57 @@
         var s = null;
         secs.forEach(function(z){ if (z.carpeta === c.carpeta) s = z; });
         if (!s) {
-          var libre = TONOS_LIBRES.filter(function(t){ return !tonosUsados[t]; })[0] || "gris";
-          tonosUsados[libre] = 1;
-          s = { id: c.carpeta, carpeta: c.carpeta, nombre: bonito(c.carpeta), descripcion: "", tono: libre, icono: "simulacion", simulaciones: [] };
+          s = { id: c.carpeta, carpeta: c.carpeta, nombre: bonito(c.carpeta), euskera: "", descripcion: "", imagen: "", icono: "simulacion", simulaciones: [] };
           secs.push(s);
         }
         (c.archivos || []).forEach(function(f){
           if (s.simulaciones.some(function(x){ return x.archivo === f.archivo; })) return;
           s.simulaciones.push({ id: null, archivo: f.archivo, titulo: f.titulo || bonito(sinExt(f.archivo)), tema: "",
-                                descripcion: f.descripcion || "", icono: "simulacion" });
+                                descripcion: f.descripcion || "", icono: "simulacion", miniatura: "" });
         });
       });
       secs = secs.filter(function(s){ return s.simulaciones.length > 0; });
     }
 
-    var usados = {};
+    var usados = { inicio: 1, areas: 1 };
     function unico(s){ var base = s, n = 2; while (usados[s]) s = base + "-" + (n++); usados[s] = 1; return s; }
     secs.forEach(function(s){ s.id = unico(slug(s.id)); });
     secs.forEach(function(s){
       s.simulaciones.forEach(function(x){
         x.id = unico(slug(x.id || sinExt(x.archivo)));
         x.ruta = "simulaciones/" + encodeURIComponent(s.carpeta) + "/" + encodeURIComponent(x.archivo);
+        // Miniatura: la del catálogo o, si existe, simulaciones/<carpeta>/miniaturas/<archivo>.webp
+        var m = x.miniatura ? s.carpeta + "/" + x.miniatura : s.carpeta + "/miniaturas/" + sinExt(x.archivo) + ".webp";
+        x.foto = (!RECURSOS || RECURSOS[m]) ? "simulaciones/" + m.split("/").map(encodeURIComponent).join("/") : "";
       });
     });
     return secs;
   }
 
   var CATALOGO = self.CATALOGO || { secciones: [] };
-  var SECCIONES = [], TODAS = [];
+  var SECCIONES = [], TODAS = [], RECURSOS = null;
   function aplicar(secs){
     SECCIONES = secs; TODAS = [];
     SECCIONES.forEach(function(sec){ sec.simulaciones.forEach(function(sim, i){ TODAS.push({ sec: sec, sim: sim, i: i }); }); });
-    pintarPortada();
+    pintarAreas();
   }
   function porId(id){ for (var k = 0; k < TODAS.length; k++) if (TODAS[k].sim.id === id) return TODAS[k]; return null; }
 
-  var CLAVE = "electromecanica:ultima";
-  function leerUltima(){ try { return localStorage.getItem(CLAVE); } catch (e) { return null; } }
-  function guardarUltima(id){ try { localStorage.setItem(CLAVE, id); } catch (e) {} }
-
-  /* ---------- portada ---------- */
-  $("mark").innerHTML = glifo("lampara");
-
-  function pintarPortada(){
-    $("secciones").innerHTML = SECCIONES.map(function(sec){
-      return '<a class="tile ' + tono(sec) + '" href="#' + esc(sec.id) + '">' +
-        '<span class="tile-top"><span class="glyph glyph-lg">' + glifo(sec.icono) + '</span>' +
-        '<span class="count">' + plural(sec.simulaciones.length) + '</span></span>' +
-        '<h2 class="tile-name">' + esc(sec.nombre) + '</h2>' +
-        (sec.descripcion ? '<p class="tile-desc">' + esc(sec.descripcion) + '</p>' : '') +
-        '<ul class="tile-list">' + resumen(sec).map(function(t){ return '<li>' + esc(t) + '</li>'; }).join("") + '</ul>' +
-        '<span class="tile-go">Ver simulaciones ' + FLECHA + '</span></a>';
+  /* ---------- menú de áreas ---------- */
+  function pintarAreas(){
+    var nav = $("areas");
+    nav.style.setProperty("--n", Math.max(SECCIONES.length, 1));
+    nav.innerHTML = SECCIONES.map(function(sec){
+      return '<a class="area" href="#' + esc(sec.id) + '">' +
+        '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +
+        '<span class="area-texto">' +
+          (sec.euskera ? '<span class="area-eus" lang="eu">' + esc(sec.euskera) + '</span>' : '') +
+          '<h3>' + esc(sec.nombre) + '</h3>' +
+          (sec.descripcion ? '<span class="area-desc">' + esc(sec.descripcion) + '</span>' : '') +
+          '<span class="area-pie"><span class="pastilla">' + plural(sec.simulaciones.length) + '</span>' +
+          '<span class="flecha">' + FLECHA + '</span></span>' +
+        '</span></a>';
     }).join("");
-    var unicas = {}; TODAS.forEach(function(e){ unicas[e.sim.ruta] = 1; });
-    $("meta").textContent = plural(Object.keys(unicas).length) + " en " + SECCIONES.length + (SECCIONES.length === 1 ? " sección" : " secciones");
   }
 
   // Temas en orden de aparición
@@ -139,70 +138,84 @@
     return out;
   }
   function agrupada(sec){ return sec.simulaciones.length > 6 && temas(sec).length > 1; }
-  function resumen(sec){
-    if (agrupada(sec)) return temas(sec);
-    var t = sec.simulaciones.map(function(s){ return s.titulo; });
-    return t.length > 6 ? t.slice(0, 5).concat(["y " + (t.length - 5) + " más"]) : t;
-  }
 
   function tarjeta(e, conSeccion, sinTema){
     var chip = conSeccion ? e.sec.nombre + (e.sim.tema ? " · " + e.sim.tema : "") : (sinTema ? "" : (e.sim.tema || ""));
-    return '<a class="card ' + tono(e.sec) + '" href="#' + esc(e.sim.id) + '">' +
-      '<span class="glyph">' + glifo(e.sim.icono) + '</span>' +
+    var mini = '<span class="mini">' + glifo(e.sim.icono) +
+      (e.sim.foto ? '<img src="' + esc(e.sim.foto) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">' : '') + '</span>';
+    return '<a class="card" href="#' + esc(e.sim.id) + '">' + mini +
       '<span class="card-body">' +
         (chip ? '<span class="chip">' + esc(chip) + '</span>' : '') +
         '<span class="card-title">' + esc(e.sim.titulo) + '</span>' +
         (e.sim.descripcion ? '<span class="card-desc">' + esc(e.sim.descripcion) + '</span>' : '') +
-      '</span>' + CHEV + '</a>';
+      '</span><span class="ir">' + CHEV + '</span></a>';
   }
 
-  var buscar = $("buscar");
+  var buscar = $("buscar"), abrirBuscar = $("abrir-buscar"), vAreas = $("vista-areas");
   function pintarBusqueda(){
+    var abierto = !$("buscador").hidden;
     var texto = buscar.value.trim(), q = norm(texto), res = $("resultados");
-    if (!q) { res.hidden = true; $("secciones").hidden = false; return; }
+    vAreas.classList.toggle("buscando", abierto);
+    $("areas").hidden = $("areas-head").hidden = abierto;
+    res.hidden = !abierto;
+    if (!abierto) return;
+    if (!q) {
+      var unicas = {}; TODAS.forEach(function(e){ unicas[e.sim.ruta] = 1; });
+      res.innerHTML = '<p class="res-head">Escribe para buscar entre ' + plural(Object.keys(unicas).length) + '.</p>';
+      return;
+    }
     var palabras = q.split(/\s+/);
     var hits = TODAS.filter(function(e){
-      var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre].join(" "));
+      var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre, e.sec.euskera].join(" "));
       return palabras.every(function(p){ return pajar.indexOf(p) >= 0; });
     });
-    $("secciones").hidden = true; res.hidden = false;
     res.innerHTML = hits.length
       ? '<p class="res-head">' + hits.length + (hits.length === 1 ? ' resultado' : ' resultados') + '</p><div class="cards">' +
         hits.map(function(h){ return tarjeta(h, true); }).join("") + '</div>'
       : '<p class="empty">Ninguna simulación coincide con «' + esc(texto) + '».</p>';
   }
   buscar.addEventListener("input", pintarBusqueda);
-
-  function pintarContinuar(){
-    var e = porId(leerUltima()), a = $("continuar");
-    if (!e) { a.hidden = true; return; }
-    a.hidden = false; a.href = "#" + e.sim.id; a.className = "continuar " + tono(e.sec);
-    $("continuar-t").textContent = e.sim.titulo;
+  function mostrarBuscador(si){
+    $("buscador").hidden = !si;
+    abrirBuscar.setAttribute("aria-expanded", si ? "true" : "false");
+    if (!si) buscar.value = "";
+    pintarBusqueda();
+    if (si) try { buscar.focus(); } catch (e) {}
   }
+  abrirBuscar.addEventListener("click", function(){ mostrarBuscador($("buscador").hidden); });
+  buscar.addEventListener("keydown", function(ev){ if (ev.key === "Escape") mostrarBuscador(false); });
 
   /* ---------- vistas ---------- */
-  function mostrarVista(id){ ["vista-inicio", "vista-seccion"].forEach(function(v){ $(v).hidden = v !== id; }); }
-  function verInicio(mover){
-    mostrarVista("vista-inicio"); pintarContinuar(); pintarBusqueda();
+  var COLOR_BARRA = { "vista-portada": "#fdb02e", "vista-areas": "#f5f3ef", "vista-seccion": "#f5f3ef" };
+  function mostrarVista(id){
+    ["vista-portada", "vista-areas", "vista-seccion"].forEach(function(v){ $(v).hidden = v !== id; });
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute("content", COLOR_BARRA[id]);
+  }
+  function verPortada(){ mostrarVista("vista-portada"); window.scrollTo(0, 0); }
+  function verAreas(mover){
+    mostrarVista("vista-areas"); pintarBusqueda();
     if (mover) window.scrollTo(0, 0);
   }
   function verSeccion(sec, mover){
-    $("vista-seccion").className = "vista " + tono(sec);
-    $("sec-glyph").innerHTML = glifo(sec.icono);
+    $("sec-barra").textContent = sec.nombre;
+    $("sec-eus").textContent = sec.euskera || "";
+    $("sec-eus").hidden = !sec.euskera;
     $("sec-nombre").textContent = sec.nombre;
     $("sec-desc").textContent = sec.descripcion || "";
     $("sec-desc").hidden = !sec.descripcion;
     $("sec-count").textContent = plural(sec.simulaciones.length);
+    $("sec-foto").innerHTML = foto(sec);
     if (agrupada(sec)) {
-      $("sec-cards").className = "grupos";
+      $("sec-cards").className = "lista";
       $("sec-cards").innerHTML = temas(sec).map(function(t){
         var items = [];
         sec.simulaciones.forEach(function(sim, i){ if (sim.tema === t) items.push(tarjeta({ sec: sec, sim: sim, i: i }, false, true)); });
-        return '<section class="grupo"><h3>' + esc(t) + ' <span>' + items.length + '</span></h3><div class="cards">' + items.join("") + '</div></section>';
+        return '<section class="grupo"><h3>' + esc(t) + ' <span class="num">' + items.length + '</span></h3><div class="cards">' + items.join("") + '</div></section>';
       }).join("");
     } else {
-      $("sec-cards").className = "cards";
-      $("sec-cards").innerHTML = sec.simulaciones.map(function(sim, i){ return tarjeta({ sec: sec, sim: sim, i: i }, false); }).join("");
+      $("sec-cards").className = "lista";
+      $("sec-cards").innerHTML = '<div class="cards">' + sec.simulaciones.map(function(sim, i){ return tarjeta({ sec: sec, sim: sim, i: i }, false); }).join("") + '</div>';
     }
     mostrarVista("vista-seccion");
     if (mover) { window.scrollTo(0, 0); try { $("sec-nombre").focus({ preventScroll: true }); } catch (e) {} }
@@ -230,10 +243,8 @@
   }
   function abrirVisor(e){
     var sec = e.sec, sim = e.sim, i = e.i;
-    visor.className = "visor " + tono(sec);
     $("v-back").href = "#" + sec.id;
     $("v-back").setAttribute("aria-label", "Volver a " + sec.nombre);
-    $("v-back-label").textContent = sec.nombre;
     $("v-sec").textContent = sec.nombre + " · ";
     $("v-pos").textContent = (i + 1) + " de " + sec.simulaciones.length;
     $("v-name").textContent = sim.titulo;
@@ -241,7 +252,6 @@
     navegacion($("v-prev"), sec.simulaciones[i - 1], "Anterior");
     navegacion($("v-next"), sec.simulaciones[i + 1], "Siguiente");
     app.hidden = true; visor.hidden = false; root.classList.add("con-visor");
-    guardarUltima(sim.id);
     if (abierta !== sim.id) { abierta = sim.id; entrada = e; cargar(e); }
   }
   function cerrarVisor(){
@@ -281,11 +291,13 @@
   function enrutar(mover){
     var id = "";
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
+    if (!id || id === "inicio") { cerrarVisor(); verPortada(); return; }
+    if (id === "areas") { cerrarVisor(); verAreas(mover); return; }
     var sec = null;
     for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === id) sec = SECCIONES[k];
     var e = sec ? null : porId(id);
     if (e) abrirVisor(e);
-    else { cerrarVisor(); if (sec) verSeccion(sec, mover); else verInicio(mover); }
+    else { cerrarVisor(); if (sec) verSeccion(sec, mover); else verAreas(mover); }
   }
   window.addEventListener("hashchange", function(){ enrutar(true); });
 
@@ -298,6 +310,8 @@
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(indice){
       if (!indice) return;
+      RECURSOS = {};
+      (indice.recursos || []).forEach(function(r){ RECURSOS[r] = 1; });
       aplicar(construir(CATALOGO, indice)); enrutar(false);
       // Pide al modo sin conexión que guarde también las simulaciones nuevas.
       if (navigator.serviceWorker && navigator.serviceWorker.ready) {

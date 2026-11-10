@@ -2,15 +2,15 @@
   "id": "./",
   "name": "Electromecánica",
   "short_name": "Electromecánica",
-  "description": "Simulaciones interactivas de electricidad y neumática para clase.",
+  "description": "Simulaciones y animaciones para entender la teoría del ciclo de Mantenimiento Electromecánico (La Salle Berrozpe).",
   "lang": "es",
   "dir": "ltr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#e6e9eb",
-  "theme_color": "#e6e9eb",
+  "background_color": "#fff8ef",
+  "theme_color": "#fdb02e",
   "categories": ["education"],
   "icons": [
     { "src": "iconos/icono-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
@@ -18,7 +18,7 @@
     { "src": "iconos/icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Eléctrica", "url": "./#electrica", "icons": [{ "src": "iconos/atajo-electrica-96.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Electricidad", "url": "./#electrica", "icons": [{ "src": "iconos/atajo-electrica-96.png", "sizes": "96x96", "type": "image/png" }] },
     { "name": "Neumática", "url": "./#neumatica", "icons": [{ "src": "iconos/atajo-neumatica-96.png", "sizes": "96x96", "type": "image/png" }] },
     { "name": "Mecánica", "url": "./#mecanica", "icons": [{ "src": "iconos/atajo-mecanica-96.png", "sizes": "96x96", "type": "image/png" }] }
   ]

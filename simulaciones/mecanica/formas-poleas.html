@@ -7,38 +7,31 @@
 <meta name="description" content="Formas de la garganta de las poleas según la correa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#e6e9eb; --panel:#f9fafb; --line:#d0d6db; --ink:#162029; --muted:#55626c;
-  --acc:#2b6e37; --acc-soft:#dcecdd;
+  --bg:#f5f3ef; --panel:#ffffff; --ink:#1b2147; --marino:#242d5f; --muted:#5d6382;
+  --naranja:#f39200; --naranja-soft:#fff0dc; --naranja-osc:#b45f00;
+  --sombra:0 10px 24px -16px rgba(36,45,95,.4),0 1px 3px rgba(36,45,95,.06);
   color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
-    --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#11161a; --panel:#192026; --line:#2c363e; --ink:#e5eaee; --muted:#98a4ad;
-  --acc:#77c387; --acc-soft:#1b3322; color-scheme:dark;
-}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.55}
-.wrap{max-width:900px;margin:0 auto;padding-block:26px 44px;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
-h1{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;font-size:clamp(30px,5vw,40px);line-height:1.05;margin:0}
-h2{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:22px;margin:0 0 8px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15.5px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding-block:22px 44px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+h1{font-weight:700;font-size:clamp(25px,5vw,34px);line-height:1.12;letter-spacing:-.01em;margin:0;color:var(--marino)}
+h2{font-weight:600;font-size:17px;margin:0 0 10px;color:var(--marino);display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--naranja);flex:none}
 .lead{margin:8px 0 0;color:var(--muted);max-width:62ch}
-figure{margin:0;background:#f0f2f4;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+figure{margin:0;background:#f0f2f4;border-radius:22px;overflow:hidden;box-shadow:var(--sombra)}
 figure.norma{background:#ffffff}
 figure img{display:block;width:100%;height:auto;max-width:100%}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.card{background:var(--panel);border-radius:22px;padding:18px 20px;box-shadow:var(--sombra)}
 ul{margin:0;padding-left:20px;display:grid;gap:8px}
-.formula{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:600;font-size:24px;color:var(--acc);
-  background:var(--acc-soft);border-radius:10px;padding:6px 14px;display:inline-block;margin:2px 0 10px}
+li::marker{color:var(--naranja)}
+.formula{font-weight:600;font-size:20px;color:var(--marino);
+  background:var(--naranja-soft);border-radius:12px;padding:6px 14px;display:inline-block;margin:2px 0 10px}
 .card p{margin:0 0 8px}
 .card p:last-child{margin-bottom:0}
 </style>
