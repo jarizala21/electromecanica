@@ -40,6 +40,16 @@
                   miniaturas/<nombre-del-archivo>.webp dentro de la carpeta,
                   y si no existe, el icono.
    ===================================================================== */
+
+/* ---------- Avisos y peticiones de los alumnos ----------
+   El botón de avisos envía un correo al profesor con Web3Forms (gratis).
+   Para activarlo: entra en https://web3forms.com, escribe el correo donde
+   quieres recibir los avisos y te llegará una «Access Key». Pégala aquí.
+   Mientras esté vacía, el formulario funciona en modo prueba (no envía nada). */
+var AVISOS = {
+  clave: ""
+};
+
 self.CATALOGO = {
   secciones: [
     {

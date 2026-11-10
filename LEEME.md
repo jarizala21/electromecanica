@@ -51,3 +51,20 @@ La foto del botón de un área es una imagen con fondo transparente en `imagenes
 | `herramientas/gif/` | Scripts que dibujan los GIF de Mecánica (`python3 herramientas/gif/todos.py`) |
 | `herramientas/paginas.py` | Genera las páginas de Mecánica a partir de sus textos |
 | `herramientas/imagenes/` | Miniaturas, recorte de fotos y las imágenes 3D del regulador y el engranaje (Blender) |
+
+## Avisos y peticiones de los alumnos
+
+El botón con el bocadillo (en el menú de áreas, en la lista de cada área y en el
+visor de cada ficha) abre un formulario anónimo: avisar de un error, proponer una
+mejora, pedir un tema nuevo u otra cosa. Se rellena solo con la ficha en la que
+estaba el alumno, el idioma, el dispositivo y la versión de la app.
+
+Los avisos llegan por correo a través de Web3Forms (gratis):
+
+1. Entra en https://web3forms.com, escribe el correo donde quieres recibirlos y
+   te llegará una «Access Key».
+2. Pégala en `catalogo.js`, en `AVISOS.clave`, y publica.
+
+Mientras la clave esté vacía, el formulario funciona en **modo prueba**: no envía
+nada y enseña el correo que se recibiría. Sin conexión, el aviso se guarda en el
+móvil y se envía solo cuando vuelve internet.

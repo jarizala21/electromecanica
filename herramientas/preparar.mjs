@@ -77,6 +77,10 @@ const swRuta = path.join(SALIDA, "sw.js");
 const sw = await fs.readFile(swRuta, "utf8");
 if (!sw.includes('var VERSION = "dev";')) throw new Error("No encuentro la línea VERSION en sw.js");
 await fs.writeFile(swRuta, sw.replace('var VERSION = "dev";', `var VERSION = "${version}";`));
+const appRuta = path.join(SALIDA, "app.js");
+const appJs = await fs.readFile(appRuta, "utf8");
+if (!appJs.includes('var VERSION_APP = "dev";')) throw new Error("No encuentro la línea VERSION_APP en app.js");
+await fs.writeFile(appRuta, appJs.replace('var VERSION_APP = "dev";', `var VERSION_APP = "${version.slice(0, 7)}";`));
 
 let Resvg = null;
 try { const m = await import("@resvg/resvg-js"); Resvg = m.Resvg || (m.default && m.default.Resvg); } catch {}

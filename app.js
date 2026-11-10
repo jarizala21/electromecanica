@@ -3,7 +3,8 @@
    (simulaciones/indice.json), pinta la portada, el menú de áreas y la lista de cada
    área, y abre cada simulación en el visor.
    Rutas: (vacía) o #inicio = portada · #areas = menú de áreas ·
-          #carpeta-del-area = lista · #id-de-simulacion = visor. */
+          #carpeta-del-area = lista · #id-de-simulacion = visor ·
+          #avisos o #avisos/<área o simulación> = formulario de avisos. */
 (function(){
   "use strict";
 
@@ -31,6 +32,8 @@
     simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>'
   };
 
+  // La publicación automática pone aquí la versión del último cambio.
+  var VERSION_APP = "dev";
   var $ = function(id){ return document.getElementById(id); };
   var root = document.documentElement;
   function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -48,7 +51,26 @@
           res: function(n){ return n + (n === 1 ? " resultado" : " resultados"); },
           escribe: function(n){ return "Escribe para buscar entre " + n + " simulaciones."; },
           nada: function(t){ return "Ninguna simulación coincide con «" + t + "»."; },
-          pos: function(i, n){ return i + " de " + n; } },
+          pos: function(i, n){ return i + " de " + n; },
+          avisos: "Avisos y peticiones", avisarFicha: "Avisar de un error en esta ficha", volver: "Volver",
+          avTitulo: "¿Algo no funciona o echas algo en falta?",
+          avIntro: "Cuéntanoslo: le llega al profesorado del departamento. Es anónimo, así que no pongas tu nombre ni datos personales.",
+          avPrueba: "<strong>Modo prueba.</strong> El formulario funciona, pero todavía no envía nada: falta conectarlo al correo del profesor.",
+          avTipo: "¿Qué quieres hacer?", avDonde: "¿Dónde?", avMsg: "Explícalo", avMsgPh: "Escribe aquí…",
+          avExtra: "Qué más se envía (sin datos personales)", avEnviar: "Enviar", avEnviando: "Enviando…",
+          avSeguir: "Volver", avOtro: "Enviar otro", avGeneral: "Toda la app, en general", avArea: "todo el área",
+          tipos: { error: "Avisar de un error", idea: "Proponer una mejora", tema: "Pedir un tema nuevo", otro: "Otra cosa" },
+          pistas: { error: "Qué hiciste, qué esperabas y qué pasó. Por ejemplo: en la pestaña Símbolo, al tocar la bobina no se ilumina.",
+                    idea: "Qué cambiarías y cómo te ayudaría a entenderlo mejor.",
+                    tema: "Qué tema o elemento te gustaría ver en la app.",
+                    otro: "Escribe lo que quieras contarnos." },
+          datos: { idioma: "Idioma", disp: "Dispositivo", pantalla: "Pantalla", app: "Instalada como app", tema: "Aspecto", ver: "Versión" },
+          si: "Sí", no: "No", claro: "Claro", oscuro: "Oscuro", euskera: "Euskera", castellano: "Castellano",
+          errTipo: "Elige qué quieres hacer.", errCorto: "Escribe un poco más (al menos 10 letras).",
+          errEnvio: "No se ha podido enviar. Inténtalo otra vez dentro de un rato.",
+          okT: "¡Gracias! Aviso enviado", okP: "El profesorado lo revisará.",
+          colaT: "Guardado: se enviará solo", colaP: "Ahora no hay conexión. Se enviará en cuanto vuelva internet y abras la app.",
+          pruebaT: "Así llegaría el aviso", pruebaP: "Modo prueba: no se ha enviado nada. Este es el correo que recibiría el profesor:" },
     eu: { app: "Elektromekanika", elige: "Aukeratu arlo bat", areas: "Arloak", buscar: "Bilatu simulazioa", instalar: "Instalatu aplikazioa",
           portada: "Itzuli azalera", volverAreas: "Itzuli arloetara", volverA: "Itzuli: ", cerrar: "Itxi oharra",
           anterior: "Aurreko simulazioa", siguiente: "Hurrengo simulazioa", reiniciar: "Berrabiarazi", completa: "Pantaila osoa",
@@ -57,7 +79,26 @@
           res: function(n){ return n === 1 ? "emaitza 1" : n + " emaitza"; },
           escribe: function(n){ return "Idatzi bilatzeko (" + n + " simulazio daude)."; },
           nada: function(t){ return "Ez dago «" + t + "» bilaketarekin bat datorren simulaziorik."; },
-          pos: function(i, n){ return i + " / " + n; } }
+          pos: function(i, n){ return i + " / " + n; },
+          avisos: "Oharrak eta eskaerak", avisarFicha: "Fitxa honetako akats baten berri eman", volver: "Itzuli",
+          avTitulo: "Zerbaitek ez du funtzionatzen edo zerbait faltan botatzen duzu?",
+          avIntro: "Kontaiguzu: saileko irakasleei iristen zaie. Anonimoa da; beraz, ez jarri zure izena ezta datu pertsonalik ere.",
+          avPrueba: "<strong>Proba modua.</strong> Formularioak funtzionatzen du, baina oraindik ez du ezer bidaltzen: irakaslearen postara konektatzea falta da.",
+          avTipo: "Zer egin nahi duzu?", avDonde: "Non?", avMsg: "Azaldu", avMsgPh: "Idatzi hemen…",
+          avExtra: "Zer gehiago bidaltzen da (datu pertsonalik gabe)", avEnviar: "Bidali", avEnviando: "Bidaltzen…",
+          avSeguir: "Itzuli", avOtro: "Beste bat bidali", avGeneral: "Aplikazio osoa, orokorrean", avArea: "arlo osoa",
+          tipos: { error: "Akats baten berri eman", idea: "Hobekuntza bat proposatu", tema: "Gai berri bat eskatu", otro: "Beste zerbait" },
+          pistas: { error: "Zer egin zenuen, zer espero zenuen eta zer gertatu zen. Adibidez: Sinboloa fitxan, bobina sakatzean ez da pizten.",
+                    idea: "Zer aldatuko zenukeen eta nola lagunduko lizukeen hobeto ulertzen.",
+                    tema: "Zein gai edo elementu ikusi nahiko zenukeen aplikazioan.",
+                    otro: "Idatzi kontatu nahi diguzuna." },
+          datos: { idioma: "Hizkuntza", disp: "Gailua", pantalla: "Pantaila", app: "Aplikazio gisa instalatuta", tema: "Itxura", ver: "Bertsioa" },
+          si: "Bai", no: "Ez", claro: "Argia", oscuro: "Iluna", euskera: "Euskara", castellano: "Gaztelania",
+          errTipo: "Aukeratu zer egin nahi duzun.", errCorto: "Idatzi pixka bat gehiago (gutxienez 10 letra).",
+          errEnvio: "Ezin izan da bidali. Saiatu berriro geroago.",
+          okT: "Eskerrik asko! Oharra bidali da", okP: "Irakasleek berrikusiko dute.",
+          colaT: "Gordeta: bere kabuz bidaliko da", colaP: "Orain ez dago konexiorik. Interneta itzultzen denean eta aplikazioa irekitzean bidaliko da.",
+          pruebaT: "Horrela iritsiko litzateke oharra", pruebaP: "Proba modua: ez da ezer bidali. Hau da irakasleak jasoko lukeen mezua:" }
   };
   var CLAVE_IDIOMA = "electromecanica:idioma";
   var IDIOMA = "es";
@@ -80,6 +121,7 @@
       if (el.hasAttribute("title")) el.title = t;
     });
     [].forEach.call(document.querySelectorAll("[data-t-ph]"), function(el){ el.placeholder = L()[el.getAttribute("data-t-ph")]; });
+    [].forEach.call(document.querySelectorAll("[data-t-html]"), function(el){ el.innerHTML = L()[el.getAttribute("data-t-html")]; });
   }
   function ponerIdioma(id){
     IDIOMA = id === "eu" ? "eu" : "es";
@@ -248,9 +290,9 @@
   buscar.addEventListener("keydown", function(ev){ if (ev.key === "Escape") mostrarBuscador(false); });
 
   /* ---------- vistas ---------- */
-  var COLOR_BARRA = { "vista-portada": "#fdb02e", "vista-areas": "#f5f3ef", "vista-seccion": "#f5f3ef" };
+  var COLOR_BARRA = { "vista-portada": "#fdb02e", "vista-areas": "#f5f3ef", "vista-seccion": "#f5f3ef", "vista-avisos": "#f5f3ef" };
   function mostrarVista(id){
-    ["vista-portada", "vista-areas", "vista-seccion"].forEach(function(v){ $(v).hidden = v !== id; });
+    ["vista-portada", "vista-areas", "vista-seccion", "vista-avisos"].forEach(function(v){ $(v).hidden = v !== id; });
     var m = document.querySelector('meta[name="theme-color"]');
     var oscuro = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
     if (m) m.setAttribute("content", id === "vista-portada" ? COLOR_BARRA[id] : (oscuro ? "#11142a" : COLOR_BARRA[id]));
@@ -267,6 +309,7 @@
     $("sec-desc").hidden = !frase(sec);
     $("sec-count").textContent = plural(sec.simulaciones.length);
     $("sec-foto").innerHTML = foto(sec);
+    $("sec-avisos").href = "#avisos/" + encodeURIComponent(sec.id);
     if (agrupada(sec)) {
       $("sec-cards").className = "lista";
       $("sec-cards").innerHTML = temas(sec).map(function(t){
@@ -309,6 +352,7 @@
     $("v-sec").textContent = nombre(sec) + " · ";
     $("v-pos").textContent = i < 0 ? "" : L().pos(i + 1, sec.simulaciones.length);
     $("v-name").textContent = titulo(sim);
+    $("v-avisos").href = "#avisos/" + encodeURIComponent(sim.id);
     frame.title = titulo(sim);
     navegacion($("v-prev"), i < 0 ? null : sec.simulaciones[i - 1], L().ant);
     navegacion($("v-next"), i < 0 ? null : sec.simulaciones[i + 1], L().sig);
@@ -348,19 +392,213 @@
     if (ev.key === "Escape" && !visor.hidden && !document.fullscreenElement && entrada) location.hash = entrada.sec.id;
   });
 
+
+  /* ---------- avisos y peticiones ----------
+     Envía el aviso por Web3Forms (le llega por correo al profesor).
+     Sin clave en catalogo.js (AVISOS.clave) funciona en modo prueba: enseña lo que se enviaría.
+     Sin conexión, lo guarda y lo envía en cuanto vuelve internet. */
+  var CLAVE_COLA = "electromecanica:avisos-pendientes";
+  var CONF_AV = (typeof AVISOS !== "undefined" && AVISOS) || {};
+  var avVolver = "#areas", avTipo = "", avContexto = "";
+  var TIPOS = ["error", "idea", "tema", "otro"];
+  var TIPOS_ES = TEXTOS.es.tipos;
+
+  function dispositivo(){
+    var u = navigator.userAgent || "", so = "Otro", nav = "";
+    if (/iphone/i.test(u)) so = "iPhone";
+    else if (/ipad/i.test(u) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) so = "iPad";
+    else if (/android/i.test(u)) so = /mobile/i.test(u) ? "Android (móvil)" : "Android (tablet)";
+    else if (/CrOS/.test(u)) so = "Chromebook";
+    else if (/windows/i.test(u)) so = "Windows";
+    else if (/mac os/i.test(u)) so = "Mac";
+    else if (/linux/i.test(u)) so = "Linux";
+    if (/SamsungBrowser/.test(u)) nav = "Samsung Internet";
+    else if (/Edg\//.test(u)) nav = "Edge";
+    else if (/Firefox|FxiOS/.test(u)) nav = "Firefox";
+    else if (/CriOS|Chrome\//.test(u)) nav = "Chrome";
+    else if (/Safari\//.test(u)) nav = "Safari";
+    return so + (nav ? " · " + nav : "");
+  }
+  function datosAuto(){
+    var enApp2 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+    var osc = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+    return [
+      ["idioma", IDIOMA === "eu" ? "eu" : "es"],
+      ["disp", dispositivo()],
+      ["pantalla", Math.round(window.innerWidth) + " × " + Math.round(window.innerHeight)],
+      ["app", enApp2 ? "si" : "no"],
+      ["tema", osc ? "oscuro" : "claro"],
+      ["ver", VERSION_APP]
+    ];
+  }
+  function valorDato(k, v, T){
+    if (k === "idioma") return v === "eu" ? T.euskera : T.castellano;
+    if (k === "app" || k === "tema") return T[v];
+    return v;
+  }
+  function lugar(id){
+    if (!id) return { es: TEXTOS.es.avGeneral, txt: L().avGeneral };
+    for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === id) {
+      var s = SECCIONES[k];
+      return { es: s.nombre + " (" + TEXTOS.es.avArea + ")", txt: nombre(s) + " (" + L().avArea + ")" };
+    }
+    var e = porId(id);
+    if (e) return { es: e.sec.nombre + " › " + e.sim.titulo, txt: nombre(e.sec) + " › " + titulo(e.sim) };
+    return { es: id, txt: id };
+  }
+  function pintarTipos(){
+    $("av-tipos").innerHTML = TIPOS.map(function(t){
+      return '<button type="button" class="av-tipo" data-tipo="' + t + '" aria-pressed="' + (t === avTipo) + '">' + esc(L().tipos[t]) + '</button>';
+    }).join("");
+    $("av-msg").placeholder = avTipo ? L().pistas[avTipo] : L().avMsgPh;
+  }
+  function pintarDonde(){
+    var opc = '<option value="">' + esc(L().avGeneral) + '</option>';
+    var esta = !avContexto;
+    SECCIONES.forEach(function(s){
+      opc += '<optgroup label="' + esc(nombre(s)) + '"><option value="' + esc(s.id) + '">' + esc(nombre(s)) + " (" + esc(L().avArea) + ')</option>';
+      if (s.id === avContexto) esta = true;
+      s.simulaciones.forEach(function(sim){
+        if (sim.oculta) return;
+        if (sim.id === avContexto) esta = true;
+        opc += '<option value="' + esc(sim.id) + '">' + esc(titulo(sim)) + '</option>';
+      });
+      opc += '</optgroup>';
+    });
+    if (!esta) opc += '<option value="' + esc(avContexto) + '">' + esc(lugar(avContexto).txt) + '</option>';
+    $("av-donde").innerHTML = opc;
+    $("av-donde").value = avContexto;
+  }
+  function pintarDatos(){
+    $("av-datos").innerHTML = datosAuto().map(function(d){
+      return '<div><dt>' + esc(L().datos[d[0]]) + '</dt><dd>' + esc(valorDato(d[0], d[1], L())) + '</dd></div>';
+    }).join("");
+  }
+  function contar(){
+    var n = $("av-msg").value.length;
+    $("av-cuenta").textContent = n + " / 1500";
+  }
+  function errorAv(t){ var e = $("av-error"); e.textContent = t || ""; e.hidden = !t; }
+  function verAvisos(ctx){
+    try { ctx = decodeURIComponent(ctx || ""); } catch (e) {}
+    if ($("av-form").hidden) $("av-msg").value = "";
+    $("av-form").hidden = false; $("av-hecho").hidden = true;
+    if (ctx !== avContexto || !$("av-msg").value) avTipo = porId(ctx) ? "error" : "";
+    avContexto = ctx;
+    $("av-volver").href = avVolver;
+    $("av-seguir").href = avVolver;
+    $("av-prueba").hidden = !!CONF_AV.clave;
+    pintarTipos(); pintarDonde(); pintarDatos(); contar(); errorAv("");
+    mostrarVista("vista-avisos");
+    window.scrollTo(0, 0);
+    try { $("av-h").focus({ preventScroll: true }); } catch (e) {}
+  }
+  $("av-tipos").addEventListener("click", function(ev){
+    var b = ev.target.closest("[data-tipo]"); if (!b) return;
+    avTipo = b.getAttribute("data-tipo"); pintarTipos(); errorAv("");
+  });
+  $("av-msg").addEventListener("input", function(){ contar(); if (this.value.trim().length >= 10) errorAv(""); });
+
+  // Lo que recibe el profesor: siempre en castellano, con el texto del alumno tal cual.
+  function construirAviso(){
+    var donde = lugar($("av-donde").value), datos = {};
+    datosAuto().forEach(function(d){ datos[TEXTOS.es.datos[d[0]]] = valorDato(d[0], d[1], TEXTOS.es); });
+    var asunto = "Electromecánica · " + TIPOS_ES[avTipo] + " · " + donde.es;
+    var aviso = { subject: asunto.length > 120 ? asunto.slice(0, 117) + "…" : asunto, from_name: "App Electromecánica",
+                  "Tipo": TIPOS_ES[avTipo], "Dónde": donde.es, "Mensaje": $("av-msg").value.trim() };
+    Object.keys(datos).forEach(function(k){ aviso[k] = datos[k]; });
+    aviso["Fecha"] = new Date().toLocaleString("es-ES");
+    return aviso;
+  }
+  function enviarUno(aviso){
+    var cuerpo = { access_key: CONF_AV.clave };
+    Object.keys(aviso).forEach(function(k){ cuerpo[k] = aviso[k]; });
+    return fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(cuerpo)
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        if (!r.ok || j.success === false) { var e = new Error(j.message || "HTTP " + r.status); e.rechazo = true; throw e; }
+        return j;
+      });
+    });
+  }
+  function leerCola(){ try { return JSON.parse(localStorage.getItem(CLAVE_COLA) || "[]") || []; } catch (e) { return []; } }
+  function guardarCola(c){ try { if (c.length) localStorage.setItem(CLAVE_COLA, JSON.stringify(c.slice(-20))); else localStorage.removeItem(CLAVE_COLA); return true; } catch (e) { return false; } }
+  var vaciando = false;
+  function vaciarCola(){
+    if (vaciando || !CONF_AV.clave || navigator.onLine === false) return;
+    var cola = leerCola(); if (!cola.length) return;
+    vaciando = true;
+    (function siguiente(){
+      if (!cola.length) { guardarCola(cola); vaciando = false; return; }
+      enviarUno(cola[0]).then(function(){ cola.shift(); guardarCola(cola); siguiente(); },
+        function(e){ if (e && e.rechazo) { cola.shift(); guardarCola(cola); siguiente(); } else { guardarCola(cola); vaciando = false; } });
+    })();
+  }
+  window.addEventListener("online", vaciarCola);
+  setTimeout(vaciarCola, 3000);
+
+  function hecho(titulo2, texto, aviso){
+    $("av-form").hidden = true;
+    $("av-hecho").hidden = false;
+    $("av-hecho-t").textContent = titulo2;
+    $("av-hecho-p").textContent = texto;
+    var r = $("av-resumen");
+    r.hidden = !aviso;
+    if (aviso) {
+      r.innerHTML = '<p class="av-asunto">' + esc(aviso.subject) + '</p><dl>' + Object.keys(aviso).filter(function(k){ return k !== "subject" && k !== "from_name"; }).map(function(k){
+        return '<div' + (k === "Mensaje" ? ' class="av-largo"' : '') + '><dt>' + esc(k) + '</dt><dd>' + esc(aviso[k]) + '</dd></div>';
+      }).join("") + '</dl>';
+    }
+    window.scrollTo(0, 0);
+    try { $("av-hecho").focus({ preventScroll: true }); } catch (e) {}
+  }
+  function reiniciarAv(){
+    $("av-msg").value = ""; $("av-hecho").hidden = true; $("av-form").hidden = false;
+    avTipo = porId(avContexto) ? "error" : ""; pintarTipos(); contar(); errorAv("");
+  }
+  $("av-otro").addEventListener("click", function(){ reiniciarAv(); try { $("av-h").focus(); } catch (e) {} });
+  $("av-seguir").addEventListener("click", function(){ setTimeout(reiniciarAv, 0); });
+
+  $("av-form").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    if ($("av-bot").checked) return;
+    if (!avTipo) { errorAv(L().errTipo); return; }
+    if ($("av-msg").value.trim().length < 10) { errorAv(L().errCorto); $("av-msg").focus(); return; }
+    errorAv("");
+    var aviso = construirAviso();
+    if (!CONF_AV.clave) { hecho(L().pruebaT, L().pruebaP, aviso); return; }
+    function aCola(){
+      var c = leerCola(); c.push(aviso);
+      if (guardarCola(c)) hecho(L().colaT, L().colaP); else errorAv(L().errEnvio);
+    }
+    if (navigator.onLine === false) { aCola(); return; }
+    var btn = $("av-enviar"), et = btn.querySelector("span");
+    btn.disabled = true; et.textContent = L().avEnviando;
+    enviarUno(aviso).then(function(){ hecho(L().okT, L().okP); },
+      function(e){ if (e && e.rechazo) errorAv(L().errEnvio); else aCola(); })
+      .then(function(){ btn.disabled = false; et.textContent = L().avEnviar; });
+  });
+
   /* ---------- rutas ---------- */
   function enrutar(mover){
     var id = "";
     try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
     if (!id || id === "inicio") { cerrarVisor(); verPortada(); return; }
     if (id === "areas") { cerrarVisor(); verAreas(mover); return; }
+    if (id === "avisos" || id.indexOf("avisos/") === 0) { cerrarVisor(); verAvisos(id.slice(7)); return; }
     var sec = null;
     for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === id) sec = SECCIONES[k];
     var e = sec ? null : porId(id);
     if (e) abrirVisor(e);
     else { cerrarVisor(); if (sec) verSeccion(sec, mover); else verAreas(mover); }
   }
-  window.addEventListener("hashchange", function(){ enrutar(true); });
+  window.addEventListener("hashchange", function(ev){
+    // Para que «Volver» del formulario lleve a donde estaba el alumno
+    var antes = String(ev.oldURL || "").split("#")[1] || "";
+    if (antes && antes.indexOf("avisos") !== 0 && String(location.hash).indexOf("#avisos") === 0) avVolver = "#" + antes;
+    enrutar(true);
+  });
 
   [].forEach.call(document.querySelectorAll("[data-idioma]"), function(a){
     a.addEventListener("click", function(){ ponerIdioma(a.getAttribute("data-idioma")); });
