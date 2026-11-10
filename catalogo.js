@@ -24,8 +24,8 @@
                   del archivo
      titulo, tema, descripcion
      icono        magnetotermico · diferencial · conmutada · cruzamiento ·
-                  presostato · regulador · lampara · manometro ·
-                  engranaje · simulacion
+                  presostato · regulador · cremallera · lampara ·
+                  manometro · engranaje · simulacion
    ===================================================================== */
 self.CATALOGO = {
   secciones: [
@@ -92,6 +92,23 @@ self.CATALOGO = {
           tema: "Mando por presión",
           descripcion: "Al llegar a la presión de corte, la membrana conmuta el contacto NA/NC y se enciende la bombilla.",
           icono: "presostato"
+        }
+      ]
+    },
+    {
+      carpeta: "mecanica",
+      nombre: "Mecánica",
+      descripcion: "Mecanismos que transmiten y transforman el movimiento.",
+      tono: "verde",
+      icono: "engranaje",
+      simulaciones: [
+        {
+          archivo: "pinon-cremallera.html",
+          id: "pinon-cremallera",
+          titulo: "Piñón y cremallera",
+          tema: "Transformación del movimiento",
+          descripcion: "El giro del piñón se convierte en desplazamiento rectilíneo de la cremallera, y al revés.",
+          icono: "cremallera"
         }
       ]
     }

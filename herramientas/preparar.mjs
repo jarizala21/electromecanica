@@ -20,7 +20,8 @@ const ICONOS = [
   ["icono-maskable.svg", "icono-maskable-512.png", 512],
   ["apple-touch-icon.svg", "apple-touch-icon.png", 180],
   ["atajo-electrica.svg", "atajo-electrica-96.png", 96],
-  ["atajo-neumatica.svg", "atajo-neumatica-96.png", 96]
+  ["atajo-neumatica.svg", "atajo-neumatica-96.png", 96],
+  ["atajo-mecanica.svg", "atajo-mecanica-96.png", 96]
 ];
 
 function decodificar(s) {
@@ -59,7 +60,17 @@ for (const carpeta of dirs) {
   }
   if (archivos.length) carpetas.push({ carpeta, archivos });
 }
-await fs.writeFile(path.join(base, "indice.json"), JSON.stringify({ generado: new Date().toISOString(), carpetas }, null, 2));
+// Otros archivos que usan las simulaciones (GIF, imágenes…), para guardarlos y usarlos sin conexión.
+const recursos = [];
+async function recorrer(dir, rel) {
+  for (const e of (await fs.readdir(dir, { withFileTypes: true })).sort((a, b) => porNombre(a.name, b.name))) {
+    const r = rel ? `${rel}/${e.name}` : e.name;
+    if (e.isDirectory()) await recorrer(path.join(dir, e.name), r);
+    else if (rel && !/\.html?$/i.test(e.name) && !e.name.startsWith(".")) recursos.push(r);
+  }
+}
+await recorrer(base, "");
+await fs.writeFile(path.join(base, "indice.json"), JSON.stringify({ generado: new Date().toISOString(), carpetas, recursos }, null, 2));
 
 const version = (process.env.GITHUB_SHA || Date.now().toString(36)).slice(0, 12);
 const swRuta = path.join(SALIDA, "sw.js");

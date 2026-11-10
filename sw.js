@@ -40,6 +40,8 @@ self.addEventListener("install", function(ev){
       if (!r.ok) return;
       return r.clone().json().then(function(indice){
         (indice.carpetas || []).forEach(function(c){ (c.archivos || []).forEach(function(f){ lista.push(ruta(c.carpeta, f.archivo)); }); });
+        // Imágenes y otros archivos que usan las simulaciones (GIF, PNG…)
+        (indice.recursos || []).forEach(function(r){ lista.push("simulaciones/" + String(r).split("/").map(encodeURIComponent).join("/")); });
         return cache.put(clave("simulaciones/indice.json"), r);
       });
     }).catch(function(){}).then(function(){

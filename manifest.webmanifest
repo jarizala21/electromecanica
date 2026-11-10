@@ -19,6 +19,7 @@
   ],
   "shortcuts": [
     { "name": "Eléctrica", "url": "./#electrica", "icons": [{ "src": "iconos/atajo-electrica-96.png", "sizes": "96x96", "type": "image/png" }] },
-    { "name": "Neumática", "url": "./#neumatica", "icons": [{ "src": "iconos/atajo-neumatica-96.png", "sizes": "96x96", "type": "image/png" }] }
+    { "name": "Neumática", "url": "./#neumatica", "icons": [{ "src": "iconos/atajo-neumatica-96.png", "sizes": "96x96", "type": "image/png" }] },
+    { "name": "Mecánica", "url": "./#mecanica", "icons": [{ "src": "iconos/atajo-mecanica-96.png", "sizes": "96x96", "type": "image/png" }] }
   ]
 }
