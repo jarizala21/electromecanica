@@ -36,6 +36,14 @@ CAP = {  # simulaciones HTML: centro x, centro y, lado (fracciones del ancho de 
     'electrica/cc-ca': (0.4, 0.5, 0.6, 'grafikoa'),
     'electrica/ficha-magnetotermico': (0.5, 0.42, 0.95, 'zatiak'),
     'electrica/ficha-diferencial': (0.5, 0.5, 0.95, 'zatiak'),
+    'dibujo/planos': (0.5, 0.5, 0.95, 'bistak'),
+    'dibujo/plegado': (0.42, 0.45, 0.62, 'erradioak'),
+    'soldadura/preparacion': (0.5, 0.5, 0.5, 'ertzak'),
+    'soldadura/parametros': (0.5, 0.3, 0.7, 'kalkulagailua'),
+    'soldadura/defectos': (0.5, 0.42, 0.55, 'akatsak'),
+    'herramientas/manuales': (0.5, 0.5, 0.62, 'motak'),
+    'herramientas/neumaticas': (0.5, 0.5, 0.62, 'motak'),
+    'herramientas/electricas': (0.5, 0.5, 0.62, 'motak'),
     'mecanica/remaches': (0.5, 0.5, 0.9, 'motak'),
 }
 GIF = {  # fotograma (fracción del total), centro x, centro y, lado (fracción del ancho)

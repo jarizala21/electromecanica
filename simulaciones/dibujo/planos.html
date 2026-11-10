@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interpretación de planos y croquizado</title>
+<meta name="description" content="Vistas, tipos de línea, escalas, cajetín, cómo hacer un croquis y las normas que los regulan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:10.5px;fill:#242d5f;font-weight:600}
+.gr{stroke:#242d5f;stroke-width:2.4;fill:none;stroke-linejoin:round}
+.fi{stroke:#242d5f;stroke-width:1;fill:none}
+.oc{stroke:#242d5f;stroke-width:1.4;fill:none;stroke-dasharray:5 3}
+.ej{stroke:#c62f2f;stroke-width:.9;fill:none;stroke-dasharray:12 3 2 3}
+.vista{transition:opacity .2s}
+.tenue .vista{opacity:.25}
+.tenue .vista.on{opacity:1}
+.linea svg{width:100%;height:40px;display:block;background:#fff;border-radius:10px;margin-bottom:6px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Dibujo técnico" data-eu="Marrazketa teknikoa"></p>
+      <h1 data-es="Interpretación de planos y croquizado" data-eu="Planoen interpretazioa eta krokizazioa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">Un <span class="clave">plano</span> es el dibujo técnico de una pieza o un conjunto, hecho con normas, para que <b>cualquiera lo entienda igual</b> y pueda fabricarlo. Lleva vistas, cotas, escala y un cajetín con los datos.</p>
+      <p class="eu"><span class="clave">Planoa</span> pieza edo multzo baten marrazki teknikoa da, arauen arabera egina, <b>edonork berdin uler dezan</b> eta fabrikatu ahal izan dezan. Bistak, kotak, eskala eta datuak dituen kajetina ditu.</p>
+      <p class="es">Un <span class="clave">croquis</span> es un dibujo <b>a mano alzada</b>, sin instrumentos, pero proporcionado, acotado y siguiendo las mismas normas. Se hace en el taller, delante de la pieza.</p>
+      <p class="eu"><span class="clave">Krokisa</span> <b>esku hutsez</b> egindako marrazkia da, tresnarik gabe, baina proportziozkoa, akotatua eta arau berei jarraituz. Tailerrean egiten da, piezaren aurrean.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Para interpretar un plano" data-eu="Plano bat interpretatzeko"></h2>
+      <ol class="es"><li>Lee el cajetín: qué pieza es, material y escala.</li><li>Mira las vistas y relaciónalas entre sí.</li><li>Imagina la pieza en 3D.</li><li>Lee las cotas y las notas (tolerancias, acabados).</li></ol>
+      <ol class="eu"><li>Irakurri kajetina: zer pieza den, materiala eta eskala.</li><li>Begiratu bistak eta erlazionatu elkarren artean.</li><li>Irudikatu pieza 3Dn.</li><li>Irakurri kotak eta oharrak (toleranteziak, akaberak).</li></ol>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="bistak" data-es="Vistas" data-eu="Bistak" hidden>
+    <div class="card">
+      <p class="es">Una pieza se dibuja con <b>vistas</b>: cómo se ve mirándola de frente, desde arriba y desde un lado. En Europa se usa el <b>método europeo (ISO E)</b>: la planta va <b>debajo</b> del alzado y el perfil izquierdo, <b>a la derecha</b>. Toca cada vista.</p>
+      <p class="eu">Pieza bat <b>bisten</b> bidez marrazten da: aurretik, goitik eta alde batetik begiratuta nola ikusten den. Europan <b>metodo europarra (ISO E)</b> erabiltzen da: oinplanoa altxaeraren <b>azpian</b> doa eta ezkerreko profila, <b>eskuinean</b>. Ukitu bista bakoitza.</p>
+    </div>
+    <div class="chips" id="vistas">
+      <button data-v="alzado" data-es="Alzado" data-eu="Altxaera"></button>
+      <button data-v="planta" data-es="Planta" data-eu="Oinplanoa"></button>
+      <button data-v="perfil" data-es="Perfil izquierdo" data-eu="Ezkerreko profila"></button>
+    </div>
+    <div class="dos">
+      <figure class="fig"><svg id="iso" viewBox="0 0 260 220" role="img" aria-label="Pieza en perspectiva"></svg><figcaption data-es="Pieza en perspectiva" data-eu="Pieza perspektiban"></figcaption></figure>
+      <figure class="fig"><svg id="orto" viewBox="0 0 260 240" role="img" aria-label="Vistas"></svg><figcaption data-es="Sus tres vistas (método europeo)" data-eu="Haren hiru bistak (metodo europarra)"></figcaption></figure>
+    </div>
+    <div class="estado" id="v-txt"></div>
+  </section>
+
+  <section class="panel" data-tab="lerroak" data-es="Líneas" data-eu="Lerroak" hidden>
+    <div class="rejilla">
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 20h180" stroke="#242d5f" stroke-width="3"/></svg><h3 class="es">Continua gruesa</h3><h3 class="eu">Jarraitu lodia</h3><p class="es">Contornos y aristas que se ven.</p><p class="eu">Ikusten diren ingeradak eta ertzak.</p></div>
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 20h180" stroke="#242d5f" stroke-width="1"/></svg><h3 class="es">Continua fina</h3><h3 class="eu">Jarraitu mehea</h3><p class="es">Líneas de cota y auxiliares, rayados, fondo de roscas.</p><p class="eu">Kota- eta lerro laguntzaileak, marraduraak, harien hondoa.</p></div>
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 20h180" stroke="#242d5f" stroke-width="1.6" stroke-dasharray="10 5"/></svg><h3 class="es">De trazos</h3><h3 class="eu">Marra etenak</h3><p class="es">Aristas y contornos ocultos.</p><p class="eu">Ertz eta ingerada ezkutuak.</p></div>
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 20h180" stroke="#c62f2f" stroke-width="1" stroke-dasharray="18 4 2 4"/></svg><h3 class="es">Fina de trazo y punto</h3><h3 class="eu">Marra eta puntu mehea</h3><p class="es">Ejes de simetría y centros de agujeros.</p><p class="eu">Simetria-ardatzak eta zuloen erdiguneak.</p></div>
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 20h180" stroke="#242d5f" stroke-width="1" stroke-dasharray="18 4 2 3 2 4"/></svg><h3 class="es">Fina de trazo y dos puntos</h3><h3 class="eu">Marra eta bi puntu mehea</h3><p class="es">Piezas vecinas y posiciones extremas de piezas móviles.</p><p class="eu">Ondoko piezak eta pieza mugikorren muturreko posizioak.</p></div>
+      <div class="card linea"><svg viewBox="0 0 200 40"><path d="M10 22c10-8 16 6 26-2s18 6 28-2 18 6 28-2 18 6 28-2 18 6 28-2 18 6 28-2" stroke="#242d5f" stroke-width="1" fill="none"/></svg><h3 class="es">Fina a mano alzada</h3><h3 class="eu">Esku hutseko mehea</h3><p class="es">Límite de una vista parcial o de una rotura.</p><p class="eu">Bista partzial baten edo haustura baten muga.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="eskalak" data-es="Escalas" data-eu="Eskalak" hidden>
+    <div class="card">
+      <p class="es">La <span class="clave">escala</span> dice cuántas veces es más pequeño o más grande el dibujo que la pieza: <b>dibujo : realidad</b>. Natural <b>1:1</b>; de reducción <b>1:2, 1:5, 1:10…</b>; de ampliación <b>2:1, 5:1…</b> Las cotas se escriben <b>siempre con la medida real</b>.</p>
+      <p class="eu"><span class="clave">Eskalak</span> marrazkia pieza baino zenbat aldiz txikiagoa edo handiagoa den esaten du: <b>marrazkia : errealitatea</b>. Naturala <b>1:1</b>; txikiagotzekoa <b>1:2, 1:5, 1:10…</b>; handiagotzekoa <b>2:1, 5:1…</b> Kotak <b>beti benetako neurriarekin</b> idazten dira.</p>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <div class="mandos">
+        <div class="deslizador"><label><span data-es="Medida real" data-eu="Benetako neurria"></span><output id="r-t"></output></label><input id="real" type="range" min="10" max="500" step="10" value="200"></div>
+        <select id="esc" aria-label="Escala"><option value="0.1">1:10</option><option value="0.2">1:5</option><option value="0.5" selected>1:2</option><option value="1">1:1</option><option value="2">2:1</option><option value="5">5:1</option></select>
+      </div>
+      <div class="formula" id="e-r"></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="kajetina" data-es="Cajetín" data-eu="Kajetina" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-c" viewBox="0 0 320 150" role="img" aria-label="Cajetín">
+          <rect x="10" y="10" width="300" height="130" fill="#fff" stroke="#242d5f" stroke-width="2"/>
+          <g class="resaltable" data-parte="centro"><rect x="10" y="10" width="110" height="40" fill="#eef1f6" stroke="#242d5f"/><text class="txt" x="65" y="34" text-anchor="middle">LSB · Andoain</text></g>
+          <g class="resaltable" data-parte="titulo"><rect x="120" y="10" width="190" height="40" fill="#fff" stroke="#242d5f"/><text class="txt" x="215" y="35" text-anchor="middle" style="font-size:14px">SOPORTE</text></g>
+          <g class="resaltable" data-parte="nombres"><rect x="10" y="50" width="110" height="60" fill="#fff" stroke="#242d5f"/><text class="txt" x="16" y="66" data-es="Dibujado: A. Pérez" data-eu="Marraztua: A. Pérez"></text><text class="txt" x="16" y="82" data-es="Comprobado: J. A." data-eu="Egiaztatua: J. A."></text><text class="txt" x="16" y="98" data-es="Fecha: 10/11" data-eu="Data: 11/10"></text></g>
+          <g class="resaltable" data-parte="material"><rect x="120" y="50" width="110" height="30" fill="#fff" stroke="#242d5f"/><text class="txt" x="126" y="69">Material: S235</text></g>
+          <g class="resaltable" data-parte="escala"><rect x="230" y="50" width="80" height="30" fill="#fff" stroke="#242d5f"/><text class="txt" x="236" y="69" data-es="Escala 1:2" data-eu="Eskala 1:2"></text></g>
+          <g class="resaltable" data-parte="metodo"><rect x="120" y="80" width="60" height="30" fill="#fff" stroke="#242d5f"/><circle cx="138" cy="95" r="8" fill="none" stroke="#242d5f"/><circle cx="138" cy="95" r="3.5" fill="none" stroke="#242d5f"/><path d="M152 89l18 -4v20l-18 -4z" fill="none" stroke="#242d5f"/></g>
+          <g class="resaltable" data-parte="numero"><rect x="180" y="80" width="130" height="30" fill="#fff" stroke="#242d5f"/><text class="txt" x="186" y="99" data-es="Plano n.º P-01 · hoja 1/1" data-eu="P-01 planoa · 1/1 orria"></text></g>
+          <g class="resaltable" data-parte="formato"><rect x="10" y="110" width="300" height="30" fill="#fff" stroke="#242d5f"/><text class="txt" x="16" y="129" data-es="Formato A4 · cotas en mm · tolerancias generales ISO 2768-m" data-eu="A4 formatua · kotak mm-tan · tolerantzia orokorrak ISO 2768-m"></text></g>
+        </svg>
+        <figcaption data-es="Toca cada casilla" data-eu="Ukitu laukitxo bakoitza"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-c">
+        <li><button data-parte="titulo"><span class="n">1</span><span><b class="es">Título</b><b class="eu">Izenburua</b><small class="es">Nombre de la pieza o del conjunto.</small><small class="eu">Piezaren edo multzoaren izena.</small></span></button></li>
+        <li><button data-parte="numero"><span class="n">2</span><span><b class="es">Número de plano</b><b class="eu">Plano-zenbakia</b><small class="es">Para identificarlo y archivarlo.</small><small class="eu">Identifikatu eta artxibatzeko.</small></span></button></li>
+        <li><button data-parte="escala"><span class="n">3</span><span><b class="es">Escala</b><b class="eu">Eskala</b></span></button></li>
+        <li><button data-parte="material"><span class="n">4</span><span><b class="es">Material</b><b class="eu">Materiala</b></span></button></li>
+        <li><button data-parte="metodo"><span class="n">5</span><span><b class="es">Símbolo del método de proyección</b><b class="eu">Proiekzio-metodoaren ikurra</b><small class="es">El cono indica método europeo o americano.</small><small class="eu">Konoak metodo europarra edo amerikarra adierazten du.</small></span></button></li>
+        <li><button data-parte="nombres"><span class="n">6</span><span><b class="es">Quién lo dibuja, quién lo comprueba y fecha</b><b class="eu">Nork marrazten duen, nork egiaztatzen duen eta data</b></span></button></li>
+        <li><button data-parte="centro"><span class="n">7</span><span><b class="es">Empresa o centro</b><b class="eu">Enpresa edo ikastetxea</b></span></button></li>
+        <li><button data-parte="formato"><span class="n">8</span><span><b class="es">Formato y notas generales</b><b class="eu">Formatua eta ohar orokorrak</b><small class="es">Tamaño de hoja (A4, A3…), unidades y tolerancias generales.</small><small class="eu">Orri-tamaina (A4, A3…), unitateak eta tolerantzia orokorrak.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="krokizazioa" data-es="Croquizado" data-eu="Krokizazioa" hidden>
+    <div class="card">
+      <ol class="es">
+        <li><b>Observa la pieza</b> y elige como alzado la vista que más información da.</li>
+        <li>Decide <b>cuántas vistas</b> hacen falta (las mínimas para que se entienda).</li>
+        <li><b>Encaja</b>: dibuja rectángulos finos con las proporciones de cada vista, alineadas.</li>
+        <li>Dibuja los <b>ejes</b> y los detalles (agujeros, chaflanes…).</li>
+        <li><b>Repasa</b> con línea gruesa lo visto y con trazos lo oculto.</li>
+        <li><b>Mide</b> la pieza (calibre, flexómetro) y <b>acota</b> siguiendo las normas.</li>
+        <li>Completa el <b>cajetín</b> y revisa que no falte ni sobre ninguna cota.</li>
+      </ol>
+      <ol class="eu">
+        <li><b>Behatu pieza</b> eta aukeratu altxaera gisa informazio gehien ematen duen bista.</li>
+        <li>Erabaki <b>zenbat bista</b> behar diren (ulertzeko gutxienekoak).</li>
+        <li><b>Enkajatu</b>: marraztu laukizuzen meheak bista bakoitzaren proportzioekin, lerrokatuta.</li>
+        <li>Marraztu <b>ardatzak</b> eta xehetasunak (zuloak, txaflanak…).</li>
+        <li><b>Errepasatu</b> lerro lodiz ikusten dena eta marra etenez ezkutukoa.</li>
+        <li><b>Neurtu</b> pieza (kalibrea, flexometroa) eta <b>akotatu</b> arauei jarraituz.</li>
+        <li>Bete <b>kajetina</b> eta berrikusi kotarik falta edo soberan ez dagoela.</li>
+      </ol>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Consejos" data-eu="Aholkuak"></h2>
+      <p class="es">Lápiz blando y goma; papel cuadriculado ayuda. Mejor proporcionado que rápido: un croquis deformado lleva a errores.</p>
+      <p class="eu">Arkatz biguna eta borragoma; paper koadrikulatuak laguntzen du. Hobe proportziozkoa azkarra baino: krokis deformatu batek akatsetara darama.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="arauak" data-es="Normas" data-eu="Arauak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3>UNE-EN ISO 128</h3><p class="es">Representación: tipos de líneas, vistas, cortes y secciones.</p><p class="eu">Irudikapena: lerro motak, bistak, ebakiak eta sekzioak.</p></div>
+      <div class="card"><h3>UNE-EN ISO 5456-2</h3><p class="es">Proyecciones ortogonales: método europeo y americano.</p><p class="eu">Proiekzio ortogonalak: metodo europarra eta amerikarra.</p></div>
+      <div class="card"><h3>UNE-EN ISO 129-1</h3><p class="es">Acotación: cómo se ponen las cotas.</p><p class="eu">Akotazioa: kotak nola jartzen diren.</p></div>
+      <div class="card"><h3>UNE-EN ISO 5455</h3><p class="es">Escalas recomendadas.</p><p class="eu">Gomendatutako eskalak.</p></div>
+      <div class="card"><h3>UNE-EN ISO 7200</h3><p class="es">Cajetín y datos del plano.</p><p class="eu">Kajetina eta planoaren datuak.</p></div>
+      <div class="card"><h3>UNE-EN ISO 5457 · ISO 216</h3><p class="es">Formatos de papel (A4, A3…) y presentación de la hoja.</p><p class="eu">Paper-formatuak (A4, A3…) eta orriaren aurkezpena.</p></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var vista = null;
+  function P(x, y, z){ var c = 0.866, s = 0.5, k = 1.9; return [130 + (x - y) * c * k, 120 + (x + y) * s * k - z * k]; }
+  function poli(pts, f, cls){ return '<path class="' + (cls || "gr") + '" style="fill:' + f + '" d="M' + pts.map(function(p){ var q = P(p[0], p[1], p[2]); return q[0].toFixed(1) + " " + q[1].toFixed(1); }).join("L") + 'Z"/>'; }
+  function iso(){
+    var s = "";
+    s += poli([[0, 40, 0], [60, 40, 0], [60, 40, 20], [20, 40, 20], [20, 40, 50], [0, 40, 50]], vista === "alzado" ? "#ffe2b8" : "#dfe6f0");
+    s += poli([[60, 0, 0], [60, 40, 0], [60, 40, 20], [60, 0, 20]], "#c6d0de");
+    s += poli([[20, 0, 20], [60, 0, 20], [60, 40, 20], [20, 40, 20]], vista === "planta" ? "#ffe2b8" : "#eef2f7");
+    s += poli([[20, 0, 20], [20, 40, 20], [20, 40, 50], [20, 0, 50]], "#c6d0de");
+    s += poli([[0, 0, 50], [20, 0, 50], [20, 40, 50], [0, 40, 50]], vista === "planta" ? "#ffe2b8" : "#eef2f7");
+    var c = P(40, 20, 20);
+    s += '<ellipse cx="' + c[0] + '" cy="' + c[1] + '" rx="' + (6 * 1.9 * 1.22) + '" ry="' + (6 * 1.9 * 0.7) + '" fill="#fff" stroke="#242d5f" stroke-width="2"/>';
+    var fl = { alzado: [P(30, 70, 25), P(30, 46, 25)], planta: [P(40, 20, 85), P(40, 20, 58)], perfil: [P(95, 20, 12), P(66, 20, 12)] };
+    if (vista) { var a = fl[vista]; s += '<path d="M' + a[0][0] + ' ' + a[0][1] + 'L' + a[1][0] + ' ' + a[1][1] + '" stroke="#f39200" stroke-width="4" marker-end="url(#fv)"/>'; }
+    s += '<defs><marker id="fv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f39200"/></marker></defs>';
+    $("iso").innerHTML = s;
+  }
+  function orto(){
+    var k = 1.5, ax = 20, ay = 20, s = '<g id="g-orto" class="' + (vista ? "tenue" : "") + '">';
+    // alzado: x horizontal, z vertical
+    var A = function(x, z){ return (ax + (60 - x) * k) + " " + (ay + (50 - z) * k); };  // visto desde delante: x crece hacia la izquierda
+    s += '<g class="vista' + (vista === "alzado" ? " on" : "") + '"><path class="gr" d="M' + A(0, 0) + 'L' + A(60, 0) + 'L' + A(60, 20) + 'L' + A(20, 20) + 'L' + A(20, 50) + 'L' + A(0, 50) + 'Z"/>';
+    s += '<path class="oc" d="M' + A(34, 0) + 'L' + A(34, 20) + 'M' + A(46, 0) + 'L' + A(46, 20) + '"/><path class="ej" d="M' + A(40, -4) + 'L' + A(40, 24) + '"/><text class="txt" x="' + ax + '" y="' + (ay - 6) + '">' + T("Alzado", "Altxaera") + '</text></g>';
+    // planta: debajo
+    var py = ay + 50 * k + 22, Pl = function(x, y){ return (ax + (60 - x) * k) + " " + (py + y * k); };
+    s += '<g class="vista' + (vista === "planta" ? " on" : "") + '"><path class="gr" d="M' + Pl(0, 0) + 'L' + Pl(60, 0) + 'L' + Pl(60, 40) + 'L' + Pl(0, 40) + 'Z M' + Pl(20, 0) + 'L' + Pl(20, 40) + '"/>';
+    s += '<circle class="gr" cx="' + (ax + 20 * k) + '" cy="' + (py + 20 * k) + '" r="' + 6 * k + '"/><path class="ej" d="M' + Pl(32, 20) + 'L' + Pl(48, 20) + 'M' + Pl(40, 12) + 'L' + Pl(40, 28) + '"/><text class="txt" x="' + ax + '" y="' + (py + 40 * k + 14) + '">' + T("Planta", "Oinplanoa") + '</text></g>';
+    // perfil izquierdo: a la derecha
+    var px = ax + 60 * k + 24, Pf = function(y, z){ return (px + y * k) + " " + (ay + (50 - z) * k); };
+    s += '<g class="vista' + (vista === "perfil" ? " on" : "") + '"><path class="gr" d="M' + Pf(0, 0) + 'L' + Pf(40, 0) + 'L' + Pf(40, 50) + 'L' + Pf(0, 50) + 'Z"/>';
+    s += '<path class="gr" d="M' + Pf(0, 20) + 'L' + Pf(40, 20) + '"/><path class="oc" d="M' + Pf(14, 0) + 'L' + Pf(14, 20) + 'M' + Pf(26, 0) + 'L' + Pf(26, 20) + '"/><path class="ej" d="M' + Pf(20, -4) + 'L' + Pf(20, 24) + '"/><text class="txt" x="' + px + '" y="' + (ay - 6) + '">' + T("Perfil izq.", "Ezker profila") + '</text></g></g>';
+    $("orto").innerHTML = s;
+    var M = {
+      alzado: ["Alzado: mirando de frente. Se ve la forma de L. El agujero no se ve: va con líneas de trazos (oculto).", "Altxaera: aurretik begiratuta. L forma ikusten da. Zuloa ez da ikusten: marra etenekin doa (ezkutua)."],
+      planta: ["Planta: mirando desde arriba. Va debajo del alzado. Aquí sí se ve el agujero (circunferencia con sus ejes).", "Oinplanoa: goitik begiratuta. Altxaeraren azpian doa. Hemen bai ikusten da zuloa (zirkunferentzia bere ardatzekin)."],
+      perfil: ["Perfil izquierdo: mirando la pieza desde su izquierda. En el método europeo se dibuja a la DERECHA del alzado. Se ve el escalón; el agujero queda oculto.", "Ezkerreko profila: pieza bere ezkerretik begiratuta. Metodo europarrean altxaeraren ESKUINEAN marrazten da. Koska ikusten da; zuloa ezkutuan geratzen da."]
+    };
+    $("v-txt").textContent = vista ? T(M[vista][0], M[vista][1]) : T("Toca una vista.", "Ukitu bista bat.");
+    [].forEach.call($("vistas").children, function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-v") === vista ? "true" : "false"); });
+  }
+  $("vistas").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; vista = b.getAttribute("data-v"); iso(); orto(); });
+  function escala(){
+    var r = +$("real").value, e = +$("esc").value, txt = $("esc").options[$("esc").selectedIndex].text;
+    $("r-t").textContent = r + " mm";
+    $("e-r").textContent = T("Real ", "Benetakoa ") + r + " mm → " + T("en el dibujo ", "marrazkian ") + (Math.round(r * e * 10) / 10).toString().replace(".", ",") + " mm (" + txt + ")";
+  }
+  $("real").addEventListener("input", escala); $("esc").addEventListener("change", escala);
+  alCambiarIdioma(function(){ iso(); orto(); escala(); });
+})();
+</script>
+</body>
+</html>

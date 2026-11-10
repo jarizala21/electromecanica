@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Herramientas eléctricas</title>
+<meta name="description" content="Taladro, amoladora, cizalla de chapa, remachadora y atornillador eléctricos: con cable o batería, uso y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Herramientas" data-eu="Erremintak"></p>
+      <h1 data-es="Herramientas eléctricas" data-eu="Erreminta elektrikoak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="orokorrak" data-es="Cómo son" data-eu="Nolakoak diren">
+    <div class="card">
+      <p class="es">Las <span class="clave">herramientas eléctricas</span> llevan un <b>motor eléctrico</b> dentro. Pueden ir <b>con cable</b> (230 V) o <b>con batería</b> (12, 18 o 36 V).</p>
+      <p class="eu"><span class="clave">Erreminta elektrikoek</span> <b>motor elektriko</b> bat dute barruan. <b>Kablearekin</b> (230 V) edo <b>bateriarekin</b> (12, 18 edo 36 V) joan daitezke.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Con cable</h3><h3 class="eu">Kablearekin</h3><p class="es">Potencia constante y sin límite de tiempo. El cable estorba y hay que vigilarlo.</p><p class="eu">Potentzia konstantea eta denbora-mugarik gabe. Kableak traba egiten du eta zaindu egin behar da.</p></div>
+      <div class="card"><h3 class="es">Con batería</h3><h3 class="eu">Bateriarekin</h3><p class="es">Libertad de movimiento. Se fija en la <b>tensión (V)</b> = fuerza, y la <b>capacidad (Ah)</b> = cuánto dura.</p><p class="eu">Mugitzeko askatasuna. <b>Tentsioari (V)</b> = indarra, eta <b>edukierari (Ah)</b> = zenbat irauten duen begiratzen zaio.</p></div>
+      <div class="card"><h3 class="es">Doble aislamiento</h3><h3 class="eu">Isolamendu bikoitza</h3><p class="es">El símbolo de dos cuadrados (▣) indica que no necesita toma de tierra.</p><p class="eu">Bi karratuko ikurrak (▣) ez duela lur-hartunerik behar adierazten du.</p></div>
+      <div class="card"><h3 class="es">Potencia y velocidad</h3><h3 class="eu">Potentzia eta abiadura</h3><p class="es">Potencia en W, velocidad en rpm. Muchas tienen regulador y embrague.</p><p class="eu">Potentzia W-tan, abiadura bira/min-tan. Askok erregulagailua eta enbragea dituzte.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Herramientas" data-eu="Erremintak" hidden>
+    <div class="h-lista" id="h-lista"></div>
+    <div id="h-detalle"></div>
+  </section>
+
+  <section class="panel" data-tab="segurtasuna" data-es="Seguridad" data-eu="Segurtasuna" hidden>
+    <div class="card">
+      <ol class="es"><li>Revisa cable, clavija y carcasa antes de usar: si están dañados, no se usa.</li><li><b>Desenchufa o quita la batería</b> para cambiar brocas, discos o cuchillas.</li><li>Nunca en ambientes mojados (las de cable).</li><li>EPIs: gafas, protección auditiva, guantes según el trabajo; nada de ropa suelta.</li><li>Espera a que la herramienta pare antes de dejarla.</li></ol>
+      <ol class="eu"><li>Berrikusi kablea, entxufea eta karkasa erabili aurretik: kaltetuta badaude, ez da erabiltzen.</li><li><b>Deskonektatu edo kendu bateria</b> burginak, diskoak edo xaflak aldatzeko.</li><li>Inoiz ez giro bustietan (kabledunak).</li><li>NBEak: betaurrekoak, entzumen-babesa, eskularruak lanaren arabera; arropa askerik ez.</li><li>Itxaron erreminta gelditu arte utzi aurretik.</li></ol>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ariketa" data-es="¿Cuál uso?" data-eu="Zein erabili?" hidden>
+    <div class="estado" id="h-nota"></div>
+    <div id="h-test" style="display:grid;gap:12px"></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script src="herramientas.js"></script>
+<script>
+var BAT = '<rect class="hm" x="26" y="48" width="22" height="10" rx="2"/>';
+fichaHerramientas({
+  lista: [
+    { n: ["Taladro", "Zulagailua"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="22" y="10" width="46" height="20" rx="8"/><path class="hs" d="M30 30h14l-2 18h-12z"/>' + BAT + '<rect class="hn" x="68" y="15" width="12" height="10"/><path class="hl" d="M80 20h16"/></svg>',
+      que: ["Taladrar y, con embrague, atornillar.", "Zulatu eta, enbragearekin, torlojutu."],
+      tipos: ["Taladro-atornillador (batería), taladro percutor (hormigón), taladro de columna (fijo, más preciso), martillo perforador.", "Zulagailu-torlojugailua (bateria), perkusio-zulagailua (hormigoia), zutabe-zulagailua (finkoa, zehatzagoa), mailu zulatzailea."],
+      uso: ["Broca según el material (HSS para metal). Velocidad baja para brocas grandes y aceite en acero.", "Burgina materialaren arabera (HSS metalerako). Abiadura txikia burgina handietarako eta olioa altzairuan."],
+      ojo: ["Pieza sujeta, pelo recogido, sin guantes junto a la broca.", "Pieza helduta, ilea bilduta, eskularrurik gabe burginatik gertu."] },
+    { n: ["Amoladora (artesca)", "Arteska (amoladora)"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="8" y="22" width="54" height="16" rx="7"/><circle class="hm" cx="74" cy="30" r="18"/><circle class="hn" cx="74" cy="30" r="4"/><path class="hl" d="M8 30H2"/></svg>',
+      que: ["Cortar, desbastar, pulir y cepillar metal.", "Metala moztu, arbastatu, leundu eta eskuilatu."],
+      tipos: ["Pequeña (115-125 mm) y grande (230 mm). Discos de corte, desbaste, láminas, cepillo.", "Txikia (115-125 mm) eta handia (230 mm). Ebaki-, arbastatze-, xafla- eta eskuila-diskoak."],
+      uso: ["Dos manos y empuñadura lateral puesta. Corta sin forzar ni torcer el disco.", "Bi eskuak eta alboko heldulekua jarrita. Moztu diskoa behartu edo okertu gabe."],
+      ojo: ["La herramienta más peligrosa del taller: protector, gafas o pantalla, guantes y protección auditiva. Nunca quitar el protector.", "Tailerreko erreminta arriskutsuena: babesa, betaurrekoak edo pantaila, eskularruak eta entzumen-babesa. Inoiz ez kendu babesa."] },
+    { n: ["Cizalla / tijera de chapa", "Txapa mozteko guraizeak"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="10" y="20" width="52" height="18" rx="7"/><path class="hs" d="M62 22h16l14 8-14 8H62z"/><path class="hl" d="M78 30h14"/></svg>',
+      que: ["Cortar chapa recta o en curva sin deformarla, más rápido que a mano.", "Txapa zuzen edo kurban moztu deformatu gabe, eskuz baino azkarrago."],
+      tipos: ["Cizalla (corta una tira), punzonadora o «nibbler» (va mordiendo, sirve para curvas y chapa ondulada).", "Zizaila (zerrenda bat mozten du), puntzonatzailea edo «nibbler»-a (hozka eginez doa, kurbetarako eta txapa uhindurako)."],
+      uso: ["Respeta el espesor máximo que indica (por ejemplo 1,6 mm en acero). Marca la línea antes.", "Errespetatu adierazten duen lodiera maximoa (adibidez 1,6 mm altzairuan). Markatu lerroa aurretik."],
+      ojo: ["Guantes: los bordes y las virutas cortan.", "Eskularruak: ertzek eta txirbilek mozten dute."] },
+    { n: ["Remachadora a batería", "Bateriako errematxagailua"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="20" y="10" width="50" height="20" rx="7"/><path class="hs" d="M30 30h14l-2 18h-12z"/>' + BAT + '<path class="hs" d="M70 16h14v8H70z"/></svg>',
+      que: ["Poner remaches pop sin cansarse, donde no hay aire comprimido.", "Pop errematxeak nekatu gabe jarri, aire konprimiturik ez dagoen lekuan."],
+      uso: ["Boquilla del diámetro del remache, remache recto y apoyado.", "Errematxearen diametroko ahokoa, errematxea zuzen eta bermatuta."],
+      ojo: ["Gafas y vaciar el depósito de vástagos.", "Betaurrekoak eta kirten-depositoa hustu."] },
+    { n: ["Atornillador", "Torlojugailua"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="24" y="12" width="40" height="18" rx="7"/><path class="hs" d="M30 30h14l-2 18h-12z"/>' + BAT + '<rect class="hn" x="64" y="16" width="10" height="10"/><path class="hl" d="M74 21h18"/></svg>',
+      que: ["Atornillar y desatornillar en serie; con embrague para no pasarse de apriete.", "Seriean torlojutu eta askatu; enbragearekin, estutzean ez pasatzeko."],
+      tipos: ["Atornillador con embrague, atornillador de impacto, llave de impacto, atornillador de cargador (pladur).", "Enbragedun torlojugailua, inpaktu-torlojugailua, inpaktu-giltza, kargagailudun torlojugailua (pladurra)."],
+      uso: ["Empieza con el embrague bajo y sube hasta el apriete correcto. Punta adecuada a la huella.", "Hasi enbrage baxuarekin eta igo estutze egokira arte. Aztarnari egokitutako punta."],
+      ojo: ["Sujeta bien: si el tornillo se bloquea, la herramienta gira de golpe.", "Ondo eutsi: torlojua blokeatzen bada, erremintak bat-batean biratzen du."] },
+    { n: ["Otras", "Besteak"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="16" y="12" width="56" height="20" rx="6"/><path class="hs" d="M44 32v20M38 52h12"/><path class="hl" d="M44 32v20"/></svg>',
+      que: ["Sierra de calar, sierra de cinta portátil, pistola de calor, pulidora, ingletadora, tronzadora de disco.", "Zerra txikia (kalatzekoa), zinta-zerra eramangarria, bero-pistola, leungailua, ingletagailua, disko-tronzagailua."],
+      ojo: ["Lee el manual: cada máquina tiene sus protecciones y sus EPIs.", "Irakurri eskuliburua: makina bakoitzak bere babesak eta NBEak ditu."] }
+  ],
+  test: [
+    { s: ["Hacer un agujero de Ø12 en una pletina de 10 mm, recto y preciso.", "10 mm-ko pletina batean Ø12-ko zulo zuzen eta zehatz bat egin."], ops: [["Taladro de columna", "Zutabe-zulagailua"], ["Atornillador de impacto", "Inpaktu-torlojugailua"], ["Amoladora", "Arteska"]], ok: 0 },
+    { s: ["Cortar en curva una chapa ondulada de cubierta.", "Estalki-txapa uhindu bat kurban moztu."], ops: [["Punzonadora (nibbler)", "Puntzonatzailea (nibbler)"], ["Taladro", "Zulagailua"], ["Pistola de calor", "Bero-pistola"]], ok: 0 },
+    { s: ["Cortar un tubo de 40×40 en obra, sin enchufes cerca.", "40×40-ko hodi bat obran moztu, entxuferik gertu gabe."], ops: [["Amoladora de batería con disco de corte", "Bateriako arteska ebaki-diskoarekin"], ["Remachadora", "Errematxagailua"], ["Atornillador", "Torlojugailua"]], ok: 0 },
+    { s: ["Montar 200 tornillos iguales sin pasarse de apriete.", "200 torloju berdin muntatu estutzean pasatu gabe."], ops: [["Atornillador con embrague", "Enbragedun torlojugailua"], ["Llave de impacto al máximo", "Inpaktu-giltza maximoan"], ["Amoladora", "Arteska"]], ok: 0 }
+  ]
+});
+</script>
+</body>
+</html>

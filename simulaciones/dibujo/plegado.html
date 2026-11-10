@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plegado de chapa</title>
+<meta name="description" content="Pasos para plegar, radios de plegado, condiciones y cálculo del desarrollo de la chapa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:10.5px;fill:#242d5f;font-weight:600}
+.cifra{font-size:11px;fill:#b45f00;font-weight:700}
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Fabricación" data-eu="Fabrikazioa"></p>
+      <h1 data-es="Plegado de chapa" data-eu="Txaparen tolestura"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es"><span class="clave">Plegar</span> es doblar una chapa a lo largo de una línea para darle forma: puertas y laterales de armarios, soportes, cajas… Se hace en la <b>plegadora</b>: un punzón empuja la chapa dentro de una matriz en V.</p>
+      <p class="eu"><span class="clave">Tolestea</span> txapa bat lerro batean zehar tolestea da, forma emateko: armairuen ateak eta albokoak, euskarriak, kaxak… <b>Tolesgailuan</b> egiten da: zulagailu batek txapa V formako matrize batean sartzen du.</p>
+      <p class="es">Al plegar, la parte de fuera <b>se estira</b> y la de dentro <b>se comprime</b>. Por eso la chapa plana (el <b>desarrollo</b>) no mide lo mismo que la suma de las caras.</p>
+      <p class="eu">Tolestean, kanpoko aldea <b>luzatu</b> egiten da eta barrukoa <b>konprimitu</b>. Horregatik, txapa lauak (<b>garapenak</b>) ez du aurpegien baturaren neurri bera.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="urratsak" data-es="Pasos" data-eu="Urratsak" hidden>
+    <div class="card">
+      <ol class="es">
+        <li><b>Mira el plano</b>: medidas, espesor, ángulo y radio de cada pliegue.</li>
+        <li><b>Calcula el desarrollo</b> (la chapa plana que hay que cortar).</li>
+        <li><b>Corta</b> la chapa y <b>marca las líneas de plegado</b>.</li>
+        <li><b>Elige punzón y matriz</b>: la abertura de la V ≈ 6 a 10 veces el espesor.</li>
+        <li><b>Coloca</b> la chapa contra los topes traseros, con la línea bajo el punzón.</li>
+        <li><b>Pliega</b> despacio y <b>comprueba el ángulo</b> con el goniómetro o la escuadra.</li>
+        <li>Corrige la <b>recuperación elástica</b>: la chapa «vuelve» un poco; hay que plegar algo más.</li>
+        <li>Sigue el <b>orden de pliegues</b> para que la pieza no choque con la máquina.</li>
+      </ol>
+      <ol class="eu">
+        <li><b>Begiratu planoa</b>: tolestura bakoitzaren neurriak, lodiera, angelua eta erradioa.</li>
+        <li><b>Kalkulatu garapena</b> (moztu behar den txapa laua).</li>
+        <li><b>Moztu</b> txapa eta <b>markatu tolestura-lerroak</b>.</li>
+        <li><b>Aukeratu zulagailua eta matrizea</b>: V-aren irekidura ≈ lodiera 6 eta 10 aldiz artean.</li>
+        <li><b>Jarri</b> txapa atzeko topeen kontra, lerroa zulagailuaren azpian dagoela.</li>
+        <li><b>Tolestu</b> poliki eta <b>egiaztatu angelua</b> goniometroarekin edo eskuairarekin.</li>
+        <li>Zuzendu <b>berreskurapen elastikoa</b>: txapa pixka bat «itzultzen» da; zertxobait gehiago tolestu behar da.</li>
+        <li>Jarraitu <b>tolesturen ordenari</b>, pieza makinaren kontra jo ez dezan.</li>
+      </ol>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Seguridad" data-eu="Segurtasuna"></h2>
+      <p class="es">Manos fuera de la zona del punzón, guantes para los bordes cortantes y la chapa bien sujeta: al plegar, la chapa sube de golpe.</p>
+      <p class="eu">Eskuak zulagailuaren eremutik kanpo, eskularruak ertz zorrotzetarako eta txapa ondo helduta: tolestean, txapa bat-batean igotzen da.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="erradioak" data-es="Radios y condiciones" data-eu="Erradioak eta baldintzak" hidden>
+    <div class="card">
+      <p class="es">El <span class="clave">radio interior (R)</span> no puede ser tan pequeño como queramos: si es muy pequeño, el lado de fuera se estira demasiado y <b>se agrieta</b>. Mueve el radio y mira.</p>
+      <p class="eu"><span class="clave">Barne-erradioa (R)</span> ezin da nahi bezain txikia izan: oso txikia bada, kanpoko aldea gehiegi luzatzen da eta <b>pitzatu</b> egiten da. Mugitu erradioa eta begiratu.</p>
+    </div>
+    <figure class="fig"><svg id="svg-r" viewBox="0 0 320 200" role="img" aria-label="Radio de plegado"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Radio interior R" data-eu="Barne-erradioa R"></span><output id="r-t"></output></label><input id="rr" type="range" min="0" max="8" step="0.5" value="2"></div>
+      <select id="mat" aria-label="Material"><option value="1" data-es="Acero (S235)" data-eu="Altzairua (S235)">Acero</option><option value="1.5" data-es="Inoxidable" data-eu="Herdoilgaitza">Inox</option><option value="2" data-es="Aluminio duro" data-eu="Aluminio gogorra">Al</option></select>
+    </div>
+    <div class="estado" id="r-est"></div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Radio mínimo</h3><h3 class="eu">Gutxieneko erradioa</h3><p class="es">Como orientación, R ≥ espesor en acero suave; más en inoxidable y aluminio duro.</p><p class="eu">Orientazio gisa, R ≥ lodiera altzairu bigunean; gehiago herdoilgaitzean eta aluminio gogorrean.</p></div>
+      <div class="card"><h3 class="es">Abertura de la V</h3><h3 class="eu">V-aren irekidura</h3><p class="es">Unas 8 veces el espesor (6-10). V más ancha = radio mayor y menos fuerza.</p><p class="eu">Lodiera 8 aldiz inguru (6-10). V zabalagoa = erradio handiagoa eta indar gutxiago.</p></div>
+      <div class="card"><h3 class="es">Agujeros cerca del pliegue</h3><h3 class="eu">Zuloak tolesturatik gertu</h3><p class="es">Sepáralos al menos 2·e + R de la línea de plegado, o se deforman.</p><p class="eu">Bereizi gutxienez 2·e + R tolestura-lerrotik, bestela deformatu egiten dira.</p></div>
+      <div class="card"><h3 class="es">Ala mínima</h3><h3 class="eu">Gutxieneko hegala</h3><p class="es">La pestaña debe ser más larga que media V, o no apoya en la matriz.</p><p class="eu">Hegalak V-aren erdia baino luzeagoa izan behar du, bestela ez da matrizean bermatzen.</p></div>
+      <div class="card"><h3 class="es">Sentido del laminado</h3><h3 class="eu">Ijezketaren noranzkoa</h3><p class="es">Mejor plegar perpendicular a las «vetas» de la chapa: se agrieta menos.</p><p class="eu">Hobe txaparen «zainekiko» perpendikularki tolestea: gutxiago pitzatzen da.</p></div>
+      <div class="card"><h3 class="es">Recuperación elástica</h3><h3 class="eu">Berreskurapen elastikoa</h3><p class="es">Tras plegar, la chapa se abre unos grados: se pliega un poco de más.</p><p class="eu">Tolestu ondoren, txapa gradu batzuk irekitzen da: zertxobait gehiago tolesten da.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="garapena" data-es="Desarrollo" data-eu="Garapena" hidden>
+    <div class="card">
+      <p class="es">El <span class="clave">desarrollo</span> es la longitud de chapa plana que hay que cortar. Se calcula con la <b>línea neutra</b>: la capa que ni se estira ni se comprime, que está a <b>K·e</b> del interior (K ≈ 0,33 – 0,5).</p>
+      <p class="eu"><span class="clave">Garapena</span> moztu behar den txapa lauaren luzera da. <b>Lerro neutroarekin</b> kalkulatzen da: ez luzatzen ez konprimitzen den geruza, barnetik <b>K·e</b>-ra dagoena (K ≈ 0,33 – 0,5).</p>
+      <div class="formula">L = (a − R − e) + (b − R − e) + π/2 · (R + K·e)</div>
+    </div>
+    <div class="campos">
+      <div class="deslizador"><label><span>a</span><output id="a-t"></output></label><input id="a" type="range" min="20" max="150" step="5" value="60"></div>
+      <div class="deslizador"><label><span>b</span><output id="b-t"></output></label><input id="b" type="range" min="20" max="150" step="5" value="40"></div>
+      <div class="deslizador"><label><span data-es="espesor e" data-eu="lodiera e"></span><output id="e-t"></output></label><input id="e" type="range" min="0.5" max="4" step="0.5" value="2"></div>
+      <div class="deslizador"><label><span data-es="radio R" data-eu="erradioa R"></span><output id="rd-t"></output></label><input id="rd" type="range" min="0.5" max="8" step="0.5" value="2"></div>
+      <div class="deslizador"><label><span>K</span><output id="k-t"></output></label><input id="k" type="range" min="0.3" max="0.5" step="0.01" value="0.4"></div>
+    </div>
+    <figure class="fig"><svg id="svg-d" viewBox="0 0 340 210" role="img" aria-label="Pieza y desarrollo"></svg></figure>
+    <div class="formula" id="d-r"></div>
+    <p class="nota es">Las medidas a y b son exteriores, para un pliegue de 90°. Comprueba siempre con una pieza de prueba.</p>
+    <p class="nota eu">a eta b kanpoko neurriak dira, 90°-ko tolestura baterako. Egiaztatu beti proba-pieza batekin.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function n(v, d){ return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toLocaleString("es-ES"); }
+  function radio(){
+    var R = +$("rr").value, e = 2, f = +$("mat").value, k = 12, cx = 130, cy = 70, s = "";
+    var Ri = Math.max(R, 0.05) * k, Re = Ri + e * k;
+    s += '<path d="M30 ' + (cy + Re) + 'H' + cx + 'A' + Re + ' ' + Re + ' 0 0 0 ' + (cx + Re) + ' ' + cy + 'V10H' + (cx + Ri) + 'V' + cy + 'A' + Ri + ' ' + Ri + ' 0 0 1 ' + cx + ' ' + (cy + Ri) + 'H30Z" fill="#cfd6e0" stroke="#242d5f" stroke-width="2"/>';
+    var mal = R < e * f * 0.5, justo = !mal && R < e * f;
+    if (mal || justo) for (var i = 0; i < (mal ? 5 : 2); i++) { var a = (0.15 + i * 0.16) * Math.PI / 2; var x = cx + Re * Math.sin(a), y = cy + Re * Math.cos(a); s += '<path d="M' + x + ' ' + y + 'l' + (6 * Math.sin(a)) + ' ' + (6 * Math.cos(a)) + '" stroke="#c62f2f" stroke-width="2.4"/>'; }
+    s += '<text class="cifra" x="' + (cx - 10) + '" y="' + (cy - 6) + '" text-anchor="end">R = ' + n(R, 1) + '</text><text class="cifra" x="40" y="' + (cy + Re + 16) + '">e = 2 mm</text>';
+    s += '<text class="txt" x="' + (cx + Re + 8) + '" y="' + (cy + 30) + '">' + T("se estira", "luzatu") + '</text><text class="txt" x="' + (cx + Ri - 70) + '" y="' + (cy + Ri - 16) + '">' + T("se comprime", "konprimitu") + '</text>';
+    $("svg-r").innerHTML = s;
+    $("r-t").textContent = n(R, 1) + " mm";
+    var est = $("r-est");
+    if (mal) { est.className = "estado mal"; est.textContent = T("Radio demasiado pequeño para este material: el exterior se agrieta.", "Erradio txikiegia material honetarako: kanpoaldea pitzatu egiten da."); }
+    else if (justo) { est.className = "estado"; est.textContent = T("Al límite: puede marcarse o agrietarse. Mejor un radio algo mayor.", "Mugan: marka edo pitzadurak ager daitezke. Hobe erradio zertxobait handiagoa."); }
+    else { est.className = "estado ok"; est.textContent = T("Bien: el radio es suficiente para este material y espesor.", "Ondo: erradioa nahikoa da material eta lodiera honetarako."); }
+  }
+  function desarrollo(){
+    var a = +$("a").value, b = +$("b").value, e = +$("e").value, R = +$("rd").value, K = +$("k").value;
+    ["a", "b", "e", "rd", "k"].forEach(function(id){ $(id + "-t").textContent = n(+$(id).value, id === "k" ? 2 : 1) + (id === "k" ? "" : " mm"); });
+    var tramoA = a - R - e, tramoB = b - R - e, arco = Math.PI / 2 * (R + K * e), L = tramoA + tramoB + arco;
+    $("d-r").textContent = "L = " + n(tramoA, 1) + " + " + n(tramoB, 1) + " + " + n(arco, 2) + " = " + n(L, 1) + " mm  (" + T("suma de caras: ", "aurpegien batura: ") + (a + b) + " mm)";
+    var k = Math.min(2.2, 150 / Math.max(a, b)), x0 = 30, y0 = 20, s = "";
+    var A = a * k, B = b * k, E = Math.max(e * k, 2), Rk = R * k;
+    s += '<path d="M' + x0 + ' ' + y0 + 'V' + (y0 + A - Rk - E) + 'A' + (Rk + E) + ' ' + (Rk + E) + ' 0 0 0 ' + (x0 + Rk + E) + ' ' + (y0 + A) + 'H' + (x0 + B) + 'V' + (y0 + A - E) + 'H' + (x0 + Rk + E) + 'A' + Rk + ' ' + Rk + ' 0 0 1 ' + (x0 + E) + ' ' + (y0 + A - Rk - E) + 'V' + y0 + 'Z" fill="#cfd6e0" stroke="#242d5f" stroke-width="1.6"/>';
+    s += '<text class="cifra" x="' + (x0 - 6) + '" y="' + (y0 + A / 2) + '" text-anchor="end">a</text><text class="cifra" x="' + (x0 + B / 2) + '" y="' + (y0 + A + 14) + '">b</text>';
+    var kl = 140 / L, yl = 60, xl = 190;
+    s += '<text class="txt" x="' + xl + '" y="' + (yl - 14) + '">' + T("Desarrollo", "Garapena") + '</text>';
+    s += '<rect x="' + xl + '" y="' + yl + '" width="' + (tramoA * kl) + '" height="18" fill="#cfd6e0" stroke="#242d5f"/><rect x="' + (xl + tramoA * kl) + '" y="' + yl + '" width="' + (arco * kl) + '" height="14" fill="#ffd9a8" stroke="#242d5f"/><rect x="' + (xl + (tramoA + arco) * kl) + '" y="' + yl + '" width="' + (tramoB * kl) + '" height="14" fill="#cfd6e0" stroke="#242d5f"/>';
+    s += '<path d="M' + xl + ' ' + (yl + 30) + 'h140" stroke="#b45f00" stroke-width="1.2"/><text class="cifra" x="' + (xl + 70) + '" y="' + (yl + 44) + '" text-anchor="middle">L = ' + n(L, 1) + ' mm</text>';
+    s += '<text class="txt" x="' + (xl + (tramoA + arco / 2) * kl) + '" y="' + (yl + 64) + '" text-anchor="middle">' + T("zona del pliegue", "tolestura-eremua") + '</text>';
+    $("svg-d").innerHTML = s;
+  }
+  ["rr", "mat"].forEach(function(id){ $(id).addEventListener("input", radio); $(id).addEventListener("change", radio); });
+  ["a", "b", "e", "rd", "k"].forEach(function(id){ $(id).addEventListener("input", desarrollo); });
+  alCambiarIdioma(function(){ [].forEach.call($("mat").options, function(o){ o.textContent = o.getAttribute("data-" + idioma()); }); radio(); desarrollo(); });
+})();
+</script>
+</body>
+</html>

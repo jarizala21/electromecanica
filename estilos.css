@@ -176,6 +176,11 @@ html:not([lang="eu"]) [data-solo="eu"],html[lang="eu"] [data-solo="es"]{display:
 .rejilla .area-pie{margin-top:6px}
 .rejilla .pastilla{font-size:11px;padding:3px 9px}
 .rejilla .flecha{width:26px;height:26px}
+@container (max-height:235px){
+  .rejilla .area-desc{display:none}
+  .rejilla .area-foto{height:60%}
+  .rejilla .area h3{font-size:clamp(15px,10cqw,20px)}
+}
 
 /* =================== LISTA DE UN ÁREA =================== */
 #vista-seccion .barra{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);
@@ -269,7 +274,7 @@ svg .t{fill:var(--naranja-soft)}
 }
 /* Pantallas anchas (PC, tablet en horizontal): áreas en tres columnas */
 @media (min-width:900px) and (min-aspect-ratio:5/4), (min-width:640px) and (max-height:540px) and (min-aspect-ratio:3/2){
-  .areas,.areas.rejilla{grid-template-rows:minmax(0,1fr);grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:18px}
+  .areas,.areas.rejilla{grid-template-rows:repeat(var(--filas-pc,1),minmax(0,1fr));grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:18px}
   .rejilla .area-foto{height:60%}
   .rejilla .area-texto{padding:0 22px 22px}
   .rejilla .area h3{font-size:clamp(20px,8cqw,32px)}
@@ -282,6 +287,17 @@ svg .t{fill:var(--naranja-soft)}
   .area-texto{width:100%;padding:0 24px 24px}
   .area h3{font-size:clamp(22px,8cqw,34px)}
   .area-desc{font-size:clamp(13px,4.6cqw,16px)}
+}
+/* PC con 5 o más áreas: dos filas de tarjetas apaisadas (foto a la derecha) */
+@media (min-width:900px) and (min-aspect-ratio:5/4), (min-width:640px) and (max-height:540px) and (min-aspect-ratio:3/2){
+  .areas.dos-filas .area{flex-direction:row;align-items:center;justify-content:flex-start;
+    background:linear-gradient(135deg,var(--marino-2) 0%,var(--marino) 55%,var(--marino-3) 100%)}
+  .areas.dos-filas .area-foto{top:0;bottom:0;right:0;left:auto;width:44%;height:auto}
+  .areas.dos-filas .disco{width:min(40cqw,78cqh);height:min(40cqw,78cqh)}
+  .areas.dos-filas .area-foto img{width:min(46cqw,84cqh);height:min(46cqw,84cqh)}
+  .areas.dos-filas .area-texto{width:58%;padding:14px 4px 14px 24px}
+  .areas.dos-filas .area h3{font-size:clamp(19px,11cqh,26px);hyphens:none}
+  .areas.dos-filas .area-desc{display:-webkit-box;font-size:clamp(12px,8cqh,15px)}
 }
 @media (min-width:900px) and (min-aspect-ratio:5/4){
   .portada{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:1fr}

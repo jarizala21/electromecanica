@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Parámetros de soldadura</title>
+<meta name="description" content="Procesos (electrodo, MIG/MAG, TIG) y cómo ajustar intensidad, tensión, hilo y gas según el material y el espesor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Soldadura" data-eu="Soldadura"></p>
+      <h1 data-es="Parámetros de soldadura" data-eu="Soldadura-parametroak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="prozesuak" data-es="Procesos" data-eu="Prozesuak">
+    <div class="rejilla">
+      <div class="card"><h2 data-es="Electrodo revestido" data-eu="Elektrodo estalia"></h2>
+        <p class="es">Una varilla con un revestimiento que, al fundirse, protege el baño. Equipo sencillo, sirve en exterior. Deja <b>escoria</b> que hay que picar.</p>
+        <p class="eu">Estaldura duen hagatxo bat; urtzean, bainua babesten du. Ekipo sinplea, kanpoan ere balio du. <b>Zepa</b> uzten du, kendu egin behar dena.</p>
+        <p class="es"><b>Se ajusta:</b> intensidad (A) y diámetro del electrodo.</p><p class="eu"><b>Doitzen da:</b> intentsitatea (A) eta elektrodoaren diametroa.</p></div>
+      <div class="card"><h2>MIG / MAG</h2>
+        <p class="es">Un hilo sale continuamente por la pistola y un <b>gas</b> protege el baño. Rápido y fácil de aprender: el más usado en taller. MIG con gas inerte (argón), MAG con gas activo (argón + CO₂).</p>
+        <p class="eu">Hari bat etengabe ateratzen da pistolatik eta <b>gas</b> batek bainua babesten du. Azkarra eta ikasteko erraza: tailerrean erabiliena. MIG gas geldoarekin (argoia), MAG gas aktiboarekin (argoia + CO₂).</p>
+        <p class="es"><b>Se ajusta:</b> tensión (V), velocidad del hilo (= intensidad) y caudal de gas.</p><p class="eu"><b>Doitzen da:</b> tentsioa (V), hariaren abiadura (= intentsitatea) eta gas-emaria.</p></div>
+      <div class="card"><h2>TIG</h2>
+        <p class="es">Un electrodo de <b>tungsteno</b> que no se funde crea el arco; el material se añade a mano con una varilla. Muy limpio y preciso: inoxidable, aluminio, chapa fina.</p>
+        <p class="eu">Urtzen ez den <b>wolframiozko</b> elektrodo batek sortzen du arkua; materiala eskuz gehitzen da hagatxo batekin. Oso garbia eta zehatza: herdoilgaitza, aluminioa, txapa mehea.</p>
+        <p class="es"><b>Se ajusta:</b> intensidad, tipo de corriente (continua o alterna para aluminio) y gas argón.</p><p class="eu"><b>Doitzen da:</b> intentsitatea, korronte mota (zuzena, edo alternoa aluminiorako) eta argoi-gasa.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="La regla de oro" data-eu="Urrezko araua"></h2>
+      <p class="es">A <b>más espesor</b>, <b>más intensidad</b> y electrodo o hilo más grueso. Si la chapa es gruesa, se hacen <b>varias pasadas</b>.</p>
+      <p class="eu"><b>Lodiera handiagoa</b>, <b>intentsitate handiagoa</b> eta elektrodo edo hari lodiagoa. Txapa lodia bada, <b>hainbat pasaldi</b> egiten dira.</p>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="kalkulagailua" data-es="Calculadora" data-eu="Kalkulagailua" hidden>
+    <div class="card"><p class="es">Elige proceso, material y espesor para ver unos <b>valores de partida</b>. Luego se afinan con una probeta.</p><p class="eu">Aukeratu prozesua, materiala eta lodiera <b>hasierako balio</b> batzuk ikusteko. Gero probeta batekin fintzen dira.</p></div>
+    <div class="campos">
+      <div><div class="chips" id="proc"><button data-p="ee" aria-pressed="true" data-es="Electrodo" data-eu="Elektrodoa"></button><button data-p="mig">MIG/MAG</button><button data-p="tig">TIG</button></div></div>
+      <div><div class="chips" id="mat"><button data-m="ac" aria-pressed="true" data-es="Acero" data-eu="Altzairua"></button><button data-m="inox" data-es="Inoxidable" data-eu="Herdoilgaitza"></button><button data-m="al" data-es="Aluminio" data-eu="Aluminioa"></button></div></div>
+    </div>
+    <div class="deslizador"><label><span data-es="Espesor" data-eu="Lodiera"></span><output id="e-t"></output></label><input id="e" type="range" min="1" max="12" step="0.5" value="3"></div>
+    <div class="lectura-g" id="res"></div>
+    <div class="estado" id="nota"></div>
+    <p class="nota es">Valores orientativos de partida. Manda siempre lo que diga el fabricante del consumible y la máquina.</p>
+    <p class="nota eu">Hasierako balio orientagarriak. Beti agintzen du kontsumigarriaren eta makinaren fabrikatzaileak dioenak.</p>
+  </section>
+
+  <section class="panel" data-tab="doitu" data-es="Cómo afinar" data-eu="Nola fintu" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Intensidad alta</h3><h3 class="eu">Intentsitate handia</h3><p class="es">Mucha penetración, cordón ancho y plano, mordeduras, proyecciones; en chapa fina, <b>agujerea</b>.</p><p class="eu">Barneratze handia, kordoi zabal eta laua, ozkak, proiekzioak; txapa mehean, <b>zulatu</b> egiten du.</p></div>
+      <div class="card"><h3 class="es">Intensidad baja</h3><h3 class="eu">Intentsitate txikia</h3><p class="es">Arco inestable, cordón alto y estrecho, <b>falta de penetración</b>, el electrodo se pega.</p><p class="eu">Arku ezegonkorra, kordoi garai eta estua, <b>barneratze eskasa</b>, elektrodoa itsatsi egiten da.</p></div>
+      <div class="card"><h3 class="es">Tensión (MIG) alta</h3><h3 class="eu">Tentsio (MIG) handia</h3><p class="es">Arco largo, cordón ancho y plano, más proyecciones.</p><p class="eu">Arku luzea, kordoi zabal eta laua, proiekzio gehiago.</p></div>
+      <div class="card"><h3 class="es">Tensión (MIG) baja</h3><h3 class="eu">Tentsio (MIG) txikia</h3><p class="es">El hilo «empuja» y choca, cordón abombado.</p><p class="eu">Hariak «bultzatu» eta jo egiten du, kordoi kupuladuna.</p></div>
+      <div class="card"><h3 class="es">Velocidad de avance</h3><h3 class="eu">Aurrerapen-abiadura</h3><p class="es">Muy rápida: cordón fino y poca penetración. Muy lenta: mucho material y calor, se deforma.</p><p class="eu">Oso azkarra: kordoi mehea eta barneratze gutxi. Oso motela: material eta bero asko, deformatu egiten da.</p></div>
+      <div class="card"><h3 class="es">Gas</h3><h3 class="eu">Gasa</h3><p class="es">Unos 10-15 l/min en MIG. Poco gas o corrientes de aire → <b>poros</b>.</p><p class="eu">10-15 l/min inguru MIGen. Gas gutxi edo aire-korronteak → <b>poroak</b>.</p></div>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var proc = "ee", mat = "ac";
+  function n(v){ return String(Math.round(v)).replace(".", ","); }
+  function d(v){ return String(v).replace(".", ","); }
+  function calc(){
+    var e = +$("e").value, r = [], nota = "";
+    $("e-t").textContent = d(e) + " mm";
+    if (proc === "ee") {
+      var t = e <= 2 ? [2, 40, 60] : e <= 3 ? [2.5, 60, 90] : e <= 5 ? [3.2, 90, 130] : e <= 8 ? [4, 130, 170] : [4, 150, 190];
+      var f = mat === "inox" ? 0.9 : 1;
+      r = [[T("Electrodo", "Elektrodoa"), "Ø " + d(t[0]) + " mm"], [T("Intensidad", "Intentsitatea"), n(t[1] * f) + "–" + n(t[2] * f) + " A"],
+           [T("Corriente", "Korrontea"), T("Continua (electrodo al +)", "Zuzena (elektrodoa +-ra)")], [T("Pasadas", "Pasaldiak"), e > 5 ? T("varias", "hainbat") : "1–2"]];
+      nota = mat === "al" ? T("El aluminio con electrodo es difícil: mejor MIG o TIG.", "Aluminioa elektrodoarekin zaila da: hobe MIG edo TIG.") : T("Regla rápida: unos 35-40 A por cada mm de diámetro del electrodo.", "Arau azkarra: 35-40 A inguru elektrodoaren diametroko mm bakoitzeko.");
+    } else if (proc === "mig") {
+      var tab = mat === "al" ? [[2, 1.0, 90, 110, 18], [3, 1.0, 120, 150, 19], [5, 1.2, 150, 190, 21], [12, 1.2, 190, 230, 24]]
+                             : [[1, 0.8, 50, 70, 16], [2, 0.8, 80, 110, 17.5], [3, 0.8, 110, 140, 18.5], [5, 1.0, 140, 180, 20], [12, 1.0, 180, 220, 23]];
+      var row = tab.filter(function(x){ return e <= x[0]; })[0] || tab[tab.length - 1], f2 = mat === "inox" ? 0.9 : 1;
+      var gas = mat === "ac" ? T("Argón + 18 % CO₂ (MAG)", "Argoia + % 18 CO₂ (MAG)") : mat === "inox" ? T("Argón + 2 % CO₂", "Argoia + % 2 CO₂") : T("Argón puro (MIG)", "Argoi hutsa (MIG)");
+      r = [[T("Hilo", "Haria"), "Ø " + d(row[1]) + " mm"], [T("Intensidad", "Intentsitatea"), n(row[2] * f2) + "–" + n(row[3] * f2) + " A"], [T("Tensión", "Tentsioa"), d(row[4]) + " V"], ["Gas", gas], [T("Caudal de gas", "Gas-emaria"), "10–15 l/min"]];
+      nota = e > 6 ? T("En más de 6 mm, prepara los bordes en V y suelda en varias pasadas.", "6 mm-tik gora, prestatu ertzak V formaz eta soldatu hainbat pasalditan.") : T("En la máquina, la intensidad se sube con la velocidad del hilo.", "Makinan, intentsitatea hariaren abiadurarekin igotzen da.");
+    } else {
+      var por = mat === "ac" ? [30, 40] : mat === "inox" ? [25, 35] : [40, 50];
+      var amax = por[1] * e, tung = amax <= 120 ? 1.6 : amax <= 220 ? 2.4 : 3.2;
+      r = [[T("Intensidad", "Intentsitatea"), n(por[0] * e) + "–" + n(Math.min(por[1] * e, 300)) + " A"], [T("Corriente", "Korrontea"), mat === "al" ? T("Alterna (AC)", "Alternoa (AC)") : T("Continua, electrodo al −", "Zuzena, elektrodoa −-ra")],
+           [T("Tungsteno", "Wolframioa"), "Ø " + d(tung) + " mm"], ["Gas", T("Argón, 6-10 l/min", "Argoia, 6-10 l/min")]];
+      nota = T("Regla rápida: unos " + por[0] + "-" + por[1] + " A por cada mm de espesor.", "Arau azkarra: " + por[0] + "-" + por[1] + " A inguru lodiera-mm bakoitzeko.");
+    }
+    $("res").innerHTML = r.map(function(x){ return '<div><small>' + x[0] + '</small><b style="font-size:15px">' + x[1] + '</b></div>'; }).join("");
+    $("nota").textContent = nota;
+  }
+  function grupo(id, fn){ $(id).addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); fn(b); calc(); }); }
+  grupo("proc", function(b){ proc = b.getAttribute("data-p"); });
+  grupo("mat", function(b){ mat = b.getAttribute("data-m"); });
+  $("e").addEventListener("input", calc);
+  alCambiarIdioma(calc);
+})();
+</script>
+</body>
+</html>

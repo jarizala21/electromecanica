@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Preparación de las superficies a soldar</title>
+<meta name="description" content="Limpieza, preparación de bordes según el espesor, tipos de unión y punteado antes de soldar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:10.5px;fill:#242d5f;font-weight:600}
+.cifra{font-size:11px;fill:#b45f00;font-weight:700}
+.ico svg{width:100%;height:84px;display:block;background:#fff;border-radius:14px;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Soldadura" data-eu="Soldadura"></p>
+      <h1 data-es="Preparación de las superficies" data-eu="Soldatu beharreko gainazalen prestaketa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="zergatik" data-es="¿Por qué?" data-eu="Zergatik?">
+    <div class="card">
+      <p class="es">Una buena soldadura empieza <b>antes de encender la máquina</b>. Si la zona de unión está sucia o mal preparada, saldrán <b>poros</b>, <b>falta de penetración</b> o <b>grietas</b>, aunque se suelde bien.</p>
+      <p class="eu">Soldadura on bat <b>makina piztu aurretik</b> hasten da. Lotura-eremua zikin edo gaizki prestatuta badago, <b>poroak</b>, <b>barneratze eskasa</b> edo <b>pitzadurak</b> aterako dira, ondo soldatu arren.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3>1</h3><p class="es"><b>Limpiar</b> la zona de unión.</p><p class="eu">Lotura-eremua <b>garbitu</b>.</p></div>
+      <div class="card"><h3>2</h3><p class="es"><b>Preparar los bordes</b> según el espesor.</p><p class="eu"><b>Ertzak prestatu</b> lodieraren arabera.</p></div>
+      <div class="card"><h3>3</h3><p class="es"><b>Presentar y puntear</b> las piezas con la separación correcta.</p><p class="eu">Piezak <b>aurkeztu eta puntuatu</b>, tarte egokiarekin.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="garbiketa" data-es="Limpieza" data-eu="Garbiketa" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Qué hay que quitar</h3><h3 class="eu">Zer kendu behar den</h3><p class="es">Óxido, cascarilla de laminación, pintura, galvanizado, grasa, aceite y humedad.</p><p class="eu">Herdoila, ijezketa-ezkata, pintura, galbanizatua, koipea, olioa eta hezetasuna.</p></div>
+      <div class="card"><h3 class="es">Con qué</h3><h3 class="eu">Zerekin</h3><p class="es">Amoladora con disco de láminas, cepillo de púas, lima y desengrasante (disolvente o alcohol).</p><p class="eu">Artezgailua xafla-diskoarekin, arantza-eskuila, lima eta koipegabetzailea (disolbatzailea edo alkohola).</p></div>
+      <div class="card"><h3 class="es">Cuánto</h3><h3 class="eu">Zenbat</h3><p class="es">Hasta ver metal brillante, unos <b>20-25 mm a cada lado</b> de la unión y por las dos caras si se puede.</p><p class="eu">Metal distiratsua ikusi arte, loturaren <b>alde bakoitzean 20-25 mm inguru</b>, eta ahal bada bi aurpegietan.</p></div>
+      <div class="card"><h3 class="es">Inoxidable y aluminio</h3><h3 class="eu">Herdoilgaitza eta aluminioa</h3><p class="es">Cepillos y discos <b>solo para ese material</b> (no contaminar con acero). El aluminio se limpia justo antes de soldar.</p><p class="eu">Material horretarako <b>bakarrik</b> diren eskuilak eta diskoak (altzairuz ez kutsatu). Aluminioa soldatu baino lehentxeago garbitzen da.</p></div>
+      <div class="card"><h3 class="es">¡Ojo con el galvanizado!</h3><h3 class="eu">Kontuz galbanizatuarekin!</h3><p class="es">Al soldarlo suelta humos de zinc tóxicos: quitar la capa y usar extracción de humos.</p><p class="eu">Soldatzean zink-ke toxikoak askatzen ditu: geruza kendu eta ke-erauzketa erabili.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ertzak" data-es="Bordes" data-eu="Ertzak" hidden>
+    <div class="card">
+      <p class="es">Para que la soldadura <b>penetre</b> en todo el espesor, en chapa gruesa hay que <b>achaflanar</b> los bordes. Mueve el espesor y mira qué preparación toca (unión a tope, acero).</p>
+      <p class="eu">Soldadura lodiera osoan <b>barneratu</b> dadin, txapa lodian ertzak <b>txaflanatu</b> egin behar dira. Mugitu lodiera eta begiratu zer prestaketa dagokion (topeko lotura, altzairua).</p>
+    </div>
+    <figure class="fig"><svg id="svg-b" viewBox="0 0 340 170" role="img" aria-label="Preparación de bordes"></svg></figure>
+    <div class="deslizador"><label><span data-es="Espesor de la chapa" data-eu="Txaparen lodiera"></span><output id="e-t"></output></label><input id="e" type="range" min="1" max="30" step="1" value="8"></div>
+    <div class="estado" id="b-txt"></div>
+    <p class="nota es">Valores orientativos: cada procedimiento de soldadura (WPS) da los suyos.</p><p class="nota eu">Balio orientagarriak: soldadura-prozedura bakoitzak (WPS) bereak ematen ditu.</p>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Tipos de unión" data-eu="Lotura motak" hidden>
+    <div class="rejilla">
+      <div class="card ico"><svg viewBox="0 0 160 84"><rect x="12" y="38" width="64" height="14" fill="#cfd6e0" stroke="#242d5f"/><rect x="84" y="38" width="64" height="14" fill="#cfd6e0" stroke="#242d5f"/><path d="M76 38h8l-4 -6z" fill="#f39200"/></svg><h3 class="es">A tope</h3><h3 class="eu">Topekoa</h3><p class="es">Chapas una a continuación de otra, en el mismo plano.</p><p class="eu">Txapak bata bestearen jarraian, plano berean.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><rect x="20" y="56" width="120" height="14" fill="#cfd6e0" stroke="#242d5f"/><rect x="73" y="10" width="14" height="46" fill="#cfd6e0" stroke="#242d5f"/><path d="M73 56l-10 0 10-10zM87 56l10 0-10-10z" fill="#f39200"/></svg><h3 class="es">En T</h3><h3 class="eu">T formakoa</h3><p class="es">Una chapa perpendicular a la otra, en medio. Soldadura en ángulo.</p><p class="eu">Txapa bat bestearekiko perpendikularra, erdian. Angelu-soldadura.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><rect x="40" y="56" width="90" height="14" fill="#cfd6e0" stroke="#242d5f"/><rect x="40" y="10" width="14" height="46" fill="#cfd6e0" stroke="#242d5f"/><path d="M54 56l10 0-10-10z" fill="#f39200"/></svg><h3 class="es">En esquina</h3><h3 class="eu">Izkinakoa</h3><p class="es">Dos chapas forman un ángulo en el borde: cajas, bastidores.</p><p class="eu">Bi txapek angelu bat osatzen dute ertzean: kaxak, bastidoreak.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><rect x="14" y="46" width="90" height="12" fill="#cfd6e0" stroke="#242d5f"/><rect x="60" y="34" width="86" height="12" fill="#cfd6e0" stroke="#242d5f"/><path d="M60 46l-8 0 8-8z" fill="#f39200"/></svg><h3 class="es">A solape</h3><h3 class="eu">Gainjarria</h3><p class="es">Una chapa encima de la otra. Fácil en chapa fina.</p><p class="eu">Txapa bat bestearen gainean. Erraza txapa mehean.</p></div>
+      <div class="card ico"><svg viewBox="0 0 160 84"><rect x="40" y="30" width="80" height="12" fill="#cfd6e0" stroke="#242d5f"/><rect x="40" y="42" width="80" height="12" fill="#cfd6e0" stroke="#242d5f"/><path d="M120 30h6v24h-6z" fill="#f39200"/></svg><h3 class="es">De borde</h3><h3 class="eu">Ertzekoa</h3><p class="es">Dos chapas juntas, soldadas por el canto.</p><p class="eu">Bi txapa elkarrekin, ertzetik soldatuak.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="puntatzea" data-es="Presentar y puntear" data-eu="Aurkeztu eta puntuatu" hidden>
+    <div class="card">
+      <ol class="es">
+        <li><b>Presenta</b> las piezas en su posición y sujétalas con sargentos o mordazas.</li>
+        <li>Deja la <b>separación</b> correcta (por ejemplo, con una varilla o galga del espesor indicado).</li>
+        <li><b>Puntea</b>: pequeños cordones cortos que mantienen las piezas. Primero en los extremos, luego en medio, <b>alternando</b>.</li>
+        <li>Comprueba <b>escuadra y medidas</b> antes de soldar del todo: corregir un punteado es fácil, un cordón no.</li>
+        <li>Al soldar, <b>reparte el calor</b> (cordones alternos o salteados) para que no se deforme.</li>
+      </ol>
+      <ol class="eu">
+        <li><b>Aurkeztu</b> piezak bere posizioan eta eutsi sargentoekin edo mordazekin.</li>
+        <li>Utzi <b>tarte</b> egokia (adibidez, adierazitako lodierako hagatxo edo galga batekin).</li>
+        <li><b>Puntuatu</b>: piezei eusten dieten kordoi labur txikiak. Lehenik muturretan, gero erdian, <b>txandakatuz</b>.</li>
+        <li>Egiaztatu <b>eskuaira eta neurriak</b> erabat soldatu aurretik: puntuazio bat zuzentzea erraza da, kordoi bat ez.</li>
+        <li>Soldatzean, <b>banatu beroa</b> (kordoi txandakatuak edo saltokakoak), deformatu ez dadin.</li>
+      </ol>
+    </div>
+    <figure class="fig"><svg viewBox="0 0 340 90" role="img" aria-label="Orden de punteado">
+      <rect x="20" y="30" width="300" height="30" fill="#cfd6e0" stroke="#242d5f"/><path d="M170 30v30" stroke="#242d5f"/>
+      <g fill="#f39200"><rect x="26" y="40" width="12" height="10" rx="3"/><rect x="302" y="40" width="12" height="10" rx="3"/><rect x="164" y="40" width="12" height="10" rx="3"/><rect x="94" y="40" width="12" height="10" rx="3"/><rect x="234" y="40" width="12" height="10" rx="3"/></g>
+      <g class="txt"><text x="32" y="24" text-anchor="middle">1</text><text x="308" y="24" text-anchor="middle">2</text><text x="170" y="24" text-anchor="middle">3</text><text x="100" y="24" text-anchor="middle">4</text><text x="240" y="24" text-anchor="middle">5</text></g>
+    </svg><figcaption data-es="Orden de los puntos" data-eu="Puntuen ordena"></figcaption></figure>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function bordes(){
+    var e = +$("e").value, k = Math.min(5, 90 / e), E = e * k, y0 = 40, gap, tipo, s = "", ang = 30 * Math.PI / 180;
+    $("e-t").textContent = e + " mm";
+    if (e <= 3) { tipo = "I"; gap = Math.max(0.5, e / 2); }
+    else if (e <= 12) { tipo = "V"; gap = 2; }
+    else if (e <= 25) { tipo = "X"; gap = 2; }
+    else { tipo = "U"; gap = 2; }
+    var G = gap * k, cx = 170, tal = Math.min(2, e) * k;
+    var izq, der;
+    if (tipo === "I") {
+      izq = [[20, y0], [cx - G / 2, y0], [cx - G / 2, y0 + E], [20, y0 + E]];
+    } else if (tipo === "V") {
+      var o = (E - tal) * Math.tan(ang);
+      izq = [[20, y0], [cx - G / 2 - o, y0], [cx - G / 2, y0 + E - tal], [cx - G / 2, y0 + E], [20, y0 + E]];
+    } else if (tipo === "X") {
+      var h = (E - tal) / 2, o2 = h * Math.tan(ang);
+      izq = [[20, y0], [cx - G / 2 - o2, y0], [cx - G / 2, y0 + h], [cx - G / 2, y0 + h + tal], [cx - G / 2 - o2, y0 + E], [20, y0 + E]];
+    } else {
+      var r = 5 * k / 2;
+      izq = [[20, y0], [cx - G / 2 - r - 6, y0], [cx - G / 2 - r, y0 + E - tal - r], [cx - G / 2, y0 + E - tal], [cx - G / 2, y0 + E], [20, y0 + E]];
+    }
+    der = izq.map(function(p){ return [2 * cx - p[0], p[1]]; });
+    function pth(pts){ return "M" + pts.map(function(p){ return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join("L") + "Z"; }
+    s += '<path d="' + pth(izq) + '" fill="#cfd6e0" stroke="#242d5f" stroke-width="1.6"/><path d="' + pth(der) + '" fill="#cfd6e0" stroke="#242d5f" stroke-width="1.6"/>';
+    s += '<path d="M' + (cx - G / 2) + ' ' + (y0 + E + 14) + 'h' + G + '" stroke="#b45f00"/><text class="cifra" x="' + cx + '" y="' + (y0 + E + 26) + '" text-anchor="middle">' + T("separación ", "tartea ") + String(gap).replace(".", ",") + ' mm</text>';
+    s += '<text class="cifra" x="12" y="' + (y0 + E / 2 + 4) + '">e</text>';
+    if (tipo !== "I") s += '<text class="cifra" x="' + cx + '" y="' + (y0 - 8) + '" text-anchor="middle">60°</text>';
+    $("svg-b").innerHTML = s;
+    var M = {
+      I: ["Borde recto (en I): hasta unos 3-4 mm no hace falta achaflanar. Se deja una pequeña separación.", "Ertz zuzena (I formakoa): 3-4 mm ingurura arte ez da txaflanatu behar. Tarte txiki bat uzten da."],
+      V: ["En V (60°): de unos 4 a 12 mm. Talón de 1-2 mm y separación de 1-3 mm. Se suelda en varias pasadas.", "V formakoa (60°): 4tik 12 mm-ra gutxi gorabehera. 1-2 mm-ko orpoa eta 1-3 mm-ko tartea. Hainbat pasalditan soldatzen da."],
+      X: ["En X (doble V): más de unos 12 mm, si se puede soldar por los dos lados. Gasta menos material y deforma menos.", "X formakoa (V bikoitza): 12 mm-tik gora, bi aldeetatik soldatu badaiteke. Material gutxiago gastatzen du eta gutxiago deformatzen du."],
+      U: ["En U: para espesores grandes; se necesita menos material de aportación que en V.", "U formakoa: lodiera handietarako; V-an baino ekarpen-material gutxiago behar da."]
+    };
+    $("b-txt").textContent = T(M[tipo][0], M[tipo][1]);
+  }
+  $("e").addEventListener("input", bordes);
+  alCambiarIdioma(bordes);
+})();
+</script>
+</body>
+</html>

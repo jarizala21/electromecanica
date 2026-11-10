@@ -172,7 +172,12 @@
     var nav = $("areas");
     nav.style.setProperty("--n", Math.max(SECCIONES.length, 1));
     nav.style.setProperty("--filas", Math.ceil(SECCIONES.length / 2));
+    // En pantallas anchas: hasta 4 en una fila; con más, en dos filas.
+    var cols = SECCIONES.length <= 4 ? Math.max(SECCIONES.length, 1) : Math.ceil(SECCIONES.length / 2);
+    nav.style.setProperty("--cols", cols);
+    nav.style.setProperty("--filas-pc", Math.ceil(SECCIONES.length / cols));
     nav.classList.toggle("rejilla", SECCIONES.length >= 4);
+    nav.classList.toggle("dos-filas", SECCIONES.length > 4);
     nav.innerHTML = SECCIONES.map(function(sec){
       return '<a class="area" href="#' + esc(sec.id) + '">' +
         '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +

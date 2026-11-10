@@ -310,16 +310,24 @@ self.CATALOGO = {
     {
       carpeta: "dibujo",
       nombre: "Dibujo técnico",
-      descripcion: "Hojas de proceso, acotación y perfiles normalizados.",
+      descripcion: "Planos, croquis, acotación, hojas de proceso, plegado y perfiles.",
       imagen: "imagenes/area-dibujo.webp",
       icono: "simulacion",
-      eu: { nombre: "Marrazketa teknikoa", descripcion: "Prozesu-orriak, akotazioa eta profil normalizatuak." },
+      eu: { nombre: "Marrazketa teknikoa", descripcion: "Planoak, krokisak, akotazioa, prozesu-orriak, tolestura eta profilak." },
       temas_eu: { "Fabricación": "Fabrikazioa", "Dibujo técnico": "Marrazketa teknikoa" },
       simulaciones: [
+        { archivo: "planos.html", id: "planos", tema: "Dibujo técnico", icono: "simulacion",
+          titulo: "Interpretación de planos y croquizado",
+          descripcion: "Vistas, líneas, escalas, cajetín, croquis y normas.",
+          eu: { titulo: "Planoen interpretazioa eta krokizazioa", descripcion: "Bistak, lerroak, eskalak, kajetina, krokisa eta arauak." } },
         { archivo: "hojas-proceso.html", id: "hojas-proceso", tema: "Fabricación", icono: "simulacion",
           titulo: "Hojas de proceso",
           descripcion: "Qué son, sus partes y un ejercicio para ordenar las operaciones.",
           eu: { titulo: "Prozesu-orriak", descripcion: "Zer diren, haien atalak eta eragiketak ordenatzeko ariketa bat." } },
+        { archivo: "plegado.html", id: "plegado", tema: "Fabricación", icono: "simulacion",
+          titulo: "Plegado de chapa",
+          descripcion: "Pasos, radios de plegado y cálculo del desarrollo.",
+          eu: { titulo: "Txaparen tolestura", descripcion: "Urratsak, tolestura-erradioak eta garapenaren kalkulua." } },
         { archivo: "acotacion.html", id: "acotacion", tema: "Dibujo técnico", icono: "simulacion",
           titulo: "Acotación",
           descripcion: "Elementos de una cota, normas, tipos y símbolos.",
@@ -328,6 +336,50 @@ self.CATALOGO = {
           titulo: "Perfiles metálicos normalizados",
           descripcion: "IPE, HEB, UPN, L, tubos… medidas, designación y peso.",
           eu: { titulo: "Metalezko profil normalizatuak", descripcion: "IPE, HEB, UPN, L, hodiak… neurriak, izendapena eta pisua." } }
+      ]
+    },
+    {
+      carpeta: "soldadura",
+      nombre: "Soldadura",
+      descripcion: "Preparación, parámetros y defectos de la soldadura.",
+      imagen: "imagenes/area-soldadura.webp",
+      icono: "simulacion",
+      eu: { nombre: "Soldadura", descripcion: "Soldaduraren prestaketa, parametroak eta akatsak." },
+      simulaciones: [
+        { archivo: "preparacion.html", id: "soldadura-preparacion", icono: "simulacion",
+          titulo: "Preparación de las superficies",
+          descripcion: "Limpieza, bordes según el espesor, tipos de unión y punteado.",
+          eu: { titulo: "Gainazalen prestaketa", descripcion: "Garbiketa, ertzak lodieraren arabera, lotura motak eta puntuazioa." } },
+        { archivo: "parametros.html", id: "soldadura-parametros", icono: "simulacion",
+          titulo: "Parámetros de soldadura",
+          descripcion: "Electrodo, MIG/MAG y TIG: ajuste según material y espesor.",
+          eu: { titulo: "Soldadura-parametroak", descripcion: "Elektrodoa, MIG/MAG eta TIG: doikuntza materialaren eta lodieraren arabera." } },
+        { archivo: "defectos.html", id: "soldadura-defectos", icono: "simulacion",
+          titulo: "Defectos de soldadura",
+          descripcion: "Proyecciones, poros, falta de penetración… causas y soluciones.",
+          eu: { titulo: "Soldaduretako akatsak", descripcion: "Proiekzioak, poroak, barneratze eskasa… kausak eta konponbideak." } }
+      ]
+    },
+    {
+      carpeta: "herramientas",
+      nombre: "Herramientas",
+      descripcion: "Herramientas manuales, neumáticas y eléctricas.",
+      imagen: "imagenes/area-herramientas.webp",
+      icono: "simulacion",
+      eu: { nombre: "Erremintak", descripcion: "Eskuzko erreminta, neumatiko eta elektrikoak." },
+      simulaciones: [
+        { archivo: "manuales.html", id: "herramientas-manuales", icono: "simulacion",
+          titulo: "Herramientas manuales",
+          descripcion: "Golpe, sujeción, destornilladores, alicates, llaves, medir, marcar…",
+          eu: { titulo: "Eskuzko erremintak", descripcion: "Kolpekoak, eusteko tresnak, torlojugailuak, alikateak, giltzak, neurtu, markatu…" } },
+        { archivo: "neumaticas.html", id: "herramientas-neumaticas", icono: "simulacion",
+          titulo: "Herramientas neumáticas",
+          descripcion: "Taladro, roscadora, amoladora, remachadora, atornillador, martillo.",
+          eu: { titulo: "Erreminta neumatikoak", descripcion: "Zulagailua, harizkatzeko makina, arteska, errematxagailua, torlojugailua, mailua." } },
+        { archivo: "electricas.html", id: "herramientas-electricas", icono: "simulacion",
+          titulo: "Herramientas eléctricas",
+          descripcion: "Taladro, amoladora, cizalla, remachadora y atornillador.",
+          eu: { titulo: "Erreminta elektrikoak", descripcion: "Zulagailua, arteska, zizaila, errematxagailua eta torlojugailua." } }
       ]
     }
   ]

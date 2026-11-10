@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Herramientas neumáticas</title>
+<meta name="description" content="Taladro, roscadora, amoladora, remachadora, atornillador y martillo neumáticos: uso, características y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Herramientas" data-eu="Erremintak"></p>
+      <h1 data-es="Herramientas neumáticas" data-eu="Erreminta neumatikoak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="orokorrak" data-es="Cómo son" data-eu="Nolakoak diren">
+    <div class="card">
+      <p class="es">Las <span class="clave">herramientas neumáticas</span> funcionan con <b>aire comprimido</b>: un pequeño motor de paletas o un pistón dentro de la herramienta convierte el aire en giro o en golpes.</p>
+      <p class="eu"><span class="clave">Erreminta neumatikoek</span> <b>aire konprimituarekin</b> funtzionatzen dute: erreminta barruko paleta-motor txiki batek edo pistoi batek airea biraketa edo kolpe bihurtzen du.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Ventajas</h3><h3 class="eu">Abantailak</h3><p class="es">Ligeras y potentes, no se queman aunque se frenen, seguras en sitios húmedos o con riesgo de explosión.</p><p class="eu">Arinak eta indartsuak, ez dira erretzen balaztatu arren, seguruak leku hezeetan edo leherketa-arriskua dutenetan.</p></div>
+      <div class="card"><h3 class="es">Qué necesitan</h3><h3 class="eu">Zer behar duten</h3><p class="es">Aire a unos <b>6 bar</b>, con <b>caudal</b> suficiente (l/min), limpio, seco y, muchas, <b>lubricado</b>. Manguera y enchufe rápido.</p><p class="eu">Airea <b>6 bar</b> ingurutan, <b>emari</b> nahikoarekin (l/min), garbia, lehorra eta, askok, <b>lubrifikatua</b>. Mahuka eta lotune azkarra.</p></div>
+      <div class="card"><h3 class="es">Inconvenientes</h3><h3 class="eu">Desabantailak</h3><p class="es">Necesitan compresor e instalación, hacen ruido y el escape de aire puede levantar polvo.</p><p class="eu">Konpresorea eta instalazioa behar dituzte, zarata egiten dute eta aire-ihesak hautsa altxa dezake.</p></div>
+      <div class="card"><h3 class="es">Mantenimiento</h3><h3 class="eu">Mantentzea</h3><p class="es">Unas gotas de aceite neumático por la entrada cada día de uso, purgar el agua de la instalación.</p><p class="eu">Olio neumatikoko tanta batzuk sarreratik erabilera-egun bakoitzean, instalazioko ura purgatu.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="motak" data-es="Herramientas" data-eu="Erremintak" hidden>
+    <div class="h-lista" id="h-lista"></div>
+    <div id="h-detalle"></div>
+  </section>
+
+  <section class="panel" data-tab="segurtasuna" data-es="Seguridad" data-eu="Segurtasuna" hidden>
+    <div class="card">
+      <ol class="es"><li><b>Desconecta el aire</b> antes de cambiar la broca, el disco o el útil.</li><li>Comprueba mangueras y enchufes: una manguera suelta latiguea.</li><li><b>Gafas y protección auditiva</b> siempre; guantes según el trabajo.</li><li>Nunca apuntes el aire a una persona ni lo uses para limpiarte la ropa.</li><li>No superes la presión que indica la herramienta.</li></ol>
+      <ol class="eu"><li><b>Deskonektatu airea</b> burgina, diskoa edo tresna aldatu aurretik.</li><li>Egiaztatu mahukak eta lotuneak: mahuka aske batek zartailuka egiten du.</li><li><b>Betaurrekoak eta entzumen-babesa</b> beti; eskularruak lanaren arabera.</li><li>Inoiz ez zuzendu airea pertsona batengana ezta arropa garbitzeko erabili ere.</li><li>Ez gainditu erremintak adierazten duen presioa.</li></ol>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ariketa" data-es="¿Cuál uso?" data-eu="Zein erabili?" hidden>
+    <div class="estado" id="h-nota"></div>
+    <div id="h-test" style="display:grid;gap:12px"></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script src="herramientas.js"></script>
+<script>
+var MANG = '<path class="hl" d="M10 52c10 0 10-8 20-8"/>';
+fichaHerramientas({
+  lista: [
+    { n: ["Taladro neumático", "Zulagailu neumatikoa"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="22" y="12" width="44" height="20" rx="8"/><path class="hs" d="M30 32h14l-4 22h-12z"/><rect class="hn" x="66" y="18" width="12" height="8"/><path class="hl" d="M78 22h16"/>' + MANG + '</svg>',
+      que: ["Taladrar agujeros en metal, madera o plástico con aire.", "Metalean, egurrean edo plastikoan zuloak egin airearekin."],
+      tipos: ["De pistola o recto, con portabrocas de llave o automático.", "Pistola-formakoa edo zuzena, giltzadun edo automatiko burgina-euskarriarekin."],
+      uso: ["Granetea antes, sujeta la pieza y empieza despacio.", "Puntzonatu aurretik, eutsi piezari eta hasi poliki."],
+      ojo: ["Pieza sujeta, nada de guantes cerca de la broca que gira.", "Pieza helduta, eskularrurik ez biratzen ari den burginatik gertu."] },
+    { n: ["Roscadora", "Harizkatzeko makina"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="10" y="20" width="50" height="18" rx="6"/><rect class="hn" x="60" y="24" width="10" height="10"/><path class="hs" d="M70 26h20v6H70z"/><path class="hl" d="M74 26l-2 6M80 26l-2 6M86 26l-2 6"/>' + MANG + '</svg>',
+      que: ["Hacer roscas con macho en agujeros, rápido y recto.", "Zuloetan hariak egin harizulatzailearekin, azkar eta zuzen."],
+      tipos: ["De mano o de brazo articulado (mantiene el macho perpendicular). Con inversión de giro.", "Eskukoa edo beso artikulatukoa (harizulatzailea perpendikular mantentzen du). Biraketa-inbertsioarekin."],
+      uso: ["Taladra antes con la broca correcta (M8 → Ø6,8), usa aceite de corte y saca el macho invirtiendo el giro.", "Zulatu aurretik burgina egokiarekin (M8 → Ø6,8), erabili ebaketa-olioa eta atera harizulatzailea biraketa alderantzikatuz."],
+      ojo: ["Si el macho se bloquea, para: se rompe y es muy difícil sacarlo.", "Harizulatzailea blokeatzen bada, gelditu: hautsi egiten da eta oso zaila da ateratzea."] },
+    { n: ["Amoladora (artesca)", "Arteska (amoladora)"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="10" y="24" width="52" height="14" rx="6"/><circle class="hm" cx="74" cy="31" r="18"/><circle class="hn" cx="74" cy="31" r="4"/>' + MANG + '</svg>',
+      que: ["Cortar, desbastar y pulir con disco que gira muy rápido.", "Moztu, arbastatu eta leundu oso azkar biratzen duen diskoarekin."],
+      tipos: ["Angular, recta (de lápiz), con disco de corte, de desbaste, de láminas o cepillo.", "Angeluarra, zuzena (arkatz-formakoa), ebaki-diskoarekin, arbastatzekoarekin, xafla-diskoarekin edo eskuilarekin."],
+      uso: ["Con las dos manos, protector puesto y chispas hacia el suelo, lejos de las personas.", "Bi eskuekin, babesa jarrita eta txinpartak lurrera, pertsonetatik urrun."],
+      ojo: ["Disco adecuado a las rpm de la máquina. Gafas o pantalla, guantes y protección auditiva.", "Makinaren bira-abiadurari egokitutako diskoa. Betaurrekoak edo pantaila, eskularruak eta entzumen-babesa."] },
+    { n: ["Remachadora", "Errematxagailua"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="20" y="10" width="50" height="20" rx="6"/><path class="hs" d="M30 30h14l-2 24h-12z"/><path class="hs" d="M70 16h14v8H70z"/><path class="hl" d="M84 20h10"/>' + MANG + '</svg>',
+      que: ["Colocar remaches pop sin esfuerzo, muy rápido en series largas.", "Pop errematxeak esfortzurik gabe jarri, oso azkar serie luzeetan."],
+      tipos: ["Para remaches de 2,4 a 6,4 mm; algunas aspiran el vástago roto a un depósito.", "2,4tik 6,4 mm-rako errematxeetarako; batzuek hautsitako kirtena depósito batera xurgatzen dute."],
+      uso: ["Boquilla según el diámetro del remache. Remache bien apoyado y recto.", "Ahokoa errematxearen diametroaren arabera. Errematxea ondo bermatuta eta zuzen."],
+      ojo: ["Vacía el depósito de vástagos. Gafas: el vástago puede salir disparado.", "Hustu kirten-depositoa. Betaurrekoak: kirtena jaurtita atera daiteke."] },
+    { n: ["Atornillador / llave de impacto", "Torlojugailua / inpaktu-giltza"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="22" y="12" width="44" height="20" rx="8"/><path class="hs" d="M30 32h14l-4 22h-12z"/><rect class="hn" x="66" y="16" width="16" height="12"/><rect class="hs" x="82" y="18" width="10" height="8"/>' + MANG + '</svg>',
+      que: ["Apretar y aflojar tornillos y tuercas rápido. La de impacto da golpes de giro: muy potente.", "Torlojuak eta azkoinak azkar estutu eta askatu. Inpaktukoak biraketa-kolpeak ematen ditu: oso indartsua."],
+      tipos: ["Atornillador con embrague (par regulable) y llave de impacto de 1/2\" para tuercas grandes (ruedas).", "Enbragedun torlojugailua (bihurdura erregulagarria) eta 1/2\"-ko inpaktu-giltza azkoin handietarako (gurpilak)."],
+      uso: ["Ajusta el par: aprieta lo justo y termina con llave dinamométrica si el apriete es importante.", "Doitu bihurdura: estutu behar adina eta amaitu giltza dinamometrikoarekin estutzea garrantzitsua bada."],
+      ojo: ["Usa vasos de impacto (negros), no los cromados normales: se rompen.", "Erabili inpaktu-hodiak (beltzak), ez kromatu arruntak: hautsi egiten dira."] },
+    { n: ["Martillo neumático", "Mailu neumatikoa"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="14" y="18" width="40" height="22" rx="8"/><rect class="hs" x="54" y="23" width="14" height="12"/><path class="hs" d="M68 26h18l6 3-6 3H68z"/>' + MANG + '</svg>',
+      que: ["Dar golpes muy seguidos: cortar remaches y tornillos, picar, desoxidar, separar piezas.", "Kolpe oso jarraituak eman: errematxeak eta torlojuak moztu, pikatu, herdoila kendu, piezak bereizi."],
+      tipos: ["Con cinceles, puntas y botadores intercambiables; el piqueta de agujas quita óxido y escoria.", "Zizel, punta eta bultzatzaile trukagarriekin; orratz-pikatzaileak herdoila eta zepa kentzen ditu."],
+      uso: ["Útil bien sujeto con su muelle de retención, apoya antes de accionar.", "Tresna ondo lotuta bere atxikitze-malgukiarekin, bermatu eragin aurretik."],
+      ojo: ["Vibraciones: guantes antivibración y pausas. Gafas y protección auditiva.", "Bibrazioak: bibrazioen aurkako eskularruak eta atsedenak. Betaurrekoak eta entzumen-babesa."] },
+    { n: ["Otras", "Besteak"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="16" y="16" width="46" height="18" rx="6"/><path class="hs" d="M24 34h12l-2 20h-10z"/><path class="hs" d="M62 22h30v6H62z"/>' + MANG + '</svg>',
+      que: ["Pistola de soplado, lijadora orbital, pistola de pintura, inflador, grapadora.", "Putz egiteko pistola, lixatzaile orbitala, pintura-pistola, puzgailua, grapagailua."],
+      ojo: ["La pistola de soplado nunca contra la piel ni la ropa puesta.", "Putz egiteko pistola inoiz ez larruazalaren kontra ezta jantzitako arroparen kontra ere."] }
+  ],
+  test: [
+    { s: ["Hacer 40 roscas M8 iguales y rectas en una placa.", "Plaka batean M8 40 hari berdin eta zuzen egin."], ops: [["Roscadora de brazo", "Beso-harizkatzeko makina"], ["Martillo neumático", "Mailu neumatikoa"], ["Amoladora", "Arteska"]], ok: 0 },
+    { s: ["Quitar los cordones de soldadura sobrantes de un bastidor.", "Bastidore bateko soberako soldadura-kordoiak kendu."], ops: [["Amoladora con disco de desbaste", "Arteska arbastatzeko diskoarekin"], ["Atornillador", "Torlojugailua"], ["Remachadora", "Errematxagailua"]], ok: 0 },
+    { s: ["Cambiar el disco de la amoladora neumática.", "Arteska neumatikoaren diskoa aldatu."], ops: [["Con el aire conectado, rápido", "Airea konektatuta, azkar"], ["Desconectando antes el aire", "Aurretik airea deskonektatuta"]], ok: 1 },
+    { s: ["Cortar la cabeza de unos remaches viejos.", "Errematxe zahar batzuen burua moztu."], ops: [["Martillo neumático con cincel", "Mailu neumatikoa zizelarekin"], ["Taladro sin broca", "Burginarik gabeko zulagailua"], ["Pistola de soplado", "Putz egiteko pistola"]], ok: 0 }
+  ]
+});
+</script>
+</body>
+</html>

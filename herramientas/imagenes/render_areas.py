@@ -318,7 +318,69 @@ def perfiles():
     colocar(perfil("tubo", [[(-t, -t), (t, -t), (t, t), (-t, t)], [(-t + .07, -t + .07), (t - .07, -t + .07), (t - .07, t - .07), (-t + .07, t - .07)]], 4.2, oscuro, 0.02), 2.2, b / 2 + 1.2, -h / 2 + t)
     estudio((0.6, -0.3, -0.3), 23, 24, -64, focal=85)
 
-if QUE == "perfiles":
+def llave():
+    cromo = mat("cromo", (0.8, 0.81, 0.83), 1.0, 0.18)
+    # mango
+    perfil("mango", [[(-2.2, -0.42), (2.2, -0.32), (2.2, 0.32), (-2.2, 0.42)]], 0.26, cromo, 0.06)
+    # cabeza de estrella (12 puntas)
+    est = []
+    for i in range(24):
+        r = 0.62 if i % 2 == 0 else 0.55
+        a = math.pi * i / 12
+        est.append((-2.75 + r * math.cos(a), r * math.sin(a)))
+    perfil("estrella", [circulo(0.92, 96, (-2.75, 0)), est], 0.3, cromo, 0.05)
+    # boca fija (abierta) inclinada 15°
+    cx, R, w, prof, inc = 2.85, 1.0, 0.62, 1.15, math.radians(15)
+    a0 = math.asin(w / 2 / R)
+    pts = []
+    n = 60
+    for i in range(n + 1):
+        a = a0 + (2 * math.pi - 2 * a0) * i / n
+        pts.append((R * math.cos(a), R * math.sin(a)))
+    pts += [(R - prof, -w / 2), (R - prof, w / 2)]
+    rot = [(cx + x * math.cos(inc) - y * math.sin(inc), x * math.sin(inc) + y * math.cos(inc)) for x, y in pts]
+    perfil("boca", [rot], 0.24, cromo, 0.05)
+    bpy.ops.object.empty_add(location=(0, 0, 0))
+    raiz = bpy.context.active_object
+    for o in bpy.data.objects:
+        if o.type == "CURVE": o.parent = raiz
+    raiz.rotation_euler = (math.radians(68), math.radians(8), math.radians(-24))
+    estudio((0, 0, 0), 19, 22, -10, focal=85)
+
+def soldadura():
+    acero = mat("chapa", (0.3, 0.31, 0.33), 1.0, 0.55)
+    cordon = mat("cordon", (0.5, 0.46, 0.4), 1.0, 0.32)
+    oro = mat("tinte1", (0.85, 0.5, 0.12), 1.0, 0.35)
+    azul = mat("tinte2", (0.12, 0.22, 0.7), 1.0, 0.3)
+    for s_, x in ((1, 1.62), (-1, -1.62)):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=(x, 0, 0))
+        o = bpy.context.active_object; o.scale = (3.2, 5.0, 0.24); o.data.materials.append(acero)
+        bv = o.modifiers.new("b", "BEVEL"); bv.width = 0.02; bv.segments = 2
+        for w, m, d in ((0.22, oro, 0.16), (0.2, azul, 0.42)):
+            bpy.ops.mesh.primitive_plane_add(size=1, location=(s_ * (0.05 + d), 0, 0.1205))
+            p = bpy.context.active_object; p.scale = (w, 4.6, 1); p.data.materials.append(m)
+    k = 0
+    y = -2.4
+    while y < 2.45:
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1, segments=24, ring_count=12, location=(0, y, 0.12))
+        e = bpy.context.active_object
+        e.scale = (0.36, 0.22, 0.13)
+        e.rotation_euler = (math.radians(-28), 0, 0)
+        e.data.materials.append(cordon)
+        for f in e.data.polygons: f.use_smooth = True
+        y += 0.13; k += 1
+    bpy.ops.object.empty_add(location=(0, 0, 0))
+    raiz = bpy.context.active_object
+    for o in bpy.data.objects:
+        if o.type == "MESH": o.parent = raiz
+    raiz.rotation_euler = (0, 0, math.radians(-35))
+    estudio((0, 0, 0), 17, 38, -30, focal=85)
+
+if QUE == "llave":
+    llave()
+elif QUE == "soldadura":
+    soldadura()
+elif QUE == "perfiles":
     perfiles()
 elif QUE == "engranaje":
     engranajes()

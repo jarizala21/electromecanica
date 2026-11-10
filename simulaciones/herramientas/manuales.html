@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Herramientas manuales</title>
+<meta name="description" content="Herramientas de golpe, de sujeción, destornilladores, alicates, llaves, marcar, medir, extractores y tijeras: para qué sirven, tipos, uso y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Herramientas" data-eu="Erremintak"></p>
+      <h1 data-es="Herramientas manuales" data-eu="Eskuzko erremintak"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <section class="panel" data-tab="motak" data-es="Herramientas" data-eu="Erremintak">
+    <div class="card"><p class="es">Toca una herramienta para ver para qué sirve, sus tipos, cómo se usa y qué cuidar.</p><p class="eu">Ukitu erreminta bat zertarako balio duen, haren motak, nola erabiltzen den eta zer zaindu behar den ikusteko.</p></div>
+    <div class="h-lista" id="h-lista"></div>
+    <div id="h-detalle"></div>
+  </section>
+
+  <section class="panel" data-tab="arauak" data-es="Normas de uso" data-eu="Erabilera-arauak" hidden>
+    <div class="card">
+      <ol class="es">
+        <li>Usa cada herramienta <b>para lo que es</b>: un destornillador no es un cincel ni una llave es un martillo.</li>
+        <li>Elige la <b>medida justa</b>: una llave grande o un destornillador pequeño redondean la cabeza.</li>
+        <li><b>Revisa</b> antes de usar: mangos rotos, bocas abiertas, cabezas sueltas → fuera.</li>
+        <li><b>Tira</b> de la llave hacia ti en lugar de empujar, y sin alargadores.</li>
+        <li>Usa <b>EPIs</b>: gafas al golpear, cortar o limar; guantes con chapa.</li>
+        <li>Al terminar, <b>limpia y guarda</b> cada herramienta en su sitio (panel o carro).</li>
+      </ol>
+      <ol class="eu">
+        <li>Erabili erreminta bakoitza <b>dagokionerako</b>: bihurkina ez da zizela, ezta giltza mailua ere.</li>
+        <li>Aukeratu <b>neurri zehatza</b>: giltza handi batek edo bihurkin txiki batek burua biribiltzen dute.</li>
+        <li><b>Berrikusi</b> erabili aurretik: kirten hautsiak, aho irekiak, buru askeak → kanpora.</li>
+        <li><b>Tira</b> giltzatik zuregana, bultzatu beharrean, eta luzagarririk gabe.</li>
+        <li>Erabili <b>NBEak</b>: betaurrekoak kolpatzean, moztean edo limatzean; eskularruak txaparekin.</li>
+        <li>Amaitzean, <b>garbitu eta gorde</b> erreminta bakoitza bere lekuan (panela edo orga).</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="panel" data-tab="ariketa" data-es="¿Cuál uso?" data-eu="Zein erabili?" hidden>
+    <div class="estado" id="h-nota"></div>
+    <div id="h-test" style="display:grid;gap:12px"></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script src="herramientas.js"></script>
+<script>
+fichaHerramientas({
+  lista: [
+    { n: ["De golpe", "Kolpekoak"], ico: '<svg viewBox="0 0 100 60"><rect class="hn" x="46" y="18" width="8" height="38" rx="3"/><rect class="hs" x="28" y="6" width="44" height="14" rx="3"/></svg>',
+      que: ["Golpear: clavar, enderezar, montar piezas a presión, granetear.", "Kolpatzea: iltzatu, zuzendu, piezak presioz muntatu, puntzonatu."],
+      tipos: ["Martillo de bola y de peña (ajustador), maza, martillo de nailon o goma (no marca), martillo de cobre.", "Bola- eta pena-mailua (doitzailea), maza, nylon edo gomazko mailua (ez du markatzen), kobrezko mailua."],
+      uso: ["Cógelo por el final del mango y golpea con la cara entera, no con el canto.", "Heldu kirtenaren muturretik eta kolpatu aurpegi osoarekin, ez ertzarekin."],
+      ojo: ["Mango bien sujeto a la cabeza, gafas de protección. Para piezas delicadas, martillo blando.", "Kirtena buruari ondo lotuta, babes-betaurrekoak. Pieza delikatuetarako, mailu biguna."] },
+    { n: ["Sujeción: mordazas y sargentos", "Eusteko tresnak: mordazak eta sargentoak"], ico: '<svg viewBox="0 0 100 60"><rect class="hs" x="14" y="30" width="72" height="14" rx="2"/><rect class="hs" x="20" y="12" width="16" height="20"/><rect class="hs" x="56" y="12" width="16" height="20"/><path class="hl" d="M72 22h20M92 14v16"/></svg>',
+      que: ["Sujetar las piezas para trabajar con seguridad y precisión.", "Piezei eustea, segurtasunez eta zehaztasunez lan egiteko."],
+      tipos: ["Tornillo de banco, mordaza de máquina (taladro, fresadora), sargento, gato rápido, mordaza de presión (grip).", "Banku-torlojua, makina-mordaza (zulagailua, fresagailua), sargentoa, katu azkarra, presio-mordaza (grip)."],
+      uso: ["Pon mordazas blandas (aluminio, cobre) para no marcar la pieza. Aprieta con la mano, sin golpear la palanca.", "Jarri mordaza bigunak (aluminioa, kobrea) pieza ez markatzeko. Estutu eskuz, palanka kolpatu gabe."],
+      ojo: ["Nunca sujetar a mano una pieza para taladrar: si la broca se engancha, gira.", "Inoiz ez eutsi pieza bati eskuz zulatzeko: burgina trabatzen bada, biratu egiten da."] },
+    { n: ["Destornilladores", "Torlojugailuak"], ico: '<svg viewBox="0 0 100 60"><rect class="hm" x="8" y="22" width="34" height="16" rx="7"/><rect class="hs" x="42" y="27" width="40" height="6"/><path class="hs" d="M82 26l10 4-10 4z"/></svg>',
+      que: ["Apretar y aflojar tornillos con ranura o con huella en la cabeza.", "Buruan arteka edo aztarna duten torlojuak estutu eta askatu."],
+      tipos: ["Plano, de estrella Phillips (PH), Pozidriv (PZ), Torx (T); aislados 1000 V para electricidad.", "Laua, Phillips izarduna (PH), Pozidriv (PZ), Torx (T); 1000 V-eko isolatuak elektrizitaterako."],
+      uso: ["La punta debe llenar la huella. Empuja mientras giras.", "Puntak aztarna bete behar du. Bultzatu biratzen duzun bitartean."],
+      ojo: ["No usarlo como palanca ni como cincel. En cuadros eléctricos, solo aislados y sin tensión.", "Ez erabili palanka edo zizel gisa. Koadro elektrikoetan, isolatuak bakarrik eta tentsiorik gabe."] },
+    { n: ["Alicates", "Alikateak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M10 22l30 6 14 2-14 4-30 6z"/><path class="hm" d="M54 30l34-16 4 6-30 12zM54 30l34 16 4-6-30-12z"/><circle class="hn" cx="54" cy="30" r="4"/></svg>',
+      que: ["Sujetar, doblar, cortar y retorcer alambres y piezas pequeñas.", "Alanbreak eta pieza txikiak eutsi, tolestu, moztu eta bihurritu."],
+      tipos: ["Universales, de puntas (planas o redondas), de corte diagonal, pelacables, de terminales (crimpar).", "Unibertsalak, puntadunak (lauak edo biribilak), zeharkako ebakikoak, kable-zuritzaileak, terminaletakoak (krinpatu)."],
+      uso: ["Corta con la parte de atrás del filo, cerca del eje: hace menos fuerza.", "Moztu ahoaren atzealdearekin, ardatzetik gertu: indar gutxiago egiten du."],
+      ojo: ["No aflojar tuercas con alicates: las redondean. Corta apuntando hacia abajo (el trozo salta).", "Ez askatu azkoinik alikateekin: biribildu egiten dituzte. Moztu beherantz begira (zatia jauzi egiten da)."] },
+    { n: ["Llaves de apriete", "Estutzeko giltzak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M18 30m-12 0a12 12 0 1 0 24 0a12 12 0 1 0-24 0M28 26h44v8H28z"/><path class="hs" d="M70 20h14l8 4v-6l6 2v20l-6 2v-6l-8 4H70z"/></svg>',
+      que: ["Apretar y aflojar tornillos y tuercas de cabeza hexagonal.", "Buru hexagonaleko torlojuak eta azkoinak estutu eta askatu."],
+      tipos: ["Fija (boca abierta), de estrella (cerrada, 12 puntas), acodada, mixta (fija + estrella), de vaso.", "Finkoa (aho irekia), izarduna (itxia, 12 punta), okertua, mistoa (finkoa + izarduna), hodi-giltza."],
+      uso: ["Usa la medida exacta (13 para M8, 16-17 para M10…). La estrella agarra mejor que la fija.", "Erabili neurri zehatza (13 M8rako, 16-17 M10erako…). Izardunak finkoak baino hobeto heltzen du."],
+      ojo: ["Tira hacia ti. Nunca alargues con un tubo ni golpees la llave.", "Tira zuregana. Inoiz ez luzatu hodi batekin ezta giltza kolpatu ere."] },
+    { n: ["Allen y Torx", "Allen eta Torx"], ico: '<svg viewBox="0 0 100 60"><path class="hn" d="M20 12h12v32h48v12H20z"/><path class="hs" d="M20 12h12v6H20z"/></svg>',
+      que: ["Apretar tornillos con hexágono interior (Allen) o con estrella de 6 puntas (Torx).", "Barne-hexagonoa (Allen) edo 6 puntako izarra (Torx) duten torlojuak estutu."],
+      tipos: ["En L, en T, de bola (permite inclinar), puntas para carraca. Allen en mm (2,5 a 17); Torx T10, T20, T30…", "L formakoak, T formakoak, bola-puntakoak (inklinatzeko), karraka-puntak. Allen mm-tan (2,5etik 17ra); Torx T10, T20, T30…"],
+      uso: ["El brazo corto dentro para apretar fuerte; el largo dentro para girar rápido.", "Beso laburra barruan indarrez estutzeko; luzea barruan azkar biratzeko."],
+      ojo: ["Mete la llave hasta el fondo: si no, se redondea la huella.", "Sartu giltza hondoraino: bestela, aztarna biribildu egiten da."] },
+    { n: ["Para marcar", "Markatzekoak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M12 26h56v8H12z"/><path class="hs" d="M68 26l22 4-22 4z"/><path class="hl" d="M20 26v8M28 26v8"/></svg>',
+      que: ["Trazar líneas y marcar puntos sobre la pieza antes de mecanizar.", "Mekanizatu aurretik piezaren gainean lerroak trazatu eta puntuak markatu."],
+      tipos: ["Punta de trazar, granete, gramil, escuadra, compás de puntas, rotulador o tinta de trazar.", "Trazatzeko punta, puntzoia, gramila, eskuaira, punta-konpasa, errotulagailua edo trazatzeko tinta."],
+      uso: ["Pinta la zona con tinta, traza con la punta y marca con el granete donde vas a taladrar.", "Margotu eremua tintaz, trazatu puntarekin eta markatu puntzoiarekin zulatuko duzun lekua."],
+      ojo: ["Puntas afiladas: guárdalas con protector.", "Punta zorrotzak: gorde babesarekin."] },
+    { n: ["Para medir", "Neurtzekoak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M8 20h84v10H8z"/><path class="hs" d="M14 30h8v18h-8zM40 30h8v18h-8z"/><path class="hl" d="M30 20v5M40 20v5M50 20v5M60 20v5M70 20v5M80 20v5"/></svg>',
+      que: ["Medir longitudes, diámetros, profundidades y ángulos.", "Luzerak, diametroak, sakonerak eta angeluak neurtu."],
+      tipos: ["Flexómetro, regla, calibre o pie de rey (0,05 mm), micrómetro (0,01 mm), escuadra, goniómetro, galgas.", "Flexometroa, erregela, kalibrea (0,05 mm), mikrometroa (0,01 mm), eskuaira, goniometroa, galgak."],
+      uso: ["Mide sin apretar de más, en perpendicular, y lee de frente.", "Neurtu gehiegi estutu gabe, perpendikularki, eta irakurri aurrez aurre."],
+      ojo: ["Son instrumentos de precisión: no golpear ni dejar caer. Guardar limpios en su estuche.", "Doitasun-tresnak dira: ez kolpatu ezta erori utzi ere. Garbi gorde bere zorroan."] },
+    { n: ["Extractores", "Erauzgailuak (extraktoreak)"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M30 10h40v8H30z"/><path class="hs" d="M34 18l-6 30h6l6-30zM66 18l6 30h-6l-6-30z"/><rect class="hn" x="47" y="4" width="6" height="40"/></svg>',
+      que: ["Sacar rodamientos, poleas y engranajes montados a presión en un eje.", "Ardatz batean presioz muntatutako errodamenduak, poleak eta engranajeak atera."],
+      tipos: ["De 2 o 3 garras, de garras interiores, separador de rodamientos.", "2 edo 3 atzaparrekoak, barne-atzaparrekoak, errodamendu-bereizlea."],
+      uso: ["Centra el husillo en el eje, apoya bien las garras detrás de la pieza y aprieta poco a poco.", "Zentratu ardatz-torlojua ardatzean, bermatu ondo atzaparrak piezaren atzean eta estutu pixkanaka."],
+      ojo: ["La pieza puede salir de golpe: protégela y no te pongas delante.", "Pieza bat-batean atera daiteke: babestu eta ez jarri aurrean."] },
+    { n: ["Llaves de carraca", "Karraka-giltzak"], ico: '<svg viewBox="0 0 100 60"><circle class="hs" cx="22" cy="30" r="14"/><rect class="hn" x="16" y="24" width="12" height="12"/><path class="hs" d="M34 26h56v8H34z"/></svg>',
+      que: ["Girar vasos sin sacar la llave de la tuerca: mucho más rápido.", "Hodiak biratu giltza azkoinetik atera gabe: askoz azkarrago."],
+      tipos: ["De 1/4\", 3/8\" y 1/2\" (cuadradillo). Con alargadores, juntas cardán y llave dinamométrica.", "1/4\", 3/8\" eta 1/2\"-koak (karratutxoa). Luzagarriekin, kardan-junturekin eta giltza dinamometrikoarekin."],
+      uso: ["Con la palanquita eliges apretar o aflojar. Para el par exacto, llave dinamométrica.", "Palankatxoarekin estutu edo askatu aukeratzen duzu. Bihurdura zehatzerako, giltza dinamometrikoa."],
+      ojo: ["No usarla para aflojar algo muy agarrotado: se rompe el mecanismo. Usa una barra articulada.", "Ez erabili oso trabatuta dagoen zerbait askatzeko: mekanismoa hausten da. Erabili barra artikulatua."] },
+    { n: ["Llave inglesa", "Giltza ingelesa"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M8 26h56v8H8z"/><path class="hs" d="M64 16h18v28H64z"/><path class="hs" d="M82 16h10v10H82z"/><path class="hl" d="M68 36h10"/></svg>',
+      que: ["Llave de boca ajustable: vale para muchas medidas.", "Aho doigarriko giltza: neurri askotarako balio du."],
+      tipos: ["De distintos largos (150, 200, 250 mm…).", "Luzera desberdinetakoak (150, 200, 250 mm…)."],
+      uso: ["Ajusta bien la boca a la tuerca y haz fuerza hacia la mandíbula fija.", "Doitu ondo ahoa azkoinera eta egin indarra baraila finkorantz."],
+      ojo: ["Es un recurso: si hay llave fija de la medida, mejor esa. Si queda floja, redondea.", "Baliabide bat da: neurriko giltza finkoa badago, hobe hori. Lasai geratzen bada, biribildu egiten du."] },
+    { n: ["Llave grifa (llave perro)", "Grifa-giltza (llave perro)"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M8 30h60v8H8z"/><path class="hs" d="M66 14h10v34H66z"/><path class="hs" d="M76 14h16v8H76zM76 40h16v8H76z"/></svg>',
+      que: ["Sujetar y girar tubos y piezas redondas.", "Hodiak eta pieza biribilak eutsi eta biratu."],
+      tipos: ["Stillson (recta), de 45° y 90°, de cadena para tubos grandes.", "Stillson (zuzena), 45° eta 90°-koak, kateduna hodi handietarako."],
+      uso: ["Las mordazas dentadas muerden al hacer fuerza en el sentido correcto.", "Mordaza horzdunek hozka egiten dute norabide egokian indarra egitean."],
+      ojo: ["Marca la pieza: no usar en piezas acabadas ni cromadas.", "Pieza markatzen du: ez erabili akabatutako edo kromatutako piezetan."] },
+    { n: ["Alicate pico de loro", "Loro-moko giltza"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M10 22l40 8-40 6z"/><path class="hm" d="M50 30l30-20 10 6-26 18zM50 30l36 14-2 6-34-14z"/><circle class="hn" cx="52" cy="30" r="4"/></svg>',
+      que: ["Alicate de boca regulable para tubos, tuercas grandes y racores.", "Aho erregulagarriko alikatea hodietarako, azkoin handietarako eta rakorretarako."],
+      tipos: ["Con varias posiciones de apertura; algunos con ajuste rápido de botón.", "Irekidura-posizio batzuekin; batzuek botoi bidezko doikuntza azkarra dute."],
+      uso: ["Elige la posición en la que la boca abraza bien la pieza y aprieta.", "Aukeratu ahoak pieza ondo besarkatzen duen posizioa eta estutu."],
+      ojo: ["Marca la pieza; protégela con un trapo si importa el acabado.", "Pieza markatzen du; babestu trapu batekin akabera garrantzitsua bada."] },
+    { n: ["Tijeras de cortar chapa", "Mozteko guraizeak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M10 26l36 4-36 4z"/><path class="hm" d="M46 30l40-14 4 6-38 10zM46 30l40 14 4-6-38-10z"/></svg>',
+      que: ["Cortar chapa fina a mano.", "Txapa mehea eskuz moztu."],
+      tipos: ["De corte recto, a izquierdas (mango rojo), a derechas (mango verde), de aviación.", "Ebaki zuzenekoak, ezkerrerakoak (kirten gorria), eskuinerakoak (kirten berdea), abiazio-guraizeak."],
+      uso: ["No cerrar del todo en cada corte: así el corte queda continuo.", "Ez itxi erabat ebaki bakoitzean: horrela ebakia jarraitua geratzen da."],
+      ojo: ["Guantes: los bordes de chapa cortan mucho. Lima las rebabas.", "Eskularruak: txapa-ertzek asko mozten dute. Limatu bizarrak."] },
+    { n: ["Otras", "Besteak"], ico: '<svg viewBox="0 0 100 60"><path class="hs" d="M10 20h60v20H10z"/><path class="hl" d="M14 22l4 16M22 22l4 16M30 22l4 16M38 22l4 16M46 22l4 16M54 22l4 16M62 22l4 16"/><rect class="hn" x="70" y="22" width="22" height="16" rx="4"/></svg>',
+      que: ["Limas, sierra de arco, cúter, cincel, botador, remachadora manual, machos y terrajas para roscar.", "Limak, arku-zerra, zorrozta, zizela, bultzatzailea, eskuzko errematxagailua, harizulatzaileak eta terrajak."],
+      uso: ["Sierra de arco: dientes hacia delante, corta al empujar. Lima: también corta al empujar.", "Arku-zerra: hortzak aurrera begira, bultzatzean mozten du. Lima: hau ere bultzatzean mozten du."],
+      ojo: ["Lima siempre con mango. Cincel y botador con la cabeza sin rebabas.", "Lima beti kirtenarekin. Zizela eta bultzatzailea burua bizarrik gabe dutela."] }
+  ],
+  test: [
+    { s: ["Tienes que aflojar una tuerca M10 muy apretada.", "Oso estututa dagoen M10 azkoin bat askatu behar duzu."], ops: [["Alicate universal", "Alikate unibertsala"], ["Llave de estrella de 16", "16ko giltza izarduna"], ["Llave inglesa abierta de más", "Gehiegi irekitako giltza ingelesa"]], ok: 1 },
+    { s: ["Sacar un rodamiento de un eje de motor.", "Motor-ardatz batetik errodamendu bat atera."], ops: [["Extractor de garras", "Atzapar-erauzgailua"], ["Martillo y destornillador", "Mailua eta bihurkina"], ["Grifa", "Grifa-giltza"]], ok: 0 },
+    { s: ["Marcar el centro de un agujero antes de taladrar.", "Zulatu aurretik zulo baten erdigunea markatu."], ops: [["Punta de trazar sola", "Trazatzeko punta bakarrik"], ["Granete y martillo", "Puntzoia eta mailua"], ["Cúter", "Zorrozta"]], ok: 1 },
+    { s: ["Medir el diámetro de un eje con precisión de 0,01 mm.", "Ardatz baten diametroa 0,01 mm-ko doitasunez neurtu."], ops: [["Flexómetro", "Flexometroa"], ["Calibre", "Kalibrea"], ["Micrómetro", "Mikrometroa"]], ok: 2 },
+    { s: ["Cortar una curva hacia la izquierda en chapa de 0,8 mm.", "0,8 mm-ko txapan ezkerrerako kurba bat moztu."], ops: [["Tijera a izquierdas (roja)", "Ezkerrerako guraizeak (gorria)"], ["Alicate de corte", "Ebaki-alikatea"], ["Sierra de arco", "Arku-zerra"]], ok: 0 },
+    { s: ["Montar un tornillo Allen M6 en un sitio estrecho y algo inclinado.", "M6 Allen torloju bat leku estu eta pixka bat inklinatu batean muntatu."], ops: [["Llave Allen de bola de 5 mm", "5 mm-ko bola-puntako Allen giltza"], ["Destornillador plano", "Bihurkin laua"], ["Llave fija de 10", "10eko giltza finkoa"]], ok: 0 }
+  ]
+});
+</script>
+</body>
+</html>
