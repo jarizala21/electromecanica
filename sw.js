@@ -13,7 +13,7 @@ var BASE = [
   "./", "index.html", "estilos.css", "app.js", "catalogo.js", "manifest.webmanifest",
   "iconos/favicon.svg", "iconos/favicon-32.png", "iconos/apple-touch-icon.png",
   "iconos/icono-192.png", "iconos/icono-512.png", "iconos/icono-maskable-512.png",
-  "imagenes/la-salle-berrozpe.webp", "imagenes/cc-by-nc-sa.svg",
+  "imagenes/la-salle-berrozpe-portada.webp", "imagenes/cc-by-nc-sa.svg",
   "imagenes/area-electrica.webp", "imagenes/area-neumatica.webp", "imagenes/area-mecanica.webp"
 ];
 var FUENTES = "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap";
