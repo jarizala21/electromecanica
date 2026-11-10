@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diferencial por dentro</title>
+<style>
+  :root{color-scheme:light}
+  html,body{margin:0}
+  body{font:14px system-ui,-apple-system,"Segoe UI",sans-serif}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+/* Misma familia visual que el magnetotérmico: corte a la izquierda, panel de medidas a la derecha, escala de efectos debajo. */
+:root{
+  --bg:#e9ecf0; --panel:#fbfcfd; --sunk:#f0f3f6; --line:#d2d8e0; --fg:#161a20; --muted:#5b6473;
+  --copper:#a9682f; --ok:#1c7a4d; --trip:#bd3a2c; --heat:#e0601f; --mag:#3d5cc7; --flux:#8249c2;
+  --fase:#8a5a2b; --neutro:#2f62b8; --tierra:#6d8c17;
+  --live-f:#ffc98a; --live-n:#9fd0ff; --live-t:#dcf58a; --arcc:#e8671f;
+  --metal:#939eaa; --metal-dim:#c0c8d1; --shell:#dee3e9; --shell-line:#b7c0ca;
+  --font:"Helvetica Neue",Helvetica,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141a; --panel:#192028; --sunk:#141a21; --line:#2c353f; --fg:#e7ecf2; --muted:#98a3b1;
+    --copper:#d2874a; --ok:#49c08a; --trip:#ef6a5d; --heat:#ff8847; --mag:#7f94ea; --flux:#b78cf0;
+    --fase:#d08b4e; --neutro:#6fa0f0; --tierra:#a9c93f;
+    --live-f:#ffe2bd; --live-n:#cfe6ff; --live-t:#f2ffc4; --arcc:#ffe9b0;
+    --metal:#79838f; --metal-dim:#454f5a; --shell:#222932; --shell-line:#39424d;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141a; --panel:#192028; --sunk:#141a21; --line:#2c353f; --fg:#e7ecf2; --muted:#98a3b1;
+  --copper:#d2874a; --ok:#49c08a; --trip:#ef6a5d; --heat:#ff8847; --mag:#7f94ea; --flux:#b78cf0;
+  --fase:#d08b4e; --neutro:#6fa0f0; --tierra:#a9c93f;
+  --live-f:#ffe2bd; --live-n:#cfe6ff; --live-t:#f2ffc4; --arcc:#ffe9b0;
+  --metal:#79838f; --metal-dim:#454f5a; --shell:#222932; --shell-line:#39424d;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-block:22px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:clamp(22px,4.4vw,31px);line-height:1.1;margin:0;letter-spacing:-.02em;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);margin:6px 0 0;max-width:62ch;font-size:14px}
+.spec{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--copper);margin:14px 0 18px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px 0}
+.layout{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:880px){.layout{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.stage{padding:10px 10px 4px}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.hint{font-size:12px;color:var(--muted);text-align:center;padding:2px 6px 8px}
+.panel{display:grid;gap:14px;min-width:0}
+.status{padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);display:grid;gap:7px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.07em;
+  text-transform:uppercase;font-weight:600}
+.dot{width:10px;height:10px;border-radius:50%;background:currentColor;flex:none}
+.state-ok{color:var(--ok)}.state-warn{color:var(--heat)}.state-trip{color:var(--trip)}.state-off{color:var(--muted)}
+.status p{margin:0;font-size:14px}
+.status .why{color:var(--muted);font-size:13.5px}
+.readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ro{background:var(--panel);padding:10px 12px;min-width:0}
+.ro .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:19px;font-variant-numeric:tabular-nums;margin-top:2px}
+.ro .v small{font-size:12px;color:var(--muted)}
+.ro.wide{grid-column:1/-1}
+.ro.diff .v{font-size:24px}
+.scaleBar{height:9px;border-radius:5px;background:var(--sunk);border:1px solid var(--line);overflow:hidden;margin-top:9px;position:relative}
+.scaleBar i{display:block;height:100%;width:0%;background:var(--trip)}
+.scaleBar u{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--fg);opacity:.65}
+.controls{padding:14px 16px;display:grid;gap:14px}
+.ctl > .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ctl .val{color:var(--copper);font-size:12.5px;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--copper);margin:9px 0 0}
+.row{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+button{font:inherit;font-size:13px;color:var(--fg);background:var(--sunk);border:1px solid var(--line);
+  border-radius:8px;padding:7px 11px;cursor:pointer}
+button:hover{border-color:var(--copper)}
+button[aria-pressed="true"]{background:var(--copper);border-color:var(--copper);color:#fff}
+button.wide{flex:1;min-width:132px}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.rearm{background:var(--copper);border-color:var(--copper);color:#fff;font-weight:600}
+button.test{border-color:var(--trip);color:var(--trip);font-weight:600}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:22px}
+@media (max-width:880px){.grid2{grid-template-columns:minmax(0,1fr)}}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 10px;font-weight:600}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (max-width:420px){.chips{grid-template-columns:minmax(0,1fr)}}
+.chip{display:flex;align-items:center;gap:9px;text-align:left;padding:7px 9px;font-size:13px;line-height:1.25}
+.chip b{font-family:var(--mono);font-size:11px;width:19px;height:19px;flex:none;border-radius:50%;
+  background:var(--copper);color:#fff;display:grid;place-items:center;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--sunk);border-color:var(--copper)}
+.chip[aria-pressed="true"] b{background:var(--fg);color:var(--panel)}
+.desc{margin-top:10px;padding:13px 15px;border-left:3px solid var(--copper);background:var(--sunk);border-radius:0 10px 10px 0}
+.desc h3{margin:0 0 4px;font-size:15px}
+.desc p{margin:0;font-size:13.5px;color:var(--muted)}
+.bodybox{padding:14px 14px 4px}
+.bodybox svg{display:block;width:100%;height:auto}
+.legend{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:4px;font-size:12.5px;color:var(--muted)}
+.legend li{display:flex;gap:9px;align-items:baseline}
+.legend b{font-family:var(--mono);font-size:11px;color:var(--fg);flex:none;width:72px;font-variant-numeric:tabular-nums}
+.legend i{width:9px;height:9px;border-radius:2px;flex:none;align-self:center}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}
+th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.d{color:var(--neutro)}td.m{color:var(--heat)}
+.foot{margin-top:22px;font-size:12px;color:var(--muted);max-width:72ch}
+/* ---- dibujo ---- */
+.shell{fill:var(--shell);stroke:var(--shell-line);stroke-width:2}
+.cav{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.wF{fill:none;stroke:var(--fase);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round}
+.wN{fill:none;stroke:var(--neutro);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round}
+.wT{fill:none;stroke:var(--tierra);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+.wTest{fill:none;stroke:var(--muted);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.live{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:7 13;opacity:.95}
+.lf{stroke:var(--live-f)}.ln{stroke:var(--live-n)}.lt{stroke:var(--live-t)}
+.metal{fill:var(--metal);stroke:none}
+.metal-l{fill:var(--metal-dim);stroke:var(--metal);stroke-width:1.2}
+.core{fill:color-mix(in oklab, var(--flux) calc(var(--fx,0)*85%), var(--metal-dim));stroke:var(--metal);stroke-width:1.2;
+  filter:drop-shadow(0 0 calc(var(--fx,0)*9px) var(--flux))}
+.sec{fill:none;stroke:color-mix(in oklab, var(--flux) calc(var(--fx,0)*100%), var(--copper));stroke-width:3;stroke-linecap:round}
+.mech{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4;opacity:.75}
+.mech-fill{fill:var(--sunk);opacity:.6}
+.act{stroke:var(--muted);stroke-width:2;fill:none;opacity:.35;stroke-dasharray:4 4}
+.act.on{opacity:1;stroke-width:2.6;stroke-dasharray:none;stroke:var(--flux)}
+.lbl{font-family:var(--mono);font-size:9px;fill:var(--muted);letter-spacing:.05em}
+.lbl.v{font-size:10px;fill:var(--fg);font-variant-numeric:tabular-nums}
+.lbl.big{font-size:13px;fill:var(--fg)}
+.badge circle{fill:var(--copper);stroke:var(--panel);stroke-width:2.5}
+.badge text{font-family:var(--mono);font-size:11px;fill:#fff;font-weight:600;text-anchor:middle}
+.badge{cursor:pointer}
+.badge:hover circle,.badge.sel circle{fill:var(--fg)}
+.badge:hover text,.badge.sel text{fill:var(--panel)}
+.glowpart{filter:drop-shadow(0 0 7px var(--copper))}
+.arc{fill:none;stroke:var(--arcc);stroke-width:2.6;stroke-linecap:round;filter:drop-shadow(0 0 5px var(--heat))}
+.lever,.tbtn{fill:var(--metal);stroke:var(--shell-line);stroke-width:1.5;cursor:pointer}
+.lever:hover{fill:var(--copper)}
+.tbtn{fill:var(--trip)}
+.tbtn:hover{opacity:.8}
+.plaque{fill:var(--sunk);stroke:var(--line);stroke-width:1.2}
+.res{fill:var(--sunk);stroke:var(--muted);stroke-width:1.6}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Diferencial por dentro</h1>
+    <p class="sub">Corte de un interruptor diferencial. Compara lo que entra por la fase con lo que vuelve por el neutro: si falta corriente por el camino, es que se está escapando a tierra. Abre la fuga y mira la secuencia a cámara lenta.</p>
+    <p class="spec">2P · 25 A · IΔn 30 mA · tipo AC · 230 V~ · instantáneo</p>
+  </header>
+
+  <main class="layout">
+    <section class="card stage">
+      <svg id="cut" viewBox="20 0 372 500" role="img" aria-label="Corte de un interruptor diferencial con sus partes numeradas">
+        <rect class="shell" x="60" y="30" width="286" height="390" rx="14"/>
+        <rect class="cav" x="67" y="37" width="272" height="376" rx="10"/>
+
+        <!-- carril DIN -->
+        <path class="metal-l" d="M 60 348 L 46 348 L 46 392 L 60 392 L 60 384 L 54 384 L 54 356 L 60 356 Z"/>
+
+        <!-- cables de entrada -->
+        <path class="wF" d="M 126 2 L 126 46"/>
+        <path class="wN" d="M 168 2 L 168 46"/>
+        <text class="lbl" x="112" y="16" text-anchor="end" style="fill:var(--fase)">F</text>
+        <text class="lbl" x="182" y="16" style="fill:var(--neutro)">N</text>
+
+        <!-- bornes de entrada -->
+        <g id="p-in">
+          <rect class="metal-l" x="106" y="44" width="40" height="30" rx="4"/>
+          <rect class="metal-l" x="148" y="44" width="40" height="30" rx="4"/>
+          <circle class="metal" cx="126" cy="59" r="7"/><circle class="metal" cx="168" cy="59" r="7"/>
+        </g>
+
+        <!-- conductores principales -->
+        <path class="wF" d="M 126 74 L 126 116"/>
+        <path class="wN" d="M 168 74 L 168 116"/>
+        <path class="wF" d="M 126 150 L 126 378"/>
+        <path class="wN" d="M 168 150 L 168 378"/>
+
+        <!-- arcos al abrir -->
+        <path id="arcF" class="arc" d="M 126 122 L 131 128 L 122 134 L 128 140" opacity="0"/>
+        <path id="arcN" class="arc" d="M 168 122 L 173 128 L 164 134 L 170 140" opacity="0"/>
+
+        <!-- contactos de los dos polos -->
+        <g id="p-con">
+          <rect class="metal" x="114" y="110" width="24" height="9" rx="2"/>
+          <rect class="metal" x="156" y="110" width="24" height="9" rx="2"/>
+          <g id="cross">
+            <rect class="metal" x="116" y="119" width="20" height="20" rx="3"/>
+            <rect class="metal" x="158" y="119" width="20" height="20" rx="3"/>
+            <rect class="metal-l" x="102" y="137" width="90" height="12" rx="4"/>
+            <rect class="metal-l" x="190" y="139" width="30" height="8" rx="3"/>
+          </g>
+        </g>
+
+        <!-- toroide -->
+        <rect x="106" y="185" width="82" height="16" rx="4" fill="var(--panel)"/>
+        <text class="lbl" x="147" y="196" text-anchor="middle" id="sumLbl" style="fill:var(--ok)">Σ = 0,0 mA</text>
+        <g id="p-core">
+          <path class="core" fill-rule="evenodd" d="M 101 232 a 46 22 0 1 0 92 0 a 46 22 0 1 0 -92 0 M 119 232 a 28 11 0 1 0 56 0 a 28 11 0 1 0 -56 0"/>
+        </g>
+        <path class="wF" d="M 126 206 L 126 258"/>
+        <path class="wN" d="M 168 206 L 168 258"/>
+
+        <!-- devanado secundario -->
+        <g id="p-sec">
+          <path class="sec" d="M 174 214 C 192 219 192 245 174 250"/>
+          <path class="sec" d="M 182 212 C 200 218 200 246 182 252"/>
+          <path class="sec" d="M 190 214 C 206 220 206 244 190 250"/>
+          <path class="sec" d="M 198 228 L 232 224"/>
+          <path class="sec" d="M 198 238 L 232 242"/>
+          <path id="liveSec" class="live" style="stroke:var(--flux)" d="M 198 228 L 232 224" opacity="0"/>
+        </g>
+
+        <!-- relé de disparo -->
+        <g id="p-rel">
+          <rect class="mech-fill" x="232" y="192" width="98" height="72" rx="6"/>
+          <rect class="mech" x="232" y="192" width="98" height="72" rx="6" stroke-dasharray="none" opacity=".4"/>
+          <path class="sec" d="M 250 204 q -12 5.5 0 11 q -12 5.5 0 11 q -12 5.5 0 11 q -12 5.5 0 11"/>
+          <rect x="262" y="212" width="16" height="34" rx="2" fill="var(--mag)" opacity=".5"/>
+          <text class="lbl" x="270" y="226" text-anchor="middle">N</text>
+          <text class="lbl" x="270" y="242" text-anchor="middle">S</text>
+          <g id="armature"><rect class="metal" x="286" y="204" width="10" height="48" rx="2"/></g>
+          <g id="rod"><rect class="metal-l" x="287" y="174" width="8" height="32" rx="2"/></g>
+        </g>
+
+        <!-- mecanismo -->
+        <g id="p-mech">
+          <rect class="mech-fill" x="216" y="104" width="100" height="70" rx="8"/>
+          <rect class="mech" x="216" y="104" width="100" height="70" rx="8"/>
+          <g id="latch"><path d="M 236 152 L 268 142" stroke="var(--metal)" stroke-width="6" stroke-linecap="round" fill="none"/></g>
+          <circle class="metal" cx="268" cy="142" r="4"/>
+          <path d="M 236 158 l 7 5 l -14 5 l 14 5 l -7 5" stroke="var(--metal)" stroke-width="2" fill="none"/>
+        </g>
+        <path id="actRel" class="act" d="M 291 186 L 291 176"/>
+        <path id="actRel2" class="act" d="M 286 182 L 291 175 L 296 182"/>
+
+        <!-- circuito de prueba -->
+        <g id="p-test">
+          <path class="wTest" d="M 336 301 L 336 96 L 168 96"/>
+          <path class="wTest" d="M 322 301 L 296 301"/>
+          <rect class="res" x="252" y="294" width="44" height="14" rx="2"/>
+          <text class="lbl" x="274" y="304" text-anchor="middle">R</text>
+          <path class="wTest" d="M 252 301 L 180 301 Q 168 287 156 301 L 126 301"/>
+          <rect class="metal" x="314" y="296" width="8" height="10" rx="2"/>
+          <g id="tbtn">
+            <rect class="metal-l" x="330" y="297" width="16" height="8" rx="2"/>
+            <rect class="tbtn" x="346" y="288" width="34" height="26" rx="5"/>
+            <text class="lbl big" x="363" y="306" text-anchor="middle" style="fill:#fff">T</text>
+          </g>
+        </g>
+
+        <!-- placa -->
+        <g>
+          <rect class="plaque" x="236" y="318" width="90" height="52" rx="5"/>
+          <text class="lbl big" x="281" y="338" text-anchor="middle" id="plaqueA">25 A · 30 mA</text>
+          <text class="lbl" x="281" y="352" text-anchor="middle">tipo AC · 230 V ~</text>
+          <text class="lbl" x="281" y="364" text-anchor="middle">IΔn prueba mensual</text>
+        </g>
+
+        <!-- palanca -->
+        <path class="act" d="M 340 136 L 318 142" opacity=".3"/>
+        <text class="lbl" x="338" y="106" text-anchor="end">I</text>
+        <text class="lbl" x="338" y="170" text-anchor="end">0</text>
+        <g id="leverG" transform="rotate(-28 346 130)"><rect class="lever" x="344" y="121" width="40" height="18" rx="6"/></g>
+        <circle class="metal" cx="346" cy="130" r="6"/>
+
+        <!-- bornes de salida -->
+        <g id="p-out">
+          <rect class="metal-l" x="106" y="376" width="40" height="30" rx="4"/>
+          <rect class="metal-l" x="148" y="376" width="40" height="30" rx="4"/>
+          <circle class="metal" cx="126" cy="391" r="7"/><circle class="metal" cx="168" cy="391" r="7"/>
+        </g>
+
+        <!-- salida y fuga -->
+        <path class="wF" d="M 126 406 L 126 480"/>
+        <path class="wN" d="M 168 406 L 168 480"/>
+        <g id="leakG" opacity="0">
+          <path class="wT" d="M 126 446 L 262 446 L 262 458"/>
+          <path class="wT" d="M 249 462 L 275 462 M 254 467 L 270 467 M 258 472 L 266 472"/>
+          <path id="liveT" class="live lt" d="M 126 446 L 262 446 L 262 456"/>
+          <text class="lbl" x="282" y="450">fuga a tierra</text>
+          <text class="lbl v" x="282" y="463" id="vT">0 mA</text>
+        </g>
+        <text class="lbl" x="118" y="438" text-anchor="end">fase</text>
+        <text class="lbl v" x="118" y="451" text-anchor="end" id="vF">8,00 A</text>
+        <text class="lbl" x="178" y="438">neutro</text>
+        <text class="lbl v" x="178" y="451" id="vN">8,00 A</text>
+
+        <!-- flujo -->
+        <path id="liveF" class="live lf" d="M 126 4 L 126 480"/>
+        <path id="liveN" class="live ln" d="M 168 4 L 168 480"/>
+        <path class="core" id="coreFront" d="M 101 232 a 46 22 0 1 0 92 0 L 175 232 a 28 11 0 1 1 -56 0 Z"/>
+
+        <!-- números -->
+        <g class="badge" data-part="1" tabindex="0" role="button" aria-label="Bornes de entrada"><circle cx="88" cy="59" r="11"/><text x="88" y="63">1</text></g>
+        <g class="badge" data-part="2" tabindex="0" role="button" aria-label="Contactos"><circle cx="204" cy="120" r="11"/><text x="204" y="124">2</text></g>
+        <g class="badge" data-part="3" tabindex="0" role="button" aria-label="Núcleo toroidal"><circle cx="86" cy="232" r="11"/><text x="86" y="236">3</text></g>
+        <g class="badge" data-part="4" tabindex="0" role="button" aria-label="Devanado secundario"><circle cx="212" cy="204" r="11"/><text x="212" y="208">4</text></g>
+        <g class="badge" data-part="5" tabindex="0" role="button" aria-label="Relé de disparo"><circle cx="318" cy="278" r="11"/><text x="318" y="282">5</text></g>
+        <g class="badge" data-part="6" tabindex="0" role="button" aria-label="Mecanismo de disparo"><circle cx="300" cy="118" r="11"/><text x="300" y="122">6</text></g>
+        <g class="badge" data-part="7" tabindex="0" role="button" aria-label="Palanca"><circle cx="370" cy="88" r="11"/><text x="370" y="92">7</text></g>
+        <g class="badge" data-part="8" tabindex="0" role="button" aria-label="Botón de prueba"><circle cx="368" cy="262" r="11"/><text x="368" y="266">8</text></g>
+        <g class="badge" data-part="9" tabindex="0" role="button" aria-label="Bornes de salida"><circle cx="88" cy="391" r="11"/><text x="88" y="395">9</text></g>
+      </svg>
+      <p class="hint">Haz clic en los números. La palanca y el botón T también funcionan.</p>
+    </section>
+
+    <section class="panel">
+      <div class="status" aria-live="polite">
+        <span class="pill state-ok" id="pill"><span class="dot"></span><span id="pillTxt">Cerrado · equilibrado</span></span>
+        <p id="stMain">Lo que entra por la fase vuelve entero por el neutro.</p>
+        <p class="why" id="stWhy">Los dos flujos se anulan dentro del toroide y el secundario no genera nada.</p>
+      </div>
+
+      <div class="readouts">
+        <div class="ro"><div class="k">Entra por la fase</div><div class="v"><span id="roF">8,00</span> <small>A</small></div></div>
+        <div class="ro"><div class="k">Vuelve por el neutro</div><div class="v"><span id="roN">8,00</span> <small>A</small></div></div>
+        <div class="ro diff wide">
+          <div class="k">Diferencia que ve el toroide</div>
+          <div class="v"><span id="roD">0,0</span> <small>mA</small></div>
+          <div class="scaleBar"><i id="dBar"></i><u id="dMark" style="left:50%"></u></div>
+          <div class="k" style="margin-top:6px" id="dNote">Umbral de este aparato: 24 mA</div>
+        </div>
+        <div class="ro"><div class="k">Tiempo de disparo</div><div class="v"><span id="roT">—</span> <small>ms</small></div></div>
+        <div class="ro"><div class="k">Sensibilidad IΔn</div><div class="v"><span id="roS">30</span> <small>mA</small></div></div>
+      </div>
+
+      <div class="card controls">
+        <div class="ctl">
+          <div class="lab"><span>Corriente de la carga</span><span class="val" id="loadVal">8,0 A</span></div>
+          <input type="range" id="load" min="0" max="25" step="0.1" value="8" aria-label="Corriente de la carga en amperios">
+        </div>
+        <div class="ctl">
+          <div class="lab"><span>Fuga a tierra</span><span class="val" id="leakVal">0 mA</span></div>
+          <input type="range" id="leak" min="0" max="1000" step="1" value="0" aria-label="Corriente de fuga a tierra en miliamperios">
+          <div class="row">
+            <button type="button" class="wide" data-leak="0">Todo correcto</button>
+            <button type="button" class="wide" data-leak="12">Humedad · 12 mA</button>
+            <button type="button" class="wide" data-leak="120">Persona · 120 mA</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span>Sensibilidad</span><span class="val" id="sensVal">personas</span></div>
+          <div class="row">
+            <button type="button" data-sens="10" aria-pressed="false">10 mA</button>
+            <button type="button" data-sens="30" aria-pressed="true">30 mA</button>
+            <button type="button" data-sens="300" aria-pressed="false">300 mA</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span>Velocidad</span><span class="val">el disparo dura milisegundos</span></div>
+          <div class="row">
+            <button type="button" data-speed="1" aria-pressed="false">Tiempo real</button>
+            <button type="button" data-speed="0.05" aria-pressed="false">Lento × 20</button>
+            <button type="button" data-speed="0.01" aria-pressed="true">Lento × 100</button>
+          </div>
+          <div class="row">
+            <button type="button" class="test wide" id="testBtn">Pulsar TEST</button>
+            <button type="button" class="rearm wide" id="rearm" disabled>Rearmar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="grid2">
+    <section>
+      <h2>Partes principales</h2>
+      <div class="chips" id="chips">
+        <button type="button" class="card chip" data-part="1" aria-pressed="false"><b>1</b>Bornes de entrada</button>
+        <button type="button" class="card chip" data-part="2" aria-pressed="false"><b>2</b>Contactos (2 polos)</button>
+        <button type="button" class="card chip" data-part="3" aria-pressed="true"><b>3</b>Núcleo toroidal</button>
+        <button type="button" class="card chip" data-part="4" aria-pressed="false"><b>4</b>Devanado secundario</button>
+        <button type="button" class="card chip" data-part="5" aria-pressed="false"><b>5</b>Relé de disparo</button>
+        <button type="button" class="card chip" data-part="6" aria-pressed="false"><b>6</b>Mecanismo de disparo</button>
+        <button type="button" class="card chip" data-part="7" aria-pressed="false"><b>7</b>Palanca</button>
+        <button type="button" class="card chip" data-part="8" aria-pressed="false"><b>8</b>Botón de TEST</button>
+        <button type="button" class="card chip" data-part="9" aria-pressed="false"><b>9</b>Bornes de salida</button>
+      </div>
+      <div class="desc">
+        <h3 id="descT">Núcleo toroidal</h3>
+        <p id="descP">Anillo de material magnético que abraza a la fase y al neutro. Cada conductor crea un flujo; si llevan la misma corriente en sentidos contrarios, los flujos se anulan y en el anillo no pasa nada. Es el sensor de todo el aparato.</p>
+      </div>
+      <table>
+        <tr><th>&nbsp;</th><th>Diferencial</th><th>Magnetotérmico</th></tr>
+        <tr><td>Protege</td><td class="d">A las personas</td><td class="m">A la instalación</td></tr>
+        <tr><td>Vigila</td><td class="d">La corriente que se escapa a tierra</td><td class="m">La corriente que pasa por el circuito</td></tr>
+        <tr><td>Actúa en</td><td class="d">30 mA</td><td class="m">16 A o más</td></tr>
+        <tr><td>Tiempo</td><td class="d">Menos de 30 ms</td><td class="m">Minutos o milisegundos</td></tr>
+        <tr><td>No detecta</td><td class="d">Sobrecargas ni cortocircuitos</td><td class="m">Fugas a tierra</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Por qué 30 mA</h2>
+      <div class="card bodybox">
+        <svg id="bodySvg" viewBox="0 0 320 112" role="img" aria-label="Escala de los efectos de la corriente en el cuerpo humano">
+          <g id="bands"></g>
+          <g id="bticks"></g>
+          <g id="sensMark"><path d="M 0 0 l -5 -9 l 10 0 z" fill="var(--fg)"/></g>
+          <g id="leakMark" opacity="0"><circle r="5" fill="var(--panel)" stroke="var(--trip)" stroke-width="2.6"/></g>
+          <text class="lbl" id="sensTxt" x="0" y="0" text-anchor="middle">IΔn</text>
+          <text class="lbl" x="177" y="106" text-anchor="middle">corriente por el cuerpo (mA)</text>
+        </svg>
+        <ul class="legend">
+          <li><i style="background:var(--ok)"></i><b>&lt; 0,5 mA</b>No se nota</li>
+          <li><i style="background:#c9b63a"></i><b>0,5 – 10</b>Hormigueo, se puede soltar</li>
+          <li><i style="background:var(--heat)"></i><b>10 – 25</b>Tetanización: no puedes soltar</li>
+          <li><i style="background:#d9542f"></i><b>25 – 50</b>Contracción del tórax, asfixia</li>
+          <li><i style="background:var(--trip)"></i><b>&gt; 50 mA</b>Riesgo de fibrilación ventricular</li>
+        </ul>
+        <p class="hint" style="text-align:left;padding:8px 2px 0">Valores orientativos para corriente alterna: el daño depende también del tiempo y del recorrido por el cuerpo.</p>
+      </div>
+    </section>
+  </div>
+
+  <p class="foot">El diferencial no necesita la toma de tierra para disparar, pero sin ella la corriente solo se desvía cuando alguien toca la masa averiada. Tampoco salta si tocas fase y neutro a la vez: por el toroide seguiría pasando lo mismo de ida que de vuelta.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var PARTS = {
+    1:["Bornes de entrada","Entran la fase y el neutro. En un diferencial los dos polos se conectan siempre: necesita ver las dos corrientes para compararlas."],
+    2:["Contactos de los dos polos","Dos juegos de contactos movidos por una misma barra, así la fase y el neutro se abren a la vez. El mecanismo los mantiene apretados hasta que lo liberan."],
+    3:["Núcleo toroidal","Anillo de material magnético que abraza a la fase y al neutro. Cada conductor crea un flujo; si llevan la misma corriente en sentidos contrarios, los flujos se anulan y en el anillo no pasa nada. Es el sensor de todo el aparato."],
+    4:["Devanado secundario","Bobina arrollada sobre el toroide. Mientras los flujos se anulan no induce nada; en cuanto falta corriente de vuelta aparece un flujo residual y el devanado entrega unos pocos miliamperios al relé."],
+    5:["Relé de disparo","Relé polarizado: un imán permanente sujeta la armadura y la corriente del secundario crea un campo contrario que la suelta. Es tan sensible que basta esa pequeña señal para liberar el mecanismo."],
+    6:["Mecanismo de disparo","La misma cerradura de disparo libre que en el magnetotérmico: suelta la barra de contactos aunque sujetes la palanca en I."],
+    7:["Palanca","Abre y cierra a mano los dos polos y señala si ha disparado. Si vuelve a saltar al rearmar, la fuga sigue ahí: hay que buscar el circuito o el aparato averiado."],
+    8:["Botón de TEST","Conecta una resistencia entre la salida de un polo y la entrada del otro, saltándose el toroide. Crea a propósito un desequilibrio parecido a la sensibilidad del aparato. Comprueba el mecanismo, no la instalación, y conviene pulsarlo una vez al mes."],
+    9:["Bornes de salida","Salen hacia los magnetotérmicos de cada circuito. Si una fuga aparece aguas abajo, la corriente vuelve por tierra en vez de por el neutro y el toroide lo detecta."]
+  };
+  var SENS = { 10:"personas, alta sensibilidad", 30:"personas", 300:"incendios y equipos" };
+
+  var S = { load:8, leak:0, sens:30, closed:true, cause:null, speed:0.01, timer:null, total:0, elapsed:0, test:false, sel:3 };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function(id){ return document.getElementById(id); };
+  function nf(v,d){ return v.toFixed(d).replace(".", ","); }
+  function thr(){ return S.sens*0.8; }                       // umbral real del aparato
+  function tripMs(i){ return Math.max(10, Math.min(300, 30*Math.sqrt(S.sens/Math.max(i,1)))); }
+
+  var svg=$("cut"), cross=$("cross"), leverG=$("leverG"), rod=$("rod"), armature=$("armature"), latch=$("latch"),
+      liveF=$("liveF"), liveN=$("liveN"), liveT=$("liveT"), liveSec=$("liveSec"), leakG=$("leakG"),
+      arcF=$("arcF"), arcN=$("arcN"), tbtn=$("tbtn"), rearmBtn=$("rearm"),
+      sLoad=$("load"), sLeak=$("leak"), pill=$("pill"), pillTxt=$("pillTxt"), stMain=$("stMain"), stWhy=$("stWhy");
+
+  /* fuga: el deslizador va al cuadrado para afinar cerca de los 30 mA */
+  function v2mA(v){ return Math.round(Math.pow(v/1000,2)*500*10)/10; }
+  function mA2v(mA){ return Math.round(Math.sqrt(mA/500)*1000); }
+
+  /* ---------- escala del cuerpo humano ---------- */
+  var BL=44, BW=266, BY=30, BH=26;
+  function bx(mA){ return BL + BW*Math.log10(Math.max(mA,0.1)/0.1)/4; }
+  (function bodyScale(){
+    var zones=[[0.1,0.5,"var(--ok)"],[0.5,10,"#c9b63a"],[10,25,"var(--heat)"],[25,50,"#d9542f"],[50,1000,"var(--trip)"]], h="";
+    zones.forEach(function(z){
+      h+='<rect x="'+bx(z[0]).toFixed(1)+'" y="'+BY+'" width="'+(bx(z[1])-bx(z[0])).toFixed(1)+'" height="'+BH+'" fill="'+z[2]+'" opacity=".85"/>';
+    });
+    $("bands").innerHTML=h;
+    var t=[0.1,1,10,100,1000], lab=["0,1","1","10","100","1000"], g="";
+    for(var i=0;i<t.length;i++){
+      g+='<line x1="'+bx(t[i]).toFixed(1)+'" y1="'+(BY+BH)+'" x2="'+bx(t[i]).toFixed(1)+'" y2="'+(BY+BH+5)+'" stroke="var(--muted)" stroke-width="1"/>';
+      g+='<text class="lbl" x="'+bx(t[i]).toFixed(1)+'" y="'+(BY+BH+16)+'" text-anchor="middle">'+lab[i]+'</text>';
+    }
+    $("bticks").innerHTML=g;
+  })();
+  function bodyMarks(){
+    $("sensMark").setAttribute("transform","translate("+bx(S.sens).toFixed(1)+","+BY+")");
+    $("sensTxt").setAttribute("x", bx(S.sens).toFixed(1)); $("sensTxt").setAttribute("y", (BY-13).toFixed(1));
+    var lm=$("leakMark");
+    if(S.leak<=0){ lm.setAttribute("opacity","0"); }
+    else { lm.setAttribute("opacity","1"); lm.setAttribute("transform","translate("+bx(S.leak).toFixed(1)+","+(BY+BH/2)+")"); }
+  }
+
+  /* ---------- dibujo ---------- */
+  function setOpen(open){
+    cross.setAttribute("transform", open? "translate(0 16)":"");
+    leverG.setAttribute("transform","rotate("+(open?30:-28)+" 346 130)");
+    latch.setAttribute("transform", open? "rotate(13 268 142)":"");
+    var o=open?"0":"1";
+    liveF.style.opacity=o; liveN.style.opacity=o;
+    liveT.style.opacity=(open||S.leak<=0)?"0":"1";
+  }
+  function setPhase(p){                    // 0 armado · 1 disparado
+    rod.setAttribute("transform", p>0.6? "translate(0 -8)":"");
+    armature.setAttribute("transform", p>0.45? "rotate(-12 291 252)":"");
+    $("actRel").classList.toggle("on", p>0.45);
+    $("actRel2").classList.toggle("on", p>0.45);
+  }
+
+  function fx(){ return S.closed? Math.min(1, S.leak/Math.max(thr(),1)) : 0; }
+
+  function paint(){
+    var iF=S.load+S.leak/1000, iN=S.load;
+    svg.style.setProperty("--fx", fx().toFixed(3));
+    liveSec.style.opacity=(S.closed? fx()*0.9 : 0).toFixed(2);
+    leakG.setAttribute("opacity", S.leak>0? "1":"0");
+    liveT.style.opacity=(!S.closed||S.leak<=0)?"0":"1";
+    $("sumLbl").textContent="Σ = "+nf(S.closed?S.leak:0,1)+" mA";
+    $("sumLbl").style.fill=(S.closed&&S.leak>0)? "var(--trip)":"var(--ok)";
+    $("roD").style.color=(S.closed&&S.leak>0)? "var(--trip)":"var(--fg)";
+    $("vF").textContent=nf(S.closed?iF:0,2)+" A";
+    $("vN").textContent=nf(S.closed?iN:0,2)+" A";
+    $("vT").textContent=nf(S.closed?S.leak:0,1)+" mA";
+    $("roF").textContent=nf(S.closed?iF:0,2);
+    $("roN").textContent=nf(S.closed?iN:0,2);
+    $("roD").textContent=nf(S.closed?S.leak:0,1);
+    $("roS").textContent=S.sens;
+    $("loadVal").textContent=nf(S.load,1)+" A";
+    $("leakVal").textContent=nf(S.leak,1)+" mA";
+    $("sensVal").textContent=SENS[S.sens];
+    $("plaqueA").textContent="25 A · "+S.sens+" mA";
+    $("dNote").textContent="Umbral de este aparato: "+nf(thr(),0)+" mA · la norma lo permite entre "+nf(S.sens/2,0)+" y "+S.sens+" mA";
+    $("dBar").style.width=Math.min(100, S.leak/S.sens*62).toFixed(1)+"%";
+    $("dMark").style.left="62%";
+    bodyMarks();
+  }
+
+  function status(){
+    var cls, txt, main, why, t=thr();
+    if(!S.closed){
+      if(S.cause==="test"){ cls="state-trip"; txt="Disparado · prueba";
+        main="El botón TEST ha desviado unos "+S.sens+" mA por la resistencia, saltándose el toroide.";
+        why="Prueba que el aparato dispara; no dice nada sobre el estado de la instalación."; }
+      else if(S.cause==="leak"){ cls="state-trip"; txt="Disparado · fuga a tierra";
+        main="El toroide vio "+nf(S.leak,1)+" mA de diferencia y el relé abrió los dos polos en "+nf(S.total*1000,0)+" ms.";
+        why="Antes de rearmar hay que localizar la fuga: si sigue, volverá a saltar en cuanto subas la palanca."; }
+      else { cls="state-off"; txt="Abierto a mano"; main="Has bajado la palanca a 0 y los dos polos están separados.";
+        why="Por los conductores no circula corriente."; }
+    } else if(S.timer!==null){
+      cls="state-warn"; txt="Disparando…";
+      main="El secundario alimenta el relé y la armadura se está soltando.";
+      why="Llevamos "+nf(S.elapsed*1000,0)+" ms de los "+nf(S.total*1000,0)+" ms que tarda en abrir.";
+    } else if(S.leak<=0){
+      cls="state-ok"; txt="Cerrado · equilibrado";
+      main="Lo que entra por la fase vuelve entero por el neutro.";
+      why="Los dos flujos se anulan dentro del toroide y el secundario no genera nada.";
+    } else if(S.leak < S.sens/2){
+      cls="state-ok"; txt="Cerrado · fuga pequeña";
+      main="Se escapan "+nf(S.leak,1)+" mA a tierra, por debajo del umbral.";
+      why="La norma garantiza que no dispare por debajo de "+nf(S.sens/2,0)+" mA, para que no salte sin motivo.";
+    } else if(S.leak < t){
+      cls="state-warn"; txt="Cerrado · zona dudosa";
+      main="Con "+nf(S.leak,1)+" mA la norma admite que dispare o que no.";
+      why="Este aparato lo hace a partir de "+nf(t,0)+" mA. Una fuga así ya avisa de humedad o de aislamiento en mal estado.";
+    } else {
+      cls="state-warn"; txt="Cerrado · fuga alta"; main="Va a disparar.";
+      why="La diferencia supera el umbral del relé.";
+    }
+    pill.className="pill "+cls; pillTxt.textContent=txt;
+    stMain.textContent=main; stWhy.textContent=why;
+    $("roT").textContent = (S.timer!==null)? nf(S.elapsed*1000,0)
+      : (!S.closed && S.cause!=="man")? nf(S.total*1000,0)
+      : (S.leak>=t? nf(tripMs(S.leak),0) : "—");
+  }
+
+  function startTrip(cause){
+    if(S.timer!==null||!S.closed) return;
+    S.cause=cause; S.total=tripMs(cause==="test"? S.sens : S.leak)/1000; S.elapsed=0; S.timer=S.total;
+  }
+  function open(cause){
+    S.closed=false; S.cause=cause; S.timer=null; setOpen(true); setPhase(1);
+    rearmBtn.disabled=false;
+    if(!reduce){ arcF.setAttribute("opacity","1"); arcN.setAttribute("opacity","1");
+      setTimeout(function(){ arcF.setAttribute("opacity","0"); arcN.setAttribute("opacity","0"); }, 260); }
+    paint(); status();
+  }
+  function rearm(){
+    S.closed=true; S.cause=null; S.timer=null; S.elapsed=0; S.test=false;
+    setOpen(false); setPhase(0); rearmBtn.disabled=true; paint(); status();
+  }
+
+  /* ---------- bucle ---------- */
+  var last=0, off=0;
+  function frame(now){
+    var dt=Math.min(0.05,(now-last)/1000)||0; last=now;
+    if(S.closed){
+      if(S.timer===null){
+        if(S.test) startTrip("test");
+        else if(S.leak>=thr()) startTrip("leak");
+      } else {
+        S.elapsed+=dt*S.speed; S.timer-=dt*S.speed;
+        setPhase(S.elapsed/S.total);
+        if(!S.test && S.leak<thr()){ S.timer=null; S.elapsed=0; setPhase(0); status(); }
+        else if(S.timer<=0) open(S.test?"test":"leak");
+        else status();
+      }
+      if(!reduce){
+        var iF=S.load+S.leak/1000;
+        off-=dt*(12+Math.min(iF,20)*5);
+        liveF.style.strokeDashoffset=off.toFixed(1);
+        liveN.style.strokeDashoffset=(off*(S.load/Math.max(iF,0.001))).toFixed(1);
+        liveT.style.strokeDashoffset=off.toFixed(1);
+        liveSec.style.strokeDashoffset=(off*2).toFixed(1);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- partes ---------- */
+  var PART_EL={1:"p-in",2:"p-con",3:"p-core",4:"p-sec",5:"p-rel",6:"p-mech",7:"leverG",8:"p-test",9:"p-out"};
+  function select(n){
+    S.sel=n; $("descT").textContent=PARTS[n][0]; $("descP").textContent=PARTS[n][1];
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(b){
+      b.setAttribute("aria-pressed", b.dataset.part===String(n)?"true":"false"); });
+    Array.prototype.forEach.call(document.querySelectorAll(".badge"), function(b){
+      b.classList.toggle("sel", b.dataset.part===String(n)); });
+    Object.keys(PART_EL).forEach(function(k){
+      var el=$(PART_EL[k]); if(el) el.classList.toggle("glowpart", k===String(n)); });
+    $("coreFront").classList.toggle("glowpart", n===3);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".chip,.badge"), function(el){
+    el.addEventListener("click", function(){ select(+el.dataset.part); });
+    el.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(+el.dataset.part); } });
+  });
+
+  /* ---------- controles ---------- */
+  sLoad.addEventListener("input", function(){ S.load=parseFloat(sLoad.value); paint(); status(); });
+  sLeak.addEventListener("input", function(){ S.leak=v2mA(parseFloat(sLeak.value)); paint(); status(); });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-leak]"), function(b){
+    b.addEventListener("click", function(){
+      S.leak=parseFloat(b.dataset.leak); sLeak.value=mA2v(S.leak);
+      if(!S.closed && S.leak<thr()) rearm();
+      paint(); status();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-sens]"), function(b){
+    b.addEventListener("click", function(){
+      S.sens=parseFloat(b.dataset.sens);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-sens]"), function(o){
+        o.setAttribute("aria-pressed", o===b?"true":"false"); });
+      paint(); status();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-speed]"), function(b){
+    b.addEventListener("click", function(){
+      S.speed=parseFloat(b.dataset.speed);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-speed]"), function(o){
+        o.setAttribute("aria-pressed", o===b?"true":"false"); });
+    });
+  });
+  function pressTest(){
+    if(!S.closed){ rearm(); return; }
+    S.test=true;
+    tbtn.setAttribute("transform","translate(-7 0)");
+    setTimeout(function(){ tbtn.setAttribute("transform",""); }, 400);
+    status();
+  }
+  $("testBtn").addEventListener("click", pressTest);
+  tbtn.addEventListener("click", pressTest);
+  rearmBtn.addEventListener("click", rearm);
+  leverG.addEventListener("click", function(){
+    if(S.closed){ open("man"); } else rearm();
+  });
+
+  select(3); setOpen(false); setPhase(0); paint(); status();
+  requestAnimationFrame(function(t){ last=t; requestAnimationFrame(frame); });
+})();
+</script>
+</body>
+</html>

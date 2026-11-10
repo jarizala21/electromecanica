@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnetotérmico por dentro</title>
+<style>
+  :root{color-scheme:light}
+  html,body{margin:0}
+  body{font:14px system-ui,-apple-system,"Segoe UI",sans-serif}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+/* Layout: corte del aparato a la izquierda, panel de instrumentos a la derecha; partes y curva de disparo debajo. */
+:root{
+  --bg:#e9ecf0; --panel:#fbfcfd; --sunk:#f0f3f6; --line:#d2d8e0; --fg:#161a20; --muted:#5b6473;
+  --copper:#a9682f; --ok:#1c7a4d; --trip:#bd3a2c; --heat:#e0601f; --mag:#3d5cc7;
+  --live:#ffd079; --arcc:#e8671f; --hot:#ffb15c;
+  --metal:#939eaa; --metal-dim:#c0c8d1; --shell:#dee3e9; --shell-line:#b7c0ca;
+  --font:"Helvetica Neue",Helvetica,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141a; --panel:#192028; --sunk:#141a21; --line:#2c353f; --fg:#e7ecf2; --muted:#98a3b1;
+    --copper:#d2874a; --ok:#49c08a; --trip:#ef6a5d; --heat:#ff8847; --mag:#7f94ea;
+    --live:#ffdc9b; --arcc:#ffe9b0; --hot:#ffd9a8;
+    --metal:#79838f; --metal-dim:#454f5a; --shell:#222932; --shell-line:#39424d;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141a; --panel:#192028; --sunk:#141a21; --line:#2c353f; --fg:#e7ecf2; --muted:#98a3b1;
+  --copper:#d2874a; --ok:#49c08a; --trip:#ef6a5d; --heat:#ff8847; --mag:#7f94ea;
+  --live:#ffdc9b; --arcc:#ffe9b0; --hot:#ffd9a8;
+  --metal:#79838f; --metal-dim:#454f5a; --shell:#222932; --shell-line:#39424d;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-block:22px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:clamp(22px,4.4vw,31px);line-height:1.1;margin:0;letter-spacing:-.02em;font-weight:700;text-wrap:balance}
+.sub{color:var(--muted);margin:6px 0 0;max-width:62ch;font-size:14px}
+.spec{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--copper);margin:14px 0 18px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:7px 0}
+.layout{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:880px){.layout{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.stage{padding:10px 10px 4px}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.hint{font-size:12px;color:var(--muted);text-align:center;padding:2px 6px 8px}
+.panel{display:grid;gap:14px;min-width:0}
+.status{padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);display:grid;gap:7px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.07em;
+  text-transform:uppercase;font-weight:600}
+.dot{width:10px;height:10px;border-radius:50%;background:currentColor;flex:none}
+.state-ok{color:var(--ok)}.state-warn{color:var(--heat)}.state-trip{color:var(--trip)}.state-off{color:var(--muted)}
+.status p{margin:0;font-size:14px;color:var(--fg)}
+.status .why{color:var(--muted);font-size:13.5px}
+.readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ro{background:var(--panel);padding:10px 12px;min-width:0}
+.ro .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:19px;font-variant-numeric:tabular-nums;margin-top:2px}
+.ro .v small{font-size:12px;color:var(--muted)}
+.bar{height:7px;border-radius:4px;background:var(--sunk);border:1px solid var(--line);overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0%;background:var(--heat);transition:width .12s linear}
+.controls{padding:14px 16px;display:grid;gap:14px}
+.ctl > .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+  display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ctl .val{color:var(--copper);font-size:12.5px;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--copper);margin:9px 0 0}
+.row{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+button{font:inherit;font-size:13px;color:var(--fg);background:var(--sunk);border:1px solid var(--line);
+  border-radius:8px;padding:7px 11px;cursor:pointer}
+button:hover{border-color:var(--copper)}
+button[aria-pressed="true"]{background:var(--copper);border-color:var(--copper);color:#fff}
+button.wide{flex:1;min-width:120px}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.rearm{background:var(--copper);border-color:var(--copper);color:#fff;font-weight:600}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:22px}
+@media (max-width:880px){.grid2{grid-template-columns:minmax(0,1fr)}}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  margin:0 0 10px;font-weight:600}
+.chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (max-width:420px){.chips{grid-template-columns:minmax(0,1fr)}}
+.chip{display:flex;align-items:center;gap:9px;text-align:left;padding:7px 9px;font-size:13px;line-height:1.25}
+.chip b{font-family:var(--mono);font-size:11px;width:19px;height:19px;flex:none;border-radius:50%;
+  background:var(--copper);color:#fff;display:grid;place-items:center;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--sunk);border-color:var(--copper);color:var(--fg)}
+.chip[aria-pressed="true"] b{background:var(--fg);color:var(--panel)}
+.desc{margin-top:10px;padding:13px 15px;border-left:3px solid var(--copper);background:var(--sunk);
+  border-radius:0 10px 10px 0}
+.desc h3{margin:0 0 4px;font-size:15px}
+.desc p{margin:0;font-size:13.5px;color:var(--muted)}
+.curvebox{padding:14px 14px 10px}
+.curvebox svg{display:block;width:100%;height:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+th,td{text-align:left;padding:7px 8px;border-top:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.t{color:var(--heat)}td.m{color:var(--mag)}
+.foot{margin-top:22px;font-size:12px;color:var(--muted);max-width:70ch}
+/* ---- dibujo ---- */
+.shell{fill:var(--shell);stroke:var(--shell-line);stroke-width:2}
+.cav{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.wire{fill:none;stroke:var(--copper);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.live{fill:none;stroke:var(--live);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:7 13;opacity:.95}
+.metal{fill:var(--metal);stroke:none}
+.metal-l{fill:var(--metal-dim);stroke:var(--metal);stroke-width:1.2}
+.plate{fill:var(--metal-dim);stroke:var(--metal);stroke-width:.8}
+.mech{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-dasharray:5 4;opacity:.75}
+.mech-fill{fill:var(--sunk);opacity:.6}
+.act{stroke:var(--muted);stroke-width:2;fill:none;opacity:.35;stroke-dasharray:4 4}
+.act.on{opacity:1;stroke-width:2.6;stroke-dasharray:none}
+.act.mag.on{stroke:var(--mag)}.act.term.on{stroke:var(--heat)}
+.lbl{font-family:var(--mono);font-size:9px;fill:var(--muted);letter-spacing:.05em}
+.lbl.big{font-size:14px;fill:var(--fg);letter-spacing:.02em}
+.badge circle{fill:var(--copper);stroke:var(--panel);stroke-width:2.5}
+.badge text{font-family:var(--mono);font-size:11px;fill:#fff;font-weight:600;text-anchor:middle}
+.badge{cursor:pointer}
+.badge:hover circle,.badge.sel circle{fill:var(--fg)}
+.badge:hover text,.badge.sel text{fill:var(--panel)}
+.glowpart{filter:drop-shadow(0 0 7px var(--copper))}
+#blade{filter:drop-shadow(0 0 calc(var(--h,0)*9px) var(--heat))}
+.blade-a{fill:color-mix(in oklab, var(--heat) calc(var(--h,0)*100%), var(--metal))}
+.blade-b{fill:color-mix(in oklab, var(--hot) calc(var(--h,0)*80%), var(--metal-dim))}
+.turn{fill:none;stroke:color-mix(in oklab, var(--mag) calc(var(--mg,0)*100%), var(--copper));stroke-width:4.5;stroke-linecap:round}
+.field{fill:none;stroke:var(--mag);stroke-width:1.6;opacity:calc(var(--mg,0)*.55)}
+.arc{fill:none;stroke:var(--arcc);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 6px var(--heat))}
+.lever{fill:var(--metal);stroke:var(--shell-line);stroke-width:1.5;cursor:pointer}
+.lever:hover{fill:var(--copper)}
+.plaque{fill:var(--sunk);stroke:var(--line);stroke-width:1.2}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Magnetotérmico por dentro</h1>
+    <p class="sub">Corte de un interruptor automático modular. Sube la corriente y mira qué elemento actúa: la lámina bimetálica tarda segundos o minutos, la bobina dispara en milisegundos.</p>
+    <p class="spec">1P+N · C16 · In 16 A · 230 V~ · Icn 6 000 A · curva C</p>
+  </header>
+
+  <main class="layout">
+    <section class="card stage">
+      <svg id="cut" viewBox="20 0 372 470" role="img" aria-label="Corte de un magnetotérmico con sus partes numeradas">
+        <!-- carcasa -->
+        <rect class="shell" x="60" y="30" width="286" height="406" rx="14"/>
+        <rect class="cav" x="67" y="37" width="272" height="392" rx="10"/>
+
+        <!-- cables exteriores -->
+        <path class="wire" d="M 125 2 L 125 44"/>
+        <path class="wire" d="M 125 424 L 125 466"/>
+        <text class="lbl" x="141" y="16">entrada (fase)</text>
+        <text class="lbl" x="141" y="458">salida al circuito</text>
+
+        <!-- carril DIN -->
+        <g>
+          <path class="metal-l" d="M 222 462 L 222 450 L 240 450 L 240 440 L 312 440 L 312 450 L 330 450 L 330 462 L 322 462 L 322 456 L 230 456 L 230 462 Z"/>
+          <path class="metal" d="M 248 436 L 248 448 L 258 448 L 258 436 Z"/>
+          <path class="metal-l" d="M 290 436 L 290 452 L 304 452 L 304 446 L 298 446 L 298 436 Z"/>
+        </g>
+
+        <!-- bornes -->
+        <g id="p-in">
+          <rect class="metal-l" x="96" y="42" width="58" height="34" rx="4"/>
+          <circle class="metal" cx="125" cy="59" r="8"/>
+          <path d="M 119 59 L 131 59" stroke="var(--shell)" stroke-width="2.5"/>
+        </g>
+        <g id="p-out">
+          <rect class="metal-l" x="96" y="392" width="58" height="34" rx="4"/>
+          <circle class="metal" cx="125" cy="409" r="8"/>
+          <path d="M 119 409 L 131 409" stroke="var(--shell)" stroke-width="2.5"/>
+        </g>
+
+        <!-- conductor fijo hasta el contacto -->
+        <path class="wire" d="M 154 59 L 190 59 L 190 114 L 228 114"/>
+
+        <!-- cámara apagachispas -->
+        <g id="p-arc">
+          <rect class="plate" x="244" y="48" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="56" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="64" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="72" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="80" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="88" width="80" height="4" rx="1"/>
+          <rect class="plate" x="244" y="96" width="80" height="4" rx="1"/>
+          <rect class="metal" x="324" y="44" width="4" height="60" rx="1"/>
+        </g>
+
+        <!-- arco eléctrico -->
+        <path id="arc" class="arc" d="M 240 120 L 250 110 L 243 98 L 258 88 L 250 76 L 266 66" opacity="0"/>
+
+        <!-- contactos -->
+        <g id="p-con">
+          <rect class="metal" x="228" y="110" width="24" height="9" rx="2"/>
+          <g id="arm">
+            <path d="M 170 150 L 240 126" stroke="var(--metal)" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <circle class="metal" cx="240" cy="126" r="5.5"/>
+          </g>
+          <circle class="metal-l" cx="170" cy="150" r="6"/>
+        </g>
+
+        <!-- trenza flexible a la bobina -->
+        <path class="wire" d="M 170 152 C 164 160 150 154 138 160" stroke-width="4"/>
+
+        <!-- bobina -->
+        <g id="p-coil">
+          <rect class="mech" x="100" y="152" width="74" height="96" rx="6" stroke-dasharray="none" opacity=".35"/>
+          <g class="field">
+            <path d="M 96 170 C 78 196 78 214 96 240"/>
+            <path d="M 88 162 C 64 196 64 212 88 248"/>
+          </g>
+          <path id="turns" class="turn" d="M 138 160 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5"/>
+          <g id="plunger">
+            <rect class="metal" x="132" y="184" width="26" height="22" rx="3"/>
+            <rect class="metal-l" x="158" y="192" width="38" height="6" rx="3"/>
+          </g>
+        </g>
+
+        <!-- mecanismo de disparo -->
+        <g id="p-mech">
+          <rect class="mech-fill" x="196" y="150" width="72" height="100" rx="8"/>
+          <rect class="mech" x="196" y="150" width="72" height="100" rx="8"/>
+          <g id="latch">
+            <path d="M 212 216 L 248 206" stroke="var(--metal)" stroke-width="6" stroke-linecap="round" fill="none"/>
+          </g>
+          <circle class="metal" cx="248" cy="206" r="4"/>
+          <path d="M 212 222 l 7 5 l -14 5 l 14 5 l -7 5" stroke="var(--metal)" stroke-width="2" fill="none"/>
+          <g id="tripbar">
+            <rect class="metal-l" x="200" y="250" width="14" height="84" rx="4"/>
+          </g>
+        </g>
+
+        <!-- acciones mecánicas -->
+        <path id="act-mag" class="act mag" d="M 180 195 L 196 195"/>
+        <path id="act-mag2" class="act mag" d="M 190 190 L 197 195 L 190 200"/>
+        <path id="act-term" class="act term" d="M 186 266 L 200 266"/>
+        <path id="act-term2" class="act term" d="M 194 261 L 201 266 L 194 271"/>
+        <path id="act-rel" class="act" d="M 214 150 C 210 140 204 136 197 134"/>
+        <path id="act-rel2" class="act" d="M 204 130 L 196 134 L 203 139"/>
+        <text class="lbl" x="216" y="130">libera</text>
+
+        <!-- bimetal -->
+        <path id="braid-bim" class="wire" d="M 138 244 C 128 252 132 256 138 262" stroke-width="4"/>
+        <g id="blade">
+          <rect class="blade-a" x="133" y="262" width="7" height="122"/>
+          <rect class="blade-b" x="140" y="262" width="5" height="122"/>
+          <rect class="blade-a" x="140" y="262" width="43" height="8" rx="2"/>
+          <path id="bladeLive" class="live" d="M 137 264 L 137 380"/>
+        </g>
+        <rect class="metal" x="127" y="378" width="24" height="14" rx="3"/>
+        <path class="wire" d="M 138 384 L 138 400 L 125 409"/>
+
+        <!-- placa de características -->
+        <g class="plaque-g">
+          <rect class="plaque" x="272" y="292" width="64" height="66" rx="5"/>
+          <text class="lbl big" x="304" y="315" text-anchor="middle">C16</text>
+          <text class="lbl" x="304" y="330" text-anchor="middle">230 V ~</text>
+          <text class="lbl" x="304" y="342" text-anchor="middle">6000</text>
+          <text class="lbl" x="304" y="354" text-anchor="middle">curva C</text>
+        </g>
+
+        <!-- palanca -->
+        <path class="act" d="M 336 178 L 268 194" opacity=".3"/>
+        <text class="lbl" x="330" y="150" text-anchor="end">I</text>
+        <text class="lbl" x="330" y="202" text-anchor="end">0</text>
+        <g id="leverG" transform="rotate(-28 346 170)">
+          <rect class="lever" x="344" y="161" width="40" height="18" rx="6"/>
+        </g>
+        <circle class="metal" cx="346" cy="170" r="6"/>
+
+        <!-- flujo de corriente -->
+        <path id="liveMain" class="live" d="M 125 4 L 125 59 L 190 59 L 190 114 L 228 114 L 240 120 L 170 150 C 164 160 150 154 138 160 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 q -50 5.25 0 10.5 L 138 250"/>
+        <path id="liveOut" class="live" d="M 138 384 L 138 400 L 125 409 L 125 464"/>
+
+        <!-- números -->
+        <g class="badge" data-part="1" tabindex="0" role="button" aria-label="Borne de entrada"><circle cx="81" cy="59" r="11"/><text x="81" y="63">1</text></g>
+        <g class="badge" data-part="2" tabindex="0" role="button" aria-label="Contactos"><circle cx="208" cy="92" r="11"/><text x="208" y="96">2</text></g>
+        <g class="badge" data-part="3" tabindex="0" role="button" aria-label="Cámara apagachispas"><circle cx="286" cy="74" r="11"/><text x="286" y="78">3</text></g>
+        <g class="badge" data-part="4" tabindex="0" role="button" aria-label="Palanca"><circle cx="372" cy="118" r="11"/><text x="372" y="122">4</text></g>
+        <g class="badge" data-part="5" tabindex="0" role="button" aria-label="Mecanismo de disparo"><circle cx="232" cy="168" r="11"/><text x="232" y="172">5</text></g>
+        <g class="badge" data-part="6" tabindex="0" role="button" aria-label="Bobina"><circle cx="82" cy="200" r="11"/><text x="82" y="204">6</text></g>
+        <g class="badge" data-part="7" tabindex="0" role="button" aria-label="Lámina bimetálica"><circle cx="172" cy="330" r="11"/><text x="172" y="334">7</text></g>
+        <g class="badge" data-part="8" tabindex="0" role="button" aria-label="Borne de salida"><circle cx="81" cy="409" r="11"/><text x="81" y="413">8</text></g>
+        <g class="badge" data-part="9" tabindex="0" role="button" aria-label="Fijación a carril DIN"><circle cx="352" cy="450" r="11"/><text x="352" y="454">9</text></g>
+      </svg>
+      <p class="hint">Haz clic en los números para ver cada pieza. La palanca se acciona a mano.</p>
+    </section>
+
+    <section class="panel">
+      <div class="status" aria-live="polite">
+        <span class="pill state-ok" id="pill"><span class="dot"></span><span id="pillTxt">Cerrado · servicio normal</span></span>
+        <p id="stMain">La corriente atraviesa el bimetal y la bobina sin activarlos.</p>
+        <p class="why" id="stWhy">Por debajo de 16 A el aparato no tiene motivo para disparar.</p>
+      </div>
+
+      <div class="readouts">
+        <div class="ro"><div class="k">Corriente</div><div class="v"><span id="roA">12,0</span> <small>A</small></div></div>
+        <div class="ro"><div class="k">Múltiplo de In</div><div class="v"><span id="roM">0,75</span> <small>× In</small></div></div>
+        <div class="ro"><div class="k">Tiempo simulado</div><div class="v"><span id="roT">0,0</span> <small>s</small></div></div>
+        <div class="ro"><div class="k">Disparo previsto</div><div class="v" id="roTrip"><small>no dispara</small></div></div>
+        <div class="ro" style="grid-column:1/-1">
+          <div class="k">Calentamiento del bimetal</div>
+          <div class="v"><span id="roH">0</span> <small>%</small></div>
+          <div class="bar"><i id="heatBar"></i></div>
+        </div>
+      </div>
+
+      <div class="card controls">
+        <div class="ctl">
+          <div class="lab"><span>Corriente del circuito</span><span class="val" id="curVal">12,0 A</span></div>
+          <input type="range" id="cur" min="0" max="20" step="0.05" value="0.75" aria-label="Corriente en múltiplos de la intensidad nominal">
+          <div class="row">
+            <button type="button" class="wide" data-preset="0.75">Carga normal · 12 A</button>
+            <button type="button" class="wide" data-preset="2">Sobrecarga · 32 A</button>
+            <button type="button" class="wide" data-preset="15">Cortocircuito · 240 A</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span>Curva de disparo</span><span class="val" id="curveVal">magnético a 8 × In</span></div>
+          <div class="row">
+            <button type="button" data-curve="B" aria-pressed="false">B · 3–5 In</button>
+            <button type="button" data-curve="C" aria-pressed="true">C · 5–10 In</button>
+            <button type="button" data-curve="D" aria-pressed="false">D · 10–20 In</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <div class="lab"><span>Velocidad del reloj</span><span class="val">tiempo simulado</span></div>
+          <div class="row">
+            <button type="button" data-speed="1" aria-pressed="false">× 1</button>
+            <button type="button" data-speed="10" aria-pressed="true">× 10</button>
+            <button type="button" data-speed="60" aria-pressed="false">× 60</button>
+            <button type="button" class="rearm" id="rearm" disabled>Rearmar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="grid2">
+    <section>
+      <h2>Partes principales</h2>
+      <div class="chips" id="chips">
+        <button type="button" class="card chip" data-part="1" aria-pressed="false"><b>1</b>Borne de entrada</button>
+        <button type="button" class="card chip" data-part="2" aria-pressed="false"><b>2</b>Contactos</button>
+        <button type="button" class="card chip" data-part="3" aria-pressed="false"><b>3</b>Cámara apagachispas</button>
+        <button type="button" class="card chip" data-part="4" aria-pressed="false"><b>4</b>Palanca</button>
+        <button type="button" class="card chip" data-part="5" aria-pressed="true"><b>5</b>Mecanismo de disparo</button>
+        <button type="button" class="card chip" data-part="6" aria-pressed="false"><b>6</b>Bobina (magnético)</button>
+        <button type="button" class="card chip" data-part="7" aria-pressed="false"><b>7</b>Bimetal (térmico)</button>
+        <button type="button" class="card chip" data-part="8" aria-pressed="false"><b>8</b>Borne de salida</button>
+        <button type="button" class="card chip" data-part="9" aria-pressed="false"><b>9</b>Carril DIN</button>
+      </div>
+      <div class="desc">
+        <h3 id="descT">Mecanismo de disparo</h3>
+        <p id="descP">Cerradura que mantiene cerrados los contactos. Tanto la bobina como el bimetal empujan la misma barra para liberarla. Es de disparo libre: aunque sujetes la palanca en I, los contactos se abren igual.</p>
+      </div>
+      <table>
+        <tr><th>&nbsp;</th><th>Térmico</th><th>Magnético</th></tr>
+        <tr><td>Protege de</td><td class="t">Sobrecarga</td><td class="m">Cortocircuito</td></tr>
+        <tr><td>Elemento</td><td class="t">Lámina bimetálica</td><td class="m">Bobina y núcleo</td></tr>
+        <tr><td>Corriente</td><td class="t">1,13 – 5 In</td><td class="m" id="tabMag">5 – 10 In</td></tr>
+        <tr><td>Tiempo</td><td class="t">Minutos a segundos</td><td class="m">Menos de 10 ms</td></tr>
+        <tr><td>Rearme</td><td class="t">Esperar a que enfríe</td><td class="m">Buscar la avería antes</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Curva de disparo</h2>
+      <div class="card curvebox">
+        <svg id="curveSvg" viewBox="0 0 320 210" role="img" aria-label="Curva tiempo-corriente del magnetotérmico">
+          <rect id="magBand" x="0" y="14" width="0" height="160" fill="var(--mag)" opacity=".09"/>
+          <g id="axes"></g>
+          <path id="thermCurve" fill="none" stroke="var(--heat)" stroke-width="2.4" stroke-linejoin="round"/>
+          <path id="magCurve" fill="none" stroke="var(--mag)" stroke-width="2.4" stroke-linejoin="round"/>
+          <g id="marker" opacity="0">
+            <circle r="5" fill="var(--panel)" stroke="var(--fg)" stroke-width="2.4"/>
+          </g>
+          <text class="lbl" id="lblTh" x="0" y="0">térmica</text>
+          <text class="lbl" id="lblMg" x="0" y="0">magnética</text>
+          <text class="lbl" x="175" y="205" text-anchor="middle">corriente (× In)</text>
+        </svg>
+        <p class="hint" style="text-align:left;padding:8px 2px 0">Valores orientativos de una curva C: el fabricante da una banda, no una línea exacta.</p>
+      </div>
+    </section>
+  </div>
+
+  <p class="foot">El reloj va acelerado para poder verlo en clase: a × 10, un disparo térmico real de 3 minutos ocurre en 18 segundos. El calor acumulado en el bimetal se conserva al rearmar, igual que en el aparato real.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var IN_A = 16;
+  var CURVES = { B:{lo:3,hi:5,trip:4}, C:{lo:5,hi:10,trip:8}, D:{lo:10,hi:20,trip:12} };
+  var PARTS = {
+    1:["Borne de entrada","Tornillo de conexión por donde entra la fase. Aprieta el conductor con una jaula metálica; un apriete flojo calienta el borne y es una de las averías más repetidas en un cuadro."],
+    2:["Contactos (fijo y móvil)","Aquí se corta de verdad la corriente. El contacto móvil va sobre un brazo que el mecanismo mantiene apretado contra el fijo; al disparar se separan en milisegundos."],
+    3:["Cámara apagachispas","Juego de láminas que recibe el arco eléctrico que salta al abrirse los contactos. Lo divide en arcos pequeños, lo enfría y lo apaga antes de que queme los contactos."],
+    4:["Palanca","Abre y cierra a mano (I / 0) y muestra el estado. Después de un disparo queda en posición intermedia: hay que bajarla del todo antes de volver a subirla."],
+    5:["Mecanismo de disparo","Cerradura que mantiene cerrados los contactos. Tanto la bobina como el bimetal empujan la misma barra para liberarla. Es de disparo libre: aunque sujetes la palanca en I, los contactos se abren igual."],
+    6:["Bobina (electroimán)","Protección magnética. La corriente pasa por sus espiras; si es muy alta, el campo atrae el núcleo móvil, que golpea el mecanismo. Responde a un cortocircuito en menos de 10 ms."],
+    7:["Lámina bimetálica","Protección térmica. Dos metales unidos con distinta dilatación: el efecto Joule la calienta y la lámina se curva hasta empujar el mecanismo. Cuanto mayor es la sobrecarga, antes dispara."],
+    8:["Borne de salida","Hacia el circuito protegido. En un cuadro doméstico el magnetotérmico se coloca normalmente aguas abajo del diferencial, que vigila las fugas a tierra."],
+    9:["Fijación a carril DIN","Pinza con muelle que lo sujeta al carril de 35 mm del cuadro. Un modular de un polo ocupa 17,5 mm de ancho, la medida con la que se cuentan los huecos."]
+  };
+
+  var S = { m:0.75, closed:true, cause:null, heat:0, t:0, speed:10, curve:"C", flash:0, strike:0, sel:5 };
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var $ = function(id){ return document.getElementById(id); };
+  function nf(v,d){ return v.toFixed(d).replace(".", ","); }
+  function thermalTime(m){ return 1000 / Math.pow(m*m-1, 1.5); }
+
+  var svg=$("cut"), blade=$("blade"), braid=$("braid-bim"), arm=$("arm"), leverG=$("leverG"),
+      plunger=$("plunger"), tripbar=$("tripbar"), latch=$("latch"), arc=$("arc"),
+      liveMain=$("liveMain"), liveOut=$("liveOut"), bladeLive=$("bladeLive"),
+      heatBar=$("heatBar"), pill=$("pill"), pillTxt=$("pillTxt"), stMain=$("stMain"), stWhy=$("stWhy"),
+      rearmBtn=$("rearm"), slider=$("cur"), marker=$("marker");
+
+  /* ---------- curva tiempo-corriente ---------- */
+  var ML=46, MR=16, MT=14, MB=36, W=320, H=210;
+  var PW=W-ML-MR, PH=H-MT-MB;
+  var TMAX=3000, TMIN=0.005, LSPAN=Math.log10(TMAX/TMIN), XSPAN=Math.log10(20);
+  function sx(m){ return ML + PW*Math.log10(Math.max(m,1))/XSPAN; }
+  function sy(t){ return MT + PH*Math.log10(TMAX/Math.min(Math.max(t,TMIN),TMAX))/LSPAN; }
+
+  (function axes(){
+    var g=$("axes"), parts=[];
+    var yt=[1000,100,10,1,0.1,0.01], ylab=["1000 s","100 s","10 s","1 s","0,1 s","0,01 s"];
+    for(var i=0;i<yt.length;i++){
+      var y=sy(yt[i]);
+      parts.push('<line x1="'+ML+'" y1="'+y.toFixed(1)+'" x2="'+(W-MR)+'" y2="'+y.toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>');
+      parts.push('<text class="lbl" x="'+(ML-6)+'" y="'+(y+3).toFixed(1)+'" text-anchor="end">'+ylab[i]+'</text>');
+    }
+    var xt=[1,2,3,5,10,20];
+    for(var j=0;j<xt.length;j++){
+      var x=sx(xt[j]);
+      parts.push('<line x1="'+x.toFixed(1)+'" y1="'+MT+'" x2="'+x.toFixed(1)+'" y2="'+(MT+PH)+'" stroke="var(--line)" stroke-width="1"/>');
+      parts.push('<text class="lbl" x="'+x.toFixed(1)+'" y="'+(MT+PH+14)+'" text-anchor="middle">'+xt[j]+'×</text>');
+    }
+    parts.push('<rect x="'+ML+'" y="'+MT+'" width="'+PW+'" height="'+PH+'" fill="none" stroke="var(--muted)" stroke-width="1.2"/>');
+    g.innerHTML=parts.join("");
+  })();
+
+  function drawCurve(){
+    var c=CURVES[S.curve];
+    var mStart=Math.sqrt(Math.pow(1000/TMAX,2/3)+1);
+    var d="", n=48;
+    for(var i=0;i<=n;i++){
+      var m=mStart+(c.trip-mStart)*i/n;
+      d+=(i?" L ":"M ")+sx(m).toFixed(1)+" "+sy(thermalTime(m)).toFixed(1);
+    }
+    $("thermCurve").setAttribute("d", d);
+    $("magCurve").setAttribute("d",
+      "M "+sx(c.trip).toFixed(1)+" "+sy(thermalTime(c.trip)).toFixed(1)+
+      " L "+sx(c.trip).toFixed(1)+" "+sy(0.008).toFixed(1)+
+      " L "+sx(20).toFixed(1)+" "+sy(0.008).toFixed(1));
+    var b=$("magBand");
+    b.setAttribute("x", sx(c.lo).toFixed(1));
+    b.setAttribute("width", (sx(c.hi)-sx(c.lo)).toFixed(1));
+    $("lblTh").setAttribute("x", (sx(1.3)).toFixed(1)); $("lblTh").setAttribute("y", (sy(2)).toFixed(1));
+    $("lblMg").setAttribute("x", (sx(c.trip)+6).toFixed(1)); $("lblMg").setAttribute("y", (sy(0.02)).toFixed(1));
+    $("curveVal").textContent="magnético a "+c.trip+" × In";
+    $("tabMag").textContent=c.lo+" – "+c.hi+" In";
+  }
+
+  function updMarker(){
+    var c=CURVES[S.curve], m=S.m;
+    if(m<=1.02){ marker.setAttribute("opacity","0"); return; }
+    var t=(m>=c.trip)?0.008:thermalTime(m);
+    marker.setAttribute("opacity","1");
+    marker.setAttribute("transform","translate("+sx(m).toFixed(1)+","+sy(t).toFixed(1)+")");
+  }
+
+  /* ---------- estado visual ---------- */
+  function setHeat(h){
+    var th=8.63*h;
+    blade.setAttribute("transform","rotate("+th.toFixed(2)+" 138 382)");
+    var r=th*Math.PI/180, tx=138+122*Math.sin(r), ty=382-122*Math.cos(r);
+    braid.setAttribute("d","M 138 244 C 128 252 "+(tx-6).toFixed(1)+" "+(ty-8).toFixed(1)+" "+tx.toFixed(1)+" "+(ty+2).toFixed(1));
+    svg.style.setProperty("--h", h.toFixed(3));
+    heatBar.style.width=(h*100).toFixed(1)+"%";
+    $("roH").textContent=Math.round(h*100);
+  }
+
+  function setOpen(open){
+    arm.setAttribute("transform", open? "rotate(-16 170 150)":"");
+    leverG.setAttribute("transform","rotate("+(open?30:-28)+" 346 170)");
+    var o=open?"0":"1";
+    liveMain.style.opacity=o; liveOut.style.opacity=o; bladeLive.style.opacity=o;
+    tripbar.setAttribute("transform", open? "translate(5 0)":"");
+    latch.setAttribute("transform", open? "rotate(13 248 206)":"");
+  }
+
+  function status(){
+    var c=CURVES[S.curve], m=S.m, cls, txt, main, why;
+    if(!S.closed){
+      if(S.cause==="mag"){ cls="state-trip"; txt="Disparado · cortocircuito";
+        main="La bobina atrajo el núcleo y liberó el mecanismo en menos de 10 ms.";
+        why="El arco se ha apagado en la cámara apagachispas. Antes de rearmar hay que localizar el defecto."; }
+      else if(S.cause==="term"){ cls="state-trip"; txt="Disparado · sobrecarga";
+        main="El bimetal se curvó lo suficiente para empujar el mecanismo después de "+nf(S.t,1)+" s.";
+        why="El bimetal sigue caliente ("+Math.round(S.heat*100)+" %): si rearmas ahora, volverá a disparar antes."; }
+      else { cls="state-off"; txt="Abierto a mano";
+        main="Has bajado la palanca a 0 y los contactos están separados.";
+        why="Sin corriente, el bimetal se va enfriando."; }
+    } else if(m<=1){
+      cls="state-ok"; txt="Cerrado · servicio normal";
+      main="La corriente atraviesa el bimetal y la bobina sin activarlos.";
+      why="Por debajo de "+IN_A+" A el aparato no tiene motivo para disparar.";
+    } else if(m<c.trip){
+      cls="state-warn"; txt="Cerrado · sobrecarga";
+      main="El bimetal se está calentando y curvando hacia el mecanismo.";
+      var tt=thermalTime(m);
+      why=tt>3600? "A esta corriente tardaría más de una hora: una sobrecarga pequeña puede aguantarse mucho tiempo."
+                 : "Disparo térmico previsto hacia los "+nf(tt,tt<10?1:0)+" s.";
+    } else {
+      cls="state-warn"; txt="Cerrado · cortocircuito";
+      main="La corriente supera "+c.trip+" × In: la bobina está a punto de disparar.";
+      why="Aquí no interviene el bimetal, no da tiempo a que se caliente.";
+    }
+    pill.className="pill "+cls; pillTxt.textContent=txt;
+    stMain.textContent=main; stWhy.textContent=why;
+  }
+
+  function readouts(){
+    var c=CURVES[S.curve], m=S.m;
+    $("roA").textContent=nf(m*IN_A,1);
+    $("roM").textContent=nf(m,2);
+    $("roT").textContent=nf(S.t,1);
+    $("curVal").textContent=nf(m*IN_A,1)+" A · "+nf(m,2)+" × In";
+    var tr=$("roTrip");
+    if(m>=c.trip) tr.innerHTML='&lt; 0,01 <small>s</small>';
+    else if(m<=1) tr.innerHTML='<small>no dispara</small>';
+    else { var tt=thermalTime(m); tr.innerHTML = tt>3600? '<small>&gt; 1 h</small>' : nf(tt,tt<10?1:0)+' <small>s</small>'; }
+    svg.style.setProperty("--mg", Math.min(1, m/c.trip).toFixed(3));
+  }
+
+  function trip(cause){
+    if(!S.closed) return;
+    S.closed=false; S.cause=cause;
+    S.flash=reduce?0.45:0.9;
+    if(cause==="mag") S.strike=0.4;
+    if(cause==="term") S.heat=1;
+    rearmBtn.disabled=false;
+    $("act-"+(cause==="mag"?"mag":"term")).classList.add("on");
+    $("act-"+(cause==="mag"?"mag":"term")+"2").classList.add("on");
+    $("act-rel").classList.add("on"); $("act-rel2").classList.add("on");
+    setOpen(true); status();
+  }
+
+  function clearActs(){
+    ["act-mag","act-mag2","act-term","act-term2","act-rel","act-rel2"].forEach(function(id){ $(id).classList.remove("on"); });
+  }
+
+  function rearm(){
+    S.closed=true; S.cause=null; S.t=0; S.flash=0; S.strike=0;
+    rearmBtn.disabled=true; clearActs(); setOpen(false); status();
+  }
+
+  /* ---------- bucle ---------- */
+  var last=0, off=0;
+  function frame(now){
+    var dt=Math.min(0.05,(now-last)/1000)||0; last=now;
+    var c=CURVES[S.curve], m=S.m, sim=dt*S.speed;
+
+    if(S.closed){
+      S.t+=sim;
+      if(m>=c.trip){ trip("mag"); }
+      else {
+        if(m>1) S.heat+=sim/thermalTime(m);
+        else S.heat-=sim*(S.heat/60+0.0008);
+        if(S.heat<0) S.heat=0;
+        if(S.heat>=1){ S.heat=1; trip("term"); }
+      }
+    } else {
+      S.heat-=sim*(S.heat/60+0.0008);
+      if(S.heat<0) S.heat=0;
+    }
+    setHeat(S.heat);
+
+    if(S.flash>0){
+      S.flash-=dt;
+      var a=Math.max(0,S.flash/0.9);
+      arc.setAttribute("opacity", reduce? a.toFixed(2) : (a*(0.55+0.45*Math.random())).toFixed(2));
+      if(S.flash<=0){ arc.setAttribute("opacity","0"); clearActs(); }
+    }
+    if(S.strike>0){
+      S.strike-=dt;
+      plunger.setAttribute("transform","translate(10 0)");
+      if(S.strike<=0) plunger.setAttribute("transform","");
+    }
+
+    if(S.closed && m>0 && !reduce){
+      off-=dt*(18+Math.min(m,4)*34);
+      liveMain.style.strokeDashoffset=off.toFixed(1);
+      liveOut.style.strokeDashoffset=off.toFixed(1);
+      bladeLive.style.strokeDashoffset=off.toFixed(1);
+    }
+    $("roT").textContent=nf(S.t,1);
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- selección de partes ---------- */
+  var PART_EL = {1:"p-in",2:"p-con",3:"p-arc",4:"leverG",5:"p-mech",6:"p-coil",7:"blade",8:"p-out",9:null};
+  function select(n){
+    S.sel=n;
+    var d=PARTS[n];
+    $("descT").textContent=d[0]; $("descP").textContent=d[1];
+    Array.prototype.forEach.call(document.querySelectorAll(".chip"), function(b){
+      b.setAttribute("aria-pressed", b.dataset.part===String(n)?"true":"false");
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".badge"), function(b){
+      b.classList.toggle("sel", b.dataset.part===String(n));
+    });
+    Object.keys(PART_EL).forEach(function(k){
+      var el=PART_EL[k]&&$(PART_EL[k]);
+      if(el) el.classList.toggle("glowpart", k===String(n));
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".chip,.badge"), function(el){
+    el.addEventListener("click", function(){ select(+el.dataset.part); });
+    el.addEventListener("keydown", function(e){
+      if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(+el.dataset.part); }
+    });
+  });
+
+  slider.addEventListener("input", function(){
+    S.m=parseFloat(slider.value);
+    readouts(); updMarker(); status();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-preset]"), function(b){
+    b.addEventListener("click", function(){
+      S.m=parseFloat(b.dataset.preset); slider.value=S.m;
+      if(!S.closed) rearm();
+      readouts(); updMarker(); status();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-curve]"), function(b){
+    b.addEventListener("click", function(){
+      S.curve=b.dataset.curve;
+      Array.prototype.forEach.call(document.querySelectorAll("[data-curve]"), function(o){
+        o.setAttribute("aria-pressed", o===b?"true":"false");
+      });
+      drawCurve(); readouts(); updMarker(); status();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-speed]"), function(b){
+    b.addEventListener("click", function(){
+      S.speed=parseFloat(b.dataset.speed);
+      Array.prototype.forEach.call(document.querySelectorAll("[data-speed]"), function(o){
+        o.setAttribute("aria-pressed", o===b?"true":"false");
+      });
+    });
+  });
+  rearmBtn.addEventListener("click", rearm);
+  leverG.addEventListener("click", function(){
+    if(S.closed){ S.closed=false; S.cause="man"; S.t=0; rearmBtn.disabled=false; setOpen(true); status(); }
+    else rearm();
+  });
+
+  drawCurve(); select(5); setOpen(false); setHeat(0); readouts(); updMarker(); status();
+  requestAnimationFrame(function(t){ last=t; requestAnimationFrame(frame); });
+})();
+</script>
+</body>
+</html>

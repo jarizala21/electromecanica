@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regulador de presión — corte interactivo</title>
+<style>
+  :root{
+    --bg:#f4f3ef; --panel:#ffffff; --ink:#2b2b29; --muted:#6e6d67;
+    --line:#d8d6cc; --coral:#c0502f; --amber:#c8860c; --teal:#1d7a63;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 56px;}
+  h1{font-size:24px;font-weight:600;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px;}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;}
+  svg{width:100%;height:auto;display:block;}
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0 6px;}
+  @media(max-width:640px){.controls{grid-template-columns:1fr;}}
+  .ctrl{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;}
+  .ctrl .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+  .ctrl label{font-size:14px;font-weight:600;}
+  .ctrl .hint{font-size:12px;color:var(--muted);}
+  .ctrl .read{font-size:15px;font-weight:600;}
+  input[type=range]{width:100%;height:26px;cursor:pointer;}
+  #tornillo{accent-color:var(--coral);}
+  #consumo{accent-color:var(--teal);}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 6px;}
+  @media(max-width:760px){.cards{grid-template-columns:repeat(2,1fr);}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .card .lab{font-size:12px;color:var(--muted);margin:0 0 4px;}
+  .card .val{font-size:22px;font-weight:600;}
+  .card .val small{font-size:12px;color:var(--muted);font-weight:400;}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:14px 2px 0;}
+  .legend i{display:inline-block;width:14px;height:6px;border-radius:3px;vertical-align:middle;margin-right:6px;}
+  .row{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap;}
+  button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:9px;
+    padding:8px 14px;cursor:pointer;color:var(--ink);}
+  button:hover{background:#f0efe9;}
+  .note{margin-top:22px;background:#fbf7ee;border:1px solid #ecdfc2;border-radius:12px;
+    padding:14px 16px;font-size:13.5px;color:#5d4a22;}
+  .note b{color:#3f3214;}
+  /* animación de flujo */
+  .flow{stroke-dasharray:7 7;}
+  @media(prefers-reduced-motion:no-preference){.flow{animation:fl var(--spd,1s) linear infinite;}}
+  @keyframes fl{to{stroke-dashoffset:-14;}}
+  .mv{transition:transform .3s ease;}
+  #membrane{transition:d .3s ease;}
+  .gas,#glow,.flow{transition:opacity .35s ease;}
+  .needle{transition:transform .4s ease;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Regulador de presión — corte interactivo</h1>
+  <p class="sub">Sección del regulador. Aprieta el tornillo para comprimir el muelle y subir la presión de salida; abre el consumo para ver cambiar el caudal.</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 760 470" role="img" aria-label="Corte de un regulador de presión con manómetros de entrada y salida">
+
+      <!-- ===== Manómetros (se rellenan por JS) ===== -->
+      <g id="gIn"></g>
+      <g id="gOut"></g>
+      <text x="120" y="240" text-anchor="middle" font-size="12.5" font-weight="600" fill="#6e6d67">Entrada (suministro)</text>
+      <text x="640" y="240" text-anchor="middle" font-size="12.5" font-weight="600" fill="#6e6d67">Salida (regulada)</text>
+
+      <!-- tubos de toma de los manómetros -->
+      <rect x="114" y="218" width="12" height="158" fill="#c9c7bd" stroke="#6e6d67" stroke-width="1"/>
+      <rect x="634" y="218" width="12" height="88" fill="#c9c7bd" stroke="#6e6d67" stroke-width="1"/>
+
+      <!-- ===== Cuerpo y cámaras (fijos) ===== -->
+      <!-- campana del muelle (ventilada) -->
+      <path d="M310,256 L310,120 Q310,94 336,94 L424,94 Q450,94 450,120 L450,256 Z"
+            fill="#c9c7bd" fill-opacity=".22" stroke="#6e6d67" stroke-width="1"/>
+      <line x1="316" y1="106" x2="304" y2="106" stroke="#6e6d67" stroke-width="1"/>
+      <line x1="316" y1="112" x2="304" y2="112" stroke="#6e6d67" stroke-width="1"/>
+
+      <!-- cuerpo inferior -->
+      <rect x="308" y="252" width="144" height="156" rx="7" fill="#b9b7ad" fill-opacity=".40" stroke="#6e6d67" stroke-width="1"/>
+      <!-- cámara de salida (regulada) -->
+      <rect class="gas" x="311" y="256" width="138" height="86" fill="#e0900f" fill-opacity=".14"/>
+      <rect id="glow" x="311" y="256" width="138" height="86" fill="#e0900f" fill-opacity="0"/>
+      <!-- cámara de entrada (alta presión) -->
+      <rect class="gas" x="311" y="353" width="138" height="51" fill="#c0392b" fill-opacity=".40"/>
+
+      <!-- asiento de la válvula -->
+      <rect x="330" y="340" width="36" height="11" rx="2" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+      <rect x="394" y="340" width="36" height="11" rx="2" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+
+      <!-- tubo de entrada -->
+      <rect x="95" y="368" width="215" height="16" rx="3" fill="#b9b7ad" fill-opacity=".55" stroke="#6e6d67" stroke-width="1"/>
+      <!-- tubo de salida -->
+      <rect x="450" y="296" width="250" height="16" rx="3" fill="#b9b7ad" fill-opacity=".55" stroke="#6e6d67" stroke-width="1"/>
+
+      <!-- ===== Flujo ===== -->
+      <path id="fin"  class="flow" d="M86,376 L300,376 C355,376 360,366 378,358" fill="none"
+            stroke="#c0392b" stroke-width="3" stroke-linecap="round" marker-end="url(#ar)" opacity="0"/>
+      <line id="fvL" class="flow" x1="370" y1="356" x2="370" y2="302" stroke="#d0631f" stroke-width="2.6"
+            stroke-linecap="round" marker-end="url(#ar)" opacity="0"/>
+      <line id="fvR" class="flow" x1="390" y1="356" x2="390" y2="302" stroke="#d0631f" stroke-width="2.6"
+            stroke-linecap="round" marker-end="url(#ar)" opacity="0"/>
+      <line id="fout" class="flow" x1="382" y1="300" x2="692" y2="300" stroke="#e0900f" stroke-width="3"
+            stroke-linecap="round" marker-end="url(#ar)" opacity="0"/>
+
+      <!-- ===== Diafragma (borde fijo, centro flexa) ===== -->
+      <path id="membrane" d="M312,244 Q380,256 448,244" fill="none" stroke="#b8703e" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- ===== Parte móvil: placa + vástago + obturador ===== -->
+      <g id="diaG" class="mv">
+        <rect x="362" y="244" width="36" height="10" rx="2" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+        <line x1="380" y1="254" x2="380" y2="348" stroke="#7a7972" stroke-width="4" stroke-linecap="round"/>
+        <polygon points="368,348 392,348 404,356 404,366 356,366 356,356" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+      </g>
+
+      <!-- ===== Muelle ===== -->
+      <g id="springG" class="mv">
+        <path id="springPath" d="" fill="none" stroke="#8a8880" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+
+      <!-- ===== Tornillo de ajuste ===== -->
+      <g id="screwG" class="mv">
+        <rect x="362" y="50" width="36" height="10" rx="2" fill="#8a8880" stroke="#6e6d67" stroke-width="1"/>
+        <rect x="352" y="36" width="56" height="16" rx="3" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+        <line x1="366" y1="44" x2="394" y2="44" stroke="#6e6d67" stroke-width="1.4"/>
+        <rect x="374" y="60" width="12" height="54" fill="#8a8880" stroke="#6e6d67" stroke-width="1"/>
+        <line x1="374" y1="70" x2="386" y2="70" stroke="#6e6d67" stroke-width=".6"/>
+        <line x1="374" y1="80" x2="386" y2="80" stroke="#6e6d67" stroke-width=".6"/>
+        <line x1="374" y1="90" x2="386" y2="90" stroke="#6e6d67" stroke-width=".6"/>
+        <line x1="374" y1="100" x2="386" y2="100" stroke="#6e6d67" stroke-width=".6"/>
+        <rect x="346" y="113" width="68" height="9" rx="2" fill="#9a988f" stroke="#6e6d67" stroke-width="1"/>
+      </g>
+
+      <!-- ===== Etiquetas ===== -->
+      <g fill="#5b5a54" font-size="13">
+        <line x1="312" y1="48" x2="262" y2="64" stroke="#b9b7ad" stroke-dasharray="2 3"/>
+        <text x="256" y="68" text-anchor="end" font-weight="600">Tornillo de ajuste</text>
+
+        <line x1="366" y1="170" x2="286" y2="170" stroke="#b9b7ad" stroke-dasharray="2 3"/>
+        <text x="280" y="174" text-anchor="end" font-weight="600">Muelle</text>
+
+        <line x1="314" y1="250" x2="262" y2="262" stroke="#b9b7ad" stroke-dasharray="2 3"/>
+        <text x="256" y="266" text-anchor="end" font-weight="600">Diafragma</text>
+
+        <line x1="430" y1="346" x2="476" y2="362" stroke="#b9b7ad" stroke-dasharray="2 3"/>
+        <text x="482" y="358" font-weight="600">Válvula y asiento</text>
+        <text x="482" y="374" font-size="12" fill="#8a8880">obturador + muelle de cierre</text>
+
+        <line x1="120" y1="392" x2="120" y2="408" stroke="#b9b7ad" stroke-dasharray="2 3"/>
+        <text x="86" y="426" font-weight="600" fill="#a23b2c">Entrada · alta presión</text>
+      </g>
+
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl">
+      <div class="top">
+        <label for="tornillo">Apretar tornillo</label>
+        <span class="read" id="tornilloVal">55 %</span>
+      </div>
+      <input type="range" id="tornillo" min="0" max="100" value="55" step="1">
+      <p class="hint">Comprime el muelle → fija la presión de salida (consigna).</p>
+    </div>
+    <div class="ctrl">
+      <div class="top">
+        <label for="consumo">Consumo aguas abajo</label>
+        <span class="read" id="consumoVal">45 %</span>
+      </div>
+      <input type="range" id="consumo" min="0" max="100" value="45" step="1">
+      <p class="hint">Demanda de gas → cambia el caudal (la presión se mantiene).</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><p class="lab">Presión de entrada</p><div class="val"><span id="pin">150</span> <small>bar</small></div></div>
+    <div class="card"><p class="lab">Presión de salida</p><div class="val"><span id="pout">0</span> <small>bar</small></div></div>
+    <div class="card"><p class="lab">Caudal</p><div class="val"><span id="caudal">0</span> <small>L/min</small></div></div>
+    <div class="card"><p class="lab">Apertura de válvula</p><div class="val"><span id="apert">0</span> <small>%</small></div></div>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:#c0392b"></i>Alta presión (entrada)</span>
+    <span><i style="background:#d0631f"></i>Paso por la válvula</span>
+    <span><i style="background:#e0900f"></i>Presión regulada (salida)</span>
+  </div>
+
+  <div class="row">
+    <button id="reset">Reiniciar</button>
+    <span class="hint" style="color:var(--muted)">Consejo: pon el consumo a 0 para ver el caso “sin caudal” (la válvula casi cierra y la presión se mantiene).</span>
+  </div>
+
+  <div class="note">
+    <b>Cómo funciona (resumen físico):</b> el muelle empuja el diafragma hacia abajo y abre la válvula;
+    la presión de salida empuja el diafragma hacia arriba y tiende a cerrarla. En equilibrio
+    <i>fuerza del muelle ≈ presión de salida × área del diafragma</i>. Por eso apretar el tornillo sube la
+    <b>consigna de presión</b>, y la válvula se abre solo lo justo para mantenerla aunque cambie el consumo.
+    Al aumentar el consumo verás una pequeña caída de presión (la “caída por carga” real de los reguladores).
+  </div>
+</div>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+
+  /* ---- manómetros ---- */
+  function gauge(host,cx,cy,r,min,max,divs,unit,valId){
+    host.appendChild(el('circle',{cx:cx,cy:cy,r:r,fill:'#ffffff',stroke:'#bdbbb1','stroke-width':2}));
+    host.appendChild(el('circle',{cx:cx,cy:cy,r:r-4,fill:'none',stroke:'#ece9e1','stroke-width':1}));
+    for(var i=0;i<=divs;i++){
+      var f=i/divs, th=(-135+f*270)*Math.PI/180;
+      var c=Math.cos(th), s=Math.sin(th);
+      host.appendChild(el('line',{x1:cx+s*(r-6),y1:cy-c*(r-6),x2:cx+s*(r-15),y2:cy-c*(r-15),stroke:'#6e6d67','stroke-width':2}));
+      var lt=el('text',{x:cx+s*(r-28),y:cy-c*(r-28)+4,'text-anchor':'middle','font-size':10.5,fill:'#6e6d67'});
+      lt.textContent=Math.round(min+f*(max-min));
+      host.appendChild(lt);
+    }
+    var u=el('text',{x:cx,y:cy+16,'text-anchor':'middle','font-size':10.5,fill:'#9a988f'});u.textContent=unit;host.appendChild(u);
+    var v=el('text',{x:cx,y:cy+38,'text-anchor':'middle','font-size':17,'font-weight':600,fill:'#2b2b29',id:valId});v.textContent='0';host.appendChild(v);
+    var n=el('g',{class:'needle'});
+    n.appendChild(el('line',{x1:cx,y1:cy+13,x2:cx,y2:cy-(r-18),stroke:'#c0392b','stroke-width':3,'stroke-linecap':'round'}));
+    n.appendChild(el('circle',{cx:cx,cy:cy,r:5.5,fill:'#3a3a37'}));
+    host.appendChild(n);
+    return {cx:cx,cy:cy,min:min,max:max,needle:n,val:v,
+      set:function(value){
+        var f=Math.max(0,Math.min(1,(value-min)/(max-min)));
+        this.needle.setAttribute('transform','rotate('+(-135+f*270).toFixed(2)+' '+cx+' '+cy+')');
+      }};
+  }
+  var gIn  = gauge(document.getElementById('gIn'), 120,150,72, 0,250,5,'bar','pinG');
+  var gOut = gauge(document.getElementById('gOut'),640,150,72, 0, 12,6,'bar','poutG');
+
+  /* ---- muelle base ---- */
+  var STOP=122, SBOT=248, SLEN=SBOT-STOP, AMP=14, N=8, CX=380;
+  (function(){
+    var seg=SLEN/(2*N), d='M'+CX+','+STOP;
+    for(var k=1;k<=2*N;k++){
+      var y=(STOP+k*seg).toFixed(1);
+      var x=(k===2*N)?CX:((k%2===1)?CX-AMP:CX+AMP);
+      d+=' L'+x+','+y;
+    }
+    document.getElementById('springPath').setAttribute('d',d);
+  })();
+  var springG=document.getElementById('springG');
+  springG.style.transformOrigin=CX+'px '+STOP+'px';
+
+  var screwG=document.getElementById('screwG'),
+      diaG=document.getElementById('diaG'),
+      memb=document.getElementById('membrane'),
+      glow=document.getElementById('glow'),
+      fin=document.getElementById('fin'), fvL=document.getElementById('fvL'),
+      fvR=document.getElementById('fvR'), fout=document.getElementById('fout'),
+      sT=document.getElementById('tornillo'), sC=document.getElementById('consumo');
+
+  function update(){
+    var cs=sT.value/100, md=sC.value/100;
+
+    var Pset = cs*10;                      // consigna (bar)
+    var Pout = Pset*(1-0.12*md);           // salida con caída por carga
+    var Pin  = 150 - 5*md;                 // suministro (casi constante)
+    var Q    = Math.round(md*cs*80);       // caudal aprox (L/min)
+    var dd   = cs*(14 + 4*md);             // bajada diafragma/obturador
+    var screwDrop = cs*36;
+
+    // muelle: arriba sigue al tornillo, abajo sigue al diafragma
+    var newLen=SLEN+dd-screwDrop, sy=newLen/SLEN;
+    screwG.style.transform='translateY('+screwDrop.toFixed(2)+'px)';
+    springG.style.transform='translateY('+screwDrop.toFixed(2)+'px) scaleY('+sy.toFixed(4)+')';
+    diaG.style.transform='translateY('+dd.toFixed(2)+'px)';
+    memb.setAttribute('d','M312,244 Q380,'+(256+dd*1.7).toFixed(1)+' 448,244');
+
+    glow.setAttribute('fill-opacity', (Pout/10*0.5).toFixed(3));
+
+    var flowing = Q>0.5;
+    var spd=Math.max(0.35, 1.5 - (Q/80)*1.15).toFixed(2)+'s';
+    [fin,fvL,fvR,fout].forEach(function(e){
+      e.style.opacity=flowing?'1':'0';
+      e.style.setProperty('--spd',spd);
+    });
+
+    gIn.set(Pin);  document.getElementById('pinG').textContent=Math.round(Pin);
+    gOut.set(Pout);document.getElementById('poutG').textContent=Pout.toFixed(1);
+
+    document.getElementById('tornilloVal').textContent=Math.round(cs*100)+' %';
+    document.getElementById('consumoVal').textContent=Math.round(md*100)+' %';
+    document.getElementById('pin').textContent=Math.round(Pin);
+    document.getElementById('pout').textContent=Pout.toFixed(1);
+    document.getElementById('caudal').textContent=Q;
+    document.getElementById('apert').textContent=Math.round(dd/18*100);
+  }
+
+  sT.addEventListener('input',update);
+  sC.addEventListener('input',update);
+  document.getElementById('reset').addEventListener('click',function(){
+    sT.value=55; sC.value=45; update();
+  });
+  update();
+})();
+</script>
+</body>
+</html>

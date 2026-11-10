@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulador: conmutada con cruzamiento y 2 bombillas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6eaec; --panel:#f7f9fa; --ink:#1c2830; --muted:#5d6b75; --line:#cbd3d8; --dots:#c3ccd2;
+  --wire:#8d99a2; --live:#e67700; --flow:#fff3bf; --lamp:#fcc419; --lampfill:#ffe066; --lampsoft:#fff9db;
+  --accent:#1864ab; --hover:rgba(24,100,171,.08);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161a; --panel:#1a2127; --ink:#e7edf1; --muted:#96a4ae; --line:#2c363e;
+    --dots:#27313a; --wire:#5a6771; --live:#ff9f1c; --flow:#fff3bf; --lamp:#fcc419; --lampfill:#ffd43b;
+    --lampsoft:rgba(252,196,25,.12); --accent:#74c0fc; --hover:rgba(116,192,252,.08);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161a; --panel:#1a2127; --ink:#e7edf1; --muted:#96a4ae; --line:#2c363e;
+  --dots:#27313a; --wire:#5a6771; --live:#ff9f1c; --flow:#fff3bf; --lamp:#fcc419; --lampfill:#ffd43b;
+  --lampsoft:rgba(252,196,25,.12); --accent:#74c0fc; --hover:rgba(116,192,252,.08);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 18px 48px}
+h1{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:700;line-height:1.15;margin:0 0 8px;letter-spacing:-.01em}
+.lead{color:var(--muted);margin:0 0 22px;max-width:64ch}
+.board{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 14px 18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:2px 4px 6px}
+.status{display:inline-flex;align-items:center;gap:9px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);font-weight:600;transition:background .3s,border-color .3s}
+.status .dot{width:11px;height:11px;border-radius:50%;background:var(--wire);transition:background .3s,box-shadow .3s}
+.status.on{border-color:var(--lamp);background:var(--lampsoft)}
+.status.on .dot{background:var(--lamp);box-shadow:0 0 10px var(--lamp)}
+.hint{font-size:.88rem;color:var(--muted)}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+svg{display:block;width:100%;min-width:660px;height:auto}
+.perf{fill:var(--dots)}
+#wires{pointer-events:none}
+.wire{fill:none;stroke:var(--wire);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s,stroke-width .25s}
+.flow{fill:none;stroke:var(--flow);stroke-width:2;stroke-dasharray:3 17;stroke-linecap:round;opacity:0;transition:opacity .25s;animation:flow .7s linear infinite}
+.on .wire{stroke:var(--live);stroke-width:4.5}
+.on .flow{opacity:1}
+.link{transition:opacity .3s}
+.link.off{opacity:0}
+@keyframes flow{to{stroke-dashoffset:-20}}
+.lever{stroke:var(--ink);stroke-width:4.5;stroke-linecap:round;transition:stroke .25s}
+.levg.on .lever{stroke:var(--live)}
+.term{fill:var(--panel);stroke:var(--ink);stroke-width:2;pointer-events:none}
+.pivot,.node{fill:var(--ink);pointer-events:none}
+.sw{cursor:pointer;outline:none}
+.sw .hit{fill:transparent;stroke:transparent;stroke-width:1.5;transition:fill .2s,stroke .2s}
+.sw .hit.xbox{stroke:var(--muted);stroke-dasharray:6 5}
+.sw:hover .hit,.sw:focus-visible .hit{stroke:var(--accent);stroke-dasharray:5 4;fill:var(--hover)}
+.lbl{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-size:15px;font-weight:500;fill:var(--muted)}
+.name{font-family:"Barlow",system-ui,sans-serif;font-size:16px;font-weight:600;fill:var(--ink)}
+.bulb .glass{fill:var(--panel);stroke:var(--ink);stroke-width:2.5;transition:fill .3s}
+.bulb .x{stroke:var(--ink);stroke-width:2}
+.bulb .glow{opacity:0;transition:opacity .35s}
+.bulb.lit .glass{fill:var(--lampfill)}
+.bulb.lit .glow{opacity:1}
+.bat-plus{stroke:var(--ink);stroke-width:3}
+.bat-minus{stroke:var(--ink);stroke-width:8}
+.sign{font-family:"Barlow",system-ui,sans-serif;font-size:18px;font-weight:700;fill:var(--ink)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.controls button{flex:1 1 200px;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;cursor:pointer;text-align:left;transition:border-color .2s}
+.controls button:hover{border-color:var(--accent)}
+.controls button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.controls .bname{font-weight:600}
+.controls .pos{font-size:.9rem;color:var(--accent);font-weight:500}
+kbd{font-family:inherit;font-size:.75rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 6px;color:var(--muted);margin-left:6px}
+.path{margin:14px 4px 0;color:var(--muted);max-width:78ch}
+.path strong{color:var(--ink);font-weight:600}
+.lower{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:28px}
+h2{font-size:1.15rem;margin:0 0 10px}
+.lower p{margin:0 0 10px;max-width:62ch}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{font-weight:600;color:var(--muted)}
+tr.current td{background:var(--hover)}
+tr.current td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.res-on{color:var(--live);font-weight:700}
+.res-off{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){
+  .flow{animation:none}
+  .wire,.flow,.bulb .glow,.bulb .glass,.lever,.link{transition:none}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>Pila + 2 conmutadores + 1 cruzamiento + 2 bombillas</h1>
+  <p class="lead">Con un cruzamiento entre los dos conmutadores, las bombillas se controlan desde tres puntos. Pulsa sobre cualquier mecanismo del esquema o usa los botones de abajo.</p>
+
+  <section class="board">
+    <div class="topbar">
+      <div class="status" id="status" aria-live="polite"><span class="dot"></span><span id="statusText">Bombillas apagadas</span></div>
+      <span class="hint">Teclas 1, 2 y 3 para accionar los mecanismos</span>
+    </div>
+
+    <div class="svgwrap">
+      <svg id="sch" viewBox="0 0 960 440" role="img" aria-labelledby="svgtitle">
+        <title id="svgtitle">Esquema: pila, conmutador, cruzamiento, conmutador y dos bombillas en paralelo</title>
+        <defs>
+          <pattern id="perfp" width="20" height="20" patternUnits="userSpaceOnUse"><circle class="perf" cx="10" cy="10" r="1.3"/></pattern>
+          <radialGradient id="glow">
+            <stop offset="0" stop-color="#ffd43b" stop-opacity=".9"/>
+            <stop offset=".45" stop-color="#ffd43b" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#ffd43b" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="960" height="440" fill="url(#perfp)"/>
+
+        <g class="bulb" id="bulb1">
+          <circle class="glow" cx="790" cy="290" r="72" fill="url(#glow)"/>
+          <circle class="glass" cx="790" cy="290" r="28"/>
+          <path class="x" d="M770.2 270.2L809.8 309.8M809.8 270.2L770.2 309.8"/>
+        </g>
+        <g class="bulb" id="bulb2">
+          <circle class="glow" cx="880" cy="290" r="72" fill="url(#glow)"/>
+          <circle class="glass" cx="880" cy="290" r="28"/>
+          <path class="x" d="M860.2 270.2L899.8 309.8M899.8 270.2L860.2 309.8"/>
+        </g>
+
+        <!-- Cruzamiento (zona pulsable, debajo de los cables) -->
+        <g class="sw" id="swX" tabindex="0" role="button" aria-label="Accionar cruzamiento">
+          <rect class="hit xbox" x="402" y="128" width="116" height="144" rx="12"/>
+          <text class="name" x="460" y="118" text-anchor="middle">Cruzamiento</text>
+        </g>
+
+        <g id="wires"></g>
+
+        <!-- Bornes del cruzamiento -->
+        <circle class="term" cx="420" cy="160" r="6"/>
+        <circle class="term" cx="420" cy="240" r="6"/>
+        <circle class="term" cx="500" cy="160" r="6"/>
+        <circle class="term" cx="500" cy="240" r="6"/>
+
+        <!-- Pila -->
+        <line class="bat-plus" x1="52" y1="276" x2="108" y2="276"/>
+        <line class="bat-minus" x1="67" y1="294" x2="93" y2="294"/>
+        <text class="sign" x="42" y="282" text-anchor="end">+</text>
+        <text class="sign" x="42" y="301" text-anchor="end">−</text>
+        <text class="lbl" x="118" y="291">Pila 4,5 V</text>
+
+        <!-- Conmutador 1 -->
+        <g class="sw" id="swA" tabindex="0" role="button" aria-label="Accionar conmutador 1">
+          <rect class="hit" x="182" y="132" width="116" height="136" rx="12"/>
+          <text class="name" x="240" y="120" text-anchor="middle">Conmutador 1</text>
+          <g transform="translate(200,200)"><g id="levA" class="levg" transform="rotate(-26.57)"><line class="lever" x1="0" y1="0" x2="89" y2="0"/></g></g>
+          <circle class="term" cx="280" cy="160" r="6"/>
+          <circle class="term" cx="280" cy="240" r="6"/>
+          <circle class="pivot" cx="200" cy="200" r="6"/>
+        </g>
+
+        <!-- Conmutador 2 -->
+        <g class="sw" id="swB" tabindex="0" role="button" aria-label="Accionar conmutador 2">
+          <rect class="hit" x="602" y="132" width="116" height="136" rx="12"/>
+          <text class="name" x="660" y="120" text-anchor="middle">Conmutador 2</text>
+          <g transform="translate(700,200)"><g id="levB" class="levg" transform="rotate(153.43)"><line class="lever" x1="0" y1="0" x2="89" y2="0"/></g></g>
+          <circle class="term" cx="620" cy="160" r="6"/>
+          <circle class="term" cx="620" cy="240" r="6"/>
+          <circle class="pivot" cx="700" cy="200" r="6"/>
+        </g>
+
+        <text class="lbl" x="350" y="150" text-anchor="middle">hilo 1</text>
+        <text class="lbl" x="350" y="263" text-anchor="middle">hilo 2</text>
+        <text class="lbl" x="560" y="150" text-anchor="middle">hilo 1</text>
+        <text class="lbl" x="560" y="263" text-anchor="middle">hilo 2</text>
+        <text class="name" x="754" y="296" text-anchor="end">B1</text>
+        <text class="name" x="916" y="296">B2</text>
+        <circle class="node" cx="790" cy="200" r="4.5"/>
+        <circle class="node" cx="790" cy="380" r="4.5"/>
+      </svg>
+    </div>
+
+    <div class="controls">
+      <button id="btnA" type="button"><span class="bname">Conmutador 1<kbd>1</kbd></span><span class="pos" id="posA">Posición 1</span></button>
+      <button id="btnX" type="button"><span class="bname">Cruzamiento<kbd>2</kbd></span><span class="pos" id="posX">Recto</span></button>
+      <button id="btnB" type="button"><span class="bname">Conmutador 2<kbd>3</kbd></span><span class="pos" id="posB">Posición 2</span></button>
+    </div>
+    <p class="path" id="path"></p>
+  </section>
+
+  <section class="lower">
+    <div>
+      <h2>Tabla de funcionamiento</h2>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Conmutador 1</th><th>Cruzamiento</th><th>Conmutador 2</th><th>Bombillas</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h2>Cómo funciona</h2>
+      <p>El cruzamiento tiene cuatro bornes y se intercala en los dos hilos puente. En posición recta deja pasar cada hilo por su sitio; en posición cruzada intercambia los hilos, de modo que lo que entraba por el hilo 1 sale por el hilo 2 y viceversa.</p>
+      <p>Las bombillas se encienden cuando el conmutador 2 está conectado al mismo hilo por el que le llega la corriente. Accionar cualquiera de los tres mecanismos siempre cambia el estado de las bombillas.</p>
+      <p>Para más puntos de mando basta con añadir más cruzamientos en serie entre los dos conmutadores. Las bombillas van en paralelo, así que ambas reciben la tensión completa de la pila.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const NS = "http://www.w3.org/2000/svg";
+  // Tramos de cable en el sentido convencional de la corriente (+ → −)
+  const segs = {
+    bat:  "M80 276 L80 200 L200 200",
+    ta0:  "M280 160 L420 160",
+    ta1:  "M280 240 L420 240",
+    s0:   "M420 160 L500 160",   // cruzamiento recto, hilo 1
+    s1:   "M420 240 L500 240",   // cruzamiento recto, hilo 2
+    x0:   "M420 160 L500 240",   // cruzado: entra hilo 1, sale hilo 2
+    x1:   "M420 240 L500 160",   // cruzado: entra hilo 2, sale hilo 1
+    tb0:  "M500 160 L620 160",
+    tb1:  "M500 240 L620 240",
+    out1: "M700 200 L790 200",
+    out2: "M790 200 L880 200",
+    b1a:  "M790 200 L790 262",
+    b1b:  "M790 318 L790 380",
+    b2a:  "M880 200 L880 262",
+    b2b:  "M880 318 L880 380",
+    r2:   "M880 380 L790 380",
+    r1:   "M790 380 L80 380 L80 294"
+  };
+  const wires = document.getElementById("wires");
+  const el = {};
+  for (const [k, d] of Object.entries(segs)) {
+    const g = document.createElementNS(NS, "g");
+    if (/^[sx][01]$/.test(k)) g.setAttribute("class", "link");
+    const base = document.createElementNS(NS, "path");
+    base.setAttribute("d", d); base.setAttribute("class", "wire");
+    const flow = document.createElementNS(NS, "path");
+    flow.setAttribute("d", d); flow.setAttribute("class", "flow");
+    g.append(base, flow); wires.append(g); el[k] = g;
+  }
+
+  // a, b: 0 = posición 1 (hilo 1), 1 = posición 2 (hilo 2). c: 0 = recto, 1 = cruzado
+  let a = 0, c = 0, b = 1;
+
+  const levers = {
+    A: { g: document.getElementById("levA"), angles: [-26.57, 26.57], cur: -26.57 },
+    B: { g: document.getElementById("levB"), angles: [206.57, 153.43], cur: 153.43 }
+  };
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function moveLever(lv, idx){
+    const to = lv.angles[idx], from = lv.cur;
+    lv.cur = to;
+    if (reduce) { lv.g.setAttribute("transform", "rotate(" + to + ")"); return; }
+    const t0 = performance.now(), dur = 220;
+    function step(t){
+      let p = Math.min(1, (t - t0) / dur); p = 1 - Math.pow(1 - p, 3);
+      lv.g.setAttribute("transform", "rotate(" + (from + (to - from) * p) + ")");
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const tbody = document.getElementById("tbody");
+  const rows = [];
+  for (const ra of [0,1]) for (const rc of [0,1]) for (const rb of [0,1]) {
+    const on = rb === (ra ^ rc);
+    const tr = document.createElement("tr");
+    tr.innerHTML = "<td>Posición " + (ra+1) + "</td><td>" + (rc ? "Cruzado" : "Recto") + "</td><td>Posición " + (rb+1) + "</td><td class='" + (on ? "res-on'>Encendidas" : "res-off'>Apagadas") + "</td>";
+    tbody.append(tr); rows.push({ tr, ra, rc, rb });
+  }
+
+  const statusEl = document.getElementById("status");
+  const statusText = document.getElementById("statusText");
+  const pathEl = document.getElementById("path");
+
+  function render(){
+    const out = a ^ c;          // hilo por el que sale la corriente del cruzamiento
+    const on = b === out;
+    el.s0.classList.toggle("off", c === 1);
+    el.s1.classList.toggle("off", c === 1);
+    el.x0.classList.toggle("off", c === 0);
+    el.x1.classList.toggle("off", c === 0);
+    Object.values(el).forEach(g => g.classList.remove("on"));
+    if (on) ["bat","ta"+a,(c ? "x" : "s")+a,"tb"+out,"out1","out2","b1a","b1b","b2a","b2b","r2","r1"].forEach(k => el[k].classList.add("on"));
+    levers.A.g.classList.toggle("on", on);
+    levers.B.g.classList.toggle("on", on);
+    document.getElementById("bulb1").classList.toggle("lit", on);
+    document.getElementById("bulb2").classList.toggle("lit", on);
+    statusEl.classList.toggle("on", on);
+    statusText.textContent = on ? "Bombillas encendidas" : "Bombillas apagadas";
+    document.getElementById("posA").textContent = "Posición " + (a+1);
+    document.getElementById("posX").textContent = c ? "Cruzado" : "Recto";
+    document.getElementById("posB").textContent = "Posición " + (b+1);
+    rows.forEach(r => r.tr.classList.toggle("current", r.ra === a && r.rc === c && r.rb === b));
+    const xText = c
+      ? "el cruzamiento la pasa del hilo " + (a+1) + " al hilo " + (out+1)
+      : "el cruzamiento la mantiene en el hilo " + (a+1);
+    pathEl.innerHTML = on
+      ? "<strong>Circuito cerrado.</strong> Borne + de la pila → conmutador 1 → hilo " + (a+1) + " → " + xText + " → conmutador 2 → B1 y B2 en paralelo → borne − de la pila."
+      : "<strong>Circuito abierto.</strong> La corriente sale del conmutador 1 por el hilo " + (a+1) + ", " + xText + ", pero el conmutador 2 está conectado al hilo " + (b+1) + ".";
+  }
+
+  function toggleA(){ a ^= 1; moveLever(levers.A, a); render(); }
+  function toggleX(){ c ^= 1; render(); }
+  function toggleB(){ b ^= 1; moveLever(levers.B, b); render(); }
+
+  function bind(svgEl, btn, fn){
+    svgEl.addEventListener("click", fn);
+    svgEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } });
+    btn.addEventListener("click", fn);
+  }
+  bind(document.getElementById("swA"), document.getElementById("btnA"), toggleA);
+  bind(document.getElementById("swX"), document.getElementById("btnX"), toggleX);
+  bind(document.getElementById("swB"), document.getElementById("btnB"), toggleB);
+  document.addEventListener("keydown", e => {
+    if (e.key === "1") toggleA();
+    if (e.key === "2") toggleX();
+    if (e.key === "3") toggleB();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

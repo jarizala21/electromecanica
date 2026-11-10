@@ -1,0 +1,300 @@
+/* Electromecánica · lógica de la app
+   Lee el catálogo (catalogo.js) y el índice de archivos que se genera al publicar
+   (simulaciones/indice.json), pinta la portada y las secciones y abre cada
+   simulación en el visor. Rutas: #carpeta-de-seccion o #id-de-simulacion. */
+(function(){
+  "use strict";
+
+  /* ---------- símbolos dibujados en una rejilla de 48 × 48 ---------- */
+  var GLIFOS = {
+    lampara: '<circle cx="24" cy="24" r="11"/><path d="M16.2 16.2l15.6 15.6M31.8 16.2L16.2 31.8M24 4v9M24 35v9"/>',
+    manometro: '<circle cx="24" cy="21" r="13"/><path d="M16 29L31 14M25.5 14H31v5.5M24 34v10"/>',
+    engranaje: '<circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="4"/><path d="M24 6v4M24 38v4M6 24h4M38 24h4M11.3 11.3l2.8 2.8M33.9 33.9l2.8 2.8M11.3 36.7l2.8-2.8M33.9 14.1l2.8-2.8"/>',
+    magnetotermico: '<path d="M24 4v12M21 13l6 6M27 13l-6 6M24 44V32L15 18"/><path class="d" d="M19.5 25H32"/><rect x="32" y="21" width="9" height="8" rx="1"/>',
+    diferencial: '<path d="M24 4v12M21 13l6 6M27 13l-6 6M24 44V32L15 18"/><ellipse cx="24" cy="38" rx="8" ry="3"/><path class="d" d="M32 38h6V25H19.5"/>',
+    conmutada: '<path d="M4 24h8M12 24l20-9M34 14h10M34 34h10"/><circle class="f" cx="12" cy="24" r="2.2"/><circle class="t" cx="34" cy="14" r="2.2"/><circle class="t" cx="34" cy="34" r="2.2"/>',
+    cruzamiento: '<path d="M4 14h8M4 34h8M36 14h8M36 34h8M12 14l24 20M12 34l24-20"/><circle class="t" cx="12" cy="14" r="2.2"/><circle class="t" cx="12" cy="34" r="2.2"/><circle class="t" cx="36" cy="14" r="2.2"/><circle class="t" cx="36" cy="34" r="2.2"/>',
+    presostato: '<path d="M4 32h10M14 32l18-9M34 32h10"/><circle class="t" cx="14" cy="32" r="2.2"/><circle class="t" cx="34" cy="32" r="2.2"/><path class="d" d="M23 27.5V14"/><rect x="16" y="4" width="14" height="10" rx="1.5"/><path d="M21 12V6.5h3a2.2 2.2 0 0 1 0 4.4h-3"/>',
+    regulador: '<rect x="14" y="10" width="20" height="28" rx="1.5"/><path d="M24 3v7M24 38v7M21 33V15M18 18.5l3-4 3 4M34 24l2.5-4 2.5 8 2.5-8 2 4"/><path class="d" d="M24 42H8V20h6"/>',
+    simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>'
+  };
+  var TONOS = ["cobre", "azul", "verde", "violeta", "gris"];
+  var TONOS_LIBRES = ["verde", "violeta", "gris"];
+
+  var $ = function(id){ return document.getElementById(id); };
+  var root = document.documentElement;
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function norm(s){ return String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); }
+  function slug(s){ return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "x"; }
+  function sinExt(f){ return String(f || "").replace(/\.html?$/i, ""); }
+  function bonito(s){ s = String(s || "").replace(/[-_]+/g, " ").trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
+  function plural(n){ return n + (n === 1 ? " simulación" : " simulaciones"); }
+  function tono(sec){ return "tono-" + (TONOS.indexOf(sec.tono) >= 0 ? sec.tono : "gris"); }
+  function glifo(n){
+    return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      (GLIFOS[n] || GLIFOS.simulacion) + '</svg>';
+  }
+  var FLECHA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+
+  /* ---------- catálogo + archivos realmente publicados ---------- */
+  function construir(cat, indice){
+    var tonosUsados = {};
+    var secs = ((cat && cat.secciones) || []).map(function(s){
+      var carpeta = s.carpeta || s.id;
+      if (s.tono) tonosUsados[s.tono] = 1;
+      return {
+        id: s.id || carpeta, carpeta: carpeta, nombre: s.nombre || bonito(carpeta),
+        descripcion: s.descripcion || "", tono: s.tono, icono: s.icono || "simulacion",
+        simulaciones: (s.simulaciones || []).map(function(x){
+          return { id: x.id, archivo: x.archivo, titulo: x.titulo || bonito(sinExt(x.archivo)), tema: x.tema || "",
+                   descripcion: x.descripcion || "", icono: x.icono || "simulacion" };
+        })
+      };
+    });
+
+    if (indice && Array.isArray(indice.carpetas)) {
+      var hay = {};
+      indice.carpetas.forEach(function(c){ hay[c.carpeta] = c.archivos || []; });
+      // Quita del catálogo lo que ya no está publicado.
+      secs.forEach(function(s){
+        var lista = hay[s.carpeta] || [];
+        s.simulaciones = s.simulaciones.filter(function(x){ return lista.some(function(f){ return f.archivo === x.archivo; }); });
+      });
+      // Añade las carpetas y los archivos nuevos que no están en el catálogo.
+      indice.carpetas.forEach(function(c){
+        var s = null;
+        secs.forEach(function(z){ if (z.carpeta === c.carpeta) s = z; });
+        if (!s) {
+          var libre = TONOS_LIBRES.filter(function(t){ return !tonosUsados[t]; })[0] || "gris";
+          tonosUsados[libre] = 1;
+          s = { id: c.carpeta, carpeta: c.carpeta, nombre: bonito(c.carpeta), descripcion: "", tono: libre, icono: "simulacion", simulaciones: [] };
+          secs.push(s);
+        }
+        (c.archivos || []).forEach(function(f){
+          if (s.simulaciones.some(function(x){ return x.archivo === f.archivo; })) return;
+          s.simulaciones.push({ id: null, archivo: f.archivo, titulo: f.titulo || bonito(sinExt(f.archivo)), tema: "",
+                                descripcion: f.descripcion || "", icono: "simulacion" });
+        });
+      });
+      secs = secs.filter(function(s){ return s.simulaciones.length > 0; });
+    }
+
+    var usados = {};
+    function unico(s){ var base = s, n = 2; while (usados[s]) s = base + "-" + (n++); usados[s] = 1; return s; }
+    secs.forEach(function(s){ s.id = unico(slug(s.id)); });
+    secs.forEach(function(s){
+      s.simulaciones.forEach(function(x){
+        x.id = unico(slug(x.id || sinExt(x.archivo)));
+        x.ruta = "simulaciones/" + encodeURIComponent(s.carpeta) + "/" + encodeURIComponent(x.archivo);
+      });
+    });
+    return secs;
+  }
+
+  var CATALOGO = self.CATALOGO || { secciones: [] };
+  var SECCIONES = [], TODAS = [];
+  function aplicar(secs){
+    SECCIONES = secs; TODAS = [];
+    SECCIONES.forEach(function(sec){ sec.simulaciones.forEach(function(sim, i){ TODAS.push({ sec: sec, sim: sim, i: i }); }); });
+    pintarPortada();
+  }
+  function porId(id){ for (var k = 0; k < TODAS.length; k++) if (TODAS[k].sim.id === id) return TODAS[k]; return null; }
+
+  var CLAVE = "electromecanica:ultima";
+  function leerUltima(){ try { return localStorage.getItem(CLAVE); } catch (e) { return null; } }
+  function guardarUltima(id){ try { localStorage.setItem(CLAVE, id); } catch (e) {} }
+
+  /* ---------- portada ---------- */
+  $("mark").innerHTML = glifo("lampara");
+
+  function pintarPortada(){
+    $("secciones").innerHTML = SECCIONES.map(function(sec){
+      return '<a class="tile ' + tono(sec) + '" href="#' + esc(sec.id) + '">' +
+        '<span class="tile-top"><span class="glyph glyph-lg">' + glifo(sec.icono) + '</span>' +
+        '<span class="count">' + plural(sec.simulaciones.length) + '</span></span>' +
+        '<h2 class="tile-name">' + esc(sec.nombre) + '</h2>' +
+        (sec.descripcion ? '<p class="tile-desc">' + esc(sec.descripcion) + '</p>' : '') +
+        '<ul class="tile-list">' + sec.simulaciones.map(function(s){ return '<li>' + esc(s.titulo) + '</li>'; }).join("") + '</ul>' +
+        '<span class="tile-go">Ver simulaciones ' + FLECHA + '</span></a>';
+    }).join("");
+    $("meta").textContent = plural(TODAS.length) + " en " + SECCIONES.length + (SECCIONES.length === 1 ? " sección" : " secciones");
+  }
+
+  function tarjeta(e, conSeccion){
+    var chip = conSeccion ? e.sec.nombre + (e.sim.tema ? " · " + e.sim.tema : "") : (e.sim.tema || "");
+    return '<a class="card ' + tono(e.sec) + '" href="#' + esc(e.sim.id) + '">' +
+      '<span class="glyph">' + glifo(e.sim.icono) + '</span>' +
+      '<span class="card-body">' +
+        (chip ? '<span class="chip">' + esc(chip) + '</span>' : '') +
+        '<span class="card-title">' + esc(e.sim.titulo) + '</span>' +
+        (e.sim.descripcion ? '<span class="card-desc">' + esc(e.sim.descripcion) + '</span>' : '') +
+      '</span>' + CHEV + '</a>';
+  }
+
+  var buscar = $("buscar");
+  function pintarBusqueda(){
+    var texto = buscar.value.trim(), q = norm(texto), res = $("resultados");
+    if (!q) { res.hidden = true; $("secciones").hidden = false; return; }
+    var palabras = q.split(/\s+/);
+    var hits = TODAS.filter(function(e){
+      var pajar = norm([e.sim.titulo, e.sim.descripcion, e.sim.tema, e.sec.nombre].join(" "));
+      return palabras.every(function(p){ return pajar.indexOf(p) >= 0; });
+    });
+    $("secciones").hidden = true; res.hidden = false;
+    res.innerHTML = hits.length
+      ? '<p class="res-head">' + hits.length + (hits.length === 1 ? ' resultado' : ' resultados') + '</p><div class="cards">' +
+        hits.map(function(h){ return tarjeta(h, true); }).join("") + '</div>'
+      : '<p class="empty">Ninguna simulación coincide con «' + esc(texto) + '».</p>';
+  }
+  buscar.addEventListener("input", pintarBusqueda);
+
+  function pintarContinuar(){
+    var e = porId(leerUltima()), a = $("continuar");
+    if (!e) { a.hidden = true; return; }
+    a.hidden = false; a.href = "#" + e.sim.id; a.className = "continuar " + tono(e.sec);
+    $("continuar-t").textContent = e.sim.titulo;
+  }
+
+  /* ---------- vistas ---------- */
+  function mostrarVista(id){ ["vista-inicio", "vista-seccion"].forEach(function(v){ $(v).hidden = v !== id; }); }
+  function verInicio(mover){
+    mostrarVista("vista-inicio"); pintarContinuar(); pintarBusqueda();
+    if (mover) window.scrollTo(0, 0);
+  }
+  function verSeccion(sec, mover){
+    $("vista-seccion").className = "vista " + tono(sec);
+    $("sec-glyph").innerHTML = glifo(sec.icono);
+    $("sec-nombre").textContent = sec.nombre;
+    $("sec-desc").textContent = sec.descripcion || "";
+    $("sec-desc").hidden = !sec.descripcion;
+    $("sec-count").textContent = plural(sec.simulaciones.length);
+    $("sec-cards").innerHTML = sec.simulaciones.map(function(sim, i){ return tarjeta({ sec: sec, sim: sim, i: i }, false); }).join("");
+    mostrarVista("vista-seccion");
+    if (mover) { window.scrollTo(0, 0); try { $("sec-nombre").focus({ preventScroll: true }); } catch (e) {} }
+  }
+
+  /* ---------- visor ---------- */
+  var app = $("app"), visor = $("visor"), stage = $("stage"), frame = $("frame"), loading = $("loading");
+  var abierta = null, entrada = null, turno = 0, esperando = -1;
+
+  function cargar(e){
+    esperando = ++turno;
+    stage.classList.remove("listo"); loading.hidden = false;
+    frame.src = e.sim.ruta;
+  }
+  frame.addEventListener("load", function(){
+    if (esperando !== turno || !abierta) return;
+    try { if (frame.contentWindow.location.href === "about:blank") return; } catch (err) {}
+    stage.classList.add("listo"); loading.hidden = true;
+  });
+
+  function navegacion(btn, sim, etiqueta){
+    btn.disabled = !sim;
+    btn.setAttribute("data-ir", sim ? sim.id : "");
+    btn.title = sim ? etiqueta + ": " + sim.titulo : "";
+  }
+  function abrirVisor(e){
+    var sec = e.sec, sim = e.sim, i = e.i;
+    visor.className = "visor " + tono(sec);
+    $("v-back").href = "#" + sec.id;
+    $("v-back").setAttribute("aria-label", "Volver a " + sec.nombre);
+    $("v-back-label").textContent = sec.nombre;
+    $("v-sec").textContent = sec.nombre + " · ";
+    $("v-pos").textContent = (i + 1) + " de " + sec.simulaciones.length;
+    $("v-name").textContent = sim.titulo;
+    frame.title = sim.titulo;
+    navegacion($("v-prev"), sec.simulaciones[i - 1], "Anterior");
+    navegacion($("v-next"), sec.simulaciones[i + 1], "Siguiente");
+    app.hidden = true; visor.hidden = false; root.classList.add("con-visor");
+    guardarUltima(sim.id);
+    if (abierta !== sim.id) { abierta = sim.id; entrada = e; cargar(e); }
+  }
+  function cerrarVisor(){
+    if (visor.hidden) return;
+    turno++; abierta = null; entrada = null;
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    frame.src = "about:blank";
+    visor.hidden = true; app.hidden = false; root.classList.remove("con-visor");
+  }
+
+  ["v-prev", "v-next"].forEach(function(id){
+    $(id).addEventListener("click", function(){ var d = this.getAttribute("data-ir"); if (d) location.hash = d; });
+  });
+  $("v-reload").addEventListener("click", function(){
+    if (!entrada) return;
+    esperando = ++turno;
+    stage.classList.remove("listo"); loading.hidden = false;
+    try { frame.contentWindow.location.reload(); } catch (err) { frame.src = entrada.sim.ruta; }
+  });
+
+  var vFull = $("v-full");
+  if (document.fullscreenEnabled && visor.requestFullscreen) vFull.hidden = false;
+  vFull.addEventListener("click", function(){
+    try {
+      if (document.fullscreenElement) document.exitFullscreen().catch(function(){});
+      else { var p = visor.requestFullscreen(); if (p && p.catch) p.catch(function(){}); }
+    } catch (e) {}
+  });
+  document.addEventListener("fullscreenchange", function(){
+    vFull.setAttribute("aria-pressed", document.fullscreenElement ? "true" : "false");
+  });
+  document.addEventListener("keydown", function(ev){
+    if (ev.key === "Escape" && !visor.hidden && !document.fullscreenElement && entrada) location.hash = entrada.sec.id;
+  });
+
+  /* ---------- rutas ---------- */
+  function enrutar(mover){
+    var id = "";
+    try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
+    var sec = null;
+    for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === id) sec = SECCIONES[k];
+    var e = sec ? null : porId(id);
+    if (e) abrirVisor(e);
+    else { cerrarVisor(); if (sec) verSeccion(sec, mover); else verInicio(mover); }
+  }
+  window.addEventListener("hashchange", function(){ enrutar(true); });
+
+  aplicar(construir(CATALOGO, null));
+  enrutar(false);
+
+  // El índice lo genera la publicación automática: incluye simulaciones nuevas
+  // aunque no estén en el catálogo, y oculta las que se hayan borrado.
+  fetch("simulaciones/indice.json", { cache: "no-cache" })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(indice){
+      if (!indice) return;
+      aplicar(construir(CATALOGO, indice)); enrutar(false);
+      // Pide al modo sin conexión que guarde también las simulaciones nuevas.
+      if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+        navigator.serviceWorker.ready.then(function(reg){
+          if (reg.active) reg.active.postMessage({ tipo: "guardar", rutas: TODAS.map(function(e){ return e.sim.ruta; }) });
+        }).catch(function(){});
+      }
+    })
+    .catch(function(){});
+
+  /* ---------- instalación como app ---------- */
+  var enApp = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  var esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var instalar = $("instalar"), avisoIOS = $("aviso-ios"), peticion = null;
+
+  if (!enApp && esIOS) instalar.hidden = false;
+  window.addEventListener("beforeinstallprompt", function(ev){
+    ev.preventDefault(); peticion = ev; instalar.hidden = false;
+  });
+  window.addEventListener("appinstalled", function(){ peticion = null; instalar.hidden = true; avisoIOS.hidden = true; });
+  instalar.addEventListener("click", function(){
+    if (peticion) {
+      peticion.prompt();
+      peticion.userChoice.then(function(r){ if (r && r.outcome === "accepted") instalar.hidden = true; peticion = null; }).catch(function(){});
+    } else if (esIOS) {
+      avisoIOS.hidden = !avisoIOS.hidden;
+    }
+  });
+  $("cerrar-ios").addEventListener("click", function(){ avisoIOS.hidden = true; });
+
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")) {
+    window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); });
+  }
+})();
