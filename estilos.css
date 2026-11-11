@@ -88,13 +88,13 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 .entrar-ico svg{width:20px;height:20px}
 .entrar:hover .entrar-ico{transform:translateX(3px)}
 
-.creditos{display:grid;gap:8px;color:var(--muted);font-size:10px;line-height:1.4;padding-top:2px}
+.creditos{display:grid;gap:8px;color:var(--muted);font-size:12px;line-height:1.45;padding-top:2px}
 .creditos p{margin:0}
 .creditos span[lang]{display:block}
 .licencia{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;padding-top:8px;border-top:1px solid var(--line)}
 .licencia a{display:block;border-radius:3px;margin-top:1px}
 .licencia img{display:block;width:62px;height:auto}
-.licencia p{font-size:9px;line-height:1.4;display:grid;gap:2px}
+.licencia p{font-size:11px;line-height:1.45;display:grid;gap:3px}
 html:not([lang="eu"]) [data-solo="eu"],html[lang="eu"] [data-solo="es"]{display:none}
 
 /* =================== PANTALLAS (áreas y lista) =================== */
@@ -211,7 +211,7 @@ html:not([lang="eu"]) [data-solo="eu"],html[lang="eu"] [data-solo="es"]{display:
 .mini svg{width:38px;height:38px}
 .mini img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 6px);border-radius:50%;object-fit:cover;background:#fff}
 .card-body{display:grid;gap:2px;min-width:0}
-.chip{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--naranja-osc)}
+.chip{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--naranja-osc)}
 .card-title{font-weight:600;font-size:15.5px;line-height:1.25;color:var(--ink)}
 .card-desc{font-size:13px;line-height:1.4;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ir{width:34px;height:34px;border-radius:50%;background:var(--naranja);color:var(--marino);display:grid;place-items:center;flex:none;transition:transform .15s ease}
@@ -242,7 +242,8 @@ svg .t{fill:var(--naranja-soft)}
 .av-tipo{font:inherit;font-size:13.5px;font-weight:500;line-height:1.25;color:var(--ink);background:var(--superficie-2);
   border:2px solid transparent;border-radius:14px;padding:11px 10px;min-height:48px;cursor:pointer;text-align:center}
 .av-tipo:hover{border-color:var(--line)}
-.av-tipo[aria-pressed="true"]{background:var(--marino);color:#fff;border-color:var(--marino)}
+.av-tipo[aria-pressed="true"]{background:var(--marino);color:#fff;border-color:var(--naranja);font-weight:600}
+@media (prefers-color-scheme: dark){ .av-tipo[aria-pressed="true"]{background:var(--marino-2)} }
 .av-campo select,.av-campo textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--superficie-2);border:2px solid transparent;
   border-radius:14px;padding:11px 12px;width:100%;min-width:0;outline:none}
 .av-campo select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
@@ -304,7 +305,6 @@ svg .t{fill:var(--naranja-soft)}
 /* =================== AJUSTES POR TAMAÑO =================== */
 @media (max-width:600px){
   .vpos-sec,#v-full{display:none}
-  .vbar .redondo{width:40px;height:40px}
   .vactions{gap:4px}
   .vbar{gap:8px}
   .vname{font-size:15.5px;line-height:1.15;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -376,7 +376,19 @@ svg .t{fill:var(--naranja-soft)}
   .sec-desc{font-size:15px}
   .sec-foto{right:3%;width:36%}
 }
+/* =================== RESPUESTA AL TOCAR ===================
+   En el móvil no hay «hover»: se quita el efecto de levantar (si no, se queda pegado
+   tras tocar) y todos los botones y tarjetas responden al pulsarlos. */
+@media (hover:none){
+  .redondo:hover:not(:disabled),.entrar:hover,.area:hover,.card:hover,
+  .entrar:hover .entrar-ico,.area:hover .flecha,.card:hover .ir,.area:hover .area-foto img{transform:none}
+}
+.cerrar,.av-tipo,.av-enviar,.av-otro{transition:transform .12s ease,background .15s ease,border-color .15s ease}
+.redondo:active:not(:disabled),.cerrar:active{transform:scale(.92);transition-duration:.08s}
+.entrar:active,.area:active,.card:active,.av-tipo:active,.av-enviar:active:not(:disabled),.av-otro:active{transform:scale(.97);transition-duration:.08s}
+
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important}
+  .area:hover .area-foto img{transform:none}
   .spinner{animation-duration:2.4s}
 }
