@@ -503,7 +503,7 @@
   function construirAviso(){
     var donde = lugar($("av-donde").value), datos = {};
     datosAuto().forEach(function(d){ datos[TEXTOS.es.datos[d[0]]] = valorDato(d[0], d[1], TEXTOS.es); });
-    var asunto = "Electromecánica · " + TIPOS_ES[avTipo] + " · " + donde.es;
+    var asunto = "App-Electromecanica: " + TIPOS_ES[avTipo] + " · " + donde.es;
     var aviso = { subject: asunto.length > 120 ? asunto.slice(0, 117) + "…" : asunto, from_name: "App Electromecánica",
                   "Tipo": TIPOS_ES[avTipo], "Dónde": donde.es, "Mensaje": $("av-msg").value.trim() };
     Object.keys(datos).forEach(function(k){ aviso[k] = datos[k]; });
