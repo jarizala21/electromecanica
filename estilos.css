@@ -122,7 +122,7 @@ html:not([lang="eu"]) [data-solo="eu"],html[lang="eu"] [data-solo="es"]{display:
 .empty{margin:0;padding:28px 20px;text-align:center;color:var(--muted);background:var(--blanco);border-radius:20px;box-shadow:var(--sombra-suave)}
 
 /* ---------- menú de áreas: cabe en una pantalla ---------- */
-#vista-areas{height:100vh;height:100svh}
+#vista-areas,#vista-sub{height:100vh;height:100svh}
 #vista-areas.buscando{height:auto;min-height:100svh}
 .areas-head{padding:2px 20px 12px}
 .areas-head h2{margin:0;font-size:clamp(22px,6vw,28px);font-weight:700;line-height:1.15;color:var(--marino-txt);letter-spacing:-.01em}
@@ -181,6 +181,14 @@ html:not([lang="eu"]) [data-solo="eu"],html[lang="eu"] [data-solo="es"]{display:
   .rejilla .area-foto{height:60%}
   .rejilla .area h3{font-size:clamp(15px,10cqw,20px)}
 }
+/* Número impar de tarjetas en rejilla: la última ocupa las dos columnas, apaisada (foto a la derecha) */
+.rejilla .area.ancha{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;
+  background:linear-gradient(135deg,var(--marino-2) 0%,var(--marino) 55%,var(--marino-3) 100%)}
+.rejilla .ancha .area-foto{top:0;bottom:0;right:0;left:auto;width:41%;height:auto}
+.rejilla .ancha .disco{width:min(40cqw,80cqh);height:min(40cqw,80cqh)}
+.rejilla .ancha .area-foto img{width:min(46cqw,84cqh);height:min(46cqw,84cqh)}
+.rejilla .ancha .area-texto{width:61%;padding:12px 4px 12px 18px}
+.rejilla .ancha .area-desc{display:-webkit-box;-webkit-line-clamp:2}
 
 /* =================== LISTA DE UN ÁREA =================== */
 #vista-seccion .barra{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);
@@ -315,7 +323,7 @@ svg .t{fill:var(--naranja-soft)}
 }
 /* Móvil muy bajo o en horizontal: el menú de áreas pasa a desplazarse */
 @media (max-height:540px) and (max-width:899px){
-  #vista-areas{height:auto;min-height:100svh}
+  #vista-areas,#vista-sub{height:auto;min-height:100svh}
   .areas{grid-template-rows:none;grid-auto-rows:150px}
   .areas.rejilla{grid-template-rows:none;grid-auto-rows:230px}
 }
@@ -356,6 +364,7 @@ svg .t{fill:var(--naranja-soft)}
   .areas.dos-filas .area-texto{width:58%;padding:14px 4px 14px 24px}
   .areas.dos-filas .area h3{font-size:clamp(19px,11cqh,26px);hyphens:none}
   .areas.dos-filas .area-desc{display:-webkit-box;font-size:clamp(12px,8cqh,15px)}
+  .rejilla .area.ancha{grid-column:auto}
 }
 @media (min-width:900px) and (min-aspect-ratio:5/4){
   .portada{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:1fr}

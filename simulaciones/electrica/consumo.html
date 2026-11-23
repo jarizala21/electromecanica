@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Consumo eléctrico</title>
+<meta name="description" content="Qué es consumir energía, kWh, contador, factura de la luz, cálculo del consumo de aparatos, stand-by y ahorro, con simulador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.txt-b{font-size:13px;fill:var(--marino);font-weight:700}
+.fila-f{fill:#f6f4ef}
+input[type=number]{font:inherit;border:0;border-radius:12px;padding:8px 10px;background:var(--blanco);box-shadow:var(--sombra);color:var(--marino-txt);font-weight:600;width:110px;max-width:100%}
+.calc{display:grid;gap:8px}
+.calc .linea{display:grid;gap:3px}
+.calc .linea span{font-size:13px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.calc .linea span b{color:var(--marino-txt);font-weight:600}
+.calc .linea span em{font-style:normal;color:var(--muted);font-variant-numeric:tabular-nums}
+.barra.fija i{background:var(--naranja)}
+.res-ej{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Consumo eléctrico" data-eu="Kontsumo elektrikoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es"><span class="clave">Consumir</span> electricidad es <b>usar energía eléctrica</b> para que un aparato haga su trabajo: dar luz, calentar, mover un motor… Lo que pagamos en la factura no es la potencia, sino <b>la energía que hemos gastado</b>.</p>
+      <p class="eu">Elektrizitatea <span class="clave">kontsumitzea</span> aparatu batek bere lana egin dezan <b>energia elektrikoa erabiltzea</b> da: argia eman, berotu, motor bat mugitu… Fakturan ordaintzen duguna ez da potentzia, <b>gastatu dugun energia</b> baizik.</p>
+      <p class="es">El consumo depende de dos cosas: <b>la potencia del aparato</b> (cuánto «tira») y <b>el tiempo que está encendido</b>.</p>
+      <p class="eu">Kontsumoa bi gauzaren araberakoa da: <b>aparatuaren potentzia</b> (zenbat «eskatzen» duen) eta <b>piztuta dagoen denbora</b>.</p>
+      <p class="formula">E = P × t</p>
+      <p class="es"><b>E</b> = energía consumida (kWh) · <b>P</b> = potencia (kW) · <b>t</b> = tiempo (horas)</p>
+      <p class="eu"><b>E</b> = kontsumitutako energia (kWh) · <b>P</b> = potentzia (kW) · <b>t</b> = denbora (orduak)</p>
+      <p class="nota es">La potencia (W, kW) se explica en su propia ficha. Aquí la usamos para calcular el consumo.</p>
+      <p class="nota eu">Potentzia (W, kW) bere fitxan azaltzen da. Hemen kontsumoa kalkulatzeko erabiltzen dugu.</p>
+    </div>
+
+    <div class="card">
+      <h2 data-es="El kilovatio hora (kWh)" data-eu="Kilowatt-ordua (kWh)"></h2>
+      <p class="es">El consumo se mide en <span class="clave">kWh</span> (kilovatio hora): es la energía que gasta un aparato de <b>1000 W</b> encendido durante <b>1 hora</b>. Todas estas cosas consumen <b>1 kWh</b>:</p>
+      <p class="eu">Kontsumoa <span class="clave">kWh</span>-tan (kilowatt-ordu) neurtzen da: <b>1000 W</b>-ko aparatu batek <b>ordubetez</b> piztuta gastatzen duen energia da. Gauza hauek guztiek <b>1 kWh</b> kontsumitzen dute:</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 360 170" role="img" aria-label="1 kWh">
+        <!-- LED -->
+        <rect x="6" y="6" width="110" height="158" rx="14" fill="#f6f4ef"/>
+        <circle cx="61" cy="52" r="22" fill="#ffe9a8" stroke="#242d5f" stroke-width="2"/>
+        <rect x="52" y="74" width="18" height="14" rx="2" fill="#c9ced6" stroke="#242d5f" stroke-width="1.5"/>
+        <path d="M53 52h16M57 46l4 6 4-6" stroke="#b45f00" stroke-width="1.8" fill="none"/>
+        <text class="txt" x="61" y="112" text-anchor="middle" data-es="Bombilla LED" data-eu="LED bonbilla"></text>
+        <text class="txt-b" x="61" y="132" text-anchor="middle">10 W</text>
+        <text class="txt-s" x="61" y="152" text-anchor="middle" data-es="× 100 horas" data-eu="× 100 ordu"></text>
+        <!-- Plancha -->
+        <rect x="125" y="6" width="110" height="158" rx="14" fill="#f6f4ef"/>
+        <path d="M146 80h66c0-22-14-40-40-40h-6c-8 0-10 6-6 10h10c14 0 22 12 22 22" fill="#c9cfd8" stroke="#242d5f" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M146 80h66v6h-66z" fill="#f39200" stroke="#242d5f" stroke-width="2"/>
+        <text class="txt" x="180" y="112" text-anchor="middle" data-es="Plancha" data-eu="Plantxa"></text>
+        <text class="txt-b" x="180" y="132" text-anchor="middle">1000 W</text>
+        <text class="txt-s" x="180" y="152" text-anchor="middle" data-es="× 1 hora" data-eu="× ordu 1"></text>
+        <!-- Horno -->
+        <rect x="244" y="6" width="110" height="158" rx="14" fill="#f6f4ef"/>
+        <rect x="266" y="26" width="66" height="60" rx="6" fill="#c9cfd8" stroke="#242d5f" stroke-width="2"/>
+        <rect x="274" y="42" width="50" height="36" rx="4" fill="#2d3340"/>
+        <path d="M280 70h38" stroke="#f39200" stroke-width="3"/>
+        <circle cx="282" cy="34" r="3" fill="#242d5f"/><circle cx="294" cy="34" r="3" fill="#242d5f"/>
+        <text class="txt" x="299" y="112" text-anchor="middle" data-es="Horno" data-eu="Labea"></text>
+        <text class="txt-b" x="299" y="132" text-anchor="middle">2000 W</text>
+        <text class="txt-s" x="299" y="152" text-anchor="middle" data-es="× ½ hora" data-eu="× ordu-erdi"></text>
+      </svg>
+      <figcaption data-es="Mucha potencia poco tiempo o poca potencia mucho tiempo: el mismo consumo" data-eu="Potentzia handia denbora gutxian edo potentzia txikia denbora luzean: kontsumo bera"></figcaption>
+    </figure>
+
+    <div class="card">
+      <h2 data-es="Paso a paso: una estufa" data-eu="Urratsez urrats: berogailu bat"></h2>
+      <ol>
+        <li><span class="es">Potencia de la estufa: <b>2000 W</b>. La paso a kW dividiendo entre 1000 → <b>2 kW</b>.</span><span class="eu">Berogailuaren potentzia: <b>2000 W</b>. kW-tara pasatzen dut 1000z zatituta → <b>2 kW</b>.</span></li>
+        <li><span class="es">Tiempo encendida: <b>3 horas</b>.</span><span class="eu">Piztuta egondako denbora: <b>3 ordu</b>.</span></li>
+        <li><span class="es">Multiplico: 2 kW × 3 h = <b>6 kWh</b>.</span><span class="eu">Biderkatu: 2 kW × 3 h = <b>6 kWh</b>.</span></li>
+        <li><span class="es">Si el kWh cuesta 0,15 € (ejemplo): 6 × 0,15 = <b>0,90 €</b>.</span><span class="eu">kWh-ak 0,15 € balio badu (adibidea): 6 × 0,15 = <b>0,90 €</b>.</span></li>
+      </ol>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es"><b>Potencia</b> (kW) = lo que «tira» el aparato. <b>Consumo</b> (kWh) = potencia × horas. 1 kWh = 1000 W durante 1 hora.</p>
+      <p class="eu"><b>Potentzia</b> (kW) = aparatuak «eskatzen» duena. <b>Kontsumoa</b> (kWh) = potentzia × orduak. 1 kWh = 1000 W ordubetez.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. KONTAGAILUA ============ -->
+  <section class="panel" data-tab="kontagailua" data-es="Contador" data-eu="Kontagailua" hidden>
+    <div class="card">
+      <p class="es">El <span class="clave">contador</span> mide la energía que entra en la casa o el taller, en <b>kWh</b>. Funciona como el cuentakilómetros de un coche: <b>siempre suma</b>, nunca vuelve atrás.</p>
+      <p class="eu"><span class="clave">Kontagailuak</span> etxean edo tailerrean sartzen den energia neurtzen du, <b>kWh</b>-tan. Auto baten kilometro-kontagailuak bezala funtzionatzen du: <b>beti batzen du</b>, ez du inoiz atzera egiten.</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 360 230" role="img" aria-label="Contador analógico y digital">
+        <!-- Analógico -->
+        <rect x="8" y="8" width="164" height="200" rx="14" fill="#2d3340"/>
+        <rect x="18" y="18" width="144" height="150" rx="8" fill="#f1efea"/>
+        <text class="txt" x="90" y="38" text-anchor="middle" font-size="12">kWh</text>
+        <rect x="30" y="46" width="120" height="28" rx="4" fill="#1b2147"/>
+        <g font-size="16" font-weight="700" fill="#fff" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">
+          <text x="42" y="66">0</text><text x="66" y="66">4</text><text x="90" y="66">2</text><text x="114" y="66">1</text>
+        </g>
+        <rect x="128" y="48" width="20" height="24" rx="3" fill="#c62f2f"/>
+        <text x="138" y="66" font-size="16" font-weight="700" fill="#fff" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">0</text>
+        <!-- disco giratorio -->
+        <rect x="36" y="96" width="108" height="34" rx="4" fill="#fff" stroke="#8d95a3"/>
+        <ellipse cx="90" cy="113" rx="48" ry="7" fill="#c9cfd8" stroke="#6b7280"/>
+        <rect id="marca-disco" x="88" y="106" width="6" height="14" fill="#c62f2f"/>
+        <text class="txt-s" x="90" y="150" text-anchor="middle" data-es="disco giratorio" data-eu="disko birakaria"></text>
+        <text class="txt" x="90" y="228" text-anchor="middle" data-es="Analógico (antiguo)" data-eu="Analogikoa (zaharra)"></text>
+        <!-- Digital -->
+        <rect x="188" y="8" width="164" height="200" rx="14" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>
+        <rect x="204" y="26" width="132" height="44" rx="6" fill="#bfe3c8" stroke="#6b7280"/>
+        <text x="270" y="55" font-size="17" font-weight="700" fill="#1b2147" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">04210,7</text>
+        <text class="txt-s" x="330" y="66" text-anchor="end">kWh</text>
+        <circle id="led-pulso" cx="216" cy="92" r="5" fill="#c62f2f"/>
+        <text class="txt-s" x="226" y="95" data-es="1000 imp/kWh" data-eu="1000 inp/kWh"></text>
+        <rect x="290" y="84" width="40" height="18" rx="9" fill="#242d5f"/>
+        <text x="310" y="97" font-size="9" fill="#fff" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" data-es="botón" data-eu="botoia"></text>
+        <path d="M222 130c8-8 20-8 28 0M228 136c5-4 11-4 16 0" stroke="#2b6cb0" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <circle cx="236" cy="142" r="2.5" fill="#2b6cb0"/>
+        <text class="txt-s" x="262" y="138" data-es="lectura a distancia" data-eu="urrutiko irakurketa"></text>
+        <text class="txt" x="270" y="228" text-anchor="middle" data-es="Digital (inteligente)" data-eu="Digitala (adimenduna)"></text>
+      </svg>
+      <figcaption data-es="Los dos marcan 4210 kWh desde que se instalaron" data-eu="Biek 4210 kWh markatzen dituzte instalatu zirenetik"></figcaption>
+    </figure>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Contador analógico</h3><h3 class="eu">Kontagailu analogikoa</h3>
+        <p class="es">Tiene un <b>disco</b> que gira más rápido cuanta más potencia se usa, y unos <b>rodillos con números</b>. La cifra roja son décimas: no se cuenta.</p>
+        <p class="eu"><b>Disko</b> bat du, potentzia gehiago erabili ahala azkarrago biratzen duena, eta <b>zenbakidun arrabolak</b>. Zifra gorria hamarrenak dira: ez da kontatzen.</p></div>
+      <div class="card"><h3 class="es">Contador digital (inteligente)</h3><h3 class="eu">Kontagailu digitala (adimenduna)</h3>
+        <p class="es">Muestra la lectura en una <b>pantalla</b> y la envía sola a la compañía (<b>telegestión</b>). Guarda el consumo por horas y también puede <b>cortar</b> si se pasa de la potencia contratada (ver la ficha del ICP).</p>
+        <p class="eu">Irakurketa <b>pantaila</b> batean erakusten du eta berak bidaltzen dio konpainiari (<b>telekudeaketa</b>). Orduko kontsumoa gordetzen du, eta kontratatutako potentzia gainditzen bada <b>moztu</b> ere egin dezake (ikusi PKE/ICParen fitxa).</p></div>
+      <div class="card"><h3 class="es">El LED que parpadea</h3><h3 class="eu">Keinuka dagoen LEDa</h3>
+        <p class="es">Da un destello por cada Wh (1000 imp/kWh). Cuanto más rápido parpadea, <b>más potencia</b> se está usando en ese momento.</p>
+        <p class="eu">Wh bakoitzeko distira bat ematen du (1000 inp/kWh). Zenbat eta azkarrago keinu egin, orduan eta <b>potentzia gehiago</b> erabiltzen ari da une horretan.</p></div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Cómo se calcula el consumo de un periodo" data-eu="Aldi bateko kontsumoa nola kalkulatu"></h2>
+      <p class="formula es">Consumo = lectura actual − lectura anterior</p>
+      <p class="formula eu">Kontsumoa = oraingo irakurketa − aurreko irakurketa</p>
+      <p class="es">Ejemplo: el mes pasado el contador marcaba 4210 kWh y hoy marca 4460 kWh → 4460 − 4210 = <b>250 kWh</b> consumidos.</p>
+      <p class="eu">Adibidea: joan den hilean kontagailuak 4210 kWh markatzen zituen eta gaur 4460 kWh → 4460 − 4210 = <b>250 kWh</b> kontsumituta.</p>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h2 data-es="Pruébalo" data-eu="Probatu"></h2>
+      <div class="lectura-g">
+        <div><small data-es="Lectura anterior" data-eu="Aurreko irakurketa"></small><b id="lec-a">–</b></div>
+        <div><small data-es="Lectura actual" data-eu="Oraingo irakurketa"></small><b id="lec-b">–</b></div>
+      </div>
+      <div class="res-ej">
+        <label for="lec-resp" data-es="Consumo (kWh):" data-eu="Kontsumoa (kWh):"></label>
+        <input id="lec-resp" type="number" inputmode="numeric" min="0" step="1">
+        <button class="boton" id="lec-comp" type="button" data-es="Comprobar" data-eu="Egiaztatu"></button>
+        <button class="boton claro" id="lec-otro" type="button" data-es="Otro" data-eu="Beste bat"></button>
+      </div>
+      <div class="estado" id="lec-estado"></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. FAKTURA ============ -->
+  <section class="panel" data-tab="faktura" data-es="Factura" data-eu="Faktura" hidden>
+    <div class="card">
+      <p class="es">La factura de la luz tiene <b>dos partes principales</b>: lo que pagas por tener una <b>potencia contratada</b> (aunque no enciendas nada) y lo que pagas por la <b>energía consumida</b> (los kWh). Después se suman el alquiler del contador y los impuestos.</p>
+      <p class="eu">Argiaren fakturak <b>bi zati nagusi</b> ditu: <b>kontratatutako potentzia</b> izateagatik ordaintzen duzuna (ezer piztu ez arren) eta <b>kontsumitutako energiagatik</b> ordaintzen duzuna (kWh-ak). Gero, kontagailuaren alokairua eta zergak gehitzen dira.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-factura" viewBox="0 0 320 336" role="img" aria-label="Factura de ejemplo">
+          <rect x="4" y="4" width="312" height="328" rx="10" fill="#fff" stroke="#c9ced6" stroke-width="1.5"/>
+          <rect x="4" y="4" width="312" height="8" rx="4" fill="#f39200"/>
+          <text class="txt-b" x="16" y="32" data-es="FACTURA DE ELECTRICIDAD" data-eu="ELEKTRIZITATE-FAKTURA"></text>
+          <text class="txt-s" x="16" y="47" data-es="Ejemplo con valores redondos" data-eu="Balio biribilak dituen adibidea"></text>
+          <g class="resaltable" data-parte="periodo">
+            <rect class="fila-f" x="12" y="56" width="296" height="22" rx="5"/>
+            <text class="txt" x="20" y="71" data-es="Periodo de facturación" data-eu="Fakturazio-aldia"></text>
+            <text class="txt" x="300" y="71" text-anchor="end" data-es="30 días" data-eu="30 egun"></text>
+          </g>
+          <g class="resaltable" data-parte="contratada">
+            <rect class="fila-f" x="12" y="82" width="296" height="22" rx="5"/>
+            <text class="txt" x="20" y="97" data-es="Potencia contratada" data-eu="Kontratatutako potentzia"></text>
+            <text class="txt" x="300" y="97" text-anchor="end">4,6 kW</text>
+          </g>
+          <g class="resaltable" data-parte="lecturas">
+            <rect class="fila-f" x="12" y="108" width="296" height="40" rx="5"/>
+            <text class="txt" x="20" y="123" data-es="Lectura anterior" data-eu="Aurreko irakurketa"></text>
+            <text class="txt" x="300" y="123" text-anchor="end">4210 kWh</text>
+            <text class="txt" x="20" y="141" data-es="Lectura actual" data-eu="Oraingo irakurketa"></text>
+            <text class="txt" x="300" y="141" text-anchor="end">4460 kWh</text>
+          </g>
+          <g class="resaltable" data-parte="t-potencia">
+            <rect class="fila-f" x="12" y="156" width="296" height="38" rx="5"/>
+            <text class="txt" x="20" y="171" data-es="Término de potencia" data-eu="Potentzia-terminoa"></text>
+            <text class="txt" x="300" y="171" text-anchor="end">13,80 €</text>
+            <text class="txt-s" x="20" y="187" data-es="4,6 kW × 30 días × 0,10 €/kW·día" data-eu="4,6 kW × 30 egun × 0,10 €/kW·egun"></text>
+          </g>
+          <g class="resaltable" data-parte="t-energia">
+            <rect class="fila-f" x="12" y="198" width="296" height="38" rx="5"/>
+            <text class="txt" x="20" y="213" data-es="Término de energía" data-eu="Energia-terminoa"></text>
+            <text class="txt" x="300" y="213" text-anchor="end">37,50 €</text>
+            <text class="txt-s" x="20" y="229" data-es="250 kWh × 0,15 €/kWh" data-eu="250 kWh × 0,15 €/kWh"></text>
+          </g>
+          <g class="resaltable" data-parte="otros">
+            <rect class="fila-f" x="12" y="240" width="296" height="40" rx="5"/>
+            <text class="txt" x="20" y="255" data-es="Alquiler del contador" data-eu="Kontagailuaren alokairua"></text>
+            <text class="txt" x="300" y="255" text-anchor="end">0,80 €</text>
+            <text class="txt" x="20" y="273" data-es="Impuestos (eléctrico + IVA)" data-eu="Zergak (elektrizitatea + BEZ)"></text>
+            <text class="txt" x="300" y="273" text-anchor="end">13,60 €</text>
+          </g>
+          <g class="resaltable" data-parte="total">
+            <rect x="12" y="290" width="296" height="32" rx="6" fill="#242d5f"/>
+            <text x="20" y="311" font-size="13" font-weight="700" fill="#fff" font-family="Poppins,system-ui,sans-serif" data-es="TOTAL A PAGAR" data-eu="ORDAINTZEKO GUZTIRA"></text>
+            <text x="300" y="311" font-size="15" font-weight="700" fill="#ffd257" text-anchor="end" font-family="Poppins,system-ui,sans-serif">65,70 €</text>
+          </g>
+        </svg>
+        <figcaption data-es="Toca una línea para ver qué significa" data-eu="Ukitu lerro bat zer esan nahi duen ikusteko"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-factura">
+        <li><button data-parte="periodo"><span class="n">1</span><span><b class="es">Periodo de facturación</b><b class="eu">Fakturazio-aldia</b><small class="es">Los días que se cobran, normalmente un mes (unos 30 días).</small><small class="eu">Kobratzen diren egunak, normalean hilabete bat (30 egun inguru).</small></span></button></li>
+        <li><button data-parte="contratada"><span class="n">2</span><span><b class="es">Potencia contratada</b><b class="eu">Kontratatutako potentzia</b><small class="es">La potencia máxima que puedes usar a la vez. Si la superas, salta el ICP o el contador.</small><small class="eu">Aldi berean erabil dezakezun potentzia handiena. Gainditzen baduzu, PKE (ICP) edo kontagailua jauzten da.</small></span></button></li>
+        <li><button data-parte="lecturas"><span class="n">3</span><span><b class="es">Lecturas del contador</b><b class="eu">Kontagailuaren irakurketak</b><small class="es">Actual − anterior = 4460 − 4210 = 250 kWh consumidos.</small><small class="eu">Oraingoa − aurrekoa = 4460 − 4210 = 250 kWh kontsumituta.</small></span></button></li>
+        <li><button data-parte="t-potencia"><span class="n">4</span><span><b class="es">Término de potencia (fijo)</b><b class="eu">Potentzia-terminoa (finkoa)</b><small class="es">kW contratados × días × precio. Se paga aunque no consumas nada.</small><small class="eu">Kontratatutako kW × egunak × prezioa. Ezer kontsumitu ez arren ordaintzen da.</small></span></button></li>
+        <li><button data-parte="t-energia"><span class="n">5</span><span><b class="es">Término de energía (variable)</b><b class="eu">Energia-terminoa (aldakorra)</b><small class="es">kWh consumidos × precio del kWh. Cuanto menos consumes, menos pagas.</small><small class="eu">Kontsumitutako kWh × kWh-aren prezioa. Zenbat eta gutxiago kontsumitu, orduan eta gutxiago ordaindu.</small></span></button></li>
+        <li><button data-parte="otros"><span class="n">6</span><span><b class="es">Alquiler e impuestos</b><b class="eu">Alokairua eta zergak</b><small class="es">Alquiler del contador, impuesto sobre la electricidad e IVA.</small><small class="eu">Kontagailuaren alokairua, elektrizitatearen gaineko zerga eta BEZa.</small></span></button></li>
+        <li><button data-parte="total"><span class="n">7</span><span><b class="es">Total</b><b class="eu">Guztira</b><small class="es">La suma de todo: 13,80 + 37,50 + 0,80 + 13,60 = 65,70 €.</small><small class="eu">Guztiaren batura: 13,80 + 37,50 + 0,80 + 13,60 = 65,70 €.</small></span></button></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 data-es="Precio según la hora" data-eu="Prezioa orduaren arabera"></h2>
+      <p class="es">En muchas tarifas el kWh <b>no cuesta lo mismo a todas horas</b>: es más caro en las horas de más consumo (<b>punta</b>), intermedio en <b>llano</b> y más barato de noche y en fin de semana (<b>valle</b>). Poner la lavadora o cargar baterías en horas valle ahorra dinero.</p>
+      <p class="eu">Tarifa askotan kWh-ak <b>ez du ordu guztietan gauza bera balio</b>: kontsumo handieneko orduetan garestiagoa da (<b>punta</b>), tartekoa <b>lauan</b> eta merkeagoa gauez eta asteburuetan (<b>harana</b>). Garbigailua jartzeak edo bateriak kargatzeak haraneko orduetan dirua aurrezten du.</p>
+      <p class="nota es">Los precios de esta ficha son de ejemplo. Cada compañía y cada contrato tiene los suyos.</p>
+      <p class="nota eu">Fitxa honetako prezioak adibideak dira. Konpainia eta kontratu bakoitzak bereak ditu.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige <b>casa</b> o <b>taller</b>, enciende aparatos y ajusta sus <b>horas de uso al día</b>. Mira cómo suma el <b>contador</b> (1 segundo = 1 hora) y cuánto cuesta al mes con el precio del kWh que elijas.</p>
+      <p class="eu">Aukeratu <b>etxea</b> edo <b>tailerra</b>, piztu aparatuak eta doitu haien <b>eguneko erabilera-orduak</b>. Begiratu nola batzen duen <b>kontagailuak</b> (segundo 1 = ordu 1) eta zenbat balio duen hilean aukeratzen duzun kWh-aren prezioarekin.</p>
+    </div>
+    <figure class="fig"><svg id="circ" viewBox="0 0 340 200" role="img" aria-label="Contador y consumo"></svg></figure>
+    <div class="chips" id="lugar">
+      <button type="button" data-l="casa" aria-pressed="true" data-es="Casa" data-eu="Etxea"></button>
+      <button type="button" data-l="taller" aria-pressed="false" data-es="Taller" data-eu="Tailerra"></button>
+    </div>
+    <div class="chips" id="aparatos"></div>
+    <div class="mandos" id="horas"></div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Precio del kWh (ejemplo)" data-eu="kWh-aren prezioa (adibidea)"></span><output id="precio-t"></output></label><input id="precio" type="range" min="0.05" max="0.40" step="0.01" value="0.15"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Potencia ahora" data-eu="Potentzia orain"></small><b id="r-p">–</b></div>
+      <div><small data-es="kWh al día" data-eu="kWh egunean"></small><b id="r-dia">–</b></div>
+      <div><small data-es="kWh al mes" data-eu="kWh hilean"></small><b id="r-mes">–</b></div>
+      <div><small data-es="€ al mes" data-eu="€ hilean"></small><b id="r-emes">–</b></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Cálculo aparato por aparato" data-eu="Kalkulua aparatuz aparatu"></h2>
+      <div class="calc" id="calc"></div>
+      <p class="nota es" style="margin-top:10px">Mes = 30 días. Solo es el término de energía: falta sumar el término de potencia, el alquiler y los impuestos.</p>
+      <p class="nota eu" style="margin-top:10px">Hilabetea = 30 egun. Energia-terminoa bakarrik da: potentzia-terminoa, alokairua eta zergak gehitu behar dira.</p>
+    </div>
+  </section>
+  <!-- ============ 5. AURREZTU ============ -->
+  <section class="panel" data-tab="aurreztu" data-es="Stand-by y ahorro" data-eu="Stand-by eta aurrezpena" hidden>
+    <div class="card">
+      <h2 data-es="El consumo «fantasma»: stand-by" data-eu="Kontsumo «mamua»: stand-by"></h2>
+      <p class="es">Muchos aparatos <b>siguen consumiendo aunque estén apagados</b> con el mando: el piloto rojo de la tele, el reloj del microondas, los cargadores enchufados, el router, la consola… Es el <span class="clave">stand-by</span> (modo espera).</p>
+      <p class="eu">Aparatu askok <b>kontsumitzen jarraitzen dute urrutiko agintearekin itzalita egon arren</b>: telebistaren pilotu gorria, mikrouhin-labearen erlojua, entxufatuta dauden kargagailuak, routerra, kontsola… <span class="clave">Stand-by</span>-a da (itxaron-modua).</p>
+      <p class="es">Cada uno gasta poco (1 – 10 W), pero <b>está las 24 horas</b>. Ejemplo con 20 W de stand-by en total:</p>
+      <p class="eu">Bakoitzak gutxi gastatzen du (1 – 10 W), baina <b>24 orduz dago</b>. Adibidea, guztira 20 W-ko stand-by-arekin:</p>
+      <ol>
+        <li><span class="es">20 W = 0,02 kW</span><span class="eu">20 W = 0,02 kW</span></li>
+        <li><span class="es">0,02 kW × 24 h = 0,48 kWh al día</span><span class="eu">0,02 kW × 24 h = 0,48 kWh egunean</span></li>
+        <li><span class="es">0,48 × 365 días ≈ <b>175 kWh al año</b></span><span class="eu">0,48 × 365 egun ≈ <b>175 kWh urtean</b></span></li>
+        <li><span class="es">175 × 0,15 € ≈ <b>26 € al año</b> por no hacer nada.</span><span class="eu">175 × 0,15 € ≈ <b>26 € urtean</b> ezer egin gabe.</span></li>
+      </ol>
+      <p class="es">Solución: una <b>regleta con interruptor</b> para apagar todo de golpe.</p>
+      <p class="eu">Konponbidea: <b>etengailudun entxufe-regleta</b> bat dena batera itzaltzeko.</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 360 200" role="img" aria-label="Etiqueta energética">
+        <g font-family="Poppins,system-ui,sans-serif" font-weight="700" font-size="13" fill="#fff">
+          <path d="M10 10h90l10 11-10 11H10z" fill="#1f8a4c"/><text x="20" y="26">A</text>
+          <path d="M10 36h115l10 11-10 11H10z" fill="#4caf50"/><text x="20" y="52">B</text>
+          <path d="M10 62h140l10 11-10 11H10z" fill="#9ccc3c"/><text x="20" y="78">C</text>
+          <path d="M10 88h165l10 11-10 11H10z" fill="#ffd257"/><text x="20" y="104" fill="#1b2147">D</text>
+          <path d="M10 114h190l10 11-10 11H10z" fill="#f39200"/><text x="20" y="130">E</text>
+          <path d="M10 140h215l10 11-10 11H10z" fill="#e0661b"/><text x="20" y="156">F</text>
+          <path d="M10 166h240l10 11-10 11H10z" fill="#c62f2f"/><text x="20" y="182">G</text>
+        </g>
+        <text class="txt" x="350" y="40" text-anchor="end" data-es="consume menos" data-eu="gutxiago kontsumitzen du"></text>
+        <text class="txt" x="350" y="182" text-anchor="end" data-es="consume más" data-eu="gehiago kontsumitzen du"></text>
+        <path d="M330 52v100" stroke="#5d6382" stroke-width="2" marker-end="url(#fl)"/>
+        <defs><marker id="fl" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5d6382"/></marker></defs>
+      </svg>
+      <figcaption data-es="Etiqueta energética: al comprar un aparato, mejor clase A o B" data-eu="Energia-etiketa: aparatu bat erostean, hobe A edo B klasea"></figcaption>
+    </figure>
+
+    <div class="rejilla">
+      <div class="card"><h3 class="es">En casa</h3><h3 class="eu">Etxean</h3>
+        <ul>
+          <li><span class="es">Bombillas <b>LED</b> en lugar de incandescentes o halógenas.</span><span class="eu"><b>LED</b> bonbillak goriak edo halogenoak ordez.</span></li>
+          <li><span class="es">Lavadora y lavavajillas <b>llenos</b>, en programa eco y en horas valle.</span><span class="eu">Garbigailua eta ontzi-garbigailua <b>beteta</b>, eko programan eta haraneko orduetan.</span></li>
+          <li><span class="es">No abrir el horno mientras cocina; aprovechar el calor residual.</span><span class="eu">Labea ez ireki sukaldatzen ari den bitartean; hondar-beroa aprobetxatu.</span></li>
+          <li><span class="es">Frigorífico lejos del horno y con la puerta bien cerrada.</span><span class="eu">Hozkailua labetik urrun eta atea ondo itxita.</span></li>
+          <li><span class="es">Calefacción a 20 – 21 °C, no más.</span><span class="eu">Berogailua 20 – 21 °C-tan, ez gehiago.</span></li>
+        </ul></div>
+      <div class="card"><h3 class="es">En el taller</h3><h3 class="eu">Tailerrean</h3>
+        <ul>
+          <li><span class="es">Reparar las <b>fugas de aire comprimido</b>: el compresor arranca sin parar.</span><span class="eu"><b>Aire komprimituaren ihesak</b> konpondu: konpresorea etengabe abiarazten da.</span></li>
+          <li><span class="es">Apagar máquinas que giran en vacío y la luz de zonas vacías.</span><span class="eu">Hutsean biraka dauden makinak eta hutsik dauden guneetako argia itzali.</span></li>
+          <li><span class="es">Motores de <b>alto rendimiento</b> (IE3, IE4) y variadores de velocidad.</span><span class="eu"><b>Errendimendu handiko</b> motorrak (IE3, IE4) eta abiadura-aldagailuak.</span></li>
+          <li><span class="es">Paneles LED en lugar de fluorescentes.</span><span class="eu">LED panelak fluoreszenteen ordez.</span></li>
+        </ul></div>
+      <div class="card"><h3 class="es">En el contrato</h3><h3 class="eu">Kontratuan</h3>
+        <p class="es">No contratar <b>más potencia de la necesaria</b>: el término de potencia se paga todos los días. Pero si contratas poca, saltará el ICP a menudo.</p>
+        <p class="eu">Ez kontratatu <b>behar baino potentzia gehiago</b>: potentzia-terminoa egunero ordaintzen da. Baina gutxi kontratatzen baduzu, PKEa (ICP) maiz jauziko da.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Lo que más consume es lo que <b>calienta</b> (horno, estufa, termo, plancha) y lo que está encendido <b>muchas horas</b> (frigorífico, stand-by).</p>
+      <p class="eu">Gehien kontsumitzen dutenak <b>berotzen</b> dutenak dira (labea, berogailua, termoa, plantxa) eta <b>ordu askotan</b> piztuta daudenak (hozkailua, stand-by).</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // Formatea un número con coma decimal (igual en castellano y en euskera)
+  function num(n, dec){
+    return n.toLocaleString("es-ES", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  }
+
+  /* ---------- Ejercicio de lectura del contador ---------- */
+  var lecA = 0, lecB = 0;
+  function nuevoEjercicio(){
+    lecA = 1000 + Math.floor(Math.random() * 8000);      // lectura anterior al azar
+    lecB = lecA + 80 + Math.floor(Math.random() * 400);   // la actual siempre es mayor
+    $("lec-a").textContent = lecA + " kWh";
+    $("lec-b").textContent = lecB + " kWh";
+    $("lec-resp").value = "";
+    $("lec-estado").className = "estado";
+    $("lec-estado").textContent = T("Resta: lectura actual − lectura anterior.", "Kendu: oraingo irakurketa − aurreko irakurketa.");
+  }
+  $("lec-comp").addEventListener("click", function(){
+    var r = parseFloat(String($("lec-resp").value).replace(",", "."));
+    var e = $("lec-estado");
+    if (isNaN(r)) { e.className = "estado"; e.textContent = T("Escribe un número.", "Idatzi zenbaki bat."); return; }
+    if (r === lecB - lecA) { e.className = "estado ok"; e.textContent = T("¡Bien! " + lecB + " − " + lecA + " = " + (lecB - lecA) + " kWh", "Ondo! " + lecB + " − " + lecA + " = " + (lecB - lecA) + " kWh"); }
+    else { e.className = "estado mal"; e.textContent = T("No. Revisa la resta (la actual menos la anterior).", "Ez. Berrikusi kenketa (oraingoa ken aurrekoa)."); }
+  });
+  $("lec-otro").addEventListener("click", nuevoEjercicio);
+
+  /* ---------- Pruébalo: simulador de consumo ---------- */
+  // Aparatos: potencia (W), horas de uso al día por defecto (h) y hora a la que se encienden (ini).
+  // ciclo:true = funciona a ratos repartidos por todo el día (como el compresor del frigorífico).
+  var APARATOS = {
+    casa: [
+      { id: "frigo", es: "Frigorífico", eu: "Hozkailua", w: 150, h: 8, ciclo: true, on: true },
+      { id: "led",   es: "Luces LED", eu: "LED argiak", w: 60, h: 5, ini: 18, on: true },
+      { id: "tv",    es: "Televisión", eu: "Telebista", w: 100, h: 4, ini: 19, on: true },
+      { id: "pc",    es: "Ordenador", eu: "Ordenagailua", w: 150, h: 3, ini: 16 },
+      { id: "lava",  es: "Lavadora", eu: "Garbigailua", w: 2000, h: 1, ini: 10 },
+      { id: "horno", es: "Horno", eu: "Labea", w: 2000, h: 0.5, ini: 13 },
+      { id: "vitro", es: "Vitrocerámica", eu: "Beirazko plaka", w: 1500, h: 1, ini: 20 },
+      { id: "termo", es: "Termo eléctrico", eu: "Termo elektrikoa", w: 1500, h: 2, ini: 5 },
+      { id: "estufa",es: "Estufa", eu: "Berogailua", w: 2000, h: 3, ini: 18 },
+      { id: "stand", es: "Stand-by", eu: "Stand-by", w: 20, h: 24, ini: 0, on: true }
+    ],
+    taller: [
+      { id: "luz",   es: "Paneles LED", eu: "LED panelak", w: 320, h: 8, ini: 8, on: true },
+      { id: "comp",  es: "Compresor", eu: "Konpresorea", w: 2200, h: 2, ciclo: true, on: true },
+      { id: "tala",  es: "Taladro de columna", eu: "Zutabe-zulagailua", w: 750, h: 1, ini: 10 },
+      { id: "amol",  es: "Amoladora", eu: "Harriketa", w: 1000, h: 0.5, ini: 11 },
+      { id: "sold",  es: "Soldadura", eu: "Soldadura", w: 4000, h: 1, ini: 12 },
+      { id: "carg",  es: "Cargador de baterías", eu: "Bateria-kargagailua", w: 300, h: 3, ini: 14 },
+      { id: "pc2",   es: "Ordenador", eu: "Ordenagailua", w: 150, h: 8, ini: 8 },
+      { id: "rad",   es: "Radiador", eu: "Erradiadorea", w: 2000, h: 4, ini: 8 }
+    ]
+  };
+  var lugar = "casa";
+  var horas = {}, encendido = {};     // lo que ha elegido el alumno (se guarda al cambiar de lugar o idioma)
+  Object.keys(APARATOS).forEach(function(l){ APARATOS[l].forEach(function(a){ horas[a.id] = a.h; encendido[a.id] = !!a.on; }); });
+
+  var reloj = 8;          // hora simulada (0-24)
+  var lectura = 4210;     // lo que marca el contador (kWh)
+  var fase = 0, faseLed = 0, ult = performance.now();
+
+  function activos(){ return APARATOS[lugar].filter(function(a){ return encendido[a.id] && horas[a.id] > 0; }); }
+
+  // ¿Está funcionando este aparato a la hora "t" del día simulado?
+  function funciona(a, t){
+    if (horas[a.id] >= 24) return true;
+    if (a.ciclo) return (t % 3) / 3 < horas[a.id] / 24;      // a ratos durante todo el día
+    return ((t - a.ini + 24) % 24) < horas[a.id];             // de "ini" a "ini + horas"
+  }
+
+  // Botones (chips) de aparatos: cada uno se enciende y apaga por separado
+  function pintarChips(){
+    var html = "";
+    APARATOS[lugar].forEach(function(a){
+      html += '<button type="button" data-id="' + a.id + '" aria-pressed="' + (encendido[a.id] ? "true" : "false") + '">' + T(a.es, a.eu) + ' · ' + a.w + ' W</button>';
+    });
+    $("aparatos").innerHTML = html;
+    pintarHoras();
+  }
+
+  // Un deslizador de horas por cada aparato encendido
+  function pintarHoras(){
+    var html = "";
+    activosOElegidos().forEach(function(a){
+      html += '<div class="deslizador"><label for="h-' + a.id + '"><span>' + T("Horas al día: ", "Orduak egunean: ") + T(a.es, a.eu) + '</span><output id="o-' + a.id + '"></output></label>' +
+              '<input type="range" id="h-' + a.id + '" data-id="' + a.id + '" min="0.5" max="24" step="0.5" value="' + horas[a.id] + '"></div>';
+    });
+    $("horas").innerHTML = html;
+    calcular();
+  }
+  function activosOElegidos(){ return APARATOS[lugar].filter(function(a){ return encendido[a.id]; }); }
+
+  // Cuentas del día y del mes (paso a paso, aparato por aparato)
+  function calcular(){
+    var total = 0, filas = [], max = 0, p = +$("precio").value;
+    activos().forEach(function(a){
+      var kw = a.w / 1000;               // paso 1: W → kW
+      var kwh = kw * horas[a.id];         // paso 2: kW × horas = kWh al día
+      total += kwh; if (kwh > max) max = kwh;
+      filas.push({ a: a, kw: kw, kwh: kwh });
+      var o = $("o-" + a.id); if (o) o.textContent = num(horas[a.id], horas[a.id] % 1 ? 1 : 0) + " h";
+    });
+    $("precio-t").textContent = num(p, 2) + " €/kWh";
+    $("r-dia").textContent = num(total, 2);
+    $("r-mes").textContent = num(total * 30, 1);                 // paso 3: × 30 días
+    $("r-emes").textContent = num(total * 30 * p, 2) + " €";      // paso 4: × precio
+    filas.sort(function(x, y){ return y.kwh - x.kwh; });
+    var html = "";
+    filas.forEach(function(f){
+      html += '<div class="linea"><span><b>' + T(f.a.es, f.a.eu) + '</b><em>' +
+              num(f.kw, f.kw < 1 ? 2 : 1) + ' kW × ' + num(horas[f.a.id], horas[f.a.id] % 1 ? 1 : 0) + ' h = ' + num(f.kwh, 2) + ' kWh</em></span>' +
+              '<div class="barra fija"><i style="width:' + (max > 0 ? f.kwh / max * 100 : 0) + '%"></i></div></div>';
+    });
+    $("calc").innerHTML = html || '<p class="nota">' + T("Enciende algún aparato.", "Piztu aparaturen bat.") + '</p>';
+  }
+
+  // Posición de un punto (0-1) a lo largo del cable (ida y vuelta, sin pasar por dentro de la carga)
+  var TRAMOS = [[[116, 104], [255, 104], [255, 118]], [[255, 158], [255, 176], [40, 176], [40, 118]]];
+  function camino(f){
+    var segs = [], tot = 0;
+    TRAMOS.forEach(function(t){ for (var i = 0; i < t.length - 1; i++) { var d = Math.abs(t[i + 1][0] - t[i][0]) + Math.abs(t[i + 1][1] - t[i][1]); segs.push([t[i], t[i + 1], d]); tot += d; } });
+    var x = f * tot;
+    for (var j = 0; j < segs.length; j++) { var s = segs[j]; if (x <= s[2]) { var r = x / s[2]; return [s[0][0] + (s[1][0] - s[0][0]) * r, s[0][1] + (s[1][1] - s[0][1]) * r]; } x -= s[2]; }
+    return TRAMOS[0][0];
+  }
+
+  // Dibujo animado: contador sumando kWh, corriente (puntos azules) y casa/taller
+  function pintar(){
+    var ahora = performance.now(), dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    var P = 0;                                   // potencia en este momento (kW)
+    activos().forEach(function(a){ if (funciona(a, reloj)) P += a.w / 1000; });
+    reloj = (reloj + dt) % 24;                   // 1 segundo real = 1 hora simulada
+    lectura += P * dt;                           // energía = potencia × tiempo (kW × h)
+    fase = (fase + dt * Math.min(P, 6) * 0.12) % 1;
+    faseLed = (faseLed + dt * P * 3) % 1;
+    var hay = P > 0, c = hay ? "#f39200" : "#9aa3b2", s = "";
+
+    // cables
+    s += '<path d="M116 104H255V118M255 158V176H40V118" stroke="' + c + '" stroke-width="4" fill="none" stroke-linejoin="round"/>';
+    // contador
+    var txt = lectura.toFixed(1).replace(".", ","); while (txt.length < 7) txt = "0" + txt;
+    s += '<rect x="16" y="24" width="100" height="94" rx="10" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>';
+    s += '<rect x="24" y="34" width="84" height="32" rx="5" fill="#bfe3c8" stroke="#6b7280"/>';
+    s += '<text x="66" y="56" font-size="16" font-weight="700" fill="#1b2147" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + txt + '</text>';
+    s += '<text class="txt-s" x="106" y="80" text-anchor="end">kWh</text>';
+    s += '<circle cx="30" cy="96" r="5" fill="' + (hay && faseLed < 0.3 ? "#ff3b30" : "#7a2a2a") + '"/>';
+    s += '<text class="txt-s" x="40" y="99">imp/kWh</text>';
+    s += '<text class="txt" x="50" y="140">' + T("Contador", "Kontagailua") + '</text>';
+    var hh = Math.floor(reloj), mm = Math.floor((reloj - hh) * 60);
+    s += '<text class="txt-s" x="50" y="158">' + T("Hora: ", "Ordua: ") + (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm + '</text>';
+    // casa o taller
+    if (lugar === "casa") s += '<path d="M176 92L255 44L334 92Z" fill="#c9cfd8" stroke="#242d5f" stroke-width="2" stroke-linejoin="round"/>';
+    else s += '<path d="M186 92V60L232 80V60L278 80V60L324 80V92Z" fill="#c9cfd8" stroke="#242d5f" stroke-width="2" stroke-linejoin="round"/>';
+    s += '<rect x="186" y="92" width="138" height="94" fill="none" stroke="#242d5f" stroke-width="2"/>';
+    s += '<text class="txt" x="255" y="198" text-anchor="middle">' + (lugar === "casa" ? T("Casa", "Etxea") : T("Taller", "Tailerra")) + '</text>';
+    // puntos azules de la corriente (más rápidos con más potencia)
+    if (hay) for (var k = 0; k < 10; k++) { var p = camino((fase + k / 10) % 1); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="#2b6cb0"/>'; }
+    // carga: potencia que se está usando ahora
+    var luz = Math.min(P / 4, 1);
+    s += '<rect x="205" y="118" width="100" height="40" rx="8" fill="rgba(255,210,87,' + (0.15 + 0.85 * luz) + ')" stroke="#242d5f" stroke-width="2"/>';
+    s += '<text x="255" y="137" font-size="13" font-weight="700" fill="#242d5f" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + num(P, 2) + ' kW</text>';
+    var n = activos().filter(function(a){ return funciona(a, reloj); }).length;
+    s += '<text class="txt-s" x="255" y="151" text-anchor="middle">' + n + T(" en marcha", " martxan") + '</text>';
+    $("circ").innerHTML = s;
+    $("r-p").textContent = num(P, 2) + " kW";
+  }
+  function bucle(){ pintar(); requestAnimationFrame(bucle); }
+
+  $("aparatos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var id = b.getAttribute("data-id");
+    encendido[id] = !encendido[id];
+    b.setAttribute("aria-pressed", encendido[id] ? "true" : "false");
+    pintarHoras();
+  });
+  $("horas").addEventListener("input", function(ev){
+    var id = ev.target.getAttribute("data-id"); if (!id) return;
+    horas[id] = +ev.target.value;
+    calcular();
+  });
+  $("precio").addEventListener("input", calcular);
+  $("lugar").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    lugar = b.getAttribute("data-l");
+    [].forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    pintarChips();
+  });
+
+  // Al cambiar de idioma se vuelven a escribir los textos generados por JS
+  alCambiarIdioma(function(){
+    pintarChips();
+    var e = $("lec-estado");
+    if (e.className === "estado") e.textContent = T("Resta: lectura actual − lectura anterior.", "Kendu: oraingo irakurketa − aurreko irakurketa.");
+  });
+  nuevoEjercicio();
+  pintarChips();
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

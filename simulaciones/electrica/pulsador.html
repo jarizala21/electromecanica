@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pulsador</title>
+<meta name="description" content="Qué es, contactos NA y NC, tipos y colores, simulador de pulsar y mantener, y símbolos IEC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.hilo{stroke:#9aa3b2;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+.pulsador{user-select:none;-webkit-user-select:none;touch-action:none}
+#cabeza{cursor:pointer}
+.ico-tipo{display:block;width:100%;height:90px;background:#fff;border-radius:14px;margin-bottom:8px}
+.color-t{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.2)}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de control" data-eu="Kontrol-elementuak"></p>
+      <h1 data-es="Pulsador" data-eu="Sakagailua (pultsadorea)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">pulsador</span> es un mecanismo que <b>cambia sus contactos solo mientras lo mantienes pulsado</b>. Al soltarlo, un <b>muelle</b> lo devuelve a su posición de reposo.</p>
+      <p class="eu"><span class="clave">Sakagailuak</span> (pultsadoreak) <b>sakatuta duzun bitartean bakarrik aldatzen ditu bere kontaktuak</b>. Askatzean, <b>malguki</b> batek atseneko posiziora itzultzen du.</p>
+      <p class="es">Se usa en los <b>circuitos de mando</b>: para dar la orden de marcha o de paro a un contactor, para un timbre, para un automatismo de puerta…</p>
+      <p class="eu"><b>Agintzeko zirkuituetan</b> erabiltzen da: kontaktore bati martxa- edo geldialdi-agindua emateko, txirrin baterako, ate-automatismo baterako…</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Interruptor</h3><h3 class="eu">Etengailua</h3>
+        <p class="es">Se queda en la posición en que lo dejas (encendido o apagado).</p>
+        <p class="eu">Uzten duzun posizioan geratzen da (piztuta edo itzalita).</p></div>
+      <div class="card"><h3 class="es">Pulsador sin enclavamiento</h3><h3 class="eu">Sakagailua blokeorik gabe</h3>
+        <p class="es">Solo actúa mientras lo pulsas. Al soltar, vuelve a reposo. Es el normal.</p>
+        <p class="eu">Sakatzen duzun bitartean bakarrik jarduten du. Askatzean, atsedenera itzultzen da. Arrunta da.</p></div>
+      <div class="card"><h3 class="es">Pulsador con enclavamiento</h3><h3 class="eu">Sakagailua blokeoarekin</h3>
+        <p class="es">Se queda enclavado al pulsarlo. Se libera pulsando otra vez, girando o con llave (como la seta de emergencia).</p>
+        <p class="eu">Sakatzean blokeatuta geratzen da. Berriz sakatuz, biratuz edo giltzarekin askatzen da (larrialdiko perretxikoa bezala).</p></div>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-partes" viewBox="0 0 300 230" role="img" aria-label="Partes del pulsador">
+          <g class="resaltable" data-parte="cabeza"><rect x="110" y="12" width="80" height="36" rx="10" fill="#1f8a4c" stroke="#145c33" stroke-width="2"/><rect x="120" y="18" width="60" height="8" rx="4" fill="#fff" opacity=".35"/></g>
+          <g class="resaltable" data-parte="fijacion">
+            <rect x="98" y="46" width="104" height="12" rx="4" fill="#c9ced6" stroke="#6b7280"/>
+            <rect x="104" y="68" width="92" height="10" rx="2" fill="#8d95a3"/>
+          </g>
+          <g class="resaltable" data-parte="chapa">
+            <rect x="10" y="58" width="104" height="10" fill="#9aa3b2"/><rect x="186" y="58" width="104" height="10" fill="#9aa3b2"/>
+            <path d="M232 46l-46 14" stroke="var(--marino)" stroke-width="1.2"/>
+            <text class="txt" x="236" y="44">Ø 22 mm</text>
+          </g>
+          <g class="resaltable" data-parte="adaptador"><rect x="92" y="80" width="116" height="16" rx="3" fill="#5c6575"/></g>
+          <g class="resaltable" data-parte="na">
+            <rect x="92" y="98" width="56" height="90" rx="4" fill="#fff" stroke="#8d95a3" stroke-width="1.5"/>
+            <rect x="92" y="98" width="56" height="10" rx="3" fill="#1f8a4c"/>
+            <text class="txt" x="120" y="134" text-anchor="middle">NA</text>
+            <circle cx="106" cy="172" r="6" fill="#c9ced6" stroke="#6b7280"/><circle cx="134" cy="172" r="6" fill="#c9ced6" stroke="#6b7280"/>
+            <text class="txt-s" x="106" y="204" text-anchor="middle">13</text><text class="txt-s" x="134" y="204" text-anchor="middle">14</text>
+          </g>
+          <g class="resaltable" data-parte="nc">
+            <rect x="152" y="98" width="56" height="90" rx="4" fill="#fff" stroke="#8d95a3" stroke-width="1.5"/>
+            <rect x="152" y="98" width="56" height="10" rx="3" fill="#c62f2f"/>
+            <text class="txt" x="180" y="134" text-anchor="middle">NC</text>
+            <circle cx="166" cy="172" r="6" fill="#c9ced6" stroke="#6b7280"/><circle cx="194" cy="172" r="6" fill="#c9ced6" stroke="#6b7280"/>
+            <text class="txt-s" x="166" y="204" text-anchor="middle">21</text><text class="txt-s" x="194" y="204" text-anchor="middle">22</text>
+          </g>
+          <text class="txt-s" x="10" y="84" data-es="cuadro / caja" data-eu="koadroa / kutxa"></text>
+        </svg>
+        <figcaption data-es="Pulsador industrial de 22 mm montado en la puerta de un cuadro. Toca una parte para verla." data-eu="22 mm-ko industria-sakagailua, koadro baten atean muntatuta. Ukitu atal bat ikusteko."></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-partes">
+        <li><button data-parte="cabeza"><span class="n">1</span><span><b class="es">Cabeza (botón)</b><b class="eu">Burua (botoia)</b><small class="es">La parte que pulsamos. Su color indica la función. Dentro tiene el muelle de retorno.</small><small class="eu">Sakatzen dugun zatia. Bere koloreak funtzioa adierazten du. Barruan itzulera-malgukia du.</small></span></button></li>
+        <li><button data-parte="fijacion"><span class="n">2</span><span><b class="es">Anillo y tuerca de fijación</b><b class="eu">Finkatze-eraztuna eta azkoina</b><small class="es">Aprietan el pulsador contra la chapa.</small><small class="eu">Sakagailua xaflaren kontra estutzen dute.</small></span></button></li>
+        <li><button data-parte="chapa"><span class="n">3</span><span><b class="es">Orificio de 22 mm</b><b class="eu">22 mm-ko zuloa</b><small class="es">Medida normalizada del agujero en la puerta del cuadro o en la botonera.</small><small class="eu">Koadroaren atean edo botoi-kutxan egiten den zuloaren neurri normalizatua.</small></span></button></li>
+        <li><button data-parte="adaptador"><span class="n">4</span><span><b class="es">Adaptador (soporte)</b><b class="eu">Egokigailua (euskarria)</b><small class="es">Pieza donde se enganchan los bloques de contactos.</small><small class="eu">Kontaktu-blokeak lotzen diren pieza.</small></span></button></li>
+        <li><button data-parte="na"><span class="n">5</span><span><b class="es">Bloque NA (13-14)</b><b class="eu">NA blokea (13-14)</b><small class="es">Contacto normalmente abierto: se cierra al pulsar. Suele ser verde.</small><small class="eu">Normalean irekitako kontaktua: sakatzean ixten da. Normalean berdea da.</small></span></button></li>
+        <li><button data-parte="nc"><span class="n">6</span><span><b class="es">Bloque NC (21-22)</b><b class="eu">NC blokea (21-22)</b><small class="es">Contacto normalmente cerrado: se abre al pulsar. Suele ser rojo.</small><small class="eu">Normalean itxitako kontaktua: sakatzean irekitzen da. Normalean gorria da.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. KONTAKTUAK ============ -->
+  <section class="panel" data-tab="kontaktuak" data-es="Contactos NA y NC" data-eu="NA eta NC kontaktuak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">NA · normalmente abierto (NO)</h3><h3 class="eu">NA · normalean irekia (NO)</h3>
+        <p class="es">En reposo está <b>abierto</b>: no pasa corriente. Al pulsar se <b>cierra</b>. Se usa para <b>MARCHA</b>. Bornes <b>13-14</b>.</p>
+        <p class="eu">Atsedenean <b>irekita</b> dago: ez da korronterik igarotzen. Sakatzean <b>ixten</b> da. <b>MARTXArako</b> erabiltzen da. <b>13-14</b> borneak.</p></div>
+      <div class="card"><h3 class="es">NC · normalmente cerrado</h3><h3 class="eu">NC · normalean itxia</h3>
+        <p class="es">En reposo está <b>cerrado</b>: pasa corriente. Al pulsar se <b>abre</b>. Se usa para <b>PARO</b>. Bornes <b>21-22</b>.</p>
+        <p class="eu">Atsedenean <b>itxita</b> dago: korrontea igarotzen da. Sakatzean <b>irekitzen</b> da. <b>GELDIALDIRAKO</b> erabiltzen da. <b>21-22</b> borneak.</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Cómo se numeran" data-eu="Nola zenbakitzen diren"></h2>
+      <p class="es">Igual que en el contactor: la <b>segunda cifra</b> dice el tipo: <b>3-4 = NA</b>, <b>1-2 = NC</b>. La <b>primera</b> es el número de orden del bloque (13-14, 23-24… / 11-12, 21-22…).</p>
+      <p class="eu">Kontaktorean bezala: <b>bigarren zifrak</b> mota adierazten du: <b>3-4 = NA</b>, <b>1-2 = NC</b>. <b>Lehenengoa</b> blokearen ordena-zenbakia da (13-14, 23-24… / 11-12, 21-22…).</p>
+      <div class="tabla"><table>
+        <thead><tr><th data-es="Contacto" data-eu="Kontaktua"></th><th data-es="Sin pulsar" data-eu="Sakatu gabe"></th><th data-es="Pulsado" data-eu="Sakatuta"></th></tr></thead>
+        <tbody>
+          <tr><td><b>13-14 NA</b></td><td class="mal" data-es="Abierto" data-eu="Irekita"></td><td class="ok" data-es="Cerrado" data-eu="Itxita"></td></tr>
+          <tr><td><b>21-22 NC</b></td><td class="ok" data-es="Cerrado" data-eu="Itxita"></td><td class="mal" data-es="Abierto" data-eu="Irekita"></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">«Normalmente» quiere decir <b>en reposo, sin pulsar</b>. El paro se hace con NC por seguridad: si se corta un cable, la máquina <b>se para</b>.</p>
+      <p class="eu">«Normalean» esan nahi du <b>atsedenean, sakatu gabe</b>. Geldialdia NC-rekin egiten da segurtasunagatik: kable bat mozten bada, makina <b>gelditu egiten da</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. MOTAK ETA KOLOREAK ============ -->
+  <section class="panel" data-tab="motak" data-es="Tipos y colores" data-eu="Motak eta koloreak" hidden>
+    <div class="rejilla">
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 90" aria-hidden="true"><rect x="20" y="40" width="80" height="12" rx="3" fill="#9aa3b2"/><rect x="30" y="28" width="60" height="14" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="40" y="31" width="40" height="10" rx="3" fill="#1f8a4c"/></svg>
+        <h3 class="es">Rasante (enrasado)</h3><h3 class="eu">Lerrokatua</h3>
+        <p class="es">El botón queda hundido en el anillo: evita pulsarlo sin querer. Típico de <b>marcha</b>.</p>
+        <p class="eu">Botoia eraztunaren barruan geratzen da: nahi gabe sakatzea saihesten du. <b>Martxarako</b> ohikoa.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 90" aria-hidden="true"><rect x="20" y="50" width="80" height="12" rx="3" fill="#9aa3b2"/><rect x="30" y="38" width="60" height="14" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="38" y="18" width="44" height="22" rx="6" fill="#c62f2f"/></svg>
+        <h3 class="es">Saliente</h3><h3 class="eu">Irtena</h3>
+        <p class="es">Sobresale y se pulsa fácil y rápido. Típico de <b>paro</b>.</p>
+        <p class="eu">Kanpora ateratzen da eta erraz eta azkar sakatzen da. <b>Geldialdirako</b> ohikoa.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 90" aria-hidden="true"><rect x="16" y="56" width="88" height="12" rx="3" fill="#f2d000"/><rect x="50" y="40" width="20" height="18" fill="#8d95a3"/><path d="M26 42a34 26 0 0 1 68 0z" fill="#c62f2f"/></svg>
+        <h3 class="es">Seta de emergencia</h3><h3 class="eu">Larrialdiko perretxikoa</h3>
+        <p class="es"><b>Roja sobre fondo amarillo</b>, grande y con <b>enclavamiento</b>. Para la máquina en caso de peligro. Se desenclava girándola o con llave.</p>
+        <p class="eu"><b>Gorria hondo horiaren gainean</b>, handia eta <b>blokeoarekin</b>. Arriskua dagoenean makina gelditzen du. Biratuz edo giltzarekin desblokeatzen da.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 90" aria-hidden="true"><rect x="20" y="50" width="80" height="12" rx="3" fill="#9aa3b2"/><rect x="30" y="38" width="60" height="14" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="40" y="20" width="40" height="20" rx="6" fill="#ffe066" stroke="#f39200" stroke-width="2"/><path d="M60 8v6M44 12l4 5M76 12l-4 5" stroke="#f39200" stroke-width="2"/></svg>
+        <h3 class="es">Luminoso</h3><h3 class="eu">Argiduna</h3>
+        <p class="es">Lleva una lámpara (LED) dentro que indica, por ejemplo, que el motor está en marcha.</p>
+        <p class="eu">Barruan lanpara (LED) bat darama, adibidez motorra martxan dagoela adierazteko.</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Colores normalizados" data-eu="Kolore normalizatuak"></h2>
+      <div class="tabla"><table>
+        <thead><tr><th data-es="Color" data-eu="Kolorea"></th><th data-es="Significado" data-eu="Esanahia"></th></tr></thead>
+        <tbody>
+          <tr><td><span class="color-t" style="background:#1f8a4c"></span><span data-es="Verde (o blanco)" data-eu="Berdea (edo zuria)"></span></td><td data-es="Marcha, puesta en funcionamiento" data-eu="Martxa, abiaraztea"></td></tr>
+          <tr><td><span class="color-t" style="background:#c62f2f"></span><span data-es="Rojo (o negro)" data-eu="Gorria (edo beltza)"></span></td><td data-es="Paro" data-eu="Geldialdia"></td></tr>
+          <tr><td><span class="color-t" style="background:#c62f2f;box-shadow:0 0 0 3px #f2d000"></span><span data-es="Rojo sobre amarillo" data-eu="Gorria horiaren gainean"></span></td><td data-es="Parada de emergencia (seta)" data-eu="Larrialdiko geldialdia (perretxikoa)"></td></tr>
+          <tr><td><span class="color-t" style="background:#f2d000"></span><span data-es="Amarillo" data-eu="Horia"></span></td><td data-es="Actuar ante algo anormal" data-eu="Egoera anormal baten aurrean jardutea"></td></tr>
+          <tr><td><span class="color-t" style="background:#2b6cb0"></span><span data-es="Azul" data-eu="Urdina"></span></td><td data-es="Acción obligatoria (p. ej. rearme)" data-eu="Nahitaezko ekintza (adib. berrarmatzea)"></td></tr>
+        </tbody>
+      </table></div>
+      <p class="nota es">Norma UNE-EN 60204-1 (equipo eléctrico de las máquinas). En el taller usaremos siempre <b>verde = marcha</b> y <b>rojo = paro</b>.</p>
+      <p class="nota eu">UNE-EN 60204-1 araua (makinen ekipamendu elektrikoa). Tailerrean beti erabiliko dugu <b>berdea = martxa</b> eta <b>gorria = geldialdia</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es"><b>Mantén pulsado</b> el botón S1 (abajo o en la cabeza verde del dibujo) y suéltalo. Mira qué contacto se cierra, cuál se abre y por dónde van los <b>puntos azules</b> de la corriente. Después prueba <b>con enclavamiento</b>.</p>
+      <p class="eu"><b>Eutsi sakatuta</b> S1 botoiari (behean edo marrazkiko buru berdean) eta askatu. Begiratu zein kontaktu ixten den, zein irekitzen den eta nondik doazen korrontearen <b>puntu urdinak</b>. Gero probatu <b>blokeoarekin</b>.</p>
+    </div>
+    <figure class="fig"><svg id="svg-sim" viewBox="0 0 340 270" role="img" aria-label="Simulador del pulsador">
+      <g id="meca"></g>
+      <g id="circ"></g>
+      <g id="puntos"></g>
+    </svg></figure>
+    <div class="mandos">
+      <button class="boton verde pulsador" id="b-s1" aria-pressed="false" data-es="S1 · mantén pulsado" data-eu="S1 · eutsi sakatuta"></button>
+      <div class="chips" id="c-encl">
+        <button type="button" data-v="0" aria-pressed="true" data-es="Sin enclavamiento" data-eu="Blokeorik gabe"></button>
+        <button type="button" data-v="1" aria-pressed="false" data-es="Con enclavamiento" data-eu="Blokeoarekin"></button>
+      </div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Estado" data-eu="Egoera"></small><b id="l-est">–</b></div>
+      <div><small>13-14 (NA)</small><b id="l-na">–</b></div>
+      <div><small>21-22 (NC)</small><b id="l-nc">–</b></div>
+      <div><small data-es="Lámpara H1" data-eu="H1 lanpara"></small><b id="l-h1">–</b></div>
+      <div><small data-es="Lámpara H2" data-eu="H2 lanpara"></small><b id="l-h2">–</b></div>
+    </div>
+    <div class="estado" id="estado" aria-live="polite"></div>
+  </section>
+
+  <!-- ============ 5. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M70 8v32M70 80L56 44M70 80v32"/><path class="s-d" d="M62 62H30"/><path class="s-l" d="M24 52h6v20h-6"/><text class="s-t" x="80" y="22" style="font-size:11px">13</text><text class="s-t" x="80" y="108" style="font-size:11px">14</text></svg>
+        <b data-es="Pulsador NA (marcha)" data-eu="NA sakagailua (martxa)"></b><small data-es="se cierra al pulsar" data-eu="sakatzean ixten da"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M70 8v32M70 40H56M70 80L54 36M70 80v32"/><path class="s-d" d="M62 60H30"/><path class="s-l" d="M24 50h6v20h-6"/><text class="s-t" x="80" y="22" style="font-size:11px">21</text><text class="s-t" x="80" y="108" style="font-size:11px">22</text></svg>
+        <b data-es="Pulsador NC (paro)" data-eu="NC sakagailua (geldialdia)"></b><small data-es="se abre al pulsar" data-eu="sakatzean irekitzen da"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M70 8v32M70 40H56M70 80L54 36M70 80v32"/><path class="s-d" d="M62 60H34"/><path class="s-l" d="M34 46a14 14 0 0 0 0 28z"/></svg>
+        <b data-es="Seta de emergencia (NC)" data-eu="Larrialdiko perretxikoa (NC)"></b><small data-es="cabeza en forma de seta" data-eu="perretxiko itxurako burua"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M70 8v32M70 80L56 44M70 80v32"/><path class="s-d" d="M62 62H30"/><path class="s-l" d="M24 52h6v20h-6"/><path class="s-l" d="M40 54l6 8-6 8"/></svg>
+        <b data-es="Pulsador con enclavamiento" data-eu="Sakagailua blokeoarekin"></b><small data-es="el triángulo = se queda enclavado" data-eu="triangelua = blokeatuta geratzen da"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 8v26M60 86v26"/><circle class="s-l" cx="60" cy="60" r="26"/><path class="s-l" d="M41.6 41.6l36.8 36.8M78.4 41.6L41.6 78.4"/></svg>
+        <b data-es="Lámpara de señalización H" data-eu="Seinaleztapen-lanpara H"></b><small data-es="piloto del cuadro" data-eu="koadroko pilotua"></small></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Marcha-paro con autorretención" data-eu="Martxa-geldialdia autoatxikimenduarekin"></h2>
+      <p class="es">Así se usan los pulsadores con un contactor: <b>S1 paro (NC)</b> en serie y <b>S2 marcha (NA)</b> con el contacto <b>KM1 13-14</b> en paralelo. Pruébalo en la ficha del <a href="contactor.html#funtzionamendua">contactor</a>.</p>
+      <p class="eu">Horrela erabiltzen dira sakagailuak kontaktore batekin: <b>S1 geldialdia (NC)</b> seriean eta <b>S2 martxa (NA)</b> <b>KM1 13-14</b> kontaktuarekin paraleloan. Probatu <a href="contactor.html#funtzionamendua">kontaktorearen</a> fitxan.</p>
+      <svg viewBox="0 0 300 250" style="display:block;width:100%;max-width:420px;margin:8px auto 0;height:auto;background:#fff;border-radius:14px" role="img" aria-label="Marcha-paro">
+        <g class="s-l">
+          <path d="M40 14H260M40 236H260"/>
+          <path d="M120 14v30M120 44H106M120 80L104 38M120 80v20"/>
+          <path d="M120 100H200M120 100v20M120 156L106 122M120 156v14M200 100v20M200 156L186 122M200 156v14M120 170H200"/>
+          <path d="M120 170v14"/><rect x="104" y="184" width="32" height="28"/><path d="M120 212v24"/>
+          <path d="M80 50h6v20h-6"/>
+        </g>
+        <path class="s-d" d="M86 60h26M86 139h26"/>
+        <path class="s-l" d="M80 129h6v20h-6"/>
+        <text class="txt" x="132" y="64">S1</text><text class="txt-s" x="132" y="76" data-es="paro" data-eu="geldialdia"></text>
+        <text class="txt" x="132" y="142">S2</text><text class="txt-s" x="132" y="154" data-es="marcha" data-eu="martxa"></text>
+        <text class="txt" x="208" y="136">KM1</text><text class="txt-s" x="208" y="148">13-14</text>
+        <text class="txt" x="142" y="202">KM1</text>
+        <text class="txt" x="28" y="18">L</text><text class="txt" x="28" y="240">N</text>
+      </svg>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var pulsado = false;      // true = contactos en posición de «pulsado»
+  var enclav = false;       // true = pulsador con enclavamiento (se queda pulsado)
+
+  // Cable del circuito: naranja si hay corriente
+  function H(d, con){ return '<path class="hilo' + (con ? " con" : "") + '" d="' + d + '"/>'; }
+
+  // Lámpara de señalización en (x, y)
+  function lampara(x, y, on, nombre){
+    return '<circle cx="' + x + '" cy="' + y + '" r="16" fill="' + (on ? "#ffe066" : "#fff") + '" stroke="var(--marino)" stroke-width="2.2"/>' +
+           '<path d="M' + (x - 11) + ' ' + (y - 11) + 'l22 22M' + (x + 11) + ' ' + (y - 11) + 'l-22 22" stroke="var(--marino)" stroke-width="2"/>' +
+           '<text class="txt" x="' + (x + 22) + '" y="' + (y + 4) + '">' + nombre + '</text>';
+  }
+
+  function dibujar(){
+    var d = pulsado ? 12 : 0;        // lo que baja la cabeza al pulsar (en px del dibujo)
+    var na = pulsado, nc = !pulsado; // estado de los contactos
+
+    /* ---- mecanismo por dentro (izquierda) ---- */
+    var m = "";
+    m += '<rect x="10" y="58" width="36" height="8" fill="#9aa3b2"/><rect x="94" y="58" width="40" height="8" fill="#9aa3b2"/>';  // chapa
+    m += '<rect x="40" y="50" width="60" height="8" rx="3" fill="#c9ced6" stroke="#6b7280"/>';                              // anillo
+    m += '<rect x="66" y="' + (52 + d) + '" width="8" height="158" rx="2" fill="#7d8697"/>';                                  // vástago
+    m += '<g id="cabeza" class="pulsador"><rect x="46" y="' + (24 + d) + '" width="48" height="28" rx="8" fill="#1f8a4c" stroke="#145c33" stroke-width="2"/>';
+    m += '<text class="txt" x="70" y="' + (42 + d) + '" text-anchor="middle" fill="#fff" style="fill:#fff">S1</text></g>';
+    // bloque NA 13-14
+    m += '<rect x="20" y="88" width="100" height="52" rx="4" fill="none" stroke="#8d95a3" stroke-width="1.5"/>';
+    m += '<rect x="28" y="128" width="22" height="5" fill="#d4a017"/><rect x="90" y="128" width="22" height="5" fill="#d4a017"/>';
+    m += '<rect x="32" y="' + (110 + d) + '" width="76" height="6" rx="2" fill="#b07d2a"/>';
+    m += '<text class="txt-s" x="24" y="100">NA</text><text class="txt-s" x="24" y="152">13</text><text class="txt-s" x="104" y="152">14</text>';
+    // bloque NC 21-22
+    m += '<rect x="20" y="158" width="100" height="44" rx="4" fill="none" stroke="#8d95a3" stroke-width="1.5"/>';
+    m += '<rect x="28" y="164" width="22" height="5" fill="#d4a017"/><rect x="90" y="164" width="22" height="5" fill="#d4a017"/>';
+    m += '<rect x="32" y="' + (169 + d) + '" width="76" height="6" rx="2" fill="#b07d2a"/>';
+    m += '<text class="txt-s" x="24" y="196">NC</text><text class="txt-s" x="24" y="214">21</text><text class="txt-s" x="104" y="214">22</text>';
+    // muelle de retorno (se comprime al pulsar)
+    var y1 = 210 + d, y2 = 246, z = "M70 " + y1;
+    for (var i = 1; i <= 6; i++) z += "L" + (i % 2 ? 78 : 62) + " " + (y1 + (y2 - y1) * i / 7).toFixed(1);
+    z += "L70 " + y2;
+    m += '<path d="' + z + '" stroke="#2b6cb0" stroke-width="2.5" fill="none"/><path d="M54 248h32" stroke="#5c6575" stroke-width="4"/>';
+    m += '<text class="txt-s" x="84" y="236">' + T("muelle", "malgukia") + '</text>';
+    $("meca").innerHTML = m;
+
+    /* ---- circuito (derecha): L – contacto – lámpara – N ---- */
+    var c = "";
+    c += H("M150 20H310", true) + H("M150 250H310", true);
+    c += '<text class="txt" x="150" y="14">L</text><text class="txt" x="150" y="266">N</text>';
+    // rama 1: NA 13-14 → H1
+    c += H("M210 20V70", true);
+    c += na ? H("M210 70V104", true) : H("M210 104L196 74", false);
+    c += '<circle cx="210" cy="70" r="3" fill="var(--marino)"/><circle cx="210" cy="104" r="3" fill="var(--marino)"/>';
+    c += '<text class="txt-s" x="176" y="82">13</text><text class="txt-s" x="176" y="104">14</text>';
+    c += H("M210 104V144", na) + lampara(210, 160, na, "H1") + H("M210 176V250", na);
+    // rama 2: NC 21-22 → H2
+    c += H("M290 20V70", true);
+    c += nc ? H("M290 70V104", true) : H("M290 104L276 74", false);
+    c += '<path d="M290 70h-12" stroke="var(--marino)" stroke-width="2"/>';
+    c += '<circle cx="290" cy="70" r="3" fill="var(--marino)"/><circle cx="290" cy="104" r="3" fill="var(--marino)"/>';
+    c += '<text class="txt-s" x="256" y="82">21</text><text class="txt-s" x="256" y="104">22</text>';
+    c += H("M290 104V144", nc) + lampara(290, 160, nc, "H2") + H("M290 176V250", nc);
+    // unión mecánica de los dos contactos (trazos)
+    c += '<path d="M203 88H283" stroke="var(--marino)" stroke-width="1.5" stroke-dasharray="5 4"/>';
+    $("circ").innerHTML = c;
+
+    /* ---- lecturas ---- */
+    $("l-est").textContent = pulsado ? (enclav ? T("Enclavado", "Blokeatuta") : T("Pulsado", "Sakatuta")) : T("Reposo", "Atsedena");
+    $("l-na").textContent = na ? T("Cerrado", "Itxita") : T("Abierto", "Irekita");
+    $("l-nc").textContent = nc ? T("Cerrado", "Itxita") : T("Abierto", "Irekita");
+    $("l-h1").textContent = na ? T("Encendida", "Piztuta") : T("Apagada", "Itzalita");
+    $("l-h2").textContent = nc ? T("Encendida", "Piztuta") : T("Apagada", "Itzalita");
+    $("b-s1").setAttribute("aria-pressed", pulsado ? "true" : "false");
+
+    var e = $("estado");
+    if (!pulsado) { e.className = "estado"; e.textContent = T("En reposo: 13-14 (NA) abierto y H1 apagada; 21-22 (NC) cerrado y H2 encendida.", "Atsedenean: 13-14 (NA) irekita eta H1 itzalita; 21-22 (NC) itxita eta H2 piztuta."); }
+    else if (!enclav) { e.className = "estado ok"; e.textContent = T("Pulsado: 13-14 se cierra (H1 se enciende) y 21-22 se abre (H2 se apaga). Suelta y todo vuelve a reposo.", "Sakatuta: 13-14 ixten da (H1 pizten da) eta 21-22 irekitzen da (H2 itzaltzen da). Askatu eta dena atsedenera itzultzen da."); }
+    else { e.className = "estado ok"; e.textContent = T("Enclavado: aunque sueltes, sigue pulsado. Vuelve a pulsar para liberarlo.", "Blokeatuta: askatu arren, sakatuta jarraitzen du. Sakatu berriz askatzeko."); }
+  }
+
+  /* ---- puntos azules de la corriente (como en «Magnitudes eléctricas») ---- */
+  function punto(pts, f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < pts.length - 1; i++) { var dd = Math.abs(pts[i + 1][0] - pts[i][0]) + Math.abs(pts[i + 1][1] - pts[i][1]); L.push(dd); tot += dd; }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) {
+      if (x <= L[i]) { var r = x / L[i]; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * r, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * r]; }
+      x -= L[i];
+    }
+    return pts[0];
+  }
+  var RAMA_H1 = [[150, 20], [210, 20], [210, 250], [150, 250]];   // L → 13-14 → H1 → N
+  var RAMA_H2 = [[150, 20], [290, 20], [290, 250], [150, 250]];   // L → 21-22 → H2 → N
+  function bucle(){
+    var s = "", rama = pulsado ? RAMA_H1 : RAMA_H2;                  // solo conduce una rama cada vez
+    for (var k = 0; k < 10; k++) {
+      var p = punto(rama, (performance.now() / 1000 * 0.3 + k / 10) % 1);
+      s += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.5" fill="#2b6cb0"/>';
+    }
+    $("puntos").innerHTML = s;
+    requestAnimationFrame(bucle);
+  }
+
+  /* ---- pulsar y soltar ---- */
+  function bajar(e){
+    if (e) e.preventDefault();
+    if (enclav) pulsado = !pulsado;   // con enclavamiento: cada pulsación cambia (se queda o se libera)
+    else pulsado = true;              // sin enclavamiento: pulsado mientras se mantiene
+    dibujar();
+  }
+  function soltar(){
+    if (!enclav && pulsado) { pulsado = false; dibujar(); }
+  }
+  var b = $("b-s1"), apretando = false;
+  b.addEventListener("pointerdown", bajar);
+  ["pointerup", "pointerleave", "pointercancel"].forEach(function(ev){ b.addEventListener(ev, soltar); });
+  b.addEventListener("keydown", function(e){ if ((e.key === " " || e.key === "Enter") && !apretando) { apretando = true; bajar(e); } });
+  b.addEventListener("keyup", function(){ apretando = false; soltar(); });
+  // también se puede pulsar la cabeza verde del dibujo
+  $("svg-sim").addEventListener("pointerdown", function(e){ if (e.target.closest("#cabeza")) bajar(e); });
+  ["pointerup", "pointerleave", "pointercancel"].forEach(function(ev){ $("svg-sim").addEventListener(ev, soltar); });
+
+  /* ---- con / sin enclavamiento ---- */
+  $("c-encl").addEventListener("click", function(ev){
+    var x = ev.target.closest("button"); if (!x) return;
+    [].forEach.call(this.querySelectorAll("button"), function(y){ y.setAttribute("aria-pressed", y === x ? "true" : "false"); });
+    enclav = x.getAttribute("data-v") === "1";
+    b.setAttribute("data-es", enclav ? "S1 · pulsa" : "S1 · mantén pulsado");
+    b.setAttribute("data-eu", enclav ? "S1 · sakatu" : "S1 · eutsi sakatuta");
+    b.textContent = b.getAttribute("data-" + idioma());
+    pulsado = false; dibujar();
+  });
+
+  alCambiarIdioma(dibujar);
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motor asíncrono de rotor bobinado</title>
+<meta name="description" content="Partes (anillos rozantes, escobillas, bornes K-L-M), reóstato de arranque interactivo, comparación con el de jaula de ardilla y mantenimiento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.pieza{fill:#e9ecef;stroke:#8d95a3;stroke-width:1.5}
+.chapa{fill:#b9c0cc;stroke:#6b7280;stroke-width:1.2}
+.cobre{fill:#e08a3c;stroke:#9a5214;stroke-width:1.2}
+.eje{fill:#9aa3b2;stroke:#5d6576;stroke-width:1.2}
+.carbon{fill:#2d3340;stroke:#111;stroke-width:1}
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.num{fill:var(--naranja);stroke:#fff;stroke-width:1.5}
+.num-t{font-size:10px;font-weight:700;fill:var(--marino);text-anchor:middle}
+.eje-f{stroke:#c4cad4;stroke-width:1.2;stroke-dasharray:4 4}
+.hilo{fill:none;stroke:var(--marino);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de potencia" data-eu="Potentzia-elementuak"></p>
+      <h1 data-es="Motor asíncrono de rotor bobinado" data-eu="Errotore harilkatuko motor asinkronoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ¿QUÉ ES? / ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">Es un motor asíncrono trifásico con el <b>mismo estátor</b> que el de jaula de ardilla, pero su <span class="clave">rotor está bobinado</span>: lleva un devanado trifásico de cobre, como el estátor. Los tres finales del devanado salen por <b>tres anillos rozantes</b> y, a través de unas <b>escobillas</b>, se conectan fuera del motor (bornes <b>K-L-M</b>).</p>
+      <p class="eu">Motor asinkrono trifasikoa da, katagorri-kaiolakoaren <b>estatore berarekin</b>, baina bere <span class="clave">errotorea harilkatuta dago</span>: kobrezko harilkadura trifasikoa du, estatoreak bezala. Harilkaduraren hiru muturrak <b>hiru eraztun irristakorretatik</b> ateratzen dira eta, <b>eskobilla</b> batzuen bidez, motorretik kanpo konektatzen dira (<b>K-L-M</b> borneak).</p>
+      <p class="es">Así se puede meter una <b>resistencia en el rotor</b> (el reóstato de arranque) para arrancar con <b>mucho par y poca corriente</b>.</p>
+      <p class="eu">Horrela, <b>errotorean erresistentzia bat</b> sar daiteke (abiarazte-erreostatoa), <b>momentu handiarekin eta korronte txikiarekin</b> abiarazteko.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-despiece" viewBox="0 0 360 270" role="img" aria-label="Despiece del motor de rotor bobinado">
+          <!-- fila de arriba: carcasa con estátor, caja de bornes y reóstato -->
+          <g class="resaltable" data-parte="estator">
+            <rect class="pieza" x="40" y="48" width="170" height="92" rx="12"/>
+            <path d="M48 54h154M48 60h154M48 128h154M48 134h154" stroke="#a7afbc" stroke-width="1.4"/>
+            <rect class="chapa" x="64" y="70" width="122" height="48" rx="3"/>
+            <path d="M74 70v48M84 70v48M94 70v48M104 70v48M114 70v48M124 70v48M134 70v48M144 70v48M154 70v48M164 70v48M174 70v48" stroke="#8d95a3" stroke-width="1"/>
+            <ellipse class="cobre" cx="60" cy="94" rx="8" ry="22"/><ellipse class="cobre" cx="190" cy="94" rx="8" ry="22"/>
+          </g>
+          <g class="resaltable" data-parte="bornes">
+            <rect class="pieza" x="74" y="6" width="104" height="34" rx="5"/>
+            <circle cx="88" cy="17" r="3.2" fill="#c9a227"/><circle cx="102" cy="17" r="3.2" fill="#c9a227"/><circle cx="116" cy="17" r="3.2" fill="#c9a227"/>
+            <circle cx="88" cy="30" r="3.2" fill="#c9a227"/><circle cx="102" cy="30" r="3.2" fill="#c9a227"/><circle cx="116" cy="30" r="3.2" fill="#c9a227"/>
+            <path d="M128 10v26" stroke="#8d95a3" stroke-width="1.2"/>
+            <circle cx="140" cy="24" r="3.2" fill="#e08a3c"/><circle cx="152" cy="24" r="3.2" fill="#e08a3c"/><circle cx="164" cy="24" r="3.2" fill="#e08a3c"/>
+            <text class="txt-s" x="140" y="16" text-anchor="middle" font-size="7.5">K</text><text class="txt-s" x="152" y="16" text-anchor="middle" font-size="7.5">L</text><text class="txt-s" x="164" y="16" text-anchor="middle" font-size="7.5">M</text>
+            <path d="M126 40v8" stroke="#8d95a3" stroke-width="3"/>
+          </g>
+          <g class="resaltable" data-parte="reostato">
+            <rect x="238" y="20" width="110" height="98" rx="10" fill="#f1f3f6" stroke="#8d95a3" stroke-width="1.5"/>
+            <path d="M262 32l-6 6 12 6-12 6 12 6-12 6 12 6-6 6M293 32l-6 6 12 6-12 6 12 6-12 6 12 6-6 6M324 32l-6 6 12 6-12 6 12 6-12 6 12 6-6 6" fill="none" stroke="#b45f00" stroke-width="2"/>
+            <path d="M252 92h84" stroke="var(--marino)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M294 92v16" stroke="var(--marino)" stroke-width="3"/><circle cx="294" cy="110" r="5" fill="var(--naranja)"/>
+          </g>
+          <!-- cables de las escobillas al reóstato -->
+          <g class="resaltable" data-parte="escobillas">
+            <path d="M262 160V128H262M280 160V134H293V118M298 160V140H324V118M262 128V118" fill="none" stroke="#b45f00" stroke-width="1.6" stroke-dasharray="4 3"/>
+            <rect class="carbon" x="256" y="160" width="12" height="16" rx="2"/>
+            <rect class="carbon" x="274" y="160" width="12" height="16" rx="2"/>
+            <rect class="carbon" x="292" y="160" width="12" height="16" rx="2"/>
+            <path d="M262 160v-6M280 160v-6M298 160v-6" stroke="#6b7280" stroke-width="2"/>
+          </g>
+          <path class="eje-f" d="M8 205H352"/>
+          <!-- fila de abajo: eje, rodamientos, rotor bobinado y anillos -->
+          <g class="resaltable" data-parte="eje">
+            <rect class="eje" x="14" y="200" width="300" height="10" rx="3"/>
+            <rect x="20" y="197" width="18" height="4" fill="#5d6576"/>
+            <rect x="56" y="190" width="12" height="30" rx="3" fill="#cfd4db" stroke="#5d6576" stroke-width="1.2"/>
+            <rect x="222" y="190" width="12" height="30" rx="3" fill="#cfd4db" stroke="#5d6576" stroke-width="1.2"/>
+          </g>
+          <g class="resaltable" data-parte="rotor">
+            <rect class="chapa" x="82" y="178" width="124" height="54" rx="3"/>
+            <path d="M92 178v54M110 178v54M128 178v54M146 178v54M164 178v54M182 178v54M198 178v54" stroke="#e08a3c" stroke-width="4"/>
+            <ellipse class="cobre" cx="80" cy="205" rx="6" ry="24"/><ellipse class="cobre" cx="208" cy="205" rx="6" ry="24"/>
+          </g>
+          <g class="resaltable" data-parte="anillos">
+            <rect class="cobre" x="256" y="186" width="12" height="38" rx="3"/>
+            <rect class="cobre" x="274" y="186" width="12" height="38" rx="3"/>
+            <rect class="cobre" x="292" y="186" width="12" height="38" rx="3"/>
+            <path d="M214 196H298" stroke="#e08a3c" stroke-width="1.5" stroke-dasharray="3 3"/>
+          </g>
+          <g>
+            <circle class="num" cx="30" cy="60" r="9"/><text class="num-t" x="30" y="64">1</text>
+            <circle class="num" cx="144" cy="246" r="9"/><text class="num-t" x="144" y="250">2</text>
+            <circle class="num" cx="280" cy="240" r="9"/><text class="num-t" x="280" y="244">3</text>
+            <circle class="num" cx="318" cy="168" r="9"/><text class="num-t" x="318" y="172">4</text>
+            <circle class="num" cx="190" cy="22" r="9"/><text class="num-t" x="190" y="26">5</text>
+            <circle class="num" cx="340" cy="132" r="9"/><text class="num-t" x="340" y="136">6</text>
+            <circle class="num" cx="30" cy="232" r="9"/><text class="num-t" x="30" y="236">7</text>
+          </g>
+        </svg>
+        <figcaption data-es="Despiece. Toca una parte para verla" data-eu="Pieza bereizitako ikuspegia. Ukitu atal bat ikusteko"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-despiece">
+        <li><button data-parte="estator"><span class="n">1</span><span><b class="es">Carcasa y estátor</b><b class="eu">Karkasa eta estatorea</b><small class="es">Iguales que en el motor de jaula: chapas con el devanado trifásico (U-V-W) que crea el campo giratorio.</small><small class="eu">Kaiola-motorrean bezalakoak: eremu birakaria sortzen duen harilkadura trifasikoa (U-V-W) duten xaflak.</small></span></button></li>
+        <li><button data-parte="rotor"><span class="n">2</span><span><b class="es">Rotor bobinado</b><b class="eu">Errotore harilkatua</b><small class="es">Chapas con ranuras y un devanado trifásico de cobre, normalmente conectado en estrella dentro del rotor.</small><small class="eu">Artekak dituzten xaflak eta kobrezko harilkadura trifasikoa, normalean errotorearen barruan izarrean konektatua.</small></span></button></li>
+        <li><button data-parte="anillos"><span class="n">3</span><span><b class="es">Anillos rozantes</b><b class="eu">Eraztun irristakorrak</b><small class="es">Tres anillos de cobre o bronce en el eje, aislados entre sí. Cada uno va unido a una fase del rotor.</small><small class="eu">Ardatzeko hiru eraztun, kobrezkoak edo brontzezkoak, elkarren artean isolatuak. Bakoitza errotoreko fase bati lotuta dago.</small></span></button></li>
+        <li><button data-parte="escobillas"><span class="n">4</span><span><b class="es">Escobillas</b><b class="eu">Eskobillak</b><small class="es">Bloques de grafito (carbón) que un muelle aprieta contra los anillos. Llevan la corriente del rotor, que gira, a los cables, que están quietos.</small><small class="eu">Grafitozko (ikatzezko) blokeak, malguki batek eraztunen kontra estutzen dituenak. Biratzen duen errotorearen korrontea geldirik dauden kableetara eramaten dute.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">5</span><span><b class="es">Caja de bornes: U-V-W y K-L-M</b><b class="eu">Borne-kaxa: U-V-W eta K-L-M</b><small class="es">Seis bornes del estátor (a la red) y tres del rotor <b>K-L-M</b> (al reóstato).</small><small class="eu">Estatorearen sei borne (sarera) eta errotorearen hiru <b>K-L-M</b> borne (erreostatora).</small></span></button></li>
+        <li><button data-parte="reostato"><span class="n">6</span><span><b class="es">Reóstato de arranque</b><b class="eu">Abiarazte-erreostatoa</b><small class="es">Tres resistencias (una por fase) que se van quitando por escalones hasta dejar el rotor en cortocircuito.</small><small class="eu">Hiru erresistentzia (fase bakoitzeko bat), mailaka kentzen direnak errotorea zirkuitulaburrean geratu arte.</small></span></button></li>
+        <li><button data-parte="eje"><span class="n">7</span><span><b class="es">Eje y rodamientos</b><b class="eu">Ardatza eta errodamenduak</b><small class="es">El eje lleva el rotor y los anillos. Los rodamientos lo sujetan y lo dejan girar.</small><small class="eu">Ardatzak errotorea eta eraztunak daramatza. Errodamenduek eusten diote eta biratzen uzten dute.</small></span></button></li>
+      </ul>
+    </div>
+    <p class="nota es">Los datos del rotor (tensión y corriente entre anillos) también vienen en la placa de características: mira su ficha.</p>
+    <p class="nota eu">Errotorearen datuak (eraztunen arteko tentsioa eta korrontea) ezaugarri-plakan ere badaude: begiratu haren fitxa.</p>
+  </section>
+
+  <!-- ============ 2. REÓSTATO / ERREOSTATOA ============ -->
+  <section class="panel" data-tab="erreostatoa" data-es="Reóstato de arranque" data-eu="Abiarazte-erreostatoa" hidden>
+    <div class="card">
+      <h2 data-es="¿Por qué meter resistencia en el rotor?" data-eu="Zergatik sartu erresistentzia errotorean?"></h2>
+      <p class="es">Si se mete resistencia en el rotor al arrancar, pasan dos cosas buenas a la vez:</p>
+      <p class="eu">Abiaraztean errotorean erresistentzia sartzen bada, bi gauza on gertatzen dira aldi berean:</p>
+      <ul>
+        <li><span class="es">La <b>corriente de arranque baja</b> mucho (de 5-7·In a 1,5-2·In).</span><span class="eu"><b>Abiarazte-korrontea</b> asko <b>jaisten da</b> (5-7·In-tik 1,5-2·In-ra).</span></li>
+        <li><span class="es">El <b>par de arranque sube</b> (la fuerza para empezar a girar): puede arrancar con la carga puesta.</span><span class="eu"><b>Abiarazte-momentua igotzen da</b> (biratzen hasteko indarra): kargarekin abiaraz daiteke.</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 data-es="Cómo se arranca, paso a paso" data-eu="Nola abiarazten den, urratsez urrats"></h2>
+      <ol>
+        <li><span class="es">Comprobar que el reóstato está en la posición de <b>resistencia máxima</b> (escalón 3).</span><span class="eu">Egiaztatu erreostatoa <b>erresistentzia handieneko</b> posizioan dagoela (3. maila).</span></li>
+        <li><span class="es">Conectar el estátor a la red (contactor de línea).</span><span class="eu">Konektatu estatorea sarera (lerro-kontaktorea).</span></li>
+        <li><span class="es">Cuando el motor coge velocidad, <b>quitar un escalón</b> de resistencia (escalón 2, luego 1).</span><span class="eu">Motorrak abiadura hartzen duenean, erresistentziaren <b>maila bat kendu</b> (2. maila, gero 1.a).</span></li>
+        <li><span class="es">Al final, <b>cortocircuitar los anillos</b> (escalón 0): el motor trabaja como uno de jaula.</span><span class="eu">Azkenean, <b>eraztunak zirkuitulaburrean jarri</b> (0 maila): motorrak kaiola-motor batek bezala lan egiten du.</span></li>
+      </ol>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 44 340 116" role="img" aria-label="Esquema K-L-M al reóstato">
+        <text class="txt" x="58" y="58" text-anchor="middle" data-es="Rotor (en estrella)" data-eu="Errotorea (izarrean)"></text>
+        <rect x="16" y="66" width="86" height="66" rx="10" fill="#f1f3f6" stroke="#8d95a3" stroke-dasharray="4 3"/>
+        <path class="hilo" d="M28 80V120"/>
+        <path class="hilo" d="M28 80h8M28 100h8M28 120h8M84 80h26M84 100h26M84 120h26"/>
+        <rect x="36" y="74" width="48" height="12" rx="3" fill="#e08a3c" stroke="#9a5214"/>
+        <rect x="36" y="94" width="48" height="12" rx="3" fill="#e08a3c" stroke="#9a5214"/>
+        <rect x="36" y="114" width="48" height="12" rx="3" fill="#e08a3c" stroke="#9a5214"/>
+        <circle cx="28" cy="100" r="3.5" fill="var(--marino)"/>
+        <text class="txt" x="120" y="84">K</text><text class="txt" x="120" y="104">L</text><text class="txt" x="120" y="124">M</text>
+        <path class="hilo" d="M134 80H160M134 100H160M134 120H160"/>
+        <g fill="none" stroke="#b45f00" stroke-width="2.2">
+          <path d="M160 80l5-6 10 12 10-12 10 12 10-12 10 12 10-12 5 6M160 100l5-6 10 12 10-12 10 12 10-12 10 12 10-12 5 6M160 120l5-6 10 12 10-12 10 12 10-12 10 12 10-12 5 6"/>
+        </g>
+        <path class="hilo" d="M230 80H300V120H230M300 100H230"/>
+        <path d="M180 64v68M200 64v68M220 64v68" stroke="var(--naranja)" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text class="txt-s" x="184" y="58" text-anchor="middle">3</text><text class="txt-s" x="204" y="58" text-anchor="middle">2</text><text class="txt-s" x="224" y="58" text-anchor="middle">1</text>
+        <text class="txt-s" x="300" y="140" text-anchor="middle" data-es="punto de estrella" data-eu="izar-puntua"></text>
+        <text class="txt-s" x="200" y="150" text-anchor="middle" data-es="escalones del reóstato" data-eu="erreostatoaren mailak"></text>
+      </svg>
+      <figcaption data-es="Los bornes K-L-M del rotor van a las tres resistencias del reóstato, unidas en estrella" data-eu="Errotorearen K-L-M borneak erreostatoaren hiru erresistentzietara doaz, izarrean lotuta"></figcaption>
+    </figure>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Arrancar <b>siempre con toda la resistencia</b> metida y quitarla poco a poco. El reóstato es solo para el arranque: si se deja metido en marcha, se calienta y el motor va más lento.</p>
+      <p class="eu"><b>Beti erresistentzia osoarekin</b> abiarazi eta pixkanaka kendu. Erreostatoa abiarazteko bakarrik da: martxan sartuta uzten bada, berotu egiten da eta motorra motelago doa.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. PRUÉBALO / PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige el escalón del reóstato y pulsa <b>Marcha</b>. Compara la <b>corriente</b> y el <b>par</b> al arrancar con el escalón 3 y con el 0. Después quita escalones (3 → 2 → 1 → 0) mientras el motor acelera.</p>
+      <p class="eu">Aukeratu erreostatoaren maila eta sakatu <b>Martxa</b>. Konparatu abiaraztean <b>korrontea</b> eta <b>momentua</b> 3. mailarekin eta 0 mailarekin. Gero, kendu mailak (3 → 2 → 1 → 0) motorra azeleratzen ari den bitartean.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-sim" viewBox="0 0 360 250" role="img" aria-label="Simulador del reóstato de arranque">
+        <text class="txt" x="50" y="14" text-anchor="middle">L1</text><text class="txt" x="80" y="14" text-anchor="middle">L2</text><text class="txt" x="110" y="14" text-anchor="middle">L3</text>
+        <path d="M50 20V52M80 20V50M110 20V52" stroke="#9aa3b2" stroke-width="3"/>
+        <!-- motor de rotor bobinado (símbolo) -->
+        <circle cx="80" cy="84" r="36" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+        <circle cx="80" cy="84" r="23" fill="#f1f3f6" stroke="var(--marino)" stroke-width="1.5"/>
+        <g id="rotor-g"><path d="M80 63v42M59 84h42" stroke="#c4cad4" stroke-width="4" stroke-linecap="round"/></g>
+        <text class="txt" x="80" y="82" text-anchor="middle" font-size="12">M</text>
+        <text class="txt" x="80" y="94" text-anchor="middle" font-size="9">3~</text>
+        <!-- anillos y escobillas -->
+        <path d="M50 116V136M80 120V136M110 116V136" stroke="var(--marino)" stroke-width="2"/>
+        <rect class="cobre" x="40" y="136" width="20" height="6" rx="3"/><rect class="cobre" x="70" y="136" width="20" height="6" rx="3"/><rect class="cobre" x="100" y="136" width="20" height="6" rx="3"/>
+        <rect class="carbon" x="46" y="142" width="8" height="8"/><rect class="carbon" x="76" y="142" width="8" height="8"/><rect class="carbon" x="106" y="142" width="8" height="8"/>
+        <text class="txt-s" x="36" y="160" text-anchor="end">K</text><text class="txt-s" x="72" y="160" text-anchor="end">L</text><text class="txt-s" x="102" y="160" text-anchor="end">M</text>
+        <path d="M50 150V166M80 150V166M110 150V166" stroke="var(--marino)" stroke-width="2"/>
+        <!-- reóstato: se dibuja desde JS -->
+        <g id="reostato"></g>
+        <text id="txt-r" class="txt" x="128" y="200">–</text>
+        <!-- gráfica -->
+        <rect x="196" y="24" width="156" height="200" rx="10" fill="#fff" stroke="#e7e2d9"/>
+        <text class="txt-s" x="274" y="18" text-anchor="middle" data-es="Corriente (naranja) y par (azul)" data-eu="Korrontea (laranja) eta momentua (urdina)"></text>
+        <path d="M200 194H348" stroke="var(--verde)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text class="txt-s" x="202" y="190">1</text>
+        <path d="M200 106H348" stroke="#c4cad4" stroke-width="1" stroke-dasharray="4 3"/>
+        <text class="txt-s" x="202" y="102">5</text>
+        <path d="M200 216H348" stroke="#c4cad4" stroke-width="1"/>
+        <polyline id="graf-i" fill="none" stroke="var(--naranja)" stroke-width="2.5" stroke-linejoin="round" points=""/>
+        <polyline id="graf-m" fill="none" stroke="var(--azul)" stroke-width="2.5" stroke-linejoin="round" points=""/>
+      </svg>
+    </figure>
+    <div class="mandos">
+      <button class="boton verde" id="b-marcha" data-es="Marcha" data-eu="Martxa"></button>
+      <button class="boton claro" id="b-paro" data-es="Paro" data-eu="Geldialdia"></button>
+      <button class="boton naranja" id="b-quitar" data-es="Quitar un escalón" data-eu="Maila bat kendu"></button>
+    </div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Carga (como una grúa)" data-eu="Karga (garabi baten modura)"></span><output id="carga-t">100 %</output></label><input id="carga" type="range" min="20" max="120" step="5" value="100"></div>
+      <div class="chips" id="chips-esc">
+        <button type="button" data-e="3" aria-pressed="true" data-es="Escalón 3 (R máx.)" data-eu="3. maila (R max.)"></button>
+        <button type="button" data-e="2" aria-pressed="false" data-es="Escalón 2" data-eu="2. maila"></button>
+        <button type="button" data-e="1" aria-pressed="false" data-es="Escalón 1" data-eu="1. maila"></button>
+        <button type="button" data-e="0" aria-pressed="false" data-es="0 (cortocircuito)" data-eu="0 (zirkuitulaburra)"></button>
+      </div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Velocidad" data-eu="Abiadura"></small><b id="r-n">0 rpm</b></div>
+      <div><small data-es="Deslizamiento" data-eu="Labainketa"></small><b id="r-s">–</b></div>
+      <div><small data-es="Corriente" data-eu="Korrontea"></small><b id="r-i">0 A</b></div>
+      <div><small data-es="Corriente / In" data-eu="Korrontea / In"></small><b id="r-x">0</b></div>
+      <div><small data-es="Par / Par nominal" data-eu="Momentua / M nominala"></small><b id="r-m">0</b></div>
+    </div>
+    <div class="estado" id="estado"></div>
+    <p class="nota es">Motor de ejemplo: 11 kW, 400 V, In = 20 A, 4 polos (1500 rpm de sincronismo). El tiempo está acelerado.</p>
+    <p class="nota eu">Adibideko motorra: 11 kW, 400 V, In = 20 A, 4 polo (1500 rpm-ko sinkronismoa). Denbora azkartuta dago.</p>
+  </section>
+
+  <!-- ============ 4. COMPARACIÓN / KONPARAKETA ============ -->
+  <section class="panel" data-tab="konparaketa" data-es="Comparación y usos" data-eu="Konparaketa eta erabilerak" hidden>
+    <div class="tabla">
+      <table>
+        <thead><tr><th></th><th data-es="Jaula de ardilla" data-eu="Katagorri-kaiola"></th><th data-es="Rotor bobinado" data-eu="Errotore harilkatua"></th></tr></thead>
+        <tbody>
+          <tr><th data-es="Rotor" data-eu="Errotorea"></th><td data-es="Barras y anillos de cortocircuito" data-eu="Barrak eta zirkuitulabur-eraztunak"></td><td data-es="Devanado trifásico de cobre" data-eu="Kobrezko harilkadura trifasikoa"></td></tr>
+          <tr><th data-es="Anillos y escobillas" data-eu="Eraztunak eta eskobillak"></th><td data-es="No tiene" data-eu="Ez du"></td><td data-es="Sí (bornes K-L-M)" data-eu="Bai (K-L-M borneak)"></td></tr>
+          <tr><th data-es="Corriente de arranque" data-eu="Abiarazte-korrontea"></th><td data-es="Alta: 5-7·In" data-eu="Handia: 5-7·In"></td><td data-es="Baja con reóstato: 1,5-2·In" data-eu="Txikia erreostatoarekin: 1,5-2·In"></td></tr>
+          <tr><th data-es="Par de arranque" data-eu="Abiarazte-momentua"></th><td data-es="Normal" data-eu="Normala"></td><td data-es="Alto (hasta el máximo)" data-eu="Handia (maximoraino)"></td></tr>
+          <tr><th data-es="Mantenimiento" data-eu="Mantentze-lanak"></th><td data-es="Muy poco" data-eu="Oso gutxi"></td><td data-es="Más: escobillas y anillos" data-eu="Gehiago: eskobillak eta eraztunak"></td></tr>
+          <tr><th data-es="Precio" data-eu="Prezioa"></th><td data-es="Barato" data-eu="Merkea"></td><td data-es="Más caro" data-eu="Garestiagoa"></td></tr>
+          <tr><th data-es="Uso típico" data-eu="Ohiko erabilera"></th><td data-es="Casi todo: bombas, ventiladores, cintas…" data-eu="Ia dena: ponpak, haizagailuak, zintak…"></td><td data-es="Arranques duros con carga" data-eu="Kargapeko abiarazte gogorrak"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2 data-es="¿Dónde se usa?" data-eu="Non erabiltzen da?"></h2>
+      <p class="es">Donde hay que arrancar <b>con mucha carga</b> o la red no aguanta corrientes de arranque grandes:</p>
+      <p class="eu"><b>Karga handiarekin</b> abiarazi behar den lekuetan, edo sareak abiarazte-korronte handiak jasaten ez dituenean:</p>
+      <ul>
+        <li><span class="es">Grúas y puentes grúa (elevación).</span><span class="eu">Garabiak eta zubi-garabiak (jasoketa).</span></li>
+        <li><span class="es">Molinos y trituradoras.</span><span class="eu">Errotak eta birringailuak.</span></li>
+        <li><span class="es">Cintas transportadoras largas y muy cargadas.</span><span class="eu">Garraio-zinta luzeak eta oso kargatuak.</span></li>
+        <li><span class="es">Bombas y ventiladores grandes en redes débiles.</span><span class="eu">Ponpa eta haizagailu handiak sare ahuletan.</span></li>
+      </ul>
+    </div>
+    <p class="nota es">Hoy en día, en muchas instalaciones nuevas se usa un motor de jaula con variador de frecuencia en su lugar, pero todavía hay muchos motores de rotor bobinado funcionando.</p>
+    <p class="nota eu">Gaur egun, instalazio berri askotan kaiola-motor bat eta maiztasun-aldagailua erabiltzen dira horren ordez, baina oraindik errotore harilkatuko motor asko daude martxan.</p>
+  </section>
+
+  <!-- ============ 5. MANTENIMIENTO / MANTENTZE-LANAK ============ -->
+  <section class="panel" data-tab="mantentzea" data-es="Mantenimiento" data-eu="Mantentze-lanak" hidden>
+    <div class="card aviso-h">
+      <h3 class="es">Antes de empezar</h3><h3 class="eu">Hasi aurretik</h3>
+      <p class="es">Trabajar siempre <b>sin tensión</b>: desconectar, bloquear y señalizar, y comprobar ausencia de tensión. El polvo de las escobillas es conductor.</p>
+      <p class="eu">Beti <b>tentsiorik gabe</b> lan egin: deskonektatu, blokeatu eta seinaleztatu, eta egiaztatu tentsiorik ez dagoela. Eskobillen hautsa eroalea da.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Escobillas</h3><h3 class="eu">Eskobillak</h3>
+        <p class="es">Se gastan con el roce. Medir su longitud y <b>cambiarlas antes</b> de llegar a la marca de mínimo. Poner siempre el mismo tipo de grafito y asentarlas bien sobre el anillo.</p>
+        <p class="eu">Igurtziarekin higatzen dira. Luzera neurtu eta gutxieneko markara iritsi <b>aurretik aldatu</b>. Beti grafito mota bera jarri eta eraztunaren gainean ondo egokitu.</p></div>
+      <div class="card"><h3 class="es">Muelles y portaescobillas</h3><h3 class="eu">Malgukiak eta eskobilla-euskarriak</h3>
+        <p class="es">El muelle debe apretar la escobilla con la presión correcta. La escobilla tiene que moverse libre en su portaescobillas, sin quedarse enganchada.</p>
+        <p class="eu">Malgukiak eskobilla presio egokiarekin estutu behar du. Eskobillak bere euskarrian aske mugitu behar du, trabatu gabe.</p></div>
+      <div class="card"><h3 class="es">Anillos rozantes</h3><h3 class="eu">Eraztun irristakorrak</h3>
+        <p class="es">Superficie lisa y limpia. Quitar el <b>polvo de carbón</b> (aspirar). Si hay rayas, marcas o mucho chisporroteo, hay que repasarlos.</p>
+        <p class="eu">Gainazal leuna eta garbia. <b>Ikatz-hautsa</b> kendu (xurgatu). Marradurak, markak edo txinparta asko badaude, berrikusi egin behar dira.</p></div>
+      <div class="card"><h3 class="es">Reóstato</h3><h3 class="eu">Erreostatoa</h3>
+        <p class="es">Revisar contactos y conexiones K-L-M, que no se recaliente y que vuelva siempre a la <b>posición de arranque</b> (resistencia máxima).</p>
+        <p class="eu">Kontaktuak eta K-L-M konexioak berrikusi, gehiegi ez berotzea eta beti <b>abiarazte-posiziora</b> itzultzea (erresistentzia handiena).</p></div>
+      <div class="card"><h3 class="es">Aislamiento y rodamientos</h3><h3 class="eu">Isolamendua eta errodamenduak</h3>
+        <p class="es">Medir el aislamiento de estátor y rotor con el <b>megóhmetro</b>. Engrasar los rodamientos según el fabricante.</p>
+        <p class="eu">Estatorearen eta errotorearen isolamendua <b>megohmetroarekin</b> neurtu. Errodamenduak fabrikatzaileak dioen bezala koipeztatu.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Estátor: bornes <b>U-V-W</b>. Rotor: bornes <b>K-L-M</b> (anillos + escobillas → reóstato). Lo que más se revisa: <b>escobillas y anillos</b>.</p>
+      <p class="eu">Estatorea: <b>U-V-W</b> borneak. Errotorea: <b>K-L-M</b> borneak (eraztunak + eskobillak → erreostatoa). Gehien berrikusten dena: <b>eskobillak eta eraztunak</b>.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function f1(n){ return n.toFixed(1).replace(".", ","); }
+
+  /* Bucle de animación que solo corre mientras su pestaña está visible.
+     ficha.js lanza el evento "pestana" cada vez que se cambia de pestaña. */
+  function bucle(tab, paso){
+    var panel = document.querySelector('.panel[data-tab="' + tab + '"]');
+    var activo = false, ult = 0;
+    function f(t){
+      if (panel.hidden) { activo = false; return; }
+      var dt = Math.min((t - ult) / 1000, 0.1); ult = t;
+      paso(dt);
+      requestAnimationFrame(f);
+    }
+    document.addEventListener("pestana", function(){
+      if (activo || panel.hidden) return;
+      activo = true; ult = performance.now(); requestAnimationFrame(f);
+    });
+  }
+
+  /* ============ MODELO DEL MOTOR ============
+     Par según el deslizamiento s (fórmula de Kloss, simplificada):
+       M = 2·Mk / (s/sk + sk/s)
+     Mk = par máximo (2,8 veces el nominal). sk = deslizamiento donde está el par máximo.
+     Meter resistencia en el rotor hace sk más grande: el par máximo se va hacia el arranque.
+     La corriente del rotor crece con M·s/sk (así a plena carga sale In en todos los escalones). */
+  var IN = 20, NS = 1500, MK = 2.8;
+  var SK = [0.2, 1.0, 2.0, 3.5];          // escalón 0 (cortocircuito), 1, 2, 3 (resistencia máxima)
+  var RX = [0, 0.6, 1.4, 2.5];            // resistencia añadida por fase (ohmios) en cada escalón
+  var XN = 0.186;                         // valor de s/sk a par nominal (sale de la fórmula con Mk = 2,8)
+
+  var marcha = false, esc = 3, n = 0, ang = 0;
+  var M = 0, I = 0, histI = [], histM = [], tHist = 0;
+
+  function par(s, k){ if (s <= 0) return 0; return 2 * MK / (s / SK[k] + SK[k] / s); }
+  function corriente(s, k, m){
+    var i2 = 0.94 * Math.sqrt(Math.max(m * s / SK[k] / XN, 0));  // corriente del rotor (veces In)
+    return Math.sqrt(0.3 * 0.3 + i2 * i2);                         // + corriente de vacío (magnetización)
+  }
+
+  function dibujarReostato(){
+    // tres resistencias verticales de 3 tramos; la barra de cortocircuito sube o baja según el escalón
+    var g = "", yBarra = 172 + esc * 18, x = [50, 80, 110];
+    var calor = marcha ? Math.min(I / IN / 3, 1) : 0;
+    var rojo = "rgb(" + Math.round(180 + 75 * calor) + "," + Math.round(95 - 60 * calor) + ",0)";
+    x.forEach(function(cx){
+      for (var t = 0; t < 3; t++) {
+        var y0 = 172 + t * 18, enCircuito = t < esc;   // los tramos por encima de la barra conducen
+        g += '<rect x="' + (cx - 5) + '" y="' + (y0 + 2) + '" width="10" height="14" rx="2" fill="' + (enCircuito ? rojo : "#d7dce3") + '" stroke="#6b7280" stroke-width="1"/>';
+      }
+      g += '<path d="M' + cx + ' 166V172" stroke="var(--marino)" stroke-width="2"/>';
+    });
+    g += '<path d="M42 ' + yBarra + 'H118" stroke="var(--marino)" stroke-width="5" stroke-linecap="round"/>';
+    $("reostato").innerHTML = g;
+    $("txt-r").textContent = esc === 0 ? T("R = 0 (cc)", "R = 0 (zl)") : "R = " + f1(RX[esc]) + " Ω";
+    $("txt-r").setAttribute("y", yBarra + 4);
+  }
+
+  function mensaje(){
+    var e = $("estado"), c = +$("carga").value / 100;
+    e.className = "estado";
+    if (!marcha) { e.textContent = n > 5 ? T("Desconectado: el motor se para.", "Deskonektatuta: motorra gelditzen ari da.") : T("Motor parado. Pon el reóstato en el escalón 3 y pulsa «Marcha».", "Motorra geldirik. Jarri erreostatoa 3. mailan eta sakatu «Martxa»."); return; }
+    if (n < 5 && M < c) { e.className = "estado mal"; e.textContent = T("¡No arranca! El par (" + f1(M) + ") es menor que la carga (" + f1(c) + ") y la corriente es muy alta. Mete resistencia en el rotor.", "Ez da abiarazten! Momentua (" + f1(M) + ") karga (" + f1(c) + ") baino txikiagoa da eta korrontea oso handia. Sartu erresistentzia errotorean."); return; }
+    if (I / IN > 3) { e.className = "estado mal"; e.textContent = T("Corriente muy alta: " + f1(I / IN) + " veces In.", "Korronte oso handia: In baino " + f1(I / IN) + " aldiz handiagoa."); return; }
+    if (esc > 0 && Math.abs(M - c) < 0.05) { e.textContent = T("El motor ya no acelera más con este escalón (va a " + Math.round(n) + " rpm). Quita otro escalón.", "Motorrak ez du gehiago azeleratzen maila honekin (" + Math.round(n) + " rpm). Kendu beste maila bat."); return; }
+    if (esc > 0) { e.textContent = T("Acelerando con resistencia en el rotor: corriente baja y buen par.", "Errotorean erresistentziarekin azeleratzen: korronte txikia eta momentu ona."); return; }
+    e.className = "estado ok";
+    e.textContent = T("Rotor en cortocircuito: el motor trabaja como uno de jaula, cerca de 1500 rpm.", "Errotorea zirkuitulaburrean: motorrak kaiola-motor batek bezala lan egiten du, 1500 rpm inguruan.");
+  }
+
+  function elegir(k){
+    esc = k;
+    [].forEach.call($("chips-esc").children, function(b){ b.setAttribute("aria-pressed", +b.getAttribute("data-e") === k ? "true" : "false"); });
+  }
+
+  bucle("proba", function(dt){
+    var c = +$("carga").value / 100;          // par de la carga (veces el nominal)
+    var s = (NS - n) / NS;                     // deslizamiento
+    if (marcha) {
+      M = par(s, esc);
+      I = IN * corriente(s, esc, M);
+      // Aceleración: (par del motor - par de la carga). Si el par no llega, no arranca.
+      n += (M - c) * 700 * dt;
+    } else {
+      M = 0; I = 0;
+      n -= (c + 0.2) * 700 * dt;               // sin tensión se frena
+    }
+    if (n < 0) n = 0;
+    if (n > NS) n = NS;
+
+    ang += n / NS * 500 * dt;
+    $("rotor-g").setAttribute("transform", "rotate(" + ang.toFixed(1) + " 80 84)");
+    tHist += dt;
+    if (tHist > 0.05) {
+      tHist = 0; histI.push(I / IN); histM.push(M);
+      if (histI.length > 120) { histI.shift(); histM.shift(); }
+    }
+    function puntos(h){ return h.map(function(v, i){ return (200 + i * 148 / 119).toFixed(1) + "," + (216 - Math.min(v, 8.5) * 22).toFixed(1); }).join(" "); }
+    $("graf-i").setAttribute("points", puntos(histI));
+    $("graf-m").setAttribute("points", puntos(histM));
+    $("r-n").textContent = Math.round(n) + " rpm";
+    $("r-s").textContent = marcha ? f1(s * 100) + " %" : "–";
+    $("r-i").textContent = f1(I) + " A";
+    $("r-x").textContent = f1(I / IN);
+    $("r-m").textContent = f1(M);
+    dibujarReostato(); mensaje();
+  });
+
+  $("b-marcha").addEventListener("click", function(){ marcha = true; });
+  $("b-paro").addEventListener("click", function(){ marcha = false; });
+  $("b-quitar").addEventListener("click", function(){ if (esc > 0) elegir(esc - 1); });
+  $("chips-esc").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    elegir(+b.getAttribute("data-e"));
+  });
+  $("carga").addEventListener("input", function(){ $("carga-t").textContent = this.value + " %"; });
+
+  dibujarReostato();
+  alCambiarIdioma(function(){ dibujarReostato(); mensaje(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intensidad de corriente</title>
+<meta name="description" content="Qué es la intensidad, sentido de la corriente, cómo se mide con amperímetro y pinza, simulador de la ley de Ohm, valores típicos, efectos en el cuerpo y ejercicios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.med{font-size:13px;font-weight:700;fill:var(--marino)}
+.hilo{stroke:#9aa3b2;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+details.card summary{cursor:pointer;font-weight:600;color:var(--naranja-osc);margin-top:6px}
+details.card[open] summary{margin-bottom:6px}
+.enunciado{font-weight:600;color:var(--marino-txt)}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Intensidad de corriente (A)" data-eu="Korronte-intentsitatea (A)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">intensidad</span> es la <b>cantidad de corriente</b> que pasa por un cable <b>cada segundo</b>: cuántos electrones atraviesan el cable en un segundo. Es como el <b>caudal</b> de agua en una tubería (litros por segundo).</p>
+      <p class="eu"><span class="clave">Intentsitatea</span> kable batetik <b>segundo bakoitzean</b> igarotzen den <b>korronte-kantitatea</b> da: segundo batean zenbat elektroik zeharkatzen duten kablea. Hodi bateko ur-<b>emaria</b> bezala da (litro segundoko).</p>
+      <p class="es">Por un cable que lleva <b>1 amperio</b> pasan unos <b>6 trillones de electrones cada segundo</b>. Por eso no los contamos uno a uno: usamos el amperio.</p>
+      <p class="eu"><b>Anpere 1</b> daraman kable batetik <b>6 trilioi elektroi inguru igarotzen dira segundoko</b>. Horregatik ez ditugu banan-banan zenbatzen: anperea erabiltzen dugu.</p>
+      <div class="formula">I → <span class="es">amperios (A)</span><span class="eu">anpereak (A)</span></div>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 170" role="img" aria-label="Caudal y corriente">
+        <!-- tubería con agua -->
+        <rect x="20" y="20" width="300" height="34" rx="6" fill="#9cc8f0" stroke="#8d95a3" stroke-width="2"/>
+        <path d="M60 37h30M150 37h30M240 37h30" stroke="#2b6cb0" stroke-width="3"/>
+        <path d="M96 37l-8-5v10zM186 37l-8-5v10zM276 37l-8-5v10z" fill="#2b6cb0"/>
+        <path d="M200 14v46" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="4 3"/>
+        <text class="txt" x="206" y="12" style="fill:var(--rojo)" data-es="litros por segundo" data-eu="litro segundoko"></text>
+        <!-- cable con electrones -->
+        <rect x="20" y="100" width="300" height="30" rx="15" fill="#f6d7b0" stroke="#b45f00" stroke-width="2"/>
+        <g fill="var(--azul)">
+          <circle cx="40" cy="110" r="4"/><circle cx="70" cy="120" r="4"/><circle cx="100" cy="108" r="4"/><circle cx="125" cy="121" r="4"/>
+          <circle cx="155" cy="112" r="4"/><circle cx="185" cy="122" r="4"/><circle cx="215" cy="109" r="4"/><circle cx="240" cy="120" r="4"/>
+          <circle cx="270" cy="111" r="4"/><circle cx="298" cy="121" r="4"/>
+        </g>
+        <path d="M200 94v42" stroke="var(--rojo)" stroke-width="2" stroke-dasharray="4 3"/>
+        <text class="txt" x="206" y="150" style="fill:var(--rojo)" data-es="electrones por segundo" data-eu="elektroi segundoko"></text>
+        <text class="txt-s" x="24" y="76" data-es="Agua: caudal" data-eu="Ura: emaria"></text>
+        <text class="txt-s" x="24" y="165" data-es="Electricidad: intensidad" data-eu="Elektrizitatea: intentsitatea"></text>
+      </svg>
+      <figcaption data-es="Se cuenta lo que atraviesa una «ventana» en un segundo" data-eu="Segundo batean «leiho» bat zeharkatzen duena zenbatzen da"></figcaption>
+    </figure>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 300 200" role="img" aria-label="Sentido de la corriente">
+          <path class="hilo con" d="M60 80V30H240V170H60V110"/>
+          <path d="M44 80h32" stroke="var(--marino)" stroke-width="3"/><path d="M52 92h16" stroke="var(--marino)" stroke-width="7"/>
+          <path d="M60 92v18" stroke="var(--naranja)" stroke-width="4"/>
+          <text class="med" x="30" y="80">+</text><text class="med" x="34" y="100">−</text>
+          <rect x="230" y="80" width="20" height="50" fill="#fff" stroke="var(--marino)" stroke-width="2.4"/>
+          <!-- sentido convencional (naranja oscuro, por fuera) -->
+          <path d="M140 18l14 0M154 18l-7-5M154 18l-7 5" stroke="var(--naranja-osc)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <text class="txt" x="150" y="12" text-anchor="end" style="fill:var(--naranja-osc)" data-es="convencional: + → −" data-eu="konbentzionala: + → −"></text>
+          <!-- sentido de los electrones (azul, por dentro) -->
+          <path d="M154 44l-14 0M140 44l7-5M140 44l7 5" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <text class="txt" x="160" y="58" style="fill:var(--azul)" data-es="electrones: − → +" data-eu="elektroiak: − → +"></text>
+          <text class="txt-s" x="262" y="110" data-es="carga" data-eu="karga"></text>
+        </svg>
+        <figcaption data-es="Dos sentidos: el convencional y el real de los electrones" data-eu="Bi noranzko: konbentzionala eta elektroien benetakoa"></figcaption>
+      </figure>
+      <div class="card">
+        <h2 data-es="El sentido de la corriente" data-eu="Korrontearen noranzkoa"></h2>
+        <p class="es">Los <b>electrones</b> salen del polo <b>−</b> y van al <b>+</b>. Pero antes de conocer los electrones se decidió que la corriente iba del <b>+ al −</b>: es el <b>sentido convencional</b>, y es el que se dibuja en los esquemas.</p>
+        <p class="eu"><b>Elektroiak</b> <b>−</b> polotik irten eta <b>+</b> polora doaz. Baina elektroiak ezagutu aurretik korrontea <b>+-tik −-ra</b> zihoala erabaki zen: hori da <b>noranzko konbentzionala</b>, eta eskemetan hori marrazten da.</p>
+        <p class="es">En <b>continua</b> la corriente va siempre en el mismo sentido. En <b>alterna</b> cambia de sentido 100 veces por segundo (50 Hz): mira la ficha de CC y CA.</p>
+        <p class="eu"><b>Korronte zuzenean</b> beti noranzko berean doa. <b>Korronte alternoan</b> segundoko 100 aldiz aldatzen du noranzkoa (50 Hz): begiratu KZ eta KA fitxa.</p>
+      </div>
+    </div>
+
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Intensidad = <b>caudal de corriente</b>. Letra <b>I</b>, unidad <b>amperio (A)</b>. Para que haya corriente hace falta <b>tensión</b> y un <b>circuito cerrado</b>.</p>
+      <p class="eu">Intentsitatea = <b>korronte-emaria</b>. <b>I</b> letra, unitatea <b>anperea (A)</b>. Korrontea egoteko <b>tentsioa</b> eta <b>zirkuitu itxia</b> behar dira.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. NEURKETA ============ -->
+  <section class="panel" data-tab="neurketa" data-es="Unidades y medida" data-eu="Unitateak eta neurketa" hidden>
+    <div class="card">
+      <h2 data-es="El amperio y sus múltiplos" data-eu="Anperea eta bere multiploak"></h2>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Unidad</span><span class="eu">Unitatea</span></th><th><span class="es">Equivale a</span><span class="eu">Baliokidea</span></th><th><span class="es">Ejemplo</span><span class="eu">Adibidea</span></th></tr>
+        <tr><td><b>mA</b> <span class="es">(miliamperio)</span><span class="eu">(milianperea)</span></td><td>1 mA = 0,001 A</td><td><span class="es">LED: 20 mA</span><span class="eu">LEDa: 20 mA</span></td></tr>
+        <tr><td><b>A</b> <span class="es">(amperio)</span><span class="eu">(anperea)</span></td><td>1 A</td><td><span class="es">base de enchufe: 16 A</span><span class="eu">entxufe-oinarria: 16 A</span></td></tr>
+        <tr><td><b>kA</b> <span class="es">(kiloamperio)</span><span class="eu">(kiloanperea)</span></td><td>1 kA = 1000 A</td><td><span class="es">cortocircuito: 6 kA</span><span class="eu">zirkuitulaburra: 6 kA</span></td></tr>
+      </table></div>
+      <p class="nota es">De A a mA se multiplica por 1000 (0,35 A = 350 mA). De mA a A se divide entre 1000 (20 mA = 0,02 A).</p>
+      <p class="nota eu">A-tik mA-ra 1000z biderkatzen da (0,35 A = 350 mA). mA-tik A-ra 1000z zatitzen da (20 mA = 0,02 A).</p>
+    </div>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 340 250" role="img" aria-label="Amperímetro en serie">
+          <!-- pila con el + abajo -->
+          <path class="hilo con" d="M40 72V30H280V65M280 105V130H180M120 130H40V84"/>
+          <path d="M33 72h14" stroke="var(--marino)" stroke-width="7"/><path d="M26 84h28" stroke="var(--marino)" stroke-width="3"/>
+          <text class="med" x="12" y="98">+</text>
+          <circle cx="280" cy="85" r="20" fill="rgba(255,210,87,.8)" stroke="var(--marino)" stroke-width="2.5"/>
+          <path d="M266 71l28 28M294 71l-28 28" stroke="var(--marino)" stroke-width="2"/>
+          <!-- circuito abierto -->
+          <circle cx="120" cy="130" r="4.5" fill="var(--marino)"/><circle cx="180" cy="130" r="4.5" fill="var(--marino)"/>
+          <text class="txt" x="150" y="122" text-anchor="middle" style="fill:var(--rojo)" data-es="se abre" data-eu="ireki"></text>
+          <!-- polímetro -->
+          <rect x="100" y="160" width="100" height="84" rx="12" fill="#ffd257" stroke="var(--marino)" stroke-width="2"/>
+          <rect x="110" y="168" width="80" height="24" rx="4" fill="#dff1dd" stroke="var(--marino)" stroke-width="1.2"/>
+          <text class="med" x="150" y="185" text-anchor="middle">0,50 A</text>
+          <circle cx="125" cy="228" r="6" fill="var(--rojo)"/><circle cx="175" cy="228" r="6" fill="#222"/>
+          <text class="txt-s" x="125" y="214" text-anchor="middle" style="fill:var(--marino)">10A</text><text class="txt-s" x="175" y="214" text-anchor="middle" style="fill:var(--marino)">COM</text>
+          <path d="M120 130C96 150 100 200 125 222" stroke="var(--rojo)" stroke-width="3" fill="none"/>
+          <path d="M180 130C204 150 200 200 175 222" stroke="#222" stroke-width="3" fill="none"/>
+          <text class="txt" x="214" y="180" style="fill:var(--rojo)" data-es="EN SERIE" data-eu="SERIEAN"></text>
+          <text class="txt-s" x="214" y="194" data-es="la corriente pasa" data-eu="korrontea bertatik"></text>
+          <text class="txt-s" x="214" y="206" data-es="por dentro del aparato" data-eu="igarotzen da"></text>
+        </svg>
+        <figcaption data-es="El amperímetro se intercala en el circuito" data-eu="Anperemetroa zirkuituaren barruan tartekatzen da"></figcaption>
+      </figure>
+      <div class="card">
+        <h2 data-es="Con el amperímetro (en serie)" data-eu="Anperemetroarekin (seriean)"></h2>
+        <ol>
+          <li><span class="es"><b>Quita la tensión</b> del circuito.</span><span class="eu"><b>Kendu tentsioa</b> zirkuitutik.</span></li>
+          <li><span class="es">Cable rojo al borne <b>10A</b> (o <b>mA</b> si es poca corriente), negro en <b>COM</b>. Selector en <b>A⎓</b> o <b>A~</b>.</span><span class="eu">Kable gorria <b>10A</b> bornera (edo <b>mA</b>-ra korronte gutxi bada), beltza <b>COM</b>-en. Hautagailua <b>A⎓</b> edo <b>A~</b> posizioan.</span></li>
+          <li><span class="es"><b>Abre el circuito</b> e intercala el polímetro: la corriente tiene que pasar por él (<b>en serie</b>).</span><span class="eu"><b>Ireki zirkuitua</b> eta tartekatu polimetroa: korronteak bertatik igaro behar du (<b>seriean</b>).</span></li>
+          <li><span class="es">Da tensión y lee. Al acabar, vuelve a poner el cable rojo en <b>V</b>.</span><span class="eu">Eman tentsioa eta irakurri. Amaitzean, jarri berriro kable gorria <b>V</b>-n.</span></li>
+        </ol>
+        <p class="mal es">¡Nunca en paralelo! El amperímetro casi no tiene resistencia: sería un cortocircuito y se funde su fusible (o algo peor).</p>
+        <p class="mal eu">Inoiz ez paraleloan! Anperemetroak ia ez du erresistentziarik: zirkuitulabur bat izango litzateke eta bere fusiblea erretzen da (edo okerragoa).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Con la pinza amperimétrica (sin cortar el cable)" data-eu="Pintza anperemetrikoarekin (kablea moztu gabe)"></h2>
+      <p class="es">La pinza mide el <b>campo magnético</b> que crea la corriente alrededor del cable. No hay que abrir nada: es la forma normal de medir en el taller. Un radiador de 2000 W está enchufado a 230 V. ¿Qué abrazas con la pinza?</p>
+      <p class="eu">Pintzak korronteak kablearen inguruan sortzen duen <b>eremu magnetikoa</b> neurtzen du. Ez da ezer ireki behar: tailerrean neurtzeko modu arrunta da. 2000 W-ko berogailu bat 230 V-ra entxufatuta dago. Zer besarkatzen duzu pintzarekin?</p>
+      <div class="chips" id="pinza-op">
+        <button type="button" data-p="L" aria-pressed="true" data-es="Solo la fase" data-eu="Fasea bakarrik"></button>
+        <button type="button" data-p="N" aria-pressed="false" data-es="Solo el neutro" data-eu="Neutroa bakarrik"></button>
+        <button type="button" data-p="LNP" aria-pressed="false" data-es="La manguera entera" data-eu="Mahuka osoa"></button>
+      </div>
+    </div>
+    <figure class="fig"><svg id="pinza" viewBox="0 0 340 200" role="img" aria-label="Pinza amperimétrica"></svg></figure>
+    <div class="estado" id="pinza-exp"></div>
+  </section>
+
+  <!-- ============ 3. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="dos">
+      <div class="card">
+        <h2 data-es="La ley de Ohm" data-eu="Ohmen legea"></h2>
+        <p class="es">La intensidad depende de dos cosas: de la <b>tensión</b> que empuja (U) y de lo que le cuesta pasar, la <b>resistencia</b> (R, en ohmios Ω).</p>
+        <p class="eu">Intentsitatea bi gauzaren araberakoa da: bultzatzen duen <b>tentsioa</b> (U) eta igarotzea zenbat kostatzen zaion, <b>erresistentzia</b> (R, ohmetan Ω).</p>
+        <div class="formula">I = U / R</div>
+        <p class="es">Más tensión → <b>más</b> corriente. Más resistencia → <b>menos</b> corriente.</p>
+        <p class="eu">Tentsio gehiago → korronte <b>gehiago</b>. Erresistentzia gehiago → korronte <b>gutxiago</b>.</p>
+      </div>
+      <figure class="fig">
+        <svg viewBox="0 0 220 150" role="img" aria-label="Triángulo de Ohm">
+          <path d="M110 10L200 140H20Z" fill="#fff0dc" stroke="var(--marino)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M52 92H168M110 92V140" stroke="var(--marino)" stroke-width="2"/>
+          <text class="med" x="110" y="74" text-anchor="middle" style="font-size:24px">U</text>
+          <text class="med" x="78" y="126" text-anchor="middle" style="font-size:22px">I</text>
+          <text class="med" x="142" y="126" text-anchor="middle" style="font-size:22px">R</text>
+        </svg>
+        <figcaption data-es="Tapa la que buscas: I = U/R · R = U/I · U = I·R" data-eu="Estali bilatzen duzuna: I = U/R · R = U/I · U = I·R"></figcaption>
+      </figure>
+    </div>
+    <div class="card">
+      <p class="es">Cambia la tensión y la resistencia y mira lo que marcan los <b>amperímetros A1 y A2</b>, uno antes y otro después de la resistencia. El circuito tiene un <b>fusible de 2 A</b>: ¿qué pasa si la resistencia es muy pequeña?</p>
+      <p class="eu">Aldatu tentsioa eta erresistentzia eta begiratu zer markatzen duten <b>A1 eta A2 anperemetroek</b>, bata erresistentziaren aurretik eta bestea ondoren. Zirkuituak <b>2 A-ko fusible</b> bat du: zer gertatzen da erresistentzia oso txikia bada?</p>
+    </div>
+    <figure class="fig">
+      <svg id="sim" viewBox="0 0 340 220" role="img" aria-label="Circuito de la ley de Ohm"></svg>
+    </figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Tensión U" data-eu="U tentsioa"></span><output id="u-t"></output></label><input id="u" type="range" min="0" max="24" step="0.5" value="12"></div>
+      <div class="deslizador"><label><span data-es="Resistencia R" data-eu="R erresistentzia"></span><output id="r-t"></output></label><input id="r" type="range" min="5" max="100" step="1" value="24"></div>
+    </div>
+    <div class="chips" id="sentido">
+      <button type="button" data-s="conv" aria-pressed="true" data-es="Sentido convencional (+ → −)" data-eu="Noranzko konbentzionala (+ → −)"></button>
+      <button type="button" data-s="elec" aria-pressed="false" data-es="Electrones (− → +)" data-eu="Elektroiak (− → +)"></button>
+    </div>
+    <div class="lectura-g">
+      <div><small>U</small><b id="l-u"></b></div>
+      <div><small>R</small><b id="l-r"></b></div>
+      <div><small>A1</small><b id="l-i"></b></div>
+      <div><small>A2</small><b id="l-i2"></b></div>
+    </div>
+    <div class="card"><p class="formula" id="cuenta" style="margin:0"></p></div>
+    <figure class="fig">
+      <svg id="graf" viewBox="0 0 340 170" role="img" aria-label="Gráfica I-U"></svg>
+      <figcaption data-es="Gráfica I–U: con R fija, si doblas la tensión se dobla la corriente (es una recta)" data-eu="I–U grafikoa: R finkoarekin, tentsioa bikoizten baduzu korrontea bikoizten da (zuzen bat da)"></figcaption>
+    </figure>
+    <div class="estado" id="estado"></div>
+    <div class="mandos"><button type="button" class="boton naranja" id="reponer" hidden data-es="Cambiar el fusible" data-eu="Fusiblea aldatu"></button></div>
+  </section>
+
+  <!-- ============ 4. BALIOAK ============ -->
+  <section class="panel" data-tab="balioak" data-es="Valores y seguridad" data-eu="Balioak eta segurtasuna" hidden>
+    <div class="card">
+      <h2 data-es="Valores típicos" data-eu="Balio ohikoak"></h2>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Aparato</span><span class="eu">Aparatua</span></th><th><span class="es">Intensidad</span><span class="eu">Intentsitatea</span></th></tr>
+        <tr><td><span class="es">LED piloto de un cuadro</span><span class="eu">Koadro bateko LED pilotua</span></td><td>≈ 20 mA</td></tr>
+        <tr><td><span class="es">Bombilla LED de 10 W (230 V)</span><span class="eu">10 W-ko LED bonbilla (230 V)</span></td><td>≈ 0,05 A</td></tr>
+        <tr><td><span class="es">Bombilla de coche de 12 V y 6 W</span><span class="eu">12 V eta 6 W-ko autoko bonbilla</span></td><td>0,5 A</td></tr>
+        <tr><td><span class="es">Motor trifásico de 4 kW (400 V)</span><span class="eu">4 kW-ko motor trifasikoa (400 V)</span></td><td>≈ 8 A</td></tr>
+        <tr><td><span class="es">Secador de pelo de 2000 W (230 V)</span><span class="eu">2000 W-ko ile-lehorgailua (230 V)</span></td><td>≈ 9 A</td></tr>
+        <tr><td><span class="es">Motor de arranque de un coche</span><span class="eu">Auto baten abio-motorra</span></td><td>150 – 300 A</td></tr>
+        <tr><td><span class="es">Cortocircuito en un cuadro</span><span class="eu">Zirkuitulaburra koadro batean</span></td><td><span class="es">miles de A (kA)</span><span class="eu">milaka A (kA)</span></td></tr>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Corriente, sección del cable y protección" data-eu="Korrontea, kablearen sekzioa eta babesa"></h2>
+      <p class="es">Cuanta más corriente, más se <b>calienta</b> el cable. Por eso cada sección de cable aguanta una corriente máxima y se protege con un magnetotérmico de ese valor. En una vivienda:</p>
+      <p class="eu">Zenbat eta korronte gehiago, orduan eta gehiago <b>berotzen</b> da kablea. Horregatik, kable-sekzio bakoitzak korronte maximo bat jasaten du, eta balio horretako magnetotermiko batekin babesten da. Etxebizitza batean:</p>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Circuito</span><span class="eu">Zirkuitua</span></th><th><span class="es">Sección</span><span class="eu">Sekzioa</span></th><th><span class="es">Magnetotérmico</span><span class="eu">Magnetotermikoa</span></th></tr>
+        <tr><td><span class="es">Alumbrado</span><span class="eu">Argiztapena</span></td><td>1,5 mm²</td><td>10 A</td></tr>
+        <tr><td><span class="es">Enchufes de uso general</span><span class="eu">Erabilera orokorreko entxufeak</span></td><td>2,5 mm²</td><td>16 A</td></tr>
+        <tr><td><span class="es">Lavadora, termo</span><span class="eu">Garbigailua, termoa</span></td><td>4 mm²</td><td>20 A</td></tr>
+        <tr><td><span class="es">Cocina y horno</span><span class="eu">Sukaldea eta labea</span></td><td>6 mm²</td><td>25 A</td></tr>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Efectos de la corriente en el cuerpo" data-eu="Korrontearen eraginak gorputzean"></h2>
+      <p class="es">Lo que hace daño es la <b>corriente que pasa por el cuerpo</b> (la tensión es lo que la empuja). Con muy pocos miliamperios ya hay peligro:</p>
+      <p class="eu">Kalte egiten duena <b>gorputzetik igarotzen den korrontea</b> da (tentsioa hura bultzatzen duena da). Miliamperio gutxi batzuekin ere arriskua dago:</p>
+      <figure class="fig" style="box-shadow:none;padding:0">
+        <svg id="cuerpo" viewBox="0 0 340 120" role="img" aria-label="Efectos de la corriente">
+          <defs><linearGradient id="grad-peligro" x1="0" x2="1"><stop offset="0" stop-color="#9fdcb5"/><stop offset=".45" stop-color="#ffd257"/><stop offset=".7" stop-color="#f39200"/><stop offset="1" stop-color="#c62f2f"/></linearGradient></defs>
+          <rect x="10" y="50" width="320" height="16" rx="8" fill="url(#grad-peligro)"/>
+          <g stroke="var(--marino)" stroke-width="2"><path d="M30 44v28M110 44v28M190 44v28M250 44v28"/></g>
+          <text class="med" x="30" y="38" text-anchor="middle">1 mA</text><text class="med" x="110" y="38" text-anchor="middle">10 mA</text>
+          <text class="med" x="190" y="38" text-anchor="middle">30 mA</text><text class="med" x="250" y="38" text-anchor="middle">50 mA</text>
+          <text class="txt-s" x="30" y="86" text-anchor="middle" data-es="se nota" data-eu="nabaritzen da"></text>
+          <text class="txt-s" x="110" y="86" text-anchor="middle" data-es="no puedes" data-eu="ezin duzu"></text>
+          <text class="txt-s" x="110" y="98" text-anchor="middle" data-es="soltarte" data-eu="askatu"></text>
+          <text class="txt-s" x="190" y="86" text-anchor="middle" data-es="salta el" data-eu="diferentziala"></text>
+          <text class="txt-s" x="190" y="98" text-anchor="middle" data-es="diferencial" data-eu="jauzten da"></text>
+          <text class="txt-s" x="250" y="86" text-anchor="middle" data-es="el corazón" data-eu="bihotza"></text>
+          <text class="txt-s" x="250" y="98" text-anchor="middle" data-es="puede pararse" data-eu="gelditu daiteke"></text>
+          <text class="txt" x="10" y="116" data-es="(valores aproximados, corriente alterna 50 Hz)" data-eu="(gutxi gorabeherako balioak, korronte alternoa 50 Hz)"></text>
+        </svg>
+      </figure>
+      <p class="es">Por eso el <b>diferencial de 30 mA</b> protege a las personas: corta antes de que la corriente sea mortal. Una bombilla de 0,05 A (50 mA) ya podría ser peligrosa si esa corriente pasara por ti.</p>
+      <p class="eu">Horregatik babesten ditu pertsonak <b>30 mA-ko diferentzialak</b>: korrontea hilgarria izan aurretik mozten du. 0,05 A-ko (50 mA) bonbilla bat arriskutsua izan liteke korronte hori zure gorputzetik igaroko balitz.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Más corriente → más calor en los cables → hace falta <b>más sección</b> y la protección adecuada. En el cuerpo, <b>30 mA</b> ya son peligrosos.</p>
+      <p class="eu">Korronte gehiago → bero gehiago kableetan → <b>sekzio handiagoa</b> eta babes egokia behar dira. Gorputzean, <b>30 mA</b> arriskutsuak dira dagoeneko.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. ARIKETAK ============ -->
+  <section class="panel" data-tab="ariketak" data-es="Ejercicios" data-eu="Ariketak" hidden>
+    <details class="card">
+      <p class="enunciado es">1. Una bombilla de coche tiene R = 24 Ω y se conecta a 12 V. ¿Qué corriente pasa?</p>
+      <p class="enunciado eu">1. Autoko bonbilla batek R = 24 Ω du eta 12 V-ra konektatzen da. Zer korronte igarotzen da?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">I = U / R = 12 V / 24 Ω = <b>0,5 A</b> (500 mA).</p>
+      <p class="eu">I = U / R = 12 V / 24 Ω = <b>0,5 A</b> (500 mA).</p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">2. Medimos con la pinza 0,2 A en una resistencia conectada a 24 V. ¿Cuánto vale la resistencia?</p>
+      <p class="enunciado eu">2. Pintzarekin 0,2 A neurtzen ditugu 24 V-ra konektatutako erresistentzia batean. Zenbat balio du erresistentziak?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">R = U / I = 24 V / 0,2 A = <b>120 Ω</b>.</p>
+      <p class="eu">R = U / I = 24 V / 0,2 A = <b>120 Ω</b>.</p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">3. La resistencia de un horno es de 26 Ω y se conecta a 230 V. ¿Qué corriente consume? ¿Vale un magnetotérmico de 16 A?</p>
+      <p class="enunciado eu">3. Labe baten erresistentzia 26 Ω-ekoa da eta 230 V-ra konektatzen da. Zer korronte kontsumitzen du? 16 A-ko magnetotermiko batek balio du?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">I = 230 V / 26 Ω ≈ <b>8,8 A</b>. Sí, es menor que 16 A (aunque el horno va en su propio circuito de 25 A).</p>
+      <p class="eu">I = 230 V / 26 Ω ≈ <b>8,8 A</b>. Bai, 16 A baino txikiagoa da (nahiz eta labea bere 25 A-ko zirkuituan joan).</p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">4. Pasa a la unidad indicada: 350 mA = ? A · 2,5 A = ? mA · 0,02 A = ? mA</p>
+      <p class="enunciado eu">4. Adierazitako unitatera pasatu: 350 mA = ? A · 2,5 A = ? mA · 0,02 A = ? mA</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p>350 mA = <b>0,35 A</b> · 2,5 A = <b>2500 mA</b> · 0,02 A = <b>20 mA</b></p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">5. Un compañero abraza con la pinza la manguera entera de un taladro y le marca 0 A, aunque el taladro funciona. ¿Qué ha hecho mal?</p>
+      <p class="enunciado eu">5. Ikaskide batek trapano baten mahuka osoa besarkatzen du pintzarekin eta 0 A markatzen dio, trapanoak funtzionatzen duen arren. Zer egin du gaizki?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">Por la fase la corriente va y por el neutro vuelve: dentro de la pinza se anulan. Hay que abrazar <b>un solo conductor</b> (la fase o el neutro).</p>
+      <p class="eu">Korrontea fasetik joan eta neutrotik itzultzen da: pintzaren barruan elkar ezeztatzen dira. <b>Eroale bakar bat</b> besarkatu behar da (fasea edo neutroa).</p>
+    </details>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // Formatea un número con coma decimal y d decimales fijos
+  function n(v, d){ return v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  /* =====================================================
+     1) PINZA AMPERIMÉTRICA (pestaña «Unidades y medida»)
+     ===================================================== */
+  var I_RAD = 2000 / 230;     // corriente del radiador ≈ 8,7 A
+  var abrazo = "L";           // L = fase · N = neutro · LNP = manguera entera
+  function dibujarPinza(){
+    var X = { L: 130, N: 170, P: 210 }, s = "";
+    // tres conductores verticales: fase (marrón), neutro (azul), tierra (verde-amarillo)
+    s += '<path d="M130 20V180" stroke="#8b5a2b" stroke-width="7"/>';
+    s += '<path d="M170 20V180" stroke="#2b6cb0" stroke-width="7"/>';
+    s += '<path d="M210 20V180" stroke="#2e9e4f" stroke-width="7"/><path d="M210 20V180" stroke="#ebb400" stroke-width="7" stroke-dasharray="8 8"/>';
+    s += '<text class="txt" x="130" y="14" text-anchor="middle">L</text><text class="txt" x="170" y="14" text-anchor="middle">N</text><text class="txt" x="210" y="14" text-anchor="middle">PE</text>';
+    // sentido de la corriente: baja por la fase, sube por el neutro
+    s += '<path d="M118 140l12 14 12-14" stroke="var(--naranja-osc)" stroke-width="3" fill="none"/>';
+    s += '<path d="M158 154l12-14 12 14" stroke="var(--naranja-osc)" stroke-width="3" fill="none"/>';
+    s += '<text class="txt-s" x="10" y="30">' + T("enchufe 230 V", "entxufea 230 V") + '</text>';
+    s += '<text class="txt-s" x="10" y="190">' + T("radiador 2000 W", "berogailua 2000 W") + '</text>';
+    // mordazas de la pinza alrededor de lo que se abraza
+    var xa = abrazo === "N" ? X.N : X.L, xb = abrazo === "L" ? X.L : (abrazo === "N" ? X.N : X.P);
+    var cx = (xa + xb) / 2, rx = (xb - xa) / 2 + 20;
+    s += '<ellipse cx="' + cx + '" cy="80" rx="' + rx + '" ry="20" fill="none" stroke="var(--naranja)" stroke-width="7"/>';
+    // cuerpo de la pinza y pantalla
+    s += '<path d="M' + (cx + rx) + ' 80H262" stroke="var(--naranja)" stroke-width="7"/>';
+    s += '<rect x="250" y="50" width="82" height="110" rx="12" fill="#ffd257" stroke="var(--marino)" stroke-width="2"/>';
+    s += '<rect x="258" y="60" width="66" height="26" rx="4" fill="#dff1dd" stroke="var(--marino)" stroke-width="1.2"/>';
+    var I = abrazo === "LNP" ? 0 : I_RAD;
+    s += '<text class="med" x="291" y="78" text-anchor="middle">' + n(I, 1) + ' A</text>';
+    s += '<text class="txt-s" x="291" y="110" text-anchor="middle" style="fill:var(--marino)">A~</text>';
+    $("pinza").innerHTML = s;
+    var e = $("pinza-exp");
+    if (abrazo === "LNP") { e.className = "estado mal"; e.textContent = T("¡Marca 0 A! La corriente que va por la fase vuelve por el neutro: dentro de la pinza se anulan. Hay que abrazar un solo conductor.", "0 A markatzen ditu! Fasetik doan korrontea neutrotik itzultzen da: pintzaren barruan elkar ezeztatzen dira. Eroale bakar bat besarkatu behar da."); }
+    else { e.className = "estado ok"; e.textContent = T("Correcto: abrazas un solo conductor y marca la corriente del radiador, ", "Zuzena: eroale bakar bat besarkatzen duzu eta berogailuaren korrontea markatzen du, ") + "I = 2000 W / 230 V ≈ " + n(I_RAD, 1) + " A."; }
+  }
+  $("pinza-op").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    abrazo = b.getAttribute("data-p");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    dibujarPinza();
+  });
+
+  /* =====================================================
+     2) SIMULADOR DE LA LEY DE OHM
+     ===================================================== */
+  var I_FUSIBLE = 2;          // el fusible se funde por encima de 2 A
+  var fusible = true;         // true = fusible sano
+  var sentido = "conv";       // conv = convencional · elec = electrones
+  var fase = 0, ult = performance.now();
+
+  // Corriente según la ley de Ohm (0 si el fusible está fundido)
+  function corriente(){ return fusible ? +$("u").value / +$("r").value : 0; }
+
+  // Recorrido de la corriente: sale del + de la fuente (arriba) y da la vuelta
+  var CAMINO = [[55, 60], [55, 30], [300, 30], [300, 190], [55, 190], [55, 160]];
+  function puntoEn(f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < CAMINO.length - 1; i++) {
+      var d = Math.abs(CAMINO[i + 1][0] - CAMINO[i][0]) + Math.abs(CAMINO[i + 1][1] - CAMINO[i][1]);
+      L.push(d); tot += d;
+    }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) {
+      if (x <= L[i]) { var r = x / L[i]; return [CAMINO[i][0] + (CAMINO[i + 1][0] - CAMINO[i][0]) * r, CAMINO[i][1] + (CAMINO[i + 1][1] - CAMINO[i][1]) * r]; }
+      x -= L[i];
+    }
+    return CAMINO[0];
+  }
+
+  // Flecha pequeña en (x, y) apuntando a la derecha (dir = 1) o a la izquierda (dir = -1)
+  function flechaH(x, y, dir, color){
+    return '<path d="M' + (x - 7 * dir) + ' ' + (y - 6) + 'L' + (x + 7 * dir) + ' ' + y + 'L' + (x - 7 * dir) + ' ' + (y + 6) + 'z" fill="' + color + '"/>';
+  }
+
+  function dibujarCircuito(){
+    var U = +$("u").value, R = +$("r").value, I = corriente(), hay = I > 0.001;
+    var s = '<path class="hilo' + (hay ? " con" : "") + '" d="M55 60V30H300V190H55V160"/>';
+    // bolitas: naranja (sentido convencional) o azul (electrones, al revés)
+    if (hay) for (var k = 0; k < 10; k++) {
+      var f = (fase + k / 10) % 1;
+      var p = puntoEn(sentido === "conv" ? f : 1 - f);
+      s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.2" fill="' + (sentido === "conv" ? "var(--naranja-osc)" : "var(--azul)") + '"/>';
+    }
+    // flechas que indican el sentido
+    if (hay) {
+      var dir = sentido === "conv" ? 1 : -1, col = sentido === "conv" ? "var(--naranja-osc)" : "var(--azul)";
+      s += flechaH(100, 16, dir, col) + flechaH(120, 204, -dir, col);
+    }
+    // fuente
+    s += '<rect x="20" y="60" width="70" height="100" rx="10" fill="#2d3340"/>';
+    s += '<rect x="27" y="70" width="56" height="24" rx="4" fill="#dff1dd"/>';
+    s += '<text class="med" x="55" y="87" text-anchor="middle">' + n(U, 1) + ' V</text>';
+    s += '<text class="med" x="34" y="120" style="fill:#fff">+</text><text class="med" x="34" y="150" style="fill:#fff">−</text>';
+    // dos amperímetros en serie: A1 antes de la resistencia y A2 después.
+    // En un circuito serie la corriente es la misma en todos los puntos → marcan igual
+    [[140, 30, "A1"], [200, 190, "A2"]].forEach(function(a){
+      s += '<circle cx="' + a[0] + '" cy="' + a[1] + '" r="21" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>';
+      s += '<text class="med" x="' + a[0] + '" y="' + (a[1] + 1) + '" text-anchor="middle" style="font-size:11.5px">' + n(I, 2) + '</text><text class="txt" x="' + a[0] + '" y="' + (a[1] + 14) + '" text-anchor="middle">A</text>';
+      s += '<text class="txt" x="' + (a[0] - 26) + '" y="' + (a[1] + (a[1] < 100 ? 34 : -26)) + '" text-anchor="end">' + a[2] + '</text>';
+    });
+    // fusible
+    s += '<rect x="205" y="23" width="40" height="14" rx="3" fill="#fff" stroke="var(--marino)" stroke-width="2"/>';
+    s += fusible ? '<path d="M205 30h40" stroke="var(--marino)" stroke-width="1.5"/>'
+                 : '<path d="M205 30h14M231 30h14M219 30l4-6M231 30l-4 6" stroke="var(--rojo)" stroke-width="2"/>';
+    s += '<text class="txt-s" x="225" y="54" text-anchor="middle">' + T("fusible 2 A", "fusiblea 2 A") + '</text>';
+    // resistencia (se calienta en rojo si pasa mucha corriente)
+    var calor = Math.min(I * I * R / 40, 1);
+    s += '<rect x="288" y="80" width="24" height="60" fill="rgb(255,' + Math.round(255 - 150 * calor) + ',' + Math.round(255 - 200 * calor) + ')" stroke="var(--marino)" stroke-width="2.5"/>';
+    s += '<text class="txt" x="282" y="114" text-anchor="end">R = ' + R + ' Ω</text>';
+    $("sim").innerHTML = s;
+  }
+
+  // Gráfica I–U para la resistencia actual
+  function dibujarGrafica(){
+    var U = +$("u").value, R = +$("r").value, I = corriente();
+    var X0 = 44, Y0 = 140, W = 280, H = 120, IMAX = 3;
+    function px(u){ return X0 + u / 24 * W; }
+    function py(i){ return Y0 - Math.min(i, IMAX) / IMAX * H; }
+    var s = '<rect x="' + X0 + '" y="' + (Y0 - H) + '" width="' + W + '" height="' + H + '" fill="#fbfcfe" stroke="#d0d6db"/>';
+    for (var u = 0; u <= 24; u += 6) s += '<path d="M' + px(u) + ' ' + (Y0 - H) + 'V' + Y0 + '" stroke="#eceff3"/><text class="txt-s" x="' + px(u) + '" y="' + (Y0 + 13) + '" text-anchor="middle">' + u + '</text>';
+    for (var i = 0; i <= IMAX; i++) s += '<path d="M' + X0 + ' ' + py(i) + 'H' + (X0 + W) + '" stroke="#eceff3"/><text class="txt-s" x="' + (X0 - 6) + '" y="' + (py(i) + 3) + '" text-anchor="end">' + i + '</text>';
+    s += '<text class="txt" x="' + (X0 + W) + '" y="' + (Y0 + 27) + '" text-anchor="end">U (V)</text><text class="txt" x="6" y="' + (Y0 - H - 6) + '">I (A)</text>';
+    // línea del fusible
+    s += '<path d="M' + X0 + ' ' + py(I_FUSIBLE) + 'H' + (X0 + W) + '" stroke="var(--rojo)" stroke-dasharray="5 4"/><text class="txt-s" x="' + (X0 + 4) + '" y="' + (py(I_FUSIBLE) - 4) + '" style="fill:var(--rojo)">' + T("fusible", "fusiblea") + '</text>';
+    // recta I = U / R (se corta arriba si se sale de la gráfica)
+    var uFin = Math.min(24, IMAX * R);
+    s += '<path d="M' + px(0) + ' ' + py(0) + 'L' + px(uFin) + ' ' + py(uFin / R) + '" stroke="var(--naranja)" stroke-width="3"/>';
+    s += '<text class="txt" x="' + (px(uFin) - 4) + '" y="' + (py(uFin / R) + (uFin < 24 ? 14 : -6)) + '" text-anchor="end">R = ' + R + ' Ω</text>';
+    // punto de trabajo
+    var iPunto = fusible ? U / R : 0;
+    s += '<circle cx="' + px(U) + '" cy="' + py(iPunto) + '" r="6" fill="' + (fusible ? "var(--marino)" : "var(--rojo)") + '" stroke="#fff" stroke-width="2"/>';
+    $("graf").innerHTML = s;
+  }
+
+  // Lecturas, cuenta de la ley de Ohm y mensajes
+  function textos(){
+    var U = +$("u").value, R = +$("r").value;
+    if (fusible && U / R > I_FUSIBLE) fusible = false;   // se funde el fusible
+    var I = corriente();
+    $("u-t").textContent = n(U, 1) + " V"; $("r-t").textContent = R + " Ω";
+    $("l-u").textContent = n(U, 1) + " V"; $("l-r").textContent = R + " Ω"; $("l-i").textContent = n(I, 2) + " A"; $("l-i2").textContent = n(I, 2) + " A";
+    $("cuenta").textContent = fusible ? "I = " + n(U, 1) + " V / " + R + " Ω = " + n(I, 2) + " A" : "I = 0 A";
+    $("reponer").hidden = fusible;
+    var e = $("estado");
+    if (!fusible) { e.className = "estado mal"; e.textContent = T("¡Se ha fundido el fusible! Con tan poca resistencia la corriente pasaba de 2 A. Sube R o baja U y cambia el fusible.", "Fusiblea erre egin da! Hain erresistentzia txikiarekin korronteak 2 A gainditzen zituen. Igo R edo jaitsi U eta aldatu fusiblea."); }
+    else if (U === 0) { e.className = "estado"; e.textContent = T("Sin tensión no hay corriente, aunque el circuito esté cerrado.", "Tentsiorik gabe ez dago korronterik, zirkuitua itxita egon arren."); }
+    else if (I > 1.5) { e.className = "estado mal"; e.textContent = T("Mucha corriente: la resistencia se calienta y el fusible está cerca de fundirse.", "Korronte handia: erresistentzia berotzen da eta fusiblea erretzeko zorian dago."); }
+    else { e.className = "estado ok"; e.textContent = T("A1 y A2 marcan lo mismo: en un circuito serie la corriente es la misma en todos los puntos. Prueba a doblar la tensión: la corriente también se dobla. Si doblas la resistencia, la corriente se reduce a la mitad.", "A1-ek eta A2-k gauza bera markatzen dute: serieko zirkuitu batean korrontea berdina da puntu guztietan. Probatu tentsioa bikoizten: korrontea ere bikoizten da. Erresistentzia bikoizten baduzu, korrontea erdira jaisten da."); }
+    if (sentido === "elec" && fusible && U > 0) e.textContent += " " + T("Los electrones (azul) van del − al +, al revés que el sentido convencional.", "Elektroiak (urdinak) −-tik +-ra doaz, noranzko konbentzionalaren kontrara.");
+    dibujarGrafica();
+  }
+
+  // Bucle de animación: la velocidad de las bolitas depende de la corriente
+  function paso(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    fase = (fase + dt * corriente() * 0.5) % 1;
+    dibujarCircuito();
+    requestAnimationFrame(paso);
+  }
+
+  $("u").addEventListener("input", textos);
+  $("r").addEventListener("input", textos);
+  $("sentido").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    sentido = b.getAttribute("data-s");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    textos();
+  });
+  $("reponer").addEventListener("click", function(){
+    // si la corriente sigue siendo excesiva, subimos R para que no vuelva a fundirse
+    if (+$("u").value / +$("r").value > I_FUSIBLE) $("r").value = Math.ceil(+$("u").value / 1.5);
+    fusible = true; textos();
+  });
+
+  alCambiarIdioma(function(){ dibujarPinza(); textos(); });
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

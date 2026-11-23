@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Potencia eléctrica</title>
+<meta name="description" content="Qué es la potencia, P = U·I, unidades, cómo se mide con el vatímetro, simulador con varias cargas, monofásica y trifásica, y ejercicios resueltos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.med{font-size:13px;font-weight:700;fill:var(--marino)}
+.hilo{stroke:#9aa3b2;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+details.card summary{cursor:pointer;font-weight:600;color:var(--naranja-osc);margin-top:6px}
+details.card[open] summary{margin-bottom:6px}
+.enunciado{font-weight:600;color:var(--marino-txt)}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Potencia eléctrica (W)" data-eu="Potentzia elektrikoa (W)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">potencia</span> dice <b>cuánto trabajo hace un aparato cada segundo</b>: lo rápido que transforma la electricidad en luz, calor o movimiento. Una bombilla de 100 W da más luz que una de 25 W; un motor de 4 kW hace más fuerza que uno de 1 kW.</p>
+      <p class="eu"><span class="clave">Potentzia</span> <b>aparatu batek segundo bakoitzean zenbat lan egiten duen</b> da: elektrizitatea argi, bero edo mugimendu bihurtzeko abiadura. 100 W-ko bonbilla batek 25 W-koak baino argi gehiago ematen du; 4 kW-ko motor batek 1 kW-koak baino indar gehiago egiten du.</p>
+      <p class="es">Depende de las otras dos magnitudes: de la <b>tensión</b> (el empuje) y de la <b>intensidad</b> (el caudal de corriente).</p>
+      <p class="eu">Beste bi magnitudeen araberakoa da: <b>tentsioaren</b> (bultzada) eta <b>intentsitatearen</b> (korronte-emaria).</p>
+      <div class="formula">P = U · I</div>
+      <p class="es">Unidad: <b>vatio (W)</b>, en honor a James Watt. 1 W = 1 V × 1 A.</p>
+      <p class="eu">Unitatea: <b>watta (W)</b>, James Watt-en omenez. 1 W = 1 V × 1 A.</p>
+    </div>
+
+    <figure class="fig">
+      <svg viewBox="0 0 340 150" role="img" aria-label="P = U · I">
+        <rect x="8" y="20" width="90" height="80" rx="14" fill="#fff0dc" stroke="var(--marino)" stroke-width="2"/>
+        <rect x="125" y="20" width="90" height="80" rx="14" fill="#e3eefa" stroke="var(--marino)" stroke-width="2"/>
+        <rect x="242" y="20" width="90" height="80" rx="14" fill="#ffd257" stroke="var(--marino)" stroke-width="2"/>
+        <text class="med" x="111" y="66" text-anchor="middle" style="font-size:22px">×</text>
+        <text class="med" x="228" y="66" text-anchor="middle" style="font-size:22px">=</text>
+        <text class="med" x="53" y="52" text-anchor="middle" style="font-size:20px">U</text>
+        <text class="med" x="170" y="52" text-anchor="middle" style="font-size:20px">I</text>
+        <text class="med" x="287" y="52" text-anchor="middle" style="font-size:20px">P</text>
+        <text class="txt" x="53" y="72" text-anchor="middle" data-es="tensión" data-eu="tentsioa"></text>
+        <text class="txt" x="170" y="72" text-anchor="middle" data-es="intensidad" data-eu="intentsitatea"></text>
+        <text class="txt" x="287" y="72" text-anchor="middle" data-es="potencia" data-eu="potentzia"></text>
+        <text class="txt-s" x="53" y="90" text-anchor="middle">V</text><text class="txt-s" x="170" y="90" text-anchor="middle">A</text><text class="txt-s" x="287" y="90" text-anchor="middle">W</text>
+        <text class="txt-s" x="53" y="122" text-anchor="middle" data-es="altura del agua" data-eu="uraren altuera"></text>
+        <text class="txt-s" x="170" y="122" text-anchor="middle" data-es="caudal" data-eu="emaria"></text>
+        <text class="txt-s" x="287" y="122" text-anchor="middle" data-es="fuerza del chorro" data-eu="ur-zorrotadaren indarra"></text>
+        <text class="txt-s" x="170" y="142" text-anchor="middle" data-es="Mucha altura y mucho caudal → la rueda gira con mucha fuerza" data-eu="Altuera eta emari handia → gurpilak indar handiz biratzen du"></text>
+      </svg>
+      <figcaption data-es="La potencia junta las dos cosas: empuje y caudal" data-eu="Potentziak bi gauzak batzen ditu: bultzada eta emaria"></figcaption>
+    </figure>
+
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Bombilla</h3><h3 class="eu">Bonbilla</h3>
+        <p class="es">Electricidad → <b>luz</b> (y algo de calor).</p><p class="eu">Elektrizitatea → <b>argia</b> (eta bero pixka bat).</p></div>
+      <div class="card"><h3 class="es">Resistencia (horno, radiador)</h3><h3 class="eu">Erresistentzia (labea, berogailua)</h3>
+        <p class="es">Electricidad → <b>calor</b>.</p><p class="eu">Elektrizitatea → <b>beroa</b>.</p></div>
+      <div class="card"><h3 class="es">Motor</h3><h3 class="eu">Motorra</h3>
+        <p class="es">Electricidad → <b>movimiento</b> (y pérdidas en calor).</p><p class="eu">Elektrizitatea → <b>mugimendua</b> (eta galerak beroan).</p></div>
+      <div class="card"><h3 class="es">Cargador</h3><h3 class="eu">Kargagailua</h3>
+        <p class="es">Electricidad → energía <b>química</b> en la batería.</p><p class="eu">Elektrizitatea → energia <b>kimikoa</b> baterian.</p></div>
+    </div>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 260 170" role="img" aria-label="Etiqueta de características">
+          <rect x="20" y="14" width="220" height="142" rx="10" fill="#f1f3f6" stroke="#8d95a3" stroke-width="2"/>
+          <text class="med" x="34" y="40" data-es="SECADOR DE PELO" data-eu="ILE-LEHORGAILUA"></text>
+          <text class="txt-s" x="34" y="56">Mod. HD-2000</text>
+          <text class="med" x="34" y="86">230 V ~ 50 Hz</text>
+          <rect x="30" y="98" width="88" height="30" rx="6" fill="#ffd257"/>
+          <text class="med" x="74" y="118" text-anchor="middle" style="font-size:17px">2000 W</text>
+          <text class="med" x="196" y="140" style="font-size:18px">CE</text>
+          <path d="M128 113h40" stroke="var(--rojo)" stroke-width="2"/><path d="M128 113l8-5v10z" fill="var(--rojo)"/>
+          <text class="txt" x="172" y="110" style="fill:var(--rojo)" data-es="potencia" data-eu="potentzia"></text>
+          <text class="txt" x="172" y="123" style="fill:var(--rojo)" data-es="nominal" data-eu="nominala"></text>
+        </svg>
+        <figcaption data-es="Etiqueta de características de un aparato" data-eu="Aparatu baten ezaugarri-etiketa"></figcaption>
+      </figure>
+      <div class="card">
+        <h2 data-es="Potencia nominal" data-eu="Potentzia nominala"></h2>
+        <p class="es">Es la potencia que da el aparato <b>a su tensión nominal</b> (230 V en casa). Viene en la etiqueta o en la placa de características.</p>
+        <p class="eu">Aparatuak bere <b>tentsio nominalean</b> (230 V etxean) ematen duen potentzia da. Etiketan edo ezaugarri-plakan dator.</p>
+        <p class="es">Con la potencia y la tensión sabemos <b>qué corriente consume</b>, y así elegimos el cable y la protección:</p>
+        <p class="eu">Potentziarekin eta tentsioarekin <b>zer korronte kontsumitzen duen</b> jakiten dugu, eta horrela kablea eta babesa aukeratzen ditugu:</p>
+        <div class="formula">I = P / U</div>
+        <p class="es">Secador: I = 2000 W / 230 V ≈ <b>8,7 A</b>.</p>
+        <p class="eu">Ile-lehorgailua: I = 2000 W / 230 V ≈ <b>8,7 A</b>.</p>
+      </div>
+    </div>
+
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es"><b>P = U · I</b> → vatios (W). Cuánta energía gasta un aparato durante un tiempo (kWh) y cuánto cuesta lo verás en las fichas de <b>Consumo</b> y <b>Energía</b>.</p>
+      <p class="eu"><b>P = U · I</b> → wattak (W). Aparatu batek denbora batean zenbat energia gastatzen duen (kWh) eta zenbat balio duen <b>Kontsumoa</b> eta <b>Energia</b> fitxetan ikusiko duzu.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. NEURKETA ============ -->
+  <section class="panel" data-tab="neurketa" data-es="Unidades y medida" data-eu="Unitateak eta neurketa" hidden>
+    <div class="card">
+      <h2 data-es="El vatio y sus múltiplos" data-eu="Watta eta bere multiploak"></h2>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Unidad</span><span class="eu">Unitatea</span></th><th><span class="es">Equivale a</span><span class="eu">Baliokidea</span></th><th><span class="es">Ejemplo</span><span class="eu">Adibidea</span></th></tr>
+        <tr><td><b>mW</b></td><td>1 mW = 0,001 W</td><td><span class="es">LED indicador: 40 mW</span><span class="eu">LED adierazlea: 40 mW</span></td></tr>
+        <tr><td><b>W</b></td><td>1 W</td><td><span class="es">bombilla LED: 10 W</span><span class="eu">LED bonbilla: 10 W</span></td></tr>
+        <tr><td><b>kW</b></td><td>1 kW = 1000 W</td><td><span class="es">horno: 3 kW · motor: 4 kW</span><span class="eu">labea: 3 kW · motorra: 4 kW</span></td></tr>
+        <tr><td><b>MW</b></td><td>1 MW = 1 000 000 W</td><td><span class="es">aerogenerador: 3 MW</span><span class="eu">aerosorgailua: 3 MW</span></td></tr>
+        <tr><td><b>CV</b> <span class="es">(caballo)</span><span class="eu">(ZP, zaldi-potentzia)</span></td><td>1 CV ≈ 736 W</td><td><span class="es">placas de motores antiguos</span><span class="eu">motor zaharren plakak</span></td></tr>
+      </table></div>
+      <p class="nota es">De W a kW se divide entre 1000 (2500 W = 2,5 kW). De kW a W se multiplica por 1000 (0,75 kW = 750 W).</p>
+      <p class="nota eu">W-tik kW-ra 1000z zatitzen da (2500 W = 2,5 kW). kW-tik W-ra 1000z biderkatzen da (0,75 kW = 750 W).</p>
+    </div>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 340 230" role="img" aria-label="Montaje del vatímetro">
+          <text class="txt" x="10" y="44">L</text><text class="txt" x="10" y="204">N</text>
+          <path class="hilo con" d="M24 40H120M220 40H290V95M290 145V200H24"/>
+          <!-- vatímetro -->
+          <rect x="120" y="60" width="100" height="70" rx="10" fill="#ffd257" stroke="var(--marino)" stroke-width="2"/>
+          <rect x="132" y="70" width="76" height="24" rx="4" fill="#dff1dd" stroke="var(--marino)" stroke-width="1.2"/>
+          <text class="med" x="170" y="87" text-anchor="middle">2000 W</text>
+          <text class="txt" x="170" y="120" text-anchor="middle">W</text>
+          <!-- bobina amperimétrica en serie -->
+          <path d="M120 40H220" stroke="var(--rojo)" stroke-width="5"/>
+          <circle cx="120" cy="40" r="5" fill="var(--marino)"/><circle cx="220" cy="40" r="5" fill="var(--marino)"/>
+          <path d="M140 40v20M200 40v20" stroke="var(--marino)" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <!-- bobina voltimétrica en paralelo -->
+          <path d="M170 130V200" stroke="var(--azul)" stroke-width="3" stroke-dasharray="5 4"/>
+          <circle cx="170" cy="200" r="5" fill="var(--azul)"/>
+          <!-- carga -->
+          <rect x="276" y="95" width="28" height="50" rx="4" fill="#ffe0c2" stroke="var(--marino)" stroke-width="2.4"/>
+          <text class="txt-s" x="290" y="162" text-anchor="middle" data-es="carga" data-eu="karga"></text>
+          <text class="txt" x="170" y="20" text-anchor="middle" style="fill:var(--rojo)" data-es="intensidad: en serie" data-eu="intentsitatea: seriean"></text>
+          <text class="txt" x="178" y="170" style="fill:var(--azul)" data-es="tensión: en paralelo" data-eu="tentsioa: paraleloan"></text>
+        </svg>
+        <figcaption data-es="El vatímetro mide a la vez la intensidad (en serie) y la tensión (en paralelo)" data-eu="Watt-metroak aldi berean neurtzen ditu intentsitatea (seriean) eta tentsioa (paraleloan)"></figcaption>
+      </figure>
+      <div class="card">
+        <h2 data-es="Cómo se mide: el vatímetro" data-eu="Nola neurtzen da: watt-metroa"></h2>
+        <p class="es">El <b>vatímetro</b> lleva dentro un amperímetro y un voltímetro, y multiplica. Por eso tiene <b>cuatro bornes</b>:</p>
+        <p class="eu"><b>Watt-metroak</b> anperemetro bat eta voltmetro bat ditu barruan, eta biderkatu egiten du. Horregatik <b>lau borne</b> ditu:</p>
+        <ul>
+          <li><span class="es">Circuito de <b>intensidad</b>: se conecta <b>en serie</b> con la carga (la corriente pasa por él).</span><span class="eu"><b>Intentsitate</b>-zirkuitua: kargarekin <b>seriean</b> konektatzen da (korrontea bertatik igarotzen da).</span></li>
+          <li><span class="es">Circuito de <b>tensión</b>: se conecta <b>en paralelo</b> con la carga.</span><span class="eu"><b>Tentsio</b>-zirkuitua: kargarekin <b>paraleloan</b> konektatzen da.</span></li>
+        </ul>
+        <p class="es">En el taller también se usa la <b>pinza vatimétrica</b> o el <b>analizador de redes</b>, que miden sin abrir el circuito.</p>
+        <p class="eu">Tailerrean <b>pintza watt-metrikoa</b> edo <b>sare-analizatzailea</b> ere erabiltzen dira, zirkuitua ireki gabe neurtzen dutenak.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Sin vatímetro: medir U e I y multiplicar" data-eu="Watt-metrorik gabe: U eta I neurtu eta biderkatu"></h2>
+      <p class="es">Con el <b>voltímetro</b> (o polímetro) mides la tensión y con la <b>pinza amperimétrica</b> la intensidad. Multiplicas: P = U · I. Ejemplo: 230 V × 4,3 A ≈ 990 W.</p>
+      <p class="eu"><b>Voltmetroarekin</b> (edo polimetroarekin) tentsioa neurtzen duzu eta <b>pintza anperemetrikoarekin</b> intentsitatea. Biderkatu: P = U · I. Adibidea: 230 V × 4,3 A ≈ 990 W.</p>
+      <p class="nota es">Ojo: esto vale para bombillas y resistencias. En motores y aparatos con bobinas, U·I sale más que la potencia real (por el cos φ, mira la pestaña «Monofásica y trifásica»): ahí hay que usar el vatímetro.</p>
+      <p class="nota eu">Kontuz: hau bonbilla eta erresistentzietarako balio du. Motorretan eta bobinak dituzten aparatuetan, U·I benetako potentzia baino handiagoa ateratzen da (cos φ-gatik, begiratu «Monofasikoa eta trifasikoa» atala): hor watt-metroa erabili behar da.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Enciende y apaga aparatos y cambia la tensión de la fuente. Mira lo que marcan el <b>voltímetro</b> (en paralelo), el <b>amperímetro</b> (en serie) y el <b>vatímetro</b>. Todos los aparatos son de <b>230 V</b>.</p>
+      <p class="eu">Piztu eta itzali aparatuak eta aldatu iturriaren tentsioa. Begiratu zer markatzen duten <b>voltmetroak</b> (paraleloan), <b>anperemetroak</b> (seriean) eta <b>watt-metroak</b>. Aparatu guztiak <b>230 V</b>-koak dira.</p>
+    </div>
+    <figure class="fig"><svg id="circ" viewBox="0 0 340 240" role="img" aria-label="Circuito con varias cargas"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Tensión de la fuente" data-eu="Iturriaren tentsioa"></span><output id="u-t"></output></label><input id="u" type="range" min="0" max="230" step="5" value="230"></div>
+      <div class="chips" id="cargas"></div>
+    </div>
+    <div class="lectura-g"><div><small>U</small><b id="l-u"></b></div><div><small>I</small><b id="l-i"></b></div><div><small>P = U · I</small><b id="l-p"></b></div></div>
+    <div class="card"><p class="formula" id="cuenta" style="margin:0"></p></div>
+    <div class="estado" id="estado"></div>
+  </section>
+
+  <!-- ============ 4. TRIFASIKOA ============ -->
+  <section class="panel" data-tab="trifasikoa" data-es="Monofásica y trifásica" data-eu="Monofasikoa eta trifasikoa" hidden>
+    <div class="rejilla">
+      <div class="card"><h2 data-es="Monofásica (230 V)" data-eu="Monofasikoa (230 V)"></h2>
+        <p class="es">Una fase y neutro. Casas y aparatos pequeños.</p><p class="eu">Fase bat eta neutroa. Etxeak eta aparatu txikiak.</p>
+        <div class="formula">P = U · I · cos φ</div></div>
+      <div class="card"><h2 data-es="Trifásica (400 V)" data-eu="Trifasikoa (400 V)"></h2>
+        <p class="es">Tres fases. Talleres, motores y máquinas grandes.</p><p class="eu">Hiru fase. Tailerrak, motorrak eta makina handiak.</p>
+        <div class="formula">P = √3 · U · I · cos φ</div></div>
+    </div>
+    <div class="card">
+      <h2 data-es="¿Qué es el cos φ?" data-eu="Zer da cos φ?"></h2>
+      <p class="es">Es el <b>factor de potencia</b>: un número entre 0 y 1. En bombillas y resistencias vale <b>1</b> (toda la corriente hace trabajo). En los motores vale <b>0,8 – 0,9</b>, porque parte de la corriente solo sirve para crear el campo magnético. Viene en la placa del motor.</p>
+      <p class="eu"><b>Potentzia-faktorea</b> da: 0 eta 1 arteko zenbaki bat. Bonbilletan eta erresistentzietan <b>1</b> balio du (korronte guztiak egiten du lan). Motorretan <b>0,8 – 0,9</b> balio du, korrontearen zati batek eremu magnetikoa sortzeko bakarrik balio duelako. Motorraren plakan dator.</p>
+      <p class="es">√3 ≈ <b>1,73</b>. Es el mismo número que relaciona 400 V y 230 V.</p>
+      <p class="eu">√3 ≈ <b>1,73</b>. 400 V eta 230 V lotzen dituen zenbaki bera da.</p>
+    </div>
+    <div class="card">
+      <p class="es">Misma potencia, dos formas de alimentarla. Mueve la potencia y compara <b>la corriente por cada cable</b>:</p>
+      <p class="eu">Potentzia bera, elikatzeko bi modu. Mugitu potentzia eta konparatu <b>kable bakoitzetik doan korrontea</b>:</p>
+    </div>
+    <figure class="fig"><svg id="comp" viewBox="0 0 340 190" role="img" aria-label="Monofásica frente a trifásica"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Potencia eléctrica" data-eu="Potentzia elektrikoa"></span><output id="p-t"></output></label><input id="p" type="range" min="0.5" max="15" step="0.5" value="4.5"></div>
+      <div class="chips" id="cos">
+        <button type="button" data-c="1" aria-pressed="false" data-es="Resistencia (cos φ = 1)" data-eu="Erresistentzia (cos φ = 1)"></button>
+        <button type="button" data-c="0.85" aria-pressed="true" data-es="Motor (cos φ = 0,85)" data-eu="Motorra (cos φ = 0,85)"></button>
+      </div>
+    </div>
+    <div class="lectura-g"><div><small data-es="I monofásica" data-eu="I monofasikoa"></small><b id="l-im"></b></div><div><small data-es="I trifásica" data-eu="I trifasikoa"></small><b id="l-it"></b></div></div>
+    <div class="estado" id="comp-exp"></div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">En la placa de un motor la potencia es la <b>mecánica</b> (en el eje). De la red absorbe algo más por las pérdidas. Por eso un motor de 4 kW a 400 V consume unos <b>8 A</b>, no 6,8 A.</p>
+      <p class="eu">Motor baten plakan potentzia <b>mekanikoa</b> da (ardatzean). Saretik zertxobait gehiago xurgatzen du galerengatik. Horregatik, 400 V-ko 4 kW-ko motor batek <b>8 A</b> inguru kontsumitzen ditu, ez 6,8 A.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. ARIKETAK ============ -->
+  <section class="panel" data-tab="ariketak" data-es="Ejercicios" data-eu="Ariketak" hidden>
+    <details class="card">
+      <p class="enunciado es">1. Una bombilla de 60 W se conecta a 230 V. ¿Qué corriente consume?</p>
+      <p class="enunciado eu">1. 60 W-ko bonbilla bat 230 V-ra konektatzen da. Zer korronte kontsumitzen du?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p>I = P / U = 60 W / 230 V ≈ <b>0,26 A</b></p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">2. Con la pinza medimos 8,7 A en un secador enchufado a 230 V. ¿Qué potencia tiene?</p>
+      <p class="enunciado eu">2. Pintzarekin 8,7 A neurtzen ditugu 230 V-ra entxufatutako ile-lehorgailu batean. Zer potentzia du?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p>P = U · I = 230 V × 8,7 A ≈ <b>2000 W = 2 kW</b></p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">3. Un circuito de enchufes tiene un magnetotérmico de 16 A (230 V). ¿Cuánta potencia admite como máximo? ¿Puedes enchufar a la vez un radiador de 2000 W y un secador de 1800 W?</p>
+      <p class="enunciado eu">3. Entxufe-zirkuitu batek 16 A-ko magnetotermikoa du (230 V). Gehienez zenbat potentzia onartzen du? Aldi berean entxufa ditzakezu 2000 W-ko berogailu bat eta 1800 W-ko ile-lehorgailu bat?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">P máx = 230 V × 16 A = <b>3680 W</b>. Los dos juntos suman 3800 W: <b>no</b>, se pasa y acabará saltando el magnetotérmico.</p>
+      <p class="eu">P max = 230 V × 16 A = <b>3680 W</b>. Biak batera 3800 W dira: <b>ez</b>, gainditu egiten du eta magnetotermikoa jauziko da.</p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">4. La placa de un motor antiguo dice 3 CV. ¿Cuántos kW son?</p>
+      <p class="enunciado eu">4. Motor zahar baten plakak 3 ZP dio. Zenbat kW dira?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p>3 × 736 W = 2208 W ≈ <b>2,2 kW</b></p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">5. Un horno industrial trifásico de 9 kW (resistencias, cos φ = 1) se conecta a 400 V. ¿Qué corriente circula por cada fase?</p>
+      <p class="enunciado eu">5. 9 kW-ko labe industrial trifasiko bat (erresistentziak, cos φ = 1) 400 V-ra konektatzen da. Zer korronte doa fase bakoitzetik?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p>I = P / (√3 · U · cos φ) = 9000 / (1,73 × 400 × 1) ≈ <b>13 A</b></p>
+    </details>
+    <details class="card">
+      <p class="enunciado es">6. Una bombilla de coche de 12 V consume 0,5 A. ¿Qué potencia tiene? Si la conectas a 6 V (y su resistencia no cambia), ¿qué potencia da?</p>
+      <p class="enunciado eu">6. 12 V-ko autoko bonbilla batek 0,5 A kontsumitzen ditu. Zer potentzia du? 6 V-ra konektatzen baduzu (eta bere erresistentzia aldatzen ez bada), zer potentzia ematen du?</p>
+      <summary data-es="Ver solución" data-eu="Ebazpena ikusi"></summary>
+      <p class="es">P = 12 V × 0,5 A = <b>6 W</b>. A 6 V la corriente también baja a la mitad (0,25 A): P = 6 × 0,25 = <b>1,5 W</b>. ¡Con la mitad de tensión da la cuarta parte de potencia!</p>
+      <p class="eu">P = 12 V × 0,5 A = <b>6 W</b>. 6 V-an korrontea ere erdira jaisten da (0,25 A): P = 6 × 0,25 = <b>1,5 W</b>. Tentsioaren erdiarekin potentziaren laurdena ematen du!</p>
+    </details>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // Formatea un número con coma decimal y d decimales fijos
+  function n(v, d){ return v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  /* =====================================================
+     1) PRUÉBALO: varias cargas en paralelo a una fuente
+     ===================================================== */
+  var U_NOM = 230;
+  // Cada carga: potencia nominal a 230 V, posición x en el dibujo y si está encendida
+  var CARGAS = [
+    { pn: 25,   x: 210, on: true,  es: "Bombilla 25 W",  eu: "Bonbilla 25 W" },
+    { pn: 60,   x: 245, on: true,  es: "Bombilla 60 W",  eu: "Bonbilla 60 W" },
+    { pn: 100,  x: 280, on: false, es: "Bombilla 100 W", eu: "Bonbilla 100 W" },
+    { pn: 2000, x: 315, on: false, es: "Secador 2000 W", eu: "Ile-lehorgailua 2000 W" }
+  ];
+  var fase = 0, ult = performance.now();
+
+  // Potencia real de una carga: suponemos resistencia fija R = U_nom² / P_nom,
+  // así que P = U² / R. A 230 V da justo su potencia nominal.
+  function potencia(c, U){ return c.on ? c.pn * (U / U_NOM) * (U / U_NOM) : 0; }
+  function totales(){
+    var U = +$("u").value, P = 0;
+    CARGAS.forEach(function(c){ P += potencia(c, U); });
+    return { U: U, P: P, I: U > 0 ? P / U : 0 };
+  }
+
+  // Recorrido de las bolitas: sale de la fuente, va por arriba hasta la última carga encendida y vuelve por abajo
+  function camino(){
+    var xmax = 0;
+    CARGAS.forEach(function(c){ if (c.on) xmax = c.x; });
+    return [[45, 70], [45, 30], [xmax, 30], [xmax, 210], [45, 210], [45, 170]];
+  }
+  function puntoEn(pts, f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < pts.length - 1; i++) { var d = Math.abs(pts[i + 1][0] - pts[i][0]) + Math.abs(pts[i + 1][1] - pts[i][1]); L.push(d); tot += d; }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) { if (x <= L[i]) { var r = x / L[i]; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * r, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * r]; } x -= L[i]; }
+    return pts[0];
+  }
+
+  function pintar(){
+    var t = totales(), hay = t.I > 0.001, c = hay ? "#f39200" : "#9aa3b2", s = "";
+    // líneas principales (fase arriba, neutro abajo)
+    s += '<path d="M45 70V30H315M45 170V210H315" stroke="' + c + '" stroke-width="4" fill="none" stroke-linejoin="round"/>';
+    s += '<text class="txt" x="322" y="34">L</text><text class="txt" x="322" y="214">N</text>';
+    // bolitas azules de corriente
+    if (hay) { var pts = camino(); for (var k = 0; k < 10; k++) { var p = puntoEn(pts, (fase + k / 10) % 1); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="#2b6cb0"/>'; } }
+    // fuente regulable
+    s += '<rect x="15" y="70" width="60" height="100" rx="10" fill="#2d3340"/><rect x="21" y="80" width="48" height="22" rx="4" fill="#dff1dd"/>';
+    s += '<text class="txt" x="45" y="95" text-anchor="middle">' + t.U + ' V</text><text class="txt-s" x="45" y="140" text-anchor="middle" style="fill:#fff">~ 50 Hz</text>';
+    // voltímetro en paralelo (entre L y N)
+    s += '<path d="M95 30V98M95 142V210" stroke="#5c6575" stroke-width="2" stroke-dasharray="4 3"/>';
+    s += '<circle cx="95" cy="120" r="20" fill="#fff" stroke="#242d5f" stroke-width="2.5"/><text class="med" x="95" y="125" text-anchor="middle">V</text>';
+    s += '<text class="txt" x="95" y="160" text-anchor="middle">' + t.U + ' V</text>';
+    // vatímetro: circuito de intensidad en la línea, de tensión al neutro
+    s += '<rect x="118" y="18" width="34" height="24" rx="4" fill="#fff" stroke="#242d5f" stroke-width="2.5"/><text class="med" x="135" y="35" text-anchor="middle">W</text>';
+    s += '<path d="M135 42V210" stroke="#5c6575" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    s += '<text class="txt" x="135" y="62" text-anchor="middle">' + n(t.P, 0) + ' W</text>';
+    // amperímetro en serie
+    s += '<circle cx="172" cy="30" r="14" fill="#fff" stroke="#242d5f" stroke-width="2.5"/><text class="med" x="172" y="35" text-anchor="middle">A</text>';
+    s += '<text class="txt" x="172" y="78" text-anchor="middle">' + n(t.I, 2) + ' A</text>';
+    // cargas en paralelo
+    CARGAS.forEach(function(cg, i){
+      var P = potencia(cg, t.U), luz = cg.on ? Math.min(P / cg.pn, 1) : 0, col = cg.on && t.U > 0 ? "#f39200" : "#9aa3b2";
+      s += '<path d="M' + cg.x + ' 30V105M' + cg.x + ' 135V210" stroke="' + col + '" stroke-width="3"/>';
+      s += '<circle cx="' + cg.x + '" cy="30" r="3.5" fill="#242d5f"/><circle cx="' + cg.x + '" cy="210" r="3.5" fill="#242d5f"/>';
+      if (i < 3) {
+        // bombilla: el tamaño del halo depende de su potencia
+        var halo = 4 + 10 * Math.sqrt(cg.pn / 100) * luz;
+        if (luz > 0.03) s += '<circle cx="' + cg.x + '" cy="120" r="' + (13 + halo) + '" fill="rgba(255,210,87,' + (0.35 * luz) + ')"/>';
+        s += '<circle cx="' + cg.x + '" cy="120" r="13" fill="rgba(255,210,87,' + luz + ')" stroke="#242d5f" stroke-width="2"/>';
+        s += '<path d="M' + (cg.x - 9) + ' 111l18 18M' + (cg.x + 9) + ' 111l-18 18" stroke="#242d5f" stroke-width="1.6"/>';
+      } else {
+        // secador: resistencia que se pone al rojo
+        s += '<rect x="' + (cg.x - 10) + '" y="100" width="20" height="40" rx="3" fill="rgb(255,' + Math.round(240 - 170 * luz) + ',' + Math.round(220 - 190 * luz) + ')" stroke="#242d5f" stroke-width="2"/>';
+      }
+      s += '<text class="txt-s" x="' + cg.x + '" y="' + (i % 2 ? 160 : 172) + '" text-anchor="middle" style="fill:#242d5f">' + (cg.pn >= 1000 ? cg.pn / 1000 + " kW" : cg.pn + " W") + '</text>';
+    });
+    $("circ").innerHTML = s;
+    $("u-t").textContent = t.U + " V"; $("l-u").textContent = t.U + " V"; $("l-i").textContent = n(t.I, 2) + " A"; $("l-p").textContent = n(t.P, 0) + " W";
+  }
+
+  // Botones de las cargas
+  function pintarChips(){
+    $("cargas").innerHTML = CARGAS.map(function(c, i){ return '<button type="button" data-i="' + i + '" aria-pressed="' + c.on + '">' + T(c.es, c.eu) + '</button>'; }).join("");
+  }
+  // Textos que cambian con los mandos
+  function textos(){
+    var t = totales();
+    $("cuenta").textContent = "P = " + t.U + " V × " + n(t.I, 2) + " A = " + n(t.P, 0) + " W";
+    var e = $("estado"), encendidas = CARGAS.filter(function(c){ return c.on; }).length;
+    if (!encendidas) { e.className = "estado"; e.textContent = T("Todo apagado: no pasa corriente y la potencia es 0 W.", "Dena itzalita: ez da korronterik igarotzen eta potentzia 0 W da."); }
+    else if (t.U === 0) { e.className = "estado"; e.textContent = T("Sin tensión no hay corriente ni potencia.", "Tentsiorik gabe ez dago ez korronterik ez potentziarik."); }
+    else if (t.U < U_NOM) { e.className = "estado mal"; e.textContent = T("Por debajo de 230 V los aparatos dan menos potencia que la nominal: las bombillas brillan menos. Con la mitad de tensión dan solo la cuarta parte.", "230 V-tik behera aparatuek potentzia nominala baino gutxiago ematen dute: bonbillek distira gutxiago egiten dute. Tentsioaren erdiarekin laurdena baino ez dute ematen."); }
+    else { e.className = "estado ok"; e.textContent = T("A 230 V cada aparato da su potencia nominal. Las potencias de los aparatos encendidos se suman, y también sus corrientes.", "230 V-an aparatu bakoitzak bere potentzia nominala ematen du. Piztutako aparatuen potentziak batu egiten dira, baita haien korronteak ere."); }
+    if (CARGAS[3].on && t.U === U_NOM) e.textContent += " " + T("El secador solo ya consume casi 9 A.", "Ile-lehorgailuak bakarrik ia 9 A kontsumitzen ditu.");
+  }
+  $("cargas").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var c = CARGAS[+b.getAttribute("data-i")];
+    c.on = !c.on; b.setAttribute("aria-pressed", c.on ? "true" : "false");
+    textos();
+  });
+  $("u").addEventListener("input", textos);
+
+  // Bucle de animación: la velocidad de las bolitas depende de la corriente total
+  function bucle(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    fase = (fase + dt * (0.15 + totales().I * 0.08)) % 1;
+    if (totales().I < 0.001) fase = 0;
+    pintar();
+    requestAnimationFrame(bucle);
+  }
+
+  /* =====================================================
+     2) MONOFÁSICA FRENTE A TRIFÁSICA
+     ===================================================== */
+  var cosfi = 0.85;
+  function comparar(){
+    var P = +$("p").value * 1000;                      // en vatios
+    var Im = P / (230 * cosfi);                        // monofásica: P = U·I·cos φ
+    var It = P / (Math.sqrt(3) * 400 * cosfi);         // trifásica: P = √3·U·I·cos φ
+    $("p-t").textContent = n(P / 1000, 1) + " kW";
+    $("l-im").textContent = n(Im, 1) + " A"; $("l-it").textContent = n(It, 1) + " A";
+    // dibujo: grosor de los cables proporcional a la corriente
+    function grosor(I){ return Math.max(2, Math.min(22, I / 3)); }
+    var s = '<text class="txt" x="10" y="20">' + T("Monofásica 230 V", "Monofasikoa 230 V") + '</text>';
+    s += '<path d="M20 44H250" stroke="#8b5a2b" stroke-width="' + grosor(Im) + '" stroke-linecap="round"/><path d="M20 76H250" stroke="#2b6cb0" stroke-width="' + grosor(Im) + '" stroke-linecap="round"/>';
+    s += '<text class="txt-s" x="256" y="48">L</text><text class="txt-s" x="256" y="80">N</text>';
+    s += '<text class="med" x="330" y="66" text-anchor="end">' + n(Im, 1) + ' A</text>';
+    s += '<text class="txt" x="10" y="110">' + T("Trifásica 400 V", "Trifasikoa 400 V") + '</text>';
+    ["#8b5a2b", "#222", "#8d95a3"].forEach(function(col, k){
+      s += '<path d="M20 ' + (130 + k * 22) + 'H250" stroke="' + col + '" stroke-width="' + grosor(It) + '" stroke-linecap="round"/><text class="txt-s" x="256" y="' + (134 + k * 22) + '">L' + (k + 1) + '</text>';
+    });
+    s += '<text class="med" x="330" y="156" text-anchor="end">' + n(It, 1) + ' A</text>';
+    $("comp").innerHTML = s;
+    $("comp-exp").textContent = T("Con la misma potencia, en trifásica la corriente por cada cable es unas 3 veces menor (" + n(Im / It, 1) + " veces). Por eso los cables pueden ser más finos y los motores grandes del taller son trifásicos.",
+                                  "Potentzia berarekin, trifasikoan kable bakoitzetik doan korrontea 3 aldiz txikiagoa da gutxi gorabehera (" + n(Im / It, 1) + " aldiz). Horregatik kableak meheagoak izan daitezke eta tailerreko motor handiak trifasikoak dira.");
+  }
+  $("p").addEventListener("input", comparar);
+  $("cos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    cosfi = +b.getAttribute("data-c");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    comparar();
+  });
+
+  // Al cambiar de idioma se repintan los textos hechos con T()
+  alCambiarIdioma(function(){ pintarChips(); textos(); comparar(); });
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

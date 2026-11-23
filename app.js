@@ -3,7 +3,9 @@
    (simulaciones/indice.json), pinta la portada, el menú de áreas y la lista de cada
    área, y abre cada simulación en el visor.
    Rutas: (vacía) o #inicio = portada · #areas = menú de áreas ·
-          #carpeta-del-area = lista · #id-de-simulacion = visor ·
+          #carpeta-del-area = lista (o submenú, si el área tiene «submenu») ·
+          #carpeta-del-area/apartado = lista de un apartado del submenú ·
+          #id-de-simulacion = visor ·
           #avisos o #avisos/<área o simulación> = formulario de avisos. */
 (function(){
   "use strict";
@@ -29,7 +31,10 @@
     polea: '<circle cx="13" cy="29" r="8"/><circle cx="34" cy="22" r="11"/><circle class="f" cx="13" cy="29" r="2"/><circle class="f" cx="34" cy="22" r="2.2"/><path d="M12 21l21-10M14 37l21-4"/>',
     cadena: '<rect x="3" y="17" width="20" height="14" rx="7"/><rect x="16" y="17" width="16" height="14" rx="7"/><rect x="25" y="17" width="20" height="14" rx="7"/><circle class="f" cx="10" cy="24" r="2"/><circle class="f" cx="24" cy="24" r="2"/><circle class="f" cx="38" cy="24" r="2"/>',
     sinfin: '<rect x="6" y="5" width="36" height="12" rx="2"/><path d="M12 5l-4 12M19 5l-4 12M26 5l-4 12M33 5l-4 12M40 5l-4 12"/><circle cx="24" cy="32" r="11"/><circle class="f" cx="24" cy="32" r="2"/>',
-    simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>'
+    simulacion: '<path d="M8 24h32"/><circle class="t" cx="28" cy="24" r="5"/>',
+    rayo: '<path d="M27 4L11 27h12l-3 17 17-24H25z"/>',
+    motor: '<circle cx="22" cy="24" r="14"/><path d="M15 30V18l7 8 7-8v12M36 24h9"/>',
+    pulsador: '<path d="M4 34h10M14 34l18-8M34 34h10"/><circle class="t" cx="14" cy="34" r="2.2"/><circle class="t" cx="34" cy="34" r="2.2"/><path class="d" d="M23 29.5V12"/><path d="M17 7v5h12V7"/>'
   };
 
   // La publicación automática pone aquí la versión del último cambio.
@@ -43,7 +48,7 @@
   function bonito(s){ s = String(s || "").replace(/[-_]+/g, " ").trim(); return s.charAt(0).toUpperCase() + s.slice(1); }
   /* ---------- idioma de los menús (las simulaciones siguen en su idioma) ---------- */
   var TEXTOS = {
-    es: { app: "Electromecánica", elige: "Elige un área", areas: "Áreas", buscar: "Buscar simulación", instalar: "Instalar la app",
+    es: { app: "Electromecánica", elige: "Elige un área", areas: "Áreas", eligeSub: "Elige un apartado", apartados: "Apartados", otros: "Otros", buscar: "Buscar simulación", instalar: "Instalar la app",
           portada: "Volver a la portada", volverAreas: "Volver a las áreas", volverA: "Volver a ", cerrar: "Cerrar aviso",
           anterior: "Simulación anterior", siguiente: "Simulación siguiente", reiniciar: "Reiniciar", completa: "Pantalla completa",
           cargando: "Cargando…", ant: "Anterior", sig: "Siguiente",
@@ -71,7 +76,7 @@
           okT: "¡Gracias! Aviso enviado", okP: "El profesorado lo revisará.",
           colaT: "Guardado: se enviará solo", colaP: "Ahora no hay conexión. Se enviará en cuanto vuelva internet y abras la app.",
           pruebaT: "Así llegaría el aviso", pruebaP: "Modo prueba: no se ha enviado nada. Este es el correo que recibiría el profesor:" },
-    eu: { app: "Elektromekanika", elige: "Aukeratu arlo bat", areas: "Arloak", buscar: "Bilatu simulazioa", instalar: "Instalatu aplikazioa",
+    eu: { app: "Elektromekanika", elige: "Aukeratu arlo bat", areas: "Arloak", eligeSub: "Aukeratu atal bat", apartados: "Atalak", otros: "Besteak", buscar: "Bilatu simulazioa", instalar: "Instalatu aplikazioa",
           portada: "Itzuli azalera", volverAreas: "Itzuli arloetara", volverA: "Itzuli: ", cerrar: "Itxi oharra",
           anterior: "Aurreko simulazioa", siguiente: "Hurrengo simulazioa", reiniciar: "Berrabiarazi", completa: "Pantaila osoa",
           cargando: "Kargatzen…", ant: "Aurrekoa", sig: "Hurrengoa",
@@ -193,8 +198,42 @@
       // Las «ocultas» no salen en las listas, pero se pueden abrir por su enlace (#id), p. ej. desde una ficha.
       s.ocultas = s.simulaciones.filter(function(x){ return x.oculta; });
       s.simulaciones = s.simulaciones.filter(function(x){ return !x.oculta; });
+      s.subs = apartados(s, cat);
     });
     return secs;
+  }
+
+  /* Submenú: si el área tiene «submenu» en el catálogo, cada apartado agrupa
+     las simulaciones de un «tema». Las que no encajan en ninguno van a «Otros».
+     Enlace de un apartado: #area/apartado (por ejemplo #electrica/magnitudes). */
+  function apartados(s, cat){
+    var def = null;
+    ((cat && cat.secciones) || []).forEach(function(c){ if ((c.carpeta || c.id) === s.carpeta) def = c.submenu; });
+    if (!def || !def.length) return null;
+    var subs = def.map(function(d){
+      return { id: slug(d.id || d.tema), tema: d.tema, nombre: d.nombre || d.tema, eu: d.eu || {},
+               descripcion: d.descripcion || "", imagen: d.imagen || "", icono: d.icono || "simulacion", sims: [] };
+    });
+    var otros = null;
+    s.simulaciones.forEach(function(x){
+      var sub = null;
+      subs.forEach(function(z){ if (z.tema === x.tema) sub = z; });
+      if (!sub) {
+        if (!otros) otros = { id: "otros", tema: "", nombre: TEXTOS.es.otros, eu: { nombre: TEXTOS.eu.otros }, descripcion: "", imagen: "", icono: "simulacion", sims: [] };
+        sub = otros;
+      }
+      sub.sims.push(x); x.sub = sub;
+    });
+    if (otros) subs.push(otros);
+    subs = subs.filter(function(z){ return z.sims.length > 0; });
+    // Las ocultas que se abren por enlace vuelven al apartado de su tema
+    (s.ocultas || []).forEach(function(x){ subs.forEach(function(z){ if (z.tema === x.tema) x.sub = z; }); });
+    return subs.length ? subs : null;
+  }
+  function porSub(sec, id){
+    var r = null;
+    (sec.subs || []).forEach(function(z){ if (z.id === id) r = z; });
+    return r;
   }
 
   var CATALOGO = self.CATALOGO || { secciones: [] };
@@ -211,22 +250,31 @@
 
   /* ---------- menú de áreas ---------- */
   function pintarAreas(){
-    var nav = $("areas");
-    nav.style.setProperty("--n", Math.max(SECCIONES.length, 1));
-    nav.style.setProperty("--filas", Math.ceil(SECCIONES.length / 2));
+    pintarTarjetas($("areas"), SECCIONES.map(function(sec){
+      return { href: "#" + sec.id, item: sec, n: sec.simulaciones.length };
+    }));
+  }
+  /* Tarjetas grandes que caben en una pantalla (menú de áreas y submenú de un área).
+     Cada elemento: { href, item (con nombre, eu, descripcion, imagen, icono), n } */
+  function pintarTarjetas(nav, lista){
+    var n = lista.length;
+    nav.style.setProperty("--n", Math.max(n, 1));
+    nav.style.setProperty("--filas", Math.ceil(n / 2));
     // En pantallas anchas: hasta 4 en una fila; con más, en dos filas.
-    var cols = SECCIONES.length <= 4 ? Math.max(SECCIONES.length, 1) : Math.ceil(SECCIONES.length / 2);
+    var cols = n <= 4 ? Math.max(n, 1) : Math.ceil(n / 2);
     nav.style.setProperty("--cols", cols);
-    nav.style.setProperty("--filas-pc", Math.ceil(SECCIONES.length / cols));
-    nav.classList.toggle("rejilla", SECCIONES.length >= 4);
-    nav.classList.toggle("dos-filas", SECCIONES.length > 4);
-    nav.innerHTML = SECCIONES.map(function(sec){
-      return '<a class="area" href="#' + esc(sec.id) + '">' +
-        '<span class="area-foto" aria-hidden="true">' + foto(sec) + '</span>' +
+    nav.style.setProperty("--filas-pc", Math.ceil(n / cols));
+    nav.classList.toggle("rejilla", n >= 4);
+    nav.classList.toggle("dos-filas", n > 4);
+    nav.innerHTML = lista.map(function(t, k){
+      // En el móvil, con un número impar, la última ocupa las dos columnas
+      var ancha = n >= 4 && n % 2 === 1 && k === n - 1;
+      return '<a class="area' + (ancha ? ' ancha' : '') + '" href="' + esc(t.href) + '">' +
+        '<span class="area-foto" aria-hidden="true">' + foto(t.item) + '</span>' +
         '<span class="area-texto">' +
-          '<h3>' + esc(nombre(sec)) + '</h3>' +
-          (frase(sec) ? '<span class="area-desc">' + esc(frase(sec)) + '</span>' : '') +
-          '<span class="area-pie"><span class="pastilla">' + plural(sec.simulaciones.length) + '</span>' +
+          '<h3>' + esc(nombre(t.item)) + '</h3>' +
+          (frase(t.item) ? '<span class="area-desc">' + esc(frase(t.item)) + '</span>' : '') +
+          '<span class="area-pie"><span class="pastilla">' + plural(t.n) + '</span>' +
           '<span class="flecha">' + FLECHA + '</span></span>' +
         '</span></a>';
     }).join("");
@@ -290,9 +338,9 @@
   buscar.addEventListener("keydown", function(ev){ if (ev.key === "Escape") mostrarBuscador(false); });
 
   /* ---------- vistas ---------- */
-  var COLOR_BARRA = { "vista-portada": "#fdb02e", "vista-areas": "#f5f3ef", "vista-seccion": "#f5f3ef", "vista-avisos": "#f5f3ef" };
+  var COLOR_BARRA = { "vista-portada": "#fdb02e", "vista-areas": "#f5f3ef", "vista-sub": "#f5f3ef", "vista-seccion": "#f5f3ef", "vista-avisos": "#f5f3ef" };
   function mostrarVista(id){
-    ["vista-portada", "vista-areas", "vista-seccion", "vista-avisos"].forEach(function(v){ $(v).hidden = v !== id; });
+    ["vista-portada", "vista-areas", "vista-sub", "vista-seccion", "vista-avisos"].forEach(function(v){ $(v).hidden = v !== id; });
     var m = document.querySelector('meta[name="theme-color"]');
     var oscuro = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
     if (m) m.setAttribute("content", id === "vista-portada" ? COLOR_BARRA[id] : (oscuro ? "#11142a" : COLOR_BARRA[id]));
@@ -302,15 +350,33 @@
     mostrarVista("vista-areas"); pintarBusqueda();
     if (mover) window.scrollTo(0, 0);
   }
-  function verSeccion(sec, mover){
-    $("sec-barra").textContent = nombre(sec);
-    $("sec-nombre").textContent = nombre(sec);
-    $("sec-desc").textContent = frase(sec) || "";
-    $("sec-desc").hidden = !frase(sec);
-    $("sec-count").textContent = plural(sec.simulaciones.length);
-    $("sec-foto").innerHTML = foto(sec);
+  // Submenú de un área: sus apartados en tarjetas grandes
+  function verSub(sec, mover){
+    $("sub-barra").textContent = nombre(sec);
+    $("sub-avisos").href = "#avisos/" + encodeURIComponent(sec.id);
+    pintarTarjetas($("subareas"), sec.subs.map(function(z){
+      return { href: "#" + sec.id + "/" + z.id, item: z, n: z.sims.length };
+    }));
+    mostrarVista("vista-sub");
+    if (mover) { window.scrollTo(0, 0); try { $("sub-titulo").focus({ preventScroll: true }); } catch (e) {} }
+  }
+
+  // Lista de un área o, si se pasa «sub», de un apartado de su submenú
+  function verSeccion(sec, mover, sub){
+    var cab = sub || sec, sims = sub ? sub.sims : sec.simulaciones;
+    $("sec-volver").href = sub ? "#" + sec.id : "#areas";
+    $("sec-volver").setAttribute("aria-label", sub ? L().volverA + nombre(sec) : L().volverAreas);
+    $("sec-barra").textContent = sub ? nombre(sec) + " · " + nombre(sub) : nombre(sec);
+    $("sec-nombre").textContent = nombre(cab);
+    $("sec-desc").textContent = frase(cab) || "";
+    $("sec-desc").hidden = !frase(cab);
+    $("sec-count").textContent = plural(sims.length);
+    $("sec-foto").innerHTML = foto(cab);
     $("sec-avisos").href = "#avisos/" + encodeURIComponent(sec.id);
-    if (agrupada(sec)) {
+    if (sub) {
+      $("sec-cards").className = "lista";
+      $("sec-cards").innerHTML = '<div class="cards">' + sims.map(function(sim){ return tarjeta({ sec: sec, sim: sim }, false, true); }).join("") + '</div>';
+    } else if (agrupada(sec)) {
       $("sec-cards").className = "lista";
       $("sec-cards").innerHTML = temas(sec).map(function(t){
         var items = [];
@@ -345,17 +411,23 @@
     btn.setAttribute("data-ir", sim ? sim.id : "");
     btn.title = sim ? etiqueta + ": " + titulo(sim) : "";
   }
+  // Adónde vuelve el visor: al apartado del submenú si lo hay, si no, a la lista del área
+  function volverDe(e){ return "#" + e.sec.id + (e.sec.subs && e.sim.sub ? "/" + e.sim.sub.id : ""); }
   function abrirVisor(e){
-    var sec = e.sec, sim = e.sim, i = e.i;
-    $("v-back").href = "#" + sec.id;
-    $("v-back").setAttribute("aria-label", L().volverA + nombre(sec));
-    $("v-sec").textContent = nombre(sec) + " · ";
-    $("v-pos").textContent = i < 0 ? "" : L().pos(i + 1, sec.simulaciones.length);
+    var sec = e.sec, sim = e.sim, sub = sec.subs && sim.sub ? sim.sub : null;
+    // Anterior / siguiente dentro del apartado (o del área si no tiene submenú)
+    var lista = sub ? sub.sims : sec.simulaciones;
+    var i = e.i < 0 ? -1 : lista.indexOf(sim);
+    var donde = sub ? nombre(sub) : nombre(sec);
+    $("v-back").href = volverDe(e);
+    $("v-back").setAttribute("aria-label", L().volverA + donde);
+    $("v-sec").textContent = donde + " · ";
+    $("v-pos").textContent = i < 0 ? "" : L().pos(i + 1, lista.length);
     $("v-name").textContent = titulo(sim);
     $("v-avisos").href = "#avisos/" + encodeURIComponent(sim.id);
     frame.title = titulo(sim);
-    navegacion($("v-prev"), i < 0 ? null : sec.simulaciones[i - 1], L().ant);
-    navegacion($("v-next"), i < 0 ? null : sec.simulaciones[i + 1], L().sig);
+    navegacion($("v-prev"), i < 0 ? null : lista[i - 1], L().ant);
+    navegacion($("v-next"), i < 0 ? null : lista[i + 1], L().sig);
     app.hidden = true; visor.hidden = false; root.classList.add("con-visor");
     if (abierta !== sim.id) { abierta = sim.id; entrada = e; cargar(e); }
   }
@@ -389,7 +461,7 @@
     vFull.setAttribute("aria-pressed", document.fullscreenElement ? "true" : "false");
   });
   document.addEventListener("keydown", function(ev){
-    if (ev.key === "Escape" && !visor.hidden && !document.fullscreenElement && entrada) location.hash = entrada.sec.id;
+    if (ev.key === "Escape" && !visor.hidden && !document.fullscreenElement && entrada) location.hash = volverDe(entrada);
   });
 
 
@@ -587,11 +659,18 @@
     if (!id || id === "inicio") { cerrarVisor(); verPortada(); return; }
     if (id === "areas") { cerrarVisor(); verAreas(mover); return; }
     if (id === "avisos" || id.indexOf("avisos/") === 0) { cerrarVisor(); verAvisos(id.slice(7)); return; }
-    var sec = null;
-    for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === id) sec = SECCIONES[k];
+    // #area/apartado = lista de un apartado del submenú
+    var partes = id.split("/"), sec = null;
+    for (var k = 0; k < SECCIONES.length; k++) if (SECCIONES[k].id === partes[0]) sec = SECCIONES[k];
+    if (sec && partes.length > 1) {
+      var sub = porSub(sec, partes[1]);
+      cerrarVisor();
+      if (sub) verSeccion(sec, mover, sub); else if (sec.subs) verSub(sec, mover); else verSeccion(sec, mover);
+      return;
+    }
     var e = sec ? null : porId(id);
     if (e) abrirVisor(e);
-    else { cerrarVisor(); if (sec) verSeccion(sec, mover); else verAreas(mover); }
+    else { cerrarVisor(); if (sec && sec.subs) verSub(sec, mover); else if (sec) verSeccion(sec, mover); else verAreas(mover); }
   }
   window.addEventListener("hashchange", function(ev){
     // Para que «Volver» del formulario lleve a donde estaba el alumno

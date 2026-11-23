@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tensión eléctrica</title>
+<meta name="description" content="Qué es la tensión, analogía con el agua, unidades, cómo se mide con el voltímetro, simulador con fuente y pilas, valores típicos de la red y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.med{font-size:13px;font-weight:700;fill:var(--marino)}
+.hilo{stroke:#9aa3b2;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+.quiz{display:grid;gap:10px}
+.quiz .preg{font-weight:600;color:var(--marino-txt);margin:0 0 4px}
+.quiz .res{font-size:13px;margin-left:4px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Tensión eléctrica (V)" data-eu="Tentsio elektrikoa (V)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">tensión</span> o <b>diferencia de potencial</b> es el <b>«empuje»</b> que hace moverse a los electrones por un circuito. Sin tensión no hay corriente, igual que sin presión no se mueve el agua por una tubería.</p>
+      <p class="eu"><span class="clave">Tentsioa</span> edo <b>potentzial-diferentzia</b> elektroiak zirkuitu batean mugiarazten dituen <b>«bultzada»</b> da. Tentsiorik gabe ez dago korronterik, presiorik gabe ura hodi batean mugitzen ez den bezala.</p>
+      <p class="es">La tensión siempre se da <b>entre dos puntos</b>: entre el + y el − de una pila, entre la fase y el neutro de un enchufe, entre dos fases… Un solo punto «no tiene tensión» por sí mismo.</p>
+      <p class="eu">Tentsioa beti <b>bi punturen artean</b> ematen da: pila baten + eta −aren artean, entxufe baten fasearen eta neutroaren artean, bi faseren artean… Puntu bakar batek ez du berez «tentsiorik».</p>
+      <div class="formula">U → <span class="es">voltios (V)</span><span class="eu">voltak (V)</span></div>
+    </div>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 340 200" role="img" aria-label="Analogía del agua">
+          <!-- depósito alto -->
+          <rect x="20" y="30" width="80" height="120" fill="#fff" stroke="#8d95a3" stroke-width="2"/>
+          <rect x="22" y="50" width="76" height="98" fill="#9cc8f0"/>
+          <!-- depósito bajo -->
+          <rect x="240" y="110" width="80" height="60" fill="#fff" stroke="#8d95a3" stroke-width="2"/>
+          <rect x="242" y="148" width="76" height="20" fill="#9cc8f0"/>
+          <!-- tubería con rueda -->
+          <path d="M100 140H150M190 160H240" stroke="#9cc8f0" stroke-width="10"/>
+          <path d="M100 140H150M190 160H240" stroke="#8d95a3" stroke-width="2" fill="none" stroke-dasharray="0"/>
+          <circle cx="170" cy="150" r="20" fill="#fff" stroke="var(--marino)" stroke-width="2"/>
+          <path d="M170 130v40M150 150h40M156 136l28 28M184 136l-28 28" stroke="var(--marino)" stroke-width="2"/>
+          <!-- cota de diferencia de altura -->
+          <path d="M120 50H230M120 148H230" stroke="var(--rojo)" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M215 54V144M211 60l4-8 4 8M211 138l4 8 4-8" stroke="var(--rojo)" stroke-width="2" fill="none"/>
+          <text class="txt" x="222" y="92" style="fill:var(--rojo)" data-es="diferencia" data-eu="altuera-"></text>
+          <text class="txt" x="222" y="105" style="fill:var(--rojo)" data-es="de altura" data-eu="diferentzia"></text>
+          <text class="txt-s" x="60" y="22" text-anchor="middle" data-es="mucha altura" data-eu="altuera handia"></text>
+          <text class="txt-s" x="280" y="102" text-anchor="middle" data-es="poca altura" data-eu="altuera txikia"></text>
+          <text class="txt-s" x="170" y="190" text-anchor="middle" data-es="el agua mueve la rueda" data-eu="urak gurpila mugitzen du"></text>
+        </svg>
+        <figcaption data-es="Agua: la diferencia de altura (presión) empuja el agua" data-eu="Ura: altuera-diferentziak (presioak) ura bultzatzen du"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg viewBox="0 0 340 200" role="img" aria-label="Circuito con pila">
+          <path class="hilo con" d="M70 70V30H260V78M260 122V170H70V110"/>
+          <!-- pila -->
+          <path d="M48 70h44" stroke="var(--marino)" stroke-width="3"/>
+          <path d="M58 82h24" stroke="var(--marino)" stroke-width="7"/>
+          <path d="M70 82v28" stroke="var(--naranja)" stroke-width="4"/>
+          <text class="med" x="34" y="72">+</text><text class="med" x="40" y="92">−</text>
+          <text class="txt" x="100" y="84">U = 12 V</text>
+          <!-- bombilla -->
+          <circle cx="260" cy="100" r="22" fill="rgba(255,210,87,.8)" stroke="var(--marino)" stroke-width="2.5"/>
+          <path d="M245 85l30 30M275 85l-30 30" stroke="var(--marino)" stroke-width="2"/>
+          <!-- flechas de corriente -->
+          <path d="M150 30l-10-6v12z M180 170l10-6v12z" fill="var(--azul)"/>
+          <text class="txt-s" x="150" y="18" text-anchor="middle" data-es="la tensión empuja la corriente" data-eu="tentsioak korrontea bultzatzen du"></text>
+          <text class="txt-s" x="70" y="190" text-anchor="middle" data-es="pila = «bomba»" data-eu="pila = «ponpa»"></text>
+          <text class="txt-s" x="260" y="140" text-anchor="middle" data-es="bombilla = «rueda»" data-eu="bonbilla = «gurpila»"></text>
+        </svg>
+        <figcaption data-es="Electricidad: la pila crea la diferencia de potencial" data-eu="Elektrizitatea: pilak sortzen du potentzial-diferentzia"></figcaption>
+      </figure>
+    </div>
+
+    <div class="card">
+      <h2 data-es="¿De dónde sale la tensión?" data-eu="Nondik dator tentsioa?"></h2>
+      <div class="rejilla">
+        <div><h3 class="es">Pilas y baterías</h3><h3 class="eu">Pilak eta bateriak</h3>
+          <p class="es">Por una reacción química. Dan corriente continua (CC).</p><p class="eu">Erreakzio kimiko baten bidez. Korronte zuzena (KZ) ematen dute.</p></div>
+        <div><h3 class="es">Alternadores (red)</h3><h3 class="eu">Alternadoreak (sarea)</h3>
+          <p class="es">Un imán que gira dentro de bobinas. Dan corriente alterna (CA) de 50 Hz.</p><p class="eu">Bobinen barruan biratzen duen iman bat. 50 Hz-ko korronte alternoa (KA) ematen dute.</p></div>
+        <div><h3 class="es">Placas solares</h3><h3 class="eu">Eguzki-plakak</h3>
+          <p class="es">La luz del sol crea tensión continua en las células.</p><p class="eu">Eguzki-argiak tentsio zuzena sortzen du zeluletan.</p></div>
+        <div><h3 class="es">Fuentes de alimentación</h3><h3 class="eu">Elikadura-iturriak</h3>
+          <p class="es">Convierten los 230 V de la red en 24 V, 12 V o 5 V de continua.</p><p class="eu">Sareko 230 V-ak 24 V, 12 V edo 5 V-ko tentsio zuzen bihurtzen dituzte.</p></div>
+      </div>
+    </div>
+
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Tensión = <b>empuje</b>, siempre <b>entre dos puntos</b>. Letra <b>U</b> (a veces V), unidad <b>voltio (V)</b>.</p>
+      <p class="eu">Tentsioa = <b>bultzada</b>, beti <b>bi punturen artean</b>. <b>U</b> letra (batzuetan V), unitatea <b>volta (V)</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. NEURKETA ============ -->
+  <section class="panel" data-tab="neurketa" data-es="Unidades y medida" data-eu="Unitateak eta neurketa" hidden>
+    <div class="card">
+      <h2 data-es="El voltio y sus múltiplos" data-eu="Volta eta bere multiploak"></h2>
+      <p class="es">La unidad es el <b>voltio (V)</b>, en honor a Alessandro Volta, el inventor de la pila. Para valores muy pequeños o muy grandes usamos múltiplos y submúltiplos:</p>
+      <p class="eu">Unitatea <b>volta (V)</b> da, Alessandro Volta pilaren asmatzailearen omenez. Balio oso txiki edo oso handietarako multiploak eta azpimultiploak erabiltzen ditugu:</p>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Unidad</span><span class="eu">Unitatea</span></th><th><span class="es">Equivale a</span><span class="eu">Baliokidea</span></th><th><span class="es">Ejemplo</span><span class="eu">Adibidea</span></th></tr>
+        <tr><td><b>mV</b> <span class="es">(milivoltio)</span><span class="eu">(milivolta)</span></td><td>1 mV = 0,001 V</td><td><span class="es">señal de un sensor: 20 mV</span><span class="eu">sentsore baten seinalea: 20 mV</span></td></tr>
+        <tr><td><b>V</b> <span class="es">(voltio)</span><span class="eu">(volta)</span></td><td>1 V</td><td><span class="es">enchufe: 230 V</span><span class="eu">entxufea: 230 V</span></td></tr>
+        <tr><td><b>kV</b> <span class="es">(kilovoltio)</span><span class="eu">(kilovolta)</span></td><td>1 kV = 1000 V</td><td><span class="es">línea eléctrica: 20 kV</span><span class="eu">linea elektrikoa: 20 kV</span></td></tr>
+      </table></div>
+      <p class="nota es">Para pasar de kV a V se multiplica por 1000 (0,4 kV = 400 V). De mV a V se divide entre 1000 (1500 mV = 1,5 V).</p>
+      <p class="nota eu">kV-tik V-ra pasatzeko 1000z biderkatzen da (0,4 kV = 400 V). mV-tik V-ra 1000z zatitzen da (1500 mV = 1,5 V).</p>
+    </div>
+
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 340 240" role="img" aria-label="Voltímetro en paralelo">
+          <!-- circuito: pila + bombilla -->
+          <path class="hilo con" d="M40 86V40H220V75M220 115V150H40V96"/>
+          <path d="M26 86h28" stroke="var(--marino)" stroke-width="3"/><path d="M33 96h14" stroke="var(--marino)" stroke-width="7"/>
+          <text class="med" x="14" y="84">+</text>
+          <circle cx="220" cy="95" r="20" fill="rgba(255,210,87,.8)" stroke="var(--marino)" stroke-width="2.5"/>
+          <path d="M206 81l28 28M234 81l-28 28" stroke="var(--marino)" stroke-width="2"/>
+          <!-- polímetro -->
+          <rect x="236" y="130" width="96" height="104" rx="12" fill="#ffd257" stroke="var(--marino)" stroke-width="2"/>
+          <rect x="246" y="138" width="76" height="26" rx="4" fill="#dff1dd" stroke="var(--marino)" stroke-width="1.2"/>
+          <text class="med" x="284" y="156" text-anchor="middle">12,0 V</text>
+          <circle cx="284" cy="186" r="13" fill="#2d3340"/><path d="M284 186l-9-6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <text class="txt-s" x="262" y="178" style="fill:var(--marino)">V⎓</text>
+          <circle cx="258" cy="220" r="6" fill="#222"/><circle cx="310" cy="220" r="6" fill="var(--rojo)"/>
+          <text class="txt-s" x="258" y="210" text-anchor="middle" style="fill:var(--marino)">COM</text><text class="txt-s" x="310" y="210" text-anchor="middle" style="fill:var(--marino)">V</text>
+          <!-- puntas -->
+          <path d="M310 214C334 160 300 58 222 58" stroke="var(--rojo)" stroke-width="3" fill="none"/>
+          <path d="M258 214C240 190 236 140 222 132" stroke="#222" stroke-width="3" fill="none"/>
+          <circle cx="220" cy="58" r="4.5" fill="var(--rojo)"/><circle cx="220" cy="132" r="4.5" fill="#222"/>
+          <text class="txt" x="110" y="190" style="fill:var(--rojo)" data-es="voltímetro EN PARALELO" data-eu="voltmetroa PARALELOAN"></text>
+          <text class="txt-s" x="110" y="205" data-es="(no se abre el circuito)" data-eu="(zirkuitua ez da irekitzen)"></text>
+        </svg>
+        <figcaption data-es="Medir la tensión de la bombilla con el polímetro" data-eu="Bonbillaren tentsioa polimetroarekin neurtu"></figcaption>
+      </figure>
+      <div class="card">
+        <h2 data-es="Cómo se mide: el voltímetro" data-eu="Nola neurtzen da: voltmetroa"></h2>
+        <ol>
+          <li><span class="es">Gira el selector a <b>V⎓</b> (continua) o <b>V~</b> (alterna).</span><span class="eu">Biratu hautagailua <b>V⎓</b> (zuzena) edo <b>V~</b> (alternoa) posiziora.</span></li>
+          <li><span class="es">Cable <b>negro en COM</b> y <b>rojo en V</b>.</span><span class="eu"><b>Kable beltza COM-en</b> eta <b>gorria V-n</b>.</span></li>
+          <li><span class="es">Si no es automático y no sabes el valor, empieza por la <b>escala más alta</b>.</span><span class="eu">Automatikoa ez bada eta balioa ez badakizu, hasi <b>eskalarik altuenetik</b>.</span></li>
+          <li><span class="es">Toca con las puntas los <b>dos puntos</b>: el voltímetro va <b>en paralelo</b>. No hay que abrir el circuito.</span><span class="eu">Ukitu puntekin <b>bi puntuak</b>: voltmetroa <b>paraleloan</b> doa. Ez da zirkuitua ireki behar.</span></li>
+          <li><span class="es">En continua, si sale un <b>signo −</b>, las puntas están al revés.</span><span class="eu">Korronte zuzenean <b>− ikurra</b> ateratzen bada, puntak alderantziz daude.</span></li>
+        </ol>
+        <p class="nota es">El voltímetro tiene una resistencia interna muy grande: casi no deja pasar corriente y por eso no altera el circuito.</p>
+        <p class="nota eu">Voltmetroak barne-erresistentzia oso handia du: ia ez du korronterik uzten igarotzen, eta horregatik ez du zirkuitua aldatzen.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Ponte a prueba" data-eu="Jarri zeure burua proban"></h2>
+      <div class="quiz" id="quiz"></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">La bombilla es de <b>12 V</b>. Sube y baja la tensión con la <b>fuente regulable</b> o poniendo <b>pilas en serie</b>, y mira qué pasa con la bombilla y con el agua. Mueve el <b>voltímetro</b> (siempre en paralelo) a distintos puntos. ¿Qué ocurre si te pasas de tensión?</p>
+      <p class="eu">Bonbilla <b>12 V</b>-koa da. Igo eta jaitsi tentsioa <b>iturri erregulagarriarekin</b> edo <b>pilak seriean</b> jarrita, eta begiratu zer gertatzen den bonbillarekin eta urarekin. Eraman <b>voltmetroa</b> (beti paraleloan) puntu desberdinetara. Zer gertatzen da tentsioa gehiegi igotzen baduzu?</p>
+    </div>
+    <div class="chips" id="modo">
+      <button type="button" data-m="fuente" aria-pressed="true" data-es="Fuente regulable" data-eu="Iturri erregulagarria"></button>
+      <button type="button" data-m="pilas" aria-pressed="false" data-es="Pilas en serie" data-eu="Pilak seriean"></button>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="sim" viewBox="0 0 340 230" role="img" aria-label="Circuito"></svg>
+        <figcaption data-es="Circuito con voltímetro en paralelo" data-eu="Zirkuitua voltmetroa paraleloan duela"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg id="agua" viewBox="0 0 200 230" role="img" aria-label="Analogía del agua"></svg>
+        <figcaption data-es="Comparación: altura del agua = tensión" data-eu="Konparaketa: uraren altuera = tentsioa"></figcaption>
+      </figure>
+    </div>
+    <div class="mandos" id="c-fuente">
+      <div class="deslizador"><label><span data-es="Tensión de la fuente" data-eu="Iturriaren tentsioa"></span><output id="u-t"></output></label><input id="u" type="range" min="0" max="24" step="0.5" value="6"></div>
+    </div>
+    <div class="mandos" id="c-pilas" hidden>
+      <button type="button" class="boton claro" id="menos" data-es="− Quitar pila" data-eu="− Pila kendu"></button>
+      <span class="clave" id="n-pilas"></span>
+      <button type="button" class="boton claro" id="mas" data-es="+ Añadir pila" data-eu="+ Pila gehitu"></button>
+    </div>
+    <div class="chips" id="punto">
+      <button type="button" data-p="bombilla" aria-pressed="true" data-es="V en la bombilla" data-eu="V bonbillan"></button>
+      <button type="button" data-p="fuente" aria-pressed="false" data-es="V en la fuente" data-eu="V iturrian"></button>
+      <button type="button" data-p="cable" aria-pressed="false" data-es="V en un cable" data-eu="V kable batean"></button>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Voltímetro" data-eu="Voltmetroa"></small><b id="l-u"></b></div>
+      <div><small data-es="Corriente" data-eu="Korrontea"></small><b id="l-i"></b></div>
+      <div><small data-es="Brillo" data-eu="Distira"></small><b id="l-b"></b></div>
+    </div>
+    <div class="estado" id="estado"></div>
+    <div class="mandos"><button type="button" class="boton naranja" id="cambiar" hidden data-es="Cambiar la bombilla" data-eu="Bonbilla aldatu"></button></div>
+    <p class="nota es">Simplificación: suponemos que la resistencia de la bombilla no cambia (24 Ω). La corriente se explica a fondo en la ficha de Intensidad.</p>
+    <p class="nota eu">Sinplifikazioa: bonbillaren erresistentzia aldatzen ez dela suposatzen dugu (24 Ω). Korrontea Intentsitatea fitxan azaltzen da sakonago.</p>
+  </section>
+
+  <!-- ============ 4. SAREA ETA SEGURTASUNA ============ -->
+  <section class="panel" data-tab="sarea" data-es="Red y seguridad" data-eu="Sarea eta segurtasuna" hidden>
+    <div class="card">
+      <h2 data-es="Valores típicos" data-eu="Balio ohikoak"></h2>
+      <div class="tabla"><table>
+        <tr><th><span class="es">Dónde</span><span class="eu">Non</span></th><th><span class="es">Tensión</span><span class="eu">Tentsioa</span></th><th><span class="es">Tipo</span><span class="eu">Mota</span></th></tr>
+        <tr><td><span class="es">Pila AA</span><span class="eu">AA pila</span></td><td>1,5 V</td><td><span class="es">CC</span><span class="eu">KZ</span></td></tr>
+        <tr><td><span class="es">Batería de móvil</span><span class="eu">Mugikorraren bateria</span></td><td>3,7 V</td><td><span class="es">CC</span><span class="eu">KZ</span></td></tr>
+        <tr><td><span class="es">Cargador USB</span><span class="eu">USB kargagailua</span></td><td>5 V</td><td><span class="es">CC</span><span class="eu">KZ</span></td></tr>
+        <tr><td><span class="es">Batería de coche</span><span class="eu">Autoaren bateria</span></td><td>12 V</td><td><span class="es">CC</span><span class="eu">KZ</span></td></tr>
+        <tr><td><span class="es">Mando de máquinas, PLC, sensores</span><span class="eu">Makinen agintea, PLCa, sentsoreak</span></td><td>24 V</td><td><span class="es">CC (o CA)</span><span class="eu">KZ (edo KA)</span></td></tr>
+        <tr><td><span class="es">Enchufe de casa (fase–neutro)</span><span class="eu">Etxeko entxufea (fasea–neutroa)</span></td><td><b>230 V</b></td><td><span class="es">CA 50 Hz</span><span class="eu">KA 50 Hz</span></td></tr>
+        <tr><td><span class="es">Red trifásica (entre fases)</span><span class="eu">Sare trifasikoa (faseen artean)</span></td><td><b>400 V</b></td><td><span class="es">CA 50 Hz</span><span class="eu">KA 50 Hz</span></td></tr>
+        <tr><td><span class="es">Líneas de distribución</span><span class="eu">Banaketa-lineak</span></td><td>13 – 30 kV</td><td><span class="es">CA</span><span class="eu">KA</span></td></tr>
+        <tr><td><span class="es">Líneas de transporte (torres grandes)</span><span class="eu">Garraio-lineak (dorre handiak)</span></td><td>220 – 400 kV</td><td><span class="es">CA</span><span class="eu">KA</span></td></tr>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="230 V o 400 V: ¿entre qué puntos mides?" data-eu="230 V edo 400 V: zein punturen artean neurtzen duzu?"></h2>
+      <p class="es">En la red trifásica hay tres fases (L1, L2, L3), el neutro (N) y la tierra (PE). Elige dónde pones las puntas del voltímetro:</p>
+      <p class="eu">Sare trifasikoan hiru fase (L1, L2, L3), neutroa (N) eta lurra (PE) daude. Aukeratu non jartzen dituzun voltmetroaren puntak:</p>
+      <div class="chips" id="pares"></div>
+    </div>
+    <figure class="fig"><svg id="tri" viewBox="0 0 340 180" role="img" aria-label="Red trifásica"></svg></figure>
+    <div class="estado" id="tri-exp"></div>
+
+    <div class="rejilla">
+      <div class="card"><h3 class="es">El pájaro en el cable</h3><h3 class="eu">Kablean dagoen txoria</h3>
+        <p class="es">Un pájaro posado en un solo cable no se electrocuta: sus dos patas están en el mismo punto, <b>no hay diferencia de potencial</b> entre ellas y no pasa corriente.</p>
+        <p class="eu">Kable bakar batean pausatutako txoria ez da elektrokutatzen: bi hankak puntu berean daude, <b>ez dago potentzial-diferentziarik</b> haien artean eta ez da korronterik igarotzen.</p></div>
+      <div class="card aviso-h"><h3 class="es">Una persona sí</h3><h3 class="eu">Pertsona batek bai</h3>
+        <p class="es">Si tocas una fase estando de pie en el suelo, hay <b>230 V entre tu mano y tus pies</b>: la corriente pasa por tu cuerpo. ¡Peligro!</p>
+        <p class="eu">Lurrean zutik zaudela fase bat ukitzen baduzu, <b>230 V daude zure eskuaren eta oinen artean</b>: korrontea zure gorputzetik igarotzen da. Arriskua!</p></div>
+      <div class="card"><h3 class="es">Tensión de seguridad</h3><h3 class="eu">Segurtasun-tentsioa</h3>
+        <p class="es">Por debajo de <b>50 V</b> (y de <b>24 V</b> en sitios húmedos) se considera poco peligrosa. Por eso los mandos de las máquinas suelen ir a 24 V.</p>
+        <p class="eu"><b>50 V</b>-tik behera (eta <b>24 V</b>-tik behera leku hezeetan) arrisku txikikotzat hartzen da. Horregatik, makinen aginteak 24 V-an joan ohi dira.</p></div>
+      <div class="card"><h3 class="es">Antes de tocar: comprueba</h3><h3 class="eu">Ukitu aurretik: egiaztatu</h3>
+        <p class="es">Una de las <b>cinco reglas de oro</b>: comprobar con el voltímetro o un comprobador que <b>no hay tensión</b> antes de trabajar.</p>
+        <p class="eu"><b>Bost urrezko arauetako</b> bat: lan egin aurretik voltmetroarekin edo egiaztatzaile batekin <b>tentsiorik ez dagoela</b> egiaztatzea.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Fase–neutro = <b>230 V</b>. Fase–fase = <b>400 V</b> (230 × √3 ≈ 400). Las dos a <b>50 Hz</b>.</p>
+      <p class="eu">Fasea–neutroa = <b>230 V</b>. Fasea–fasea = <b>400 V</b> (230 × √3 ≈ 400). Biak <b>50 Hz</b>-an.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // Formatea un número con coma decimal y d decimales fijos (12,0 · 0,25)
+  function n(v, d){ return v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  /* =====================================================
+     1) TEST RÁPIDO (pestaña «Unidades y medida»)
+     ===================================================== */
+  var PREGUNTAS = [
+    { es: "0,4 kV son…", eu: "0,4 kV hau da…", ops: ["4 V", "400 V", "4000 V"], ok: 1 },
+    { es: "230 V son…", eu: "230 V hau da…", ops: ["0,23 kV", "2,3 kV", "23 kV"], ok: 0 },
+    { es: "1500 mV son…", eu: "1500 mV hau da…", ops: ["1,5 V", "15 V", "150 V"], ok: 0 },
+    { es: "El voltímetro se conecta…", eu: "Voltmetroa honela konektatzen da…", ops: [["en serie", "seriean"], ["en paralelo", "paraleloan"]], ok: 1 }
+  ];
+  var respuestas = {};   // guarda qué opción ha elegido el alumno en cada pregunta
+  function pintarQuiz(){
+    $("quiz").innerHTML = PREGUNTAS.map(function(p, i){
+      var botones = p.ops.map(function(o, j){
+        var txt = typeof o === "string" ? o : T(o[0], o[1]);
+        return '<button type="button" data-i="' + i + '" data-j="' + j + '" aria-pressed="' + (respuestas[i] === j) + '">' + txt + '</button>';
+      }).join("");
+      var res = "";
+      if (respuestas[i] !== undefined) {
+        res = respuestas[i] === p.ok ? '<span class="res ok">' + T("¡Bien!", "Ondo!") + '</span>'
+                                     : '<span class="res mal">' + T("Repasa la tabla y los pasos", "Berrikusi taula eta urratsak") + '</span>';
+      }
+      return '<div><p class="preg">' + (i + 1) + '. ' + T(p.es, p.eu) + '</p><div class="chips">' + botones + res + '</div></div>';
+    }).join("");
+  }
+  $("quiz").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    respuestas[+b.getAttribute("data-i")] = +b.getAttribute("data-j");
+    pintarQuiz();
+  });
+
+  /* =====================================================
+     2) SIMULADOR: fuente / pilas + bombilla de 12 V
+     ===================================================== */
+  var R = 24;            // resistencia de la bombilla (12 V / 0,5 A), la suponemos fija
+  var U_NOM = 12;        // tensión nominal de la bombilla
+  var U_FUNDE = 15;      // por encima de esto la bombilla se funde
+  var modo = "fuente", pilas = 4, fundida = false;
+  var punto = "bombilla"; // dónde están las puntas del voltímetro: bombilla, fuente o cable
+  var fase = 0;          // posición de las «bolitas» de corriente (0..1)
+  var giro = 0;          // ángulo de la rueda de agua
+  var ult = performance.now();
+
+  // Tensión que da la fuente o el conjunto de pilas
+  function tension(){ return modo === "fuente" ? +$("u").value : pilas * 1.5; }
+
+  // Recorrido de la corriente por el circuito (para animar las bolitas)
+  var CAMINO = [[60, 60], [60, 30], [250, 30], [250, 200], [60, 200], [60, 170]];
+  function puntoEn(f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < CAMINO.length - 1; i++) {
+      var d = Math.abs(CAMINO[i + 1][0] - CAMINO[i][0]) + Math.abs(CAMINO[i + 1][1] - CAMINO[i][1]);
+      L.push(d); tot += d;
+    }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) {
+      if (x <= L[i]) { var r = x / L[i]; return [CAMINO[i][0] + (CAMINO[i + 1][0] - CAMINO[i][0]) * r, CAMINO[i][1] + (CAMINO[i + 1][1] - CAMINO[i][1]) * r]; }
+      x -= L[i];
+    }
+    return CAMINO[0];
+  }
+
+  // Recorrido de las puntas del voltímetro (roja «a» y negra «b») para cada punto de medida
+  var PUNTAS = {
+    bombilla: { a: "M306 91V50H250", b: "M306 139V185H250", na: [250, 50], nb: [250, 185] },
+    fuente:   { a: "M306 91V12H40V45H60", b: "M306 139V220H40V185H60", na: [60, 45], nb: [60, 185] },
+    cable:    { a: "M306 91V12H200V30", b: "M290 97V6H120V30", na: [200, 30], nb: [120, 30] }
+  };
+  // Lo que marca el voltímetro: en la bombilla y en la fuente, toda la tensión;
+  // entre dos puntos del mismo cable no hay diferencia de potencial (0 V)
+  function lecturaV(U){ return punto === "cable" ? 0 : U; }
+
+  // Dibuja el circuito: fuente o pilas, bombilla, voltímetro y bolitas
+  function dibujarCircuito(U, I){
+    var hay = I > 0.001, c = hay ? "con" : "";
+    var s = '<path class="hilo ' + c + '" d="M60 60V30H250V200H60V170"/>';
+    // bolitas de corriente (se dibujan antes para que la bombilla las tape)
+    if (hay) for (var k = 0; k < 8; k++) { var p = puntoEn((fase + k / 8) % 1); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="var(--azul)"/>'; }
+    // generador
+    if (modo === "fuente") {
+      s += '<rect x="20" y="60" width="80" height="110" rx="10" fill="#2d3340"/>';
+      s += '<rect x="28" y="72" width="64" height="26" rx="4" fill="#dff1dd"/>';
+      s += '<text class="med" x="60" y="90" text-anchor="middle">' + n(U, 1) + ' V</text>';
+      s += '<circle cx="60" cy="130" r="16" fill="#c9ced6"/><path d="M60 130l8-10" stroke="#2d3340" stroke-width="3" stroke-linecap="round"/>';
+      s += '<text class="txt-s" x="60" y="164" text-anchor="middle" style="fill:#fff">' + T("fuente", "iturria") + '</text>';
+    } else {
+      // pilas apiladas: cada una 1,5 V
+      s += '<rect x="30" y="60" width="60" height="110" rx="6" fill="#eef0f4" stroke="#8d95a3"/>';
+      var h = 104 / Math.max(pilas, 1);
+      for (var j = 0; j < pilas; j++) {
+        var y = 63 + j * h;
+        s += '<rect x="36" y="' + (y + 1) + '" width="48" height="' + Math.max(h - 3, 4) + '" rx="3" fill="#f39200" stroke="#242d5f" stroke-width="1"/>';
+        if (h > 14) s += '<text class="txt-s" x="60" y="' + (y + h / 2 + 4) + '" text-anchor="middle" style="fill:#242d5f">1,5 V</text>';
+      }
+      s += '<text class="med" x="96" y="70">+</text><text class="med" x="96" y="168">−</text>';
+    }
+    // bombilla
+    var luz = fundida ? 0 : Math.min((U * U / R) / 6, 1.4);   // 6 W = brillo normal
+    s += '<circle cx="250" cy="115" r="24" fill="' + (fundida ? "#c9ced6" : "rgba(255,210,87," + Math.min(luz, 1) + ")") + '" stroke="var(--marino)" stroke-width="2.5"/>';
+    if (fundida) s += '<path d="M234 99l12 12M266 131l-12-12M266 99l-30 30" stroke="var(--marino)" stroke-width="2"/><text class="txt" x="250" y="160" text-anchor="middle" style="fill:var(--rojo)">' + T("¡Fundida!", "Erreta!") + '</text>';
+    else s += '<path d="M233 98l34 34M267 98l-34 34" stroke="var(--marino)" stroke-width="2"/>';
+    if (luz > 0.05) for (var a = 0; a < 8; a++) {
+      var ang = a * Math.PI / 4, r1 = 30, r2 = 30 + 12 * Math.min(luz, 1.4);
+      s += '<path d="M' + (250 + r1 * Math.cos(ang)) + ' ' + (115 + r1 * Math.sin(ang)) + 'L' + (250 + r2 * Math.cos(ang)) + ' ' + (115 + r2 * Math.sin(ang)) + '" stroke="var(--naranja)" stroke-width="2.5" stroke-linecap="round"/>';
+    }
+    s += '<text class="txt-s" x="214" y="80" text-anchor="end">12 V · 6 W</text>';
+    // voltímetro en paralelo: las puntas van a los dos puntos elegidos
+    var P = PUNTAS[punto];
+    s += '<path d="' + P.a + '" stroke="var(--rojo)" stroke-width="2" fill="none" stroke-dasharray="4 3"/>';
+    s += '<path d="' + P.b + '" stroke="#222" stroke-width="2" fill="none" stroke-dasharray="4 3"/>';
+    s += '<circle cx="' + P.na[0] + '" cy="' + P.na[1] + '" r="4" fill="var(--rojo)"/><circle cx="' + P.nb[0] + '" cy="' + P.nb[1] + '" r="4" fill="#222"/>';
+    s += '<circle cx="306" cy="115" r="24" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>';
+    s += '<text class="med" x="306" y="115" text-anchor="middle">' + n(lecturaV(U), 1) + '</text><text class="txt" x="306" y="130" text-anchor="middle">V</text>';
+    $("sim").innerHTML = s;
+  }
+
+  // Dibuja la comparación con el agua: la altura sube con la tensión
+  function dibujarAgua(U, caudal){
+    var nivel = Math.min(U / 24, 1), arriba = 170 - 140 * nivel;
+    var s = '<rect x="30" y="20" width="70" height="152" fill="#fff" stroke="#8d95a3" stroke-width="2"/>';
+    s += '<rect x="32" y="' + arriba + '" width="66" height="' + (170 - arriba) + '" fill="#9cc8f0"/>';
+    // cota de altura
+    if (nivel > 0.02) s += '<path d="M18 ' + (arriba + 2) + 'V168" stroke="var(--rojo)" stroke-width="2"/><text class="txt" x="12" y="' + ((arriba + 170) / 2 + 4) + '" text-anchor="middle" style="fill:var(--rojo)">h</text>';
+    // tubería de salida
+    s += '<path d="M100 162H138" stroke="#9cc8f0" stroke-width="10"/>';
+    if (caudal > 0) s += '<path d="M138 162V200" stroke="#9cc8f0" stroke-width="' + (2 + 8 * Math.min(caudal, 1)) + '"/>';
+    // válvula cerrada si la bombilla está fundida (circuito abierto)
+    if (fundida) s += '<path d="M118 150v24" stroke="var(--rojo)" stroke-width="5"/>';
+    // rueda que gira
+    s += '<g transform="rotate(' + giro + ' 158 196)"><circle cx="158" cy="196" r="22" fill="#fff" stroke="var(--marino)" stroke-width="2"/>';
+    for (var k = 0; k < 6; k++) s += '<path d="M158 196L' + (158 + 22 * Math.cos(k * Math.PI / 3)) + ' ' + (196 + 22 * Math.sin(k * Math.PI / 3)) + '" stroke="var(--marino)" stroke-width="2.5"/>';
+    s += '</g><text class="txt-s" x="65" y="14" text-anchor="middle">' + T("depósito", "depositua") + '</text>';
+    s += '<text class="txt-s" x="158" y="168" text-anchor="middle">' + T("rueda", "gurpila") + '</text>';
+    $("agua").innerHTML = s;
+  }
+
+  // Textos de lecturas, estado y mandos
+  function textos(){
+    var U = tension(), I = fundida ? 0 : U / R, P = U * I;
+    if (U > U_FUNDE && !fundida) { fundida = true; I = 0; P = 0; }
+    $("u-t").textContent = n(+$("u").value, 1) + " V";
+    $("n-pilas").textContent = pilas + " × 1,5 V = " + n(pilas * 1.5, 1) + " V";
+    $("l-u").textContent = n(lecturaV(U), 1) + " V";
+    $("l-i").textContent = n(I, 2) + " A";
+    $("l-b").textContent = Math.round(P / 6 * 100) + " %";
+    $("cambiar").hidden = !fundida;
+    $("menos").disabled = pilas <= 1; $("mas").disabled = pilas >= 12;
+    var e = $("estado");
+    if (fundida) { e.className = "estado mal"; e.textContent = T("¡La bombilla se ha fundido! Le has dado mucha más tensión de la que aguanta (12 V). Baja la tensión y cámbiala.", "Bonbilla erre egin da! Jasan dezakeena (12 V) baino tentsio askoz gehiago eman diozu. Jaitsi tentsioa eta aldatu bonbilla."); }
+    else if (U === 0) { e.className = "estado"; e.textContent = T("Sin tensión no hay empuje: no pasa corriente y la bombilla está apagada.", "Tentsiorik gabe ez dago bultzadarik: ez da korronterik igarotzen eta bonbilla itzalita dago."); }
+    else if (U < 9) { e.className = "estado"; e.textContent = T("Poca tensión: empuja poco, pasa poca corriente y la bombilla brilla poco.", "Tentsio gutxi: gutxi bultzatzen du, korronte gutxi igarotzen da eta bonbillak gutxi egiten du distira."); }
+    else if (U <= 13) { e.className = "estado ok"; e.textContent = T("Tensión cercana a la nominal (12 V): la bombilla brilla como debe.", "Tentsio nominaletik (12 V) gertu: bonbillak behar bezala egiten du distira."); }
+    else { e.className = "estado mal"; e.textContent = T("Más tensión que la nominal: brilla mucho, se calienta y su vida se acorta. Por encima de 15 V se funde.", "Tentsio nominala baino gehiago: distira handia, berotu egiten da eta bizitza laburtzen zaio. 15 V-tik gora erre egiten da."); }
+    if (modo === "pilas" && !fundida) e.textContent += " " + T("Pilas en serie: sus tensiones se suman.", "Pilak seriean: haien tentsioak batu egiten dira.");
+    if (punto === "cable") e.textContent += " " + T("El voltímetro marca 0 V: entre dos puntos del mismo cable no hay diferencia de potencial.", "Voltmetroak 0 V markatzen ditu: kable bereko bi punturen artean ez dago potentzial-diferentziarik.");
+    else if (punto === "fuente") e.textContent += " " + T("En los bornes de la fuente se mide la misma tensión que en la bombilla: están en paralelo.", "Iturriaren borneetan bonbillan bezain beste tentsio neurtzen da: paraleloan daude.");
+  }
+
+  // Bucle de animación: mueve bolitas y rueda según la corriente
+  function paso(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    var U = tension(), I = fundida ? 0 : U / R;
+    fase = (fase + dt * I * 0.8) % 1;
+    giro = (giro + dt * I * 400) % 360;
+    dibujarCircuito(U, I);
+    dibujarAgua(U, fundida ? 0 : I);
+    requestAnimationFrame(paso);
+  }
+
+  // Botones del simulador
+  $("modo").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    modo = b.getAttribute("data-m");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    $("c-fuente").hidden = modo !== "fuente";
+    $("c-pilas").hidden = modo !== "pilas";
+    textos();
+  });
+  $("u").addEventListener("input", textos);
+  $("punto").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    punto = b.getAttribute("data-p");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    textos();
+  });
+  $("menos").addEventListener("click", function(){ if (pilas > 1) pilas--; textos(); });
+  $("mas").addEventListener("click", function(){ if (pilas < 12) pilas++; textos(); });
+  $("cambiar").addEventListener("click", function(){
+    // bajamos la tensión a un valor seguro y ponemos bombilla nueva
+    if (tension() > U_NOM) { $("u").value = U_NOM; pilas = 8; }
+    fundida = false; textos();
+  });
+
+  /* =====================================================
+     3) RED TRIFÁSICA: tensión entre dos conductores
+     ===================================================== */
+  var LINEAS = { L1: { y: 30, c: "#8b5a2b" }, L2: { y: 60, c: "#222" }, L3: { y: 90, c: "#8d95a3" }, N: { y: 120, c: "#2b6cb0" }, PE: { y: 150, c: "#2e9e4f" } };
+  var PARES = ["L1-N", "L2-N", "L1-L2", "L2-L3", "L3-L1", "L1-PE", "N-PE"];
+  var par = "L1-N";
+  function valorPar(p){
+    var a = p.split("-");
+    if (a[0].charAt(0) === "L" && a[1].charAt(0) === "L") return 400;   // entre dos fases
+    if (a[0].charAt(0) === "L" || a[1].charAt(0) === "L") return 230;   // fase con neutro o tierra
+    return 0;                                                           // neutro con tierra
+  }
+  function dibujarTri(){
+    var a = par.split("-"), s = "";
+    Object.keys(LINEAS).forEach(function(k){
+      var l = LINEAS[k];
+      s += '<path d="M34 ' + l.y + 'H220" stroke="' + l.c + '" stroke-width="5" stroke-linecap="round"/>';
+      if (k === "PE") s += '<path d="M34 ' + l.y + 'H220" stroke="#ebb400" stroke-width="5" stroke-dasharray="8 8"/>';
+      s += '<text class="txt" x="6" y="' + (l.y + 4) + '">' + k + '</text>';
+    });
+    var yA = LINEAS[a[0]].y, yB = LINEAS[a[1]].y, U = valorPar(par);
+    s += '<path d="M150 ' + yA + 'C210 ' + yA + ' 230 70 262 80" stroke="var(--rojo)" stroke-width="3" fill="none"/>';
+    s += '<path d="M190 ' + yB + 'C230 ' + yB + ' 240 110 262 104" stroke="#222" stroke-width="3" fill="none"/>';
+    s += '<circle cx="150" cy="' + yA + '" r="5" fill="var(--rojo)"/><circle cx="190" cy="' + yB + '" r="5" fill="#222"/>';
+    s += '<circle cx="290" cy="92" r="30" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>';
+    s += '<text class="med" x="290" y="94" text-anchor="middle" style="font-size:16px">' + U + '</text><text class="txt" x="290" y="110" text-anchor="middle">V~</text>';
+    $("tri").innerHTML = s;
+    var e = $("tri-exp");
+    e.className = "estado" + (U === 0 ? " ok" : "");
+    if (U === 400) e.textContent = T("Entre dos fases: 400 V. Es la tensión de los motores trifásicos del taller. 400 ≈ 230 × √3 (≈ 1,73).", "Bi faseren artean: 400 V. Tailerreko motor trifasikoen tentsioa da. 400 ≈ 230 × √3 (≈ 1,73).");
+    else if (U === 230) e.textContent = a[1] === "PE" ? T("Entre una fase y tierra: 230 V. Por eso es peligroso tocar una fase estando en el suelo.", "Fase baten eta lurraren artean: 230 V. Horregatik da arriskutsua lurrean egonda fase bat ukitzea.")
+                                                     : T("Entre una fase y el neutro: 230 V. Es la tensión monofásica de los enchufes de casa.", "Fase baten eta neutroaren artean: 230 V. Etxeko entxufeen tentsio monofasikoa da.");
+    else e.textContent = T("Entre neutro y tierra: casi 0 V en una instalación bien hecha.", "Neutroaren eta lurraren artean: ia 0 V ondo egindako instalazio batean.");
+  }
+  $("pares").innerHTML = PARES.map(function(p){ return '<button type="button" data-p="' + p + '" aria-pressed="' + (p === par) + '">' + p.replace("-", " – ") + '</button>'; }).join("");
+  $("pares").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    par = b.getAttribute("data-p");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    dibujarTri();
+  });
+
+  // Al cambiar de idioma se repintan todos los textos hechos con T()
+  alCambiarIdioma(function(){ pintarQuiz(); textos(); dibujarTri(); });
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

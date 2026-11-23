@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interruptor simple (punto de luz)</title>
+<meta name="description" content="Qué es, partes, esquemas unifilar y multifilar, colores de los cables, simulador de encendido y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.borne{fill:#c9ced6;stroke:#6b7280;stroke-width:1.2}
+/* cables del simulador (mismo estilo que conmutada y cruzamiento) */
+.hilo{fill:none;stroke:#9aa3b2;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.hilo.ten{stroke:var(--rojo)}
+.hilo.cor{stroke:var(--naranja);stroke-width:5}
+.palanca{stroke:var(--marino);stroke-width:5;stroke-linecap:round}
+.palanca.cor{stroke:var(--naranja)}
+.sw{cursor:pointer}
+.sw .toque{fill:transparent;stroke:transparent}
+.sw:hover .toque{fill:rgba(36,45,95,.06);stroke:var(--marino);stroke-dasharray:4 4}
+.bombilla .vidrio{fill:#fff;stroke:var(--marino);stroke-width:2.5;transition:fill .3s}
+.bombilla .halo{opacity:0;transition:opacity .35s}
+.bombilla.luce .vidrio{fill:#ffe066}
+.bombilla.luce .halo{opacity:1}
+.color{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+.muestra{width:44px;height:14px;border-radius:999px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Instalaciones eléctricas" data-eu="Instalazio elektrikoak"></p>
+      <h1 data-es="Interruptor simple (punto de luz)" data-eu="Etengailu sinplea (argi-puntua)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">interruptor simple</span> es el mecanismo más sencillo de una instalación: <b>abre o cierra un circuito</b> para encender y apagar una lámpara <b>desde un solo sitio</b>. Al conjunto de interruptor + lámpara se le llama <b>punto de luz sencillo</b>.</p>
+      <p class="eu"><span class="clave">Etengailu sinplea</span> instalazio bateko mekanismorik errazena da: <b>zirkuitu bat ireki edo ixten du</b>, lanpara bat <b>leku bakar batetik</b> pizteko eta itzaltzeko. Etengailua + lanpara multzoari <b>argi-puntu sinplea</b> esaten zaio.</p>
+      <p class="es">Tiene <b>dos posiciones</b> que se quedan fijas: abierto (apagado) y cerrado (encendido). Es el primer paso antes de la <b>conmutada</b> (dos puntos) y el <b>cruzamiento</b> (tres o más puntos).</p>
+      <p class="eu"><b>Bi posizio</b> ditu eta finko geratzen dira: irekia (itzalita) eta itxia (piztuta). <b>Komutatuaren</b> (bi puntu) eta <b>gurutzaketaren</b> (hiru puntu edo gehiago) aurreko urratsa da.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-aparato" viewBox="0 0 300 254" role="img" aria-label="Partes del interruptor">
+          <g class="resaltable" data-parte="caja">
+            <rect x="18" y="12" width="264" height="216" rx="18" fill="#f1efea" stroke="#8d95a3" stroke-width="2" stroke-dasharray="7 5"/>
+          </g>
+          <g class="resaltable" data-parte="bastidor">
+            <rect x="40" y="28" width="220" height="184" rx="10" fill="none" stroke="#9aa3b2" stroke-width="8"/>
+            <path d="M36 66l-12 8 12 8M36 160l-12 8 12 8M264 66l12 8-12 8M264 160l12 8-12 8" stroke="#6b7280" stroke-width="3" fill="none" stroke-linejoin="round"/>
+          </g>
+          <g class="resaltable" data-parte="tecla">
+            <rect x="80" y="42" width="140" height="76" rx="12" fill="#fff" stroke="#8d95a3" stroke-width="2"/>
+            <path d="M80 80h140" stroke="#d7dce3" stroke-width="2"/>
+            <text class="txt" x="150" y="66" text-anchor="middle" font-size="14">I</text>
+            <text class="txt" x="150" y="106" text-anchor="middle" font-size="14">O</text>
+          </g>
+          <g class="resaltable" data-parte="contacto">
+            <rect x="66" y="128" width="168" height="40" rx="6" fill="#e9ecef" stroke="#8d95a3"/>
+            <rect x="194" y="141" width="24" height="8" rx="2" fill="#d4a017"/>
+            <path d="M90 156L198 141" stroke="#b07d2a" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="90" cy="156" r="5" fill="#5c6575"/>
+            <path d="M90 160V180M206 149V180" stroke="#b07d2a" stroke-width="4"/>
+          </g>
+          <g class="resaltable" data-parte="bornes">
+            <path d="M0 194H68" stroke="#8a5a2b" stroke-width="5" stroke-linecap="round"/>
+            <path d="M228 194H300" stroke="#3a3f4a" stroke-width="5" stroke-linecap="round"/>
+            <rect x="68" y="180" width="44" height="28" rx="4" fill="#c9ced6" stroke="#6b7280"/>
+            <rect x="184" y="180" width="44" height="28" rx="4" fill="#c9ced6" stroke="#6b7280"/>
+            <circle class="borne" cx="90" cy="194" r="8"/><circle class="borne" cx="206" cy="194" r="8"/>
+            <path d="M85 194h10M90 189v10M201 194h10M206 189v10" stroke="#6b7280" stroke-width="2"/>
+          </g>
+          <text class="txt-s" x="6" y="244" data-es="entra la fase (L)" data-eu="fasea sartzen da (L)"></text>
+          <text class="txt-s" x="294" y="244" text-anchor="end" data-es="sale a la lámpara" data-eu="lanparara doa"></text>
+        </svg>
+        <figcaption data-es="Interruptor empotrado visto por delante (sin tapa). Toca una parte para verla." data-eu="Etengailu enpotratua aurretik ikusita (estalkirik gabe). Ukitu atal bat ikusteko."></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-aparato">
+        <li><button data-parte="tecla"><span class="n">1</span><span><b class="es">Tecla</b><b class="eu">Tekla</b><small class="es">La parte que tocamos. Al pulsarla bascula y mueve el contacto.</small><small class="eu">Ukitzen dugun zatia. Sakatzean kulunkatu egiten da eta kontaktua mugitzen du.</small></span></button></li>
+        <li><button data-parte="contacto"><span class="n">2</span><span><b class="es">Contacto (móvil y fijo)</b><b class="eu">Kontaktua (mugikorra eta finkoa)</b><small class="es">Una lámina de latón que toca o se separa del contacto fijo: cierra o abre el circuito.</small><small class="eu">Letoizko xafla bat, kontaktu finkoa ukitu edo hartatik bereizten dena: zirkuitua itxi edo irekitzen du.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">3</span><span><b class="es">Bornes (2)</b><b class="eu">Borneak (2)</b><small class="es">Tornillos o bornas rápidas. A uno llega la fase y del otro sale el hilo de retorno a la lámpara.</small><small class="eu">Torlojuak edo konexio azkarreko borneak. Batera fasea iristen da eta bestetik lanpararako itzulera-haria ateratzen da.</small></span></button></li>
+        <li><button data-parte="bastidor"><span class="n">4</span><span><b class="es">Bastidor y garras</b><b class="eu">Markoa eta atzaparrak</b><small class="es">Marco metálico que sujeta el mecanismo a la caja con tornillos o garras.</small><small class="eu">Mekanismoa kutxari torloju edo atzaparren bidez lotzen dion metalezko markoa.</small></span></button></li>
+        <li><button data-parte="caja"><span class="n">5</span><span><b class="es">Caja de mecanismos</b><b class="eu">Mekanismo-kutxa</b><small class="es">Caja empotrada en la pared donde se aloja el interruptor.</small><small class="eu">Horman enpotratutako kutxa, etengailua barruan hartzen duena.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. ESKEMAK ============ -->
+  <section class="panel" data-tab="eskemak" data-es="Esquemas" data-eu="Eskemak" hidden>
+    <div class="card">
+      <h2 data-es="Esquema multifilar" data-eu="Hari anitzeko eskema"></h2>
+      <p class="es">Se dibujan <b>todos los cables</b>, cada uno con su color. Así se ve por dónde va cada hilo cuando montas.</p>
+      <p class="eu"><b>Kable guztiak</b> marrazten dira, bakoitza bere kolorearekin. Horrela ikusten da hari bakoitza nondik doan muntatzean.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-multi" viewBox="0 0 340 226" role="img" aria-label="Esquema multifilar">
+        <!-- fase hasta el interruptor -->
+        <path d="M20 30H104" stroke="#8a5a2b" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- interruptor abierto -->
+        <circle cx="104" cy="30" r="4" fill="var(--marino)"/><circle cx="154" cy="30" r="4" fill="var(--marino)"/>
+        <path d="M104 30L148 10" stroke="var(--marino)" stroke-width="3" stroke-linecap="round"/>
+        <!-- retorno hasta la lámpara -->
+        <path d="M154 30H262V86" stroke="#3a3f4a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- lámpara -->
+        <circle cx="262" cy="108" r="22" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+        <path d="M246.4 92.4L277.6 123.6M277.6 92.4L246.4 123.6" stroke="var(--marino)" stroke-width="2"/>
+        <!-- neutro -->
+        <path d="M262 130V182H20" stroke="#2f62b8" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- tierra (verde-amarillo) -->
+        <path d="M20 206H306V108H284" stroke="#3f9b3a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 206H306V108H284" stroke="#f2d000" stroke-width="4" fill="none" stroke-dasharray="7 7" stroke-linejoin="round"/>
+        <text class="txt" x="20" y="22">L</text><text class="txt" x="20" y="174">N</text><text class="txt" x="20" y="198">PE</text>
+        <text class="txt-s" x="128" y="50" text-anchor="middle" data-es="interruptor" data-eu="etengailua"></text>
+        <text class="txt-s" x="200" y="22" text-anchor="middle" data-es="retorno" data-eu="itzulera"></text>
+        <text class="txt-s" x="226" y="112" text-anchor="end" data-es="lámpara" data-eu="lanpara"></text>
+      </svg>
+      <figcaption data-es="Fase (marrón) → interruptor → retorno (negro) → lámpara → neutro (azul). La tierra (verde-amarillo) va a la parte metálica de la lámpara." data-eu="Fasea (marroia) → etengailua → itzulera (beltza) → lanpara → neutroa (urdina). Lurra (berde-horia) lanparako zati metalikora doa."></figcaption>
+    </figure>
+    <div class="card">
+      <h2 data-es="Esquema unifilar" data-eu="Hari bakarreko eskema"></h2>
+      <p class="es">Se dibuja <b>una sola línea</b> y unas rayitas (<b>/</b>) que dicen cuántos cables van por el tubo. Es el que se usa en los planos de una vivienda.</p>
+      <p class="eu"><b>Lerro bakar bat</b> marrazten da eta marratxo batzuk (<b>/</b>), hodian zenbat kable doazen adierazteko. Etxebizitza baten planoetan erabiltzen dena da.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-uni" viewBox="0 0 340 150" role="img" aria-label="Esquema unifilar">
+        <rect x="10" y="30" width="50" height="36" rx="4" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        <text class="txt" x="35" y="52" text-anchor="middle">C1</text>
+        <path d="M60 48H160M180 48H284" stroke="var(--marino)" stroke-width="2.2"/>
+        <!-- 3 conductores: L, N, PE -->
+        <path d="M100 56l8-16M108 56l8-16M116 56l8-16M226 56l8-16M234 56l8-16M242 56l8-16" stroke="var(--marino)" stroke-width="1.8"/>
+        <!-- caja de registro -->
+        <circle cx="170" cy="48" r="10" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        <!-- lámpara -->
+        <circle cx="300" cy="48" r="16" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        <path d="M288.7 36.7L311.3 59.3M311.3 36.7L288.7 59.3" stroke="var(--marino)" stroke-width="2"/>
+        <!-- bajada al interruptor: 2 conductores (L y retorno) -->
+        <path d="M170 58V112" stroke="var(--marino)" stroke-width="2.2"/>
+        <path d="M162 84l16-8M162 92l16-8" stroke="var(--marino)" stroke-width="1.8"/>
+        <circle cx="170" cy="118" r="6" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        <path d="M174 114L196 94l6 6" fill="none" stroke="var(--marino)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text class="txt-s" x="35" y="82" text-anchor="middle" data-es="cuadro" data-eu="koadroa"></text>
+        <text class="txt-s" x="170" y="28" text-anchor="middle" data-es="caja de registro" data-eu="erregistro-kutxa"></text>
+        <text class="txt-s" x="210" y="124" data-es="interruptor" data-eu="etengailua"></text>
+        <text class="txt-s" x="300" y="82" text-anchor="middle" data-es="lámpara" data-eu="lanpara"></text>
+        <text class="txt-s" x="112" y="72" text-anchor="middle">3 × 1,5 mm²</text>
+        <text class="txt-s" x="140" y="104" text-anchor="end">2</text>
+      </svg>
+      <figcaption data-es="Circuito C1 de alumbrado: cable de 1,5 mm² y PIA de 10 A (REBT)." data-eu="C1 argiztapen-zirkuitua: 1,5 mm²-ko kablea eta 10 A-ko PIA (REBT)."></figcaption>
+    </figure>
+    <div class="card">
+      <h2 data-es="Colores de los cables" data-eu="Kableen koloreak"></h2>
+      <div style="display:grid;gap:10px">
+        <div class="color"><span class="muestra" style="background:linear-gradient(90deg,#8a5a2b 0 33%,#1b1b1b 33% 66%,#8d8d8d 66%)"></span>
+          <span><b class="es">Fase (L): marrón, negro o gris</b><b class="eu">Fasea (L): marroia, beltza edo grisa</b></span></div>
+        <div class="color"><span class="muestra" style="background:#2f62b8"></span>
+          <span><b class="es">Neutro (N): azul</b><b class="eu">Neutroa (N): urdina</b></span></div>
+        <div class="color"><span class="muestra" style="background:repeating-linear-gradient(90deg,#3f9b3a 0 8px,#f2d000 8px 16px)"></span>
+          <span><b class="es">Tierra (PE): verde-amarillo</b><b class="eu">Lurra (PE): berde-horia</b></span></div>
+      </div>
+      <p class="nota es">El hilo que va del interruptor a la lámpara se llama <b>retorno</b>: es fase cortada, por eso se usa negro o gris, nunca azul ni verde-amarillo.</p>
+      <p class="nota eu">Etengailutik lanparara doan hariari <b>itzulera</b> esaten zaio: fase etena da; horregatik beltza edo grisa erabiltzen da, inoiz ez urdina edo berde-horia.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Regla de oro" data-eu="Urrezko araua"></h2>
+      <p class="es">El interruptor <b>corta siempre la FASE</b>, nunca el neutro. Así, con la luz apagada, la lámpara se queda <b>sin tensión</b> y se puede cambiar la bombilla sin peligro.</p>
+      <p class="eu">Etengailuak <b>beti FASEA mozten du</b>, inoiz ez neutroa. Horrela, argia itzalita dagoenean, lanpara <b>tentsiorik gabe</b> geratzen da eta bonbilla arriskurik gabe alda daiteke.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Abre y cierra el interruptor (en los botones o tocando el dibujo) y mira los <b>puntos azules</b>: es la corriente. Después elige <b>«interruptor en el neutro»</b> y apaga la luz: ¿qué cables siguen con tensión?</p>
+      <p class="eu">Ireki eta itxi etengailua (botoietan edo marrazkia ukituz) eta begiratu <b>puntu urdinak</b>: korrontea da. Gero aukeratu <b>«etengailua neutroan»</b> eta itzali argia: zein kablek jarraitzen dute tentsioarekin?</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-sim" viewBox="0 0 340 262" role="img" aria-label="Simulador">
+        <defs>
+          <radialGradient id="brillo">
+            <stop offset="0" stop-color="#ffd43b" stop-opacity=".9"/>
+            <stop offset=".45" stop-color="#ffd43b" stop-opacity=".35"/>
+            <stop offset="1" stop-color="#ffd43b" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- bombilla (debajo de los cables para que el halo quede detrás) -->
+        <g class="bombilla" id="bombilla">
+          <circle class="halo" cx="290" cy="130" r="66" fill="url(#brillo)"/>
+          <circle class="vidrio" cx="290" cy="130" r="26"/>
+          <path d="M271.6 111.6L308.4 148.4M308.4 111.6L271.6 148.4" stroke="var(--marino)" stroke-width="2"/>
+        </g>
+        <g id="cables"></g>
+        <g id="puntos"></g>
+        <text class="txt" x="10" y="26" data-es="L fase 230 V" data-eu="L fasea 230 V"></text>
+        <text class="txt" x="10" y="246" data-es="N neutro" data-eu="N neutroa"></text>
+        <text class="txt-s" x="252" y="182" text-anchor="end" data-es="bombilla" data-eu="bonbilla"></text>
+      </svg>
+      <figcaption data-es="Puntos azules y naranja: pasa corriente · Rojo: hay tensión (peligro si lo tocas) aunque no pase corriente · Gris: sin tensión" data-eu="Puntu urdinak eta laranja: korrontea igarotzen da · Gorria: tentsioa dago (arriskutsua ukituz gero) korronterik ez badabil ere · Grisa: tentsiorik gabe"></figcaption>
+    </figure>
+    <div class="mandos">
+      <div class="chips" id="c-int">
+        <button type="button" data-v="0" aria-pressed="true" data-es="Abierto (O)" data-eu="Irekita (O)"></button>
+        <button type="button" data-v="1" aria-pressed="false" data-es="Cerrado (I)" data-eu="Itxita (I)"></button>
+      </div>
+      <div class="chips" id="c-modo">
+        <button type="button" data-v="fase" aria-pressed="true" data-es="Interruptor en la fase (bien)" data-eu="Etengailua fasean (ondo)"></button>
+        <button type="button" data-v="neutro" aria-pressed="false" data-es="Interruptor en el neutro (mal)" data-eu="Etengailua neutroan (gaizki)"></button>
+      </div>
+      <div class="chips" id="c-pot">
+        <button type="button" data-v="40" aria-pressed="false">40 W</button>
+        <button type="button" data-v="60" aria-pressed="true">60 W</button>
+        <button type="button" data-v="100" aria-pressed="false">100 W</button>
+      </div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Estado" data-eu="Egoera"></small><b id="l-bom">–</b></div>
+      <div><small data-es="Tensión en la lámpara" data-eu="Lanparako tentsioa"></small><b id="l-u">–</b></div>
+      <div><small data-es="Corriente I = P / U" data-eu="Korrontea I = P / U"></small><b id="l-i">–</b></div>
+      <div><small data-es="¿Cambiar bombilla?" data-eu="Bonbilla aldatu?"></small><b id="l-seg">–</b></div>
+    </div>
+    <div class="estado" id="estado" aria-live="polite"></div>
+    <p class="nota es">Aunque el interruptor esté bien montado, para cambiar una lámpara o tocar cables hay que <b>bajar el PIA</b> del circuito en el cuadro.</p>
+    <p class="nota eu">Etengailua ondo muntatuta egon arren, lanpara bat aldatzeko edo kableak ukitzeko zirkuituaren <b>PIA jaitsi</b> behar da koadroan.</p>
+  </section>
+
+  <!-- ============ 4. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 8v32M60 80L44 44M60 80v32"/><circle class="s-f" cx="60" cy="40" r="2.5"/><circle class="s-f" cx="60" cy="80" r="2.5"/></svg>
+        <b data-es="Interruptor (multifilar)" data-eu="Etengailua (hari anitzekoa)"></b><small data-es="contacto abierto en reposo" data-eu="kontaktua irekita atsedenean"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><circle class="s-l" cx="46" cy="78" r="9"/><path class="s-l" d="M53 72L82 42l9 9"/></svg>
+        <b data-es="Interruptor (unifilar, planos)" data-eu="Etengailua (hari bakarrekoa, planoak)"></b><small data-es="una sola patilla = simple" data-eu="hanka bakarra = sinplea"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 8v26M60 86v26"/><circle class="s-l" cx="60" cy="60" r="26"/><path class="s-l" d="M41.6 41.6l36.8 36.8M78.4 41.6L41.6 78.4"/></svg>
+        <b data-es="Lámpara / punto de luz" data-eu="Lanpara / argi-puntua"></b><small data-es="círculo con una X" data-eu="X bat duen zirkulua"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M10 60h100M44 70l10-20M56 70l10-20M68 70l10-20"/></svg>
+        <b data-es="Número de conductores" data-eu="Eroale kopurua"></b><small data-es="3 rayas = 3 cables" data-eu="3 marra = 3 kable"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><circle class="s-l" cx="60" cy="60" r="14"/><path class="s-l" d="M10 60h36M74 60h36M60 46V10"/></svg>
+        <b data-es="Caja de registro (empalmes)" data-eu="Erregistro-kutxa (lotuneak)"></b><small data-es="donde se unen los cables" data-eu="kableak lotzen diren lekua"></small></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Siguiente paso" data-eu="Hurrengo urratsa"></h2>
+      <p class="es">Si quieres encender la misma lámpara <b>desde dos sitios</b> (un pasillo, una escalera), el interruptor se cambia por dos <b>conmutadores</b>: mira la <a href="conmutada-2-bombillas.html">conmutada</a>. Para tres o más sitios, el <a href="cruzamiento-2-bombillas.html">cruzamiento</a>.</p>
+      <p class="eu">Lanpara bera <b>bi lekutatik</b> piztu nahi baduzu (korridore bat, eskailera bat), etengailuaren ordez bi <b>komutadore</b> jartzen dira: ikusi <a href="conmutada-2-bombillas.html">komutatua</a>. Hiru leku edo gehiagorako, <a href="cruzamiento-2-bombillas.html">gurutzaketa</a>.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var cerrado = false;     // true = interruptor cerrado (luz encendida)
+  var enNeutro = false;    // false = montaje bien (corta la fase) · true = montaje mal (corta el neutro)
+
+  // Devuelve el SVG de un tramo de cable.
+  // estado: "cor" = pasa corriente · "ten" = hay tensión pero no corriente · "" = sin tensión
+  function tramo(d, estado){
+    return '<path class="hilo ' + estado + '" d="' + d + '"/>';
+  }
+  var P = 60, U = 230;     // potencia de la bombilla (W) y tensión de la red (V)
+
+  // Dibuja el interruptor: eje en (x, y) y borne fijo en (x + 60, y)
+  function interruptor(x, y){
+    var ang = cerrado ? 0 : -28;                 // grados: 0 = cerrado, -28 = abierto
+    var r = ang * Math.PI / 180;
+    var x2 = x + 60 * Math.cos(r), y2 = y + 60 * Math.sin(r);
+    var s = '<g class="sw" id="sw" role="button" tabindex="0">';
+    s += '<rect class="toque" x="' + (x - 14) + '" y="' + (y - 44) + '" width="88" height="62" rx="10"/>';
+    s += '<line class="palanca' + (cerrado ? " cor" : "") + '" x1="' + x + '" y1="' + y + '" x2="' + x2.toFixed(1) + '" y2="' + y2.toFixed(1) + '"/>';
+    s += '<circle cx="' + x + '" cy="' + y + '" r="6" fill="var(--marino)"/>';
+    s += '<circle cx="' + (x + 60) + '" cy="' + y + '" r="6" fill="#fff" stroke="var(--marino)" stroke-width="2"/>';
+    s += '<text class="txt-s" x="' + (x + 30) + '" y="' + (y + 22) + '" text-anchor="middle">' + T("interruptor", "etengailua") + '</text>';
+    return s + '</g>';
+  }
+
+  function dibujar(){
+    var g = "";
+    if (!enNeutro) {
+      // BIEN: fase → interruptor (arriba) → bombilla → neutro
+      g += tramo("M20 40H110", cerrado ? "cor" : "ten");          // fase: siempre con tensión
+      g += tramo("M170 40H290V104", cerrado ? "cor" : "");         // retorno: sin tensión si está abierto
+      g += tramo("M290 156V220H20", cerrado ? "cor" : "");         // neutro
+      g += interruptor(110, 40);
+    } else {
+      // MAL: fase directa a la bombilla → interruptor en el neutro (abajo)
+      g += tramo("M20 40H290V104", cerrado ? "cor" : "ten");       // fase llega siempre a la bombilla
+      g += tramo("M290 156V220H170", cerrado ? "cor" : "ten");     // ¡con tensión a través del filamento!
+      g += tramo("M110 220H20", cerrado ? "cor" : "");
+      g += interruptor(110, 220);
+    }
+    $("cables").innerHTML = g;
+    $("bombilla").classList.toggle("luce", cerrado);
+
+    // Lecturas: con la luz encendida la lámpara recibe 230 V e I = P / U
+    $("l-bom").textContent = cerrado ? T("Encendida", "Piztuta") : T("Apagada", "Itzalita");
+    $("l-u").textContent = cerrado ? U + " V" : "0 V";
+    $("l-i").textContent = cerrado ? (P / U).toFixed(2).replace(".", ",") + " A" : "0 A";
+    var seguro = !cerrado && !enNeutro;
+    $("l-seg").textContent = seguro ? T("Sí", "Bai") : T("No", "Ez");
+    $("l-seg").style.color = seguro ? "var(--verde)" : "var(--rojo)";
+
+    // Mensaje explicativo
+    var e = $("estado");
+    if (cerrado && !enNeutro) { e.className = "estado ok"; e.textContent = T("Circuito cerrado. Recorrido: fase (L) → interruptor → retorno → bombilla → neutro (N).", "Zirkuitu itxia. Ibilbidea: fasea (L) → etengailua → itzulera → bonbilla → neutroa (N)."); }
+    else if (!cerrado && !enNeutro) { e.className = "estado"; e.textContent = T("Interruptor abierto: la fase se corta en el interruptor. La bombilla queda sin tensión.", "Etengailua irekita: fasea etengailuan mozten da. Bonbilla tentsiorik gabe geratzen da."); }
+    else if (cerrado && enNeutro) { e.className = "estado mal"; e.textContent = T("La bombilla luce, pero el interruptor está en el neutro: el montaje es INCORRECTO.", "Bonbillak argi egiten du, baina etengailua neutroan dago: muntaketa OKERRA da."); }
+    else { e.className = "estado mal"; e.textContent = T("¡Peligro! La bombilla está apagada, pero la fase sigue llegando al portalámparas (en rojo). Si tocas el casquillo al cambiarla, te puedes electrocutar.", "Arriskua! Bonbilla itzalita dago, baina fasea duiraino iristen da oraindik (gorriz). Aldatzean kasketa ukitzen baduzu, elektrokutatu zaitezke."); }
+  }
+
+  // ---- Puntos azules de la corriente (como en «Magnitudes eléctricas») ----
+  // Recorrido: fase → (interruptor) → bombilla → neutro. Es el mismo en los dos montajes.
+  var CAMINO = [[20, 40], [290, 40], [290, 220], [20, 220]];
+  function punto(f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < CAMINO.length - 1; i++) {
+      var d = Math.abs(CAMINO[i + 1][0] - CAMINO[i][0]) + Math.abs(CAMINO[i + 1][1] - CAMINO[i][1]);
+      L.push(d); tot += d;
+    }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) {
+      if (x <= L[i]) { var r = x / L[i]; return [CAMINO[i][0] + (CAMINO[i + 1][0] - CAMINO[i][0]) * r, CAMINO[i][1] + (CAMINO[i + 1][1] - CAMINO[i][1]) * r]; }
+      x -= L[i];
+    }
+    return CAMINO[0];
+  }
+  function bucle(){
+    var s = "";
+    if (cerrado) {
+      var v = P / U * 1.5;                     // más corriente → puntos más rápidos
+      for (var k = 0; k < 12; k++) {
+        var p = punto((performance.now() / 1000 * v + k / 12) % 1);
+        s += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.5" fill="#2b6cb0"/>';
+      }
+    }
+    $("puntos").innerHTML = s;
+    requestAnimationFrame(bucle);
+  }
+
+  // Marca el botón pulsado dentro de un grupo de chips
+  function chips(id, fn){
+    $(id).addEventListener("click", function(ev){
+      var b = ev.target.closest("button"); if (!b) return;
+      [].forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      fn(b.getAttribute("data-v")); dibujar();
+    });
+  }
+  function marcarInt(){
+    [].forEach.call($("c-int").querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", (x.getAttribute("data-v") === "1") === cerrado ? "true" : "false"); });
+  }
+  chips("c-int", function(v){ cerrado = v === "1"; });
+  chips("c-modo", function(v){ enNeutro = v === "neutro"; });
+  chips("c-pot", function(v){ P = +v; });
+
+  // Clic o teclado sobre el interruptor del dibujo (se redibuja, por eso se escucha en el SVG)
+  function accionar(){ cerrado = !cerrado; marcarInt(); dibujar(); }
+  $("svg-sim").addEventListener("click", function(ev){ if (ev.target.closest("#sw")) accionar(); });
+  $("svg-sim").addEventListener("keydown", function(ev){
+    if (ev.target.closest("#sw") && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); accionar(); var s = $("sw"); if (s) s.focus(); }
+  });
+  alCambiarIdioma(dibujar);
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

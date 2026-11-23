@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monofásica vs trifásica</title>
+<meta name="description" content="Sistema monofásico y trifásico: tensiones, colores de los conductores, ondas desfasadas 120°, potencia, usos, ventajas y osciloscopio interactivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.txt-s{font-size:9.5px;fill:#5d6382}
+.rejilla-osc{stroke:#dde1e7;stroke-width:1}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Monofásica vs trifásica" data-eu="Monofasikoa vs trifasikoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Monofásica</h3><h3 class="eu">Monofasikoa</h3>
+        <p class="es">Dos conductores: una <b>fase (L)</b> y el <b>neutro (N)</b>. Entre ellos hay <b>230 V</b>. Es la de los enchufes de casa.</p>
+        <p class="eu">Bi eroale: <b>fase</b> bat <b>(L)</b> eta <b>neutroa (N)</b>. Haien artean <b>230 V</b> daude. Etxeko entxufeetakoa da.</p></div>
+      <div class="card"><h3 class="es">Trifásica</h3><h3 class="eu">Trifasikoa</h3>
+        <p class="es">Tres fases <b>L1, L2, L3</b> y normalmente el <b>neutro N</b>. Entre dos fases hay <b>400 V</b> (tensión de línea). Entre una fase y el neutro, <b>230 V</b> (tensión de fase).</p>
+        <p class="eu">Hiru fase <b>L1, L2, L3</b> eta normalean <b>N neutroa</b>. Bi faseren artean <b>400 V</b> daude (linea-tentsioa). Fase baten eta neutroaren artean, <b>230 V</b> (fase-tentsioa).</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Relación entre las dos tensiones" data-eu="Bi tentsioen arteko erlazioa"></h2>
+      <div class="formula">U<sub>L</sub> = √3 · U<sub>F</sub></div>
+      <p class="es">400 V = 1,732 · 230 V. No es 2 · 230 = 460 V porque las fases no suben y bajan a la vez (mira la pestaña «Ondas»).</p>
+      <p class="eu">400 V = 1,732 · 230 V. Ez da 2 · 230 = 460 V, faseak ez direlako aldi berean igotzen eta jaisten («Uhinak» fitxa begiratu).</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg viewBox="0 0 300 150" role="img" aria-label="Monofásica">
+          <path d="M20 50H280" stroke="#8b5a2b" stroke-width="4"/><path d="M20 100H280" stroke="#3b82d6" stroke-width="4"/>
+          <text class="txt" x="10" y="54" text-anchor="middle">L</text><text class="txt" x="10" y="104" text-anchor="middle">N</text>
+          <path d="M150 50v50" stroke="#242d5f" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="158" y="64" width="54" height="22" rx="6" fill="#fff0dc"/><text class="txt" x="185" y="79" text-anchor="middle">230 V</text>
+          <text class="txt-s" x="150" y="134" text-anchor="middle" data-es="2 conductores (+ tierra PE)" data-eu="2 eroale (+ PE lurra)"></text>
+        </svg>
+        <figcaption data-es="Monofásica: 230 V entre L y N" data-eu="Monofasikoa: 230 V L eta N artean"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg viewBox="0 0 300 190" role="img" aria-label="Trifásica">
+          <path d="M20 30H280" stroke="#8b5a2b" stroke-width="4"/><path d="M20 70H280" stroke="#222" stroke-width="4"/><path d="M20 110H280" stroke="#7a828f" stroke-width="4"/><path d="M20 150H280" stroke="#3b82d6" stroke-width="4"/>
+          <text class="txt" x="10" y="34" text-anchor="middle">L1</text><text class="txt" x="10" y="74" text-anchor="middle">L2</text><text class="txt" x="10" y="114" text-anchor="middle">L3</text><text class="txt" x="10" y="154" text-anchor="middle">N</text>
+          <path d="M70 30v40M120 70v40M170 30v80" stroke="#242d5f" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="44" y="40" width="52" height="20" rx="6" fill="#fff0dc"/><text class="txt" x="70" y="54" text-anchor="middle">400 V</text>
+          <rect x="94" y="80" width="52" height="20" rx="6" fill="#fff0dc"/><text class="txt" x="120" y="94" text-anchor="middle">400 V</text>
+          <rect x="144" y="60" width="52" height="20" rx="6" fill="#fff0dc"/><text class="txt" x="170" y="74" text-anchor="middle">400 V</text>
+          <path d="M240 110v40" stroke="#242d5f" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <rect x="214" y="120" width="52" height="20" rx="6" fill="#e3eefa"/><text class="txt" x="240" y="134" text-anchor="middle">230 V</text>
+          <text class="txt-s" x="150" y="180" text-anchor="middle" data-es="3 fases + neutro (+ tierra PE)" data-eu="3 fase + neutroa (+ PE lurra)"></text>
+        </svg>
+        <figcaption data-es="Trifásica: 400 V entre fases, 230 V entre fase y neutro" data-eu="Trifasikoa: 400 V faseen artean, 230 V fasearen eta neutroaren artean"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ 2. EROALEAK ============ -->
+  <section class="panel" data-tab="koloreak" data-es="Colores" data-eu="Koloreak" hidden>
+    <div class="card">
+      <p class="es">Cada conductor tiene su <b>color normalizado</b>. Así, al abrir un cuadro, se sabe qué es cada cable sin medir (aunque <b>siempre hay que comprobar la ausencia de tensión</b> antes de tocar).</p>
+      <p class="eu">Eroale bakoitzak bere <b>kolore normalizatua</b> du. Horrela, koadro bat irekitzean, kable bakoitza zer den badakigu neurtu gabe (hala ere, <b>beti egiaztatu behar da tentsiorik eza</b> ukitu aurretik).</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-col" viewBox="0 0 300 200" role="img" aria-label="Colores de los conductores">
+          <g class="resaltable" data-parte="l1"><path d="M20 30H250" stroke="#8b5a2b" stroke-width="10" stroke-linecap="round"/><text class="txt" x="270" y="34">L1</text></g>
+          <g class="resaltable" data-parte="l2"><path d="M20 65H250" stroke="#222" stroke-width="10" stroke-linecap="round"/><text class="txt" x="270" y="69">L2</text></g>
+          <g class="resaltable" data-parte="l3"><path d="M20 100H250" stroke="#7a828f" stroke-width="10" stroke-linecap="round"/><text class="txt" x="270" y="104">L3</text></g>
+          <g class="resaltable" data-parte="n"><path d="M20 135H250" stroke="#3b82d6" stroke-width="10" stroke-linecap="round"/><text class="txt" x="270" y="139">N</text></g>
+          <g class="resaltable" data-parte="pe"><path d="M20 170H250" stroke="#2e9b4e" stroke-width="10" stroke-linecap="round"/><path d="M30 170h20M70 170h20M110 170h20M150 170h20M190 170h20M230 170h16" stroke="#f2c600" stroke-width="10"/><text class="txt" x="270" y="174">PE</text></g>
+        </svg>
+        <figcaption data-es="Toca un conductor" data-eu="Ukitu eroale bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-col">
+        <li><button data-parte="l1"><span class="n">1</span><span><b class="es">L1 · marrón</b><b class="eu">L1 · marroia</b><small class="es">Primera fase. En monofásica la fase suele ser marrón.</small><small class="eu">Lehen fasea. Monofasikoan fasea marroia izan ohi da.</small></span></button></li>
+        <li><button data-parte="l2"><span class="n">2</span><span><b class="es">L2 · negro</b><b class="eu">L2 · beltza</b><small class="es">Segunda fase.</small><small class="eu">Bigarren fasea.</small></span></button></li>
+        <li><button data-parte="l3"><span class="n">3</span><span><b class="es">L3 · gris</b><b class="eu">L3 · grisa</b><small class="es">Tercera fase.</small><small class="eu">Hirugarren fasea.</small></span></button></li>
+        <li><button data-parte="n"><span class="n">4</span><span><b class="es">N · azul</b><b class="eu">N · urdina</b><small class="es">Neutro. El azul es solo para el neutro.</small><small class="eu">Neutroa. Urdina neutrorako bakarrik da.</small></span></button></li>
+        <li><button data-parte="pe"><span class="n">5</span><span><b class="es">PE · verde-amarillo</b><b class="eu">PE · berde-horia</b><small class="es">Tierra de protección. No lleva corriente en funcionamiento normal. Nunca se usa para otra cosa.</small><small class="eu">Babeserako lurra. Funtzionamendu normalean ez darama korronterik. Ez da inoiz beste ezertarako erabiltzen.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. UHINAK ============ -->
+  <section class="panel" data-tab="uhinak" data-es="Ondas" data-eu="Uhinak" hidden>
+    <div class="card">
+      <p class="es">La tensión alterna sube y baja <b>50 veces por segundo</b> (50 Hz): un ciclo dura <b>20 ms</b>. Con 230 V eficaces, el pico llega a <b>325 V</b> (230 · √2).</p>
+      <p class="eu">Tentsio alternoa <b>segundoko 50 aldiz</b> igotzen eta jaisten da (50 Hz): ziklo batek <b>20 ms</b> irauten du. 230 V eraginkorrekin, gailurra <b>325 V</b>-ra iristen da (230 · √2).</p>
+      <p class="es">En trifásica hay <b>tres ondas iguales desfasadas 120°</b>: cada fase llega a su pico un tercio de ciclo (6,7 ms) después que la anterior.</p>
+      <p class="eu">Trifasikoan <b>120°-ko desfasea duten hiru uhin berdin</b> daude: fase bakoitza bere gailurrera aurrekoa baino ziklo-heren bat (6,7 ms) geroago iristen da.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-ondas" viewBox="0 0 340 200" role="img" aria-label="Tres ondas desfasadas 120 grados"></svg>
+      <figcaption data-es="L1 marrón, L2 negro, L3 gris. Un ciclo = 20 ms = 360°" data-eu="L1 marroia, L2 beltza, L3 grisa. Ziklo bat = 20 ms = 360°"></figcaption>
+    </figure>
+    <div class="recuerda">
+      <h2 data-es="Fíjate" data-eu="Erreparatu"></h2>
+      <p class="es">En cualquier instante, <b>la suma de las tres tensiones es 0</b>. Por eso, si las tres fases llevan la misma carga, <b>por el neutro no circula corriente</b>.</p>
+      <p class="eu">Edozein unetan, <b>hiru tentsioen batura 0 da</b>. Horregatik, hiru faseek karga bera badaramate, <b>neutrotik ez da korronterik igarotzen</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. POTENTZIA ============ -->
+  <section class="panel" data-tab="potentzia" data-es="Potencia y usos" data-eu="Potentzia eta erabilerak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Potencia monofásica</h3><h3 class="eu">Potentzia monofasikoa</h3>
+        <div class="formula">P = U · I · cos φ</div>
+        <p class="es">U = 230 V (fase-neutro).</p><p class="eu">U = 230 V (fase-neutroa).</p></div>
+      <div class="card"><h3 class="es">Potencia trifásica</h3><h3 class="eu">Potentzia trifasikoa</h3>
+        <div class="formula">P = √3 · U · I · cos φ</div>
+        <p class="es">U = 400 V (entre fases), I = corriente de cada línea.</p><p class="eu">U = 400 V (faseen artean), I = linea bakoitzeko korrontea.</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Ejemplo: horno de 9 kW (cos φ = 1)" data-eu="Adibidea: 9 kW-ko labea (cos φ = 1)"></h2>
+      <p class="es"><b>Monofásica:</b> I = 9000 / 230 ≈ <b>39 A</b> → cable de unos 10 mm².</p>
+      <p class="eu"><b>Monofasikoa:</b> I = 9000 / 230 ≈ <b>39 A</b> → 10 mm² inguruko kablea.</p>
+      <p class="es"><b>Trifásica:</b> I = 9000 / (1,732 · 400) ≈ <b>13 A</b> por fase → cable de 2,5 mm².</p>
+      <p class="eu"><b>Trifasikoa:</b> I = 9000 / (1,732 · 400) ≈ <b>13 A</b> fase bakoitzeko → 2,5 mm²-ko kablea.</p>
+      <p class="nota es">Secciones orientativas: dependen del tipo de instalación y de la longitud.</p>
+      <p class="nota eu">Sekzio orientagarriak: instalazio motaren eta luzeraren araberakoak dira.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Dónde se usa la monofásica</h3><h3 class="eu">Non erabiltzen da monofasikoa</h3>
+        <p class="es">Viviendas, oficinas, alumbrado, enchufes, electrodomésticos y máquinas pequeñas.</p>
+        <p class="eu">Etxebizitzak, bulegoak, argiztapena, entxufeak, etxetresna elektrikoak eta makina txikiak.</p></div>
+      <div class="card"><h3 class="es">Dónde se usa la trifásica</h3><h3 class="eu">Non erabiltzen da trifasikoa</h3>
+        <p class="es">Talleres, industria, motores, compresores, bombas, ascensores, hornos grandes, cargadores rápidos.</p>
+        <p class="eu">Tailerrak, industria, motorrak, konpresoreak, ponpak, igogailuak, labe handiak, karga azkarreko kargagailuak.</p></div>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Ventajas de la trifásica" data-eu="Trifasikoaren abantailak"></h2>
+      <ul>
+        <li class="es">Para la misma potencia, <b>menos corriente</b> por cable → <b>menos sección</b> y menos cobre.</li>
+        <li class="eu">Potentzia berarako, kable bakoitzeko <b>korronte gutxiago</b> → <b>sekzio txikiagoa</b> eta kobre gutxiago.</li>
+        <li class="es">Las tres fases juntas crean un <b>campo magnético giratorio</b>: los motores trifásicos son más sencillos y arrancan solos.</li>
+        <li class="eu">Hiru faseek batera <b>eremu magnetiko birakaria</b> sortzen dute: motor trifasikoak sinpleagoak dira eta bakarrik abiarazten dira.</li>
+        <li class="es">Da dos tensiones: <b>400 V</b> para motores y <b>230 V</b> para alumbrado y enchufes.</li>
+        <li class="eu">Bi tentsio ematen ditu: <b>400 V</b> motorretarako eta <b>230 V</b> argiztapenerako eta entxufeetarako.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 5. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige <b>monofásica o trifásica</b> y mira el osciloscopio: el cursor recorre las ondas (el tiempo va muy despacio) y abajo ves los valores en cada instante. Mueve la <b>potencia</b> de la carga y compara la corriente que hace falta en cada sistema.</p>
+      <p class="eu">Aukeratu <b>monofasikoa edo trifasikoa</b> eta begiratu osziloskopioa: kurtsoreak uhinak zeharkatzen ditu (denbora oso poliki doa) eta behean une bakoitzeko balioak ikusten dituzu. Mugitu kargaren <b>potentzia</b> eta konparatu sistema bakoitzean behar den korrontea.</p>
+    </div>
+    <figure class="fig"><svg id="osc" viewBox="0 0 340 300" role="img" aria-label="Osciloscopio"></svg></figure>
+    <div class="mandos">
+      <div class="chips" id="sistema">
+        <button type="button" data-s="1" aria-pressed="false" data-es="Monofásica" data-eu="Monofasikoa"></button>
+        <button type="button" data-s="3" aria-pressed="true" data-es="Trifásica" data-eu="Trifasikoa"></button>
+      </div>
+      <div class="deslizador"><label><span data-es="Potencia de la carga (cos φ = 1)" data-eu="Kargaren potentzia (cos φ = 1)"></span><output id="p-t"></output></label><input id="pot" type="range" min="0" max="12" step="0.5" value="6"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small id="lab1">u L1</small><b id="u1"></b></div>
+      <div><small>u L2</small><b id="u2"></b></div>
+      <div><small>u L3</small><b id="u3"></b></div>
+      <div><small data-es="suma" data-eu="batura"></small><b id="us"></b></div>
+      <div><small data-es="I por fase" data-eu="I fase bakoitzeko"></small><b id="ii"></b></div>
+      <div><small data-es="I neutro" data-eu="I neutroa"></small><b id="in"></b></div>
+    </div>
+    <div class="estado" id="estado"></div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function num(v, d){ return v.toFixed(d).replace(".", ","); }
+
+  var PICO = 325;                                   // valor de pico de 230 V eficaces
+  var COLORES = ["#8b5a2b", "#222222", "#7a828f"];  // L1 marrón, L2 negro, L3 gris
+  // pantalla: de x0 a x0+ancho = 40 ms; centro vertical yc; amplitud en píxeles
+  var x0 = 34, ancho = 296, yc = 90, amp = 66, VENTANA = 40;
+
+  // tensión instantánea de la fase k (0, 1, 2) en el tiempo t (ms)
+  function u(k, t){ return PICO * Math.sin(2 * Math.PI * 50 * t / 1000 - k * 2 * Math.PI / 3); }
+
+  // camino SVG de la onda de la fase k en la pantalla
+  function onda(k){
+    var d = "";
+    for (var i = 0; i <= 120; i++) {
+      var t = VENTANA * i / 120, x = x0 + ancho * i / 120, y = yc - amp * u(k, t) / PICO;
+      d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+    }
+    return '<path d="' + d + '" stroke="' + COLORES[k] + '" stroke-width="2.4" fill="none"/>';
+  }
+
+  // cuadrícula y ejes de la pantalla
+  function pantalla(alto){
+    var s = '<rect x="' + x0 + '" y="' + (yc - alto) + '" width="' + ancho + '" height="' + (2 * alto) + '" fill="#fafbfc" stroke="#9aa3b2"/>';
+    for (var ms = 5; ms < VENTANA; ms += 5) { var x = x0 + ancho * ms / VENTANA; s += '<path class="rejilla-osc" d="M' + x + ' ' + (yc - alto) + 'V' + (yc + alto) + '"/>'; }
+    s += '<path d="M' + x0 + ' ' + yc + 'h' + ancho + '" stroke="#9aa3b2"/>';
+    s += '<text class="txt-s" x="' + (x0 - 4) + '" y="' + (yc - amp + 3) + '" text-anchor="end">325</text>';
+    s += '<text class="txt-s" x="' + (x0 - 4) + '" y="' + (yc + 3) + '" text-anchor="end">0</text>';
+    s += '<text class="txt-s" x="' + (x0 - 4) + '" y="' + (yc + amp + 3) + '" text-anchor="end">−325</text>';
+    s += '<text class="txt-s" x="' + (x0 + ancho) + '" y="' + (yc + alto + 12) + '" text-anchor="end">40 ms</text>';
+    s += '<text class="txt-s" x="' + (x0 + ancho / 2) + '" y="' + (yc + alto + 12) + '" text-anchor="middle">20 ms</text>';
+    return s;
+  }
+
+  // ---------- Pestaña «Ondas»: dibujo fijo ----------
+  function ondasFijas(){
+    var s = pantalla(80);
+    for (var k = 0; k < 3; k++) s += onda(k);
+    // flecha de 120° entre los picos de L1 (5 ms) y L2 (11,7 ms)
+    var xa = x0 + ancho * 5 / VENTANA, xb = x0 + ancho * (5 + 20 / 3) / VENTANA;
+    s += '<path d="M' + xa + ' 14H' + xb + '" stroke="#b45f00" stroke-width="1.6"/><path d="M' + xa + ' 10v8M' + xb + ' 10v8" stroke="#b45f00" stroke-width="1.6"/>';
+    s += '<text class="txt" x="' + ((xa + xb) / 2) + '" y="11" text-anchor="middle" style="fill:#b45f00">120°</text>';
+    s += '<text class="txt" x="250" y="194" style="fill:#8b5a2b">L1</text><text class="txt" x="275" y="194" style="fill:#222">L2</text><text class="txt" x="300" y="194" style="fill:#7a828f">L3</text>';
+    $("svg-ondas").innerHTML = s;
+  }
+
+  // ---------- Pruébalo: osciloscopio ----------
+  var fases = 3;
+  var tSim = 0;                // tiempo simulado (ms)
+  var ult = performance.now();
+
+  // puntos azules que van y vienen por un conductor horizontal (corriente alterna)
+  // la posición sigue a -cos, así la velocidad va en fase con la tensión (cos φ = 1)
+  function puntosLinea(y, xIni, xFin, desfase, a){
+    var g = "", lon = xFin - xIni, d = -a * Math.cos(2 * Math.PI * 50 * tSim / 1000 - desfase);
+    for (var p = 0; p < lon; p += 16) {
+      var x = xIni + ((p + d) % lon + lon) % lon;
+      g += '<circle cx="' + x.toFixed(1) + '" cy="' + y + '" r="3" fill="#2b6cb0"/>';
+    }
+    return g;
+  }
+
+  function pintar(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.5); ult = ahora;
+    tSim = (tSim + dt * 8) % VENTANA;          // 8 ms simulados por segundo real
+    var P = +$("pot").value * 1000;            // W
+    var Imono = P / 230, Itri = P / (Math.sqrt(3) * 400);
+    var I = fases === 1 ? Imono : Itri;
+
+    // osciloscopio
+    var s = pantalla(76);
+    for (var k = 0; k < fases; k++) s += onda(k);
+    var xc = x0 + ancho * tSim / VENTANA;
+    s += '<path d="M' + xc + ' ' + (yc - 76) + 'V' + (yc + 76) + '" stroke="#f39200" stroke-width="2"/>';
+    for (k = 0; k < fases; k++) s += '<circle cx="' + xc.toFixed(1) + '" cy="' + (yc - amp * u(k, tSim) / PICO).toFixed(1) + '" r="5" fill="' + COLORES[k] + '" stroke="#fff" stroke-width="1.5"/>';
+
+    // conductores hasta la carga
+    var ys = fases === 1 ? [212, 262] : [200, 222, 244, 266];
+    var nombres = fases === 1 ? ["L", "N"] : ["L1", "L2", "L3", "N"];
+    var colCable = fases === 1 ? ["#8b5a2b", "#3b82d6"] : ["#8b5a2b", "#222", "#7a828f", "#3b82d6"];
+    ys.forEach(function(y, i){
+      s += '<path d="M34 ' + y + 'H250" stroke="' + colCable[i] + '" stroke-width="4"/>';
+      s += '<text class="txt" x="10" y="' + (y + 4) + '">' + nombres[i] + '</text>';
+    });
+    s += '<rect x="250" y="' + (ys[0] - 10) + '" width="76" height="' + (ys[ys.length - 1] - ys[0] + 20) + '" rx="8" fill="#fff0dc" stroke="#242d5f" stroke-width="2"/>';
+    s += '<text class="txt" x="288" y="' + ((ys[0] + ys[ys.length - 1]) / 2) + '" text-anchor="middle">' + T("Carga", "Karga") + '</text>';
+    s += '<text class="txt" x="288" y="' + ((ys[0] + ys[ys.length - 1]) / 2 + 14) + '" text-anchor="middle">' + num(P / 1000, 1) + ' kW</text>';
+    // puntos de corriente: amplitud según la corriente (el neutro en trifásica equilibrada no lleva)
+    var a = Math.min(14, 0.35 * I);
+    if (P > 0) {
+      if (fases === 1) { s += puntosLinea(212, 34, 250, 0, a) + puntosLinea(262, 34, 250, Math.PI, a); }
+      else for (k = 0; k < 3; k++) s += puntosLinea(ys[k], 34, 250, k * 2 * Math.PI / 3, a);
+    }
+    $("osc").innerHTML = s;
+
+    // lecturas instantáneas
+    $("lab1").textContent = fases === 1 ? "u L-N" : "u L1";
+    $("u1").textContent = Math.round(u(0, tSim)) + " V";
+    $("u2").textContent = fases === 3 ? Math.round(u(1, tSim)) + " V" : "–";
+    $("u3").textContent = fases === 3 ? Math.round(u(2, tSim)) + " V" : "–";
+    $("us").textContent = fases === 3 ? Math.round(u(0, tSim) + u(1, tSim) + u(2, tSim)) + " V" : "–";
+    $("ii").textContent = num(I, 1) + " A";
+    $("in").textContent = (fases === 1 ? num(Imono, 1) : "0,0") + " A";
+    $("p-t").textContent = num(P / 1000, 1) + " kW";
+
+    var e = $("estado");
+    e.className = "estado";
+    e.textContent = fases === 1
+      ? T("Monofásica 230 V: para " + num(P / 1000, 1) + " kW hacen falta " + num(Imono, 1) + " A. En trifásica serían solo " + num(Itri, 1) + " A por fase.",
+          "Monofasikoa 230 V: " + num(P / 1000, 1) + " kW-rako " + num(Imono, 1) + " A behar dira. Trifasikoan " + num(Itri, 1) + " A baino ez lirateke fase bakoitzeko.")
+      : T("Trifásica 400 V: " + num(Itri, 1) + " A por fase (en monofásica serían " + num(Imono, 1) + " A). La carga es igual en las tres fases: por el neutro no pasa corriente.",
+          "Trifasikoa 400 V: " + num(Itri, 1) + " A fase bakoitzeko (monofasikoan " + num(Imono, 1) + " A lirateke). Karga berdina da hiru faseetan: neutrotik ez da korronterik igarotzen.");
+  }
+  function bucle(t){ pintar(t); requestAnimationFrame(bucle); }
+  $("sistema").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    fases = +b.getAttribute("data-s");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+  });
+
+  // al cambiar de idioma se repintan los textos hechos con JS
+  alCambiarIdioma(ondasFijas);
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

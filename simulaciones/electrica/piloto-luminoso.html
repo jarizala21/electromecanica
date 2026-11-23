@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Piloto luminoso</title>
+<meta name="description" content="Qué es, partes, colores normalizados, características, simulador de pilotos de marcha, paro y disparo térmico, y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.hilo{stroke:#9aa3b2;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hilo.con{stroke:var(--naranja)}
+.luz{transition:fill .15s ease}
+.halo{transition:opacity .15s ease}
+#motor-aspas{transform-origin:150px 222px}
+.gira #motor-aspas{animation:giro .5s linear infinite}
+@keyframes giro{to{transform:rotate(360deg)}}
+.quiz{display:grid;gap:10px}
+.quiz .fila{display:grid;gap:6px}
+.quiz .sit{font-weight:600;color:var(--marino-txt)}
+.quiz .chips button{min-width:44px}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de control" data-eu="Kontrol-elementuak"></p>
+      <h1 data-es="Piloto luminoso" data-eu="Seinale-argia (pilotua)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">piloto luminoso</span> (o lámpara de señalización) es una pequeña luz que se monta en la puerta del cuadro. Sirve para <b>avisar al operario</b> de lo que está pasando dentro: si el motor está en marcha, si está parado, si ha saltado una protección…</p>
+      <p class="eu"><span class="clave">Seinale-argia</span> (pilotua) koadroaren atean muntatzen den argi txiki bat da. Barruan zer gertatzen den <b>operarioari adierazteko</b> balio du: motorra martxan dagoen, geldirik dagoen, babes bat jauzi den…</p>
+      <p class="es">El piloto <b>no manda nada</b>: solo informa. Se enciende cuando le llega tensión por un contacto (de un contactor, de un relé térmico, etc.).</p>
+      <p class="eu">Pilotuak <b>ez du ezer agintzen</b>: informatu bakarrik egiten du. Kontaktu baten bidez (kontaktore batena, errele termiko batena, etab.) tentsioa iristen zaionean pizten da.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-piloto" viewBox="0 0 320 200" role="img" aria-label="Piloto luminoso">
+          <!-- chapa de la puerta del cuadro -->
+          <rect x="120" y="14" width="8" height="172" fill="#b8bec8"/>
+          <text class="txt-s" x="124" y="198" text-anchor="middle" data-es="puerta del cuadro" data-eu="koadroaren atea"></text>
+          <g class="resaltable" data-parte="agujero">
+            <path d="M116 78h16M116 122h16" stroke="var(--naranja-osc)" stroke-width="2"/>
+            <path d="M136 30v14M136 156v14" stroke="var(--naranja-osc)" stroke-width="1.5"/>
+            <text class="txt" x="136" y="26" text-anchor="middle" style="fill:var(--naranja-osc)">Ø 22 mm</text>
+          </g>
+          <g class="resaltable" data-parte="cabeza">
+            <rect x="104" y="56" width="16" height="88" rx="3" fill="#59606c"/>
+            <path d="M104 64H96Q66 64 66 100Q66 136 96 136H104Z" fill="#3fbf6a" stroke="#1f8a4c" stroke-width="1.5"/>
+            <path d="M82 76Q74 88 76 104" stroke="#d8f7e2" stroke-width="4" fill="none" stroke-linecap="round"/>
+          </g>
+          <g class="resaltable" data-parte="led">
+            <path d="M100 92h-6a8 8 0 0 0 0 16h6z" fill="#e8fff0" stroke="#1f8a4c" stroke-width="1.5"/>
+            <path d="M100 96h42M100 104h42" stroke="#8d95a3" stroke-width="2"/>
+          </g>
+          <g class="resaltable" data-parte="tuerca">
+            <rect x="128" y="64" width="14" height="72" rx="2" fill="#8d95a3"/>
+            <path d="M128 76h14M128 124h14" stroke="#6b7280" stroke-width="1.2"/>
+          </g>
+          <g class="resaltable" data-parte="cuerpo">
+            <rect x="142" y="72" width="96" height="56" rx="6" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>
+            <rect x="166" y="90" width="22" height="9" rx="2" fill="#c4a35a"/>
+            <rect x="196" y="88" width="16" height="22" rx="2" fill="#2d3340"/>
+          </g>
+          <g class="resaltable" data-parte="bornes">
+            <rect x="238" y="74" width="28" height="22" rx="3" fill="#c9ced6" stroke="#6b7280"/>
+            <rect x="238" y="104" width="28" height="22" rx="3" fill="#c9ced6" stroke="#6b7280"/>
+            <circle cx="252" cy="85" r="6" fill="#dfe3e9" stroke="#6b7280"/><path d="M247 85h10" stroke="#6b7280" stroke-width="1.6"/>
+            <circle cx="252" cy="115" r="6" fill="#dfe3e9" stroke="#6b7280"/><path d="M247 115h10" stroke="#6b7280" stroke-width="1.6"/>
+            <path d="M266 85h40M266 115h40" stroke="#2b6cb0" stroke-width="3" stroke-linecap="round"/>
+            <text class="txt" x="290" y="78" text-anchor="middle">X1</text><text class="txt" x="290" y="134" text-anchor="middle">X2</text>
+          </g>
+        </svg>
+        <figcaption data-es="Piloto montado en la puerta (vista de lado). Toca una parte" data-eu="Atean muntatutako pilotua (alboko ikuspegia). Ukitu atal bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-piloto">
+        <li><button data-parte="cabeza"><span class="n">1</span><span><b class="es">Cabeza (lente de color)</b><b class="eu">Burua (koloretako lentea)</b><small class="es">Lo que se ve desde fuera. El color de la lente dice qué significa el aviso.</small><small class="eu">Kanpotik ikusten dena. Lentearen koloreak abisuaren esanahia adierazten du.</small></span></button></li>
+        <li><button data-parte="led"><span class="n">2</span><span><b class="es">LED o lámpara</b><b class="eu">LEDa edo lanpara</b><small class="es">Da la luz. Hoy casi siempre es un LED: gasta poco y dura muchos años.</small><small class="eu">Argia ematen du. Gaur egun ia beti LED bat da: gutxi kontsumitzen du eta urte asko irauten du.</small></span></button></li>
+        <li><button data-parte="tuerca"><span class="n">3</span><span><b class="es">Tuerca o brida de fijación</b><b class="eu">Finkatzeko azkoina edo brida</b><small class="es">Aprieta el piloto contra la puerta por detrás.</small><small class="eu">Pilotua atearen kontra estutzen du atzetik.</small></span></button></li>
+        <li><button data-parte="cuerpo"><span class="n">4</span><span><b class="es">Cuerpo (portalámparas)</b><b class="eu">Gorputza (lanpara-euskarria)</b><small class="es">Lleva dentro el circuito del LED (resistencia, rectificador…).</small><small class="eu">LEDaren zirkuitua darama barruan (erresistentzia, artezgailua…).</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">5</span><span><b class="es">Bornes X1 – X2</b><b class="eu">X1 – X2 borneak</b><small class="es">Donde se conectan los dos cables de alimentación del piloto.</small><small class="eu">Pilotuaren elikadurako bi kableak konektatzen diren lekua.</small></span></button></li>
+        <li><button data-parte="agujero"><span class="n">6</span><span><b class="es">Agujero de 22 mm</b><b class="eu">22 mm-ko zuloa</b><small class="es">Medida normalizada: pilotos, pulsadores y selectores usan el mismo agujero.</small><small class="eu">Neurri normalizatua: pilotuek, pultsadoreek eta hautagailuek zulo bera erabiltzen dute.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. KOLOREAK ============ -->
+  <section class="panel" data-tab="koloreak" data-es="Colores" data-eu="Koloreak" hidden>
+    <div class="card">
+      <p class="es">El color <b>no se elige por gusto</b>: lo marca la norma de seguridad de máquinas <b>IEC 60204-1</b> (y la IEC 60073). Así cualquier operario entiende el aviso en cualquier máquina.</p>
+      <p class="eu">Kolorea <b>ez da gustuaren arabera aukeratzen</b>: makinen segurtasun-arauak ezartzen du, <b>IEC 60204-1</b>ek (eta IEC 60073k). Horrela, edozein operariok edozein makinatan ulertzen du abisua.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-colores" viewBox="0 0 320 120" role="img" aria-label="Colores">
+          <rect x="4" y="10" width="312" height="100" rx="12" fill="#e4e7ec" stroke="#8d95a3" stroke-width="1.5"/>
+          <g class="resaltable" data-parte="rojo"><circle cx="40" cy="52" r="22" fill="#59606c"/><circle cx="40" cy="52" r="17" fill="#e53935"/><text class="txt" x="40" y="96" text-anchor="middle">RD</text></g>
+          <g class="resaltable" data-parte="amarillo"><circle cx="100" cy="52" r="22" fill="#59606c"/><circle cx="100" cy="52" r="17" fill="#fdd835"/><text class="txt" x="100" y="96" text-anchor="middle">YE</text></g>
+          <g class="resaltable" data-parte="verde"><circle cx="160" cy="52" r="22" fill="#59606c"/><circle cx="160" cy="52" r="17" fill="#43c463"/><text class="txt" x="160" y="96" text-anchor="middle">GN</text></g>
+          <g class="resaltable" data-parte="azul"><circle cx="220" cy="52" r="22" fill="#59606c"/><circle cx="220" cy="52" r="17" fill="#3b82d6"/><text class="txt" x="220" y="96" text-anchor="middle">BU</text></g>
+          <g class="resaltable" data-parte="blanco"><circle cx="280" cy="52" r="22" fill="#59606c"/><circle cx="280" cy="52" r="17" fill="#ffffff"/><text class="txt" x="280" y="96" text-anchor="middle">WH</text></g>
+        </svg>
+        <figcaption data-es="Toca un color. Debajo, su código (IEC 60757)" data-eu="Ukitu kolore bat. Azpian, haren kodea (IEC 60757)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-colores">
+        <li><button data-parte="rojo"><span class="n">1</span><span><b class="es">Rojo · Emergencia</b><b class="eu">Gorria · Larrialdia</b><small class="es">Situación peligrosa: hay que actuar ya. Ej.: temperatura peligrosa, máquina parada por una protección importante.</small><small class="eu">Egoera arriskutsua: berehala jardun behar da. Adib.: tenperatura arriskutsua, babes garrantzitsu batek gelditutako makina.</small></span></button></li>
+        <li><button data-parte="amarillo"><span class="n">2</span><span><b class="es">Amarillo · Anormal</b><b class="eu">Horia · Anormala</b><small class="es">Algo no va bien: vigilar o intervenir. Ej.: sobrecarga, disparo del térmico, nivel bajo.</small><small class="eu">Zerbait ez doa ondo: zaindu edo esku hartu. Adib.: gainkarga, termikoaren jauzia, maila baxua.</small></span></button></li>
+        <li><button data-parte="verde"><span class="n">3</span><span><b class="es">Verde · Normal</b><b class="eu">Berdea · Normala</b><small class="es">Todo funciona bien. Ej.: motor en marcha, presión correcta.</small><small class="eu">Dena ondo dabil. Adib.: motorra martxan, presio zuzena.</small></span></button></li>
+        <li><button data-parte="azul"><span class="n">4</span><span><b class="es">Azul · Obligatorio</b><b class="eu">Urdina · Derrigorrezkoa</b><small class="es">El operario tiene que hacer algo. Ej.: rearmar, cambiar una herramienta.</small><small class="eu">Operarioak zerbait egin behar du. Adib.: berrarmatu, erreminta bat aldatu.</small></span></button></li>
+        <li><button data-parte="blanco"><span class="n">5</span><span><b class="es">Blanco · Neutro</b><b class="eu">Zuria · Neutroa</b><small class="es">Información general. Ej.: hay tensión en el cuadro, máquina preparada.</small><small class="eu">Informazio orokorra. Adib.: koadroak tentsioa du, makina prest dago.</small></span></button></li>
+      </ul>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Ojo con el rojo" data-eu="Kontuz gorriarekin"></h2>
+      <p class="es">En muchos cuadros antiguos verás el rojo para «paro». La norma actual reserva el <b>rojo para peligro o emergencia</b>; para «parado» se usa mejor el <b>blanco</b>. La luz <b>intermitente</b> llama más la atención.</p>
+      <p class="eu">Koadro zahar askotan gorria ikusiko duzu «geldirik» adierazteko. Gaur egungo arauak <b>gorria arriskurako edo larrialdirako</b> gordetzen du; «geldirik» adierazteko hobe da <b>zuria</b> erabiltzea. Argi <b>keinukariak</b> arreta gehiago erakartzen du.</p>
+    </div>
+    <div class="card">
+      <h2 data-es="¿Qué color pondrías?" data-eu="Zer kolore jarriko zenuke?"></h2>
+      <div class="quiz" id="quiz"></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. EZAUGARRIAK ============ -->
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Tensión de trabajo</h3><h3 class="eu">Lan-tentsioa</h3>
+        <p class="es">Las más usadas: <b>24 V</b> (AC o DC, la del circuito de mando) y <b>230 V AC</b>. También hay de 12, 48 y 110 V.</p>
+        <p class="eu">Erabilienak: <b>24 V</b> (AC edo DC, agintzeko zirkuituarena) eta <b>230 V AC</b>. 12, 48 eta 110 V-koak ere badaude.</p></div>
+      <div class="card"><h3 class="es">¡Mira la tensión antes de conectar!</h3><h3 class="eu">Begiratu tentsioa konektatu aurretik!</h3>
+        <p class="es">Un piloto de 24 V conectado a 230 V <b>se quema</b>. Uno de 230 V conectado a 24 V <b>no se enciende</b>.</p>
+        <p class="eu">24 V-ko pilotu bat 230 V-ra konektatuta <b>erre egiten da</b>. 230 V-ko bat 24 V-ra konektatuta <b>ez da pizten</b>.</p></div>
+      <div class="card"><h3 class="es">LED o incandescencia</h3><h3 class="eu">LEDa edo goritasun-lanpara</h3>
+        <p class="es">El <b>LED</b> consume muy poco (unos 20 mA) y dura decenas de miles de horas. La bombilla antigua se fundía a menudo.</p>
+        <p class="eu"><b>LEDak</b> oso gutxi kontsumitzen du (20 mA inguru) eta hamarnaka mila ordu irauten du. Bonbilla zaharra maiz fusiontzen zen.</p></div>
+      <div class="card"><h3 class="es">Montaje en 22 mm</h3><h3 class="eu">22 mm-ko muntaketa</h3>
+        <p class="es">Se hace un agujero de <b>Ø 22 mm</b> (22,3 mm) en la puerta, se mete la cabeza por delante y se aprieta la tuerca por detrás.</p>
+        <p class="eu">Atean <b>Ø 22 mm</b>-ko (22,3 mm) zulo bat egiten da, burua aurretik sartzen da eta azkoina atzetik estutzen da.</p></div>
+      <div class="card"><h3 class="es">Monobloque o modular</h3><h3 class="eu">Monoblokea edo modularra</h3>
+        <p class="es">Monobloque: todo en una pieza. Modular: <b>cabeza + bloque luminoso</b> que se encajan; se puede cambiar solo el bloque.</p>
+        <p class="eu">Monoblokea: dena pieza bakarrean. Modularra: <b>burua + argi-blokea</b> elkarri ahokatuta; blokea bakarrik alda daiteke.</p></div>
+      <div class="card"><h3 class="es">Protección IP</h3><h3 class="eu">IP babesa</h3>
+        <p class="es">Por delante suelen ser <b>IP65 o IP66</b>: no entra polvo ni agua aunque se limpie la máquina con manguera.</p>
+        <p class="eu">Aurretik <b>IP65 edo IP66</b> izan ohi dira: ez da hautsik ez urik sartzen, makina mahukaz garbitu arren.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-simbolo" viewBox="0 0 240 230" role="img" aria-label="Símbolo">
+          <g fill="none" stroke="var(--marino)" stroke-width="2.4" stroke-linecap="round">
+            <g class="resaltable" data-parte="bornes">
+              <path d="M110 20v62M110 146v62"/>
+              <text class="txt" x="120" y="32" stroke="none" font-size="13">X1</text>
+              <text class="txt" x="120" y="204" stroke="none" font-size="13">X2</text>
+            </g>
+            <g class="resaltable" data-parte="circulo">
+              <circle cx="110" cy="114" r="32"/>
+              <path d="M87.4 91.4l45.2 45.2M132.6 91.4l-45.2 45.2"/>
+            </g>
+          </g>
+          <g class="resaltable" data-parte="letra"><text class="txt" x="40" y="120" font-size="18">H1</text></g>
+          <g class="resaltable" data-parte="color"><text class="txt" x="156" y="120" font-size="16" style="fill:#1f8a4c">GN</text></g>
+        </svg>
+        <figcaption data-es="Símbolo del piloto luminoso (IEC 60617)" data-eu="Seinale-argiaren sinboloa (IEC 60617)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-simbolo">
+        <li><button data-parte="circulo"><span class="n">1</span><span><b class="es">Círculo con aspa</b><b class="eu">Zirkulua gurutzearekin</b><small class="es">Es el símbolo de una lámpara de señalización.</small><small class="eu">Seinaleztapen-lanpara baten sinboloa da.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">2</span><span><b class="es">Bornes X1 – X2</b><b class="eu">X1 – X2 borneak</b><small class="es">Los dos terminales del piloto. No tiene polaridad en alterna.</small><small class="eu">Pilotuaren bi terminalak. Korronte alternoan ez du polaritaterik.</small></span></button></li>
+        <li><button data-parte="letra"><span class="n">3</span><span><b class="es">Letra H (H1, H2…)</b><b class="eu">H letra (H1, H2…)</b><small class="es">Identifica los elementos de señalización. En la norma nueva (IEC 81346) puede aparecer como P.</small><small class="eu">Seinaleztapen-elementuak identifikatzen ditu. Arau berrian (IEC 81346) P gisa ager daiteke.</small></span></button></li>
+        <li><button data-parte="color"><span class="n">4</span><span><b class="es">Código de color</b><b class="eu">Kolore-kodea</b><small class="es">RD rojo, YE amarillo, GN verde, BU azul, WH blanco.</small><small class="eu">RD gorria, YE horia, GN berdea, BU urdina, WH zuria.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 5. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Pon el motor en <b>marcha</b> y páralo. Luego sube la <b>carga</b> por encima del 100 %: el térmico se calienta y acaba saltando. Mira qué piloto se enciende y por qué contacto le llega la corriente (puntos azules).</p>
+      <p class="eu">Jarri motorra <b>martxan</b> eta gelditu. Gero igo <b>karga</b> % 100etik gora: termikoa berotu egiten da eta azkenean jauzi egiten du. Begiratu zein pilotu pizten den eta zein kontaktutatik iristen zaion korrontea (puntu urdinak).</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-cuadro" viewBox="0 0 300 270" role="img" aria-label="Puerta del cuadro">
+          <rect x="10" y="6" width="280" height="258" rx="14" fill="#e4e7ec" stroke="#8d95a3" stroke-width="2"/>
+          <rect x="96" y="16" width="108" height="20" rx="4" fill="#fff" stroke="#8d95a3"/>
+          <text class="txt" x="150" y="30" text-anchor="middle" data-es="MOTOR M1" data-eu="M1 MOTORRA"></text>
+          <g id="pilotos"></g>
+          <text class="txt" x="60" y="128" text-anchor="middle">H1</text><text class="txt" x="150" y="128" text-anchor="middle">H2</text><text class="txt" x="240" y="128" text-anchor="middle">H3</text>
+          <text class="txt-s" x="60" y="142" text-anchor="middle" data-es="MARCHA" data-eu="MARTXAN"></text>
+          <text class="txt-s" x="150" y="142" text-anchor="middle" data-es="PARADO" data-eu="GELDIRIK"></text>
+          <text class="txt-s" x="240" y="142" text-anchor="middle" data-es="TÉRMICO" data-eu="TERMIKOA"></text>
+          <g id="motor">
+            <circle cx="150" cy="222" r="30" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+            <g id="motor-aspas"><path d="M150 198v48M126 222h48" stroke="#c4cad4" stroke-width="5" stroke-linecap="round"/></g>
+            <text class="txt" x="150" y="220" text-anchor="middle" font-size="14">M</text>
+            <text class="txt" x="150" y="234" text-anchor="middle">3~</text>
+          </g>
+        </svg>
+        <figcaption data-es="Puerta del cuadro" data-eu="Koadroaren atea"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg id="svg-esquema" viewBox="0 0 300 250" role="img" aria-label="Esquema de los pilotos"></svg>
+        <figcaption data-es="Esquema de mando de los pilotos" data-eu="Pilotuen agintzeko eskema"></figcaption>
+      </figure>
+    </div>
+    <div class="mandos">
+      <div class="chips" id="modo">
+        <button type="button" data-m="paro" aria-pressed="true" data-es="Paro" data-eu="Geldialdia"></button>
+        <button type="button" data-m="marcha" aria-pressed="false" data-es="Marcha" data-eu="Martxa"></button>
+        <button type="button" data-m="rearme" aria-pressed="false" data-es="Rearmar térmico" data-eu="Termikoa berrarmatu"></button>
+      </div>
+      <div class="deslizador"><label><span data-es="Carga del motor" data-eu="Motorraren karga"></span><output id="carga-t">100 %</output></label><input id="carga" type="range" min="0" max="150" step="5" value="100"></div>
+    </div>
+    <div class="deslizador"><label><span data-es="Calentamiento del térmico F2" data-eu="F2 termikoaren berotzea"></span><output id="calor-t">0 %</output></label><div class="barra"><i id="calor"></i></div></div>
+    <div class="lectura-g">
+      <div><small data-es="I motor" data-eu="I motorra"></small><b id="l-i">0 A</b></div>
+      <div><small>H1</small><b id="l-h1"></b></div>
+      <div><small>H2</small><b id="l-h2"></b></div>
+      <div><small>H3</small><b id="l-h3"></b></div>
+    </div>
+    <div class="estado" id="estado"></div>
+    <p class="nota es">KM1 = contactor del motor · F2 = relé térmico ajustado a 3,2 A. El contacto 97-98 del térmico se cierra cuando dispara. El tiempo está acelerado.</p>
+    <p class="nota eu">KM1 = motorraren kontaktorea · F2 = 3,2 A-ra doitutako errele termikoa. Termikoaren 97-98 kontaktua jauzten denean ixten da. Denbora azkartuta dago.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---------- Simulador «Pruébalo» ----------
+  // estado del motor: "paro", "marcha" o "disparo" (ha saltado el térmico)
+  var estado = "paro";
+  var IN = 3.2;          // intensidad nominal del motor (A) = ajuste del térmico
+  var calor = 0;         // calentamiento del térmico: 0 = frío, 1 = dispara
+  var avisoHasta = 0;    // mientras dure un aviso no se pisa el mensaje
+
+  // colores de cada piloto: [encendido, apagado]
+  var COL = { verde: ["#43c463", "#a9b8ad"], blanco: ["#ffffff", "#c9ccd2"], amarillo: ["#fdd835", "#c9c3a0"] };
+
+  // dibuja un piloto visto de frente (aro gris + lente de color + brillo si está encendido)
+  function piloto(x, y, col, on){
+    var g = '<circle cx="' + x + '" cy="' + y + '" r="34" fill="' + col[0] + '" opacity="' + (on ? 0.35 : 0) + '"/>';
+    g += '<circle cx="' + x + '" cy="' + y + '" r="26" fill="#59606c"/>';
+    g += '<circle cx="' + x + '" cy="' + y + '" r="20" fill="' + (on ? col[0] : col[1]) + '" stroke="#3d434d" stroke-width="1"/>';
+    if (on) g += '<path d="M' + (x - 9) + ' ' + (y - 8) + 'q4 -6 10 -7" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>';
+    return g;
+  }
+
+  // hilo del esquema: naranja si lleva tensión
+  function H(d, con){ return '<path class="hilo' + (con ? " con" : "") + '" d="' + d + '"/>'; }
+
+  // contacto del esquema en la columna x, entre y1 e y2.
+  // cerrado = true → línea recta; false → línea inclinada (abierto)
+  function contacto(x, y1, y2, cerrado){
+    var g = cerrado ? H("M" + x + " " + y1 + "V" + y2, true) : H("M" + x + " " + y2 + "L" + (x - 14) + " " + (y1 + 3), false);
+    g += '<circle cx="' + x + '" cy="' + y1 + '" r="3" fill="var(--marino)"/><circle cx="' + x + '" cy="' + y2 + '" r="3" fill="var(--marino)"/>';
+    return g;
+  }
+
+  // lámpara del esquema (círculo con aspa); se rellena con su color si está encendida
+  function lampara(x, y, col, on){
+    var g = '<circle cx="' + x + '" cy="' + y + '" r="14" fill="' + (on ? col : "#fff") + '" stroke="var(--marino)" stroke-width="2.2"/>';
+    g += '<path d="M' + (x - 10) + ' ' + (y - 10) + 'l20 20M' + (x + 10) + ' ' + (y - 10) + 'l-20 20" stroke="var(--marino)" stroke-width="2"/>';
+    return g;
+  }
+
+  // puntos azules que bajan por una rama del esquema (de L a N) si hay corriente
+  function puntos(x){
+    var g = "", t = performance.now() / 1000;
+    for (var k = 0; k < 5; k++) {
+      var f = (t * 0.5 + k / 5) % 1;          // posición 0..1 a lo largo de la rama
+      g += '<circle cx="' + x + '" cy="' + (20 + f * 210) + '" r="3" fill="#2b6cb0"/>';
+    }
+    return g;
+  }
+
+  function dibujar(){
+    var km = estado === "marcha";      // contactor KM1 activado
+    var f2 = estado === "disparo";     // térmico F2 disparado
+    var h1 = km, h2 = !km, h3 = f2;    // qué piloto se enciende
+
+    // puerta del cuadro
+    $("pilotos").innerHTML = piloto(60, 84, COL.verde, h1) + piloto(150, 84, COL.blanco, h2) + piloto(240, 84, COL.amarillo, h3);
+    $("svg-cuadro").classList.toggle("gira", km && +$("carga").value > 0);
+
+    // esquema: L arriba, N abajo, tres ramas
+    var g = '<text class="txt" x="8" y="24">L</text><text class="txt" x="8" y="234">N</text>';
+    g += H("M22 20H280", true) + H("M22 230H280", true);
+    // rama 1: KM1 13-14 (NA) → H1 verde
+    g += H("M60 20V60", true) + contacto(60, 60, 100, km) + H("M60 100V146", h1) + lampara(60, 160, "#43c463", h1) + H("M60 174V230", h1);
+    g += '<text class="txt-s" x="66" y="76">KM1</text><text class="txt-s" x="66" y="88">13-14</text>';
+    // rama 2: KM1 21-22 (NC) → H2 blanco
+    g += H("M150 20V60", true) + contacto(150, 60, 100, !km) + H("M150 100V146", h2) + lampara(150, 160, "#f4f4f4", h2) + H("M150 174V230", h2);
+    g += '<text class="txt-s" x="156" y="76">KM1</text><text class="txt-s" x="156" y="88">21-22</text>';
+    // rama 3: F2 97-98 (NA del térmico) → H3 amarillo
+    g += H("M240 20V60", true) + contacto(240, 60, 100, f2) + H("M240 100V146", h3) + lampara(240, 160, "#fdd835", h3) + H("M240 174V230", h3);
+    g += '<text class="txt-s" x="246" y="76">F2</text><text class="txt-s" x="246" y="88">97-98</text>';
+    g += '<text class="txt" x="80" y="164">H1</text><text class="txt" x="170" y="164">H2</text><text class="txt" x="260" y="164">H3</text>';
+    // corriente: solo por las ramas cuyo piloto está encendido
+    if (h1) g += puntos(60);
+    if (h2) g += puntos(150);
+    if (h3) g += puntos(240);
+    $("svg-esquema").innerHTML = g;
+
+    // lecturas
+    var I = km ? IN * $("carga").value / 100 : 0;
+    $("l-i").textContent = I.toFixed(1).replace(".", ",") + " A";
+    $("l-h1").textContent = h1 ? T("encendido", "piztuta") : T("apagado", "itzalita");
+    $("l-h2").textContent = h2 ? T("encendido", "piztuta") : T("apagado", "itzalita");
+    $("l-h3").textContent = h3 ? T("encendido", "piztuta") : T("apagado", "itzalita");
+    $("calor").style.width = Math.min(100, calor * 100) + "%";
+    $("calor-t").textContent = Math.round(Math.min(100, calor * 100)) + " %";
+    $("carga-t").textContent = $("carga").value + " %";
+    // los chips marcan el estado actual (en disparo no hay ninguno marcado)
+    [].forEach.call($("modo").children, function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-m") === estado ? "true" : "false"); });
+
+    // mensaje de estado (si no hay un aviso reciente)
+    if (performance.now() < avisoHasta) return;
+    var e = $("estado");
+    if (estado === "marcha" && +$("carga").value > 105) { e.className = "estado mal"; e.textContent = T("¡Sobrecarga! Pasa más corriente que 3,2 A y el térmico se está calentando.", "Gainkarga! 3,2 A baino korronte gehiago dabil eta termikoa berotzen ari da."); }
+    else if (estado === "marcha") { e.className = "estado ok"; e.textContent = T("Motor en marcha: KM1 cierra 13-14 y se enciende H1 (verde). 21-22 se abre y H2 se apaga.", "Motorra martxan: KM1ek 13-14 ixten du eta H1 (berdea) pizten da. 21-22 irekitzen da eta H2 itzaltzen da."); }
+    else if (estado === "disparo") { e.className = "estado mal"; e.textContent = T("Ha saltado el térmico: KM1 se suelta, el motor para y F2 cierra 97-98: se enciende H3 (amarillo).", "Termikoa jauzi da: KM1 askatzen da, motorra gelditzen da eta F2k 97-98 ixten du: H3 (horia) pizten da."); }
+    else { e.className = "estado"; e.textContent = T("Motor parado: KM1 en reposo, su contacto 21-22 está cerrado y enciende H2 (blanco).", "Motorra geldirik: KM1 atsedenean, haren 21-22 kontaktua itxita dago eta H2 (zuria) pizten du."); }
+  }
+
+  // aviso que se queda 2,5 s en pantalla
+  function aviso(es, eu){ var e = $("estado"); e.className = "estado mal"; e.textContent = T(es, eu); avisoHasta = performance.now() + 2500; }
+
+  // bucle de animación: calcula el calentamiento del térmico y redibuja
+  var ult = performance.now();
+  function bucle(ahora){
+    var dt = Math.min((ahora - ult) / 1000, 0.5); ult = ahora;
+    var c = +$("carga").value / 100;
+    if (estado === "marcha" && c > 1.05) calor += (c - 1.05) * 0.5 * dt;   // sobrecarga: se calienta
+    else calor -= 0.08 * dt;                                              // si no, se enfría poco a poco
+    if (calor < 0) calor = 0;
+    if (estado === "marcha" && calor >= 1) { calor = 1; estado = "disparo"; }
+    dibujar();
+    requestAnimationFrame(bucle);
+  }
+
+  // chips: Paro, Marcha y Rearmar
+  $("modo").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var m = b.getAttribute("data-m");
+    if (m === "marcha") {
+      if (estado === "disparo") { aviso("No arranca: primero hay que rearmar el térmico.", "Ez da abiarazten: lehenik termikoa berrarmatu behar da."); return; }
+      estado = "marcha";
+    } else if (m === "paro") {
+      if (estado === "disparo") { aviso("El motor ya está parado por el térmico. Rearma el térmico.", "Motorra termikoak geldituta dago dagoeneko. Berrarmatu termikoa."); return; }
+      estado = "paro";
+    } else if (m === "rearme") {
+      if (estado !== "disparo") { aviso("El térmico no ha saltado: no hace falta rearmar.", "Termikoa ez da jauzi: ez da berrarmatu behar."); return; }
+      if (calor > 0.6) { aviso("Todavía está caliente: espera un poco.", "Oraindik bero dago: itxaron pixka bat."); return; }
+      estado = "paro";
+    }
+    avisoHasta = 0;
+  });
+  requestAnimationFrame(bucle);
+
+  // ---------- Test de colores ----------
+  var COLORES = [
+    { id: "rojo", es: "Rojo", eu: "Gorria" },
+    { id: "amarillo", es: "Amarillo", eu: "Horia" },
+    { id: "verde", es: "Verde", eu: "Berdea" },
+    { id: "azul", es: "Azul", eu: "Urdina" },
+    { id: "blanco", es: "Blanco", eu: "Zuria" }
+  ];
+  var SIT = [
+    { r: "verde", es: "La bomba funciona con normalidad.", eu: "Ponpak normal funtzionatzen du." },
+    { r: "rojo", es: "Temperatura peligrosa: hay que actuar ya.", eu: "Tenperatura arriskutsua: berehala jardun behar da." },
+    { r: "amarillo", es: "Aviso: el nivel de aceite está bajo.", eu: "Abisua: olio-maila baxua da." },
+    { r: "azul", es: "El operario tiene que rearmar la máquina.", eu: "Operarioak makina berrarmatu behar du." },
+    { r: "blanco", es: "El cuadro tiene tensión.", eu: "Koadroak tentsioa du." }
+  ];
+  function quiz(){
+    $("quiz").innerHTML = SIT.map(function(s, i){
+      var chips = COLORES.map(function(c){ return '<button type="button" data-i="' + i + '" data-r="' + c.id + '">' + T(c.es, c.eu) + '</button>'; }).join("");
+      return '<div class="fila"><span class="sit">' + (i + 1) + '. ' + T(s.es, s.eu) + '</span><span class="chips">' + chips + '</span><span id="r' + i + '"></span></div>';
+    }).join("");
+  }
+  document.addEventListener("click", function(ev){
+    var b = ev.target.closest("#quiz button"); if (!b) return;
+    var i = +b.getAttribute("data-i"), bien = SIT[i].r === b.getAttribute("data-r");
+    [].forEach.call(b.parentNode.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    var r = $("r" + i);
+    r.className = bien ? "ok" : "mal";
+    r.textContent = bien ? T("¡Bien!", "Ondo!") : T("No. Repasa la tabla de colores.", "Ez. Berrikusi koloreen taula.");
+  });
+
+  // al cambiar de idioma se repintan los textos hechos con JS
+  alCambiarIdioma(function(){ dibujar(); quiz(); });
+})();
+</script>
+</body>
+</html>

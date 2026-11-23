@@ -11,7 +11,7 @@ Portada de bienvenida (euskera y castellano) → **Sartu · Entrar** → menú d
 - **Android (Chrome) y PC (Chrome o Edge):** en el menú de áreas, pulsa el botón naranja de descarga para instalarla.
 - **iPhone o iPad (Safari):** pulsa *Compartir* y elige *Añadir a pantalla de inicio*.
 
-Enlaces directos para Moodle: añade al final de la dirección `#areas` (menú de áreas), `#electrica`, `#neumatica`, `#mecanica` (cada área) o el de una simulación (`#magnetotermico`, `#engranajes-rectos`…).
+Enlaces directos para Moodle: añade al final de la dirección `#areas` (menú de áreas), `#electrica`, `#neumatica`, `#mecanica` (cada área), un apartado de Electricidad (`#electrica/magnitudes`, `#electrica/proteccion`, `#electrica/instalaciones`, `#electrica/control`, `#electrica/potencia`) o el de una simulación (`#magnetotermico`, `#engranajes-rectos`…).
 
 ## Añadir una simulación
 
@@ -24,6 +24,12 @@ Las apps ya instaladas se actualizan solas la próxima vez que se abren con inte
 Para darle un título, una descripción o un icono más cuidados, cambiar el orden o agruparla en un apartado (campo `tema`), edita `catalogo.js` (las instrucciones están dentro).
 
 La imagen redonda de la lista sale de `simulaciones/<área>/miniaturas/<archivo>.webp`. Si no existe, se ve el icono. Para crearlas: `python3 herramientas/imagenes/miniaturas.py`.
+
+## Submenú de un área (apartados)
+
+Un área puede tener un submenú: al entrar salen sus apartados en una sola pantalla (como el menú de áreas) y cada uno abre su lista. Electricidad lo usa: Magnitudes, Elementos de protección, Instalaciones eléctricas, Elementos de control y Elementos de potencia.
+
+Se hace en `catalogo.js`, añadiendo al área una lista `submenu`. Cada apartado lleva `id` (su enlace: `#electrica/magnitudes`), `tema` (reúne las simulaciones con ese mismo `tema`), `icono` o `imagen`, `descripcion` y `eu: { nombre, descripcion }`. Una simulación que no encaje en ningún apartado sale en uno llamado «Otros». En el visor, Anterior / Siguiente se mueven dentro del apartado.
 
 ## Fichas bilingües
 

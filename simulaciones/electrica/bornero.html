@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bornero (regleta de bornes)</title>
+<meta name="description" content="Para qué sirve, tipos de bornes, accesorios, numeración y montaje con punteras, y práctica interactiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.carril{fill:#b8bec8;stroke:#8d95a3;stroke-width:1.2}
+.tornillo{fill:#dfe3e9;stroke:#6b7280;stroke-width:1.2}
+.ranura{stroke:#6b7280;stroke-width:1.8;stroke-linecap:round}
+.borne-j{cursor:pointer}
+.borne-j:hover > rect:first-child{stroke:var(--naranja);stroke-width:3}
+.borne-j.bien > rect:first-child{stroke:var(--verde);stroke-width:4}
+.borne-j.malo > rect:first-child{stroke:var(--rojo);stroke-width:4}
+.cable-actual{display:flex;align-items:center;gap:10px;font-weight:600;color:var(--marino-txt)}
+.cable-actual i{display:inline-block;width:44px;height:12px;border-radius:6px;flex:none}
+#tornillo-ranura{transform-origin:212px 38px;transition:transform .3s ease}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de control" data-eu="Kontrol-elementuak"></p>
+      <h1 data-es="Bornero (regleta de bornes)" data-eu="Borne-regleta"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">bornero</span> (o regleta de bornes) es una fila de bornes montados en <b>carril DIN</b>, normalmente en la parte de abajo del cuadro. Sirve para <b>unir el cuadro con el exterior de forma ordenada</b>: los cables de dentro llegan por un lado y los de fuera (motores, sensores, pulsadores…) por el otro.</p>
+      <p class="eu"><span class="clave">Borne-regleta</span> <b>DIN errailean</b> muntatutako borne-ilara bat da, normalean koadroaren behealdean. <b>Koadroa kanpoaldearekin modu ordenatuan lotzeko</b> balio du: barruko kableak alde batetik iristen dira eta kanpokoak (motorrak, sentsoreak, pultsadoreak…) bestetik.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-cuadro" viewBox="0 0 300 260" role="img" aria-label="Cuadro con bornero">
+          <rect x="20" y="8" width="260" height="196" rx="10" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/>
+          <g class="resaltable" data-parte="interior">
+            <rect x="44" y="24" width="50" height="62" rx="5" fill="#dfe3e9" stroke="#8d95a3"/><text class="txt" x="69" y="60" text-anchor="middle">KM1</text>
+            <rect x="124" y="24" width="50" height="62" rx="5" fill="#dfe3e9" stroke="#8d95a3"/><text class="txt" x="149" y="60" text-anchor="middle">Q1</text>
+            <rect x="204" y="24" width="50" height="62" rx="5" fill="#dfe3e9" stroke="#8d95a3"/><text class="txt" x="229" y="60" text-anchor="middle">A1</text>
+            <path d="M69 86V120H86V150M149 86V112H110V150M229 86V110H134V150M229 86V120H200V150M149 86V130H224V150" stroke="#2d3340" stroke-width="2" fill="none"/>
+            <text class="txt-s" x="150" y="104" text-anchor="middle" data-es="cableado interior" data-eu="barneko kableatua"></text>
+          </g>
+          <g class="resaltable" data-parte="bornero">
+            <rect x="60" y="174" width="190" height="8" class="carril"/>
+            <rect x="74" y="150" width="20" height="30" rx="2" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="98" y="150" width="20" height="30" rx="2" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="122" y="150" width="20" height="30" rx="2" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="190" y="150" width="20" height="30" rx="2" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="214" y="150" width="20" height="30" rx="2" fill="#f2c600" stroke="#6b7280"/>
+            <path d="M214 156h20M214 166h20M214 176h20" stroke="#2e9b4e" stroke-width="4"/>
+            <text class="txt" x="46" y="170" text-anchor="middle">X1</text>
+          </g>
+          <g class="resaltable" data-parte="exterior">
+            <path d="M84 180V240M108 180V236M132 180V232" stroke="#8b5a2b" stroke-width="3" fill="none"/>
+            <path d="M200 180V226M224 180V226" stroke="#2d3340" stroke-width="3" fill="none"/>
+            <circle cx="108" cy="246" r="12" fill="#fff" stroke="var(--marino)" stroke-width="2"/><text class="txt" x="108" y="250" text-anchor="middle">M</text>
+            <rect x="196" y="226" width="34" height="22" rx="4" fill="#fff" stroke="var(--marino)" stroke-width="2"/><text class="txt-s" x="213" y="241" text-anchor="middle">B1</text>
+            <text class="txt-s" x="268" y="226" text-anchor="end" data-es="exterior" data-eu="kanpoa"></text>
+          </g>
+        </svg>
+        <figcaption data-es="El bornero es la «frontera» del cuadro. Toca una parte" data-eu="Borne-regleta koadroaren «muga» da. Ukitu atal bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-cuadro">
+        <li><button data-parte="interior"><span class="n">1</span><span><b class="es">Cableado interior</b><b class="eu">Barneko kableatua</b><small class="es">Contactores, protecciones, autómata… se cablean hasta la parte de arriba del bornero.</small><small class="eu">Kontaktoreak, babesak, automata… borne-regletaren goialderaino kableatzen dira.</small></span></button></li>
+        <li><button data-parte="bornero"><span class="n">2</span><span><b class="es">Bornero X1</b><b class="eu">X1 borne-regleta</b><small class="es">Fila de bornes en carril DIN. Cada borne tiene su número.</small><small class="eu">DIN errailean dagoen borne-ilara. Borne bakoitzak bere zenbakia du.</small></span></button></li>
+        <li><button data-parte="exterior"><span class="n">3</span><span><b class="es">Cables al exterior</b><b class="eu">Kanporako kableak</b><small class="es">Motores, sensores, pulsadores de la máquina. Se conectan por abajo, sin tocar el cableado interior.</small><small class="eu">Makinaren motorrak, sentsoreak, pultsadoreak. Behetik konektatzen dira, barneko kableatua ukitu gabe.</small></span></button></li>
+      </ul>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="¿Por qué no conectar directamente?" data-eu="Zergatik ez zuzenean konektatu?"></h2>
+      <p class="es">Con bornero el cuadro queda <b>ordenado</b>, cada cable está <b>numerado</b>, se puede <b>cambiar un motor o un sensor</b> sin tocar nada de dentro y es mucho más fácil <b>medir y buscar averías</b>.</p>
+      <p class="eu">Borne-regletarekin koadroa <b>ordenatuta</b> geratzen da, kable bakoitza <b>zenbakituta</b> dago, <b>motor edo sentsore bat alda daiteke</b> barruan ezer ukitu gabe eta askoz errazagoa da <b>neurtzea eta matxurak bilatzea</b>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. MOTAK ============ -->
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-tipos" viewBox="0 0 320 200" role="img" aria-label="Tipos de bornes">
+          <rect x="4" y="158" width="312" height="14" class="carril"/>
+          <!-- 1 paso -->
+          <g class="resaltable" data-parte="paso">
+            <rect x="12" y="34" width="44" height="130" rx="4" fill="#c4c9d0" stroke="#6b7280"/>
+            <circle class="tornillo" cx="34" cy="58" r="9"/><path class="ranura" d="M28 58h12"/>
+            <circle class="tornillo" cx="34" cy="140" r="9"/><path class="ranura" d="M28 140h12"/>
+            <text class="txt" x="34" y="24" text-anchor="middle">1</text>
+          </g>
+          <!-- 2 tierra -->
+          <g class="resaltable" data-parte="tierra">
+            <rect x="62" y="34" width="44" height="130" rx="4" fill="#f2c600" stroke="#6b7280"/>
+            <path d="M62 76h44M62 98h44M62 120h44" stroke="#2e9b4e" stroke-width="9"/>
+            <circle class="tornillo" cx="84" cy="58" r="9"/><path class="ranura" d="M78 58h12"/>
+            <circle class="tornillo" cx="84" cy="140" r="9"/><path class="ranura" d="M78 140h12"/>
+            <rect x="70" y="160" width="28" height="10" fill="#6b7280"/>
+            <text class="txt" x="84" y="24" text-anchor="middle">2</text>
+          </g>
+          <!-- 3 neutro -->
+          <g class="resaltable" data-parte="neutro">
+            <rect x="112" y="34" width="44" height="130" rx="4" fill="#3b82d6" stroke="#6b7280"/>
+            <circle class="tornillo" cx="134" cy="58" r="9"/><path class="ranura" d="M128 58h12"/>
+            <circle class="tornillo" cx="134" cy="140" r="9"/><path class="ranura" d="M128 140h12"/>
+            <text class="txt" x="134" y="24" text-anchor="middle">3</text>
+          </g>
+          <!-- 4 seccionable -->
+          <g class="resaltable" data-parte="seccionable">
+            <rect x="162" y="34" width="44" height="130" rx="4" fill="#c4c9d0" stroke="#6b7280"/>
+            <circle class="tornillo" cx="184" cy="58" r="9"/><path class="ranura" d="M178 58h12"/>
+            <rect x="170" y="80" width="28" height="40" rx="4" fill="#f39200" stroke="#b45f00"/>
+            <circle cx="184" cy="114" r="3" fill="#b45f00"/>
+            <circle class="tornillo" cx="184" cy="140" r="9"/><path class="ranura" d="M178 140h12"/>
+            <text class="txt" x="184" y="24" text-anchor="middle">4</text>
+          </g>
+          <!-- 5 fusible -->
+          <g class="resaltable" data-parte="fusible">
+            <rect x="212" y="34" width="44" height="130" rx="4" fill="#c4c9d0" stroke="#6b7280"/>
+            <circle class="tornillo" cx="234" cy="58" r="9"/><path class="ranura" d="M228 58h12"/>
+            <rect x="218" y="74" width="32" height="50" rx="4" fill="#2d3340"/>
+            <rect x="226" y="86" width="16" height="26" rx="3" fill="#f2f2f2" stroke="#8d95a3"/>
+            <circle cx="244" cy="80" r="2.5" fill="#ff5a4f"/>
+            <circle class="tornillo" cx="234" cy="140" r="9"/><path class="ranura" d="M228 140h12"/>
+            <text class="txt" x="234" y="24" text-anchor="middle">5</text>
+          </g>
+          <!-- 6 doble piso -->
+          <g class="resaltable" data-parte="doble">
+            <path d="M262 164V34h26v20h20v110z" fill="#c4c9d0" stroke="#6b7280"/>
+            <circle class="tornillo" cx="275" cy="46" r="8"/><path class="ranura" d="M270 46h10"/>
+            <circle class="tornillo" cx="298" cy="68" r="8"/><path class="ranura" d="M293 68h10"/>
+            <circle class="tornillo" cx="298" cy="128" r="8"/><path class="ranura" d="M293 128h10"/>
+            <circle class="tornillo" cx="275" cy="148" r="8"/><path class="ranura" d="M270 148h10"/>
+            <path d="M262 98h46" stroke="#8d95a3" stroke-dasharray="4 3"/>
+            <text class="txt" x="285" y="24" text-anchor="middle">6</text>
+          </g>
+          <text class="txt-s" x="160" y="190" text-anchor="middle" data-es="carril DIN" data-eu="DIN erraila"></text>
+        </svg>
+        <figcaption data-es="Bornes vistos de frente. Toca uno" data-eu="Borneak aurretik ikusita. Ukitu bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-tipos">
+        <li><button data-parte="paso"><span class="n">1</span><span><b class="es">Borne de paso (gris)</b><b class="eu">Igarotze-bornea (grisa)</b><small class="es">El normal: une el cable de arriba con el de abajo. Para fases y señales.</small><small class="eu">Arrunta: goiko kablea beheko kablearekin lotzen du. Faseetarako eta seinaleetarako.</small></span></button></li>
+        <li><button data-parte="tierra"><span class="n">2</span><span><b class="es">Borne de tierra (verde-amarillo)</b><b class="eu">Lur-bornea (berde-horia)</b><small class="es">Para el conductor de protección PE. Hace contacto con el carril DIN, que va a tierra.</small><small class="eu">PE babes-eroalerako. DIN errailarekin kontaktua egiten du, eta erraila lurrera doa.</small></span></button></li>
+        <li><button data-parte="neutro"><span class="n">3</span><span><b class="es">Borne de neutro (azul)</b><b class="eu">Neutro-bornea (urdina)</b><small class="es">Igual que el de paso, pero azul para reconocer el neutro N.</small><small class="eu">Igarotze-bornearen berdina, baina urdina, N neutroa ezagutzeko.</small></span></button></li>
+        <li><button data-parte="seccionable"><span class="n">4</span><span><b class="es">Borne seccionable</b><b class="eu">Borne seksionagarria</b><small class="es">Tiene una palanca o cuchilla que abre el circuito sin quitar cables. Muy útil para medir y probar.</small><small class="eu">Palanka edo labana bat du, zirkuitua kableak kendu gabe irekitzeko. Oso erabilgarria neurtzeko eta probatzeko.</small></span></button></li>
+        <li><button data-parte="fusible"><span class="n">5</span><span><b class="es">Borne fusible (portafusible)</b><b class="eu">Fusible-bornea (fusible-euskarria)</b><small class="es">Lleva un fusible pequeño (por ejemplo 5×20 mm) para proteger un circuito de mando. Algunos tienen un LED que avisa si está fundido.</small><small class="eu">Fusible txiki bat darama (adibidez 5×20 mm) agintzeko zirkuitu bat babesteko. Batzuek LED bat dute, fusiblea urtuta dagoen abisatzeko.</small></span></button></li>
+        <li><button data-parte="doble"><span class="n">6</span><span><b class="es">Borne de doble piso</b><b class="eu">Bi solairuko bornea</b><small class="es">Dos bornes uno encima del otro: el doble de conexiones en el mismo espacio de carril.</small><small class="eu">Bi borne bata bestearen gainean: errail-tarte berean konexio bikoitzak.</small></span></button></li>
+      </ul>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Conexión por tornillo</h3><h3 class="eu">Torlojuzko konexioa</h3>
+        <p class="es">La clásica. Se aprieta el cable con un tornillo. Hay que dar el <b>par de apriete</b> correcto y revisarlo con el tiempo.</p>
+        <p class="eu">Klasikoa. Kablea torloju batekin estutzen da. <b>Estutze-momentu</b> zuzena eman behar da eta denborarekin berrikusi.</p></div>
+      <div class="card"><h3 class="es">Conexión por resorte</h3><h3 class="eu">Malgukizko konexioa</h3>
+        <p class="es">Se abre el muelle con un destornillador, se mete el cable y se suelta. <b>No se afloja</b> con las vibraciones.</p>
+        <p class="eu">Malgukia torlojuzorro batekin irekitzen da, kablea sartu eta askatu egiten da. Bibrazioekin <b>ez da lasaitzen</b>.</p></div>
+      <div class="card"><h3 class="es">Conexión push-in</h3><h3 class="eu">Push-in konexioa (zuzenean sartzekoa)</h3>
+        <p class="es">El cable rígido o con puntera <b>se empuja y queda sujeto</b>, sin herramienta. Para sacarlo se pulsa un botón.</p>
+        <p class="eu">Kable zurruna edo terminalduna <b>bultzatu eta lotuta geratzen da</b>, erremintarik gabe. Ateratzeko botoi bat sakatzen da.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. OSAGARRIAK ============ -->
+  <section class="panel" data-tab="osagarriak" data-es="Accesorios" data-eu="Osagarriak" hidden>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-acc" viewBox="0 0 320 200" role="img" aria-label="Accesorios del bornero">
+          <rect x="4" y="158" width="312" height="14" class="carril"/>
+          <g class="resaltable" data-parte="tope">
+            <path d="M8 164V96h18l6 10v58z" fill="#5c6575"/>
+            <circle cx="19" cy="120" r="5" class="tornillo"/>
+            <path d="M286 164V96h18l6 10v58z" fill="#5c6575" transform="translate(592 0) scale(-1 1)"/>
+            <circle cx="295" cy="120" r="5" class="tornillo"/>
+          </g>
+          <g id="acc-bornes">
+            <rect x="34" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="70" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="106" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="142" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="188" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <rect x="224" y="40" width="34" height="124" rx="3" fill="#c4c9d0" stroke="#6b7280"/>
+            <circle class="tornillo" cx="51" cy="74" r="7"/><circle class="tornillo" cx="87" cy="74" r="7"/><circle class="tornillo" cx="123" cy="74" r="7"/><circle class="tornillo" cx="159" cy="74" r="7"/><circle class="tornillo" cx="205" cy="74" r="7"/><circle class="tornillo" cx="241" cy="74" r="7"/>
+            <circle class="tornillo" cx="51" cy="140" r="7"/><circle class="tornillo" cx="87" cy="140" r="7"/><circle class="tornillo" cx="123" cy="140" r="7"/><circle class="tornillo" cx="159" cy="140" r="7"/><circle class="tornillo" cx="205" cy="140" r="7"/><circle class="tornillo" cx="241" cy="140" r="7"/>
+          </g>
+          <g class="resaltable" data-parte="marcador">
+            <rect x="38" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="51" y="55" text-anchor="middle">1</text>
+            <rect x="74" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="87" y="55" text-anchor="middle">2</text>
+            <rect x="110" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="123" y="55" text-anchor="middle">3</text>
+            <rect x="146" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="159" y="55" text-anchor="middle">4</text>
+            <rect x="192" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="205" y="55" text-anchor="middle">5</text>
+            <rect x="228" y="44" width="26" height="14" rx="2" fill="#fff" stroke="#8d95a3"/><text class="txt" x="241" y="55" text-anchor="middle">6</text>
+          </g>
+          <g class="resaltable" data-parte="puente">
+            <rect x="80" y="100" width="88" height="12" rx="3" fill="#d64545"/>
+            <rect x="83" y="96" width="8" height="20" rx="2" fill="#a32b2b"/><rect x="119" y="96" width="8" height="20" rx="2" fill="#a32b2b"/><rect x="155" y="96" width="8" height="20" rx="2" fill="#a32b2b"/>
+          </g>
+          <g class="resaltable" data-parte="separador">
+            <rect x="178" y="22" width="8" height="146" rx="2" fill="#f39200" stroke="#b45f00"/>
+          </g>
+          <g class="resaltable" data-parte="tapa">
+            <rect x="260" y="40" width="6" height="124" rx="1" fill="#9aa3b2" stroke="#6b7280"/>
+          </g>
+          <text class="txt" x="20" y="30" text-anchor="middle">X1</text>
+        </svg>
+        <figcaption data-es="Bornero X1 completo. Toca un accesorio" data-eu="X1 borne-regleta osoa. Ukitu osagarri bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-acc">
+        <li><button data-parte="tope"><span class="n">1</span><span><b class="es">Topes finales</b><b class="eu">Muturreko topeak</b><small class="es">Uno en cada extremo. Se atornillan al carril para que los bornes no se deslicen.</small><small class="eu">Bana mutur bakoitzean. Errailari torlojuz lotzen zaizkio, borneak ez labaintzeko.</small></span></button></li>
+        <li><button data-parte="tapa"><span class="n">2</span><span><b class="es">Tapa final</b><b class="eu">Amaierako estalkia</b><small class="es">Los bornes están abiertos por un lado. La tapa tapa el último para que no queden partes con tensión al aire.</small><small class="eu">Borneak alde batetik irekita daude. Estalkiak azkena estaltzen du, tentsiodun zatiak agerian gera ez daitezen.</small></span></button></li>
+        <li><button data-parte="puente"><span class="n">3</span><span><b class="es">Puente</b><b class="eu">Zubia</b><small class="es">Pieza metálica que se enchufa en el centro y une varios bornes seguidos (por ejemplo, para repartir 24 V).</small><small class="eu">Erdian sartzen den pieza metalikoa; jarraian dauden zenbait borne lotzen ditu (adibidez, 24 V banatzeko).</small></span></button></li>
+        <li><button data-parte="separador"><span class="n">4</span><span><b class="es">Separador</b><b class="eu">Bereizgailua</b><small class="es">Placa que separa grupos de bornes, por ejemplo potencia (400 V) y mando (24 V).</small><small class="eu">Borne-taldeak bereizten dituen plaka, adibidez potentzia (400 V) eta agintea (24 V).</small></span></button></li>
+        <li><button data-parte="marcador"><span class="n">5</span><span><b class="es">Marcadores</b><b class="eu">Markagailuak</b><small class="es">Etiquetas con el número de cada borne, igual que en el esquema.</small><small class="eu">Borne bakoitzaren zenbakia duten etiketak, eskeman bezala.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 4. MUNTAKETA ============ -->
+  <section class="panel" data-tab="muntaketa" data-es="Montaje" data-eu="Muntaketa" hidden>
+    <div class="card">
+      <h2 data-es="Numeración: X1:1, X1:2…" data-eu="Zenbakitzea: X1:1, X1:2…"></h2>
+      <p class="es"><b>X</b> es la letra de los bornes; <b>X1</b> es el nombre del bornero (el primero). Lo que va detrás de los dos puntos es el <b>número del borne</b>. Así, <b>X1:3</b> es el borne 3 del bornero X1.</p>
+      <p class="eu"><b>X</b> borneen letra da; <b>X1</b> borne-regletaren izena da (lehenengoa). Bi puntuen ondoren doana <b>bornearen zenbakia</b> da. Horrela, <b>X1:3</b> X1 borne-regletaren 3. bornea da.</p>
+      <figure class="fig">
+        <svg id="svg-num" viewBox="0 0 320 170" role="img" aria-label="Numeración en el esquema">
+          <text class="txt-s" x="10" y="16" data-es="dentro del cuadro" data-eu="koadro barruan"></text>
+          <text class="txt" x="70" y="34" text-anchor="middle">F2:2</text><text class="txt" x="130" y="34" text-anchor="middle">F2:4</text><text class="txt" x="190" y="34" text-anchor="middle">F2:6</text><text class="txt" x="250" y="34" text-anchor="middle">PE</text>
+          <path d="M70 40V70M130 40V70M190 40V70M250 40V70M70 100V130M130 100V130M190 100V130M250 100V130" stroke="var(--marino)" stroke-width="2.2"/>
+          <rect x="40" y="70" width="240" height="30" fill="#fff" stroke="var(--marino)" stroke-width="2"/>
+          <path d="M100 70v30M160 70v30M220 70v30" stroke="var(--marino)" stroke-width="2"/>
+          <text class="txt" x="70" y="90" text-anchor="middle">1</text><text class="txt" x="130" y="90" text-anchor="middle">2</text><text class="txt" x="190" y="90" text-anchor="middle">3</text><text class="txt" x="250" y="90" text-anchor="middle">4</text>
+          <text class="txt" x="20" y="90" text-anchor="middle" font-size="13">X1</text>
+          <text class="txt" x="70" y="146" text-anchor="middle">U1</text><text class="txt" x="130" y="146" text-anchor="middle">V1</text><text class="txt" x="190" y="146" text-anchor="middle">W1</text><text class="txt" x="250" y="146" text-anchor="middle">PE</text>
+          <text class="txt-s" x="10" y="164" data-es="fuera: motor M1" data-eu="kanpoan: M1 motorra"></text>
+        </svg>
+        <figcaption data-es="El cable que va a U1 del motor sale por X1:1" data-eu="Motorraren U1era doan kablea X1:1etik ateratzen da"></figcaption>
+      </figure>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Sección del borne</h3><h3 class="eu">Bornearen sekzioa</h3>
+        <p class="es">El borne se elige por la <b>sección del cable</b> y la corriente. Valores orientativos:</p>
+        <p class="eu">Bornea <b>kablearen sekzioaren</b> eta korrontearen arabera aukeratzen da. Balio orientagarriak:</p>
+        <div class="tabla"><table>
+          <tr><th data-es="Borne" data-eu="Bornea"></th><th data-es="Cable" data-eu="Kablea"></th><th data-es="Corriente" data-eu="Korrontea"></th></tr>
+          <tr><td>2,5 mm²</td><td>0,5 – 4 mm²</td><td>≈ 24 A</td></tr>
+          <tr><td>4 mm²</td><td>0,5 – 6 mm²</td><td>≈ 32 A</td></tr>
+          <tr><td>6 mm²</td><td>0,5 – 10 mm²</td><td>≈ 41 A</td></tr>
+          <tr><td>10 mm²</td><td>1,5 – 16 mm²</td><td>≈ 57 A</td></tr>
+        </table></div></div>
+      <div class="card"><h3 class="es">Par de apriete</h3><h3 class="eu">Estutze-momentua</h3>
+        <p class="es">En bornes de tornillo, el que indica el fabricante (por ejemplo <b>0,6 – 0,8 N·m</b> en un borne de 2,5 mm²). Flojo → calienta y hace chispas. Demasiado → rompe el hilo o el borne.</p>
+        <p class="eu">Torlojuzko borneetan, fabrikatzaileak adierazten duena (adibidez <b>0,6 – 0,8 N·m</b> 2,5 mm²-ko borne batean). Lasai → berotu eta txinpartak ateratzen ditu. Gehiegi → haria edo bornea hausten du.</p></div>
+      <div class="card"><h3 class="es">Punteras</h3><h3 class="eu">Kable-terminalak (punterak)</h3>
+        <p class="es">En cable <b>flexible</b> (de hilos finos) se pone siempre puntera: los hilos no se abren y el contacto es bueno. Se pela la misma longitud que el tubo metálico y se <b>crimpa</b> con su alicate.</p>
+        <p class="eu">Kable <b>malguan</b> (hari finekoan) beti jartzen da terminala: hariak ez dira irekitzen eta kontaktua ona da. Hodi metalikoaren luzera bera zuritzen da eta bere alikatearekin <b>prentsatzen</b> da.</p></div>
+      <div class="card"><h3 class="es">Color de la puntera</h3><h3 class="eu">Terminalaren kolorea</h3>
+        <p class="es">El color indica la sección. Hay <b>dos sistemas de colores</b> distintos: mira siempre la tabla de la caja.</p>
+        <p class="eu">Koloreak sekzioa adierazten du. <b>Bi kolore-sistema</b> desberdin daude: begiratu beti kaxako taula.</p></div>
+      <div class="card"><h3 class="es">Un cable por borne</h3><h3 class="eu">Kable bat borne bakoitzeko</h3>
+        <p class="es">Si hay que meter dos cables en el mismo borne, se usa una <b>puntera doble</b> o un puente a otro borne.</p>
+        <p class="eu">Borne berean bi kable sartu behar badira, <b>terminal bikoitza</b> edo beste borne baterako zubia erabiltzen da.</p></div>
+      <div class="card"><h3 class="es">Comprueba</h3><h3 class="eu">Egiaztatu</h3>
+        <p class="es">Al terminar, <b>tira suavemente</b> de cada cable: no se debe salir. Que no se vea cobre fuera del borne.</p>
+        <p class="eu">Bukatzean, <b>tira emeki</b> kable bakoitzetik: ez da atera behar. Ez da kobrerik ikusi behar bornetik kanpo.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 5. ARIKETAK ============ -->
+  <section class="panel" data-tab="ariketak" data-es="Ejercicios" data-eu="Ariketak" hidden>
+    <div class="card">
+      <h2 data-es="1. Conecta un cable con puntera" data-eu="1. Konektatu kable bat terminalarekin"></h2>
+      <p class="es">Pulsa los pasos <b>en el orden correcto</b>.</p>
+      <p class="eu">Sakatu urratsak <b>ordena zuzenean</b>.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-puntera" viewBox="0 0 320 140" role="img" aria-label="Cable y borne">
+        <g id="puntera-dibujo"></g>
+        <rect x="184" y="20" width="126" height="100" rx="6" fill="#c4c9d0" stroke="#6b7280" stroke-width="1.5"/>
+        <rect x="184" y="56" width="58" height="28" fill="#4a505a"/>
+        <rect id="pisador" x="190" y="56" width="46" height="5" fill="#8d95a3"/>
+        <rect x="204" y="20" width="16" height="36" fill="#aab1bb"/>
+        <circle cx="212" cy="38" r="11" class="tornillo"/>
+        <path id="tornillo-ranura" class="ranura" d="M204 30l16 16"/>
+        <text class="txt-s" x="276" y="112" text-anchor="middle" data-es="borne" data-eu="bornea"></text>
+        <g id="puntera-cable"></g>
+      </svg>
+      <figcaption id="puntera-paso"></figcaption>
+    </figure>
+    <div class="estado" id="estado-p"></div>
+    <div class="mandos" id="pasos">
+      <button class="boton claro" data-paso="5" data-es="Apretar tornillo" data-eu="Torlojua estutu"></button>
+      <button class="boton claro" data-paso="1" data-es="Pelar" data-eu="Zuritu"></button>
+      <button class="boton claro" data-paso="3" data-es="Crimpar" data-eu="Prentsatu"></button>
+      <button class="boton claro" data-paso="4" data-es="Meter en el borne" data-eu="Bornean sartu"></button>
+      <button class="boton claro" data-paso="2" data-es="Poner puntera" data-eu="Terminala jarri"></button>
+      <button class="boton" id="p-reset" data-es="Empezar de nuevo" data-eu="Berriro hasi"></button>
+    </div>
+
+    <div class="card">
+      <h2 data-es="2. ¿A qué borne va cada cable?" data-eu="2. Zein bornetara doa kable bakoitza?"></h2>
+      <p class="es">Lee el cable y <b>toca el borne</b> donde se conecta.</p>
+      <p class="eu">Irakurri kablea eta <b>ukitu bornea</b> non konektatzen den.</p>
+      <div class="cable-actual"><i id="cable-color"></i><span id="cable-txt"></span></div>
+    </div>
+    <figure class="fig">
+      <svg id="svg-juego" viewBox="0 0 320 180" role="img" aria-label="Bornes para elegir">
+        <rect x="4" y="150" width="312" height="14" class="carril"/>
+        <g class="borne-j" data-b="paso"><rect x="16" y="30" width="50" height="126" rx="4" fill="#c4c9d0" stroke="#6b7280"/><circle class="tornillo" cx="41" cy="56" r="9"/><circle class="tornillo" cx="41" cy="132" r="9"/></g>
+        <g class="borne-j" data-b="tierra"><rect x="76" y="30" width="50" height="126" rx="4" fill="#f2c600" stroke="#6b7280"/><path d="M76 74h50M76 96h50M76 118h50" stroke="#2e9b4e" stroke-width="9" pointer-events="none"/><circle class="tornillo" cx="101" cy="56" r="9"/><circle class="tornillo" cx="101" cy="132" r="9"/></g>
+        <g class="borne-j" data-b="neutro"><rect x="136" y="30" width="50" height="126" rx="4" fill="#3b82d6" stroke="#6b7280"/><circle class="tornillo" cx="161" cy="56" r="9"/><circle class="tornillo" cx="161" cy="132" r="9"/></g>
+        <g class="borne-j" data-b="seccionable"><rect x="196" y="30" width="50" height="126" rx="4" fill="#c4c9d0" stroke="#6b7280"/><circle class="tornillo" cx="221" cy="56" r="9"/><rect x="207" y="76" width="28" height="40" rx="4" fill="#f39200" stroke="#b45f00"/><circle class="tornillo" cx="221" cy="132" r="9"/></g>
+        <g class="borne-j" data-b="fusible"><rect x="256" y="30" width="50" height="126" rx="4" fill="#c4c9d0" stroke="#6b7280"/><circle class="tornillo" cx="281" cy="56" r="9"/><rect x="263" y="72" width="36" height="50" rx="4" fill="#2d3340"/><rect x="273" y="84" width="16" height="26" rx="3" fill="#f2f2f2"/><circle class="tornillo" cx="281" cy="132" r="9"/></g>
+        <text class="txt" x="160" y="20" text-anchor="middle">X2</text>
+      </svg>
+    </figure>
+    <div class="estado" id="estado-j"></div>
+    <div class="mandos"><button class="boton" id="j-reset" data-es="Volver a empezar" data-eu="Berriro hasi"></button></div>
+  </section>
+
+  <!-- ============ 6. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Una fuente de 24 V del cuadro alimenta una lámpara H1 de fuera <b>a través del bornero</b>. Abre la <b>cuchilla del borne seccionable</b> X1:1 y mira la tensión que aparece. Luego cambia el <b>par de apriete</b> del tornillo: si queda flojo, el borne se calienta.</p>
+      <p class="eu">Koadroko 24 V-ko iturri batek kanpoko H1 lanpara elikatzen du <b>borne-regletaren bidez</b>. Ireki X1:1 <b>borne seksionagarriaren labana</b> eta begiratu agertzen den tentsioa. Gero aldatu torlojuaren <b>estutze-momentua</b>: lasai geratzen bada, bornea berotu egiten da.</p>
+    </div>
+    <figure class="fig"><svg id="svg-proba" viewBox="0 0 320 250" role="img" aria-label="Circuito a través del bornero"></svg></figure>
+    <div class="mandos">
+      <div class="chips" id="cuchilla">
+        <button type="button" data-c="1" aria-pressed="true" data-es="Cuchilla cerrada" data-eu="Labana itxita"></button>
+        <button type="button" data-c="0" aria-pressed="false" data-es="Cuchilla abierta" data-eu="Labana irekita"></button>
+      </div>
+      <div class="deslizador"><label><span data-es="Par de apriete X1:1" data-eu="X1:1 estutze-momentua"></span><output id="par-t"></output></label><input id="par" type="range" min="0" max="1.2" step="0.1" value="0.7"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small>I</small><b id="b-i"></b></div>
+      <div><small data-es="U lámpara" data-eu="U lanpara"></small><b id="b-ul"></b></div>
+      <div><small data-es="U en la cuchilla" data-eu="U labanan"></small><b id="b-uc"></b></div>
+      <div><small data-es="T borne" data-eu="T bornea"></small><b id="b-t"></b></div>
+    </div>
+    <div class="estado" id="estado-b"></div>
+    <p class="nota es">Valores orientativos. Lámpara de 24 V y 2 A. La temperatura sube despacio, como en la realidad (pero más rápido).</p>
+    <p class="nota eu">Balio orientagarriak. 24 V-ko eta 2 A-ko lanpara. Tenperatura poliki igotzen da, errealitatean bezala (baina azkarrago).</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // =============== 1. Cable con puntera ===============
+  // paso = cuántos pasos se han hecho bien (0 a 5)
+  var paso = 0;
+  var NOMBRES = [
+    ["Cable sin preparar", "Prestatu gabeko kablea"],
+    ["Cable pelado: se ven los hilos finos de cobre", "Kablea zurituta: kobrezko hari finak ikusten dira"],
+    ["Puntera puesta sobre los hilos", "Terminala harien gainean jarrita"],
+    ["Puntera crimpada: ya no se sale", "Terminala prentsatuta: ez da ateratzen"],
+    ["Cable metido en el borne", "Kablea bornean sartuta"],
+    ["Tornillo apretado: conexión terminada", "Torlojua estututa: konexioa amaituta"]
+  ];
+
+  function dibujarPuntera(){
+    var dx = paso >= 4 ? 56 : 0;   // a partir del paso 4 el cable entra en el borne
+    var g = "";
+    // aislante marrón del cable
+    g += '<rect x="-10" y="62" width="' + (130 + dx) + '" height="16" rx="3" fill="#8b5a2b"/>';
+    // hilos de cobre (solo si está pelado)
+    if (paso >= 1) {
+      g += '<rect x="' + (120 + dx) + '" y="65" width="32" height="10" fill="#d08a3a"/>';
+      if (paso === 1) g += '<path d="M' + (120 + dx) + ' 67h34M' + (120 + dx) + ' 70h36M' + (120 + dx) + ' 73h33" stroke="#a8641f" stroke-width="1"/>';
+    }
+    // puntera: collar de plástico + tubo metálico
+    if (paso >= 2) {
+      var h = paso >= 3 ? 10 : 14, y = 70 - h / 2;   // al crimpar el tubo se aplasta
+      g += '<rect x="' + (110 + dx) + '" y="58" width="18" height="24" rx="3" fill="#d64545"/>';
+      g += '<rect x="' + (128 + dx) + '" y="' + y + '" width="26" height="' + h + '" rx="1" fill="#cfd4da" stroke="#8d95a3"/>';
+      if (paso >= 3) g += '<path d="M' + (134 + dx) + ' 65v10M' + (141 + dx) + ' 65v10M' + (148 + dx) + ' 65v10" stroke="#8d95a3" stroke-width="1.5"/>';
+    }
+    $("puntera-cable").innerHTML = g;
+    // el pisador del borne baja al apretar el tornillo
+    $("pisador").setAttribute("y", paso >= 5 ? 61 : 56);
+    $("tornillo-ranura").style.transform = paso >= 5 ? "rotate(45deg)" : "none";
+    $("puntera-paso").textContent = (paso + "/5 · ") + T(NOMBRES[paso][0], NOMBRES[paso][1]);
+    var e = $("estado-p");
+    if (paso === 5) { e.className = "estado ok"; e.textContent = T("¡Bien hecho! Ahora tira suavemente del cable para comprobar que no se sale.", "Ondo egina! Orain tira emeki kabletik, ez dela ateratzen egiaztatzeko."); }
+    else if (paso === 0) { e.className = "estado"; e.textContent = T("¿Cuál es el primer paso?", "Zein da lehen urratsa?"); }
+  }
+
+  // mensajes si se pulsa un paso fuera de orden
+  var ERRORES = {
+    1: ["Ya está pelado.", "Dagoeneko zurituta dago."],
+    2: ["Primero hay que pelar el cable.", "Lehenik kablea zuritu behar da."],
+    3: ["No puedes crimpar sin la puntera puesta.", "Ezin duzu prentsatu terminala jarri gabe."],
+    4: ["Antes de meterlo, la puntera tiene que estar puesta y crimpada.", "Sartu aurretik, terminalak jarrita eta prentsatuta egon behar du."],
+    5: ["Primero mete el cable en el borne.", "Lehenik sartu kablea bornean."]
+  };
+
+  $("pasos").addEventListener("click", function(ev){
+    var b = ev.target.closest("[data-paso]"); if (!b) return;
+    var n = +b.getAttribute("data-paso"), e = $("estado-p");
+    if (n === paso + 1) {            // es el siguiente paso: correcto
+      paso = n; e.className = "estado ok"; e.textContent = T("Correcto.", "Zuzena.");
+      dibujarPuntera();
+    } else if (n <= paso) {          // ese paso ya está hecho
+      e.className = "estado"; e.textContent = T("Ese paso ya está hecho.", "Urrats hori eginda dago.");
+    } else {                         // se ha saltado algún paso
+      e.className = "estado mal"; e.textContent = T(ERRORES[n][0], ERRORES[n][1]);
+    }
+  });
+  $("p-reset").addEventListener("click", function(){ paso = 0; dibujarPuntera(); });
+
+  // =============== 2. ¿A qué borne va? ===============
+  var RONDAS = [
+    { b: "tierra", color: "linear-gradient(90deg,#2e9b4e 0 25%,#f2c600 25% 50%,#2e9b4e 50% 75%,#f2c600 75%)", es: "Conductor de protección PE (verde-amarillo) del motor", eu: "Motorraren PE babes-eroalea (berde-horia)" },
+    { b: "neutro", color: "#3b82d6", es: "Neutro N (azul) de una toma de corriente", eu: "Korronte-hartune baten N neutroa (urdina)" },
+    { b: "paso", color: "#8b5a2b", es: "Fase L1 (marrón) que va a un motor", eu: "Motor batera doan L1 fasea (marroia)" },
+    { b: "seccionable", color: "#2d6fb3", es: "Señal de un sensor que quieres poder abrir para medir sin quitar cables", eu: "Kableak kendu gabe neurtzeko ireki nahi duzun sentsore baten seinalea" },
+    { b: "fusible", color: "#c62f2f", es: "Alimentación de 24 V de un circuito de mando que necesita su propia protección", eu: "Bere babesa behar duen agintzeko zirkuitu baten 24 V-ko elikadura" }
+  ];
+  var ronda = 0, aciertos = 0, fallo = false;
+
+  function pintarRonda(){
+    [].forEach.call(document.querySelectorAll(".borne-j"), function(g){ g.classList.remove("bien", "malo"); });
+    if (ronda >= RONDAS.length) {
+      $("cable-color").style.background = "transparent";
+      $("cable-txt").textContent = T("¡Terminado!", "Amaituta!");
+      var e = $("estado-j"); e.className = "estado ok";
+      e.textContent = T("Has acertado a la primera " + aciertos + " de " + RONDAS.length + ".", "Lehen saiakeran " + RONDAS.length + "tik " + aciertos + " asmatu dituzu.");
+      return;
+    }
+    var r = RONDAS[ronda];
+    $("cable-color").style.background = r.color;
+    $("cable-txt").textContent = (ronda + 1) + "/" + RONDAS.length + " · " + T(r.es, r.eu);
+  }
+
+  $("svg-juego").addEventListener("click", function(ev){
+    var g = ev.target.closest(".borne-j"); if (!g || ronda >= RONDAS.length) return;
+    var e = $("estado-j");
+    if (g.getAttribute("data-b") === RONDAS[ronda].b) {
+      if (!fallo) aciertos++;
+      g.classList.add("bien");
+      e.className = "estado ok"; e.textContent = T("¡Correcto!", "Zuzena!");
+      fallo = false; ronda++;
+      setTimeout(pintarRonda, 900);
+    } else {
+      fallo = true;
+      g.classList.add("malo");
+      setTimeout(function(){ g.classList.remove("malo"); }, 700);
+      e.className = "estado mal"; e.textContent = T("Ese no. Repasa la pestaña «Tipos».", "Hori ez. Berrikusi «Motak» fitxa.");
+    }
+  });
+  $("j-reset").addEventListener("click", function(){ ronda = 0; aciertos = 0; fallo = false; $("estado-j").className = "estado"; $("estado-j").textContent = ""; pintarRonda(); });
+
+  // =============== 3. Pruébalo: circuito a través del bornero ===============
+  var U = 24, RL = 12;          // fuente de 24 V y lámpara de 12 Ω (2 A)
+  var cerrada = true;           // cuchilla del borne seccionable
+  var temp = 25;                // temperatura del borne X1:1 (°C)
+  // recorrido de la corriente: + fuente → X1:1 → lámpara → X1:2 → − fuente
+  var CAMINO = [[40, 30], [40, 50], [110, 50], [110, 222], [230, 222], [230, 50], [280, 50], [280, 30]];
+
+  function num(v, d){ return v.toFixed(d).replace(".", ","); }
+
+  // resistencia del contacto según el par de apriete (N·m)
+  function rContacto(par){
+    if (par < 0.05) return Infinity;                 // tornillo suelto: el cable no hace contacto
+    var flojo = Math.max(0, (0.6 - par) / 0.5);      // 0 si está bien apretado
+    return 0.002 + 0.4 * flojo * flojo;
+  }
+
+  // punto que está a la fracción f (0..1) del recorrido
+  function puntoCamino(f){
+    var L = [], tot = 0, i;
+    for (i = 0; i < CAMINO.length - 1; i++) { var d = Math.abs(CAMINO[i + 1][0] - CAMINO[i][0]) + Math.abs(CAMINO[i + 1][1] - CAMINO[i][1]); L.push(d); tot += d; }
+    var x = f * tot;
+    for (i = 0; i < L.length; i++) {
+      if (x <= L[i]) { var r = x / L[i]; return [CAMINO[i][0] + (CAMINO[i + 1][0] - CAMINO[i][0]) * r, CAMINO[i][1] + (CAMINO[i + 1][1] - CAMINO[i][1]) * r]; }
+      x -= L[i];
+    }
+    return CAMINO[0];
+  }
+
+  // un borne visto de frente, centrado en x
+  function borne(x, nombre, seccionable){
+    var g = '<rect x="' + (x - 18) + '" y="84" width="36" height="96" rx="3" fill="#c4c9d0" stroke="#6b7280"/>';
+    g += '<circle class="tornillo" cx="' + x + '" cy="98" r="7"/><circle class="tornillo" cx="' + x + '" cy="166" r="7"/>';
+    g += '<text class="txt" x="' + (x + 24) + '" y="136">' + nombre + '</text>';
+    if (seccionable) {
+      // cuchilla naranja: recta si está cerrada, girada si está abierta
+      g += cerrada ? '<rect x="' + (x - 4) + '" y="112" width="8" height="34" rx="2" fill="#f39200" stroke="#b45f00"/>'
+                   : '<rect x="' + (x - 4) + '" y="112" width="8" height="34" rx="2" fill="#f39200" stroke="#b45f00" transform="rotate(-35 ' + x + ' 112)"/>';
+      g += '<circle cx="' + x + '" cy="112" r="3" fill="#b45f00"/>';
+    }
+    return g;
+  }
+
+  var ultB = performance.now();
+  function pintarProba(ahora){
+    var dt = Math.min((ahora - ultB) / 1000, 0.5); ultB = ahora;
+    var par = +$("par").value, rc = rContacto(par);
+    var hay = cerrada && rc !== Infinity;               // ¿circula corriente?
+    var I = hay ? U / (RL + rc) : 0;
+    var pBorne = hay ? I * I * rc : 0;                   // potencia que se pierde en el contacto (W)
+    temp += ((25 + 40 * pBorne) - temp) * dt / 3;        // la temperatura va subiendo poco a poco
+    var luz = Math.min(1, (I * RL) / U);
+    var c = hay ? "#f39200" : "#9aa3b2";
+
+    var s = "";
+    // fuente del cuadro
+    s += '<rect x="24" y="6" width="272" height="24" rx="6" fill="#fff" stroke="#242d5f" stroke-width="2"/>';
+    s += '<text class="txt" x="160" y="22" text-anchor="middle">' + T("Fuente 24 V DC (dentro del cuadro)", "24 V DC iturria (koadro barruan)") + '</text>';
+    s += '<text class="txt" x="46" y="22">+</text><text class="txt" x="270" y="22">−</text>';
+    // cables
+    s += '<path d="M40 30V50H110V84M110 180V222H154M186 222H230V180M230 84V50H280V30" stroke="' + c + '" stroke-width="4" fill="none" stroke-linejoin="round"/>';
+    // carril y bornes
+    s += '<rect x="60" y="176" width="220" height="8" class="carril"/>';
+    s += borne(110, "X1:1", true) + borne(230, "X1:2", false);
+    // calor en el tornillo de X1:1 (círculo rojo cada vez más visible)
+    var cal = Math.max(0, Math.min(1, (temp - 30) / 50));
+    s += '<circle cx="110" cy="98" r="16" fill="#e53935" opacity="' + (cal * 0.6).toFixed(2) + '"/>';
+    if (rc === Infinity) s += '<text class="txt" x="118" y="78" style="fill:#c62f2f">' + T("¡cable suelto!", "kablea solte!") + '</text>';
+    // lámpara exterior
+    s += '<circle cx="170" cy="222" r="16" fill="rgba(255,210,87,' + luz.toFixed(2) + ')" stroke="#242d5f" stroke-width="2.5"/>';
+    s += '<path d="M159 211l22 22M181 211l-22 22" stroke="#242d5f" stroke-width="2"/>';
+    s += '<text class="txt" x="170" y="248" text-anchor="middle">' + T("H1 (fuera del cuadro)", "H1 (koadrotik kanpo)") + '</text>';
+    // puntos azules de la corriente
+    if (hay) for (var k = 0; k < 10; k++) { var p = puntoCamino((ahora / 1000 * 0.12 * I + k / 10) % 1); s += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3" fill="#2b6cb0"/>'; }
+    $("svg-proba").innerHTML = s;
+
+    // lecturas
+    $("par-t").textContent = num(par, 1) + " N·m";
+    $("b-i").textContent = num(I, 2) + " A";
+    $("b-ul").textContent = num(I * RL, 1) + " V";
+    $("b-uc").textContent = (!cerrada && rc !== Infinity ? num(U, 0) : "0") + " V";
+    $("b-t").textContent = Math.round(temp) + " °C";
+
+    // mensaje
+    var e = $("estado-b");
+    if (!cerrada) { e.className = "estado"; e.textContent = T("Cuchilla abierta: el circuito se corta sin quitar ningún cable. Entre los dos lados de la cuchilla mides los 24 V.", "Labana irekita: zirkuitua eten egiten da kablerik kendu gabe. Labanaren bi aldeen artean 24 V neurtzen dira."); }
+    else if (rc === Infinity) { e.className = "estado mal"; e.textContent = T("El tornillo está suelto: el cable no hace contacto y la lámpara no luce.", "Torlojua solte dago: kableak ez du kontakturik egiten eta lanpara ez da pizten."); }
+    else if (par < 0.55) { e.className = "estado mal"; e.textContent = T("Apriete flojo: el contacto tiene resistencia y el borne se calienta. Con el tiempo puede quemarse.", "Estutze lasaia: kontaktuak erresistentzia du eta bornea berotu egiten da. Denborarekin erre daiteke."); }
+    else if (par > 0.95) { e.className = "estado mal"; e.textContent = T("Demasiado apretado: funciona, pero puedes romper el hilo o la rosca del borne.", "Estuegi: badabil, baina haria edo bornearen hariztatzea hauts dezakezu."); }
+    else { e.className = "estado ok"; e.textContent = T("Apriete correcto: buen contacto, el borne no se calienta.", "Estutze zuzena: kontaktu ona, bornea ez da berotzen."); }
+  }
+  function bucleB(t){ pintarProba(t); requestAnimationFrame(bucleB); }
+  $("cuchilla").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    cerrada = b.getAttribute("data-c") === "1";
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+  });
+  requestAnimationFrame(bucleB);
+
+  // al cambiar de idioma se repintan los textos hechos con JS
+  alCambiarIdioma(function(){ dibujarPuntera(); pintarRonda(); });
+})();
+</script>
+</body>
+</html>

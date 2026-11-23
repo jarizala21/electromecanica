@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICP (Interruptor de Control de Potencia)</title>
+<meta name="description" content="Para qué sirve el ICP, dónde está en el cuadro, contador inteligente, diferencias con IGA y PIA, calibres, simulador y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.txt-s{font-size:9.5px;fill:#5d6382}
+.disp{fill:#e9ecef;stroke:#8d95a3;stroke-width:1.5}
+.palanca{fill:#242d5f}
+.barra.uso i{background:var(--verde)}
+.barra.uso.pasa i{background:var(--rojo)}
+.mandos .boton{flex:none}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de protección" data-eu="Babes-elementuak"></p>
+      <h1 data-es="ICP (Interruptor de Control de Potencia)" data-eu="PKE (Potentzia Kontrolatzeko Etengailua)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">ICP</span> es un interruptor automático que <b>corta la luz si usas más potencia de la que tienes contratada</b>. Si en casa tienes 4,6 kW contratados y enciendes a la vez el horno, la lavadora y la estufa (6 kW), el ICP salta.</p>
+      <p class="eu"><span class="clave">PKEa</span> (ICP) etengailu automatiko bat da: <b>kontratatuta duzun potentzia baino gehiago erabiltzen baduzu, argia mozten du</b>. Etxean 4,6 kW kontratatuta badituzu eta aldi berean labea, garbigailua eta berogailua (6 kW) pizten badituzu, PKEa jauzi egiten da.</p>
+      <p class="es">No protege la instalación: sirve para que <b>nadie use más potencia de la que paga</b>. Lo pone o lo controla la <b>compañía distribuidora</b> y va <b>precintado</b>.</p>
+      <p class="eu">Ez du instalazioa babesten: <b>inork ordaintzen duena baino potentzia gehiago ez erabiltzeko</b> balio du. <b>Banaketa-enpresak</b> jartzen edo kontrolatzen du, eta <b>zigilatuta</b> egoten da.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-cuadro" viewBox="0 0 340 214" role="img" aria-label="Contador y cuadro general">
+          <!-- cuadro general -->
+          <rect x="80" y="34" width="256" height="150" rx="10" fill="#f6f4ef" stroke="#8d95a3" stroke-width="1.5"/>
+          <text class="txt-s" x="208" y="28" text-anchor="middle" data-es="Cuadro general de mando y protección" data-eu="Agintzeko eta babesteko koadro orokorra"></text>
+          <!-- cable de entrada -->
+          <path d="M38 56V16H107V70" stroke="#f39200" stroke-width="3" fill="none"/>
+          <g class="resaltable" data-parte="contador">
+            <rect x="6" y="56" width="64" height="100" rx="8" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>
+            <rect x="13" y="66" width="50" height="22" rx="4" fill="#bfe3c8" stroke="#6b7280"/>
+            <text x="38" y="81" font-size="10" font-weight="700" fill="#1b2147" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">4210</text>
+            <circle cx="20" cy="100" r="3.5" fill="#c62f2f"/>
+            <rect x="26" y="120" width="24" height="12" rx="6" fill="#242d5f"/>
+            <text class="txt" x="38" y="172" text-anchor="middle" data-es="Contador" data-eu="Kontagailua"></text>
+          </g>
+          <g class="resaltable" data-parte="icp">
+            <rect x="88" y="62" width="38" height="88" rx="6" fill="none" stroke="#c62f2f" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <rect class="disp" x="94" y="70" width="26" height="72" rx="4"/>
+            <rect class="palanca" x="101" y="88" width="12" height="18" rx="3"/>
+            <circle cx="121" cy="66" r="4" fill="#c62f2f"/>
+            <text class="txt" x="107" y="166" text-anchor="middle">ICP</text>
+          </g>
+          <g class="resaltable" data-parte="iga">
+            <rect class="disp" x="134" y="70" width="34" height="72" rx="4"/>
+            <rect class="palanca" x="145" y="88" width="12" height="18" rx="3"/>
+            <text class="txt" x="151" y="166" text-anchor="middle">IGA</text>
+          </g>
+          <g class="resaltable" data-parte="id">
+            <rect class="disp" x="174" y="70" width="40" height="72" rx="4"/>
+            <rect class="palanca" x="182" y="88" width="12" height="18" rx="3"/>
+            <circle cx="204" cy="124" r="5" fill="#ebb400" stroke="#242d5f"/>
+            <text x="204" y="127" font-size="7" font-weight="700" fill="#242d5f" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">T</text>
+            <text class="txt" x="194" y="166" text-anchor="middle">ID</text>
+          </g>
+          <g class="resaltable" data-parte="pia">
+            <rect class="disp" x="222" y="70" width="20" height="72" rx="3"/><rect class="disp" x="244" y="70" width="20" height="72" rx="3"/><rect class="disp" x="266" y="70" width="20" height="72" rx="3"/><rect class="disp" x="288" y="70" width="20" height="72" rx="3"/><rect class="disp" x="310" y="70" width="20" height="72" rx="3"/>
+            <rect class="palanca" x="227" y="90" width="10" height="16" rx="2"/><rect class="palanca" x="249" y="90" width="10" height="16" rx="2"/><rect class="palanca" x="271" y="90" width="10" height="16" rx="2"/><rect class="palanca" x="293" y="90" width="10" height="16" rx="2"/><rect class="palanca" x="315" y="90" width="10" height="16" rx="2"/>
+            <text class="txt-s" x="232" y="154" text-anchor="middle">C1</text><text class="txt-s" x="254" y="154" text-anchor="middle">C2</text><text class="txt-s" x="276" y="154" text-anchor="middle">C3</text><text class="txt-s" x="298" y="154" text-anchor="middle">C4</text><text class="txt-s" x="320" y="154" text-anchor="middle">C5</text>
+            <text class="txt" x="276" y="172" text-anchor="middle">PIA</text>
+          </g>
+          <path d="M20 200H320" stroke="#f39200" stroke-width="2" marker-end="url(#fl)"/>
+          <defs><marker id="fl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f39200"/></marker></defs>
+          <text class="txt-s" x="170" y="195" text-anchor="middle" data-es="la energía va de izquierda a derecha" data-eu="energia ezkerretik eskuinera doa"></text>
+        </svg>
+        <figcaption data-es="Toca una parte para verla" data-eu="Ukitu atal bat ikusteko"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-cuadro">
+        <li><button data-parte="contador"><span class="n">1</span><span><b class="es">Contador</b><b class="eu">Kontagailua</b><small class="es">Mide los kWh. Si es inteligente, también vigila la potencia y puede cortar: hace de ICP.</small><small class="eu">kWh-ak neurtzen ditu. Adimenduna bada, potentzia ere zaintzen du eta moztu dezake: PKE gisa jarduten du.</small></span></button></li>
+        <li><button data-parte="icp"><span class="n">2</span><span><b class="es">ICP (precintado)</b><b class="eu">PKE / ICP (zigilatua)</b><small class="es">Primero del cuadro, antes del IGA, en una caja aparte con precinto.</small><small class="eu">Koadroko lehena, EOAren (IGA) aurretik, kaxa berezi batean, zigiluarekin.</small></span></button></li>
+        <li><button data-parte="iga"><span class="n">3</span><span><b class="es">IGA (Interruptor General Automático)</b><b class="eu">EOA / IGA (Etengailu Orokor Automatikoa)</b><small class="es">Magnetotérmico general: protege toda la instalación y permite cortarla a mano.</small><small class="eu">Magnetotermiko orokorra: instalazio osoa babesten du eta eskuz mozteko aukera ematen du.</small></span></button></li>
+        <li><button data-parte="id"><span class="n">4</span><span><b class="es">Interruptor diferencial (ID)</b><b class="eu">Etengailu diferentziala (ID)</b><small class="es">Protege a las personas contra las fugas de corriente.</small><small class="eu">Pertsonak babesten ditu korronte-ihesen aurka.</small></span></button></li>
+        <li><button data-parte="pia"><span class="n">5</span><span><b class="es">PIA (uno por circuito)</b><b class="eu">PIA (zirkuitu bakoitzeko bat)</b><small class="es">Magnetotérmicos de cada circuito: iluminación, enchufes, cocina…</small><small class="eu">Zirkuitu bakoitzeko magnetotermikoak: argiztapena, entxufeak, sukaldea…</small></span></button></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2 data-es="Hoy: el contador inteligente" data-eu="Gaur egun: kontagailu adimenduna"></h2>
+      <p class="es">En muchas casas ya <b>no hay ICP en el cuadro</b>: el <b>contador inteligente</b> lleva dentro un interruptor y hace su trabajo. Si te pasas de potencia, el contador corta la luz. Para recuperarla: <b>apaga algún aparato</b> y pulsa el botón del contador (o espera a que reconecte solo).</p>
+      <p class="eu">Etxe askotan <b>ez dago jada PKErik koadroan</b>: <b>kontagailu adimendunak</b> barruan etengailu bat du eta haren lana egiten du. Potentzia gainditzen baduzu, kontagailuak argia mozten du. Berreskuratzeko: <b>itzali aparaturen bat</b> eta sakatu kontagailuaren botoia (edo itxaron berez konektatu arte).</p>
+    </div>
+  </section>
+
+  <!-- ============ 2. EZAUGARRIAK ============ -->
+  <section class="panel" data-tab="ezaugarriak" data-es="Características" data-eu="Ezaugarriak" hidden>
+    <div class="card">
+      <h2 data-es="Calibre del ICP y potencia contratada" data-eu="PKEaren kalibrea eta kontratatutako potentzia"></h2>
+      <p class="es">El calibre (en amperios) se elige según la potencia contratada. En monofásica a 230 V:</p>
+      <p class="eu">Kalibrea (anperetan) kontratatutako potentziaren arabera aukeratzen da. Monofasikoan, 230 V-an:</p>
+      <p class="formula">I = P / U = P / 230</p>
+      <p class="es">Ejemplo: 4,6 kW = 4600 W → I = 4600 / 230 = <b>20 A</b>. El ICP es de 20 A.</p>
+      <p class="eu">Adibidea: 4,6 kW = 4600 W → I = 4600 / 230 = <b>20 A</b>. PKEa 20 A-koa da.</p>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th data-es="Potencia contratada" data-eu="Kontratatutako potentzia"></th><th data-es="Calibre del ICP" data-eu="PKEaren kalibrea"></th></tr></thead>
+        <tbody>
+          <tr><td>3,45 kW</td><td>15 A</td></tr>
+          <tr><td>4,6 kW</td><td>20 A</td></tr>
+          <tr><td>5,75 kW</td><td>25 A</td></tr>
+          <tr><td>6,9 kW</td><td>30 A</td></tr>
+          <tr><td>8,05 kW</td><td>35 A</td></tr>
+          <tr><td>9,2 kW</td><td>40 A</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Dónde va</h3><h3 class="eu">Non doa</h3>
+        <p class="es">Al principio del cuadro general, <b>antes del IGA</b>, en un compartimento propio que se puede precintar.</p>
+        <p class="eu">Koadro orokorraren hasieran, <b>EOAren (IGA) aurretik</b>, zigila daitekeen konpartimentu berezi batean.</p></div>
+      <div class="card"><h3 class="es">Cómo actúa</h3><h3 class="eu">Nola jarduten du</h3>
+        <p class="es">Como un magnetotérmico, pero ajustado a la potencia contratada. Deja pasar <b>picos cortos</b> (el arranque de un motor) y salta si el exceso <b>dura</b>. Cuanto más te pasas, antes salta.</p>
+        <p class="eu">Magnetotermiko baten antzera, baina kontratatutako potentziara doituta. <b>Gailur laburrak</b> pasatzen uzten ditu (motor baten abiaraztea), eta gehiegizkoak <b>irauten</b> badu jauzi egiten du. Zenbat eta gehiago gainditu, orduan eta lehenago jauzi.</p></div>
+      <div class="card"><h3 class="es">Polos</h3><h3 class="eu">Poloak</h3>
+        <p class="es">En vivienda monofásica es <b>bipolar</b> (fase y neutro). En trifásica, tetrapolar.</p>
+        <p class="eu">Etxebizitza monofasikoan <b>bipolarra</b> da (fasea eta neutroa). Trifasikoan, tetrapolarra.</p></div>
+      <div class="card"><h3 class="es">Quién lo pone</h3><h3 class="eu">Nork jartzen du</h3>
+        <p class="es">Lo controla la compañía distribuidora. El usuario <b>no puede cambiarlo</b>: para tener más potencia hay que pedir un cambio de contrato.</p>
+        <p class="eu">Banaketa-enpresak kontrolatzen du. Erabiltzaileak <b>ezin du aldatu</b>: potentzia gehiago izateko kontratu-aldaketa eskatu behar da.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ALDEA ============ -->
+  <section class="panel" data-tab="aldea" data-es="ICP, IGA y PIA" data-eu="PKE, EOA eta PIA" hidden>
+    <div class="card">
+      <p class="es">Los tres parecen iguales (son interruptores automáticos con palanca), pero <b>cada uno tiene un trabajo distinto</b>.</p>
+      <p class="eu">Hirurak berdinak dirudite (palankadun etengailu automatikoak dira), baina <b>bakoitzak lan desberdina du</b>.</p>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th></th><th>ICP / PKE</th><th>IGA / EOA</th><th>PIA</th></tr></thead>
+        <tbody>
+          <tr><th data-es="¿Para qué?" data-eu="Zertarako?"></th>
+            <td><span class="es">Limitar la potencia contratada</span><span class="eu">Kontratatutako potentzia mugatzea</span></td>
+            <td><span class="es">Proteger toda la instalación</span><span class="eu">Instalazio osoa babestea</span></td>
+            <td><span class="es">Proteger un circuito</span><span class="eu">Zirkuitu bat babestea</span></td></tr>
+          <tr><th data-es="Calibre según…" data-eu="Kalibrea…"></th>
+            <td><span class="es">el contrato</span><span class="eu">kontratuaren arabera</span></td>
+            <td><span class="es">la instalación (25, 32, 40 A…)</span><span class="eu">instalazioaren arabera (25, 32, 40 A…)</span></td>
+            <td><span class="es">el cable del circuito (10, 16, 20, 25 A)</span><span class="eu">zirkuituko kablearen arabera (10, 16, 20, 25 A)</span></td></tr>
+          <tr><th data-es="¿De quién?" data-eu="Norena?"></th>
+            <td><span class="es">Compañía (precintado)</span><span class="eu">Konpainiarena (zigilatua)</span></td>
+            <td><span class="es">Usuario</span><span class="eu">Erabiltzailearena</span></td>
+            <td><span class="es">Usuario</span><span class="eu">Erabiltzailearena</span></td></tr>
+          <tr><th data-es="Si salta…" data-eu="Jauzten bada…"></th>
+            <td><span class="es">Toda la casa a oscuras: demasiados aparatos a la vez</span><span class="eu">Etxe osoa ilunpetan: aparatu gehiegi aldi berean</span></td>
+            <td><span class="es">Toda la casa: sobrecarga o cortocircuito general</span><span class="eu">Etxe osoa: gainkarga edo zirkuitulabur orokorra</span></td>
+            <td><span class="es">Solo ese circuito</span><span class="eu">Zirkuitu hori bakarrik</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">El ICP <b>cuida el contrato</b>; el IGA y los PIA <b>cuidan los cables</b>; el diferencial <b>cuida a las personas</b>. El ICP tiene que ser de <b>menor calibre que el IGA</b> para que salte él primero.</p>
+      <p class="eu">PKEak <b>kontratua zaintzen du</b>; EOAk eta PIAek <b>kableak zaintzen dituzte</b>; diferentzialak <b>pertsonak zaintzen ditu</b>. PKEak <b>EOAk baino kalibre txikiagoa</b> izan behar du, bera jauzi dadin lehenengo.</p>
+      <p class="es">Más detalles en las fichas del magnetotérmico y del diferencial.</p>
+      <p class="eu">Xehetasun gehiago magnetotermikoaren eta diferentzialaren fitxetan.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige la <b>potencia contratada</b> y ve encendiendo aparatos. Mira la potencia total: si pasa de la contratada, el ICP empieza a contar y <b>salta</b>. Apaga algo y pulsa <b>Rearmar</b>.</p>
+      <p class="eu">Aukeratu <b>kontratatutako potentzia</b> eta piztu aparatuak banan-banan. Begiratu potentzia osoa: kontratatua gainditzen badu, PKEa kontatzen hasten da eta <b>jauzi</b> egiten du. Itzali zerbait eta sakatu <b>Berrarmatu</b>.</p>
+    </div>
+    <figure class="fig"><svg id="circ" viewBox="0 0 340 204" role="img" aria-label="ICP y casa"></svg></figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Potencia contratada" data-eu="Kontratatutako potentzia"></span><output id="pc-t"></output></label><input id="pc" type="range" min="0" max="5" step="1" value="1"></div>
+      <button type="button" class="boton naranja" id="rearmar" data-es="Rearmar" data-eu="Berrarmatu"></button>
+    </div>
+    <div class="chips" id="aparatos"></div>
+    <div class="lectura-g">
+      <div><small data-es="Potencia total" data-eu="Potentzia osoa"></small><b id="l-p"></b></div>
+      <div><small data-es="Contratada" data-eu="Kontratatua"></small><b id="l-pc"></b></div>
+      <div><small>I = P / 230</small><b id="l-i"></b></div>
+      <div><small data-es="Calibre ICP" data-eu="PKE kalibrea"></small><b id="l-cal"></b></div>
+    </div>
+    <div class="card" style="display:grid;gap:8px">
+      <div class="deslizador"><label><span data-es="Uso de la potencia contratada" data-eu="Kontratatutako potentziaren erabilera"></span><output id="uso-t"></output></label><div class="barra uso" id="uso-b"><i id="uso"></i></div></div>
+      <div class="deslizador"><label><span data-es="Cuenta atrás hasta el disparo" data-eu="Jauzirako atzerako kontaketa"></span><output id="disp-t"></output></label><div class="barra"><i id="disp"></i></div></div>
+      <div class="estado" id="estado"></div>
+    </div>
+    <p class="nota es">El tiempo de disparo es orientativo. Un exceso pequeño tarda más en hacer saltar el ICP que uno grande.</p>
+    <p class="nota eu">Jauzi-denbora gutxi gorabeherakoa da. Gehiegizko txiki batek handi batek baino denbora gehiago behar du PKEa jauzarazteko.</p>
+  </section>
+
+  <!-- ============ 5. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="card">
+      <p class="es">El ICP se dibuja como un <b>interruptor automático</b> (igual que un magnetotérmico) y se le pone el nombre <b>ICP</b> y su calibre.</p>
+      <p class="eu">PKEa <b>etengailu automatiko</b> gisa marrazten da (magnetotermiko baten berdina), eta <b>PKE / ICP</b> izena eta kalibrea jartzen zaizkio.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-simbolo" viewBox="0 0 300 300" role="img" aria-label="Símbolo del ICP">
+          <g fill="none" stroke="#242d5f" stroke-width="2.4" stroke-linecap="round">
+            <g class="resaltable" data-parte="bornes">
+              <text class="txt" x="120" y="22" text-anchor="middle" stroke="none">L</text><text class="txt" x="190" y="22" text-anchor="middle" stroke="none">N</text>
+              <text class="txt" x="120" y="292" text-anchor="middle" stroke="none">L</text><text class="txt" x="190" y="292" text-anchor="middle" stroke="none">N</text>
+            </g>
+            <g class="resaltable" data-parte="contactos">
+              <path d="M120 30v40M190 30v40"/>
+              <path d="M120 110L106 74M190 110L176 74"/>
+              <path d="M115 64l10 12M125 64l-10 12M185 64l10 12M195 64l-10 12"/>
+              <path d="M120 110v20M190 110v20"/>
+            </g>
+            <g class="resaltable" data-parte="termico">
+              <rect x="108" y="130" width="24" height="40"/><rect x="178" y="130" width="24" height="40"/>
+              <path d="M120 130v12h-6v16h6v12M190 130v12h-6v16h6v12"/>
+            </g>
+            <g class="resaltable" data-parte="magnetico">
+              <path d="M120 170v20M190 170v20"/>
+              <rect x="108" y="190" width="24" height="40"/><rect x="178" y="190" width="24" height="40"/>
+              <text class="txt" x="120" y="215" text-anchor="middle" stroke="none" font-size="10">I&gt;</text><text class="txt" x="190" y="215" text-anchor="middle" stroke="none" font-size="10">I&gt;</text>
+              <path d="M120 230v48M190 230v48"/>
+            </g>
+            <g class="resaltable" data-parte="union">
+              <path d="M60 92H182" stroke-dasharray="6 5"/>
+              <path d="M60 150H108M132 150h46M60 210H108M132 210h46M60 92v118" stroke-dasharray="6 5"/>
+            </g>
+            <g class="resaltable" data-parte="mando">
+              <path d="M60 92H42M42 80v24"/>
+            </g>
+          </g>
+          <g class="resaltable" data-parte="nombre">
+            <text class="txt" x="222" y="150" font-size="16">ICP</text>
+            <text class="txt" x="222" y="170" font-size="12">20 A</text>
+          </g>
+        </svg>
+        <figcaption data-es="Símbolo del ICP bipolar (esquema multifilar)" data-eu="PKE bipolarraren sinboloa (hari anitzeko eskema)"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-simbolo">
+        <li><button data-parte="contactos"><span class="n">1</span><span><b class="es">Contactos (fase y neutro)</b><b class="eu">Kontaktuak (fasea eta neutroa)</b><small class="es">Dos contactos que abren a la vez. La «×» indica interruptor automático.</small><small class="eu">Batera irekitzen diren bi kontaktu. «×» ikurrak etengailu automatikoa adierazten du.</small></span></button></li>
+        <li><button data-parte="termico"><span class="n">2</span><span><b class="es">Parte térmica</b><b class="eu">Zati termikoa</b><small class="es">Salta si te pasas de potencia durante un rato.</small><small class="eu">Potentzia denbora batez gainditzen baduzu, jauzi egiten du.</small></span></button></li>
+        <li><button data-parte="magnetico"><span class="n">3</span><span><b class="es">Parte magnética (I&gt;)</b><b class="eu">Zati magnetikoa (I&gt;)</b><small class="es">Salta al instante con corrientes muy grandes.</small><small class="eu">Berehala jauzten da korronte oso handiekin.</small></span></button></li>
+        <li><button data-parte="union"><span class="n">4</span><span><b class="es">Unión mecánica (trazos)</b><b class="eu">Lotura mekanikoa (marra etenak)</b><small class="es">Abre los dos polos a la vez.</small><small class="eu">Bi poloak batera irekitzen ditu.</small></span></button></li>
+        <li><button data-parte="mando"><span class="n">5</span><span><b class="es">Mando manual</b><b class="eu">Eskuzko eragingailua</b><small class="es">La palanca para rearmar.</small><small class="eu">Berrarmatzeko palanka.</small></span></button></li>
+        <li><button data-parte="nombre"><span class="n">6</span><span><b class="es">Nombre y calibre</b><b class="eu">Izena eta kalibrea</b><small class="es">ICP y su intensidad, que depende de la potencia contratada.</small><small class="eu">PKE / ICP eta haren korrontea, kontratatutako potentziaren araberakoa.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">7</span><span><b class="es">Fase (L) y neutro (N)</b><b class="eu">Fasea (L) eta neutroa (N)</b><small class="es">Entrada arriba, salida abajo hacia el IGA.</small><small class="eu">Sarrera goian, irteera behean EOArantz (IGA).</small></span></button></li>
+      </ul>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 230 330" role="img" aria-label="Esquema unifilar de la entrada">
+        <g fill="none" stroke="#242d5f" stroke-width="2" stroke-linecap="round">
+          <path d="M80 4V20"/>
+          <rect x="60" y="20" width="40" height="30" fill="#fff"/>
+          <!-- ICP -->
+          <path d="M80 50v12M75 57l10 10M85 57l-10 10M80 94L66 64M80 94v14M74 102l12-6M74 107l12-6"/>
+          <!-- IGA -->
+          <path d="M80 108v12M75 115l10 10M85 115l-10 10M80 152L66 122M80 152v14M74 160l12-6M74 165l12-6"/>
+          <!-- ID -->
+          <path d="M80 166v12M80 210L66 180M80 210v26M74 222l12-6M74 227l12-6"/>
+          <ellipse cx="80" cy="203" rx="10" ry="4"/>
+          <path d="M70 203H60V188h12" stroke-dasharray="3 3"/>
+          <!-- barra y PIA -->
+          <path d="M40 236H180"/>
+          <path d="M50 236v12M45 243l10 10M55 243l-10 10M50 280L36 250M50 280v14M44 288l12-6"/>
+          <path d="M110 236v12M105 243l10 10M115 243l-10 10M110 280L96 250M110 280v14M104 288l12-6"/>
+          <path d="M170 236v12M165 243l10 10M175 243l-10 10M170 280L156 250M170 280v14M164 288l12-6"/>
+        </g>
+        <text class="txt" x="80" y="40" text-anchor="middle">kWh</text>
+        <text class="txt-s" x="90" y="12" data-es="red 230 V" data-eu="sarea 230 V"></text>
+        <text class="txt" x="100" y="84" fill="#c62f2f" style="fill:#c62f2f">ICP 20 A</text>
+        <text class="txt" x="100" y="142">IGA 25 A</text>
+        <text class="txt" x="100" y="196">ID 40 A</text>
+        <text class="txt-s" x="100" y="208">30 mA</text>
+        <text class="txt-s" x="50" y="310" text-anchor="middle">C1 10 A</text>
+        <text class="txt-s" x="110" y="310" text-anchor="middle">C2 16 A</text>
+        <text class="txt-s" x="170" y="310" text-anchor="middle">C3 25 A</text>
+        <text class="txt-s" x="110" y="326" text-anchor="middle">PIA</text>
+      </svg>
+      <figcaption data-es="Esquema unifilar: contador → ICP → IGA → diferencial → PIA" data-eu="Hari bakarreko eskema: kontagailua → PKE → EOA → diferentziala → PIA"></figcaption>
+    </figure>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function n(v, d){ return v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  // Potencias contratadas normalizadas (kW) y calibre del ICP (A) en monofásica 230 V
+  var CONTRATOS = [[3.45, 15], [4.6, 20], [5.75, 25], [6.9, 30], [8.05, 35], [9.2, 40]];
+  // Aparatos de una casa (potencia en W). "on" = encendido al empezar
+  var APARATOS = [
+    { id: "luz",   es: "Luces LED", eu: "LED argiak", w: 100, on: true },
+    { id: "frigo", es: "Frigorífico", eu: "Hozkailua", w: 150, on: true },
+    { id: "tv",    es: "Televisión", eu: "Telebista", w: 100, on: true },
+    { id: "pc",    es: "Ordenador", eu: "Ordenagailua", w: 200 },
+    { id: "micro", es: "Microondas", eu: "Mikrouhin-labea", w: 900 },
+    { id: "plan",  es: "Plancha", eu: "Plantxa", w: 1200 },
+    { id: "seca",  es: "Secador de pelo", eu: "Ile-lehorgailua", w: 1500 },
+    { id: "termo", es: "Termo eléctrico", eu: "Termo elektrikoa", w: 1500 },
+    { id: "vitro", es: "Vitrocerámica", eu: "Beirazko plaka", w: 1800 },
+    { id: "lava",  es: "Lavadora", eu: "Garbigailua", w: 2000 },
+    { id: "horno", es: "Horno", eu: "Labea", w: 2000 },
+    { id: "estufa",es: "Estufa", eu: "Berogailua", w: 2000 }
+  ];
+  var encendido = {};
+  APARATOS.forEach(function(a){ encendido[a.id] = !!a.on; });
+
+  var saltado = false;   // ¿ha saltado el ICP?
+  var cuenta = 0;        // "calentamiento" del ICP: al llegar a 1, salta
+  var fase = 0, ult = performance.now();
+
+  function contrato(){ return CONTRATOS[+$("pc").value]; }
+  // Potencia que piden los aparatos encendidos (W)
+  function potenciaPedida(){ var p = 0; APARATOS.forEach(function(a){ if (encendido[a.id]) p += a.w; }); return p; }
+
+  function pintarChips(){
+    var html = "";
+    APARATOS.forEach(function(a){
+      html += '<button type="button" data-id="' + a.id + '" aria-pressed="' + (encendido[a.id] ? "true" : "false") + '">' + T(a.es, a.eu) + ' · ' + a.w + ' W</button>';
+    });
+    $("aparatos").innerHTML = html;
+  }
+
+  // Camino de la corriente: ida (arriba) y vuelta (abajo), sin pasar por dentro de la casa
+  var TRAMOS = [[[96, 70], [255, 70], [255, 112]], [[255, 152], [255, 178], [56, 178], [56, 150]]];
+  function camino(f){
+    var segs = [], tot = 0;
+    TRAMOS.forEach(function(t){ for (var i = 0; i < t.length - 1; i++) { var d = Math.abs(t[i + 1][0] - t[i][0]) + Math.abs(t[i + 1][1] - t[i][1]); segs.push([t[i], t[i + 1], d]); tot += d; } });
+    var x = f * tot;
+    for (var j = 0; j < segs.length; j++) { var s = segs[j]; if (x <= s[2]) { var r = x / s[2]; return [s[0][0] + (s[1][0] - s[0][0]) * r, s[0][1] + (s[1][1] - s[0][1]) * r]; } x -= s[2]; }
+    return TRAMOS[0][0];
+  }
+
+  function paso(){
+    var ahora = performance.now(), dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    var c = contrato(), Pc = c[0] * 1000, cal = c[1];
+    var Ppide = potenciaPedida();
+    var P = saltado ? 0 : Ppide;              // si ha saltado, no pasa corriente
+    var I = P / 230;                           // I = P / U
+    var r = Ppide / Pc;                        // cuánto se pasa: 1 = justo la contratada
+
+    // Lógica del disparo: si te pasas, la cuenta sube (más rápido cuanto más te pasas); si no, baja
+    if (!saltado) {
+      if (r > 1) cuenta += dt * (r * r - 1) / 1.2;
+      else cuenta = Math.max(0, cuenta - dt * 0.3);
+      if (cuenta >= 1) { saltado = true; cuenta = 1; }
+    }
+    fase = (fase + dt * Math.min(I, 45) * 0.012) % 1;
+
+    // ---- dibujo ----
+    var hay = I > 0.01, col = hay ? "#f39200" : "#9aa3b2", s = "";
+    s += '<path d="M96 70H255V112M255 152V178H56V150" stroke="' + col + '" stroke-width="4" fill="none" stroke-linejoin="round"/>';
+    s += '<path d="M56 4V30" stroke="#9aa3b2" stroke-width="4"/>';
+    s += '<text class="txt-s" x="64" y="14">' + T("de la red", "saretik") + '</text>';
+    // ICP con su palanca: arriba (I) = conectado, abajo (O) = ha saltado
+    s += '<rect x="16" y="30" width="80" height="120" rx="10" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>';
+    s += '<rect x="42" y="56" width="28" height="64" rx="6" fill="#d7dce3" stroke="#8d95a3"/>';
+    s += '<rect x="47" y="' + (saltado ? 92 : 62) + '" width="18" height="24" rx="4" fill="' + (saltado ? "#c62f2f" : "#1f8a4c") + '"/>';
+    s += '<text x="56" y="' + (saltado ? 108 : 78) + '" font-size="11" font-weight="700" fill="#fff" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + (saltado ? "O" : "I") + '</text>';
+    s += '<text class="txt" x="56" y="46" text-anchor="middle">ICP ' + cal + ' A</text>';
+    s += '<circle cx="84" cy="138" r="4" fill="#c62f2f"/>';
+    s += '<text class="txt-s" x="56" y="168" text-anchor="middle">' + T("precintado", "zigilatua") + '</text>';
+    // casa
+    s += '<path d="M176 88L255 40L334 88Z" fill="#c9cfd8" stroke="#242d5f" stroke-width="2" stroke-linejoin="round"/>';
+    s += '<rect x="186" y="88" width="138" height="104" fill="' + (saltado ? "#3a3f55" : "none") + '" stroke="#242d5f" stroke-width="2"/>';
+    // puntos azules de la corriente (más rápidos con más corriente)
+    if (hay) for (var k = 0; k < 10; k++) { var p = camino((fase + k / 10) % 1); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3" fill="#2b6cb0"/>'; }
+    // bombilla de la casa: luce si hay corriente
+    s += '<circle cx="216" cy="110" r="9" fill="' + (saltado ? "#5d6382" : "#ffd257") + '" stroke="#242d5f" stroke-width="1.5"/>';
+    // recuadro con la potencia
+    var pasa = r > 1 && !saltado;
+    s += '<rect x="205" y="112" width="100" height="40" rx="8" fill="' + (saltado ? "#5d6382" : (pasa ? "#fde6e3" : "#fff6d6")) + '" stroke="' + (pasa ? "#c62f2f" : "#242d5f") + '" stroke-width="2"/>';
+    s += '<text x="255" y="131" font-size="13" font-weight="700" fill="' + (saltado ? "#fff" : "#242d5f") + '" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + n(P / 1000, 2) + ' kW</text>';
+    s += '<text x="255" y="145" font-size="9.5" fill="' + (saltado ? "#fff" : "#5d6382") + '" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + n(I, 1) + ' A</text>';
+    if (saltado) s += '<text x="255" y="176" font-size="11" font-weight="700" fill="#ffd257" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + T("¡Sin luz!", "Argirik gabe!") + '</text>';
+    $("circ").innerHTML = s;
+
+    // ---- lecturas y barras ----
+    $("l-p").textContent = n(Ppide / 1000, 2) + " kW";
+    $("l-pc").textContent = n(c[0], 2) + " kW";
+    $("l-i").textContent = n(Ppide / 230, 1) + " A";
+    $("l-cal").textContent = cal + " A";
+    $("pc-t").textContent = n(c[0], 2) + " kW · " + cal + " A";
+    $("uso").style.width = Math.min(100, r * 100) + "%";
+    $("uso-b").classList.toggle("pasa", r > 1);
+    $("uso-t").textContent = Math.round(r * 100) + " %";
+    $("disp").style.width = cuenta * 100 + "%";
+    $("disp-t").textContent = Math.round(cuenta * 100) + " %";
+    mensaje(r);
+    requestAnimationFrame(paso);
+  }
+
+  function mensaje(r){
+    var e = $("estado");
+    if (saltado) {
+      e.className = "estado mal";
+      e.textContent = r > 1 ? T("¡Ha saltado el ICP! Te has pasado de la potencia contratada. Apaga algún aparato y pulsa «Rearmar».", "PKEa jauzi da! Kontratatutako potentzia gainditu duzu. Itzali aparaturen bat eta sakatu «Berrarmatu».")
+                            : T("Ya estás por debajo de la potencia contratada: pulsa «Rearmar».", "Orain kontratatutako potentziaren azpitik zaude: sakatu «Berrarmatu».");
+      return;
+    }
+    if (r > 1) { e.className = "estado mal"; e.textContent = T("Te estás pasando de la potencia contratada: el ICP saltará enseguida.", "Kontratatutako potentzia gainditzen ari zara: PKEa laster jauziko da."); return; }
+    if (r > 0.8) { e.className = "estado"; e.textContent = T("Cerca del límite. Si enciendes algo más, puede saltar.", "Mugatik gertu. Beste zerbait pizten baduzu, jauzi daiteke."); return; }
+    e.className = "estado ok"; e.textContent = T("Todo bien: usas menos potencia de la contratada.", "Dena ondo: kontratatua baino potentzia gutxiago erabiltzen duzu.");
+  }
+
+  $("aparatos").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var id = b.getAttribute("data-id");
+    encendido[id] = !encendido[id];
+    b.setAttribute("aria-pressed", encendido[id] ? "true" : "false");
+  });
+  // Rearmar: vuelve a conectar. Si sigues pasándote, volverá a saltar
+  $("rearmar").addEventListener("click", function(){ saltado = false; cuenta = 0; });
+
+  alCambiarIdioma(pintarChips);
+  pintarChips();
+  requestAnimationFrame(paso);
+})();
+</script>
+</body>
+</html>

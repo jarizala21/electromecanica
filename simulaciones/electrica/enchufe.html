@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Base de enchufe (toma de corriente)</title>
+<meta name="description" content="Qué es, partes, tipos (Schuko, 25 A, industriales CETAC), conexión, toma de tierra, simulador de conexión y de fuga, y símbolo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.borne{fill:#c9ced6;stroke:#6b7280;stroke-width:1.2}
+.agujero{fill:#2d3340}
+.ico-tipo{display:block;width:100%;height:96px;background:#fff;border-radius:14px;margin-bottom:8px}
+.hilo{fill:none;stroke:#9aa3b2;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.hilo.cor{stroke:var(--naranja);stroke-width:5}
+.bloque{display:grid;gap:14px}
+.b-sel,.c-sel{cursor:pointer}
+.b-sel .toque,.c-sel .toque{fill:transparent}
+.b-sel:hover .toque,.c-sel:hover .toque{fill:rgba(243,146,0,.12)}
+.color-t{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.2)}
+/* Que las tarjetas de tipos no se salgan en el móvil con palabras largas en euskera */
+.rejilla .card{min-width:0;overflow-wrap:anywhere}
+.panel > *, .card{min-width:0}
+.tabla{max-width:100%}
+.rejilla .card svg{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Instalaciones eléctricas" data-eu="Instalazio elektrikoak"></p>
+      <h1 data-es="Base de enchufe (toma de corriente)" data-eu="Entxufe-oinarria (korronte-hartunea)"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">base de enchufe</span> (o toma de corriente) es el punto de la instalación donde <b>conectamos los aparatos</b> con su <b>clavija</b>. Da <b>230 V y 50 Hz</b> entre fase y neutro.</p>
+      <p class="eu"><span class="clave">Entxufe-oinarria</span> (edo korronte-hartunea) instalazioko puntu bat da, non <b>aparatuak</b> beren <b>klabijarekin konektatzen</b> ditugun. Fasearen eta neutroaren artean <b>230 V eta 50 Hz</b> ematen ditu.</p>
+      <p class="es">Tiene <b>tres conexiones</b>: fase (L), neutro (N) y <b>toma de tierra</b> (PE). La tierra no hace funcionar el aparato: está para <b>protegernos</b> si algo falla.</p>
+      <p class="eu"><b>Hiru konexio</b> ditu: fasea (L), neutroa (N) eta <b>lur-hartunea</b> (PE). Lurrak ez du aparatua martxan jartzen: zerbait huts egiten badu <b>gu babesteko</b> dago.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-aparato" viewBox="0 0 320 210" role="img" aria-label="Partes de la base de enchufe">
+          <text class="txt" x="80" y="13" text-anchor="middle" data-es="Por delante" data-eu="Aurretik"></text>
+          <text class="txt" x="240" y="13" text-anchor="middle" data-es="Por detrás" data-eu="Atzetik"></text>
+          <!-- delante -->
+          <g class="resaltable" data-parte="marco"><rect x="10" y="22" width="140" height="160" rx="14" fill="#fff" stroke="#8d95a3" stroke-width="2"/></g>
+          <circle cx="80" cy="102" r="50" fill="#e9ecef" stroke="#c4cad4" stroke-width="2"/>
+          <g class="resaltable" data-parte="alveolos"><circle class="agujero" cx="62" cy="102" r="6.5"/><circle class="agujero" cx="98" cy="102" r="6.5"/></g>
+          <g class="resaltable" data-parte="patillas"><rect x="70" y="52" width="20" height="9" rx="2" fill="#b8bec8" stroke="#6b7280"/><rect x="70" y="143" width="20" height="9" rx="2" fill="#b8bec8" stroke="#6b7280"/></g>
+          <!-- detrás -->
+          <g class="resaltable" data-parte="bastidor">
+            <rect x="170" y="22" width="140" height="160" rx="14" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/>
+            <path d="M170 60l-8 6 8 6M170 132l-8 6 8 6M310 60l8 6-8 6M310 132l8 6-8 6" stroke="#6b7280" stroke-width="2.5" fill="none"/>
+          </g>
+          <path d="M240 72V206" stroke="#3f9b3a" stroke-width="5"/><path d="M240 72V206" stroke="#f2d000" stroke-width="5" stroke-dasharray="7 7"/>
+          <path d="M204 140V206" stroke="#8a5a2b" stroke-width="5"/><path d="M276 140V206" stroke="#2f62b8" stroke-width="5"/>
+          <g class="resaltable" data-parte="bornes">
+            <rect x="190" y="128" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/><rect x="262" y="128" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/>
+            <circle class="borne" cx="204" cy="140" r="7"/><circle class="borne" cx="276" cy="140" r="7"/>
+            <text class="txt" x="204" y="122" text-anchor="middle">L</text><text class="txt" x="276" y="122" text-anchor="middle">N</text>
+          </g>
+          <g class="resaltable" data-parte="borne-tierra">
+            <rect x="226" y="48" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/><circle class="borne" cx="240" cy="60" r="7"/>
+            <path d="M262 50v10M256 60h12M258 64h8M261 68h2" stroke="var(--marino)" stroke-width="1.8"/>
+          </g>
+        </svg>
+        <figcaption data-es="Base Schuko (tipo F). Toca una parte para verla." data-eu="Schuko oinarria (F mota). Ukitu atal bat ikusteko."></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-aparato">
+        <li><button data-parte="alveolos"><span class="n">1</span><span><b class="es">Alvéolos (L y N)</b><b class="eu">Zuloak edo alveoloak (L eta N)</b><small class="es">Dos agujeros donde entran las patillas de la clavija. Dentro hay unas pinzas de latón.</small><small class="eu">Klabijaren hankak sartzen diren bi zulo. Barruan letoizko pintza batzuk daude.</small></span></button></li>
+        <li><button data-parte="patillas"><span class="n">2</span><span><b class="es">Contactos de tierra</b><b class="eu">Lurreko kontaktuak</b><small class="es">Dos láminas metálicas arriba y abajo. Tocan la clavija antes que la fase y el neutro.</small><small class="eu">Goian eta behean dauden bi xafla metaliko. Klabija ukitzen dute fasea eta neutroa baino lehen.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">3</span><span><b class="es">Bornes de fase y neutro</b><b class="eu">Fasearen eta neutroaren borneak</b><small class="es">Detrás. Aquí se atornillan el cable marrón (L) y el azul (N).</small><small class="eu">Atzean. Hemen torlojutzen dira kable marroia (L) eta urdina (N).</small></span></button></li>
+        <li><button data-parte="borne-tierra"><span class="n">4</span><span><b class="es">Borne de tierra ⏚</b><b class="eu">Lurreko bornea ⏚</b><small class="es">Va unido a los contactos de tierra. Aquí va el cable verde-amarillo.</small><small class="eu">Lurreko kontaktuekin lotuta dago. Hemen kable berde-horia doa.</small></span></button></li>
+        <li><button data-parte="bastidor"><span class="n">5</span><span><b class="es">Bastidor y garras</b><b class="eu">Markoa eta atzaparrak</b><small class="es">Sujetan el mecanismo dentro de la caja empotrada.</small><small class="eu">Mekanismoa kutxa enpotratuaren barruan eusten dute.</small></span></button></li>
+        <li><button data-parte="marco"><span class="n">6</span><span><b class="es">Tapa y marco</b><b class="eu">Estalkia eta markoa</b><small class="es">Plástico aislante que tapa la caja y protege de contactos.</small><small class="eu">Kutxa estaltzen duen eta kontaktuetatik babesten duen plastiko isolatzailea.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. MOTAK ============ -->
+  <section class="panel" data-tab="motak" data-es="Tipos" data-eu="Motak" hidden>
+    <div class="rejilla">
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 96" aria-hidden="true"><circle cx="60" cy="48" r="38" fill="#e9ecef" stroke="#8d95a3" stroke-width="2"/><circle class="agujero" cx="46" cy="48" r="5"/><circle class="agujero" cx="74" cy="48" r="5"/><rect x="52" y="10" width="16" height="7" rx="2" fill="#b8bec8"/><rect x="52" y="79" width="16" height="7" rx="2" fill="#b8bec8"/></svg>
+        <h3 class="es">Schuko (tipo F) · 16 A</h3><h3 class="eu">Schuko (F mota) · 16 A</h3>
+        <p class="es">La de casa. Con <b>toma de tierra</b> por las láminas laterales. La clavija entra en las dos posiciones.</p>
+        <p class="eu">Etxekoa. <b>Lur-hartunea</b> du alboko xaflen bidez. Klabija bi posizioetan sartzen da.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 96" aria-hidden="true"><rect x="16" y="6" width="88" height="84" rx="14" fill="#e9ecef" stroke="#8d95a3" stroke-width="2"/><circle class="agujero" cx="40" cy="48" r="7.5"/><circle class="agujero" cx="80" cy="48" r="7.5"/><rect x="52" y="12" width="16" height="8" rx="2" fill="#b8bec8"/><rect x="52" y="76" width="16" height="8" rx="2" fill="#b8bec8"/><text class="txt" x="60" y="52" text-anchor="middle">25 A</text></svg>
+        <h3 class="es">Base de 25 A (cocina)</h3><h3 class="eu">25 A-ko oinarria (sukaldea)</h3>
+        <p class="es">Para la <b>cocina y el horno</b> (circuito C3). Patillas más gruesas y separadas: una clavija normal de 16 A <b>no entra</b>.</p>
+        <p class="eu"><b>Sukalderako eta laberako</b> (C3 zirkuitua). Hanka lodiagoak eta urrunago: 16 A-ko klabija arrunt bat <b>ez da sartzen</b>.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 96" aria-hidden="true"><circle cx="60" cy="48" r="38" fill="#2b6cb0" stroke="#1d4e85" stroke-width="2"/><circle cx="60" cy="48" r="28" fill="#e9ecef"/><circle class="agujero" cx="60" cy="68" r="6"/><circle class="agujero" cx="43" cy="38" r="4.5"/><circle class="agujero" cx="77" cy="38" r="4.5"/><rect x="56" y="18" width="8" height="6" fill="#2b6cb0"/></svg>
+        <h3 class="es">Industrial monofásica (CETAC)</h3><h3 class="eu">Industriako monofasikoa (CETAC)</h3>
+        <p class="es"><b>2P+T</b>, 3 alvéolos, color <b>azul</b> = 230 V. Estanca, con tapa. Para obras, talleres y exteriores.</p>
+        <p class="eu"><b>2P+T</b>, 3 zulo, kolore <b>urdina</b> = 230 V. Estankoa, estalkiarekin. Obretarako, tailerretarako eta kanpoaldeetarako.</p></div>
+      <div class="card">
+        <svg class="ico-tipo" viewBox="0 0 120 96" aria-hidden="true"><circle cx="60" cy="48" r="38" fill="#c62f2f" stroke="#8d1f1f" stroke-width="2"/><circle cx="60" cy="48" r="28" fill="#e9ecef"/><circle class="agujero" cx="60" cy="70" r="6"/><circle class="agujero" cx="40" cy="56" r="4"/><circle class="agujero" cx="80" cy="56" r="4"/><circle class="agujero" cx="44" cy="33" r="4"/><circle class="agujero" cx="76" cy="33" r="4"/><rect x="56" y="18" width="8" height="6" fill="#c62f2f"/></svg>
+        <h3 class="es">Industrial trifásica (CETAC)</h3><h3 class="eu">Industriako trifasikoa (CETAC)</h3>
+        <p class="es"><b>3P+T</b> (4 alvéolos) o <b>3P+N+T</b> (5 alvéolos), color <b>rojo</b> = 400 V. Para máquinas y motores trifásicos.</p>
+        <p class="eu"><b>3P+T</b> (4 zulo) edo <b>3P+N+T</b> (5 zulo), kolore <b>gorria</b> = 400 V. Makina eta motor trifasikoetarako.</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Bases industriales: color = tensión" data-eu="Industriako oinarriak: kolorea = tentsioa"></h2>
+      <p class="es">Así no se puede enchufar una máquina a una tensión equivocada: la clavija solo entra en la base de su color.</p>
+      <p class="eu">Horrela ezin da makina bat tentsio okerrera konektatu: klabija bere koloreko oinarrian bakarrik sartzen da.</p>
+      <div class="tabla"><table>
+        <thead><tr><th data-es="Color" data-eu="Kolorea"></th><th data-es="Tensión" data-eu="Tentsioa"></th><th data-es="Uso" data-eu="Erabilera"></th></tr></thead>
+        <tbody>
+          <tr><td><span class="color-t" style="background:#7b4bb7"></span><span data-es="Violeta" data-eu="Morea"></span></td><td>20 – 25 V</td><td data-es="Muy baja tensión de seguridad" data-eu="Segurtasuneko tentsio oso baxua"></td></tr>
+          <tr><td><span class="color-t" style="background:#f2d000"></span><span data-es="Amarillo" data-eu="Horia"></span></td><td>110 – 130 V</td><td data-es="Herramientas en obras (con transformador)" data-eu="Obretako erremintak (transformadorearekin)"></td></tr>
+          <tr><td><span class="color-t" style="background:#2b6cb0"></span><span data-es="Azul" data-eu="Urdina"></span></td><td>230 V</td><td data-es="Monofásica" data-eu="Monofasikoa"></td></tr>
+          <tr><td><span class="color-t" style="background:#c62f2f"></span><span data-es="Rojo" data-eu="Gorria"></span></td><td>400 V</td><td data-es="Trifásica" data-eu="Trifasikoa"></td></tr>
+          <tr><td><span class="color-t" style="background:#1b1b1b"></span><span data-es="Negro" data-eu="Beltza"></span></td><td>500 – 690 V</td><td data-es="Industria pesada" data-eu="Industria astuna"></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. KONEXIOA ============ -->
+  <section class="panel" data-tab="konexioa" data-es="Conexión" data-eu="Konexioa" hidden>
+    <div class="card">
+      <h2 data-es="Paso a paso" data-eu="Urratsez urrats"></h2>
+      <ol class="es">
+        <li><b>Baja el PIA</b> del circuito y comprueba con el comprobador que <b>no hay tensión</b>.</li>
+        <li>Pela unos <b>10 mm</b> de cada cable (lo que mida la borna).</li>
+        <li>Conecta primero el <b>verde-amarillo al borne de tierra ⏚</b>.</li>
+        <li>Conecta el <b>marrón (L)</b> y el <b>azul (N)</b> a los dos bornes de los lados.</li>
+        <li>Aprieta bien y <b>tira suave</b> de cada cable para ver que no se sale.</li>
+        <li>Mete el mecanismo en la caja, fíjalo con las garras y pon la tapa.</li>
+      </ol>
+      <ol class="eu">
+        <li>Zirkuituaren <b>PIA jaitsi</b> eta egiaztatzailearekin <b>tentsiorik ez dagoela</b> egiaztatu.</li>
+        <li>Kable bakoitzetik <b>10 mm</b> inguru zuritu (bornearen neurria).</li>
+        <li>Lehenik konektatu <b>berde-horia lurreko bornera ⏚</b>.</li>
+        <li>Konektatu <b>marroia (L)</b> eta <b>urdina (N)</b> alboetako bi borneetara.</li>
+        <li>Ondo estutu eta kable bakoitzetik <b>leun tiratu</b>, ez dela ateratzen ikusteko.</li>
+        <li>Sartu mekanismoa kutxan, finkatu atzaparrekin eta jarri estalkia.</li>
+      </ol>
+    </div>
+    <figure class="fig">
+      <svg id="svg-multi" viewBox="0 0 340 200" role="img" aria-label="Esquema multifilar de la base">
+        <rect x="8" y="14" width="56" height="76" rx="6" fill="#fff" stroke="var(--marino)" stroke-width="2"/>
+        <text class="txt" x="36" y="46" text-anchor="middle">PIA</text><text class="txt" x="36" y="62" text-anchor="middle">16 A</text>
+        <path d="M64 30H330" stroke="#8a5a2b" stroke-width="4"/>
+        <path d="M64 70H330" stroke="#2f62b8" stroke-width="4"/>
+        <path d="M8 110H330" stroke="#3f9b3a" stroke-width="4"/><path d="M8 110H330" stroke="#f2d000" stroke-width="4" stroke-dasharray="7 7"/>
+        <text class="txt" x="322" y="24" text-anchor="end">L</text><text class="txt" x="322" y="64" text-anchor="end">N</text><text class="txt" x="322" y="104" text-anchor="end">PE</text>
+        <!-- dos bases conectadas en paralelo -->
+        <g id="base-a">
+          <circle cx="130" cy="30" r="4" fill="var(--marino)"/><circle cx="150" cy="70" r="4" fill="var(--marino)"/><circle cx="170" cy="110" r="4" fill="var(--marino)"/>
+          <path d="M130 30V150M150 70V150M170 110V150" stroke="var(--marino)" stroke-width="2"/>
+          <path d="M122 150h56v24a28 28 0 0 1-56 0z" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        </g>
+        <g>
+          <circle cx="240" cy="30" r="4" fill="var(--marino)"/><circle cx="260" cy="70" r="4" fill="var(--marino)"/><circle cx="280" cy="110" r="4" fill="var(--marino)"/>
+          <path d="M240 30V150M260 70V150M280 110V150" stroke="var(--marino)" stroke-width="2"/>
+          <path d="M232 150h56v24a28 28 0 0 1-56 0z" fill="#fff" stroke="var(--marino)" stroke-width="2.2"/>
+        </g>
+        <text class="txt-s" x="150" y="196" text-anchor="middle" data-es="base 1" data-eu="1. oinarria"></text>
+        <text class="txt-s" x="260" y="196" text-anchor="middle" data-es="base 2" data-eu="2. oinarria"></text>
+      </svg>
+      <figcaption data-es="Las bases de un circuito van en paralelo: todas reciben 230 V." data-eu="Zirkuitu bateko oinarriak paraleloan doaz: guztiek 230 V jasotzen dituzte."></figcaption>
+    </figure>
+    <div class="card">
+      <h2 data-es="Circuitos de una vivienda (REBT)" data-eu="Etxebizitza baten zirkuituak (REBT)"></h2>
+      <div class="tabla"><table>
+        <thead><tr><th data-es="Circuito" data-eu="Zirkuitua"></th><th data-es="Cable" data-eu="Kablea"></th><th>PIA</th></tr></thead>
+        <tbody>
+          <tr><td data-es="C2 · tomas de uso general" data-eu="C2 · erabilera orokorreko hartuneak"></td><td><b>2,5 mm²</b></td><td><b>16 A</b></td></tr>
+          <tr><td data-es="C3 · cocina y horno (base 25 A)" data-eu="C3 · sukaldea eta labea (25 A-ko oinarria)"></td><td>6 mm²</td><td>25 A</td></tr>
+          <tr><td data-es="C4 · lavadora, lavavajillas, termo" data-eu="C4 · garbigailua, ontzi-garbigailua, termoa"></td><td>4 mm²</td><td>20 A</td></tr>
+          <tr><td data-es="C5 · baño y bases de la cocina" data-eu="C5 · bainugela eta sukaldeko oinarriak"></td><td>2,5 mm²</td><td>16 A</td></tr>
+        </tbody>
+      </table></div>
+      <p class="nota es">En el circuito C2 se pueden poner como máximo <b>20 bases</b>.</p>
+      <p class="nota eu">C2 zirkuituan gehienez <b>20 oinarri</b> jar daitezke.</p>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="¿Por qué es tan importante la tierra?" data-eu="Zergatik da hain garrantzitsua lurra?"></h2>
+      <p class="es">Si un cable suelto toca la carcasa metálica de un aparato, la carcasa se queda con tensión. Con la <b>tierra conectada</b>, la corriente se va por el cable verde-amarillo y el <b>diferencial salta</b> enseguida. <b>Sin tierra</b>, el camino a tierra lo haces <b>tú</b> al tocarla. Pruébalo en la pestaña «Pruébalo».</p>
+      <p class="eu">Kable solte batek aparatu baten karkasa metalikoa ukitzen badu, karkasa tentsioarekin geratzen da. <b>Lurra konektatuta</b> badago, korrontea kable berde-horitik joaten da eta <b>diferentziala</b> berehala <b>jauzi egiten da</b>. <b>Lurrik gabe</b>, lurrerako bidea <b>zuk</b> egiten duzu ukitzean. Probatu «Probatu» fitxan.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="chips" id="modo">
+      <button type="button" data-m="fuga" aria-pressed="true" data-es="Fuga con y sin tierra" data-eu="Ihesa lurrarekin eta lurrik gabe"></button>
+      <button type="button" data-m="con" aria-pressed="false" data-es="Conectar los cables" data-eu="Kableak konektatu"></button>
+    </div>
+
+    <!-- A) conectar -->
+    <div id="sim-con" class="bloque" hidden>
+      <div class="card">
+        <p class="es">Toca un <b>cable</b> (abajo) y después el <b>borne</b> donde debe ir. Cuando estén los tres, pulsa <b>Comprobar</b>.</p>
+        <p class="eu">Ukitu <b>kable</b> bat (behean) eta gero joan behar duen <b>bornea</b>. Hirurak daudenean, sakatu <b>Egiaztatu</b>.</p>
+      </div>
+      <figure class="fig">
+        <svg id="svg-con" viewBox="0 0 340 272" role="img" aria-label="Conectar los cables a la base">
+          <rect x="60" y="20" width="220" height="140" rx="16" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/>
+          <text class="txt-s" x="170" y="150" text-anchor="middle" data-es="base de enchufe vista por detrás" data-eu="entxufe-oinarria atzetik ikusita"></text>
+          <!-- unión interna de la tierra con las láminas -->
+          <path d="M170 44V30M120 30H220" stroke="#b8bec8" stroke-width="4"/>
+          <g class="b-sel" data-b="izq"><rect class="toque" x="80" y="88" width="60" height="50" rx="10"/><rect x="96" y="100" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/><circle class="borne" cx="110" cy="112" r="7"/><text class="txt" x="110" y="96" text-anchor="middle">1</text></g>
+          <g class="b-sel" data-b="der"><rect class="toque" x="200" y="88" width="60" height="50" rx="10"/><rect x="216" y="100" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/><circle class="borne" cx="230" cy="112" r="7"/><text class="txt" x="230" y="96" text-anchor="middle">2</text></g>
+          <g class="b-sel" data-b="tierra"><rect class="toque" x="140" y="36" width="70" height="46" rx="10"/><rect x="156" y="46" width="28" height="24" rx="4" fill="#c9ced6" stroke="#6b7280"/><circle class="borne" cx="170" cy="58" r="7"/><path d="M196 50v9M190 59h12M192 63h8M195 67h2" stroke="var(--marino)" stroke-width="1.8"/></g>
+          <g id="c-cables"></g>
+          <text class="txt" x="100" y="268" text-anchor="middle">L</text><text class="txt" x="170" y="268" text-anchor="middle">N</text><text class="txt" x="240" y="268" text-anchor="middle">PE</text>
+        </svg>
+      </figure>
+      <div class="estado" id="estado-con" aria-live="polite"></div>
+      <div class="mandos">
+        <button class="boton verde" id="b-comprobar" data-es="Comprobar" data-eu="Egiaztatu"></button>
+        <button class="boton claro" id="b-reset" data-es="Empezar de nuevo" data-eu="Berriz hasi"></button>
+      </div>
+    </div>
+
+    <!-- B) fuga -->
+    <div id="sim-fuga" class="bloque">
+      <div class="card">
+        <p class="es">Una lavadora con <b>carcasa metálica</b> está enchufada y una persona la toca. Pulsa <b>Provocar fallo</b> (un cable de fase toca la carcasa) y mira por dónde van los <b>puntos azules</b> de la corriente. Prueba <b>con</b> y <b>sin</b> toma de tierra.</p>
+        <p class="eu"><b>Karkasa metalikoa</b> duen garbigailu bat entxufatuta dago eta pertsona batek ukitzen du. Sakatu <b>Matxura eragin</b> (fase-kable batek karkasa ukitzen du) eta begiratu nondik doazen korrontearen <b>puntu urdinak</b>. Probatu lur-hartunearekin eta <b>gabe</b>.</p>
+      </div>
+      <figure class="fig">
+        <svg id="svg-fuga" viewBox="0 0 340 262" role="img" aria-label="Fuga a tierra">
+          <rect x="0" y="0" width="24" height="238" fill="#e5e1d8"/>
+          <rect x="0" y="238" width="340" height="24" fill="#d9d4c9"/>
+          <!-- base y clavija -->
+          <rect x="22" y="80" width="26" height="44" rx="4" fill="#fff" stroke="#8d95a3" stroke-width="1.5"/>
+          <rect x="48" y="90" width="18" height="24" rx="4" fill="#2d3340"/>
+          <path d="M66 102C104 102 100 150 140 150" stroke="#5c6575" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <!-- lavadora -->
+          <rect x="140" y="70" width="100" height="130" rx="10" fill="#e9ecef" stroke="#8d95a3" stroke-width="2"/>
+          <rect x="148" y="78" width="84" height="14" rx="3" fill="#d7dce3"/>
+          <circle cx="190" cy="142" r="34" fill="#cfd5de" stroke="#8d95a3" stroke-width="2"/>
+          <circle cx="190" cy="142" r="22" fill="#e9ecef"/>
+          <text class="txt-s" x="190" y="214" text-anchor="middle" data-es="carcasa metálica" data-eu="karkasa metalikoa"></text>
+          <g id="f-dibujo"></g>
+          <path id="f-ruta" d="M0 0" fill="none" stroke="none"/>
+          <g id="f-puntos"></g>
+          <!-- electrodo de tierra -->
+          <path d="M26 240h22M30 246h14M34 252h6" stroke="var(--marino)" stroke-width="2"/>
+        </svg>
+      </figure>
+      <div class="mandos">
+        <div class="chips" id="c-fallo">
+          <button type="button" data-v="0" aria-pressed="true" data-es="Sin fallo" data-eu="Matxurarik gabe"></button>
+          <button type="button" data-v="1" aria-pressed="false" data-es="Provocar fallo" data-eu="Matxura eragin"></button>
+        </div>
+        <div class="chips" id="c-tierra">
+          <button type="button" data-v="1" aria-pressed="true" data-es="Con toma de tierra" data-eu="Lur-hartunearekin"></button>
+          <button type="button" data-v="0" aria-pressed="false" data-es="Sin toma de tierra" data-eu="Lur-hartunerik gabe"></button>
+        </div>
+      </div>
+      <div class="lectura-g">
+        <div><small data-es="Estado" data-eu="Egoera"></small><b id="l-e">–</b></div>
+        <div><small data-es="Tensión carcasa" data-eu="Karkasaren tentsioa"></small><b id="l-v">0 V</b></div>
+        <div><small data-es="Corriente por la persona" data-eu="Pertsonatik korrontea"></small><b id="l-i">0 mA</b></div>
+        <div><small data-es="Diferencial 30 mA" data-eu="30 mA-ko diferentziala"></small><b id="l-d">–</b></div>
+      </div>
+      <div class="estado" id="estado-fuga" aria-live="polite"></div>
+      <p class="nota es">Valores aproximados: el cuerpo humano tiene unos 1500 Ω, así que a 230 V pasarían unos 150 mA. A partir de unos 30 mA la corriente puede ser mortal.</p>
+      <p class="nota eu">Gutxi gorabeherako balioak: giza gorputzak 1500 Ω inguru ditu; beraz, 230 V-an 150 mA inguru igaroko lirateke. 30 mA ingurutik aurrera korrontea hilgarria izan daiteke.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. SINBOLOA ============ -->
+  <section class="panel" data-tab="sinboloa" data-es="Símbolo" data-eu="Sinboloa" hidden>
+    <div class="simbolos">
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M36 46a24 24 0 0 0 48 0M60 70v42"/></svg>
+        <b data-es="Base de enchufe" data-eu="Entxufe-oinarria"></b><small data-es="sin toma de tierra" data-eu="lur-hartunerik gabe"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M36 46a24 24 0 0 0 48 0M60 70v42M28 36h64"/></svg>
+        <b data-es="Base con toma de tierra" data-eu="Oinarria lur-hartunearekin"></b><small data-es="la raya de arriba = tierra" data-eu="goiko marra = lurra"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M30 46a24 24 0 0 0 48 0M54 70v42M22 36h64"/><text class="s-t" x="92" y="58">2</text></svg>
+        <b data-es="Base doble" data-eu="Oinarri bikoitza"></b><small data-es="el número dice cuántas" data-eu="zenbakiak zenbat diren dio"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M36 40a24 24 0 0 0 48 0M60 64v48M28 30h64M52 92l16-8M52 100l16-8M52 108l16-8"/><text class="s-t" x="72" y="84" style="font-size:11px">3P+T</text></svg>
+        <b data-es="Base trifásica" data-eu="Oinarri trifasikoa"></b><small data-es="3 rayas = 3 fases" data-eu="3 marra = 3 fase"></small></div>
+      <div class="simbolo"><svg viewBox="0 0 120 120"><path class="s-l" d="M60 20v44M36 64h48M44 76h32M53 88h14"/></svg>
+        <b data-es="Toma de tierra" data-eu="Lur-hartunea"></b><small data-es="conductor PE verde-amarillo" data-eu="PE eroale berde-horia"></small></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Esquema unifilar del circuito C2" data-eu="C2 zirkuituaren hari bakarreko eskema"></h2>
+      <svg viewBox="0 0 340 110" style="display:block;width:100%;height:auto;background:#fff;border-radius:14px" role="img" aria-label="Unifilar C2">
+        <g class="s-l">
+          <rect x="10" y="30" width="46" height="34" rx="4"/>
+          <path d="M56 47H300M100 55l8-16M108 55l8-16M116 55l8-16"/>
+          <path d="M170 47v14M146 75a24 24 0 0 0 48 0M140 67h60"/>
+          <path d="M280 47v14M256 75a24 24 0 0 0 48 0M250 67h60"/>
+        </g>
+        <text class="s-t" x="33" y="52" text-anchor="middle" style="font-size:11px">C2</text>
+        <text class="txt-s" x="112" y="76" text-anchor="middle">3 × 2,5 mm²</text>
+        <text class="txt-s" x="33" y="82" text-anchor="middle">PIA 16 A</text>
+      </svg>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- cambio de simulador ---------- */
+  $("modo").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    var m = b.getAttribute("data-m");
+    [].forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    $("sim-con").hidden = m !== "con";
+    $("sim-fuga").hidden = m !== "fuga";
+  });
+
+  /* ---------- A) CONECTAR LOS CABLES ---------- */
+  // Posición de cada borne (punto donde termina el cable)
+  var BORNES = { izq: { x: 110, y: 112 }, der: { x: 230, y: 112 }, tierra: { x: 170, y: 58 } };
+  // Cada cable: posición abajo y color
+  var CABLES = { L: { x: 100, color: "#8a5a2b" }, N: { x: 170, color: "#2f62b8" }, PE: { x: 240, color: "#3f9b3a" } };
+  var sel = null;                                // cable elegido (esperando borne)
+  var con = { L: null, N: null, PE: null };      // borne donde está conectado cada cable
+  var comprobado = false;
+
+  function dibujarCables(){
+    var g = "";
+    Object.keys(CABLES).forEach(function(c){
+      var k = CABLES[c], b = con[c] ? BORNES[con[c]] : null, d;
+      // Si está conectado, una curva hasta el borne; si no, un trozo suelto abajo
+      d = b ? "M" + k.x + " 250V214C" + k.x + " 180 " + b.x + " " + (b.y + 70) + " " + b.x + " " + b.y
+            : "M" + k.x + " 250V206";
+      g += '<g class="c-sel" data-c="' + c + '">';
+      g += '<rect class="toque" x="' + (k.x - 22) + '" y="190" width="44" height="66" rx="10"/>';
+      if (sel === c) g += '<path d="' + d + '" stroke="var(--naranja)" stroke-width="13" fill="none" stroke-linecap="round" opacity=".55"/>';
+      g += '<path d="' + d + '" stroke="' + k.color + '" stroke-width="6" fill="none" stroke-linecap="round"/>';
+      if (c === "PE") g += '<path d="' + d + '" stroke="#f2d000" stroke-width="6" fill="none" stroke-dasharray="8 8"/>';
+      if (!b) g += '<circle cx="' + k.x + '" cy="206" r="4" fill="#d4a017"/>';   // cobre pelado
+      g += '</g>';
+    });
+    $("c-cables").innerHTML = g;
+  }
+
+  function mensajeCon(){
+    var e = $("estado-con");
+    e.className = "estado";
+    if (!comprobado) {
+      e.textContent = sel ? T("Ahora toca el borne donde va el cable " + sel + ".", "Orain ukitu " + sel + " kablea doan bornea.")
+                          : T("Toca un cable y después el borne donde va.", "Ukitu kable bat eta gero doan bornea.");
+      return;
+    }
+    if (!con.L || !con.N || !con.PE) { e.textContent = T("Faltan cables por conectar.", "Kable batzuk konektatu gabe daude."); return; }
+    if (con.PE !== "tierra") {
+      e.className = "estado mal";
+      e.textContent = T("¡Peligro! El verde-amarillo (PE) va SIEMPRE al borne de tierra ⏚. Así, la fase llegaría a la tierra y las carcasas metálicas de los aparatos quedarían a 230 V.",
+                        "Arriskua! Berde-horia (PE) BETI lurreko bornera ⏚ doa. Horrela, fasea lurrera iritsiko litzateke eta aparatuen karkasa metalikoak 230 V-an geratuko lirateke.");
+      return;
+    }
+    e.className = "estado ok";
+    e.textContent = T("¡Bien conectado! La tierra va al borne central ⏚, unido a las láminas de tierra. Fase y neutro van a los bornes de los lados: en una Schuko da igual cuál, porque la clavija entra en las dos posiciones.",
+                      "Ondo konektatuta! Lurra erdiko bornera ⏚ doa, lurreko xaflekin lotuta. Fasea eta neutroa alboetako borneetara doaz: Schuko batean berdin du zein, klabija bi posizioetan sartzen baita.");
+  }
+
+  $("svg-con").addEventListener("click", function(ev){
+    var c = ev.target.closest(".c-sel"), b = ev.target.closest(".b-sel");
+    comprobado = false;
+    if (c) { sel = c.getAttribute("data-c"); }
+    else if (b && sel) {
+      var id = b.getAttribute("data-b");
+      // si ya había otro cable en ese borne, se suelta
+      Object.keys(con).forEach(function(k){ if (con[k] === id) con[k] = null; });
+      con[sel] = id; sel = null;
+    }
+    dibujarCables(); mensajeCon();
+  });
+  $("b-comprobar").addEventListener("click", function(){ comprobado = true; sel = null; dibujarCables(); mensajeCon(); });
+  $("b-reset").addEventListener("click", function(){ con = { L: null, N: null, PE: null }; sel = null; comprobado = false; dibujarCables(); mensajeCon(); });
+
+  /* ---------- B) FUGA CON Y SIN TIERRA ---------- */
+  var fallo = false, tierra = true;
+  var ruta = null;                            // camino de la corriente de fuga (texto «d» del SVG) o null
+  function tramo(d, corriente){
+    if (corriente) ruta = d;                  // los puntos azules seguirán este camino
+    return '<path class="hilo' + (corriente ? " cor" : "") + '" d="' + d + '"/>';
+  }
+  function dibujarFuga(){
+    var g = "";
+    ruta = null;
+    var porTierra = fallo && tierra;         // la fuga se va por el cable PE
+    var porPersona = fallo && !tierra;        // la fuga pasa por la persona
+    // cable de tierra: de la carcasa a la base y de la base al electrodo
+    var pe1 = "M232 104V190H140C96 190 92 116 48 116H36", pe2 = "M36 116V236";
+    g += '<path d="' + pe1 + '" stroke="#3f9b3a" stroke-width="3" fill="none"/><path d="' + pe1 + '" stroke="#f2d000" stroke-width="3" fill="none" stroke-dasharray="6 6"/>';
+    if (tierra) g += '<path d="' + pe2 + '" stroke="#3f9b3a" stroke-width="3" fill="none"/><path d="' + pe2 + '" stroke="#f2d000" stroke-width="3" fill="none" stroke-dasharray="6 6"/>';
+    else g += '<path d="' + pe2 + '" stroke="#9aa3b2" stroke-width="2" fill="none" stroke-dasharray="3 5"/><path d="M28 168l16 16M44 168l-16 16" stroke="var(--rojo)" stroke-width="3.5" stroke-linecap="round"/>';
+    if (porTierra) g += tramo(pe1 + "V236", true);
+    // fallo: un cable de fase toca la carcasa (chispa)
+    if (fallo) g += '<path d="M150 150H200L232 104" stroke="#8a5a2b" stroke-width="3" fill="none"/><path d="M232 92l6 8 8-2-5 8 6 7-9-1-3 9-3-9-9 1 6-7-5-8 8 2z" fill="#ffd257" stroke="var(--rojo)" stroke-width="1.5"/>';
+    // persona
+    var col = porPersona ? "var(--rojo)" : "var(--marino)";
+    g += '<g stroke="' + col + '" stroke-width="4" stroke-linecap="round" fill="none">';
+    g += '<circle cx="292" cy="96" r="12" fill="#fff"/><path d="M292 108V172M292 172L278 236M292 172L306 236M292 124L242 118M292 124L312 152"/></g>';
+    if (porPersona) {
+      g += tramo("M242 118L292 124V172L278 236", true);
+      g += '<path d="M268 88l-6-6M316 88l6-6M292 76v-8" stroke="var(--rojo)" stroke-width="2.5" stroke-linecap="round"/>';
+    }
+    $("f-dibujo").innerHTML = g;
+    if (ruta) $("f-ruta").setAttribute("d", ruta);
+
+    // lecturas
+    $("l-e").textContent = !fallo ? T("Normal", "Normala") : (tierra ? T("Fuga a tierra", "Lurrerako ihesa") : T("¡Descarga!", "Deskarga!"));
+    $("l-e").style.color = !fallo ? "" : (tierra ? "var(--naranja-osc)" : "var(--rojo)");
+    $("l-v").textContent = !fallo ? "0 V" : (tierra ? "< 50 V" : "230 V");
+    $("l-i").textContent = porPersona ? "≈ 150 mA" : (fallo ? T("casi 0", "ia 0") : "0 mA");
+    $("l-i").style.color = porPersona ? "var(--rojo)" : "";
+    $("l-d").textContent = fallo ? T("Dispara", "Jauzi egiten du") : T("En reposo", "Atsedenean");
+
+    var e = $("estado-fuga");
+    if (!fallo) { e.className = "estado"; e.textContent = T("Todo normal: la lavadora funciona y la carcasa no tiene tensión. Pulsa «Provocar fallo».", "Dena normal: garbigailuak funtzionatzen du eta karkasak ez du tentsiorik. Sakatu «Matxura eragin»."); }
+    else if (tierra) { e.className = "estado ok"; e.textContent = T("La corriente de fuga se va por el cable de tierra, que es el camino más fácil. El diferencial lo detecta y corta en milisegundos. La persona está a salvo.", "Ihes-korrontea lurreko kabletik joaten da, biderik errazena baita. Diferentzialak hauteman eta milisegundotan mozten du. Pertsona salbu dago."); }
+    else { e.className = "estado mal"; e.textContent = T("Sin tierra, la carcasa se queda a 230 V. Al tocarla, la corriente pasa por tu cuerpo hasta el suelo: ¡descarga eléctrica! Solo te salva que el diferencial de 30 mA funcione bien.", "Lurrik gabe, karkasa 230 V-an geratzen da. Ukitzean, korrontea zure gorputzetik lurreraino igarotzen da: deskarga elektrikoa! 30 mA-ko diferentzialak ondo funtzionatzeak bakarrik salbatzen zaitu."); }
+  }
+  // Grupos de chips: marca el pulsado y avisa con su valor
+  function chips(id, fn){
+    $(id).addEventListener("click", function(ev){
+      var b = ev.target.closest("button"); if (!b) return;
+      [].forEach.call(this.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      fn(b.getAttribute("data-v") === "1"); dibujarFuga();
+    });
+  }
+  chips("c-fallo", function(v){ fallo = v; });
+  chips("c-tierra", function(v){ tierra = v; });
+
+  // Puntos azules de la corriente de fuga (se mueven con requestAnimationFrame)
+  function bucle(){
+    var s = "";
+    // solo se dibujan si hay corriente de fuga y el dibujo se ve en pantalla
+    if (ruta && $("svg-fuga").getBoundingClientRect().width > 0) {
+      try {
+        var p = $("f-ruta"), L = p.getTotalLength();
+        for (var k = 0; k < 10; k++) {
+          var q = p.getPointAtLength(((performance.now() / 1000 * 0.35 + k / 10) % 1) * L);
+          s += '<circle cx="' + q.x.toFixed(1) + '" cy="' + q.y.toFixed(1) + '" r="3.5" fill="#2b6cb0"/>';
+        }
+      } catch (e) {}
+    }
+    $("f-puntos").innerHTML = s;
+    requestAnimationFrame(bucle);
+  }
+
+  alCambiarIdioma(function(){ dibujarCables(); mensajeCon(); dibujarFuga(); });
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

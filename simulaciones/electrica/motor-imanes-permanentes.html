@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motor síncrono de imanes permanentes</title>
+<meta name="description" content="Partes del motor de imanes permanentes (PMSM / brushless), por qué necesita variador, simulador de sincronismo, usos, comparación y seguridad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.pieza{fill:#e9ecef;stroke:#8d95a3;stroke-width:1.5}
+.chapa{fill:#b9c0cc;stroke:#6b7280;stroke-width:1.2}
+.cobre{fill:#e08a3c;stroke:#9a5214;stroke-width:1.2}
+.iman-n{fill:#d94848;stroke:#8f1f1f;stroke-width:1.2}
+.iman-s{fill:#3b74c4;stroke:#1d4a85;stroke-width:1.2}
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.num{fill:var(--naranja);stroke:#fff;stroke-width:1.5}
+.num-t{font-size:10px;font-weight:700;fill:var(--marino);text-anchor:middle}
+.bloque{fill:#f1f3f6;stroke:#8d95a3;stroke-width:1.5}
+.flecha{fill:none;stroke:var(--naranja);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de potencia" data-eu="Potentzia-elementuak"></p>
+      <h1 data-es="Motor síncrono de imanes permanentes" data-eu="Iman iraunkorreko motor sinkronoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ¿QUÉ ES? / ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">motor síncrono de imanes permanentes</span> (en inglés <b>PMSM</b>; los pequeños se llaman <b>brushless</b>, «sin escobillas») tiene un <b>estátor bobinado</b> como el de un motor asíncrono, pero su rotor lleva <b>imanes</b> muy potentes de neodimio.</p>
+      <p class="eu"><span class="clave">Iman iraunkorreko motor sinkronoak</span> (ingelesez <b>PMSM</b>; txikiei <b>brushless</b> deitzen zaie, «eskobillarik gabea») motor asinkrono batenaren antzeko <b>estatore harilkatua</b> du, baina errotoreak neodimiozko <b>iman</b> oso indartsuak ditu.</p>
+      <p class="es">El rotor no necesita corriente: ya es un imán. Por eso gasta menos energía y se calienta menos. A cambio, <b>siempre necesita un variador o driver electrónico</b> para funcionar.</p>
+      <p class="eu">Errotoreak ez du korronterik behar: dagoeneko iman bat da. Horregatik energia gutxiago kontsumitzen du eta gutxiago berotzen da. Horren truke, <b>beti behar du maiztasun-aldagailu edo driver elektroniko bat</b> funtzionatzeko.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-partes" viewBox="0 0 360 260" role="img" aria-label="Corte del motor de imanes permanentes">
+          <g class="resaltable" data-parte="carcasa">
+            <circle cx="130" cy="130" r="112" fill="#e9ecef" stroke="#8d95a3" stroke-width="2"/>
+            <path d="M40 238h180" stroke="#8d95a3" stroke-width="8" stroke-linecap="round"/>
+          </g>
+          <g class="resaltable" data-parte="estator">
+            <circle cx="130" cy="130" r="100" fill="#b9c0cc" stroke="#6b7280" stroke-width="1.5"/>
+            <circle cx="130" cy="130" r="64" fill="#fff" stroke="#6b7280" stroke-width="1.2"/>
+          </g>
+          <g class="resaltable" data-parte="devanado" id="bobinas-fijas"></g>
+          <g class="resaltable" data-parte="iman" id="rotor-fijo"></g>
+          <g class="resaltable" data-parte="eje">
+            <circle cx="130" cy="130" r="12" fill="#9aa3b2" stroke="#5d6576" stroke-width="1.5"/>
+            <rect x="126" y="116" width="8" height="5" fill="#5d6576"/>
+          </g>
+          <g class="resaltable" data-parte="encoder">
+            <path d="M242 130H270" stroke="#9aa3b2" stroke-width="8"/>
+            <circle cx="300" cy="130" r="34" fill="#f1f3f6" stroke="#8d95a3" stroke-width="1.5"/>
+            <circle cx="300" cy="130" r="26" fill="none" stroke="#2d3340" stroke-width="6" stroke-dasharray="3 3"/>
+            <circle cx="300" cy="130" r="6" fill="#9aa3b2"/>
+            <rect x="322" y="96" width="22" height="20" rx="4" fill="#2d3340"/>
+            <text class="txt-s" x="300" y="184" text-anchor="middle" data-es="encoder (detrás)" data-eu="enkoderra (atzean)"></text>
+          </g>
+          <circle class="num" cx="30" cy="40" r="9"/><text class="num-t" x="30" y="44">1</text>
+          <circle class="num" cx="226" cy="64" r="9"/><text class="num-t" x="226" y="68">2</text>
+          <circle class="num" cx="226" cy="196" r="9"/><text class="num-t" x="226" y="200">3</text>
+          <circle class="num" cx="163" cy="97" r="8"/><text class="num-t" x="163" y="101">4</text>
+          <circle class="num" cx="148" cy="148" r="8"/><text class="num-t" x="148" y="152">5</text>
+          <circle class="num" cx="340" cy="164" r="9"/><text class="num-t" x="340" y="168">6</text>
+        </svg>
+        <figcaption data-es="Corte del motor. Rojo = polo N, azul = polo S. Toca una parte" data-eu="Motorraren ebakidura. Gorria = N poloa, urdina = S poloa. Ukitu atal bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-partes">
+        <li><button data-parte="carcasa"><span class="n">1</span><span><b class="es">Carcasa</b><b class="eu">Karkasa</b><small class="es">Protege el motor y saca el calor. Muchas veces es más pequeña que la de un asíncrono de la misma potencia.</small><small class="eu">Motorra babesten du eta beroa ateratzen du. Askotan potentzia bereko asinkrono batena baino txikiagoa da.</small></span></button></li>
+        <li><button data-parte="estator"><span class="n">2</span><span><b class="es">Estátor</b><b class="eu">Estatorea</b><small class="es">Chapas de hierro con ranuras, como en el motor asíncrono.</small><small class="eu">Artekak dituzten burdinazko xaflak, motor asinkronoan bezala.</small></span></button></li>
+        <li><button data-parte="devanado"><span class="n">3</span><span><b class="es">Devanado del estátor</b><b class="eu">Estatorearen harilkadura</b><small class="es">Bobinas de cobre de las tres fases. El variador les da corriente para crear el campo giratorio.</small><small class="eu">Hiru faseetako kobrezko harilak. Aldagailuak korrontea ematen die eremu birakaria sortzeko.</small></span></button></li>
+        <li><button data-parte="iman"><span class="n">4</span><span><b class="es">Rotor con imanes de neodimio</b><b class="eu">Errotorea, neodimiozko imanekin</b><small class="es">Imanes N y S alternados pegados o metidos en el rotor. Aquí hay 4 polos (p = 2 pares).</small><small class="eu">N eta S iman txandakatuak, errotorean itsatsita edo sartuta. Hemen 4 polo daude (p = 2 pare).</small></span></button></li>
+        <li><button data-parte="eje"><span class="n">5</span><span><b class="es">Eje y rodamientos</b><b class="eu">Ardatza eta errodamenduak</b><small class="es">Sacan el giro hacia la máquina. No hay escobillas ni anillos.</small><small class="eu">Biraketa makinara ateratzen dute. Ez dago eskobillarik ezta eraztunik ere.</small></span></button></li>
+        <li><button data-parte="encoder"><span class="n">6</span><span><b class="es">Sensor de posición (encoder)</b><b class="eu">Posizio-sentsorea (enkoderra)</b><small class="es">Dice al variador dónde están los imanes en cada momento (encoder, resolver o sensores Hall).</small><small class="eu">Imanak une bakoitzean non dauden esaten dio aldagailuari (enkoderra, resolver-a edo Hall sentsoreak).</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. FUNCIONAMIENTO / FUNTZIONAMENDUA ============ -->
+  <section class="panel" data-tab="funtzionamendua" data-es="Funcionamiento" data-eu="Funtzionamendua" hidden>
+    <div class="card">
+      <h2 data-es="Los imanes siguen al campo" data-eu="Imanek eremuari jarraitzen diote"></h2>
+      <ol>
+        <li><span class="es">Las bobinas del estátor crean un <b>campo magnético giratorio</b>, igual que en el motor asíncrono.</span><span class="eu">Estatoreko harilek <b>eremu magnetiko birakaria</b> sortzen dute, motor asinkronoan bezala.</span></li>
+        <li><span class="es">Los polos del campo <b>atraen a los imanes</b> del rotor (N atrae a S).</span><span class="eu">Eremuaren poloek errotoreko <b>imanak erakartzen dituzte</b> (N-k S erakartzen du).</span></li>
+        <li><span class="es">El rotor gira <b>enganchado</b> al campo, a su misma velocidad: por eso es <b>síncrono</b>.</span><span class="eu">Errotoreak eremuari <b>lotuta</b> biratzen du, abiadura berean: horregatik da <b>sinkronoa</b>.</span></li>
+      </ol>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Sin deslizamiento</h3><h3 class="eu">Labainketarik gabe</h3>
+        <p class="es">Gira justo a la velocidad de sincronismo:</p><p class="eu">Sinkronismo-abiaduran biratzen du, zehazki:</p>
+        <p><span class="formula">n = 60 · f / p</span></p>
+        <p class="es">Con p = 2 y f = 50 Hz → <b>1500 rpm exactas</b> (un asíncrono iría a unas 1450 rpm).</p>
+        <p class="eu">p = 2 eta f = 50 Hz-ekin → <b>1500 rpm zehatz</b> (asinkrono bat 1450 rpm inguruan joango litzateke).</p></div>
+      <div class="card"><h3 class="es">Velocidad = frecuencia</h3><h3 class="eu">Abiadura = maiztasuna</h3>
+        <p class="es">Para cambiar la velocidad, el variador cambia la <b>frecuencia</b>: 25 Hz → 750 rpm; 100 Hz → 3000 rpm.</p>
+        <p class="eu">Abiadura aldatzeko, aldagailuak <b>maiztasuna</b> aldatzen du: 25 Hz → 750 rpm; 100 Hz → 3000 rpm.</p></div>
+      <div class="card"><h3 class="es">Alto rendimiento</h3><h3 class="eu">Errendimendu handia</h3>
+        <p class="es">El rotor no tiene corriente ni pérdidas en las barras. Llega a clases de eficiencia <b>IE4 e IE5</b>.</p>
+        <p class="eu">Errotoreak ez du korronterik, ezta galerarik barretan ere. <b>IE4 eta IE5</b> efizientzia-klaseetara iristen da.</p></div>
+      <div class="card"><h3 class="es">Si la carga es excesiva</h3><h3 class="eu">Karga gehiegizkoa bada</h3>
+        <p class="es">Los imanes se quedan cada vez más atrás del campo. Si la carga es demasiado grande, se <b>«desenganchan»</b> (pérdida de sincronismo) y el variador da fallo.</p>
+        <p class="eu">Imanak gero eta atzerago geratzen dira eremuarekiko. Karga handiegia bada, <b>«askatu»</b> egiten dira (sinkronismo-galera) eta aldagailuak akatsa ematen du.</p></div>
+    </div>
+    <p class="nota es">Míralo en la pestaña «Pruébalo».</p>
+    <p class="nota eu">Ikusi «Probatu» fitxan.</p>
+  </section>
+
+  <!-- ============ 3. PRUÉBALO / PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Con el <b>variador</b>: pulsa Marcha y sube la <b>frecuencia</b>. Mira cómo los imanes siguen al campo y el deslizamiento es 0. Sube la <b>carga</b>. Después prueba a <b>conectarlo directo a la red</b> (50 Hz).</p>
+      <p class="eu"><b>Aldagailuarekin</b>: sakatu Martxa eta igo <b>maiztasuna</b>. Begiratu nola imanek eremuari jarraitzen dioten eta labainketa 0 den. Igo <b>karga</b>. Gero probatu <b>sarera zuzenean konektatzen</b> (50 Hz).</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-sim" viewBox="0 0 360 250" role="img" aria-label="Simulador del motor de imanes permanentes">
+        <!-- estátor -->
+        <circle cx="130" cy="125" r="108" fill="#b9c0cc" stroke="#6b7280" stroke-width="1.5"/>
+        <g id="polos-campo"></g>
+        <g id="bobinas-sim"></g>
+        <circle cx="130" cy="125" r="64" fill="#fff" stroke="#6b7280" stroke-width="1.2"/>
+        <!-- rotor con imanes (gira) -->
+        <g id="rotor-sim"></g>
+        <circle cx="130" cy="125" r="11" fill="#9aa3b2" stroke="#5d6576" stroke-width="1.5"/>
+        <!-- encoder -->
+        <circle cx="300" cy="70" r="30" fill="#f1f3f6" stroke="#8d95a3" stroke-width="1.5"/>
+        <circle cx="300" cy="70" r="22" fill="none" stroke="#2d3340" stroke-width="5" stroke-dasharray="3 3"/>
+        <path id="enc-marca" d="M300 70V48" stroke="var(--naranja)" stroke-width="4" stroke-linecap="round"/>
+        <text class="txt-s" x="300" y="116" text-anchor="middle" data-es="encoder" data-eu="enkoderra"></text>
+        <text id="enc-txt" class="txt" x="300" y="132" text-anchor="middle">0°</text>
+        <!-- leyenda -->
+        <rect x="262" y="160" width="12" height="12" rx="3" fill="#d94848" opacity=".45"/><text class="txt-s" x="280" y="170" data-es="campo N" data-eu="N eremua"></text>
+        <rect x="262" y="178" width="12" height="12" rx="3" fill="#3b74c4" opacity=".45"/><text class="txt-s" x="280" y="188" data-es="campo S" data-eu="S eremua"></text>
+        <rect x="262" y="196" width="12" height="12" rx="3" fill="#d94848"/><text class="txt-s" x="280" y="206" data-es="imán N" data-eu="N imana"></text>
+        <rect x="262" y="214" width="12" height="12" rx="3" fill="#3b74c4"/><text class="txt-s" x="280" y="224" data-es="imán S" data-eu="S imana"></text>
+      </svg>
+      <figcaption data-es="Animación a cámara lenta (50 veces más lenta)" data-eu="Kamera geldoko animazioa (50 aldiz motelago)"></figcaption>
+    </figure>
+    <div class="mandos">
+      <button class="boton verde" id="b-marcha" data-es="Marcha" data-eu="Martxa"></button>
+      <button class="boton claro" id="b-paro" data-es="Paro" data-eu="Geldialdia"></button>
+      <div class="chips" id="chips-modo">
+        <button type="button" data-modo="var" aria-pressed="true" data-es="Con variador" data-eu="Aldagailuarekin"></button>
+        <button type="button" data-modo="red" aria-pressed="false" data-es="Directo a la red (50 Hz)" data-eu="Zuzenean sarera (50 Hz)"></button>
+      </div>
+    </div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Frecuencia (consigna del variador)" data-eu="Maiztasuna (aldagailuaren kontsigna)"></span><output id="f-t">50 Hz</output></label><input id="f" type="range" min="0" max="100" step="5" value="50"></div>
+      <div class="deslizador"><label><span data-es="Carga" data-eu="Karga"></span><output id="carga-t">40 %</output></label><input id="carga" type="range" min="0" max="120" step="5" value="40"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Frecuencia" data-eu="Maiztasuna"></small><b id="r-f">0 Hz</b></div>
+      <div><small data-es="Sincronismo ns" data-eu="Sinkronismoa ns"></small><b id="r-ns">0 rpm</b></div>
+      <div><small data-es="Rotor n" data-eu="Errotorea n"></small><b id="r-n">0 rpm</b></div>
+      <div><small data-es="Deslizamiento" data-eu="Labainketa"></small><b id="r-s">–</b></div>
+      <div><small data-es="Retraso imanes" data-eu="Imanen atzerapena"></small><b id="r-d">–</b></div>
+    </div>
+    <div class="estado" id="estado"></div>
+    <p class="nota es">Motor de ejemplo: 4 polos (p = 2). «Retraso imanes» es lo que los imanes van por detrás del campo (en grados eléctricos): crece con la carga.</p>
+    <p class="nota eu">Adibideko motorra: 4 polo (p = 2). «Imanen atzerapena» imanak eremuaren atzetik zenbat doazen da (gradu elektrikotan): kargarekin handitzen da.</p>
+  </section>
+
+  <!-- ============ 4. ¿POR QUÉ VARIADOR? / ZERGATIK ALDAGAILUA? ============ -->
+  <section class="panel" data-tab="aldagailua" data-es="¿Por qué variador?" data-eu="Zergatik aldagailua?" hidden>
+    <div class="card">
+      <p class="es">Si se conecta directamente a la red de 50 Hz, el campo empieza a girar a 1500 rpm de golpe. El rotor, con su peso (inercia), <b>no puede pasar de 0 a 1500 rpm en un instante</b>: los imanes son atraídos hacia delante y hacia atrás muy deprisa y el motor solo <b>vibra</b>, no arranca.</p>
+      <p class="eu">50 Hz-ko sarera zuzenean konektatzen bada, eremua bat-batean 1500 rpm-tan hasten da biratzen. Errotoreak, bere pisuarekin (inertzia), <b>ezin du une batean 0-tik 1500 rpm-ra pasatu</b>: imanak oso azkar erakartzen dira aurrera eta atzera, eta motorrak <b>dardara</b> besterik ez du egiten, ez da abiarazten.</p>
+      <p class="es">El <span class="clave">variador (driver)</span> lo soluciona:</p>
+      <p class="eu"><span class="clave">Aldagailuak (driver-ak)</span> konpontzen du:</p>
+      <ul>
+        <li><span class="es">Arranca con <b>frecuencia baja</b> y la sube poco a poco (rampa).</span><span class="eu"><b>Maiztasun txikiarekin</b> abiarazten du eta pixkanaka igotzen du (arrapala).</span></li>
+        <li><span class="es">Lee el <b>encoder</b> para saber dónde están los imanes y da corriente a las bobinas justas en cada momento.</span><span class="eu"><b>Enkoderra</b> irakurtzen du imanak non dauden jakiteko, eta une bakoitzean behar diren harilei ematen die korrontea.</span></li>
+        <li><span class="es">Cambiando la frecuencia, <b>regula la velocidad</b> con precisión.</span><span class="eu">Maiztasuna aldatuz, <b>abiadura</b> zehaztasunez <b>erregulatzen du</b>.</span></li>
+      </ul>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 360 170" role="img" aria-label="Red, variador, motor y encoder">
+        <rect class="bloque" x="6" y="40" width="70" height="60" rx="10"/>
+        <text class="txt" x="41" y="66" text-anchor="middle" data-es="Red" data-eu="Sarea"></text>
+        <text class="txt-s" x="41" y="82" text-anchor="middle">400 V 50 Hz</text>
+        <path class="flecha" d="M78 70H100M94 64l6 6-6 6"/>
+        <rect x="104" y="22" width="150" height="96" rx="12" fill="#fff0dc" stroke="var(--naranja)" stroke-width="2"/>
+        <text class="txt" x="179" y="38" text-anchor="middle" data-es="Variador / driver" data-eu="Aldagailua / driver-a"></text>
+        <rect class="bloque" x="112" y="50" width="40" height="40" rx="6"/><text class="txt-s" x="132" y="74" text-anchor="middle">AC→DC</text>
+        <rect class="bloque" x="160" y="50" width="38" height="40" rx="6"/><text class="txt-s" x="179" y="74" text-anchor="middle" data-es="bus CC" data-eu="DC busa"></text>
+        <rect class="bloque" x="206" y="50" width="40" height="40" rx="6"/><text class="txt-s" x="226" y="74" text-anchor="middle">DC→AC</text>
+        <text class="txt-s" x="179" y="108" text-anchor="middle" data-es="frecuencia variable 0-100 Hz" data-eu="maiztasun aldakorra 0-100 Hz"></text>
+        <path class="flecha" d="M256 70H278M272 64l6 6-6 6"/>
+        <circle cx="314" cy="70" r="32" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+        <text class="txt" x="314" y="68" text-anchor="middle" font-size="13">M</text>
+        <text class="txt-s" x="314" y="82" text-anchor="middle">PMSM</text>
+        <path d="M314 102V146H179V122" fill="none" stroke="var(--azul)" stroke-width="2" stroke-dasharray="5 4"/>
+        <path d="M173 128l6-6 6 6" fill="none" stroke="var(--azul)" stroke-width="2"/>
+        <text class="txt-s" x="246" y="162" text-anchor="middle" data-es="encoder: posición de los imanes" data-eu="enkoderra: imanen posizioa"></text>
+      </svg>
+      <figcaption data-es="El variador rectifica la red, la guarda en el bus de continua y crea una nueva alterna de frecuencia variable" data-eu="Aldagailuak sarea zuzentzen du, korronte zuzeneko busean gordetzen du eta maiztasun aldakorreko alterna berri bat sortzen du"></figcaption>
+    </figure>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Imanes permanentes → <b>siempre con variador</b>. El variador arranca con rampa, mira el encoder y fija la velocidad con la frecuencia.</p>
+      <p class="eu">Iman iraunkorrak → <b>beti aldagailuarekin</b>. Aldagailuak arrapalarekin abiarazten du, enkoderrari begiratzen dio eta abiadura maiztasunarekin finkatzen du.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. USOS Y SEGURIDAD / ERABILERAK ETA SEGURTASUNA ============ -->
+  <section class="panel" data-tab="erabilerak" data-es="Usos y seguridad" data-eu="Erabilerak eta segurtasuna" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Coches eléctricos</h3><h3 class="eu">Auto elektrikoak</h3>
+        <p class="es">Mucha potencia en poco peso y gran rendimiento: más kilómetros con la misma batería.</p>
+        <p class="eu">Potentzia handia pisu txikian eta errendimendu handia: kilometro gehiago bateria berarekin.</p></div>
+      <div class="card"><h3 class="es">Servomotores y robots</h3><h3 class="eu">Serbomotorrak eta robotak</h3>
+        <p class="es">Control muy preciso de posición y velocidad gracias al encoder.</p>
+        <p class="eu">Posizioaren eta abiaduraren kontrol oso zehatza, enkoderrari esker.</p></div>
+      <div class="card"><h3 class="es">Ventiladores EC y bombas</h3><h3 class="eu">EC haizagailuak eta ponpak</h3>
+        <p class="es">Ventiladores de climatización y bombas de calefacción con la electrónica dentro del motor: ahorran mucha energía.</p>
+        <p class="eu">Klimatizazioko haizagailuak eta berokuntzako ponpak, elektronika motorraren barruan dutela: energia asko aurrezten dute.</p></div>
+      <div class="card"><h3 class="es">Bicicletas y patinetes eléctricos</h3><h3 class="eu">Bizikleta eta patinete elektrikoak</h3>
+        <p class="es">Motor brushless en el buje de la rueda, alimentado por batería a través de un controlador.</p>
+        <p class="eu">Brushless motorra gurpilaren bujean, bateriak elikatua kontrolagailu baten bidez.</p></div>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th></th><th data-es="Jaula de ardilla" data-eu="Katagorri-kaiola"></th><th data-es="Imanes permanentes" data-eu="Iman iraunkorrak"></th></tr></thead>
+        <tbody>
+          <tr><th data-es="Rotor" data-eu="Errotorea"></th><td data-es="Barras de aluminio" data-eu="Aluminiozko barrak"></td><td data-es="Imanes de neodimio" data-eu="Neodimiozko imanak"></td></tr>
+          <tr><th data-es="Velocidad" data-eu="Abiadura"></th><td data-es="Algo menor que ns (deslizamiento)" data-eu="ns baino zertxobait txikiagoa (labainketa)"></td><td data-es="Igual a ns (sin deslizamiento)" data-eu="ns-ren berdina (labainketarik gabe)"></td></tr>
+          <tr><th data-es="Conexión" data-eu="Konexioa"></th><td data-es="Directo a la red o con variador" data-eu="Zuzenean sarera edo aldagailuarekin"></td><td data-es="Siempre con variador" data-eu="Beti aldagailuarekin"></td></tr>
+          <tr><th data-es="Rendimiento" data-eu="Errendimendua"></th><td data-es="Bueno (IE2-IE3, algunos IE4)" data-eu="Ona (IE2-IE3, batzuk IE4)"></td><td data-es="Muy alto (IE4-IE5)" data-eu="Oso handia (IE4-IE5)"></td></tr>
+          <tr><th data-es="Tamaño y peso" data-eu="Tamaina eta pisua"></th><td data-es="Mayor" data-eu="Handiagoa"></td><td data-es="Menor para la misma potencia" data-eu="Txikiagoa potentzia berarentzat"></td></tr>
+          <tr><th data-es="Precio" data-eu="Prezioa"></th><td data-es="Barato" data-eu="Merkea"></td><td data-es="Más caro (imanes + variador)" data-eu="Garestiagoa (imanak + aldagailua)"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card aviso-h">
+      <h3 class="es">¡Seguridad! El motor es también un generador</h3><h3 class="eu">Segurtasuna! Motorra sorgailua ere bada</h3>
+      <p class="es">Si se <b>gira el eje</b>, los imanes generan <b>tensión en los bornes aunque el motor esté desconectado</b> del variador: por ejemplo, una bomba movida por el agua, un ventilador movido por el aire o un coche remolcado. Antes de tocar los bornes, <b>asegurar que el eje está parado y bloqueado</b>.</p>
+      <p class="eu"><b>Ardatza biratzen</b> bada, imanek <b>borneetan tentsioa sortzen dute, motorra aldagailutik deskonektatuta egon arren</b>: adibidez, urak mugitutako ponpa bat, aireak mugitutako haizagailu bat edo atoian eramandako auto bat. Borneak ukitu aurretik, <b>ziurtatu ardatza geldirik eta blokeatuta dagoela</b>.</p>
+      <p class="es">Además: los condensadores del variador siguen cargados unos minutos después de desconectar, y los imanes son muy fuertes (pueden pillar los dedos y afectan a marcapasos).</p>
+      <p class="eu">Gainera: aldagailuaren kondentsadoreak kargatuta jarraitzen dute deskonektatu eta minutu batzuetan, eta imanak oso indartsuak dira (behatzak harrapa ditzakete eta taupada-markagailuei eragiten diete).</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function f1(n){ return n.toFixed(1).replace(".", ","); }
+  var CX = 130, CY = 125;
+
+  // Trozo de anillo (sector) entre los radios r1 y r2 y los ángulos a0 y a1 (radianes)
+  function sector(cx, cy, r1, r2, a0, a1){
+    function p(r, a){ return (cx + r * Math.cos(a)).toFixed(1) + " " + (cy + r * Math.sin(a)).toFixed(1); }
+    var g = a1 - a0 > Math.PI ? 1 : 0;
+    return "M" + p(r2, a0) + "A" + r2 + " " + r2 + " 0 " + g + " 1 " + p(r2, a1) + "L" + p(r1, a1) + "A" + r1 + " " + r1 + " 0 " + g + " 0 " + p(r1, a0) + "Z";
+  }
+  // Cuatro imanes alternados N-S-N-S girados un ángulo a
+  function imanes(cx, cy, r1, r2, a){
+    var g = "";
+    for (var k = 0; k < 4; k++) {
+      var c = a + k * Math.PI / 2;
+      g += '<path class="' + (k % 2 ? "iman-s" : "iman-n") + '" d="' + sector(cx, cy, r1, r2, c - 0.6, c + 0.6) + '"/>';
+      g += '<text x="' + (cx + (r1 + r2) / 2 * Math.cos(c)).toFixed(1) + '" y="' + (cy + (r1 + r2) / 2 * Math.sin(c) + 4).toFixed(1) + '" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">' + (k % 2 ? "S" : "N") + '</text>';
+    }
+    return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r1 + '" fill="#b9c0cc" stroke="#6b7280"/>' + g;
+  }
+  // Seis bobinas del estátor (dos por fase)
+  function bobinas(cx, cy, r){
+    var g = "";
+    for (var k = 0; k < 6; k++) {
+      var a = k * Math.PI / 3 - Math.PI / 2, x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+      g += '<rect class="cobre" x="' + (x - 11).toFixed(1) + '" y="' + (y - 9).toFixed(1) + '" width="22" height="18" rx="4" transform="rotate(' + (a * 180 / Math.PI + 90).toFixed(1) + ' ' + x.toFixed(1) + ' ' + y.toFixed(1) + ')"/>';
+    }
+    return g;
+  }
+
+  // Dibujos fijos de la pestaña 1
+  $("bobinas-fijas").innerHTML = bobinas(130, 130, 78);
+  $("rotor-fijo").innerHTML = imanes(130, 130, 34, 58, -Math.PI / 2);
+  $("bobinas-sim").innerHTML = bobinas(CX, CY, 84);
+
+  /* Bucle de animación que solo corre mientras su pestaña está visible. */
+  function bucle(tab, paso){
+    var panel = document.querySelector('.panel[data-tab="' + tab + '"]');
+    var activo = false, ult = 0;
+    function f(t){
+      if (panel.hidden) { activo = false; return; }
+      var dt = Math.min((t - ult) / 1000, 0.1); ult = t;
+      paso(dt);
+      requestAnimationFrame(f);
+    }
+    document.addEventListener("pestana", function(){
+      if (activo || panel.hidden) return;
+      activo = true; ult = performance.now(); requestAnimationFrame(f);
+    });
+  }
+
+  /* ============ SIMULADOR ============
+     Todo va a cámara lenta: a 50 Hz el campo da media vuelta por segundo en pantalla.
+     Ángulos en radianes. p = 2 pares de polos.
+     El rotor se mueve por la atracción de los imanes: par = A · sen(retraso eléctrico). */
+  var P = 2, A = 4;
+  var modo = "var", marcha = false, fallo = false;
+  var f = 0;                 // frecuencia que da el variador en este momento (Hz)
+  var thF = 0;               // ángulo del campo
+  var thR = 0, wR = 0;       // ángulo y velocidad del rotor
+  var wFilt = 0;             // velocidad del rotor filtrada (para las lecturas)
+  var tMal = 0;              // tiempo que lleva el rotor sin seguir al campo
+
+  function wCampo(){ return 2 * Math.PI * f / 100; }   // velocidad del campo en pantalla
+  function rpm(w){ return w * 100 / (2 * Math.PI) * 30; } // pasa a rpm reales (n = 30·f con p = 2)
+
+  function paso(h){
+    var carga = +$("carga").value / 100;
+    // 1) Frecuencia: el variador sube o baja con rampa; directo a la red son 50 Hz de golpe
+    if (!marcha) f = 0;
+    else if (modo === "red") f = 50;
+    else {
+      var obj = +$("f").value;
+      f += Math.max(-10 * h, Math.min(10 * h, obj - f));   // rampa de 10 Hz por segundo
+    }
+    thF += wCampo() * h;
+    // 2) Par sobre el rotor
+    var d = P * (thF - thR);                               // retraso eléctrico de los imanes
+    // Con variador el par máximo es mayor: el variador ajusta la corriente mirando el encoder
+    var a = modo === "var" ? 2 * A : A;
+    var par = marcha ? a * Math.sin(d) : 0;
+    var amort = marcha && modo === "var" ? 1.5 * (wCampo() - wR) : 0;  // el variador usa el encoder para amortiguar
+    var resist = carga * 0.85 * a * Math.tanh(wR * 5) + (marcha ? 0.05 : 0.8) * wR;  // carga + rozamiento
+    wR += (par + amort - resist) * h;
+    thR += wR * h;
+  }
+
+  function dibujar(){
+    // Polos del campo del estátor: S donde está thF (atrae al N del imán), N a 90°
+    var g = "";
+    if (marcha) for (var k = 0; k < 4; k++) {
+      var c = thF + k * Math.PI / 2;
+      g += '<path d="' + sector(CX, CY, 66, 106, c - 0.55, c + 0.55) + '" fill="' + (k % 2 ? "#d94848" : "#3b74c4") + '" opacity=".45"/>';
+    }
+    $("polos-campo").innerHTML = g;
+    $("rotor-sim").innerHTML = imanes(CX, CY, 22, 60, thR);
+    var gEnc = (thR * 180 / Math.PI) % 360; if (gEnc < 0) gEnc += 360;
+    $("enc-marca").setAttribute("transform", "rotate(" + gEnc.toFixed(1) + " 300 70)");
+    $("enc-txt").textContent = Math.round(gEnc) + "°";
+  }
+
+  function mensaje(dEl){
+    var e = $("estado"), carga = +$("carga").value / 100;
+    e.className = "estado";
+    if (fallo) { e.className = "estado mal"; e.textContent = T("FALLO del variador: carga excesiva, los imanes se han desenganchado del campo. Baja la carga y pulsa Marcha.", "Aldagailuaren AKATSA: karga gehiegi, imanak eremutik askatu dira. Jaitsi karga eta sakatu Martxa."); return; }
+    if (!marcha) { e.textContent = Math.abs(wR) > 0.05 ? T("Parando…", "Gelditzen…") : T("Parado. Elige el modo y pulsa Marcha.", "Geldirik. Aukeratu modua eta sakatu Martxa."); return; }
+    if (modo === "red") {
+      e.className = "estado mal";
+      e.textContent = tMal > 0.5 ? T("Directo a la red: el campo gira de golpe a 1500 rpm y el rotor no puede seguirlo. Solo vibra.", "Zuzenean sarera: eremua bat-batean 1500 rpm-tan hasten da eta errotoreak ezin dio jarraitu. Dardara besterik ez.")
+        : T("Conectando directo a la red…", "Zuzenean sarera konektatzen…");
+      return;
+    }
+    if (f < 0.5) { e.textContent = T("Variador en marcha a 0 Hz: el campo está quieto y sujeta los imanes. Sube la frecuencia.", "Aldagailua martxan 0 Hz-tan: eremua geldirik dago eta imanei eusten die. Igo maiztasuna."); return; }
+    if (Math.abs(f - +$("f").value) > 0.5) { e.textContent = T("Rampa: el variador cambia la frecuencia poco a poco y el rotor la sigue.", "Arrapala: aldagailuak maiztasuna pixkanaka aldatzen du eta errotoreak jarraitzen dio."); return; }
+    e.className = carga > 0.85 ? "estado mal" : "estado ok";
+    e.textContent = carga > 0.85 ? T("Mucha carga: los imanes van muy retrasados (" + Math.round(dEl) + "°). Cerca de desengancharse.", "Karga handia: imanak oso atzeratuta doaz (" + Math.round(dEl) + "°). Askatzeko zorian.")
+      : T("Síncrono: el rotor gira exactamente a " + Math.round(rpm(wCampo())) + " rpm, sin deslizamiento.", "Sinkronoa: errotoreak " + Math.round(rpm(wCampo())) + " rpm-tan biratzen du zehazki, labainketarik gabe.");
+  }
+
+  bucle("proba", function(dt){
+    // pasos pequeños para que el cálculo sea estable
+    var n = Math.ceil(dt / 0.01);
+    for (var i = 0; i < n; i++) paso(dt / n);
+    wFilt += (wR - wFilt) * Math.min(dt / 0.4, 1);
+    // El variador detecta (con el encoder) que los imanes se han quedado demasiado atrás (> 126° eléctricos)
+    var mal = marcha && f > 1 && Math.abs(P * (thF - thR)) > 2.2;
+    tMal = mal ? tMal + dt : 0;
+    if (modo === "var" && tMal > 0.8) { marcha = false; fallo = true; tMal = 0; }
+    // Retraso eléctrico de los imanes, entre -180° y 180°
+    var dEl = ((P * (thF - thR)) * 180 / Math.PI) % 360;
+    if (dEl > 180) dEl -= 360; if (dEl < -180) dEl += 360;
+    var sinc = marcha && f > 0.5 && tMal === 0;
+    $("r-f").textContent = Math.round(f) + " Hz";
+    $("r-ns").textContent = Math.round(30 * f) + " rpm";
+    $("r-n").textContent = Math.round(Math.abs(rpm(wFilt))) + " rpm";
+    $("r-s").textContent = !marcha || f < 0.5 ? "–" : (sinc ? "0,0 %" : f1(Math.max(0, (wCampo() - wFilt) / wCampo() * 100)) + " %");
+    $("r-d").textContent = sinc ? Math.round(dEl) + "°" : "–";
+    dibujar(); mensaje(dEl);
+  });
+
+  $("b-marcha").addEventListener("click", function(){
+    if (marcha) return;
+    marcha = true; fallo = false; tMal = 0;
+    // el variador lee el encoder y empieza con el campo donde están los imanes; la red no sabe dónde están
+    thF = modo === "var" ? thR : thR + 1.2;
+  });
+  $("b-paro").addEventListener("click", function(){ marcha = false; fallo = false; });
+  $("chips-modo").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    modo = b.getAttribute("data-modo");
+    marcha = false; fallo = false;     // al cambiar de modo se desconecta
+    $("f").disabled = modo === "red";
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+  });
+  $("f").addEventListener("input", function(){ $("f-t").textContent = this.value + " Hz"; });
+  $("carga").addEventListener("input", function(){ $("carga-t").textContent = this.value + " %"; });
+
+  dibujar();
+  alCambiarIdioma(function(){ mensaje(0); });
+})();
+</script>
+</body>
+</html>

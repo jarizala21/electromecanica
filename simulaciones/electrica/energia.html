@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Energía eléctrica</title>
+<meta name="description" content="Qué es la energía, julio y kWh, diferencia entre potencia y energía, transformaciones, rendimiento y fuentes de energía, con diagrama de flujo interactivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.txt-s{font-size:9.5px;fill:#5d6382}
+.blanco{font-size:12px;fill:#fff;font-weight:700}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Magnitudes" data-eu="Magnitudeak"></p>
+      <h1 data-es="Energía eléctrica" data-eu="Energia elektrikoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">La <span class="clave">energía</span> es la <b>capacidad de hacer un trabajo</b>: mover algo, calentarlo, iluminarlo… La <b>energía eléctrica</b> es la que llevan los electrones al moverse por los cables, empujados por la tensión.</p>
+      <p class="eu"><span class="clave">Energia</span> <b>lan bat egiteko gaitasuna</b> da: zerbait mugitu, berotu, argiztatu… <b>Energia elektrikoa</b> elektroiek kableetan zehar mugitzean daramatena da, tentsioak bultzatuta.</p>
+      <p class="es">La energía <b>no se crea ni se destruye, solo se transforma</b>. Un aparato eléctrico no «gasta» la energía: la <b>convierte</b> en otra forma que nos sirve.</p>
+      <p class="eu">Energia <b>ez da sortzen ezta suntsitzen ere, eraldatu egiten da soilik</b>. Aparatu elektriko batek ez du energia «gastatzen»: erabilgarria zaigun beste forma batean <b>bihurtzen</b> du.</p>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 340 196" role="img" aria-label="Transformaciones de la energía eléctrica">
+        <defs><marker id="fl1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#242d5f"/></marker></defs>
+        <rect x="95" y="8" width="150" height="40" rx="12" fill="#242d5f"/>
+        <path d="M118 18l-6 12h7l-5 12 12-15h-7l5-9z" fill="#ffd257"/>
+        <text class="blanco" x="182" y="33" text-anchor="middle" data-es="Energía eléctrica" data-eu="Energia elektrikoa"></text>
+        <g stroke="#242d5f" stroke-width="2" fill="none" marker-end="url(#fl1)">
+          <path d="M140 48L44 112"/><path d="M160 48L128 112"/><path d="M180 48L212 112"/><path d="M200 48L296 112"/>
+        </g>
+        <!-- luz -->
+        <rect x="6" y="116" width="76" height="72" rx="10" fill="#fff6d6" stroke="#ebb400" stroke-width="1.5"/>
+        <circle cx="44" cy="136" r="10" fill="#ffd257" stroke="#242d5f" stroke-width="1.5"/>
+        <text class="txt" x="44" y="164" text-anchor="middle" data-es="Luz" data-eu="Argia"></text>
+        <text class="txt-s" x="44" y="178" text-anchor="middle" data-es="bombilla" data-eu="bonbilla"></text>
+        <!-- calor -->
+        <rect x="90" y="116" width="76" height="72" rx="10" fill="#fde6e3" stroke="#c62f2f" stroke-width="1.5"/>
+        <path d="M116 144c-4-6 4-8 0-14M128 144c-4-6 4-8 0-14M140 144c-4-6 4-8 0-14" stroke="#c62f2f" stroke-width="2" fill="none"/>
+        <text class="txt" x="128" y="164" text-anchor="middle" data-es="Calor" data-eu="Beroa"></text>
+        <text class="txt-s" x="128" y="178" text-anchor="middle" data-es="estufa, horno" data-eu="berogailua, labea"></text>
+        <!-- movimiento -->
+        <rect x="174" y="116" width="76" height="72" rx="10" fill="#e3eefa" stroke="#2b6cb0" stroke-width="1.5"/>
+        <circle cx="212" cy="136" r="11" fill="#fff" stroke="#242d5f" stroke-width="1.5"/>
+        <text x="212" y="140" font-size="10" font-weight="700" fill="#242d5f" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">M</text>
+        <text class="txt" x="212" y="164" text-anchor="middle" data-es="Movimiento" data-eu="Mugimendua"></text>
+        <text class="txt-s" x="212" y="178" text-anchor="middle" data-es="motor" data-eu="motorra"></text>
+        <!-- química -->
+        <rect x="258" y="116" width="76" height="72" rx="10" fill="#e2f4e9" stroke="#1f8a4c" stroke-width="1.5"/>
+        <rect x="284" y="128" width="20" height="16" rx="2" fill="#fff" stroke="#242d5f" stroke-width="1.5"/><rect x="304" y="133" width="3" height="6" fill="#242d5f"/>
+        <rect x="286" y="130" width="10" height="12" fill="#1f8a4c"/>
+        <text class="txt" x="296" y="164" text-anchor="middle" data-es="Química" data-eu="Kimikoa"></text>
+        <text class="txt-s" x="296" y="178" text-anchor="middle" data-es="cargar batería" data-eu="bateria kargatu"></text>
+      </svg>
+      <figcaption data-es="La energía eléctrica se transforma en otras formas de energía" data-eu="Energia elektrikoa beste energia-forma batzuetan eraldatzen da"></figcaption>
+    </figure>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">En casa</h3><h3 class="eu">Etxean</h3>
+        <p class="es">Bombilla → luz. Horno y termo → calor. Lavadora → movimiento (y calor para el agua). Cargador del móvil → energía química en la batería.</p>
+        <p class="eu">Bonbilla → argia. Labea eta termoa → beroa. Garbigailua → mugimendua (eta beroa urarentzat). Mugikorraren kargagailua → energia kimikoa baterian.</p></div>
+      <div class="card"><h3 class="es">En el taller</h3><h3 class="eu">Tailerrean</h3>
+        <p class="es">Motor del torno o del compresor → movimiento. Soldadura → calor. Electroimán del contactor → fuerza magnética.</p>
+        <p class="eu">Tornuaren edo konpresorearen motorra → mugimendua. Soldadura → beroa. Kontaktorearen elektroimana → indar magnetikoa.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ 2. ENERGIA ETA POTENTZIA ============ -->
+  <section class="panel" data-tab="unitateak" data-es="Unidades y potencia" data-eu="Unitateak eta potentzia" hidden>
+    <div class="card">
+      <h2 data-es="Julio y kilovatio hora" data-eu="Joulea eta kilowatt-ordua"></h2>
+      <p class="es">En el Sistema Internacional la energía se mide en <span class="clave">julios (J)</span>. Un julio es muy poco: es la energía que gasta un aparato de <b>1 W</b> durante <b>1 segundo</b>.</p>
+      <p class="eu">Nazioarteko Sisteman energia <span class="clave">joule-tan (J)</span> neurtzen da. Joule bat oso gutxi da: <b>1 W</b>-ko aparatu batek <b>segundo batean</b> gastatzen duen energia da.</p>
+      <p class="es">Por eso, en electricidad se usa el <span class="clave">kilovatio hora (kWh)</span>: un aparato de 1000 W durante 1 hora (3600 s).</p>
+      <p class="eu">Horregatik, elektrizitatean <span class="clave">kilowatt-ordua (kWh)</span> erabiltzen da: 1000 W-ko aparatu bat ordubetez (3600 s).</p>
+      <p class="formula">1 kWh = 1000 W × 3600 s = 3 600 000 J = 3,6 MJ</p>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th data-es="Unidad" data-eu="Unitatea"></th><th data-es="Equivale a" data-eu="Baliokidea"></th></tr></thead>
+        <tbody>
+          <tr><td>1 Wh</td><td>3600 J</td></tr>
+          <tr><td>1 kWh</td><td>1000 Wh = 3,6 MJ</td></tr>
+          <tr><td>1 MJ</td><td>1 000 000 J ≈ 0,28 kWh</td></tr>
+          <tr><td>1 MWh</td><td>1000 kWh</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <h2 data-es="Conversor" data-eu="Bihurgailua"></h2>
+      <div class="mandos">
+        <div class="deslizador"><label><span data-es="Energía en kWh" data-eu="Energia kWh-tan"></span><output id="cv-t"></output></label><input id="cv" type="range" min="0" max="10" step="0.1" value="1"></div>
+      </div>
+      <div class="lectura-g">
+        <div><small>Wh</small><b id="cv-wh"></b></div>
+        <div><small>J</small><b id="cv-j"></b></div>
+        <div><small>MJ</small><b id="cv-mj"></b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 data-es="Potencia y energía no son lo mismo" data-eu="Potentzia eta energia ez dira gauza bera"></h2>
+      <p class="es">Piensa en un coche: la <b>velocidad</b> (km/h) dice lo rápido que va; los <b>kilómetros</b> recorridos dicen cuánto ha andado. Con la electricidad pasa igual:</p>
+      <p class="eu">Pentsa ezazu auto batean: <b>abiadurak</b> (km/h) zein azkar doan esaten du; egindako <b>kilometroek</b>, zenbat ibili den. Elektrizitatearekin berdin gertatzen da:</p>
+      <ul>
+        <li><span class="es"><b>Potencia</b> (W, kW) = lo rápido que se usa la energía. Es como la velocidad.</span><span class="eu"><b>Potentzia</b> (W, kW) = energia zein azkar erabiltzen den. Abiadura bezala da.</span></li>
+        <li><span class="es"><b>Energía</b> (J, kWh) = cuánta energía se ha usado en total. Son los kilómetros.</span><span class="eu"><b>Energia</b> (J, kWh) = guztira zenbat energia erabili den. Kilometroak dira.</span></li>
+      </ul>
+      <p class="formula">P = E / t &nbsp; → &nbsp; E = P × t</p>
+      <p class="es">Ejemplo: un horno de <b>2 kW</b> encendido <b>2 horas</b> → E = 2 × 2 = <b>4 kWh</b>. Un cargador de móvil de 10 W necesitaría 400 horas para gastar lo mismo.</p>
+      <p class="eu">Adibidea: <b>2 kW</b>-ko labea <b>2 orduz</b> piztuta → E = 2 × 2 = <b>4 kWh</b>. 10 W-ko mugikor-kargagailu batek 400 ordu beharko lituzke gauza bera gastatzeko.</p>
+      <p class="nota es">La potencia tiene su propia ficha (Magnitudes eléctricas). El cálculo del consumo y la factura están en la ficha «Consumo eléctrico».</p>
+      <p class="nota eu">Potentziak bere fitxa du (Magnitude elektrikoak). Kontsumoaren kalkulua eta faktura «Kontsumo elektrikoa» fitxan daude.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. ERRENDIMENDUA ============ -->
+  <section class="panel" data-tab="errendimendua" data-es="Rendimiento" data-eu="Errendimendua" hidden>
+    <div class="card">
+      <p class="es">Ningún aparato convierte toda la energía en lo que queremos. Una parte se pierde, casi siempre en forma de <b>calor</b> (por eso los motores y las bombillas se calientan).</p>
+      <p class="eu">Aparatu batek ere ez du energia guztia nahi duguna bihurtzen. Zati bat galdu egiten da, ia beti <b>bero</b> moduan (horregatik berotzen dira motorrak eta bonbillak).</p>
+      <ul>
+        <li><span class="es"><b>Energía absorbida</b>: la que entra del enchufe.</span><span class="eu"><b>Xurgatutako energia</b>: entxufetik sartzen dena.</span></li>
+        <li><span class="es"><b>Energía útil</b>: la que hace lo que queremos (luz, movimiento…).</span><span class="eu"><b>Energia erabilgarria</b>: nahi duguna egiten duena (argia, mugimendua…).</span></li>
+        <li><span class="es"><b>Pérdidas</b>: absorbida − útil.</span><span class="eu"><b>Galerak</b>: xurgatutakoa − erabilgarria.</span></li>
+      </ul>
+      <p class="es">El <span class="clave">rendimiento</span> (η, letra griega «eta») dice qué parte se aprovecha:</p>
+      <p class="eu"><span class="clave">Errendimenduak</span> (η, «eta» letra grekoa) zein zati aprobetxatzen den esaten du:</p>
+      <p class="formula">η = P<sub>útil</sub> / P<sub>absorbida</sub> × 100 %</p>
+      <p class="es">Ejemplo: un motor absorbe 2000 W y da 1700 W en el eje → η = 1700 / 2000 × 100 = <b>85 %</b>. Pierde 300 W en calor.</p>
+      <p class="eu">Adibidea: motor batek 2000 W xurgatzen ditu eta 1700 W ematen ditu ardatzean → η = 1700 / 2000 × 100 = <b>% 85</b>. 300 W galtzen ditu bero moduan.</p>
+    </div>
+    <div class="tabla">
+      <table>
+        <thead><tr><th data-es="Aparato" data-eu="Aparatua"></th><th data-es="Rendimiento aproximado" data-eu="Gutxi gorabeherako errendimendua"></th></tr></thead>
+        <tbody>
+          <tr><td><span class="es">Bombilla incandescente</span><span class="eu">Bonbilla gorikaria</span></td><td>≈ 5 %</td></tr>
+          <tr><td><span class="es">Bombilla LED</span><span class="eu">LED bonbilla</span></td><td>30 – 40 %</td></tr>
+          <tr><td><span class="es">Motor eléctrico</span><span class="eu">Motor elektrikoa</span></td><td>75 – 95 %</td></tr>
+          <tr><td><span class="es">Transformador</span><span class="eu">Transformadorea</span></td><td>95 – 99 %</td></tr>
+          <tr><td><span class="es">Motor de gasolina (para comparar)</span><span class="eu">Gasolina-motorra (alderatzeko)</span></td><td>25 – 30 %</td></tr>
+          <tr><td><span class="es">Estufa de resistencia</span><span class="eu">Erresistentziadun berogailua</span></td><td>≈ 100 % <span class="es">(lo útil es el calor)</span><span class="eu">(beroa da erabilgarria)</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">El rendimiento siempre es <b>menor del 100 %</b>. Más rendimiento = menos pérdidas = menos consumo y menos calor. Por eso una LED de 8 W da casi la misma luz que una incandescente de 60 W.</p>
+      <p class="eu">Errendimendua beti da <b>% 100 baino txikiagoa</b>. Errendimendu handiagoa = galera gutxiago = kontsumo eta bero gutxiago. Horregatik ematen du 8 W-ko LED batek 60 W-ko bonbilla gorikari batek adinako argia.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige un aparato y cambia su <b>potencia</b> y su <b>rendimiento</b>. El diagrama muestra cómo se reparte la energía: lo que entra (azul), lo <b>útil</b> y las <b>pérdidas</b>. El grosor de cada flecha es proporcional a la energía.</p>
+      <p class="eu">Aukeratu aparatu bat eta aldatu haren <b>potentzia</b> eta <b>errendimendua</b>. Diagramak energia nola banatzen den erakusten du: sartzen dena (urdina), <b>erabilgarria</b> eta <b>galerak</b>. Gezi bakoitzaren lodiera energiaren proportzionala da.</p>
+    </div>
+    <figure class="fig"><svg id="flujo" viewBox="0 0 340 270" role="img" aria-label="Diagrama de flujo de energía"></svg></figure>
+    <div class="chips" id="aparato">
+      <button type="button" data-a="incand" aria-pressed="true" data-es="Bombilla incandescente" data-eu="Bonbilla gorikaria"></button>
+      <button type="button" data-a="led" aria-pressed="false" data-es="Bombilla LED" data-eu="LED bonbilla"></button>
+      <button type="button" data-a="motor" aria-pressed="false" data-es="Motor" data-eu="Motorra"></button>
+      <button type="button" data-a="estufa" aria-pressed="false" data-es="Estufa" data-eu="Berogailua"></button>
+    </div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Potencia absorbida" data-eu="Xurgatutako potentzia"></span><output id="p-t"></output></label><input id="p" type="range" min="25" max="100" step="5" value="60"></div>
+      <div class="deslizador"><label><span data-es="Rendimiento η" data-eu="Errendimendua η"></span><output id="e-t"></output></label><input id="e" type="range" min="2" max="10" step="1" value="5"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Absorbida" data-eu="Xurgatua"></small><b id="l-abs"></b></div>
+      <div><small data-es="Útil" data-eu="Erabilgarria"></small><b id="l-util"></b></div>
+      <div><small data-es="Pérdidas" data-eu="Galerak"></small><b id="l-perd"></b></div>
+      <div><small data-es="Pérdidas en 1 h" data-eu="Galerak 1 h-an"></small><b id="l-wh"></b></div>
+    </div>
+    <div class="estado" id="comentario"></div>
+  </section>
+
+  <!-- ============ 5. ITURRIAK ============ -->
+  <section class="panel" data-tab="iturriak" data-es="Fuentes" data-eu="Iturriak" hidden>
+    <div class="card">
+      <p class="es">La energía eléctrica no está en la naturaleza lista para usar: se <b>produce</b> en las <b>centrales</b> transformando otra energía. Casi todas mueven una turbina que hace girar un <b>alternador</b>; las placas solares fotovoltaicas la producen directamente con la luz.</p>
+      <p class="eu">Energia elektrikoa ez dago naturan erabiltzeko prest: <b>zentraletan ekoizten</b> da beste energia bat eraldatuta. Ia guztiek turbina bat mugitzen dute eta horrek <b>alternadore</b> bat biraraziko du; eguzki-plaka fotovoltaikoek zuzenean ekoizten dute argiarekin.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card" style="background:var(--verde-soft)"><h3 class="es">Renovables</h3><h3 class="eu">Berriztagarriak</h3>
+        <p class="es">No se acaban y contaminan poco.</p><p class="eu">Ez dira agortzen eta gutxi kutsatzen dute.</p>
+        <ul>
+          <li><span class="es"><b>Hidráulica</b>: agua de un embalse.</span><span class="eu"><b>Hidraulikoa</b>: urtegi bateko ura.</span></li>
+          <li><span class="es"><b>Eólica</b>: viento (aerogeneradores).</span><span class="eu"><b>Eolikoa</b>: haizea (aerosorgailuak).</span></li>
+          <li><span class="es"><b>Solar fotovoltaica</b>: luz del sol.</span><span class="eu"><b>Eguzki-energia fotovoltaikoa</b>: eguzki-argia.</span></li>
+          <li><span class="es"><b>Biomasa</b>: restos de madera y cultivos.</span><span class="eu"><b>Biomasa</b>: egur- eta labore-hondakinak.</span></li>
+          <li><span class="es"><b>Geotérmica</b> y <b>mareomotriz</b>: calor de la Tierra y mareas.</span><span class="eu"><b>Geotermikoa</b> eta <b>itsasaldiena</b>: Lurraren beroa eta itsasaldiak.</span></li>
+        </ul></div>
+      <div class="card" style="background:var(--rojo-soft)"><h3 class="es">No renovables</h3><h3 class="eu">Ez-berriztagarriak</h3>
+        <p class="es">Se acaban y contaminan más (CO₂ o residuos).</p><p class="eu">Agortu egiten dira eta gehiago kutsatzen dute (CO₂ edo hondakinak).</p>
+        <ul>
+          <li><span class="es"><b>Gas natural</b> (centrales de ciclo combinado).</span><span class="eu"><b>Gas naturala</b> (ziklo konbinatuko zentralak).</span></li>
+          <li><span class="es"><b>Carbón</b> y <b>petróleo</b>.</span><span class="eu"><b>Ikatza</b> eta <b>petrolioa</b>.</span></li>
+          <li><span class="es"><b>Nuclear</b>: uranio.</span><span class="eu"><b>Nuklearra</b>: uranioa.</span></li>
+        </ul></div>
+    </div>
+    <figure class="fig">
+      <svg viewBox="0 0 340 120" role="img" aria-label="De la central a casa">
+        <defs><marker id="fl2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f39200"/></marker></defs>
+        <g fill="#f6f4ef" stroke="#242d5f" stroke-width="1.5">
+          <rect x="4" y="20" width="58" height="54" rx="8"/><rect x="73" y="20" width="58" height="54" rx="8"/><rect x="142" y="20" width="58" height="54" rx="8"/><rect x="211" y="20" width="58" height="54" rx="8"/><rect x="280" y="20" width="56" height="54" rx="8"/>
+        </g>
+        <g stroke="#f39200" stroke-width="2.5" marker-end="url(#fl2)"><path d="M62 47h9"/><path d="M131 47h9"/><path d="M200 47h9"/><path d="M269 47h9"/></g>
+        <!-- iconos simples -->
+        <path d="M18 62V40h10v8l8-6v6l8-6v20z" fill="#c9cfd8" stroke="#242d5f" stroke-width="1.2"/>
+        <circle cx="94" cy="44" r="8" fill="none" stroke="#242d5f" stroke-width="1.5"/><circle cx="110" cy="44" r="8" fill="none" stroke="#242d5f" stroke-width="1.5"/>
+        <path d="M171 30l-10 32h20zM164 44h14M162 52h18" fill="none" stroke="#242d5f" stroke-width="1.4"/>
+        <circle cx="232" cy="44" r="8" fill="none" stroke="#242d5f" stroke-width="1.5"/><circle cx="248" cy="44" r="8" fill="none" stroke="#242d5f" stroke-width="1.5"/>
+        <path d="M294 46l14-12 14 12M298 44v16h20V44" fill="#c9cfd8" stroke="#242d5f" stroke-width="1.4"/>
+        <text class="txt-s" x="33" y="88" text-anchor="middle" data-es="Central" data-eu="Zentrala"></text>
+        <text class="txt-s" x="102" y="88" text-anchor="middle" data-es="Transformador" data-eu="Transformadorea"></text>
+        <text class="txt-s" x="102" y="100" text-anchor="middle" data-es="sube la tensión" data-eu="tentsioa igo"></text>
+        <text class="txt-s" x="171" y="88" text-anchor="middle" data-es="Línea de" data-eu="Goi-tentsioko"></text>
+        <text class="txt-s" x="171" y="100" text-anchor="middle" data-es="alta tensión" data-eu="linea"></text>
+        <text class="txt-s" x="240" y="88" text-anchor="middle" data-es="Transformador" data-eu="Transformadorea"></text>
+        <text class="txt-s" x="240" y="100" text-anchor="middle" data-es="baja la tensión" data-eu="tentsioa jaitsi"></text>
+        <text class="txt-s" x="308" y="88" text-anchor="middle" data-es="Casa, taller" data-eu="Etxea, tailerra"></text>
+        <text class="txt-s" x="308" y="100" text-anchor="middle">230 / 400 V</text>
+      </svg>
+      <figcaption data-es="La tensión se sube para transportar la energía con menos pérdidas y se baja antes de usarla" data-eu="Tentsioa igo egiten da energia galera gutxiagorekin garraiatzeko, eta jaitsi erabili aurretik"></figcaption>
+    </figure>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">En casa y en el taller llega a <b>230 V</b> (monofásica) o <b>400 V</b> (trifásica), a <b>50 Hz</b>. La energía más barata y limpia es la que <b>no se consume</b>.</p>
+      <p class="eu">Etxera eta tailerrera <b>230 V</b>-an (monofasikoa) edo <b>400 V</b>-an (trifasikoa) iristen da, <b>50 Hz</b>-an. Energiarik merkeena eta garbiena <b>kontsumitzen ez dena</b> da.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // Número con coma decimal
+  function n(v, d){ return v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+  /* ---------- Conversor kWh → Wh, J, MJ ---------- */
+  function convertir(){
+    var kwh = +$("cv").value;
+    $("cv-t").textContent = n(kwh, 1) + " kWh";
+    $("cv-wh").textContent = n(kwh * 1000, 0);
+    $("cv-j").textContent = n(kwh * 3600000, 0);       // 1 kWh = 3 600 000 J
+    $("cv-mj").textContent = n(kwh * 3.6, 2);          // 1 kWh = 3,6 MJ
+  }
+  $("cv").addEventListener("input", convertir);
+
+  /* ---------- Pruébalo: diagrama de flujo (Sankey) ---------- */
+  // Para cada aparato: potencia (mín, máx, paso, valor), rendimiento (mín, máx, valor), qué es lo útil y qué se pierde
+  var APARATOS = {
+    incand: { p: [25, 100, 5, 60],     e: [2, 10, 5],   util: ["Luz", "Argia"], perd: ["Calor", "Beroa"], color: "#ebb400" },
+    led:    { p: [3, 20, 1, 8],        e: [20, 50, 35], util: ["Luz", "Argia"], perd: ["Calor", "Beroa"], color: "#ebb400" },
+    motor:  { p: [250, 5000, 250, 1500], e: [60, 96, 85], util: ["Movimiento", "Mugimendua"], perd: ["Calor y rozamiento", "Beroa eta marruskadura"], color: "#1f8a4c" },
+    estufa: { p: [500, 2500, 100, 2000], e: [95, 100, 100], util: ["Calor útil", "Bero erabilgarria"], perd: ["Pérdidas", "Galerak"], color: "#f39200" }
+  };
+  var actual = "incand", fase = 0, ult = performance.now();
+
+  // Al elegir un aparato se ajustan los límites de los deslizadores
+  function elegir(id){
+    actual = id;
+    var a = APARATOS[id];
+    $("p").min = a.p[0]; $("p").max = a.p[1]; $("p").step = a.p[2]; $("p").value = a.p[3];
+    $("e").min = a.e[0]; $("e").max = a.e[1]; $("e").value = a.e[2];
+    textos();
+  }
+
+  // Potencia en W o kW según el tamaño
+  function pot(w){ return w >= 1000 ? n(w / 1000, 2) + " kW" : n(w, w < 10 ? 1 : 0) + " W"; }
+
+  function textos(){
+    var a = APARATOS[actual], P = +$("p").value, eta = +$("e").value / 100;
+    var util = P * eta, perd = P - util;
+    $("p-t").textContent = pot(P);
+    $("e-t").textContent = n(eta * 100, 0) + " %";
+    $("l-abs").textContent = pot(P);
+    $("l-util").textContent = pot(util);
+    $("l-perd").textContent = pot(perd);
+    $("l-wh").textContent = n(perd, perd < 10 ? 1 : 0) + " Wh";    // E = P × t, con t = 1 h
+    var c = $("comentario");
+    if (actual === "incand") { c.className = "estado mal"; c.textContent = T("Casi toda la energía se va en calor. La bombilla quema al tocarla.", "Energia ia guztia bero bihurtzen da. Bonbillak erre egiten du ukitzean."); }
+    else if (actual === "led") { c.className = "estado ok"; c.textContent = T("Una LED de 8 W da casi la misma luz que una incandescente de 60 W: compara la flecha de luz.", "8 W-ko LED batek 60 W-ko bonbilla gorikari batek adinako argia ematen du: alderatu argiaren gezia."); }
+    else if (actual === "motor") { c.className = eta >= 0.85 ? "estado ok" : "estado"; c.textContent = T("Las pérdidas calientan el motor: por eso lleva ventilador. Los motores IE3 e IE4 tienen más rendimiento.", "Galerek motorra berotzen dute: horregatik du haizagailua. IE3 eta IE4 motorrek errendimendu handiagoa dute."); }
+    else { c.className = "estado ok"; c.textContent = T("En una estufa lo que queremos es calor, así que casi toda la energía es útil.", "Berogailu batean beroa nahi dugu; beraz, energia ia guztia da erabilgarria."); }
+  }
+
+  // Curva de Bézier cúbica (para las flechas curvas del diagrama)
+  function bez(a, b, c, d, t){ var u = 1 - t; return u * u * u * a + 3 * u * u * t * b + 3 * u * t * t * c + t * t * t * d; }
+
+  // Medidas del diagrama
+  var X0 = 10, X1 = 100, X2 = 268, X3 = 292, Y0 = 70, H = 120, YU = 24, YB = 246;
+  function geometria(){
+    var eta = +$("e").value / 100;
+    var hu = Math.max(eta * H, 1.5), hl = Math.max(H - eta * H, eta < 1 ? 1.5 : 0);
+    return { hu: hu, hl: hl, ul: YB - hl };   // ul = altura donde acaba la flecha de pérdidas
+  }
+  // Banda curva entre (X1, ya..ya+h) y (X2, yb..yb+h)
+  function banda(ya, yb, h, color){
+    var xm = (X1 + X2) / 2;
+    return '<path d="M' + X1 + ' ' + ya + 'C' + xm + ' ' + ya + ' ' + xm + ' ' + yb + ' ' + X2 + ' ' + yb +
+           'L' + X3 + ' ' + (yb + h / 2) + 'L' + X2 + ' ' + (yb + h) +
+           'C' + xm + ' ' + (yb + h) + ' ' + xm + ' ' + (ya + h) + ' ' + X1 + ' ' + (ya + h) + 'Z" fill="' + color + '"/>';
+  }
+  // Posición de una partícula: u = avance (0-1), q = posición dentro del grosor, util = va por la rama útil
+  function punto(g, u, q, util){
+    if (u < 0.3) { var r = u / 0.3; return [X0 + (X1 - X0) * r, Y0 + q * H]; }      // tramo de entrada (recto)
+    var t = (u - 0.3) / 0.7;
+    var ya = util ? Y0 : Y0 + g.hu, yb = util ? YU : g.ul, h = util ? g.hu : g.hl;
+    return [bez(X1, (X1 + X2) / 2, (X1 + X2) / 2, X2, t), bez(ya, ya, yb, yb, t) + q * h];
+  }
+
+  function pintar(){
+    var ahora = performance.now(), dt = Math.min((ahora - ult) / 1000, 0.1); ult = ahora;
+    fase = (fase + dt * 0.25) % 1;
+    var a = APARATOS[actual], P = +$("p").value, eta = +$("e").value / 100, g = geometria(), s = "";
+    // flecha de entrada (energía eléctrica)
+    s += '<rect x="' + X0 + '" y="' + Y0 + '" width="' + (X1 - X0 + 1) + '" height="' + H + '" fill="#2b6cb0"/>';
+    // rama útil (arriba) y rama de pérdidas (abajo)
+    s += banda(Y0, YU, g.hu, a.color);
+    if (g.hl > 0) s += banda(Y0 + g.hu, g.ul, g.hl, "#e86a5c");
+    // partículas: azules al entrar; luego del color de su rama
+    for (var k = 0; k < 24; k++) {
+      var u = (fase + k / 24) % 1, q = 0.15 + ((k * 0.618) % 1) * 0.7;
+      var util = ((k * 0.381) % 1) < eta;            // la proporción de partículas útiles = rendimiento
+      var p = punto(g, u, q, util);
+      var col = u < 0.3 ? "#cfe0f5" : (util ? "#fff" : "#7a1f17");
+      s += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="2.6" fill="' + col + '" opacity=".9"/>';
+    }
+    // etiquetas
+    s += '<text class="txt" x="' + X0 + '" y="' + (Y0 - 8) + '">' + T("Energía eléctrica", "Energia elektrikoa") + '</text>';
+    s += '<text x="' + ((X0 + X1) / 2) + '" y="' + (Y0 + H / 2 + 5) + '" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" font-family="Poppins,system-ui,sans-serif">' + pot(P) + '</text>';
+    s += '<text class="txt" x="' + X3 + '" y="' + (YU - 8) + '" text-anchor="end">' + T(a.util[0], a.util[1]) + ' · ' + pot(P * eta) + ' (' + n(eta * 100, 0) + ' %)</text>';
+    s += '<text class="txt" x="' + X3 + '" y="' + (YB + 16) + '" text-anchor="end" style="fill:#c62f2f">' + T(a.perd[0], a.perd[1]) + ' · ' + pot(P * (1 - eta)) + ' (' + n(100 - eta * 100, 0) + ' %)</text>';
+    $("flujo").innerHTML = s;
+  }
+  function bucle(){ pintar(); requestAnimationFrame(bucle); }
+
+  $("aparato").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    elegir(b.getAttribute("data-a"));
+  });
+  $("p").addEventListener("input", textos);
+  $("e").addEventListener("input", textos);
+
+  alCambiarIdioma(function(){ convertir(); textos(); });
+  convertir();
+  elegir("incand");
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>

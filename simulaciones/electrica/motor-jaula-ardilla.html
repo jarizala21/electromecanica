@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Motor asíncrono de jaula de ardilla</title>
+<meta name="description" content="Partes, campo magnético giratorio, velocidad de sincronismo, deslizamiento, arranque y cambio de sentido de giro del motor de jaula de ardilla.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.pieza{fill:#e9ecef;stroke:#8d95a3;stroke-width:1.5}
+.chapa{fill:#b9c0cc;stroke:#6b7280;stroke-width:1.2}
+.cobre{fill:#e08a3c;stroke:#9a5214;stroke-width:1.2}
+.alu{fill:#d9dde3;stroke:#7b8494;stroke-width:1.2}
+.eje{fill:#9aa3b2;stroke:#5d6576;stroke-width:1.2}
+.txt{font-size:11px;fill:var(--marino);font-weight:600}
+.txt-s{font-size:9.5px;fill:var(--muted)}
+.num{fill:var(--naranja);stroke:#fff;stroke-width:1.5}
+.num-t{font-size:10px;font-weight:700;fill:var(--marino);text-anchor:middle}
+.eje-f{stroke:#c4cad4;stroke-width:1.2;stroke-dasharray:4 4}
+.cable{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.apagado .cable{opacity:.35}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de potencia" data-eu="Potentzia-elementuak"></p>
+      <h1 data-es="Motor asíncrono de jaula de ardilla" data-eu="Katagorri-kaiolako motor asinkronoa"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. ¿QUÉ ES? / ZER DA? ============ -->
+  <section class="panel" data-tab="zer-da" data-es="¿Qué es?" data-eu="Zer da?">
+    <div class="card">
+      <p class="es">El <span class="clave">motor asíncrono trifásico de jaula de ardilla</span> es el motor <b>más usado en la industria</b>. Se conecta a la red trifásica (400 V, 50 Hz) y convierte la energía eléctrica en <b>giro del eje</b> (energía mecánica).</p>
+      <p class="eu"><span class="clave">Katagorri-kaiolako motor asinkrono trifasikoa</span> da <b>industrian gehien erabiltzen den motorra</b>. Sare trifasikora konektatzen da (400 V, 50 Hz) eta energia elektrikoa <b>ardatzaren biraketa</b> bihurtzen du (energia mekanikoa).</p>
+      <p class="es">Tiene dos partes principales: el <b>estátor</b> (parte fija, con las bobinas) y el <b>rotor</b> (parte que gira). Su rotor parece una <b>jaula de ardilla</b>: barras unidas por dos anillos, sin cables ni escobillas.</p>
+      <p class="eu">Bi atal nagusi ditu: <b>estatorea</b> (atal finkoa, harilekin) eta <b>errotorea</b> (biratzen duen atala). Errotoreak <b>katagorri-kaiola</b> baten itxura du: bi eraztunek lotutako barrak, kablerik eta eskobillarik gabe.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-despiece" viewBox="0 0 360 260" role="img" aria-label="Despiece del motor">
+          <!-- fila de arriba: carcasa con el estátor dentro y la caja de bornes -->
+          <g class="resaltable" data-parte="carcasa">
+            <rect class="pieza" x="92" y="52" width="176" height="96" rx="12"/>
+            <path d="M100 58h160M100 64h160M100 70h160M100 130h160M100 136h160M100 142h160" stroke="#a7afbc" stroke-width="1.4"/>
+            <rect class="pieza" x="104" y="148" width="26" height="10" rx="2"/><rect class="pieza" x="230" y="148" width="26" height="10" rx="2"/>
+          </g>
+          <g class="resaltable" data-parte="estator">
+            <rect class="chapa" x="118" y="76" width="124" height="48" rx="3"/>
+            <path d="M126 76v48M134 76v48M142 76v48M150 76v48M158 76v48M166 76v48M174 76v48M182 76v48M190 76v48M198 76v48M206 76v48M214 76v48M222 76v48M230 76v48" stroke="#8d95a3" stroke-width="1"/>
+            <ellipse class="cobre" cx="114" cy="100" rx="8" ry="22"/><ellipse class="cobre" cx="246" cy="100" rx="8" ry="22"/>
+          </g>
+          <g class="resaltable" data-parte="bornes">
+            <rect class="pieza" x="152" y="14" width="56" height="32" rx="5"/>
+            <circle cx="164" cy="24" r="3.5" fill="#c9a227"/><circle cx="180" cy="24" r="3.5" fill="#c9a227"/><circle cx="196" cy="24" r="3.5" fill="#c9a227"/>
+            <circle cx="164" cy="37" r="3.5" fill="#c9a227"/><circle cx="180" cy="37" r="3.5" fill="#c9a227"/><circle cx="196" cy="37" r="3.5" fill="#c9a227"/>
+            <path d="M180 46v6" stroke="#8d95a3" stroke-width="3"/>
+          </g>
+          <!-- línea de despiece -->
+          <path class="eje-f" d="M12 205H350"/>
+          <!-- fila de abajo: ventilador, rodamientos, rotor y eje -->
+          <g class="resaltable" data-parte="eje">
+            <rect class="eje" x="40" y="200" width="306" height="10" rx="3"/>
+            <rect x="318" y="197" width="18" height="4" fill="#5d6576"/>
+          </g>
+          <g class="resaltable" data-parte="ventilador">
+            <ellipse cx="46" cy="205" rx="9" ry="34" fill="#4a5568" stroke="#2d3340" stroke-width="1.2"/>
+            <path d="M40 178l12 6M40 192l12 6M40 206l12 6M40 220l12 6" stroke="#9aa3b2" stroke-width="2"/>
+          </g>
+          <g class="resaltable" data-parte="rodamientos">
+            <rect x="84" y="190" width="14" height="30" rx="3" fill="#cfd4db" stroke="#5d6576" stroke-width="1.2"/>
+            <circle cx="91" cy="195" r="2.6" fill="#5d6576"/><circle cx="91" cy="215" r="2.6" fill="#5d6576"/>
+            <rect x="280" y="190" width="14" height="30" rx="3" fill="#cfd4db" stroke="#5d6576" stroke-width="1.2"/>
+            <circle cx="287" cy="195" r="2.6" fill="#5d6576"/><circle cx="287" cy="215" r="2.6" fill="#5d6576"/>
+          </g>
+          <g class="resaltable" data-parte="rotor">
+            <rect class="chapa" x="130" y="178" width="120" height="54" rx="3"/>
+            <path d="M140 178l6 54M156 178l6 54M172 178l6 54M188 178l6 54M204 178l6 54M220 178l6 54M236 178l6 54" stroke="#eef1f4" stroke-width="4"/>
+            <rect class="alu" x="122" y="174" width="10" height="62" rx="3"/><rect class="alu" x="248" y="174" width="10" height="62" rx="3"/>
+          </g>
+          <!-- números -->
+          <g>
+            <circle class="num" cx="82" cy="60" r="9"/><text class="num-t" x="82" y="64">1</text>
+            <circle class="num" cx="258" cy="92" r="9"/><text class="num-t" x="258" y="96">2</text>
+            <circle class="num" cx="190" cy="168" r="9"/><text class="num-t" x="190" y="172">3</text>
+            <circle class="num" cx="330" cy="222" r="9"/><text class="num-t" x="330" y="226">4</text>
+            <circle class="num" cx="91" cy="238" r="9"/><text class="num-t" x="91" y="242">5</text>
+            <circle class="num" cx="46" cy="252" r="7.5"/><text class="num-t" x="46" y="256">6</text>
+            <circle class="num" cx="222" cy="22" r="9"/><text class="num-t" x="222" y="26">7</text>
+          </g>
+        </svg>
+        <figcaption data-es="Despiece. Toca una parte para verla" data-eu="Pieza bereizitako ikuspegia. Ukitu atal bat ikusteko"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-despiece">
+        <li><button data-parte="carcasa"><span class="n">1</span><span><b class="es">Carcasa con aletas y patas</b><b class="eu">Karkasa, hegatsekin eta hankekin</b><small class="es">Protege el motor. Las aletas ayudan a sacar el calor. Las patas sirven para fijarlo.</small><small class="eu">Motorra babesten du. Hegatsek beroa ateratzen laguntzen dute. Hankak motorra finkatzeko dira.</small></span></button></li>
+        <li><button data-parte="estator"><span class="n">2</span><span><b class="es">Estátor con devanado</b><b class="eu">Estatorea, harilkadurarekin</b><small class="es">Parte fija: chapas de hierro con ranuras donde van las bobinas de cobre de las tres fases.</small><small class="eu">Atal finkoa: burdinazko xaflak, hiru faseetako kobrezko harilak dauzkaten artekekin.</small></span></button></li>
+        <li><button data-parte="rotor"><span class="n">3</span><span><b class="es">Rotor de jaula de ardilla</b><b class="eu">Katagorri-kaiolako errotorea</b><small class="es">Chapas de hierro con barras de aluminio (o cobre) unidas en los extremos por dos anillos de cortocircuito.</small><small class="eu">Burdinazko xaflak, muturretan bi zirkuitulabur-eraztunek lotutako aluminiozko (edo kobrezko) barrekin.</small></span></button></li>
+        <li><button data-parte="eje"><span class="n">4</span><span><b class="es">Eje</b><b class="eu">Ardatza</b><small class="es">Va unido al rotor y saca el giro hacia la máquina. La chaveta sujeta la polea o el acoplamiento.</small><small class="eu">Errotoreari lotuta dago eta biraketa makinara eramaten du. Kuñak poleari edo akoplamenduari eusten dio.</small></span></button></li>
+        <li><button data-parte="rodamientos"><span class="n">5</span><span><b class="es">Rodamientos</b><b class="eu">Errodamenduak</b><small class="es">Dos, uno en cada tapa. Sujetan el eje y le dejan girar con poco rozamiento.</small><small class="eu">Bi, tapa bakoitzean bat. Ardatzari eusten diote eta marruskadura txikiarekin biratzen uzten dute.</small></span></button></li>
+        <li><button data-parte="ventilador"><span class="n">6</span><span><b class="es">Ventilador</b><b class="eu">Haizagailua</b><small class="es">Va en el eje, detrás, tapado por una rejilla. Sopla aire sobre las aletas para enfriar.</small><small class="eu">Ardatzean dago, atzean, sareta batek estalita. Hegatsen gainera airea botatzen du hozteko.</small></span></button></li>
+        <li><button data-parte="bornes"><span class="n">7</span><span><b class="es">Caja de bornes</b><b class="eu">Borne-kaxa</b><small class="es">Seis bornes (U1 V1 W1 y W2 U2 V2) para conectar la red en estrella o en triángulo.</small><small class="eu">Sei borne (U1 V1 W1 eta W2 U2 V2) sarea izarrean edo triangeluan konektatzeko.</small></span></button></li>
+      </ul>
+    </div>
+    <p class="nota es">Los datos del motor (potencia, tensión, intensidad, velocidad…) vienen en la placa de características: mira su ficha.</p>
+    <p class="nota eu">Motorraren datuak (potentzia, tentsioa, korrontea, abiadura…) ezaugarri-plakan daude: begiratu haren fitxa.</p>
+  </section>
+
+  <!-- ============ 2. CAMPO GIRATORIO / EREMU BIRAKARIA ============ -->
+  <section class="panel" data-tab="eremua" data-es="Campo giratorio" data-eu="Eremu birakaria" hidden>
+    <div class="card">
+      <p class="es">Las tres bobinas del estátor están colocadas a <b>120°</b> entre sí y reciben tres corrientes <b>desfasadas 120°</b> (L1, L2, L3). Cada bobina crea un campo que sube y baja, pero <b>la suma de los tres</b> es un campo de tamaño fijo que <b>gira</b>: el <span class="clave">campo magnético giratorio</span>.</p>
+      <p class="eu">Estatoreko hiru harilak elkarren artean <b>120°-ra</b> daude eta <b>120° desfasatuta</b> dauden hiru korronte jasotzen dituzte (L1, L2, L3). Haril bakoitzak igo eta jaisten den eremu bat sortzen du, baina <b>hiruren batura</b> tamaina finkoko eta <b>biratzen duen</b> eremu bat da: <span class="clave">eremu magnetiko birakaria</span>.</p>
+      <p class="es">Ese campo «arrastra» al rotor: induce corrientes en las barras de la jaula y el rotor gira detrás del campo.</p>
+      <p class="eu">Eremu horrek errotorea «arrastatzen» du: kaiolako barretan korronteak induzitzen ditu eta errotoreak eremuaren atzetik biratzen du.</p>
+    </div>
+    <figure class="fig">
+      <svg id="svg-campo" viewBox="0 0 360 220" role="img" aria-label="Campo magnético giratorio">
+        <!-- estátor -->
+        <circle cx="110" cy="110" r="92" fill="#f1f3f6" stroke="#8d95a3" stroke-width="8"/>
+        <g id="ejes-fase"></g>
+        <g id="rotor-campo">
+          <circle cx="110" cy="110" r="28" fill="#c4cad4" stroke="#6b7280" stroke-width="1.5"/>
+          <path id="rotor-marca" d="M110 110V84" stroke="#2d3340" stroke-width="5" stroke-linecap="round"/>
+        </g>
+        <g id="vectores"></g>
+        <!-- ondas de las tres fases -->
+        <rect x="222" y="30" width="130" height="160" rx="10" fill="#fff" stroke="#e7e2d9"/>
+        <path d="M228 110H346" stroke="#c4cad4" stroke-width="1"/>
+        <g id="ondas"></g>
+        <path id="cursor" d="M228 36V184" stroke="var(--naranja)" stroke-width="2"/>
+        <g id="puntos"></g>
+        <text class="txt-s" x="287" y="204" text-anchor="middle" data-es="una vuelta = un periodo (20 ms)" data-eu="bira bat = periodo bat (20 ms)"></text>
+      </svg>
+      <figcaption data-es="Fases L1 (marrón), L2 (negro), L3 (gris) y campo resultante (naranja)" data-eu="L1 (marroia), L2 (beltza), L3 (grisa) faseak eta eremu erresultantea (laranja)"></figcaption>
+    </figure>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Velocidad de la animación" data-eu="Animazioaren abiadura"></span><output id="vel-t">3</output></label><input id="vel" type="range" min="1" max="10" step="1" value="3"></div>
+      <button class="boton claro" id="b-pausa" aria-pressed="false" data-es="Pausa" data-eu="Pausa"></button>
+      <button class="boton claro" id="b-rotor" aria-pressed="false" data-es="Ver el rotor" data-eu="Errotorea ikusi"></button>
+    </div>
+    <div class="estado" id="estado-campo"></div>
+
+    <div class="card">
+      <h2 data-es="Velocidad de sincronismo" data-eu="Sinkronismo-abiadura"></h2>
+      <p class="es">Es la velocidad a la que gira el campo. Depende de la <b>frecuencia</b> de la red (f = 50 Hz) y del número de <b>pares de polos</b> (p) del motor:</p>
+      <p class="eu">Eremuak biratzen duen abiadura da. Sarearen <b>maiztasunaren</b> (f = 50 Hz) eta motorraren <b>polo-pare</b> kopuruaren (p) araberakoa da:</p>
+      <p><span class="formula">n<sub>s</sub> = 60 · f / p</span></p>
+      <div class="chips" id="chips-p">
+        <button type="button" data-p="1" aria-pressed="false">p = 1</button>
+        <button type="button" data-p="2" aria-pressed="true">p = 2</button>
+        <button type="button" data-p="3" aria-pressed="false">p = 3</button>
+        <button type="button" data-p="4" aria-pressed="false">p = 4</button>
+      </div>
+      <div class="lectura-g" style="margin-top:10px">
+        <div><small data-es="Sincronismo ns" data-eu="Sinkronismoa ns"></small><b id="ns">1500 rpm</b></div>
+        <div><small data-es="Rotor n (típico)" data-eu="Errotorea n (ohikoa)"></small><b id="nr">1450 rpm</b></div>
+        <div><small data-es="Deslizamiento s" data-eu="Labainketa s"></small><b id="sl">3,3 %</b></div>
+      </div>
+      <p class="nota" id="calculo" style="margin-top:8px"></p>
+    </div>
+    <div class="card">
+      <h2 data-es="Deslizamiento: ¿por qué «asíncrono»?" data-eu="Labainketa: zergatik «asinkronoa»?"></h2>
+      <p class="es">El rotor <b>siempre gira un poco más lento</b> que el campo. Si girara igual de rápido, las barras no «verían» cambiar el campo, no habría corriente en ellas y no habría fuerza. Esa pequeña diferencia es el <span class="clave">deslizamiento</span> (normalmente entre un 2 y un 6 %).</p>
+      <p class="eu">Errotoreak <b>beti biratzen du eremuak baino pixka bat motelago</b>. Abiadura berean biratuko balu, barrek ez lukete eremua aldatzen «ikusiko», ez litzateke korronterik egongo haietan eta ez legoke indarrik. Alde txiki hori da <span class="clave">labainketa</span> (normalean % 2 eta % 6 artean).</p>
+      <p class="es">Pulsa «Ver el rotor» en la animación: la marca negra se va quedando atrás del campo naranja.</p>
+      <p class="eu">Sakatu «Errotorea ikusi» animazioan: marka beltza eremu laranjaren atzean geratzen joaten da.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. ARRANQUE Y GIRO / ABIARAZTEA ETA BIRAKETA ============ -->
+  <section class="panel" data-tab="abiaraztea" data-es="Arranque y giro" data-eu="Abiaraztea eta biraketa" hidden>
+    <div class="card">
+      <p class="es">Al arrancar, el rotor está parado y el campo lo «adelanta» muy rápido: el motor pide una <b>corriente de arranque muy alta, de 5 a 7 veces la nominal (In)</b>, durante unos segundos. Para motores grandes se usa el <b>arranque estrella-triángulo</b>, que la reduce a la tercera parte (o un variador de frecuencia).</p>
+      <p class="eu">Abiaraztean errotorea geldirik dago eta eremuak oso azkar «aurreratzen» du: motorrak <b>abiarazte-korronte oso handia eskatzen du, korronte nominala (In) baino 5-7 aldiz handiagoa</b>, segundo batzuetan. Motor handietan <b>izar-triangelu abiaraztea</b> erabiltzen da, hirugarren zatira murrizten duena (edo maiztasun-aldagailua).</p>
+      <p class="es">Para <b>cambiar el sentido de giro</b> basta con <b>intercambiar dos fases</b>: el campo gira al revés y el motor también.</p>
+      <p class="eu"><b>Biraketa-noranzkoa aldatzeko</b> nahikoa da <b>bi fase trukatzea</b>: eremuak alderantziz biratzen du, eta motorrak ere bai.</p>
+    </div>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Arranque directo</h3><h3 class="eu">Zuzeneko abiaraztea</h3>
+        <p class="es">El motor se conecta de golpe a 400 V. Es lo más sencillo, pero la corriente sube a <b>5-7·In</b>. Se usa en motores pequeños (hasta unos 4-5 kW).</p>
+        <p class="eu">Motorra bat-batean konektatzen da 400 V-ra. Errazena da, baina korrontea <b>5-7·In</b>-ra igotzen da. Motor txikietan erabiltzen da (4-5 kW ingurura arte).</p></div>
+      <div class="card"><h3 class="es">Arranque estrella-triángulo</h3><h3 class="eu">Izar-triangelu abiaraztea</h3>
+        <p class="es">Arranca en <b>estrella (Y)</b> y, tras unos segundos, un temporizador lo pasa a <b>triángulo (Δ)</b>. La corriente de arranque baja a la <b>tercera parte</b>, pero el motor también tiene menos fuerza al arrancar.</p>
+        <p class="eu"><b>Izarrean (Y)</b> abiarazten da eta, segundo batzuen ondoren, tenporizadore batek <b>triangelura (Δ)</b> pasatzen du. Abiarazte-korrontea <b>hirugarren zatira</b> jaisten da, baina motorrak indar gutxiago du abiaraztean.</p></div>
+      <div class="card"><h3 class="es">Cambio de sentido de giro</h3><h3 class="eu">Biraketa-noranzkoaren aldaketa</h3>
+        <p class="es">Se intercambian <b>dos fases</b> (por ejemplo L1 y L2). Se hace con dos contactores (inversor) con <b>enclavamiento</b>, y siempre con el motor parado.</p>
+        <p class="eu"><b>Bi fase</b> trukatzen dira (adibidez L1 eta L2). Bi kontaktorerekin egiten da (alderantzikagailua) <b>blokeoarekin</b>, eta beti motorra geldirik dagoela.</p></div>
+    </div>
+    <p class="nota es">Pruébalo en la pestaña «Pruébalo».</p>
+    <p class="nota eu">Probatu «Probatu» fitxan.</p>
+  </section>
+
+  <!-- ============ 4. PRUÉBALO / PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige el arranque y pulsa <b>Marcha</b>. Mira la <b>corriente</b> al arrancar, cambia la <b>carga</b> y observa el <b>deslizamiento</b>. Prueba también a <b>intercambiar L1 y L2</b>.</p>
+      <p class="eu">Aukeratu abiaraztea eta sakatu <b>Martxa</b>. Begiratu <b>korrontea</b> abiaraztean, aldatu <b>karga</b> eta begiratu <b>labainketa</b>. Probatu <b>L1 eta L2 trukatzen</b> ere.</p>
+    </div>
+    <figure class="fig" id="fig-arr">
+      <svg id="svg-arr" class="apagado" viewBox="0 0 360 250" role="img" aria-label="Simulador de arranque">
+        <text class="txt" x="50" y="14" text-anchor="middle">L1</text><text class="txt" x="90" y="14" text-anchor="middle">L2</text><text class="txt" x="130" y="14" text-anchor="middle">L3</text>
+        <g id="lineas"></g>
+        <rect x="30" y="112" width="120" height="22" rx="6" fill="#d7dce3" stroke="#8d95a3"/>
+        <text class="txt-s" x="50" y="127" text-anchor="middle">U1</text><text class="txt-s" x="90" y="127" text-anchor="middle">V1</text><text class="txt-s" x="130" y="127" text-anchor="middle">W1</text>
+        <text id="conex" class="txt" x="160" y="128">–</text>
+        <!-- motor visto de frente -->
+        <circle cx="90" cy="192" r="46" fill="#fff" stroke="var(--marino)" stroke-width="2.5"/>
+        <g id="aspas"><path d="M90 152v80M50 192h80M62 164l56 56M118 164l-56 56" stroke="#c4cad4" stroke-width="5" stroke-linecap="round"/></g>
+        <circle cx="90" cy="192" r="18" fill="#fff" stroke="var(--marino)" stroke-width="1.5"/>
+        <text class="txt" x="90" y="190" text-anchor="middle" font-size="13">M</text>
+        <text class="txt" x="90" y="203" text-anchor="middle" font-size="10">3~</text>
+        <path id="flecha-giro" d="" fill="none" stroke="var(--naranja)" stroke-width="3" stroke-linecap="round"/>
+        <polygon id="punta-giro" points="" fill="var(--naranja)"/>
+        <!-- gráfica de corriente -->
+        <rect x="196" y="24" width="156" height="200" rx="10" fill="#fff" stroke="#e7e2d9"/>
+        <text class="txt-s" x="274" y="18" text-anchor="middle" data-es="Corriente en el tiempo" data-eu="Korrontea denboran"></text>
+        <path d="M200 194H348" stroke="var(--verde)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text class="txt-s" x="202" y="190">In</text>
+        <path d="M200 84H348" stroke="var(--rojo)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text class="txt-s" x="202" y="80">6·In</text>
+        <path d="M200 216H348" stroke="#c4cad4" stroke-width="1"/>
+        <polyline id="graf" fill="none" stroke="var(--naranja)" stroke-width="2.5" stroke-linejoin="round" points=""/>
+      </svg>
+    </figure>
+    <div class="mandos">
+      <button class="boton verde" id="b-marcha" data-es="Marcha" data-eu="Martxa"></button>
+      <button class="boton claro" id="b-paro" data-es="Paro" data-eu="Geldialdia"></button>
+      <button class="boton claro" id="b-cambio" aria-pressed="false" data-es="Intercambiar L1 y L2" data-eu="L1 eta L2 trukatu"></button>
+    </div>
+    <div class="mandos">
+      <div class="deslizador"><label><span data-es="Carga del motor" data-eu="Motorraren karga"></span><output id="carga-t">100 %</output></label><input id="carga" type="range" min="0" max="120" step="5" value="100"></div>
+      <div class="chips" id="chips-arr">
+        <button type="button" data-modo="directo" aria-pressed="true" data-es="Arranque directo" data-eu="Zuzeneko abiaraztea"></button>
+        <button type="button" data-modo="yd" aria-pressed="false" data-es="Estrella-triángulo" data-eu="Izar-triangelua"></button>
+      </div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Velocidad" data-eu="Abiadura"></small><b id="r-n">0 rpm</b></div>
+      <div><small data-es="Deslizamiento" data-eu="Labainketa"></small><b id="r-sl">–</b></div>
+      <div><small data-es="Corriente" data-eu="Korrontea"></small><b id="r-i">0 A</b></div>
+      <div><small data-es="Corriente / In" data-eu="Korrontea / In"></small><b id="r-x">0</b></div>
+      <div><small data-es="Sentido" data-eu="Noranzkoa"></small><b id="r-s">–</b></div>
+    </div>
+    <div class="estado" id="estado-arr"></div>
+    <p class="nota es">Motor de ejemplo: 4 kW, 400 V, In = 8 A, 1450 rpm. El tiempo está acelerado. En la realidad, antes de invertir el giro hay que <b>parar el motor</b> (inversor con enclavamiento).</p>
+    <p class="nota eu">Adibideko motorra: 4 kW, 400 V, In = 8 A, 1450 rpm. Denbora azkartuta dago. Errealitatean, biraketa alderantzikatu aurretik <b>motorra gelditu</b> behar da (blokeodun alderantzikagailua).</p>
+  </section>
+
+  <!-- ============ 5. USOS / ERABILERAK ============ -->
+  <section class="panel" data-tab="erabilerak" data-es="Usos y ventajas" data-eu="Erabilerak eta abantailak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">Robusto</h3><h3 class="eu">Sendoa</h3>
+        <p class="es">El rotor no tiene cables, ni escobillas, ni contactos que se desgasten. Aguanta golpes, polvo y trabajo continuo.</p>
+        <p class="eu">Errotoreak ez du kablerik, ez eskobillarik, ez higatzen den kontakturik. Kolpeak, hautsa eta etengabeko lana jasaten ditu.</p></div>
+      <div class="card"><h3 class="es">Barato</h3><h3 class="eu">Merkea</h3>
+        <p class="es">Es sencillo de fabricar y se hace en serie. Es el motor más barato para cada potencia.</p>
+        <p class="eu">Fabrikatzeko erraza da eta seriean egiten da. Potentzia bakoitzerako motorrik merkeena da.</p></div>
+      <div class="card"><h3 class="es">Poco mantenimiento</h3><h3 class="eu">Mantentze-lan gutxi</h3>
+        <p class="es">Casi solo hay que revisar los rodamientos, limpiar las aletas y vigilar el aislamiento y la temperatura.</p>
+        <p class="eu">Ia errodamenduak berrikustea, hegatsak garbitzea eta isolamendua eta tenperatura zaintzea besterik ez da behar.</p></div>
+      <div class="card"><h3 class="es">Inconvenientes</h3><h3 class="eu">Desabantailak</h3>
+        <p class="es">Corriente de arranque alta. Su velocidad depende de la frecuencia: para regularla hace falta un variador de frecuencia.</p>
+        <p class="eu">Abiarazte-korronte handia. Abiadura maiztasunaren araberakoa da: hura erregulatzeko maiztasun-aldagailua behar da.</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="¿Dónde se usa?" data-eu="Non erabiltzen da?"></h2>
+      <ul>
+        <li><span class="es">Bombas de agua y de líquidos.</span><span class="eu">Ur- eta likido-ponpak.</span></li>
+        <li><span class="es">Ventiladores y extractores.</span><span class="eu">Haizagailuak eta erauzgailuak.</span></li>
+        <li><span class="es">Compresores de aire.</span><span class="eu">Aire-konpresoreak.</span></li>
+        <li><span class="es">Cintas transportadoras.</span><span class="eu">Garraio-zintak.</span></li>
+        <li><span class="es">Máquinas-herramienta: tornos, taladros, sierras.</span><span class="eu">Makina-erremintak: tornuak, zulagailuak, zerrak.</span></li>
+      </ul>
+    </div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Tres fases a 120° → <b>campo giratorio</b>. n<sub>s</sub> = 60·f/p. El rotor gira algo más lento (<b>deslizamiento</b>). Arranque: <b>5-7·In</b>. Para invertir el giro: <b>intercambiar dos fases</b>.</p>
+      <p class="eu">120°-ko hiru fase → <b>eremu birakaria</b>. n<sub>s</sub> = 60·f/p. Errotoreak zertxobait motelago biratzen du (<b>labainketa</b>). Abiaraztea: <b>5-7·In</b>. Biraketa alderantzikatzeko: <b>bi fase trukatu</b>.</p>
+    </div>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  // Coma decimal en los dos idiomas
+  function f1(n){ return n.toFixed(1).replace(".", ","); }
+  // Colores normalizados de las fases: L1 marrón, L2 negro, L3 gris
+  var COLOR = ["#8b5a2b", "#2d3340", "#8d95a3"];
+
+  /* Bucle de animación que solo corre mientras su pestaña está visible.
+     ficha.js lanza el evento "pestana" cada vez que se cambia de pestaña. */
+  function bucle(tab, paso){
+    var panel = document.querySelector('.panel[data-tab="' + tab + '"]');
+    var activo = false, ult = 0;
+    function f(t){
+      if (panel.hidden) { activo = false; return; }      // pestaña oculta: se para
+      var dt = Math.min((t - ult) / 1000, 0.1); ult = t;  // segundos desde el último cuadro
+      paso(dt);
+      requestAnimationFrame(f);
+    }
+    function arrancar(){
+      if (activo || panel.hidden) return;
+      activo = true; ult = performance.now(); requestAnimationFrame(f);
+    }
+    document.addEventListener("pestana", arrancar);
+  }
+
+  /* ================= 2. CAMPO GIRATORIO ================= */
+  var CX = 110, CY = 110;
+  // Ejes de las bobinas: L1 arriba y las otras dos a 120° (en grados, sentido de las agujas del reloj)
+  var EJE = [-90, 30, 150];
+  var th = 0;            // ángulo eléctrico (radianes) = momento de la onda
+  var rotorAng = 0;      // ángulo de la marca del rotor
+  var pausa = false, verRotor = false;
+  var rad = function(g){ return g * Math.PI / 180; };
+
+  // Dibuja los ejes de las tres bobinas (fijos)
+  (function(){
+    var g = "";
+    EJE.forEach(function(a, k){
+      var c = Math.cos(rad(a)), s = Math.sin(rad(a));
+      g += '<path d="M' + (CX - 84 * c) + ' ' + (CY - 84 * s) + 'L' + (CX + 84 * c) + ' ' + (CY + 84 * s) + '" stroke="' + COLOR[k] + '" stroke-width="1.2" stroke-dasharray="4 4" opacity=".6"/>';
+      // bobina dibujada en el borde del estátor
+      g += '<rect x="' + (CX + 80 * c - 9) + '" y="' + (CY + 80 * s - 9) + '" width="18" height="18" rx="4" fill="' + COLOR[k] + '"/>';
+      g += '<text x="' + (CX + 80 * c) + '" y="' + (CY + 80 * s + 3.5) + '" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">L' + (k + 1) + '</text>';
+    });
+    $("ejes-fase").innerHTML = g;
+    // Ondas senoidales de las tres fases (un periodo)
+    var o = "";
+    for (var k = 0; k < 3; k++) {
+      var pts = [];
+      for (var i = 0; i <= 60; i++) {
+        var x = 228 + i * 118 / 60, ang = i / 60 * 2 * Math.PI;
+        pts.push(x.toFixed(1) + "," + (110 - 60 * Math.cos(ang - k * 2 * Math.PI / 3)).toFixed(1));
+      }
+      o += '<polyline points="' + pts.join(" ") + '" fill="none" stroke="' + COLOR[k] + '" stroke-width="2"/>';
+    }
+    $("ondas").innerHTML = o;
+  })();
+
+  // Flecha con punta desde el centro hasta (x, y)
+  function flecha(x, y, color, ancho){
+    var dx = x - CX, dy = y - CY, l = Math.sqrt(dx * dx + dy * dy);
+    if (l < 3) return "";
+    var ux = dx / l, uy = dy / l, p = 9;
+    return '<path d="M' + CX + ' ' + CY + 'L' + (x - ux * p).toFixed(1) + ' ' + (y - uy * p).toFixed(1) + '" stroke="' + color + '" stroke-width="' + ancho + '" stroke-linecap="round"/>' +
+      '<polygon points="' + x.toFixed(1) + ',' + y.toFixed(1) + ' ' + (x - ux * p - uy * p * 0.6).toFixed(1) + ',' + (y - uy * p + ux * p * 0.6).toFixed(1) + ' ' + (x - ux * p + uy * p * 0.6).toFixed(1) + ',' + (y - uy * p - ux * p * 0.6).toFixed(1) + '" fill="' + color + '"/>';
+  }
+
+  function dibujarCampo(){
+    var g = "", sx = 0, sy = 0, pt = "";
+    for (var k = 0; k < 3; k++) {
+      var i = Math.cos(th - k * 2 * Math.PI / 3);   // corriente de la fase k (de -1 a +1)
+      var c = Math.cos(rad(EJE[k])), s = Math.sin(rad(EJE[k]));
+      var vx = 46 * i * c, vy = 46 * i * s;            // campo de esa bobina: siempre sobre su eje
+      sx += vx; sy += vy;
+      g += flecha(CX + vx, CY + vy, COLOR[k], 3);
+      pt += '<circle cx="' + (228 + (th % (2 * Math.PI)) / (2 * Math.PI) * 118).toFixed(1) + '" cy="' + (110 - 60 * i).toFixed(1) + '" r="4" fill="' + COLOR[k] + '"/>';
+    }
+    // Campo resultante = suma de los tres (tamaño fijo, 1,5 veces uno solo)
+    g += flecha(CX + sx, CY + sy, "var(--naranja)", 6);
+    var l = Math.sqrt(sx * sx + sy * sy) || 1;
+    g += '<text x="' + (CX + sx / l * 62) + '" y="' + (CY + sy / l * 62 + 4) + '" text-anchor="middle" font-size="12" font-weight="700" fill="var(--naranja-osc)">N</text>';
+    g += '<text x="' + (CX - sx / l * 60) + '" y="' + (CY - sy / l * 60 + 4) + '" text-anchor="middle" font-size="12" font-weight="700" fill="var(--naranja-osc)">S</text>';
+    $("vectores").innerHTML = g;
+    $("puntos").innerHTML = pt;
+    var xc = 228 + (th % (2 * Math.PI)) / (2 * Math.PI) * 118;
+    $("cursor").setAttribute("d", "M" + xc.toFixed(1) + " 36V184");
+    $("rotor-campo").style.display = verRotor ? "" : "none";
+    $("rotor-marca").setAttribute("transform", "rotate(" + (rotorAng * 180 / Math.PI) + " " + CX + " " + CY + ")");
+  }
+
+  function mensajeCampo(){
+    $("estado-campo").textContent = verRotor
+      ? T("El rotor (marca negra) gira un 5 % más lento que el campo: se va quedando atrás. Eso es el deslizamiento.", "Errotoreak (marka beltza) eremuak baino % 5 motelago biratzen du: atzean geratzen joaten da. Hori da labainketa.")
+      : T("Mira: cada flecha de color crece y decrece sobre su eje, pero la naranja (la suma) siempre mide lo mismo y gira.", "Begira: kolorezko gezi bakoitza bere ardatzean handitu eta txikitzen da, baina laranjak (baturak) beti neurri bera du eta biratu egiten du.");
+  }
+
+  bucle("eremua", function(dt){
+    if (!pausa) {
+      var w = +$("vel").value * 0.35;   // velocidad angular de la animación (rad/s), muy ralentizada
+      th += w * dt;
+      rotorAng += w * 0.95 * dt;         // el rotor va un 5 % más lento (deslizamiento exagerado)
+    }
+    dibujarCampo();
+  });
+  dibujarCampo();
+
+  $("vel").addEventListener("input", function(){ $("vel-t").textContent = this.value; });
+  $("b-pausa").addEventListener("click", function(){ pausa = !pausa; this.setAttribute("aria-pressed", pausa ? "true" : "false"); });
+  $("b-rotor").addEventListener("click", function(){
+    verRotor = !verRotor; rotorAng = th;  // el rotor empieza alineado con el campo
+    this.setAttribute("aria-pressed", verRotor ? "true" : "false"); mensajeCampo();
+  });
+
+  // Calculadora de velocidad de sincronismo
+  var NREAL = { 1: 2900, 2: 1450, 3: 960, 4: 720 };  // velocidades típicas de placa a 50 Hz
+  var pSel = 2;
+  function calcular(){
+    var ns = 60 * 50 / pSel, n = NREAL[pSel], s = (ns - n) / ns * 100;
+    $("ns").textContent = ns + " rpm";
+    $("nr").textContent = n + " rpm";
+    $("sl").textContent = f1(s) + " %";
+    $("calculo").textContent = "ns = 60 · 50 / " + pSel + " = " + ns + " rpm  ·  s = (" + ns + " − " + n + ") / " + ns + " = " + f1(s) + " %. " +
+      T("Polos: " + (2 * pSel) + ".", "Poloak: " + (2 * pSel) + ".");
+  }
+  $("chips-p").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    pSel = +b.getAttribute("data-p");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    calcular();
+  });
+
+  /* ================= 3. ARRANQUE Y SENTIDO DE GIRO ================= */
+  var IN = 8, NNOM = 1450, NS = 1500;   // motor de 4 polos (p = 2) a 50 Hz
+  var marcha = false, cambiado = false, modo = "directo";
+  var etapa = "D";       // conexión actual: "Y" estrella, "D" triángulo
+  var tY = 0;            // tiempo en estrella (temporizador del estrella-triángulo)
+  var n = 0;             // velocidad con signo (rpm): + horario, − antihorario
+  var I = 0, angAspas = 0, hist = [], tHist = 0;
+
+  function sentido(){ return cambiado ? -1 : 1; }
+
+  function dibujarLineas(){
+    // L1-L2-L3 bajan hacia U1-V1-W1; si están cambiadas, L1 va a V1 y L2 a U1
+    var dest = cambiado ? [90, 50, 130] : [50, 90, 130], g = "";
+    [50, 90, 130].forEach(function(x, k){
+      g += '<path class="cable" stroke="' + COLOR[k] + '" d="M' + x + ' 20V58C' + x + ' 82 ' + dest[k] + ' 78 ' + dest[k] + ' 100V112"/>';
+    });
+    $("lineas").innerHTML = g;
+  }
+
+  function dibujarGiro(){
+    // flecha curva alrededor del motor, según el sentido real de giro
+    var d = n > 1 ? 1 : (n < -1 ? -1 : 0);
+    if (!d) { $("flecha-giro").setAttribute("d", ""); $("punta-giro").setAttribute("points", ""); return; }
+    var r = 54, cx = 90, cy = 192, a0 = rad(-140), a1 = rad(-40);
+    var ini = d > 0 ? a0 : a1, fin = d > 0 ? a1 : a0;
+    $("flecha-giro").setAttribute("d", "M" + (cx + r * Math.cos(ini)).toFixed(1) + " " + (cy + r * Math.sin(ini)).toFixed(1) +
+      "A" + r + " " + r + " 0 0 " + (d > 0 ? 1 : 0) + " " + (cx + r * Math.cos(fin)).toFixed(1) + " " + (cy + r * Math.sin(fin)).toFixed(1));
+    var px = cx + r * Math.cos(fin), py = cy + r * Math.sin(fin), tx = -Math.sin(fin) * d, ty = Math.cos(fin) * d;
+    $("punta-giro").setAttribute("points", (px + tx * 8).toFixed(1) + "," + (py + ty * 8).toFixed(1) + " " + (px - ty * 6).toFixed(1) + "," + (py + tx * 6).toFixed(1) + " " + (px + ty * 6).toFixed(1) + "," + (py - tx * 6).toFixed(1));
+  }
+
+  function mensajeArr(){
+    var e = $("estado-arr"), x = I / IN;
+    e.className = "estado";
+    if (!marcha) { e.textContent = Math.abs(n) > 5 ? T("Motor desconectado: se va parando por inercia.", "Motorra deskonektatuta: inertziaz gelditzen ari da.") : T("Motor parado. Elige el tipo de arranque y pulsa «Marcha».", "Motorra geldirik. Aukeratu abiarazte mota eta sakatu «Martxa»."); return; }
+    if (n * sentido() < 0) { e.className = "estado mal"; e.textContent = T("¡Has invertido el giro en marcha! El motor frena a contracorriente: corriente muy alta.", "Biraketa martxan alderantzikatu duzu! Motorrak kontrakorrontez balaztatzen du: korronte oso handia."); return; }
+    if (x > 2.5) { e.className = "estado mal"; e.textContent = T("Arrancando: la corriente es " + f1(x) + " veces la nominal.", "Abiarazten: korrontea nominala baino " + f1(x) + " aldiz handiagoa da."); return; }
+    if (etapa === "Y") { e.textContent = T("Arranque en ESTRELLA: la corriente es mucho menor, pero el motor tiene menos fuerza.", "IZARREAN abiaraztea: korrontea askoz txikiagoa da, baina motorrak indar gutxiago du."); return; }
+    e.className = "estado ok";
+    e.textContent = x > 1.3 ? T("Acelerando: la corriente baja según el motor coge velocidad.", "Azeleratzen: korrontea jaisten da motorrak abiadura hartu ahala.")
+      : T("En marcha a " + Math.round(Math.abs(n)) + " rpm, un poco por debajo de 1500 rpm (deslizamiento). Más carga → más deslizamiento y más corriente. Gira " + (sentido() > 0 ? "en sentido horario." : "en sentido antihorario."),
+          Math.round(Math.abs(n)) + " rpm-tan martxan, 1500 rpm-tik pixka bat behera (labainketa). Karga handiagoa → labainketa eta korronte handiagoa. " + (sentido() > 0 ? "Erlojuaren noranzkoan" : "Erlojuaren aurkako noranzkoan") + " biratzen du.");
+  }
+
+  bucle("proba", function(dt){
+    var dir = sentido(), objetivo = 0, k = 0.6;
+    var c = +$("carga").value / 100;               // carga: 1 = nominal
+    // Deslizamiento en marcha estable: proporcional a la carga (3,3 % a plena carga)
+    var sEq = 0.033 * c;
+    if (marcha) {
+      if (etapa === "Y") {
+        tY += dt;
+        sEq = Math.min(0.033 * c * 3, 0.3);        // en estrella tiene 1/3 del par: desliza el triple
+        k = 0.9;
+        if (tY > 3) etapa = "D";                   // el temporizador pasa a triángulo a los 3 s
+      } else k = 1.5;
+      objetivo = dir * NS * (1 - sEq);
+    }
+    n += (objetivo - n) * k * dt;                  // la velocidad se acerca poco a poco a la de equilibrio
+
+    // Corriente: muy alta con el rotor lento y baja cuando se acerca a la velocidad de marcha
+    if (!marcha) I = 0;
+    else {
+      var nEq = NS * (1 - sEq);
+      var r = n * dir / nEq, g = r < 0 ? 1.1 : Math.max(0, 1 - Math.pow(Math.min(r, 1), 3));
+      var Iarr = etapa === "Y" ? 2 : 6;            // en estrella la corriente de arranque es 1/3
+      var Imarcha = IN * (0.35 + 0.65 * c);        // en vacío consume ~35 % de In
+      if (etapa === "Y") Imarcha = Imarcha * 1.15;
+      I = Imarcha + (IN * Iarr - Imarcha) * g;
+    }
+    var desl = marcha ? (NS - n * dir) / NS * 100 : null;  // deslizamiento en %
+    // Giro del dibujo (ralentizado) y gráfica
+    angAspas += n / NNOM * 400 * dt;
+    $("aspas").setAttribute("transform", "rotate(" + angAspas.toFixed(1) + " 90 192)");
+    tHist += dt;
+    if (tHist > 0.05) { tHist = 0; hist.push(I); if (hist.length > 120) hist.shift(); }
+    var pts = hist.map(function(v, i){ return (200 + i * 148 / 119).toFixed(1) + "," + (216 - Math.min(v / IN, 7) * 22).toFixed(1); });
+    $("graf").setAttribute("points", pts.join(" "));
+    $("svg-arr").classList.toggle("apagado", !marcha);
+    $("conex").textContent = marcha ? (etapa === "Y" ? "Y" : "Δ") : "–";
+    $("r-n").textContent = Math.round(Math.abs(n)) + " rpm";
+    $("r-sl").textContent = desl === null ? "–" : f1(desl) + " %";
+    $("r-i").textContent = f1(I) + " A";
+    $("r-x").textContent = f1(I / IN);
+    $("r-s").textContent = Math.abs(n) < 5 ? "–" : (n > 0 ? "↻" : "↺");
+    dibujarGiro(); mensajeArr();
+  });
+
+  $("b-marcha").addEventListener("click", function(){
+    if (marcha) return;
+    marcha = true;
+    etapa = modo === "yd" ? "Y" : "D"; tY = 0;
+  });
+  $("b-paro").addEventListener("click", function(){ marcha = false; });
+  $("carga").addEventListener("input", function(){ $("carga-t").textContent = this.value + " %"; });
+  $("b-cambio").addEventListener("click", function(){
+    cambiado = !cambiado; this.setAttribute("aria-pressed", cambiado ? "true" : "false"); dibujarLineas();
+  });
+  $("chips-arr").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    modo = b.getAttribute("data-modo");
+    [].forEach.call(this.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+  });
+
+  dibujarLineas();
+  alCambiarIdioma(function(){ mensajeCampo(); calcular(); mensajeArr(); });
+})();
+</script>
+</body>
+</html>

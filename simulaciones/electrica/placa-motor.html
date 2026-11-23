@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Placa de características del motor</title>
+<meta name="description" content="Qué significa cada dato de la placa de un motor trifásico, conexión estrella o triángulo, cálculos sencillos, ajuste del guardamotor y simulador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../comun/ficha.css">
+<style>
+.txt{font-size:11px;fill:#242d5f;font-weight:600}
+.txt-s{font-size:9.5px;fill:#5d6382}
+.dato{font-size:13px;fill:#242d5f;font-weight:700}
+.celda{fill:#eef0f3;stroke:#9aa3b2;stroke-width:1}
+.remache{fill:#aab1bb;stroke:#6b7280;stroke-width:1}
+.resaltable{cursor:pointer}
+</style>
+</head>
+<body>
+<main class="ficha">
+  <header class="cab">
+    <div class="cab-t">
+      <p class="tema" data-es="Elementos de potencia" data-eu="Potentzia-elementuak"></p>
+      <h1 data-es="Placa de características del motor" data-eu="Motorraren ezaugarri-plaka"></h1>
+    </div>
+    <button type="button" class="idioma"></button>
+  </header>
+  <nav class="pestanas"></nav>
+
+  <!-- ============ 1. PLAKA ============ -->
+  <section class="panel" data-tab="plaka" data-es="La placa" data-eu="Plaka">
+    <div class="card">
+      <p class="es">Todos los motores llevan una <span class="clave">placa de características</span> remachada en la carcasa. En ella el fabricante pone los <b>datos nominales</b>: cómo hay que conectarlo y cómo funciona <b>a plena carga</b>. Antes de conectar un motor, <b>lee siempre la placa</b>.</p>
+      <p class="eu">Motor guztiek <span class="clave">ezaugarri-plaka</span> bat dute karkasan errematxatuta. Bertan fabrikatzaileak <b>datu nominalak</b> jartzen ditu: nola konektatu behar den eta nola funtzionatzen duen <b>karga osoan</b>. Motor bat konektatu aurretik, <b>irakurri beti plaka</b>.</p>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-placa" viewBox="0 0 340 200" role="img" aria-label="Placa de características">
+          <rect x="4" y="4" width="332" height="192" rx="10" fill="#d5d9df" stroke="#8d95a3" stroke-width="2"/>
+          <circle class="remache" cx="14" cy="14" r="4"/><circle class="remache" cx="326" cy="14" r="4"/><circle class="remache" cx="14" cy="186" r="4"/><circle class="remache" cx="326" cy="186" r="4"/>
+          <!-- cabecera -->
+          <g class="resaltable" data-parte="fases"><rect class="celda" x="24" y="12" width="96" height="28" rx="3"/><text class="dato" x="72" y="31" text-anchor="middle" style="font-size:15px">3 ~ Mot.</text></g>
+          <g class="resaltable" data-parte="norma"><rect class="celda" x="122" y="12" width="194" height="28" rx="3"/><text class="dato" x="219" y="31" text-anchor="middle">IEC 60034</text></g>
+          <!-- fila 1 -->
+          <g class="resaltable" data-parte="tipo"><rect class="celda" x="24" y="44" width="96" height="26" rx="3"/><text class="dato" x="72" y="61" text-anchor="middle" style="font-size:11px">Type MT 90L-4</text></g>
+          <g class="resaltable" data-parte="carcasa"><rect class="celda" x="122" y="44" width="96" height="26" rx="3"/><text class="dato" x="170" y="62" text-anchor="middle">IEC 90L</text></g>
+          <g class="resaltable" data-parte="peso"><rect class="celda" x="220" y="44" width="96" height="26" rx="3"/><text class="dato" x="268" y="62" text-anchor="middle">14 kg</text></g>
+          <!-- fila 2 -->
+          <g class="resaltable" data-parte="tension"><rect class="celda" x="24" y="72" width="96" height="26" rx="3"/><text class="dato" x="72" y="90" text-anchor="middle">230/400 V</text>
+            <rect class="celda" x="122" y="72" width="96" height="26" rx="3"/><text class="dato" x="170" y="90" text-anchor="middle">Δ / Y</text></g>
+          <g class="resaltable" data-parte="frecuencia"><rect class="celda" x="220" y="72" width="96" height="26" rx="3"/><text class="dato" x="268" y="90" text-anchor="middle">50 Hz</text></g>
+          <!-- fila 3 -->
+          <g class="resaltable" data-parte="intensidad"><rect class="celda" x="24" y="100" width="96" height="26" rx="3"/><text class="dato" x="72" y="118" text-anchor="middle">5,6/3,2 A</text></g>
+          <g class="resaltable" data-parte="potencia"><rect class="celda" x="122" y="100" width="96" height="26" rx="3"/><text class="dato" x="170" y="118" text-anchor="middle">1,5 kW</text></g>
+          <g class="resaltable" data-parte="cosfi"><rect class="celda" x="220" y="100" width="96" height="26" rx="3"/><text class="dato" x="268" y="118" text-anchor="middle">cos φ 0,79</text></g>
+          <!-- fila 4 -->
+          <g class="resaltable" data-parte="velocidad"><rect class="celda" x="24" y="128" width="96" height="26" rx="3"/><text class="dato" x="72" y="146" text-anchor="middle">1440 min⁻¹</text></g>
+          <g class="resaltable" data-parte="ip"><rect class="celda" x="122" y="128" width="96" height="26" rx="3"/><text class="dato" x="170" y="146" text-anchor="middle">IP55</text></g>
+          <g class="resaltable" data-parte="aislamiento"><rect class="celda" x="220" y="128" width="96" height="26" rx="3"/><text class="dato" x="268" y="146" text-anchor="middle">Th.Cl. F</text></g>
+          <!-- fila 5 -->
+          <g class="resaltable" data-parte="servicio"><rect class="celda" x="24" y="156" width="96" height="26" rx="3"/><text class="dato" x="72" y="174" text-anchor="middle">S1</text></g>
+          <g class="resaltable" data-parte="rendimiento"><rect class="celda" x="122" y="156" width="194" height="26" rx="3"/><text class="dato" x="219" y="174" text-anchor="middle">IE3 · η 85,3 %</text></g>
+        </svg>
+        <figcaption data-es="Placa de un motor trifásico de 1,5 kW. Toca un dato" data-eu="1,5 kW-ko motor trifasiko baten plaka. Ukitu datu bat"></figcaption>
+      </figure>
+      <ul class="partes" data-svg="svg-placa">
+        <li><button data-parte="fases"><span class="n">1</span><span><b class="es">3 ~ Mot.</b><b class="eu">3 ~ Mot.</b><small class="es">Motor trifásico (3 fases) de corriente alterna (~).</small><small class="eu">Korronte alternoko (~) motor trifasikoa (3 fase).</small></span></button></li>
+        <li><button data-parte="norma"><span class="n">2</span><span><b class="es">Norma IEC 60034</b><b class="eu">IEC 60034 araua</b><small class="es">Norma internacional de máquinas eléctricas rotativas que cumple el motor.</small><small class="eu">Motorrak betetzen duen makina elektriko birakarien nazioarteko araua.</small></span></button></li>
+        <li><button data-parte="tipo"><span class="n">3</span><span><b class="es">Tipo</b><b class="eu">Mota</b><small class="es">Referencia del fabricante (modelo). Sirve para pedir repuestos o un motor igual.</small><small class="eu">Fabrikatzailearen erreferentzia (modeloa). Ordezko piezak edo motor berdin bat eskatzeko balio du.</small></span></button></li>
+        <li><button data-parte="carcasa"><span class="n">4</span><span><b class="es">Tamaño de carcasa 90L</b><b class="eu">Karkasa-tamaina 90L</b><small class="es">90 = altura del eje desde la base, en mm. L = versión larga. Motores del mismo tamaño tienen las mismas medidas de anclaje y de eje.</small><small class="eu">90 = ardatzaren altuera oinarritik, mm-tan. L = bertsio luzea. Tamaina bereko motorrek ainguratze- eta ardatz-neurri berdinak dituzte.</small></span></button></li>
+        <li><button data-parte="peso"><span class="n">5</span><span><b class="es">Peso</b><b class="eu">Pisua</b><small class="es">Para saber cómo transportarlo y levantarlo con seguridad.</small><small class="eu">Nola garraiatu eta segurtasunez nola altxatu jakiteko.</small></span></button></li>
+        <li><button data-parte="tension"><span class="n">6</span><span><b class="es">Tensión 230/400 V · Δ/Y</b><b class="eu">Tentsioa 230/400 V · Δ/Y</b><small class="es">En triángulo (Δ) a 230 V, en estrella (Y) a 400 V. Mira la pestaña 2.</small><small class="eu">Triangeluan (Δ) 230 V-an, izarrean (Y) 400 V-an. Begiratu 2. fitxa.</small></span></button></li>
+        <li><button data-parte="frecuencia"><span class="n">7</span><span><b class="es">Frecuencia 50 Hz</b><b class="eu">Maiztasuna 50 Hz</b><small class="es">La de la red. En Europa 50 Hz; en América suele ser 60 Hz.</small><small class="eu">Sarearena. Europan 50 Hz; Amerikan 60 Hz izan ohi da.</small></span></button></li>
+        <li><button data-parte="intensidad"><span class="n">8</span><span><b class="es">Intensidad nominal In</b><b class="eu">Intentsitate nominala In</b><small class="es">5,6 A en triángulo a 230 V; 3,2 A en estrella a 400 V. Es lo que consume a plena carga. Con ella se ajusta el guardamotor.</small><small class="eu">5,6 A triangeluan 230 V-an; 3,2 A izarrean 400 V-an. Karga osoan kontsumitzen duena da. Harekin doitzen da disyuntorea.</small></span></button></li>
+        <li><button data-parte="potencia"><span class="n">9</span><span><b class="es">Potencia 1,5 kW</b><b class="eu">Potentzia 1,5 kW</b><small class="es">Potencia <b>útil en el eje</b> (mecánica) a plena carga. No es la eléctrica que consume, que es algo mayor.</small><small class="eu"><b>Ardatzeko potentzia baliagarria</b> (mekanikoa) karga osoan. Ez da kontsumitzen duen potentzia elektrikoa, hori zertxobait handiagoa da.</small></span></button></li>
+        <li><button data-parte="cosfi"><span class="n">10</span><span><b class="es">cos φ 0,79</b><b class="eu">cos φ 0,79</b><small class="es">Factor de potencia a plena carga. Se usa para calcular la potencia que consume.</small><small class="eu">Potentzia-faktorea karga osoan. Kontsumitzen duen potentzia kalkulatzeko erabiltzen da.</small></span></button></li>
+        <li><button data-parte="velocidad"><span class="n">11</span><span><b class="es">Velocidad 1440 min⁻¹</b><b class="eu">Abiadura 1440 min⁻¹</b><small class="es">Vueltas por minuto del eje a plena carga (rpm). Un poco menos que la velocidad síncrona (1500).</small><small class="eu">Ardatzaren bira minutuko karga osoan (rpm). Abiadura sinkronoa (1500) baino pixka bat gutxiago.</small></span></button></li>
+        <li><button data-parte="ip"><span class="n">12</span><span><b class="es">Protección IP55</b><b class="eu">IP55 babesa</b><small class="es">1.ª cifra 5: protegido contra el polvo. 2.ª cifra 5: protegido contra chorros de agua.</small><small class="eu">1. zifra 5: hautsaren aurka babestua. 2. zifra 5: ur-zorrotaden aurka babestua.</small></span></button></li>
+        <li><button data-parte="aislamiento"><span class="n">13</span><span><b class="es">Clase de aislamiento F</b><b class="eu">F isolamendu-klasea</b><small class="es">El aislamiento de las bobinas aguanta hasta 155 °C. Si se pasa, se estropea y el motor se quema.</small><small class="eu">Bobinen isolamenduak 155 °C-raino jasaten du. Hortik gora hondatu egiten da eta motorra erre egiten da.</small></span></button></li>
+        <li><button data-parte="servicio"><span class="n">14</span><span><b class="es">Servicio S1</b><b class="eu">S1 zerbitzua</b><small class="es">Servicio continuo: puede trabajar a plena carga todo el tiempo que haga falta.</small><small class="eu">Zerbitzu jarraitua: karga osoan behar adina denboran lan egin dezake.</small></span></button></li>
+        <li><button data-parte="rendimiento"><span class="n">15</span><span><b class="es">Rendimiento IE3 · η 85,3 %</b><b class="eu">Errendimendua IE3 · η % 85,3</b><small class="es">Clase de eficiencia (de IE1, la peor, a IE4) y rendimiento a plena carga. En la UE la mayoría de motores nuevos deben ser al menos IE3.</small><small class="eu">Eraginkortasun-klasea (IE1, txarrena, IE4ra arte) eta errendimendua karga osoan. EBn motor berri gehienek gutxienez IE3 izan behar dute.</small></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 2. IZARRA EDO TRIANGELUA ============ -->
+  <section class="panel" data-tab="izar-triangelu" data-es="Estrella o triángulo" data-eu="Izarra edo triangelua" hidden>
+    <div class="card">
+      <p class="es">La placa dice <b>230/400 V Δ/Y</b>. La tensión <b>pequeña</b> (230 V) es la que aguanta <b>cada bobina</b>. Mira la <b>tensión entre fases</b> de tu red:</p>
+      <p class="eu">Plakak <b>230/400 V Δ/Y</b> dio. Tentsio <b>txikia</b> (230 V) da <b>bobina bakoitzak</b> jasaten duena. Begiratu zure sarearen <b>faseen arteko tentsioa</b>:</p>
+      <ul>
+        <li class="es">Red = tensión <b>pequeña</b> de la placa (230 V) → <b>triángulo (Δ)</b>.</li>
+        <li class="eu">Sarea = plakako tentsio <b>txikia</b> (230 V) → <b>triangelua (Δ)</b>.</li>
+        <li class="es">Red = tensión <b>grande</b> de la placa (400 V) → <b>estrella (Y)</b>.</li>
+        <li class="eu">Sarea = plakako tentsio <b>handia</b> (400 V) → <b>izarra (Y)</b>.</li>
+      </ul>
+    </div>
+    <div class="dos">
+      <figure class="fig">
+        <svg id="svg-y" viewBox="0 0 300 240" role="img" aria-label="Conexión en estrella"></svg>
+        <figcaption data-es="Estrella (Y): un puente horizontal une W2-U2-V2" data-eu="Izarra (Y): zubi horizontal batek W2-U2-V2 lotzen ditu"></figcaption>
+      </figure>
+      <figure class="fig">
+        <svg id="svg-d" viewBox="0 0 300 240" role="img" aria-label="Conexión en triángulo"></svg>
+        <figcaption data-es="Triángulo (Δ): tres puentes verticales W2-U1, U2-V1, V2-W1" data-eu="Triangelua (Δ): hiru zubi bertikal W2-U1, U2-V1, V2-W1"></figcaption>
+      </figure>
+    </div>
+    <div class="tabla"><table>
+      <tr><th data-es="Red (entre fases)" data-eu="Sarea (faseen artean)"></th><th data-es="Conexión" data-eu="Konexioa"></th><th data-es="Tensión en cada bobina" data-eu="Bobina bakoitzeko tentsioa"></th><th data-es="Intensidad (In)" data-eu="Intentsitatea (In)"></th></tr>
+      <tr><td>3 × 230 V</td><td><b data-es="Triángulo Δ" data-eu="Triangelua Δ"></b></td><td>230 V</td><td>5,6 A</td></tr>
+      <tr><td>3 × 400 V</td><td><b data-es="Estrella Y" data-eu="Izarra Y"></b></td><td>400 / √3 = 230 V</td><td>3,2 A</td></tr>
+      <tr><td>3 × 690 V</td><td class="mal" data-es="No vale este motor" data-eu="Motor honek ez du balio"></td><td>–</td><td>–</td></tr>
+    </table></div>
+    <div class="recuerda">
+      <h2 data-es="Recuerda" data-eu="Gogoratu"></h2>
+      <p class="es">Hoy la red normal es de <b>400 V entre fases</b>: un motor 230/400 V se conecta en <b>estrella</b>. Para arrancarlo en estrella-triángulo a 400 V hace falta un motor <b>400/690 V</b>.</p>
+      <p class="eu">Gaur egun sare arrunta <b>400 V-koa da faseen artean</b>: 230/400 V-ko motor bat <b>izarrean</b> konektatzen da. 400 V-an izar-triangelu abiaraztea egiteko <b>400/690 V-ko</b> motor bat behar da.</p>
+    </div>
+  </section>
+
+  <!-- ============ 3. KALKULUAK ============ -->
+  <section class="panel" data-tab="kalkuluak" data-es="Cálculos" data-eu="Kalkuluak" hidden>
+    <div class="rejilla">
+      <div class="card"><h3 class="es">1. Pares de polos</h3><h3 class="eu">1. Polo-pareak</h3>
+        <p class="es">La velocidad síncrona es <b>ns = 60 · f / p</b> (p = pares de polos). A 50 Hz: p = 1 → 3000; p = 2 → 1500; p = 3 → 1000; p = 4 → 750 min⁻¹.</p>
+        <p class="eu">Abiadura sinkronoa <b>ns = 60 · f / p</b> da (p = polo-pareak). 50 Hz-tan: p = 1 → 3000; p = 2 → 1500; p = 3 → 1000; p = 4 → 750 min⁻¹.</p>
+        <p class="es">La placa dice 1440: la síncrona justo por encima es <b>1500</b> → <b>p = 2</b> (4 polos).</p>
+        <p class="eu">Plakak 1440 dio: justu gainetik dagoen sinkronoa <b>1500</b> da → <b>p = 2</b> (4 polo).</p></div>
+      <div class="card"><h3 class="es">2. Deslizamiento</h3><h3 class="eu">2. Labainketa</h3>
+        <div class="formula">s = (ns − n) / ns</div>
+        <p class="es">s = (1500 − 1440) / 1500 = 0,04 → <b>4 %</b>. Es lo que gira el eje por debajo de la velocidad síncrona.</p>
+        <p class="eu">s = (1500 − 1440) / 1500 = 0,04 → <b>% 4</b>. Ardatza abiadura sinkronoaren azpitik zenbat biratzen den.</p></div>
+      <div class="card"><h3 class="es">3. Potencia absorbida</h3><h3 class="eu">3. Xurgatutako potentzia</h3>
+        <div class="formula">P1 = √3 · U · I · cos φ</div>
+        <p class="es">A 400 V: 1,732 · 400 · 3,2 · 0,79 ≈ <b>1751 W</b>. A 230 V: 1,732 · 230 · 5,6 · 0,79 ≈ 1762 W. ¡Casi igual! La potencia no depende de la conexión.</p>
+        <p class="eu">400 V-an: 1,732 · 400 · 3,2 · 0,79 ≈ <b>1751 W</b>. 230 V-an: 1,732 · 230 · 5,6 · 0,79 ≈ 1762 W. Ia berdina! Potentzia ez dago konexioaren menpe.</p></div>
+      <div class="card"><h3 class="es">4. Rendimiento</h3><h3 class="eu">4. Errendimendua</h3>
+        <div class="formula">η = P2 / P1</div>
+        <p class="es">η = 1500 / 1751 ≈ 0,857 → <b>85,7 %</b>, casi el 85,3 % de la placa (la diferencia es por redondear). Se pierden unos 250 W en calor.</p>
+        <p class="eu">η = 1500 / 1751 ≈ 0,857 → <b>% 85,7</b>, ia plakako % 85,3 (aldea biribiltzeagatik da). 250 W inguru galtzen dira beroan.</p></div>
+      <div class="card"><h3 class="es">5. Par nominal (extra)</h3><h3 class="eu">5. Momentu nominala (gehigarria)</h3>
+        <div class="formula">M = 9550 · P / n</div>
+        <p class="es">M = 9550 · 1,5 / 1440 ≈ <b>9,9 N·m</b> (P en kW, n en min⁻¹).</p>
+        <p class="eu">M = 9550 · 1,5 / 1440 ≈ <b>9,9 N·m</b> (P kW-tan, n min⁻¹-tan).</p></div>
+    </div>
+    <div class="card">
+      <h2 data-es="Calcula con otra velocidad" data-eu="Kalkulatu beste abiadura batekin"></h2>
+      <div class="deslizador"><label><span data-es="Velocidad de la placa (n)" data-eu="Plakako abiadura (n)"></span><output id="n-t"></output></label><input id="n" type="range" min="680" max="2960" step="10" value="1440"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="ns síncrona" data-eu="ns sinkronoa"></small><b id="c-ns"></b></div>
+      <div><small data-es="pares de polos p" data-eu="polo-pareak p"></small><b id="c-p"></b></div>
+      <div><small data-es="polos" data-eu="poloak"></small><b id="c-polos"></b></div>
+      <div><small data-es="deslizamiento s" data-eu="labainketa s"></small><b id="c-s"></b></div>
+    </div>
+  </section>
+
+  <!-- ============ 4. DISYUNTOREA ============ -->
+  <section class="panel" data-tab="guardamotor" data-es="Guardamotor" data-eu="Disyuntorea" hidden>
+    <div class="card">
+      <p class="es">El guardamotor se ajusta a la <b>intensidad nominal de la placa</b> para la conexión que vas a usar: <b>Ir = In</b>. Elige la red y gira la regulación hasta el valor correcto.</p>
+      <p class="eu">Disyuntorea <b>plakako intentsitate nominalera</b> doitzen da, erabiliko duzun konexiorako: <b>Ir = In</b>. Aukeratu sarea eta biratu erregulazioa balio zuzenera arte.</p>
+    </div>
+    <figure class="fig"><svg id="svg-gm" viewBox="0 0 300 170" role="img" aria-label="Regulación del guardamotor"></svg></figure>
+    <div class="mandos">
+      <div class="chips" id="gm-red">
+        <button type="button" data-u="400" aria-pressed="true" data-es="Red 400 V" data-eu="400 V-ko sarea"></button>
+        <button type="button" data-u="230" aria-pressed="false" data-es="Red 230 V" data-eu="230 V-ko sarea"></button>
+      </div>
+      <div class="deslizador"><label><span data-es="Regulación Ir" data-eu="Ir erregulazioa"></span><output id="ir-t"></output></label><input id="ir" type="range" min="2.5" max="4" step="0.1" value="2.5"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="Conexión" data-eu="Konexioa"></small><b id="g-con"></b></div>
+      <div><small data-es="In placa" data-eu="In plaka"></small><b id="g-in"></b></div>
+      <div><small data-es="Margen guardamotor" data-eu="Disyuntorearen tartea"></small><b id="g-mar"></b></div>
+    </div>
+    <div class="estado" id="g-estado"></div>
+  </section>
+
+  <!-- ============ 5. PROBATU ============ -->
+  <section class="panel" data-tab="proba" data-es="Pruébalo" data-eu="Probatu" hidden>
+    <div class="card">
+      <p class="es">Elige la <b>red</b> y pon los <b>puentes</b> en estrella o en triángulo. Si aciertas, el motor arranca: mira la tensión de cada bobina y la intensidad de línea al cambiar la <b>carga</b>. Los puntos azules son la corriente (va y viene: es alterna).</p>
+      <p class="eu">Aukeratu <b>sarea</b> eta jarri <b>zubiak</b> izarrean edo triangeluan. Asmatzen baduzu, motorra abiarazten da: begiratu bobina bakoitzaren tentsioa eta lineako intentsitatea <b>karga</b> aldatzean. Puntu urdinak korrontea dira (joan-etorrian dabil: alternoa da).</p>
+    </div>
+    <figure class="fig"><svg id="svg-proba" viewBox="0 0 300 240" role="img" aria-label="Caja de bornes del motor"></svg></figure>
+    <div class="mandos">
+      <div class="chips" id="p-red">
+        <button type="button" data-u="230" aria-pressed="false">3 × 230 V</button>
+        <button type="button" data-u="400" aria-pressed="true">3 × 400 V</button>
+        <button type="button" data-u="690" aria-pressed="false">3 × 690 V</button>
+      </div>
+      <div class="chips" id="p-con">
+        <button type="button" data-c="Y" aria-pressed="false" data-es="Estrella Y" data-eu="Izarra Y"></button>
+        <button type="button" data-c="D" aria-pressed="false" data-es="Triángulo Δ" data-eu="Triangelua Δ"></button>
+      </div>
+      <div class="deslizador"><label><span data-es="Carga del motor" data-eu="Motorraren karga"></span><output id="carga-t"></output></label><input id="carga" type="range" min="0" max="100" step="5" value="100"></div>
+    </div>
+    <div class="lectura-g">
+      <div><small data-es="U red" data-eu="U sarea"></small><b id="l-u"></b></div>
+      <div><small data-es="U bobina" data-eu="U bobina"></small><b id="l-ub"></b></div>
+      <div><small data-es="I línea" data-eu="I linea"></small><b id="l-i"></b></div>
+      <div><small data-es="P en el eje" data-eu="P ardatzean"></small><b id="l-p"></b></div>
+    </div>
+    <div class="estado" id="p-estado"></div>
+    <p class="nota es">Valores orientativos: en vacío un motor consume más o menos el 40 % de su In.</p>
+    <p class="nota eu">Balio orientagarriak: hutsean motor batek bere In-aren % 40 inguru kontsumitzen du.</p>
+  </section>
+</main>
+<script src="../comun/ficha.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  function num(v, d){ return v.toFixed(d).replace(".", ","); }
+  function chips(grupo, b){ [].forEach.call(grupo.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); }
+
+  // Datos de la placa
+  var PLACA = { P: 1.5, In230: 5.6, In400: 3.2 };
+
+  // ---------- Caja de bornes del motor (se usa en las pestañas 2 y 5) ----------
+  // Fila de arriba: W2 U2 V2 · fila de abajo: U1 V1 W1 · las fases L1 L2 L3 llegan por abajo
+  var X = [90, 150, 210], YA = 80, YB = 160;
+
+  // puntos azules que van y vienen por un segmento (corriente alterna)
+  // fase = 0, 1 o 2 (desfase de 120°) · amp = cuánto se mueven (según la corriente)
+  function puntosSeg(x1, y1, x2, y2, fase, amp, t){
+    var lon = Math.hypot(x2 - x1, y2 - y1), paso = 14, g = "";
+    var desp = amp * Math.sin(2 * Math.PI * 0.8 * t - fase * 2 * Math.PI / 3);
+    for (var d = 0; d < lon; d += paso) {
+      var r = ((d + desp) % lon + lon) % lon / lon;   // posición 0..1 dentro del segmento
+      g += '<circle cx="' + (x1 + (x2 - x1) * r).toFixed(1) + '" cy="' + (y1 + (y2 - y1) * r).toFixed(1) + '" r="2.8" fill="#2b6cb0"/>';
+    }
+    return g;
+  }
+
+  // dibuja la caja. con = "Y", "D" o null (sin puentes) · amp = 0 si no hay corriente
+  function caja(con, amp, t){
+    var g = '<text class="txt" x="150" y="22" text-anchor="middle">' + T("Caja de bornes del motor", "Motorraren borne-kaxa") + '</text>';
+    g += '<rect x="40" y="40" width="220" height="160" rx="12" fill="#eef0f4" stroke="#8d95a3" stroke-width="2"/>';
+    // bobinas por dentro (líneas de trazos): U1→U2, V1→V2, W1→W2
+    var bob = [[X[0], YB, X[1], YA], [X[1], YB, X[2], YA], [X[2], YB, X[0], YA]];
+    bob.forEach(function(b){ g += '<path d="M' + b[0] + ' ' + b[1] + 'L' + b[2] + ' ' + b[3] + '" stroke="#b9c0cb" stroke-width="2" stroke-dasharray="5 4"/>'; });
+    // fases de la red
+    ["L1", "L2", "L3"].forEach(function(l, k){
+      g += '<path d="M' + X[k] + ' 236V' + YB + '" stroke="' + (amp > 0 ? "#f39200" : "#9aa3b2") + '" stroke-width="4"/>';
+      g += '<text class="txt" x="' + (X[k] + 8) + '" y="230">' + l + '</text>';
+    });
+    // puentes
+    var puentes = [];
+    if (con === "Y") puentes = [[X[0] - 10, YA, X[2] + 10, YA]];
+    if (con === "D") puentes = [[X[0], YA, X[0], YB], [X[1], YA, X[1], YB], [X[2], YA, X[2], YB]];
+    puentes.forEach(function(p){ g += '<path d="M' + p[0] + ' ' + p[1] + 'L' + p[2] + ' ' + p[3] + '" stroke="#b07d2a" stroke-width="12" stroke-linecap="round"/>'; });
+    // bornes (tuercas) y nombres
+    var arriba = ["W2", "U2", "V2"], abajo = ["U1", "V1", "W1"];
+    for (var k = 0; k < 3; k++) {
+      g += '<circle cx="' + X[k] + '" cy="' + YA + '" r="12" fill="#dfe3e9" stroke="#6b7280" stroke-width="1.5"/><circle cx="' + X[k] + '" cy="' + YA + '" r="4" fill="#6b7280"/>';
+      g += '<circle cx="' + X[k] + '" cy="' + YB + '" r="12" fill="#dfe3e9" stroke="#6b7280" stroke-width="1.5"/><circle cx="' + X[k] + '" cy="' + YB + '" r="4" fill="#6b7280"/>';
+      g += '<text class="txt" x="' + X[k] + '" y="' + (YA - 18) + '" text-anchor="middle">' + arriba[k] + '</text>';
+      g += '<text class="txt" x="' + (X[k] + 16) + '" y="' + (YB + 22) + '">' + abajo[k] + '</text>';
+    }
+    // corriente
+    if (amp > 0) {
+      for (k = 0; k < 3; k++) { g += puntosSeg(X[k], 236, X[k], YB, k, amp, t); g += puntosSeg(bob[k][0], bob[k][1], bob[k][2], bob[k][3], k, amp, t); }
+      if (con === "D") for (k = 0; k < 3; k++) g += puntosSeg(X[k], YA, X[k], YB, k, amp, t);
+      if (con === "Y") g += puntosSeg(X[0], YA, X[2], YA, 0, amp * 0.5, t);
+    }
+    // letra grande de la conexión
+    if (con) g += '<text class="txt" x="248" y="132" text-anchor="end" style="font-size:22px;fill:#b45f00">' + (con === "Y" ? "Y" : "Δ") + '</text>';
+    return g;
+  }
+
+  // dibujos fijos de la pestaña 2
+  function cajasFijas(){ $("svg-y").innerHTML = caja("Y", 0, 0); $("svg-d").innerHTML = caja("D", 0, 0); }
+
+  // ---------- Pestaña 3: calculadora de velocidad ----------
+  function calcular(){
+    var n = +$("n").value;
+    var p = Math.max(1, Math.floor(3000 / n));    // pares de polos: la síncrona justo por encima de n
+    var ns = 3000 / p;
+    var s = (ns - n) / ns * 100;
+    $("n-t").textContent = n + " min⁻¹";
+    $("c-ns").textContent = Math.round(ns) + " min⁻¹";
+    $("c-p").textContent = p;
+    $("c-polos").textContent = 2 * p;
+    $("c-s").textContent = num(s, 1) + " %";
+  }
+  $("n").addEventListener("input", calcular);
+
+  // ---------- Pestaña 4: ajuste del guardamotor ----------
+  var gmU = 400;
+  // margen de regulación del guardamotor elegido para cada red
+  var GM = { 400: { min: 2.5, max: 4, In: PLACA.In400, con: "Y" }, 230: { min: 4, max: 6.3, In: PLACA.In230, con: "D" } };
+
+  function guardamotor(){
+    var d = GM[gmU], ir = +$("ir").value;
+    // dibujo del mando de regulación: aguja que va de -120° (mín.) a +120° (máx.)
+    var ang = -120 + 240 * (ir - d.min) / (d.max - d.min), rad = (ang - 90) * Math.PI / 180;
+    var s = '<rect x="90" y="8" width="120" height="154" rx="12" fill="#e9ecef" stroke="#8d95a3" stroke-width="1.5"/>';
+    s += '<circle cx="150" cy="88" r="44" fill="#fff" stroke="#8d95a3" stroke-width="2"/>';
+    // marcas de la escala: mínimo, medio y máximo
+    [0, 0.5, 1].forEach(function(f){
+      var a = (-120 + 240 * f - 90) * Math.PI / 180, v = d.min + (d.max - d.min) * f;
+      s += '<path d="M' + (150 + 38 * Math.cos(a)) + ' ' + (88 + 38 * Math.sin(a)) + 'L' + (150 + 44 * Math.cos(a)) + ' ' + (88 + 44 * Math.sin(a)) + '" stroke="#242d5f" stroke-width="2"/>';
+      s += '<text class="txt-s" x="' + (150 + 58 * Math.cos(a)) + '" y="' + (91 + 58 * Math.sin(a)) + '" text-anchor="middle">' + num(v, 1) + '</text>';
+    });
+    // marca naranja en la In de la placa
+    var ai = (-120 + 240 * (d.In - d.min) / (d.max - d.min) - 90) * Math.PI / 180;
+    s += '<circle cx="' + (150 + 41 * Math.cos(ai)) + '" cy="' + (88 + 41 * Math.sin(ai)) + '" r="3.5" fill="#f39200"/>';
+    s += '<path d="M150 88L' + (150 + 34 * Math.cos(rad)) + ' ' + (88 + 34 * Math.sin(rad)) + '" stroke="#b45f00" stroke-width="4" stroke-linecap="round"/><circle cx="150" cy="88" r="6" fill="#242d5f"/>';
+    s += '<text class="txt" x="150" y="152" text-anchor="middle">Ir = ' + num(ir, 1) + ' A</text>';
+    s += '<text class="txt-s" x="24" y="88">Q1</text>';
+    $("svg-gm").innerHTML = s;
+
+    $("ir-t").textContent = num(ir, 1) + " A";
+    $("g-con").textContent = d.con === "Y" ? T("Estrella Y", "Izarra Y") : T("Triángulo Δ", "Triangelua Δ");
+    $("g-in").textContent = num(d.In, 1) + " A";
+    $("g-mar").textContent = num(d.min, 1) + " – " + num(d.max, 1) + " A";
+    var e = $("g-estado");
+    if (Math.abs(ir - d.In) < 0.05) { e.className = "estado ok"; e.textContent = T("¡Correcto! Ir = In de la placa (" + num(d.In, 1) + " A).", "Zuzena! Ir = plakako In (" + num(d.In, 1) + " A)."); }
+    else if (ir < d.In) { e.className = "estado mal"; e.textContent = T("Demasiado bajo: el guardamotor saltará aunque el motor trabaje normal.", "Baxuegia: disyuntoreak jauzi egingo du motorrak normal lan egin arren."); }
+    else { e.className = "estado mal"; e.textContent = T("Demasiado alto: con una sobrecarga el motor se calienta y el guardamotor no salta a tiempo.", "Altuegia: gainkarga batekin motorra berotu egiten da eta disyuntoreak ez du garaiz jauzi egiten."); }
+  }
+  $("gm-red").addEventListener("click", function(ev){
+    var b = ev.target.closest("button"); if (!b) return;
+    gmU = +b.getAttribute("data-u"); chips(this, b);
+    // el deslizador cambia al margen del guardamotor de esa red
+    var d = GM[gmU], ir = $("ir"); ir.min = d.min; ir.max = d.max; ir.value = d.min;
+    guardamotor();
+  });
+  $("ir").addEventListener("input", guardamotor);
+
+  // ---------- Pestaña 5: Pruébalo ----------
+  var red = 400, con = null;   // red elegida y conexión elegida (null = sin puentes)
+
+  function pintarProba(t){
+    var c = +$("carga").value / 100;
+    var correcta = (red === 230 && con === "D") || (red === 400 && con === "Y");
+    var ub = con === "Y" ? red / Math.sqrt(3) : (con === "D" ? red : 0);   // tensión en cada bobina
+    var In = red === 230 ? PLACA.In230 : PLACA.In400;
+    var I = correcta ? In * (0.4 + 0.6 * c) : 0;                           // intensidad de línea aproximada
+    $("svg-proba").innerHTML = caja(con, correcta ? 3 + 6 * I / In : 0, t / 1000);
+    $("carga-t").textContent = Math.round(c * 100) + " %";
+    $("l-u").textContent = red + " V";
+    $("l-ub").textContent = !con ? "–" : (con === "Y" ? "≈ " + Math.round(ub / 5) * 5 : Math.round(ub)) + " V";
+    $("l-i").textContent = correcta ? num(I, 1) + " A" : "–";
+    $("l-p").textContent = correcta ? num(PLACA.P * c, 2) + " kW" : "–";
+
+    var e = $("p-estado");
+    if (!con) { e.className = "estado"; e.textContent = T("Elige estrella o triángulo para poner los puentes.", "Aukeratu izarra edo triangelua zubiak jartzeko."); }
+    else if (red === 690) { e.className = "estado mal"; e.textContent = T("A 690 V ninguna conexión vale: cada bobina tendría 400 V o más. Hace falta un motor 400/690 V.", "690 V-an konexio batek ere ez du balio: bobina bakoitzak 400 V edo gehiago izango lituzke. 400/690 V-ko motor bat behar da."); }
+    else if (correcta) { e.className = "estado ok"; e.textContent = T("¡Bien! Cada bobina recibe 230 V. El motor gira y consume " + num(I, 1) + " A por línea.", "Ondo! Bobina bakoitzak 230 V jasotzen ditu. Motorrak biratzen du eta " + num(I, 1) + " A kontsumitzen ditu lineako."); }
+    else if (red === 400) { e.className = "estado mal"; e.textContent = T("¡Mal! En triángulo a 400 V cada bobina recibe 400 V (y aguanta 230 V): el motor se quema. No lo conectes.", "Gaizki! Triangeluan 400 V-an bobina bakoitzak 400 V jasotzen ditu (eta 230 V jasaten ditu): motorra erre egiten da. Ez konektatu."); }
+    else { e.className = "estado mal"; e.textContent = T("¡Mal! En estrella a 230 V cada bobina recibe solo unos 133 V: el motor no tiene fuerza y se calienta con carga.", "Gaizki! Izarrean 230 V-an bobina bakoitzak 133 V inguru baino ez ditu jasotzen: motorrak ez du indarrik eta berotu egiten da kargarekin."); }
+  }
+  function bucle(t){ pintarProba(t); requestAnimationFrame(bucle); }
+  $("p-red").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; red = +b.getAttribute("data-u"); chips(this, b); });
+  $("p-con").addEventListener("click", function(ev){ var b = ev.target.closest("button"); if (!b) return; con = b.getAttribute("data-c"); chips(this, b); });
+
+  // al cambiar de idioma se repintan los textos hechos con JS
+  alCambiarIdioma(function(){ cajasFijas(); calcular(); guardamotor(); });
+  requestAnimationFrame(bucle);
+})();
+</script>
+</body>
+</html>
